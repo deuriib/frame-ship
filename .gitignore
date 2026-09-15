@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Mise / tooling caches
+.mise/
+.mise-cache/
+.mise.local.toml
+
+# Build outputs
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Env / secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Temp
+tmp/
+temp/
