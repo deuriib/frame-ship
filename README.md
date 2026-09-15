@@ -58,8 +58,9 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 ./
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── .opencode/
+│   ├── INSTALL.md              # named-path install: git (use) + file:/// (dev)
 │   └── plugins/
-│       └── frame-ship.ts       # runtime: injects chain into context (ONLY committed artifact here)
+│       └── frame-ship.ts       # runtime: injects chain into context
 ├── skills/
 │   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
 │   ├── translate-to-spec/      # → REQ-IDs + ARCHITECTURE.md
@@ -76,7 +77,7 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 └── README.md
 ```
 
-> Note: `.opencode/.gitignore` hides `node_modules/package.json/package-lock.json/bun.lock` — the plugin file itself is the only committed runtime artifact in `.opencode/`.
+> Note: `.opencode/.gitignore` hides `node_modules/package.json/package-lock.json/bun.lock` — committed docs are `plugins/frame-ship.ts` + `INSTALL.md`. Full install: see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md).
 
 ## Prerequisites
 
@@ -110,6 +111,8 @@ Verify:
 mise exec -- node --version   # expect v22.x
 git status                    # clean
 ```
+
+> Consuming from another project? Use the named-path install — see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md) (git for use, `file:///` for dev).
 
 ## The 9-Stage Chain
 
