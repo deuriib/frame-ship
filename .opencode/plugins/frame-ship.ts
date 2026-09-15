@@ -2,7 +2,10 @@
  * frame-ship v0.2.0 — Frame→Ship workflow plugin for opencode
  *
  * Local plugin. Single-file, zero dependencies.
- * Location: .opencode/plugins/frame-ship.ts (auto-discovered, restart opencode after changes)
+ * Location: .opencode/plugins/frame-ship.ts (auto-discovered per-project).
+ * Global (style named path): "plugin": ["frame-ship@file:///D:/GitHub/frame-ship"]
+ *   — requires the root package.json (name + main) so Bun can install the
+ *   directory; skills resolve relative to this file via import.meta.url.
  *
  * What it does:
  * - Registers ./skills/ via `config.skills.paths` so the native `skill` tool discovers all 9 stages
@@ -87,15 +90,52 @@ function hasMarker(parts: unknown): boolean {
   return parts.some((p) => typeof p === "string" && p.includes(MARKER));
 }
 
+function fileUrlToPath(url: string): string | undefined {
+  try {
+    const pathname = decodeURIComponent(new URL(url).pathname);
+    // URL pathname on win32 looks like /D:/GitHub/frame-ship/... — strip the
+    // leading slash before a drive letter so joins stay valid.
+    const win = pathname.match(/^\/([A-Za-z]:\/.*)$/);
+    return win ? win[1] : pathname;
+  } catch {
+    return undefined;
+  }
+}
+
+// Skills live at <repo-root>/skills/ next to this file's
+// <repo-root>/.opencode/plugins/frame-ship.ts. Resolve relative to our own
+// location (import.meta.url) so global installs work from ANY cwd — never
+// assume cwd IS the frame-ship repo. Falls back to cwd only when our own URL
+// is unavailable (e.g. unit tests). No node: imports keeps zero-dep + no
+// @types/node so `tsc` stays clean.
+function resolveSkillsDir(fallbackBase: string): string {
+  try {
+    const meta = import.meta as unknown as { url?: string };
+    const url = meta?.url;
+    if (typeof url === "string" && url.startsWith("file:")) {
+      const filePath = fileUrlToPath(url);
+      if (filePath) {
+        const parts = filePath.split("/");
+        // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
+        if (
+          parts.length >= 4 &&
+          parts[parts.length - 2] === "plugins" &&
+          parts[parts.length - 3] === ".opencode"
+        ) {
+          const root = parts.slice(0, parts.length - 3).join("/") || "/";
+          return `${root.replace(/[/\\]+$/, "")}/skills`;
+        }
+      }
+    }
+  } catch {
+    // fall through to cwd-based fallback
+  }
+  return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
+}
+
 export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInput) => {
-  // Repo keeps skills at ./skills/ (not .opencode/skills/), so native discovery
-  // would miss them. Build an absolute path per session from PluginInput —
-  // never hardcode one. Prefer `directory` (cwd where opencode started),
-  // fall back to `worktree` (git root). Plain string join (no node: import)
-  // keeps the plugin zero-dependency and typechecks without @types/node;
-  // forward slashes work on win32 (Node + opencode path handling accept them).
-  const base = (directory || worktree).replace(/[/\\]+$/, "");
-  const skillsDir = `${base}/skills`;
+  const fallbackBase = (directory || worktree || "").replace(/[/\\]+$/, "");
+  const skillsDir = resolveSkillsDir(fallbackBase);
 
   return {
     // Runs once on init with the merged config. Appends our skills dir to
@@ -105,6 +145,7 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
       const c = cfg as Config & { skills?: { paths?: string[] } };
       c.skills ??= {};
       c.skills.paths ??= [];
+      if (!skillsDir || skillsDir === "/skills") return; // no resolvable base — don't pollute
       if (!c.skills.paths.includes(skillsDir)) c.skills.paths.push(skillsDir);
     },
     "experimental.chat.system.transform": async (_input: unknown, output: unknown) => {
@@ -121,3 +162,8 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
     },
   };
 };
+
+// Default export mirrors the named export. The v1 loader calls every function
+// export (named or default) with dedupe, so either shape loads; shipping both
+// keeps direct-file and directory-package installs working.
+export default FrameShipPlugin;
