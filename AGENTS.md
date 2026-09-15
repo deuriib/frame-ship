@@ -26,8 +26,8 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain. Stack: 1 TS file
 | Plugin deps | `.opencode/package.json` | only `@opencode-ai/plugin@1.18.29`, no scripts |
 
 ## CODE MAP
-Single runtime export: `default FrameShipPlugin satisfies Plugin` (`frame-ship.ts:105`).
-Hooks: `experimental.chat.system.transform` → push 3 strings; `experimental.session.compacting` → push reminder. Guard: `hasMarker()` idempotency.
+Single runtime export: `export const FrameShipPlugin: Plugin` (`frame-ship.ts:90`).
+Hooks: `config` → append `./skills/` to `skills.paths` (idempotent); `experimental.chat.system.transform` → push 3 strings; `experimental.session.compacting` → push reminder. Guard: `hasMarker()` idempotency.
 
 ## CONVENTIONS
 - SKILL frontmatter exact: `name: <kebab==dir>`, 1-sentence `description` with `Use when/Triggered by`. No extra keys.

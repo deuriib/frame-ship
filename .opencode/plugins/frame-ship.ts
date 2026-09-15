@@ -1,10 +1,11 @@
 /**
- * frame-ship v0.1.0 — Frame→Ship workflow plugin for opencode
+ * frame-ship v0.2.0 — Frame→Ship workflow plugin for opencode
  *
  * Local plugin. Single-file, zero dependencies.
  * Location: .opencode/plugins/frame-ship.ts (auto-discovered, restart opencode after changes)
  *
  * What it does:
+ * - Registers ./skills/ via `config.skills.paths` so the native `skill` tool discovers all 9 stages
  * - Injects the Frame→Ship chain contract + role bindings + hard rules into every session
  * - Injects full guardrails inline AND points to AGENTS.md / skills/ as source of truth
  * - Preserves chain across compaction so long sessions don't lose process
@@ -21,9 +22,9 @@
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
-import type { Plugin } from "@opencode-ai/plugin";
+import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 // Compact always-on card. Full detail stays in skills/*/SKILL.md — this is the pointer + contract.
@@ -86,8 +87,26 @@ function hasMarker(parts: unknown): boolean {
   return parts.some((p) => typeof p === "string" && p.includes(MARKER));
 }
 
-const FrameShipPlugin = async () => {
+export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInput) => {
+  // Repo keeps skills at ./skills/ (not .opencode/skills/), so native discovery
+  // would miss them. Build an absolute path per session from PluginInput —
+  // never hardcode one. Prefer `directory` (cwd where opencode started),
+  // fall back to `worktree` (git root). Plain string join (no node: import)
+  // keeps the plugin zero-dependency and typechecks without @types/node;
+  // forward slashes work on win32 (Node + opencode path handling accept them).
+  const base = (directory || worktree).replace(/[/\\]+$/, "");
+  const skillsDir = `${base}/skills`;
+
   return {
+    // Runs once on init with the merged config. Appends our skills dir to
+    // `skills.paths` (scanned recursively for **/SKILL.md). Idempotent:
+    // never duplicates, never clobbers user paths.
+    config: async (cfg: Config) => {
+      const c = cfg as Config & { skills?: { paths?: string[] } };
+      c.skills ??= {};
+      c.skills.paths ??= [];
+      if (!c.skills.paths.includes(skillsDir)) c.skills.paths.push(skillsDir);
+    },
     "experimental.chat.system.transform": async (_input: unknown, output: unknown) => {
       const out = output as { system?: unknown };
       if (!Array.isArray(out.system)) return;
@@ -102,5 +121,3 @@ const FrameShipPlugin = async () => {
     },
   };
 };
-
-export default FrameShipPlugin satisfies Plugin;

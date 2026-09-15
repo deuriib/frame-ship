@@ -30,7 +30,8 @@ Local opencode plugin that injects the Frame→Ship contract into every session,
 
 ## Features
 
-- **Single-file plugin** — `.opencode/plugins/frame-ship.ts` (v0.1.0), `import type { Plugin }` only.
+- **Single-file plugin** — `.opencode/plugins/frame-ship.ts` (v0.2.0), `import type` only, zero runtime deps.
+- **9 skills, natively discoverable** — `config` hook registers `./skills/` via `config.skills.paths` so the `skill` tool finds every stage.
 - **9 skills, full lifecycle** — from strategic brief (`BRIEF-XXX`) to release (`RELEASE_NOTES.md`).
 - **Guardrails built-in** — OWASP by default, deny-by-default secrets, Ley 172-13 PII hygiene, calibrated severity.
 - **Role bindings** — `montilla` (briefs/releases), `vasquez` (architecture), `barrera` (security), leaf specialists implement.
@@ -40,10 +41,11 @@ Local opencode plugin that injects the Frame→Ship contract into every session,
 
 ## How It Works
 
-1. Plugin hook `experimental.chat.system.transform` pushes 3 strings: `WORKFLOW_CARD` + `GUARDRAILS_FULL` + `POINTERS`.
-2. `hasMarker()` guard keeps injection idempotent — no duplication on retries.
-3. `experimental.session.compacting` pushes 1 reminder so the chain survives compaction.
-4. Skills in `skills/<stage>/SKILL.md` define behavior. Plugin only injects pointers; skills are authoritative.
+1. Plugin hook `config` registers `./skills/` in `config.skills.paths` (once per session, idempotent) so the native `skill` tool discovers all 9 stages.
+2. Plugin hook `experimental.chat.system.transform` pushes 3 strings: `WORKFLOW_CARD` + `GUARDRAILS_FULL` + `POINTERS`.
+3. `hasMarker()` guard keeps injection idempotent — no duplication on retries.
+4. `experimental.session.compacting` pushes 1 reminder so the chain survives compaction.
+5. Skills in `skills/<stage>/SKILL.md` define behavior. Plugin registers + points; skills are authoritative.
 
 ```text
 frame-intent → translate-to-spec → propose-changes → review-security/review-architecture
