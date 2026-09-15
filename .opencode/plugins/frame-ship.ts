@@ -18,6 +18,7 @@
  *     → execute-spec → quality-gate → verify-handoff → ship-release
  *
  * Skills (source of truth, in ./skills/):
+ *   using-frame-ship (bootstrap),
  *   frame-intent, translate-to-spec, propose-changes,
  *   review-security, review-architecture, execute-spec,
  *   quality-gate, verify-handoff, ship-release
@@ -35,6 +36,7 @@ const WORKFLOW_CARD = `${MARKER} Frame→Ship workflow (authoritative order, do 
 frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release
 
 Stage triggers — load the named skill before acting:
+- "session start / what skills / how does frame-ship work" → using-frame-ship (bootstrap, load first, re-load after compaction)
 - "start initiative / define OKRs / strategic planning" → frame-intent (owner: montilla/CEO, out: docs/briefs/BRIEF-<slug>.md + OKRs)
 - "brief approved / new domain spec" → translate-to-spec (owners: vasquez/barrera/dauhajre/subero/vera/santana/montero/espinoza, out: REQ-IDs + ARCHITECTURE.md + API_CONTRACTS.md)
 - "ready to implement / needs pre-approval" → propose-changes (owners: leaf specialists + C-level, out: docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md, repo untouched)
@@ -79,11 +81,11 @@ FAIL → retry N=2 with different approach → escalate. Never third loop, never
 
 const POINTERS = `${MARKER} Sources of truth (read before acting):
 - "Haces las cosas como para Dios…"), dispatch contract, guardrails 1-14.
-- skills/frame-intent/SKILL.md, translate-to-spec, propose-changes, review-security, review-architecture, execute-spec, quality-gate, verify-handoff, ship-release + their references/ templates.
-- Chain entry: frame-intent.
+- skills/using-frame-ship/SKILL.md (bootstrap first), skills/frame-intent/SKILL.md, translate-to-spec, propose-changes, review-security, review-architecture, execute-spec, quality-gate, verify-handoff, ship-release + their references/ templates.
+- Chain entry: frame-intent (after bootstrap).
 - Chain close: ship-release (lessons captured on PASS).`;
 
-const COMPACTION_REMINDER = `${MARKER} Frame→Ship survives compaction. Active chain: frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release. Keep REQ-ID→test→artifact trace, gate verdicts, and current stage. No code without approved proposal. No handoff on CLOSED gate.`;
+const COMPACTION_REMINDER = `${MARKER} Frame→Ship survives compaction. Re-load using-frame-ship first, then resume. Active chain: frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release. Keep REQ-ID→test→artifact trace, gate verdicts, and current stage. No code without approved proposal. No handoff on CLOSED gate.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;

@@ -9,124 +9,130 @@
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![Private](https://img.shields.io/badge/repo-private-lightgrey)
 
-**Opencode plugin + 9-skill chain — Frame→Ship workflow (frame-intent to ship-release).**
+**An agentic skills framework & Frame→Ship methodology that works — from strategic intent to shipped release.**
 
-Local opencode plugin that injects the Frame→Ship contract into every session, plus 9 stage skills as the process source of truth. Single-file runtime, zero dependencies, idempotent injection, compaction-safe.
+A complete delivery methodology for your coding agents, built on top of a set of composable skills and a small plugin that makes sure your agent uses them. Single-file runtime, zero dependencies, idempotent injection, compaction-safe.
 
 ## Table of Contents
 
-- [Features](#features)
-- [How It Works](#how-it-works)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Quickstart](#quickstart)
-- [The 9-Stage Chain](#the-9-stage-chain)
-- [Commands](#commands)
-- [Conventions](#conventions)
-- [Anti-Patterns](#anti-patterns)
+- [How it works](#how-it-works)
+- [Installation](#installation)
+- [The Basic Workflow](#the-basic-workflow)
+- [What's Inside](#whats-inside)
+- [Philosophy](#philosophy)
 - [Contributing](#contributing)
+- [Updating](#updating)
+- [Developing](#developing)
 - [Roadmap](#roadmap)
 - [License](#license)
 
-## Features
+## How it works
 
-- **Single-file plugin** — `.opencode/plugins/frame-ship.ts` (v0.2.0), `import type` only, zero runtime deps.
-- **9 skills, natively discoverable** — `config` hook registers `./skills/` via `config.skills.paths` so the `skill` tool finds every stage.
-- **9 skills, full lifecycle** — from strategic brief (`BRIEF-XXX`) to release (`RELEASE_NOTES.md`).
-- **Guardrails built-in** — OWASP by default, deny-by-default secrets, Ley 172-13 PII hygiene, calibrated severity.
-- **Role bindings** — `montilla` (briefs/releases), `vasquez` (architecture), `barrera` (security), leaf specialists implement.
-- **Traceability** — every step traces `REQ-ID → test → artifact → gate verdict`.
-- **Compaction-safe** — chain reminder survives long sessions via `experimental.session.compacting`.
-- **Reproducible env** — `mise` pins Node 22 LTS + tasks.
+It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into writing code. Instead, it loads `using-frame-ship` and asks what you're really trying to do.
 
-## How It Works
+Once it's teased a brief out of the conversation (`frame-intent`), it shows it to you in chunks short enough to actually read and digest — problem, affected who, success criteria, OKRs.
 
-1. Plugin hook `config` registers `./skills/` in `config.skills.paths` (once per session, idempotent) so the native `skill` tool discovers all 9 stages.
-2. Plugin hook `experimental.chat.system.transform` pushes 3 strings: `WORKFLOW_CARD` + `GUARDRAILS_FULL` + `POINTERS`.
-3. `hasMarker()` guard keeps injection idempotent — no duplication on retries.
-4. `experimental.session.compacting` pushes 1 reminder so the chain survives compaction.
-5. Skills in `skills/<stage>/SKILL.md` define behavior. Plugin registers + points; skills are authoritative.
+After you've signed off on the brief, your agent translates it into testable requirements and architecture contracts (`translate-to-spec`), then puts together a proposal clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow (`propose-changes`). No code is written until the proposal is approved.
 
-```text
-frame-intent → translate-to-spec → propose-changes → review-security/review-architecture
-  → execute-spec → quality-gate → verify-handoff → ship-release
+Next up, once you say "go", it runs mandatory reviews for auth/data/API (`review-security`, STRIDE verdict) and for public APIs/data models (`review-architecture`, ADR), implements strictly within approved boundaries with `REQ-ID → test → artifact` traceability (`execute-spec`), routes every touched domain through reviewers (`quality-gate`), verifies Definition of Done (`verify-handoff`), and ships with notes, changelog, and rollback plan (`ship-release`).
+
+There's guardrails throughout — deny-by-default secrets, OWASP by default, PII minimization — but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Frame→Ship.
+
+## Installation
+
+Opencode is the supported harness today. Frame-ship is a general plugin by design — Claude Code and others follow the same skills + bootstrap pattern (see Roadmap).
+
+### Opencode
+
+Add the plugin by name + source in your opencode config (`~/.config/opencode/opencode.json` globally, or `<your-project>/opencode.json`):
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["frame-ship@github:deuriib/frame-ship"]
+}
 ```
 
-## Project Structure
-
-```text
-./
-├── mise.toml                    # Node 22 + tasks (mise install)
-├── .opencode/
-│   ├── INSTALL.md              # named-path install: git (use) + file:/// (dev)
-│   └── plugins/
-│       └── frame-ship.ts       # runtime: injects chain into context
-├── skills/
-│   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
-│   ├── translate-to-spec/      # → REQ-IDs + ARCHITECTURE.md
-│   ├── propose-changes/        # → PROPOSED_CHANGES.md, repo untouched
-│   ├── review-security/        # → SECURITY_REVIEW.md + STRIDE verdict
-│   ├── review-architecture/    # → ADR + contract verdict
-│   ├── execute-spec/           # → impl + test-matrix.md
-│   ├── quality-gate/           # → GATE_REPORT.md (15 files, multi-reviewer)
-│   ├── verify-handoff/         # → HANDOFF.md via DoD
-│   └── ship-release/           # → RELEASE_NOTES.md + changelog + rollback
-├── tests/                      # empty, no harness yet
-├── AGENTS.md                   # project knowledge base (source of truth)
-├── LICENSE.md                  # MIT
-└── README.md
-```
-
-> Note: `.opencode/.gitignore` hides `node_modules/package.json/package-lock.json/bun.lock` — committed docs are `plugins/frame-ship.ts` + `INSTALL.md`. Full install: see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md).
-
-## Prerequisites
-
-- [mise](https://mise.jdx.dev/) (version manager)
-- Git + [GitHub CLI (`gh`)](https://cli.github.com/) authenticated
-- Node 22 LTS (via `mise install` — no manual install needed)
-- [opencode](https://opencode.ai/) — restart after any plugin/skill edit (config not hot-reloaded)
-
-## Quickstart
+Or via CLI:
 
 ```bash
-# 1. Clone (private repo)
-gh repo clone deuriib/frame-ship
-cd frame-ship
-
-# 2. Trust + install toolchain
-mise trust
-mise install
-
-# 3. Install plugin deps + typecheck
-mise run install
-mise run typecheck
-
-# 4. Restart opencode to pick up plugin/skills
-# quit + restart opencode
+opencode plugin add github:deuriib/frame-ship
 ```
 
-Verify:
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.2.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
-```bash
-mise exec -- node --version   # expect v22.x
-git status                    # clean
+Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
+
+For development on frame-ship itself (live local changes), use a local path instead — see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md). Never commit a `file:///` path to a shared config.
+
+> Note: full per-harness guides (`docs/README.<harness>.md`) land as each adapter ships. Today: opencode only.
+
+## The Basic Workflow
+
+0. **using-frame-ship** — Bootstrap. Loads at session start and after compaction. States chain order, routes by trigger, enforces hard rules. Check skills before any task.
+1. **frame-intent** — Activates before specs. Refines rough strategic direction through questions, freezes `BRIEF-<slug>.md` + 2–4 OKRs. No specs, no code.
+2. **translate-to-spec** — Activates with approved brief. Produces REQ-IDs + `ARCHITECTURE.md` + API contracts. Testable requirements only.
+3. **propose-changes** — Activates with spec. Writes `PROPOSED_CHANGES.md` with risk assessment. Repo untouched. Blocks until approved.
+4. **review-security** — Activates for auth/data/external API. STRIDE review, verdict Approved / Conditional / Rejected. CISO sign-off.
+5. **review-architecture** — Activates for public API / data model / cross-cutting changes. Records ADR + contract verdict.
+6. **execute-spec** — Activates with approved proposal. Implements only approved files, produces test matrix, keeps `REQ-ID → test → artifact` trace.
+7. **quality-gate** — Activates when implementation is ready. Routes every touched domain to reviewers, consolidates `GATE_REPORT.md`. CLOSED on any fail; waivers only by c-levels + CEO.
+8. **verify-handoff** — Activates when work declares complete. Verifies DoD checklist, produces `HANDOFF.md`. No OPEN gate = no handoff.
+9. **ship-release** — Activates when verified. Ships `RELEASE_NOTES.md` + changelog + deployment order + rollback plan, archives spec.
+
+**The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
+
+```text
+using-frame-ship → frame-intent → translate-to-spec → propose-changes
+  → review-security/review-architecture → execute-spec → quality-gate
+  → verify-handoff → ship-release
 ```
 
-> Consuming from another project? Use the named-path install — see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md) (git for use, `file:///` for dev).
+## What's Inside
 
-## The 9-Stage Chain
+### Skills Library
 
-| Trigger | Skill | Owner | Output |
-|---------|-------|-------|--------|
-| new initiative / OKRs | `frame-intent` | `montilla` | `BRIEF-<slug>.md` |
-| brief approved | `translate-to-spec` | C-levels | REQ-IDs + `ARCHITECTURE.md` |
-| ready to implement | `propose-changes` | specialist + C-level | `PROPOSED_CHANGES.md`, repo untouched |
-| auth/data/API | `review-security` | `barrera` | STRIDE verdict |
-| public API/model | `review-architecture` | `vasquez` | ADR |
-| approved spec | `execute-spec` | backend/frontend/devops | impl + `test-matrix.md` |
-| impl done | `quality-gate` | owning C-level | `GATE_REPORT.md` |
-| complete | `verify-handoff` | owning C-level | `HANDOFF.md` |
-| verified | `ship-release` | `montilla` + devops | notes + changelog + rollback |
+**Bootstrap**
+
+- **using-frame-ship** — Chain contract + session-start/post-compaction checklist (includes tool-mapping reference)
+
+**Frame**
+
+- **frame-intent** — Strategic intent to Product Brief + OKRs
+
+**Specify**
+
+- **translate-to-spec** — Brief to REQ-IDs + architecture contracts
+- **propose-changes** — Design-before-code proposal + risk assessment
+
+**Guard**
+
+- **review-security** — STRIDE threat model + verdict
+- **review-architecture** — ADR + contract verdict
+- **quality-gate** — Multi-domain reviewer router + consolidated gate report (includes waiver template)
+
+**Build**
+
+- **execute-spec** — Specialist implementation + test matrix with traceability
+
+**Close**
+
+- **verify-handoff** — DoD verification + handoff
+- **ship-release** — Release notes + changelog + rollback + archive
+
+### Plugin Runtime
+
+- **`.opencode/plugins/frame-ship.ts`** — Single-file, zero-deps. Registers `./skills/` via `config.skills.paths`, injects workflow card + guardrails + pointers, preserves chain across compaction. `hasMarker()` keeps injection idempotent.
+
+## Philosophy
+
+- **Excellence as creed** — *"Haces las cosas como para Dios…"* Non-negotiable.
+- **Proposal before code** — Never write code without an approved proposal.
+- **Systematic over ad-hoc** — Fixed chain order. Do not skip stages.
+- **Deny by default** — No secrets in code/config/logs/examples. Finding without proof (diff/scan/log pointer) = REFUTED. OWASP on every change; new endpoints/boundaries are trust boundaries until proven otherwise.
+- **Privacy by minimization** — Minimum PII for purpose; map every PII flow source → store → log → third party; explicit retention + deletion.
+- **Evidence over claims** — Always trace `REQ-ID → test → artifact → gate verdict`. Residual risk explicit — no silent PASS.
+- **Reference-only packets** — Never paste full context between stages.
 
 Hard rules (non-negotiable):
 
@@ -138,7 +144,63 @@ Hard rules (non-negotiable):
 6. ALWAYS produce HANDOFF.md before shipping.
 7. Reference-only packets between stages — never paste full context.
 
-## Commands
+## Contributing
+
+1. Start at `frame-intent` for initiatives, or `propose-changes` for scoped fixes (proposal first, no code).
+2. Keep changes small, traced (`REQ-ID → test → artifact`), and verified.
+3. Run `mise run typecheck` before pushing.
+4. After any plugin/skill edit: quit + restart opencode (config not hot-reloaded).
+5. One problem per change; never approve your own proposal.
+
+Skill frontmatter stays exact: `name: <kebab==dir>`, one-sentence `description` with `Use when/Triggered by`. No extra keys. Body shape: Purpose / Chain / Role / Process / Won't do / References. Creed lives in `SKILL.md` only.
+
+## Updating
+
+Pull latest, restart opencode:
+
+```bash
+cd <your-checkout-of-frame-ship>
+git pull --ff-only
+# quit + restart opencode
+```
+
+If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To pin a version:
+
+```jsonc
+{
+  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.2.0"]
+}
+```
+
+## Developing
+
+Project structure:
+
+```text
+./
+├── mise.toml                    # Node 22 + tasks (mise install)
+├── .opencode/
+│   ├── INSTALL.md              # named-path install: git (use) + file:/// (dev)
+│   └── plugins/
+│       └── frame-ship.ts       # runtime: injects chain into context
+├── skills/
+│   ├── using-frame-ship/       # → bootstrap + chain contract
+│   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
+│   ├── translate-to-spec/      # → REQ-IDs + ARCHITECTURE.md
+│   ├── propose-changes/        # → PROPOSED_CHANGES.md, repo untouched
+│   ├── review-security/        # → SECURITY_REVIEW.md + STRIDE verdict
+│   ├── review-architecture/    # → ADR + contract verdict
+│   ├── execute-spec/           # → impl + test-matrix.md
+│   ├── quality-gate/           # → GATE_REPORT.md (multi-reviewer)
+│   ├── verify-handoff/         # → HANDOFF.md via DoD
+│   └── ship-release/           # → RELEASE_NOTES.md + changelog + rollback
+├── tests/                      # empty, harness TBD (see Roadmap)
+├── AGENTS.md                   # project knowledge base (source of truth)
+├── LICENSE.md                  # MIT
+└── README.md
+```
+
+Commands:
 
 ```bash
 # from repo root (mise)
@@ -149,9 +211,7 @@ mise run install     # npm install in .opencode/
 npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts
 ```
 
-No build/test scripts in repo. `tests/` is empty — harness TBD (see Roadmap).
-
-## Conventions
+Conventions:
 
 - SKILL frontmatter exact: `name: <kebab==dir>`, 1-sentence `description` with `Use when/Triggered by`. No extra keys.
 - Every SKILL body: `# Title — Sub` + creed quote + `Purpose / Chain / Role / Process / Won't do / References`.
@@ -159,7 +219,7 @@ No build/test scripts in repo. `tests/` is empty — harness TBD (see Roadmap).
 - Chain order fixed — do not skip stages.
 - Commits tell a lineal story: `type(scope): imperative lowercase subject ≤72 chars`.
 
-## Anti-Patterns
+Anti-patterns:
 
 - Code without approved `PROPOSED_CHANGES.md`.
 - Skipping `review-security` on auth/data/API; arch change without ADR.
@@ -169,19 +229,15 @@ No build/test scripts in repo. `tests/` is empty — harness TBD (see Roadmap).
 - Editing `references/` without updating parent SKILL `§5`.
 - Adding `version/author` to SKILL frontmatter — loader expects `name/description` only.
 
-## Contributing
-
-1. Start at `frame-intent` for initiatives, or `propose-changes` for scoped fixes (proposal first, no code).
-2. Keep changes small, traced (`REQ-ID → test → artifact`), and verified.
-3. Run `mise run typecheck` before pushing.
-4. After any plugin/skill edit: quit + restart opencode.
-
 ## Roadmap
 
-- [ ] Test harness in `tests/` (plugin injection + marker idempotency)
-- [ ] CI: typecheck on push via GitHub Actions
+- [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
+- [ ] General plugin adapters: Claude Code → Codex CLI → Cursor/Gemini → rest (one at a time, opencode stays green)
+- [ ] `docs/README.<harness>.md` per supported harness + tool-mapping per harness
+- [ ] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
 - [ ] `docs/briefs` + `docs/specs` scaffolding (referenced by skills, not yet in repo)
-- [ ] Release automation via `ship-release` skill
+- [ ] Release automation via `ship-release` skill + tagged versions
+- [ ] Public flip (explicit): license detection, code of conduct, topics, homepage — repo stays private until then
 
 ## License
 
