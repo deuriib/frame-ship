@@ -11,7 +11,7 @@
 |------|-------------|----------------|-------------------|-------------|
 | 1 | [step — file change OR document/campaign/contract/policy/workflow action] | [files or non-code target] | [artifact path or sign-off location] | [hours] |
 
-Each step maps to one work-unit commit unless the plan explicitly groups them (see `../../using-frame-ship/references/commit-convention.md`).
+Each step maps to one commit unless the plan explicitly groups them.
 
 ## Order of Operations
 

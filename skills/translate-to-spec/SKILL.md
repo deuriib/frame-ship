@@ -31,7 +31,7 @@ canonical architecture contract. The brief is read-only here.
 4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
 6. Hand off to `frame-ship:propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
-7. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth`.
+7. Close with a commit. Example: `feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth`.
 
 ## 4. What I won't do
 
@@ -44,4 +44,3 @@ canonical architecture contract. The brief is read-only here.
 - `references/spec-template.md` — Spec with Context/REQ/AC/Contracts/Out-of-scope (includes `execution_mode` + packet).
 - `references/architecture-template.md` — Architecture contract.
 - `references/requirements-template.md` — Requirements index.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

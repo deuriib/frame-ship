@@ -30,7 +30,7 @@ no parallel reviewer universe.
 2. Produce security review output via `references/security-review-template.md`.
 3. Threat-model via `references/threat-model.md` (STRIDE).
 4. Issue verdict + conditions; block implementation on Rejected.
-5. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(sec-003): approve SECURITY_REVIEW with STRIDE verdict`.
+5. Close with a commit. Example: `docs(sec-003): approve SECURITY_REVIEW with STRIDE verdict`.
 
 ## 4. What I won't do
 
@@ -42,4 +42,3 @@ no parallel reviewer universe.
 
 - `references/security-review-template.md` — Findings + verdict + sign-off.
 - `references/threat-model.md` — STRIDE attack surface analysis.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

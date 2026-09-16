@@ -36,7 +36,7 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 4. Define 2–4 OKRs using `references/okr-template.md`.
 5. Identify required domain owners (engineering, security, finance, legal, marketing, people, revenue, automation — 8-domain catalogue in `../AGENTS.md`) and flag cross-cutting concerns (data lens where schema/PII involved). Each domain owner understands their domain's practices.
 6. Hand off the brief reference to `frame-ship:translate-to-spec` as `SPEC:<brief-path>#OKRs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
-7. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(brief-auth): add BRIEF-auth with OKRs and domains-touched`.
+7. Close with a commit. Example: `docs(brief-auth): add BRIEF-auth with OKRs and domains-touched`.
 
 ## 4. What I won't do
 
@@ -48,4 +48,3 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 
 - `references/product-brief.md` — Product Brief template (includes `execution_mode`).
 - `references/okr-template.md` — OKR template.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

@@ -14,12 +14,12 @@ specs/
 ## WHERE TO LOOK
 | Stage | Dir | Holds |
 |-------|-----|-------|
-| Design | `10_design/` | `ADR-001..003` + `SPEC-commit-convention-v2.md`; decisions before contracts |
+| Design | `10_design/` | `ADR-001..003`; decisions before contracts |
 | Requirements | `15_requirements/` | `REQ-single-dispatcher-{engineering,people}.md`; `REQ-F/NF-001` IDs |
 | Backlog | `20_backlog/` | empty; approved-but-unscheduled specs queue here |
 | Delivery | `30_delivery/` | `RELEASE_NOTES.md`; `ship-release` canonical output |
 | Workspace | `40_workspace/` | per-owner scratch: `barrera/`, `santana/`, `vasquez/` (people/eng dispatch), `single-demo/` (full-chain demo), `quality-gate/` (per-spec verdicts) |
-| Archive | `50_archive/` | `SPEC-001/002/003`, `plugin-001`, `SPEC-commit-convention-v2`; terminal |
+| Archive | `50_archive/` | `SPEC-001/002/003`, `plugin-001`; terminal |
 
 ## CONVENTIONS
 - `40_workspace/quality-gate/<spec-id>/` holds per-reviewer verdicts + `GATE_REPORT.md`; `single-demo/` mirrors the same shape as a runnable demo (`GATE_REPORT.md`, `HANDOFF.md`, `ARCHIVE-RECORD.md`).

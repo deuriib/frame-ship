@@ -61,7 +61,7 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).
 6. All ✅ → gate OPEN → hand off to `frame-ship:verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 7. Waivers only by domain owners + orchestrator via `references/waiver-template.md`.
-8. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only; never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
+8. Close with a commit (never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
 
 ## 5. What I won't do
 
@@ -75,4 +75,3 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 - `references/waiver-template.md` — Domain owners + orchestrator override record.
 - `references/engineering/` — readability, reliability, refuter, resilience, qa checklists.
 - `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).
