@@ -42,7 +42,7 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    4. Pre-flight: skill loaded? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load first. FAIL → retry N=2 differently → escalate to orchestrator. Never third loop, never sideways.
 1. Check for relevant skills before any task — mandatory workflows, not
    suggestions. Load the named stage skill via the native `skill` tool before
-   acting (see `references/tool-mapping.md`).
+   acting — skill + domain role before any task/edit/bash/dispatch (see `references/bootstrap-checklist.md`).
 2. Route by trigger, never by guess:
    - new initiative / OKRs / strategic planning → `frame-ship:frame-intent`
    - brief approved / new domain spec → `frame-ship:translate-to-spec`
@@ -73,5 +73,4 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
 
 ## 5. References
 
-- `references/bootstrap-checklist.md` — Session-start and post-compaction checks.
-- `references/tool-mapping.md` — Action phrases to native tool names per harness.
+- `references/bootstrap-checklist.md` — Session-start and post-compaction checks (incl. skill + role load order).
