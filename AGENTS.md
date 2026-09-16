@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 2026-09-16
-**Commit:** 933b072 (repo git verificado vía `git rev-parse --short HEAD`)
+**Commit:** 7de6d01 (repo git verificado vía `git rev-parse --short HEAD`)
 **Branch:** main (verificada vía `git branch --show-current`)
 
 ## OVERVIEW
