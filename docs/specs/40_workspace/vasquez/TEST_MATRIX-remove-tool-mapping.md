@@ -7,7 +7,7 @@
 | REQ-ID | Evidence ID | Description | Type | Status | Commit |
 |--------|-------------|-------------|------|--------|--------|
 | REQ-001 | E-001 | `Test-Path skills/using-frame-ship/references/tool-mapping.md` = False; `git status` shows `D` | Attestation | pass | 8d2e58b |
-| REQ-002 | E-002 | Read-through `SKILL.md §3.1`: load order self-contained, cites `bootstrap-checklist.md`, no tool-mapping mention | Review | pass | 8d2e58b |
+| REQ-002 | E-002 | Read-through `SKILL.md §3.1`: line ends at `acting.` — clean, no tool-mapping mention, no dangling pointer (user amendment ea2733c stripped the intermediate checklist clause; full load order still lives in §3.0 + checklist) | Review | pass | ea2733c |
 | REQ-003 | E-003 | `SKILL.md §5` single bullet; `glob skills/using-frame-ship/references/*` = 1 file (`bootstrap-checklist.md`), 1:1 match | Review | pass | 8d2e58b |
 | REQ-004 | E-004 | Grep `tool-mapping`: `skills/` = 0, `.opencode/` = 0, all `AGENTS.md` = 0; remaining hits only in `docs/` history + this unit's own trace artifacts (by design) | Attestation | pass | 8d2e58b |
 | REQ-NF-001 | E-005 | Secrets/PII scan over changed SKILL.md (`secret\|token\|password\|credential\|api_key\|session_id`) = 0; deleted file was process prose, read fully pre-delete | Attestation | pass | 8d2e58b |
