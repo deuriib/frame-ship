@@ -15,10 +15,9 @@ const CHAIN =
 
 // Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
-LOAD ORDER — HARD STOP: 1.skill(using-frame-ship) 2.skill(<stage>) via skill tool (no skill=STOP) 3.read(agents/<domain>/<agent>.md) skill=process,template=craft 4.then edit/bash/task. Pre-flight: skill? template cited? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate montilla. No 3rd loop, no sideways.
-Modes (frozen at frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+C-level template, task(general) per domain max2, each reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
-Triggers→skill: start/what-skills→using-frame-ship | initiative/OKRs→frame-intent(montilla,BRIEF+OKRs) | brief-approved→translate-to-spec(REQ+ARCHITECTURE+CONTRACTS) | pre-approval→propose-changes(PROPOSED_CHANGES,untouched) | auth/data/API→review-security(barrera,STRIDE) | API/model/cross-cut→review-architecture(vasquez,ADR) | approved→execute-spec(approved files,REQ→test) | impl-ready→quality-gate(CLOSED on fail) | complete→verify-handoff(HANDOFF,DoD) | verified→ship-release(NOTES+changelog+rollback).
-Roles: montilla briefs/gates/releases; vasquez ARCHITECTURE/contracts/arch verdicts; barrera security verdicts. No self-dispatch/approve.
+LOAD ORDER — HARD STOP: 1.skill(frame-ship:using-frame-ship) 2.skill(frame-ship:<stage>) via skill tool (no skill=STOP) 3.read(agents/<domain>/<agent>.md) skill=process,template=craft 4.then edit/bash/task. Pre-flight: skill? template cited? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate montilla. No 3rd loop, no sideways.
+Modes (frozen at frame-ship:frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+C-level template, task(general) per domain max2, each reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
+Triggers→skill: start/what-skills→frame-ship:using-frame-ship | initiative/OKRs→frame-ship:frame-intent(BRIEF+OKRs) | brief-approved→frame-ship:translate-to-spec(REQ+ARCHITECTURE+CONTRACTS) | pre-approval→frame-ship:propose-changes(PROPOSED_CHANGES,untouched) | auth/data/API→frame-ship:review-security(STRIDE) | API/model/cross-cut→frame-ship:review-architecture(ADR) | approved→frame-ship:execute-spec(approved files,REQ→test) | impl-ready→frame-ship:quality-gate(CLOSED on fail) | complete→frame-ship:verify-handoff(HANDOFF,DoD) | verified→frame-ship:ship-release(NOTES+changelog+rollback).
 Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o c-levels+CEO waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
 
 // Short-form guardrails: every rule 1-14 present, greppable by number, same meaning. Full text: AGENTS.md.
@@ -31,6 +30,8 @@ Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 1
 const POINTERS = `${MARKER} Truth: AGENTS.md (creed, dispatch, guardrails 1-14) > skills/<stage>/SKILL.md+references/ > agents/<domain>/<agent>.md (REQUIRED read, skill=process/template=craft). Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
 
 const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill+template BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, execution_mode, stage. No skill+template=STOP. No code w/o proposal. No handoff on CLOSED.`;
+
+const MONTILLA_OWNERSHIP = `${MARKER} You are Montilla (CEO): owner of frame-ship, guardrails, skills, agents, and dispatch.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;
@@ -83,8 +84,8 @@ function resolveSkillsDir(fallbackBase: string): string {
 
 // Live bootstrap: SKILL.md body only (references stay file-based per scope).
 // Runtime file read keeps a single source of truth — no hardcoded copy to drift.
-const BOOTSTRAP_LABEL = `${MARKER} using-frame-ship bootstrap (live from skills/using-frame-ship/SKILL.md):`;
-const BOOTSTRAP_ACK = `NOTE: using-frame-ship is already loaded in this context — do not re-load it via the skill tool; route straight to the stage skill.`;
+const BOOTSTRAP_LABEL = `${MARKER} frame-ship:using-frame-ship bootstrap:`;
+const BOOTSTRAP_ACK = `NOTE: frame-ship:using-frame-ship is already loaded in this context — do not re-load it via the skill tool; follow the chain: ${CHAIN}.`;
 let bootstrapCachePath = "";
 let bootstrapCacheText = "";
 
@@ -137,7 +138,7 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
       const out = output as { system?: unknown };
       if (!Array.isArray(out.system)) return;
       if (hasMarker(out.system)) return; // idempotent — no duplication on retries
-      out.system.push(WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS);
+      out.system.push(WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS, MONTILLA_OWNERSHIP);
       const bootstrap = await loadBootstrapBody(skillsDir);
       if (bootstrap) out.system.push(bootstrap);
     },
@@ -145,7 +146,7 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
       const out = output as { context?: unknown };
       if (!Array.isArray(out.context)) return;
       if (hasMarker(out.context)) return;
-      out.context.push(COMPACTION_REMINDER);
+      out.context.push(COMPACTION_REMINDER, MONTILLA_OWNERSHIP);
     },
   };
 };
