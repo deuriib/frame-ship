@@ -59,7 +59,7 @@ Or via CLI:
 opencode plugin add github:deuriib/frame-ship
 ```
 
-Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.2.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.4.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
 Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
 
@@ -76,7 +76,7 @@ For development on frame-ship itself (live local changes), use a local path inst
 4. **review-security** — Activates for auth/data/external API. STRIDE review, verdict Approved / Conditional / Rejected. CISO sign-off.
 5. **review-architecture** — Activates for public API / data model / cross-cutting changes. Records ADR + contract verdict.
 6. **execute-spec** — Activates with approved proposal. Implements only approved files, produces test matrix, keeps `REQ-ID → test → artifact` trace.
-7. **quality-gate** — Activates when implementation is ready. Routes every touched domain to reviewers, consolidates `GATE_REPORT.md`. CLOSED on any fail; waivers only by c-levels + CEO.
+7. **quality-gate** — Activates when implementation is ready. Routes to domain reviewers, consolidates `GATE_REPORT.md`. CLOSED on any fail; waivers only by orchestrator.
 8. **verify-handoff** — Activates when work declares complete. Verifies DoD checklist, produces `HANDOFF.md`. No OPEN gate = no handoff.
 9. **ship-release** — Activates when verified. Ships `RELEASE_NOTES.md` + changelog + deployment order + rollback plan, archives spec.
 
@@ -139,7 +139,7 @@ Hard rules (non-negotiable):
 1. NEVER write code without an approved proposal.
 2. NEVER skip security review for auth/data/API changes.
 3. NEVER modify architecture contracts without an ADR.
-4. NEVER hand off with a CLOSED gate unless waived by c-levels + CEO with waiver record.
+4. NEVER hand off with a CLOSED gate unless waived by orchestrator with waiver record.
 5. ALWAYS trace REQ-ID → test → artifact → gate verdict.
 6. ALWAYS produce HANDOFF.md before shipping.
 7. Reference-only packets between stages — never paste full context.
@@ -168,7 +168,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.2.0"]
+  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.4.0"]
 }
 ```
 

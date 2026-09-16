@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.3.4 — Frame→Ship plugin (single-file, zero deps).
+ * frame-ship v0.4.0 — Frame→Ship plugin (single-file, zero deps).
  * Chain: see CHAIN const (single source of truth for order).
  * Skills: ./skills/<stage>/SKILL.md. Location: .opencode/plugins/frame-ship.ts.
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
@@ -7,7 +7,7 @@
 
 import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 
-const VERSION = "0.3.4";
+const VERSION = "0.4.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
@@ -15,10 +15,9 @@ const CHAIN =
 
 // Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
-LOAD ORDER — HARD STOP: 1.skill(frame-ship:using-frame-ship) 2.skill(frame-ship:<stage>) via skill tool (no skill=STOP) 3.read(agents/<domain>/<agent>.md) skill=process,template=craft 4.then edit/bash/task. Pre-flight: skill? template cited? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate orchestrator. No 3rd loop, no sideways.
-Modes (frozen at frame-ship:frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+domain owner template, orchestrator is the sole dispatcher — task(general) max2, orchestrator dispatches entire team; domain owners/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to orchestrator, who delegates to the right agent or resolves. Each dispatched agent reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
+LOAD ORDER — HARD STOP: 1.skill(frame-ship:using-frame-ship) 2.skill(frame-ship:<stage>) via skill tool (no skill=STOP) 3.then act. Pre-flight: skill? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate orchestrator. No 3rd loop, no sideways.
 Triggers→skill: start/what-skills→frame-ship:using-frame-ship | initiative/OKRs→frame-ship:frame-intent(BRIEF+OKRs) | brief-approved→frame-ship:translate-to-spec(REQ+ARCHITECTURE+CONTRACTS) | pre-approval→frame-ship:propose-changes(PROPOSED_CHANGES,untouched) | auth/data/API→frame-ship:review-security(STRIDE) | API/model/cross-cut→frame-ship:review-architecture(ADR) | approved→frame-ship:execute-spec(approved files,REQ→test) | impl-ready→frame-ship:quality-gate(CLOSED on fail) | complete→frame-ship:verify-handoff(HANDOFF,DoD) | verified→frame-ship:ship-release(NOTES+changelog+rollback).
-Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o domain owners+orchestrator waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
+Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
 
 // Short-form guardrails: every rule 1-14 present, greppable by number, same meaning. Full text: AGENTS.md.
 const GUARDRAILS_FULL = `${MARKER} Guardrails (BEFORE dispatch, AFTER verify; full text: AGENTS.md):
@@ -27,9 +26,9 @@ Privacy (Ley 172-13): 5.Minimization: minimum PII; map flow source→store→log
 Severity: 9.Critical(exploitable/prod/loss),High(probable),Medium(conditional),Low(hygiene). 10.Critical/High surface same session+severity+evidence+owner; Med/Low ride gate. 11.Residual explicit: APPROVE+conditions lists risk+owner; no silent PASS.
 Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 14.Respect attention—one point/paragraph; state assumptions on irreversible. FAIL→retry N=2 differently→escalate orchestrator. No 3rd loop, no sideways.`;
 
-const POINTERS = `${MARKER} Truth: AGENTS.md (creed, dispatch, guardrails 1-14) > skills/<stage>/SKILL.md+references/ > agents/<domain>/<agent>.md (REQUIRED read, skill=process/template=craft). Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
+const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-14) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
 
-const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill+template BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, execution_mode, stage. No skill+template=STOP. No code w/o proposal. No handoff on CLOSED.`;
+const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;

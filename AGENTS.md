@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 2026-09-16
-**Commit:** 19532cd (repo git verificado vía `git rev-parse --short HEAD`)
+**Commit:** 933b072 (repo git verificado vía `git rev-parse --short HEAD`)
 **Branch:** main (verificada vía `git branch --show-current`)
 
 ## OVERVIEW
@@ -14,7 +14,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain. Stack: 1 TS file
 ├── skills/<stage>/SKILL.md + references/*.md  # 9 stages, process source of truth
 └── tests/  # empty, no harness
 ```
-`docs/briefs/BRIEF-agent-templates.md` + `docs/specs/10_design|20_backlog|30_delivery|40_workspace|50_archive/` existen en repo (ver `docs/` listing).
+`docs/specs/10_design|20_backlog|30_delivery|40_workspace|50_archive/` existen en repo (ver `docs/` listing).
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
@@ -34,12 +34,11 @@ Hooks: `config` → append `./skills/` to `skills.paths` (idempotent); `experime
 - Every SKILL body: `# Title — Sub` + creed quote `> *"Haces las cosas..."* + `1.Purpose/2.Chain/2b.Role/3.Process/4.Won't do/5.References`.
 - Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
 - Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
-- Dispatch (ADR-003, CEO-only): sole dispatcher is `montilla` (CEO) — **CEO dispatches entire team; c-levels/specialists do the work or brief back.** Cross-domain need → formal **Cross-domain request** brief to the CEO (Need + Reason + Suggested owner + Urgency), returned inside the agent's return; the CEO delegates to the right agent via `task(general)` max 2 parallel or resolves. No sideways, no self-dispatch.
 
 ## ANTI-PATTERNS (THIS PROJECT)
 - Code without approved `PROPOSED_CHANGES.md`.
 - Skipping `review-security` on auth/data/API; arch change without ADR.
-- Handoff on CLOSED gate without c-levels+CEO waiver record.
+- Handoff on CLOSED gate without waiver record.
 - Pasting full context between stages — reference-only packets.
 - Adding deps to plugin — must stay single-file (`.opencode/.gitignore` hides package.json anyway).
 
@@ -53,6 +52,6 @@ No build/test scripts in repo. `tests/` empty.
 
 ## NOTES
 - `.opencode/.gitignore` ignores `node_modules/package.json/package-lock.json/bun.lock` — don't commit those.
-- `AGENTS.md` absent before this run; plugin points to it as source of truth — this file fills that gap.
+
 - Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
 - Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
