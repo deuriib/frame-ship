@@ -20,7 +20,7 @@
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
-- Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs).
+- Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `translate-to-spec` 4 (SKILL + 3 refs); `using-frame-ship` 3 (SKILL + 2 refs); all others 3 (SKILL + 2 refs).
 - Commit closings: every stage ends with a commit step + example; `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
