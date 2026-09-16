@@ -121,3 +121,46 @@
 ## Rollback / Undo
 
 `git revert ea2733c` then `git revert 8d2e58b` — in that order (amendment first, exec second); restores the deleted file plus both SKILL lines. Evidence commits (`0fd68b5`, `70044a4`, gate `b037033`, handoff `deb242f`) revert independently with no live-tree effect. No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA: immediate (< 5 min).
+
+---
+
+# Release Notes: residual-cleanup (internal close)
+
+**Date:** 2026-09-16
+**Release Manager:** montilla (CEO)
+**Specs Included:** SPEC-residual-cleanup-engineering
+**Domains-Touched:** [engineering]
+**Ship Type:** close (internal close-out; no deploy, filing, launch, or workflow enablement)
+
+## Highlights
+
+- Front-door exact: the last two `tool-mapping` prose mentions outside history are gone — `README.md:97` descriptor without parenthetical, `:236` roadmap item without the harness clause (still `[ ]`, honestly pending).
+- The second retained risk (dangling `commit-convention.md` pointers) was formally REFUTED with disk proof (`grep commit-convention skills/` = 0; purge `f859726` + its gate verified it) — closed without spending a commit.
+- Full chain in `single` mode: brief → spec → proposal → exec → min-gate (4/4 pass) → DoD PASS → this close.
+
+## Changes
+
+### Features
+
+- N/A (close-out only — no new behavior)
+
+### Fixes
+
+- N/A (no defect; stale-prose removal)
+
+### Removed
+
+- `README.md:97` parenthetical `(includes tool-mapping reference)` — SPEC-residual-cleanup-engineering, engineering
+- `README.md:236` clause `+ tool-mapping per harness` — same spec
+
+### Breaking Changes
+
+- None — descriptive prose only; no loader, runtime, skill, or harness consumes the README as a contract.
+
+## Known Issues
+
+- None. Remaining `tool-mapping` strings repo-wide are `docs/` history + trace artifacts (by design, they reference the removed name as evidence, not as pointers).
+
+## Rollback / Undo
+
+`git revert e73eee0` — restores both README lines in one step. Evidence commits (`f1aa7a3`, gate `62a3667`, handoff `4707b79`) revert independently with no live-tree effect. No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA: immediate (< 2 min).

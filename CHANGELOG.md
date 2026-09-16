@@ -8,6 +8,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Removed
 
 - `skills/using-frame-ship/references/tool-mapping.md` (engineering, SPEC-remove-tool-mapping-engineering): CEO-only dispatch contract now single-sourced in `using-frame-ship/SKILL.md` + checklist + AGENTS.md + plugin; SKILL §3/§5 reworded, zero live pointers (gate OPEN, DoD PASS).
+- `README.md` stale `tool-mapping` prose (engineering, SPEC-residual-cleanup-engineering): L97 descriptor + L236 roadmap clause reworded; front-door exact, roadmap honestly still pending (gate OPEN, DoD PASS).
 
 ## [v0.4.0] — 2026-09-16
 
