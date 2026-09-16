@@ -1,151 +1,133 @@
-# Proposed Changes: engineering owner + specialist
+# Proposed Changes: Engineering specialist — skill-naming convention (residual-only)
 
-**Spec Reference:** User request 2026-09-16 "remove commit-convention from the repo" + user scoping decision 2026-09-16 (Full purge incl. history + Update all citations)
-**Agent:** engineering owner + specialist (dispatched by orchestrator Montilla CEO)
+**Spec Reference:** docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md#REQ-001..005 (+ REQ-NF-001..003)
+**REQ Index:** docs/specs/15_requirements/REQ-skill-naming-engineering.md
+**Agent:** Engineering specialist
 **Date:** 2026-09-16
-**Execution_Mode:** single (inherited — single-domain owner acting directly, no subagent dispatch)
-**Domains-Touched:** engineering
+**Execution_Mode:** single (inherited from spec §header + BRIEF-skill-naming, frozen at frame-intent; not overridden)
+**Domains-Touched:** [engineering] (automation/ops conditional — plugin runtime strings RECORDED only, not edited; automation owner owns any runtime follow-up)
 
 ## Summary
 
-Purge the commit convention from the repo in one work unit: delete the convention template plus all 8 historical commit-convention-v2 work products and their 5 gate review files, then remove all 21 live citation lines (9 stage SKILLs + `skills/AGENTS.md` + `implementation-plan.md`) so no file points at a deleted path. Shipped-release prose keeps its history lines with justification; the orchestrator decides the one open scrub question.
+Freeze the canonical navigation form `` `frame-ship:{skill-name}` `` with the normative 3-row carve-out table, disposition all 15 bare `` `skill(...)` `` cites in `skills/` as C-3 KEEP-bare (tool-API namespace), and map every chain/dir surface per REQ-004 with the plugin `CHAIN`/card strings deferred to an automation-owner follow-up. This unit proposes **zero repository file modifications** — it is a verification/record unit: execute-spec will reproduce the greps and scans, quality-gate will enforce them. Prior content at this path (INTENT-2026-09-16-concise-plugin-prompts proposal) is preserved in git history; this revision retargets the path to SPEC-skill-naming-engineering per orchestrator packet.
 
 ## Changes
 
-### A. Deletions — convention file + historical artifacts (14 files, all glob-verified)
-
 | Target | Change Type | Description |
 |--------|-------------|-------------|
-| `skills/using-frame-ship/references/commit-convention.md` | file-delete | Delete convention template (source of truth for all citations) |
-| `docs/briefs/BRIEF-commit-convention-v2.md` | file-delete | Delete historical brief |
-| `docs/specs/10_design/SPEC-commit-convention-v2.md` | file-delete | Delete historical design spec |
-| `docs/specs/50_archive/SPEC-commit-convention-v2.md` | file-delete | Delete historical archive copy |
-| `docs/specs/40_workspace/vasquez/PROPOSED_CHANGES-commit-convention-v2.md` | file-delete | Delete historical proposal |
-| `docs/specs/40_workspace/vasquez/IMPLEMENTATION_PLAN-commit-convention-v2.md` | file-delete | Delete historical implementation plan |
-| `docs/specs/40_workspace/vasquez/TEST_MATRIX-commit-convention-v2.md` | file-delete | Delete historical test matrix |
-| `docs/specs/40_workspace/vasquez/HANDOFF-commit-convention-v2.md` | file-delete | Delete historical handoff |
-| `docs/specs/40_workspace/vasquez/DOD-commit-convention-v2.md` | file-delete | Delete historical DoD checklist |
-| `docs/specs/40_workspace/quality-gate/commit-convention-v2/GATE_REPORT.md` | file-delete | Delete gate report (dir becomes empty, drops out of git) |
-| `docs/specs/40_workspace/quality-gate/commit-convention-v2/qa-review.md` | file-delete | Delete QA review |
-| `docs/specs/40_workspace/quality-gate/commit-convention-v2/readability-review.md` | file-delete | Delete readability review |
-| `docs/specs/40_workspace/quality-gate/commit-convention-v2/refuter-review.md` | file-delete | Delete refuter review |
-| `docs/specs/40_workspace/quality-gate/commit-convention-v2/risk-review.md` | file-delete | Delete risk review |
+| *(none — verification/record unit)* | — | No `file-create` / `file-modify` / `file-delete` proposed. All 15 `skill(...)` cites KEEP bare per C-3; frontmatter/paths/plugin runtime byte-identical per REQ-005. Execution = reproduce greps + scans (§Verification). |
 
-Note: packet said "8 historical artifacts" — glob confirms 8 (1 brief + 2 specs + 5 vasquez files); +1 template +5 gate reviews = 14 deletions total.
+Change types per `skills/propose-changes/references/proposal-template.md` (`file-*` for engineering; zero rows = zero edits).
 
-### B. Citation updates — live pointers to the deleted path (21 lines, all grep-verified)
+### Disposition table — 15 bare `skill(...)` cites (REQ-003, baseline verified 2026-09-16 via `rg -n "skill\(" skills/`)
 
-Rule applied per line: drop the `per <path-to-commit-convention.md> (guidance only…)` pointer clause, keep the stage's own commit example and any chain rule (REQ-ID trace, per-task, tag-after-commit, never-fails-gate). Delete §5/§6 reference bullets outright (bulleted lists — no renumbering needed).
+Every cite below is tool-invocation context (pre-flight load check or template checklist), NOT inter-skill navigation → disposition **KEEP bare under C-3**. Zero canonicalizations required; prior PASS already normalized all navigation cites to `frame-ship:`-form.
 
-| Target | Change Type | Description |
-|--------|-------------|-------------|
-| `skills/frame-intent/SKILL.md:39` | file-modify | Close line → `7. Close with a commit. Example: \`docs(brief-auth): add BRIEF-auth with OKRs and domains-touched\`.` |
-| `skills/frame-intent/SKILL.md:51` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/translate-to-spec/SKILL.md:34` | file-modify | Close line → `7. Close with a commit. Example: \`feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth\`.` |
-| `skills/translate-to-spec/SKILL.md:47` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/propose-changes/SKILL.md:34` | file-modify | Close line → `6. Close with a commit (the proposal doc itself is committed, impl files stay untouched). Example: \`docs(proposal-003): add PROPOSED_CHANGES for auth with blast radius\`.` |
-| `skills/propose-changes/SKILL.md:46` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/review-security/SKILL.md:33` | file-modify | Close line → `5. Close with a commit. Example: \`docs(sec-003): approve SECURITY_REVIEW with STRIDE verdict\`.` |
-| `skills/review-security/SKILL.md:45` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/review-architecture/SKILL.md:34` | file-modify | Close line → `6. Close with a commit.` |
-| `skills/review-architecture/SKILL.md:46` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/execute-spec/SKILL.md:37` | file-modify | Keep per-task chain rule, drop pointer → `7. Commit one commit per approved task/REQ-ID (never batch unrelated REQ-IDs). Body links \`REQ-ID → test → artifact\`. Examples: \`feat(auth-001): add session store with REQ-001 test trace\`, \`fix(auth-002): enforce TTL per REQ-002\`.` |
-| `skills/execute-spec/SKILL.md:50` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/quality-gate/SKILL.md:64` | file-modify | Close line → `8. Close with a commit (never fails the gate). Example: \`docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews\`.` |
-| `skills/quality-gate/SKILL.md:78` | file-modify | Delete §6 `commit-convention.md` bullet |
-| `skills/verify-handoff/SKILL.md:33` | file-modify | Close line → `6. Close with a commit. Example: \`docs(handoff-003): verify DoD and route SPEC-003 to ship\`.` |
-| `skills/verify-handoff/SKILL.md:45` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/ship-release/SKILL.md:36` | file-modify | Close line → `6. Close with a release commit (tag after commit). Example: \`chore(release-0.4.0): ship SPEC-003 with notes and rollback plan\`.` |
-| `skills/ship-release/SKILL.md:48` | file-modify | Delete §5 `commit-convention.md` bullet |
-| `skills/AGENTS.md:24` | file-modify | Bullet → `- Commit closings: every stage ends with a commit step + example; \`execute-spec\` commits one per approved task/REQ-ID.` |
-| `skills/execute-spec/references/implementation-plan.md:14` | file-modify | Sentence → `Each step maps to one commit unless the plan explicitly groups them.` |
-| `skills/using-frame-ship/SKILL.md:78` | file-modify | Delete §5 `references/commit-convention.md` bullet |
-| `docs/specs/AGENTS.md:17` | file-modify | Design row: remove `+ \`SPEC-commit-convention-v2.md\`` (index accuracy — file will not exist) |
-| `docs/specs/AGENTS.md:22` | file-modify | Archive row: remove `, \`SPEC-commit-convention-v2\`` (index accuracy — file will not exist) |
+| # | File:Line | Cite (verbatim) | Disposition | Carve-out |
+|---|-----------|-----------------|-------------|-----------|
+| D-01 | `skills/execute-spec/SKILL.md:28` | `` `skill(execute-spec)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-02 | `skills/execute-spec/SKILL.md:32` | `` `skill(execute-spec)` `` (`single` output-cites line) | KEEP bare — no edit | C-3 |
+| D-03 | `skills/review-architecture/SKILL.md:28` | `` `skill(review-architecture)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-04 | `skills/propose-changes/SKILL.md:28` | `` `skill(propose-changes)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-05 | `skills/verify-handoff/SKILL.md:27` | `` `skill(verify-handoff)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-06 | `skills/frame-intent/SKILL.md:32` | `` `skill(frame-intent)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-07 | `skills/quality-gate/SKILL.md:56` | `` `skill(quality-gate)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-08 | `skills/using-frame-ship/SKILL.md:39` | `` `skill(using-frame-ship)` `` (§3 load-order step 1) | KEEP bare — no edit | C-3 |
+| D-09 | `skills/using-frame-ship/SKILL.md:40` | `` `skill(<stage>)` `` (§3 load-order step 2, template arg) | KEEP bare — no edit | C-3 |
+| D-10 | `skills/using-frame-ship/SKILL.md:63` | `` `skill(stage)` `` (`single` mode line) | KEEP bare — no edit | C-3 |
+| D-11 | `skills/using-frame-ship/SKILL.md:64` | `` `skill(stage)` `` (`multi-subagents` mode line) | KEEP bare — no edit | C-3 |
+| D-12 | `skills/ship-release/SKILL.md:30` | `` `skill(ship-release)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-13 | `skills/review-security/SKILL.md:28` | `` `skill(review-security)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-14 | `skills/translate-to-spec/SKILL.md:27` | `` `skill(translate-to-spec)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-15 | `skills/quality-gate/references/gate-report.md:34` | `` `skill(<stage>)` `` (stage-skill-loaded checklist) | KEEP bare — no edit | C-3 |
 
-### C. Historical mentions — keep-as-history (default, with justification)
+Re-grep acceptance (execute-spec / gate): `rg -n "skill\(" skills/` → same 15 hits, 0 unmapped (15/15 rows above).
 
-| Target | Change Type | Description |
-|--------|-------------|-------------|
-| `CHANGELOG.md:12,31` | no-change | Keep. Shipped release narrative; rewriting falsifies the audit trail of what v0.4.0 contained. |
-| `docs/specs/30_delivery/RELEASE_NOTES.md:5,18,38` | no-change | Keep. Shipped release record including its rollback note; rollback line (`git checkout -- …`) remains valid git syntax against history. |
-| `docs/specs/50_archive/plugin-001-concise-prompts.md:33` | no-change | Keep. Archived lesson-learned; archive is terminal by lifecycle rule. |
-| `docs/specs/40_workspace/vasquez/HANDOFF-skill-refs-normalization.md:23` | no-change | Keep. Prior handoff record describing work already done; editing rewrites history. |
-| Incidental `work-unit` prose (`IMPLEMENTATION_PLAN-single-dispatcher.md:27`, `IMPLEMENTATION_PLAN-ceo-only-dispatch.md:22`, `santana/IMPLEMENTATION_PLAN-single-dispatcher.md:40`) | no-change | Keep. Generic phrasing, no pointer to the deleted file; out of purge scope. |
+### Chain/dir surface map (REQ-004 — informative; enforced here, plugin rows RECORDED not edited)
 
-**Open decision for orchestrator:** user scoping says "Full purge incl. history." The §A deletions ARE the history purge (all 8 work-product artifacts gone). §C keeps prose mentions in shipped/archived records. If orchestrator requires full prose scrub instead, that is a follow-up work unit (rewrite CHANGELOG + RELEASE_NOTES + archive entries) — stated here so the waiver/decision is explicit, not silent.
+| # | Surface | Form carried | Disposition |
+|---|---------|--------------|-------------|
+| S-01 | `AGENTS.md:14,25-26` (`skills/<stage>/SKILL.md`, `skills/<stage>/references/`, `skills/quality-gate/`) | bare (paths) | KEEP per C-2 |
+| S-02 | `AGENTS.md:65`, `skills/AGENTS.md` trigger table + catalogue paths + `frame-intent` bare cite (`skills/AGENTS.md:26`) | paths bare; navigation already `frame-ship:`-prefixed where applicable | KEEP per C-2 / REQ-001 |
+| S-03 | `README.md:31,62,86-88,125,187-196` (chain diagram `using-frame-ship → …` bare stage names; tree paths) | diagram + tree are dir/path context | KEEP bare per C-2; NOT navigation cites (no edit in this unit) |
+| S-04 | `skills/using-frame-ship/references/bootstrap-checklist.md:8` (chain `frame-intent → … → ship-release` bare) | bare chain shorthand in checklist | KEEP — checklist shorthand, navigation canon lives in SKILL.md Previous/Next/route lines (REQ-001) |
+| S-05 | `.opencode/plugins/frame-ship.ts:4,13-14,16,20,29` (`./skills/<stage>/SKILL.md`, `skills/*/SKILL.md`, `CHAIN`, `WORKFLOW_CARD`, `POINTERS`, `COMPACTION_REMINDER` strings incl. `skill(frame-ship:…)` load-order literals `:18`) | paths bare per C-2; runtime injection strings | RECORD ONLY — **not edited in this unit** (runtime risk). Follow-up owned by automation owner + typecheck (REQ-004) |
+| S-06 | All 10 `SKILL.md` Previous/Next/route/handoff lines + `using-frame-ship` diagram (`:23-25`) | `frame-ship:`-prefixed (prior PASS 10/10) | KEEP canonical per REQ-001 — no edit |
+
+### Carve-out table (normative, frozen per SPEC §4 / REQ-002 — exactly 3 rows, no fourth form)
+
+| # | Surface | Form | Example | Rationale |
+|---|---------|------|---------|-----------|
+| C-1 | Skill frontmatter `name:` | bare kebab, `name==dir` | `name: translate-to-spec` (`skills/translate-to-spec/SKILL.md:2`) | Loader contract — harness resolves by dir/name; prefix would break discovery |
+| C-2 | Filesystem paths / dir globs | bare | `skills/<stage>/SKILL.md`, `skills/*/SKILL.md`, `./skills/<stage>/SKILL.md` | File resolution — paths are not skill invocations |
+| C-3 | Native `skill()` tool args | bare | `` `skill(translate-to-spec)` `` (§0 pre-flights), `` `skill(<stage>)` `` / `` `skill(stage)` `` (`using-frame-ship` §3, `gate-report.md:34`) | Tool API namespace — harness resolves bare names; distinct from navigation cites |
 
 ## Rationale
 
-The user request plus scoping decision fully determines the shape: every live pointer to `commit-convention.md` must go (otherwise 21 dangling references to a deleted file), every commit-convention-v2 work product goes (the "incl. history" decision), and shipped-record prose stays (audit-trail integrity — a release record must describe what actually shipped). Grep confirms no `commit-convention-v2` reference lives outside the §A deletion set and the §C history set, so the purge leaves zero dangling pointers. Doc-only change: no auth/data/API touched, no behavior change, no migration.
+REQ-001: navigation canon already holds (10/10 Previous/Next `frame-ship:`-prefixed, verified by `rg -n "frame-ship:" skills/` — 40+ hits, zero bare navigation cites outstanding); this proposal freezes the rule verbatim rather than re-editing. REQ-002: the 3-row table above is copied normatively from SPEC §4 — frontmatter/paths/tool-args each have a loader/tool rationale, closing the "third form" ambiguity for future cites. REQ-003: all 15 `skill(` hits are §0/§3 tool-API context (D-01..D-15), so KEEP-bare is the correct disposition — canonicalizing any of them would break the harness-resolved tool namespace. REQ-004: chain/dir surfaces split cleanly into C-2 paths vs REQ-001 navigation, with the plugin runtime explicitly deferred (single-file zero-deps runtime, needs automation owner + `mise run typecheck`). REQ-005: zero file edits → guard holds by construction; `git status` + diff stat at execute-spec will show only this proposal doc (plus its commit).
 
 ## Alternatives Considered
 
 | Alternative | Reason Rejected |
 |-------------|-----------------|
-| Leave SKILL citation lines pointing at a stub/redirect file | Keeps a dead concept alive; user asked for removal, not relocation |
-| Scrub §C prose mentions in the same work unit | Rewrites shipped history (CHANGELOG/RELEASE_NOTES) and terminal archive; needs explicit orchestrator waiver first — recorded as open decision above |
-| Split deletions and citation edits into two commits | Single coherent work unit (purge + pointer cleanup); one revert restores everything — splitting adds revert complexity for no traceability gain |
+| Canonicalize the 15 `skill(...)` cites to `skill(frame-ship:…)` | Breaks tool namespace — harness resolves bare names (C-3 rationale); SPEC REQ-002/003 explicitly keep them bare |
+| Edit plugin `CHAIN`/`WORKFLOW_CARD` strings in this unit | Runtime risk without automation owner; SPEC REQ-004 + HARD defer it — record-only here |
+| Rewrite `README.md:86-88` diagram + `bootstrap-checklist.md:8` to `frame-ship:`-form | Out of residual scope — those are path/checklist shorthand (C-2), not navigation cites; prior PASS deliberately preserved them |
+| Touch frontmatter `name:` or rename skill dirs | Violates loader contract + REQ-005 (no renames); prefix would break discovery |
 
 ## Approval Required From
 
-- [ ] Owning domain owner: engineering owner (mandatory — single-domain proposal; self-approval not permitted, orchestrator routes approval)
-- [ ] engineering owner (architecture/API/model/cross-cutting impact) — N/A: doc-only deletion, no contract change (assumption stated)
-- [ ] security owner (auth/data/external-API/PII impact) — N/A: no auth/data/API touched (assumption stated)
+- [ ] Owning domain owner: **engineering owner** (mandatory; [engineering] is the sole touched domain — approves proposal + C-1/C-2/C-3 freeze)
+- [ ] engineering owner for architecture impact: **same as above — no separate approval** (no API/model/cross-cutting surface; no `ARCHITECTURE.md`/`API_CONTRACTS.md` touched per SPEC §4)
+- [ ] security owner: **not required** (docs-only, no auth/data/external-API/PII surface; REQ-NF-001 scan scope only — security lens N/A at gate per REQ index Domain Controls)
 
-> **Rule:** No repository file modifications during proposal phase. Only this proposal doc is committed; all §A/§B files stay untouched until execute-spec.
+> **Rule:** No repository file modifications during proposal phase. Only this proposal doc is committed; implementation files stay untouched.
 
-## Risk Assessment
+---
 
-Per `skills/propose-changes/references/risk-assessment.md`.
+# Risk Assessment: SPEC-skill-naming-engineering
 
-### Risk Matrix
+**Proposer:** Engineering specialist
+**Date:** 2026-09-16
+**Domains-Touched:** [engineering] (automation/ops conditional record-only)
+
+## Risk Matrix
 
 | ID | Risk | Likelihood | Impact | Mitigation |
 |----|------|-----------|--------|------------|
-| R-001 | Dangling reference missed — some file still points at deleted path | Low | Med | Grep-verified twice (21 citation lines + 33 `commit-convention-v2` matches, all mapped to §A/§B/§C); execute-spec re-greps post-edit before commit |
-| R-002 | Future agents lose commit-format guidance, produce inconsistent messages | Low | Low | Stage SKILLs keep their own per-stage examples; git history retains the convention file content for reference |
-| R-003 | "Full purge incl. history" interpreted as requiring §C prose scrub, proposal judged incomplete | Med | Low | Open decision stated explicitly in §C for orchestrator ruling before execute-spec; scrub (if ordered) is a separate follow-up work unit |
+| R-001 | Over-canonicalization — a future editor prefixes a `skill()` tool arg or frontmatter `name:` and breaks harness/loader resolution | Med | Med | C-1/C-3 rows frozen with rationale; gate re-greps `skill\(` vs `frame-ship:`; this proposal dispositions 15/15 as KEEP |
+| R-002 | Under-canonicalization — a new navigation cite is written bare and reintroduces the ambiguous third form | Med | Low | Canonical rule frozen (REQ-001); quality-gate checks Previous/Next/route lines for `frame-ship:`-form |
+| R-003 | Scope creep — plugin runtime edit slips into execute-spec without automation owner | Low | Med | S-05 marked RECORD ONLY with owner; REQ-005 diff-stat check (`git status` shows proposal doc only) rejects runtime edits |
+| R-004 | Collision — overwriting this shared `PROPOSED_CHANGES.md` path obscures the prior concise-plugin-prompts proposal | Low | Low | Prior revision preserved in git history (revertible); follow-up proposals use per-spec suffix (`PROPOSED_CHANGES-skill-naming.md`) |
 
-### Blast Radius
+## Blast Radius
 
-- **Systems:** none. Doc/markdown files only; plugin runtime (`frame-ship.ts`), toolchain (`mise.toml`), and `package.json` untouched. No build, test, or deploy path references the deleted files.
-- **Teams:** engineering (owns the edit work unit); all domain owners read updated SKILL close lines — content change is subtractive (pointer clause removed), no new process to learn.
-- **Customers:** none. Internal process docs; no user-facing surface.
-- **Regulators:** none. No PII, retention, or control surface involved; audit trail preserved via §C keep-as-history default + git history.
-- **Revenue:** none. No pipeline, pricing, or GTM artifact touched.
+- **Systems:** none — docs prose/record only; no services, data stores, endpoints, or runtime behavior change (plugin byte-identical).
+- **Teams:** engineering (review load only: engineering owner approval + gate grep); automation owner informed of S-05 follow-up, no action required this unit.
+- **Customers:** none — no user-facing surface.
+- **Regulators:** none — no PII/auth/data in scope (Ley 172-13 minimization holds; scoped evidence = paths + line refs only).
+- **Revenue:** none — no pipeline/quota/billing surface.
 
-### Rollback Plan
+## Rollback Plan
 
-`git revert <proposal-impl-commit>` — single commit revert restores all 14 deleted files and all §B line edits (one work unit = one commit). Owner: engineering owner. ETA: immediate (< 5 min). No external sends/filings/launches/deploys to undo.
+`git revert` the single proposal-doc commit. Owner: Engineering specialist (commit author). ETA: **< 5 min** (docs-only, no migration, no external undo). Verify with `git status --short` clean + `git log --oneline -3`.
 
-### Security Considerations
+## Security Considerations
 
-No auth, data exposure, or input validation surface. Doc-only deletion; no trust boundaries crossed. Security review not required (assumption: doc-only scope holds — orchestrator GATE confirms).
+No auth, data exposure, or input-validation surface (docs-only cite inventory). REQ-NF-001: pattern scan over proposal + referenced cite lines for `secret|token|credential|session|password|api[_-]?key|ssn|passport` = expected 0; no PII added (paths + line refs only). Security owner review not required; full review wave runs at quality-gate only if scope expands.
 
-### Domain Considerations
+## Domain Considerations
 
-Engineering only. Finance/legal/marketing/people/revenue/automation-ops: no budget, liability, brand, workload, pipeline, or runbook impact — domains deleted as non-touched per template.
+Engineering only. Delete non-touched domains: finance — n/a (no budget/controls); legal — n/a (no IP/regulatory/liability); marketing/brand — n/a (no GTM); people — n/a (no workload/culture change); revenue — n/a (no pipeline/quota); automation/ops — conditional record-only (S-05 plugin follow-up owned by automation owner, no runbook/capacity impact this unit).
 
-## Definition of Done
+---
 
-- [ ] Proposal approved by engineering owner via orchestrator (no self-approval)
-- [ ] Orchestrator rules on §C open decision (keep-as-history confirmed or scrub ordered as follow-up)
-- [ ] Execute-spec deletes exactly the 14 §A files, edits exactly the 23 §B lines, touches nothing else
-- [ ] Post-edit grep for `commit-convention` returns only §C history lines (zero live pointers)
-- [ ] Rollback verified: single-commit revert path identified at commit time
+## Verification (this stage — proposal only, repo untouched except this doc)
 
-## REQ → Test → Artifact → Verdict Trace (placeholder for execute-spec / quality-gate)
-
-| REQ | Test / Evidence | Artifact | Gate Verdict |
-|-----|-----------------|----------|--------------|
-| REQ-001 (full purge: template + 8 historical + gate reviews deleted) | `glob **/*commit-convention*` returns zero files | Deletion commit | _pending gate_ |
-| REQ-002 (all live citations updated) | `grep commit-convention skills/` returns zero matches | Citation-edit hunks in same commit | _pending gate_ |
-| REQ-003 (no dangling pointers anywhere) | `grep commit-convention` repo-wide returns only §C history lines | Grep output attached to handoff | _pending gate_ |
-| REQ-004 (impl files untouched except §A/§B set) | `git status --short` shows only listed paths | Commit file list | _pending gate_ |
-
-## Assumptions
-
-1. `execution_mode: single` — carried as single-domain direct execution (no subagent dispatch occurred for this proposal).
-2. No security/architecture review required — doc-only deletion with no auth/data/API/contract touch; GATE packet confirms engineering owner only.
-3. "Full purge incl. history" = delete all 8 work-product artifacts (§A); §C prose keeps history pending orchestrator ruling.
+- [x] Skill loaded: `frame-ship:propose-changes` via skill tool; contract cited: `skills/propose-changes/SKILL.md` (§3 Process steps 1-6, §4 Won't-do)
+- [x] SPEC read: `docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md` (REQ-001..005 + REQ-NF-001..003)
+- [x] REQ index read: `docs/specs/15_requirements/REQ-skill-naming-engineering.md`
+- [x] Templates used: `skills/propose-changes/references/proposal-template.md` + `skills/propose-changes/references/risk-assessment.md`
+- [x] Baseline grep: `rg -n "skill\(" skills/` → 15 hits (D-01..D-15 above); `rg -n "frame-ship:" skills/` → navigation cites already canonical
+- [ ] Approval: engineering owner (BLOCKED until granted — specialists never self-approve)
+- [ ] Post-approval commit: proposal doc only (see commit below); `git status --short` must show only `docs/specs/40_workspace/vasquez/PROPOSED_CHANGES.md`

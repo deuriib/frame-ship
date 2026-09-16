@@ -45,3 +45,6 @@ This skill is supporting, not a stage — chain order never changes.
 ## 5. References
 
 - `references/worktree-lifecycle.md` — Create to verify to remove sequence with pwsh command contracts.
+- `references/guards.md` — Security controls, owned by security lane (fail-closed ignore gate, trust boundaries).
+- `references/pwsh-flow.md` — Automation lane (win32/pwsh joins, serialized baseline gate, max-2 discipline).
+- `references/announce-template.md` — People lane (consent-before-create plus warm announce wording).

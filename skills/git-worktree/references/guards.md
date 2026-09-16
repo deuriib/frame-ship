@@ -30,7 +30,7 @@ Rules:
 ## 2. Fail-closed `.gitignore` gate (REQ-SEC-002)
 
 ```powershell
-git check-ignore -q .worktrees   # exit 0 = gate green; nonzero = STOP
+git check-ignore -q .worktrees/  # exit 0 = gate green; nonzero = STOP
 ```
 
 - `.gitignore` MUST contain a `.worktrees/` entry before the first
@@ -41,9 +41,13 @@ git check-ignore -q .worktrees   # exit 0 = gate green; nonzero = STOP
 - Gate evidence (carried by reference, engineering lane attaches logs):
   `check-ignore` log + missing-entry drill log + `git status` zero-tracked
   snapshot for `.worktrees/`.
-- Observed 2026-09-16: entry absent, probe exits 1 — gate correctly fails
-  closed. The entry itself is landed by the engineering lane; this file only
-  defines the gate, never edits `.gitignore`.
+- Observed 2026-09-16: entry present (`.gitignore:55-56`, 56 lines),
+  slash probe `git check-ignore -q .worktrees/` exits 0 — gate green on
+  fresh clones with no directory on disk. Bare form without the slash
+  exits 1 here: it is a dir-existence variant only, never the gate probe.
+  Slash-form nonzero still = STOP, no override. The entry itself is landed
+  by the engineering lane; this file only defines the gate, never edits
+  `.gitignore`.
 
 ## 3. Least privilege per worktree (REQ-SEC-003)
 

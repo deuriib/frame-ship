@@ -76,4 +76,4 @@ No `API_CONTRACTS.md` file is minted: there is no HTTP/RPC surface. The pwsh com
 
 - Default-root TTL owner (automation + security) — proposed: repo-local default, `Temp\opencode` fallback with explicit TTL; orchestrator confirms.
 - Announce uniform template vs per-owner tone (people) — proposed: uniform template default; waiver only via people-owner + orchestrator.
-- `40_workspace/<owner>/` promotion rule (engineering) — proposed in `propose-changes`; gate confirms.
+- `40_workspace/<domain>/` promotion rule (engineering) — proposed in `propose-changes`; gate confirms.

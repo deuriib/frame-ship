@@ -51,10 +51,10 @@ first.
 3. Create exactly one worktree per SPEC-ID with `Resolve-Path`-safe joins:
 
 ```powershell
-$root = Join-Path ".worktrees" "<spec-id>"
+$worktreeRoot = Join-Path ".worktrees" "<spec-id>"
 $branch = "<branch>"
-git worktree add $root -b $branch
-if (Test-Path -LiteralPath $root) { Resolve-Path -LiteralPath $root }
+git worktree add $worktreeRoot -b $branch
+if (Test-Path -LiteralPath $worktreeRoot) { Resolve-Path -LiteralPath $worktreeRoot }
 git worktree list
 ```
 
@@ -92,6 +92,20 @@ is held waits — it never starts its own installer concurrently. Lock-flake
 retries are evidence the mutex was violated; the fix is serialization, not
 parallel retry.
 
+Installer-mutex kill bound: a waiter holds no longer than 10 minutes total,
+then STOPs with owner notify — it never kills another lane's installer.
+Bounded-wait pattern:
+
+```powershell
+$deadline = (Get-Date).AddMinutes(10)
+while ($mutexHeld) { if ((Get-Date) -gt $deadline) { Write-Output "STOP: mutex wait exceeded, notify orchestrator"; break }; Start-Sleep -Seconds 30 }
+```
+
+Sandbox TTL co-sign: repo-local `.worktrees/` is primary; fallback
+`Join-Path $env:TEMP "opencode"` only on repo-local refusal, with purpose
+plus TTL plus deletion owner automation plus security, orchestrator confirms
+before use.
+
 Confirm toolchain active per worktree (`mise current` or `mise ls`) and record
 the setup log path per worktree for gate evidence.
 
@@ -117,8 +131,8 @@ plus TTL plus deletion owner. TTL expiry or lane completion triggers the
 terminal state below — only after work is merged or archived:
 
 ```powershell
-$root = Join-Path ".worktrees" "<spec-id>"
-git worktree remove $root --force
+$worktreeRoot = Join-Path ".worktrees" "<spec-id>"
+git worktree remove $worktreeRoot --force
 git worktree prune
 git worktree list
 ```

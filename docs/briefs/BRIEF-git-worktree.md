@@ -61,7 +61,7 @@ Two SPECs in parallel, zero residue:
 
 - [ ] Default root final: repo-local `.worktrees/` vs `Temp\opencode` sandbox — who owns cleanup TTL? (owner: automation + security)
 - [ ] Announce-line uniform template vs per-owner tone (owner: santana/people)
-- [ ] Promotion rule: `40_workspace/<owner>/` scratch maps to which worktree promotes to `10→30` lifecycle? (owner: vasquez/engineering)
+- [ ] Promotion rule: `40_workspace/<domain>/` scratch maps to which worktree promotes to `10→30` lifecycle? (owner: vasquez/engineering)
 
 ## References
 

@@ -1,41 +1,39 @@
-# Refuter Review: SPEC-git-worktree
+# Refuter Review: SPEC-git-worktree — RE-CHECK (fix loop N=1, retry 1 of 2)
 
 **Reviewer:** review-refuter (adversarial, engineering)
 **Date:** 2026-09-16
-**Verdict:** conditional
+**Verdict:** pass (could not falsify)
 **Skill:** skill(frame-ship:quality-gate) + `skills/quality-gate/references/engineering/refuter-review.md`
+**Prior verdict:** conditional (RF-001..RF-006) — this re-check re-probes each with fresh proof
 
 ## Mission
 
-Attempt to **falsify** the implementation claims. Success = a counterexample with proof. A claim without proof is REFUTED per HARD; every finding below carries its own proof.
+Attempt to **falsify** the post-fix claims. Success = a counterexample with proof. Per HARD, a finding without proof (diff/scan/log ref) is REFUTED — every row below carries fresh proof from this session.
 
-## Refuted Claims
+## Re-check: Refuted / Confirmed per RF-00x
 
-| Claim | Evidence Demanded | Result |
-|-------|-------------------|--------|
-| T-001 — SKILL §5 resolves to existing refs (eng matrix) | §5 lists all normatively-consumed refs | **REFUTED** — `skills/git-worktree/SKILL.md:45-47` lists 1/4 files (`worktree-lifecycle.md` only); `references/` holds 4 files (glob proof); §3 steps 1/3/4 normatively consume `announce-template.md`, `guards.md`, `pwsh-flow.md`. Confirms readability RD-001. |
-| C-001 — check-ignore green + zero tracked paths (eng lane) | Citable log path + status snapshot ref | **REFUTED as cited** — matrix cites "session shell logs for this lane, commands run post-edit" with no path. State independently CONFIRMED by refuter probe: `git check-ignore -q .worktrees/` exit 0, `.gitignore:55-56` entry present (see RF-004/RF-006). Lane proof missing. |
-| C-003 — live count ≤2 snapshot (eng + automation lanes) | `git worktree list` snapshot path | **REFUTED as cited** — both matrices cite "session shell log for this lane" with no path. State independently CONFIRMED: `git worktree list` → 1 entry (`D:/GitHub/frame-ship e7a6ba4 [main]`), count 1 ≤ 2. Lane proof missing. |
-| C-002 — secret scans 0 hits (eng + automation lanes) | Scan command + log ref over stated file set | **REFUTED as cited, state CONFIRMED by spot-check** — lanes cite "returns 0 hits" with no log path. Refuter re-ran: POSIX `$(` over `skills/git-worktree/**` 0 hits; high-signal `api_key\|passwd\|access_token\|bearer\|aws_access\|ghp_\|sk-` 0 hits; `TODO\|FIXME\|XXX\|HACK` 0 hits. State holds; lane citation lacks proof. |
-| SEC T-002 — observed `.gitignore` 53 lines, zero hits, probe exit 1 (sec matrix) | Current `.gitignore` state matching observation | **REFUTED (stale)** — matrix `TEST_MATRIX-git-worktree-security.md:10` records 53 lines / absent entry / exit 1. Current: 56 lines, entry at `.gitignore:55-56`, slash-form exit 0, bare-form exit 1. Engineering lane has since landed the entry; sec observation superseded, not re-attested. |
-| PPL E-001..E-004 — consent/announce/refusal/fatigue proven at dry run (people matrix) | Filled excerpt paths + 2-SPEC announce count | **REFUTED (unexecuted)** — matrix §C-006 lists slots only: `session transcript excerpt: <path-or-session-ref>`, `removal announce excerpt: <path-or-session-ref>`, `dirty-baseline drill log: <path-or-session-ref>`; count "expect 2 create + ≤2 remove" not observed. Matrix itself states "carried, not closed here". In-table `pass` ≠ proven. |
-| 28/28 pass implies gate-ready | 8+7+8+5 rows each with citable artifact | **REFUTED** — matrices exist 4/4 and rows sum 8+7+8+5=28, all marked `pass` in-table (verified by read). But ≥6 evidence items cite unpathed "session shell log(s)", `pending — orchestrator owns commits`, or unfilled `<path-or-session-ref>` slots. Count holds; readiness does not. |
+| ID | Prior claim | Fresh probe (2026-09-16) | Result |
+|----|-------------|--------------------------|--------|
+| RF-001 | SKILL §5 drift (§5 listed 1/4) | Read `skills/git-worktree/SKILL.md:45-50` — §5 now lists 4/4 lines (`worktree-lifecycle.md`, `guards.md`, `pwsh-flow.md`, `announce-template.md`); lane diff-stat confirms `SKILL.md \| 3 +++` (the 3 added lines) | **Cleared — CONFIRMED fixed** |
+| RF-002 | Bare-form `check-ignore` in guards contradicts slash canonical | Read `skills/git-worktree/references/guards.md:32-34` — gate block now slash-canonical `git check-ignore -q .worktrees/`; §2 lines 44-47 explicitly demote bare form to dir-existence variant, never the probe. Live probe: slash exit 0; bare exit 0 only because empty `.worktrees/` dir now exists on disk (`Test-Path True`, `Get-ChildItem` empty) — variant behavior, not gate-probe drift. Lane diff confirms `guards.md \| 12 ++++++++----` | **Cleared — CONFIRMED fixed** |
+| RF-003 | Dirty baseline, override-or-clean required (COND-004) | `git status --porcelain` still non-empty (`M .gitignore, M AGENTS.md, M README.md` + parallel-lane edits). Override recorded: `override: orchestrator 2026-09-16 COND-004-proceed-documented-dirty-baseline` in `docs/specs/40_workspace/engineering/DRILL-git-worktree-2spec.md §1`. Scope proof: lane diff `--name-only -- skills/git-worktree/ .gitignore` = `SKILL.md, guards.md, pwsh-flow.md, .gitignore` only; `git diff -- AGENTS.md README.md` shows unrelated parallel wording/roadmap hunks (per-domain workspace line, adapter roadmap line) — out-of-scope files untouched by this lane | **Cleared — override recorded + scope verified** |
+| RF-004 | Claims without citable logs (C-001/C-003/C-002 unpathed) | `Select-String "session shell log"` over all 4 matrices → 0 hits (no unpathed cites remain). Eng matrix §§C-001/C-003/C-002 now pathed (exit codes, `ls-files`/`porcelain` empties, `.gitignore:55-56`, `worktree list` 1-entry snapshot, 0-hit scans with commands). Auto matrix §§C-005/C-003/C-002/T-002/T-003 now pathed (rg-exit 1, `Select-String Count 0`, `git diff -- mise.toml` 0 lines, check-ignore exit 0) | **Cleared — CONFIRMED pathed** |
+| RF-005 | People dry run unexecuted (excerpt slots `<path-or-session-ref>`) | Drill note exists at `docs/specs/40_workspace/engineering/DRILL-git-worktree-2spec.md` (packet-cited `vasquez/` path is stale — file lives under `engineering/`). §2 ANNOUNCE-001/002 exactly-once 2/2 with donde+rama+porque+limpieza slots; §3 list snapshots (2 incl main → 3 incl main); §4 cleanup executed 2026-09-16 (remove x2 exit 0, prune, list back to main-only `923a16f [main]`, branches deleted, `Test-Path` False x2, `porcelain -- .worktrees/` empty, `branch --list "drill/*"` empty). People matrix §C-006 now fills excerpt paths + counts pointing at DRILL §§1/2/4 + override record | **Cleared — CONFIRMED executed** |
+| RF-006 | Stale sec observation (53 lines / exit 1) | Sec matrix T-002 re-attested 2026-09-16: 56 lines, entry `:55-56`, slash exit 0, bare exit 1 annotated as variant. Fresh probes: `(Get-Content .gitignore).Count` = 56; `Select-String worktree .gitignore` = `:55` comment + `:56` `.worktrees/`; `git check-ignore -q .worktrees/` exit 0; `git status --porcelain -- .worktrees/` empty; `git ls-files -- .worktrees/` 0 lines | **Cleared — CONFIRMED refreshed** |
 
-Refuted: 7 of 7 claims tried as cited (3 states independently confirmed, 4 states stale/missing).
+Cleared: 6 of 6. Persisting: 0.
 
-## Findings
+## Findings (current state)
 
-| ID | Severity | Location | Finding + Proof |
-|----|----------|----------|-----------------|
-| RF-001 | Medium | `skills/git-worktree/SKILL.md:45-47` | §5 drift falsifies T-001. Proof: §5 lists only `worktree-lifecycle.md`; glob of `skills/git-worktree/references/` returns 4 files (`worktree-lifecycle.md`, `guards.md`, `pwsh-flow.md`, `announce-template.md`); SKILL §3 steps 1/3/4 consume the other three by reference. Fix: add 3 missing §5 lines (same as readability RD-001, required). |
-| RF-002 | Low | `skills/git-worktree/references/guards.md:33` | Bare-form `check-ignore` contradicts canonical slash form. Proof: `guards.md:33` bare `git check-ignore -q .worktrees` vs `worktree-lifecycle.md:31` + `pwsh-flow.md:45` trailing-slash; refuter probe: slash exit 0, bare exit 1 (no `.worktrees/` dir on disk). Copy-paste from guards STOPs on fresh clones. Fix: slash form in guards (same as RD-003). |
-| RF-003 | Medium | repo baseline 2026-09-16 | Baseline dirty — new `add` needs recorded override. Proof: `git status --porcelain` → `M .gitignore`, `M AGENTS.md`, `M README.md`, `?? docs/specs/40_workspace/quality-gate/git-worktree/`. Per skill §3 step 2, non-empty means REFUSE `git worktree add` without session-recorded override. Gate must record `override: <who> <timestamp> <reason>` or land clean before any lane creates. |
-| RF-004 | Medium | eng + automation matrices C-001/C-003/C-002 sections | Claims without citable logs. Proof: eng matrix "Log excerpt paths: session shell logs for this lane" / "Snapshot path: session shell log for this lane"; auto matrix same phrasing; scan sections "returns 0 hits" with no log path; all commits "pending — orchestrator owns commits". Fix: attach log paths + `list` snapshots + rescan proof, or downgrade rows from `pass` to `pending`. |
-| RF-005 | Medium | `docs/specs/40_workspace/santana/TEST_MATRIX-git-worktree-people.md:25` + §C-006 | People dry run unexecuted. Proof: excerpt slots `<path-or-session-ref>` unfilled; §C-006 "carried, not closed here"; count expectation ("expect 1+≤1 per lane") stated, not observed. Fix: run orchestrator-aggregated 2-SPEC dry run, fill excerpt paths + announce count, then gate closes C-006. |
-| RF-006 | Low | `docs/specs/40_workspace/barrera/TEST_MATRIX-git-worktree-security.md:10` | Stale security observation. Proof: matrix records 53-line `.gitignore`, zero hits, exit 1; current `.gitignore` 56 lines with entry `:55-56`, slash probe exit 0. Fix: security lane re-attests T-002 against landed entry (one line + probe code). |
+No new counterexamples. Residual notes (not findings, no severity):
+
+- Packet path staleness: re-check brief cited `docs/specs/40_workspace/vasquez/DRILL-git-worktree-2spec.md`; the file lives at `docs/specs/40_workspace/engineering/DRILL-git-worktree-2spec.md`. Content is complete — path alias only, orchestrator to correct the reference at re-gate.
+- Bare-form `check-ignore` now exits 0 (empty `.worktrees/` dir on disk post-drill) vs the `exit 1` noted in guards §2 prose. Behavior is consistent with the documented variant semantics (dir-existence check, never the gate probe); slash-canonical gate unaffected (exit 0 either way). No action.
+- Baseline remains dirty (parallel work in flight); COND-004 override covers lane creation. No sideways `add` attempted by this reviewer.
+
+Fresh falsification attempts this session (all held): POSIX `$(` scan over all 5 `skills/git-worktree/**` lane files → 0 hits; `git worktree list` → main-only (1 ≤ 2); `.worktrees/` zero tracked paths + empty porcelain; lane diff-stat scope = 4 files, 28 insertions, 4 deletions, no out-of-scope touch.
 
 ## Verdict Rationale
 
-- Falsification succeeded on citations, not on mechanics: the three independently probeable states all hold (slash-form ignore green, live count 1 ≤ 2, 0-hit scans), so `fail` (spec invalidated) overstates harm — no counterexample breaks the lifecycle, ignore gate, capacity guard, or scan posture.
-- But 7/7 claims as cited lack proof, are stale, or are unexecuted (RF-001..RF-006 with diff/scan/log proof above), including the load-bearing T-001 (§5) and the people dry run. In-table `pass` ≠ proven `pass`; the gate cannot OPEN on this packet.
-- `conditional`: clear RF-001 (3-line §5 fix) + RF-004 log attachments + RF-005 dry run + RF-006 re-attestation (required); RF-002 slash fix and RF-003 override-or-clean record recommended in the same pass. Re-check flips this review to `pass (could not falsify)` when every refuted row carries a path, code, or snapshot.
+- Prior conditional required RF-001 (§5) cleared, RF-004 log attachments, RF-005 dry run, RF-006 re-attestation, plus RF-002 slash hygiene and RF-003 override record. All six verify cleared with diff/scan/log proof above — including the load-bearing T-001 (§5 now 4/4) and the C-006 dry run (executed with residue-free snapshots).
+- Adversarial re-probes found no counterexample that breaks the lifecycle, the fail-closed ignore gate, the max-2 capacity guard, or the scan posture. `pass (could not falsify)`.

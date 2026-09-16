@@ -36,8 +36,8 @@ Exit 0 means the `.gitignore` entry is active and creation may proceed. Nonzero 
 4. Create one worktree per SPEC-ID:
 
 ```powershell
-$root = Join-Path ".worktrees" "<spec-id>"
-git worktree add $root -b "<branch>"
+$worktreeRoot = Join-Path ".worktrees" "<spec-id>"
+git worktree add $worktreeRoot -b "<branch>"
 git worktree list
 ```
 
@@ -67,8 +67,8 @@ Baseline must be green before `execute-spec` starts. Red baseline means STOP, fi
 1. After gate evidence is attributed per `<spec-id>`, remove and prune:
 
 ```powershell
-$root = Join-Path ".worktrees" "<spec-id>"
-git worktree remove $root --force
+$worktreeRoot = Join-Path ".worktrees" "<spec-id>"
+git worktree remove $worktreeRoot --force
 git worktree prune
 git worktree list
 ```

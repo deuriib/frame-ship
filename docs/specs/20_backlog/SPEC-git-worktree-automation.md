@@ -54,7 +54,7 @@ Workflow targets (non-API; pwsh-native runbook):
 
 - Upstream: BRIEF-git-worktree (read-only) + `docs/briefs/OKR-git-worktree.md` OKRs (by reference).
 - Toolchain: `mise.toml` (`[tools] node = "22"`, `[tasks.typecheck]`, `[tasks.install]`).
-- Sibling specs: engineering spec (skill mechanics, branch/promotion rule for `40_workspace/<owner>/` → `10→30`), security spec (`.gitignore` gate, trust boundaries, submodule guard/sandbox fallback), people spec (consent + announce template).
+- Sibling specs: engineering spec (skill mechanics, branch/promotion rule for `40_workspace/<domain>/` → `10→30`), security spec (`.gitignore` gate, trust boundaries, submodule guard/sandbox fallback), people spec (consent + announce template).
 - Downstream: `frame-ship:propose-changes` as `SPEC:docs/specs/20_backlog/SPEC-git-worktree-automation.md#REQ-AUTO-001..007 / HARD:multi-subagents+win32/pwsh / GATE:none-yet / DOMAINS:[engineering, automation/ops, security, people]`.
 
 ## 7. Traceability

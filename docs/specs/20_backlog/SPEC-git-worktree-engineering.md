@@ -66,7 +66,7 @@ mise run typecheck                      # per-worktree baseline gate, serialized
 - Changing `.opencode/plugins/frame-ship.ts` runtime (stays single-file zero-dep) or the 8-domain catalogue.
 - Rotating keys, patching prod, widening perms (no freelance fixes — owner remediates).
 - Copying upstream code without license/attribution check (reference only).
-- Deciding brief Open Questions (worktree-root TTL owner, announce template tone, `40_workspace/<owner>/` promotion rule) — this spec surfaces options; orchestrator + named owners decide.
+- Deciding brief Open Questions (worktree-root TTL owner, announce template tone, `40_workspace/<domain>/` promotion rule) — this spec surfaces options; orchestrator + named owners decide.
 
 ## 6. Dependencies
 

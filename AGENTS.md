@@ -25,7 +25,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap). St
 | Change stage process | `skills/<stage>/SKILL.md` | 10 dirs, identical body shape |
 | Change output shape | `skills/<stage>/references/` | bracket placeholders |
 | Gate routing/waivers | `skills/quality-gate/` | only multi-reviewer domain |
-| Find briefs/specs/releases | `docs/briefs/`, `docs/specs/` | lifecycle 10→50, per-owner workspace |
+| Find briefs/specs/releases | `docs/briefs/`, `docs/specs/` | lifecycle 10→50, per-domain workspace |
 | Plugin deps | `.opencode/package.json` | only `@opencode-ai/plugin@1.18.29`, no scripts |
 | Toolchain | `mise.toml` | `mise run typecheck`, `mise run install` |
 
@@ -41,6 +41,7 @@ Resolvers: `resolveSkillsDir()` from own `import.meta.url` (fallback `directory|
 - Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
 - Reference-only packets: `SPEC/HARD/GATE/DOMAINS` between stages; retry N=2 → escalate orchestrator, no 3rd loop.
 - Version bump triple: header comment + `VERSION` + `MARKER` juntos.
+- Skills reference naming convention: `frame-ship:<stage>` (no `frame-ship:` prefix in SKILL frontmatter `name`).
 
 ## ANTI-PATTERNS (THIS PROJECT)
 - Code without approved `PROPOSED_CHANGES.md`.

@@ -232,7 +232,7 @@ Anti-patterns:
 ## Roadmap
 
 - [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
-- [ ] General plugin adapters: Claude Code → Codex CLI → Cursor/Gemini → rest (one at a time, opencode stays green)
+- [ ] General plugin adapters: Antigravity CLI (agy) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
 - [ ] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
 - [ ] `docs/briefs` + `docs/specs` scaffolding (referenced by skills, not yet in repo)

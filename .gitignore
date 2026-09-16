@@ -51,3 +51,6 @@ temp/
 
 # Cargo (rust)
 .ruff_cache/
+
+# git-worktree isolation (SPEC-git-worktree-engineering REQ-002, C-001) — never track worktrees
+.worktrees/

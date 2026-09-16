@@ -32,7 +32,7 @@
 
 | Domain | Control | Owner |
 |--------|---------|-------|
-| engineering | Skill file shape + pwsh command contracts + `.gitignore` contract per SPEC §4; branch-per-SPEC convention; promotion rule proposal for `40_workspace/<owner>/` → lifecycle | vasquez |
+| engineering | Skill file shape + pwsh command contracts + `.gitignore` contract per SPEC 4; branch-per-SPEC convention; promotion rule proposal for `40_workspace/<domain>/` → lifecycle | engineering-owner |
 | automation/ops | Serialized `mise` setup, baseline `typecheck` gate, max-2 discipline, cleanup TTL — consumed from automation spec, mechanics confirmed here | automation owner + engineering owner |
 | security | `.gitignore` fail-closed gate + trust-boundary map + submodule/sandbox guards — security-owner review required before gate PASS | barrera |
 | people | Consent + uniform announce wording — people-owner wording consumed verbatim, no per-owner variants | santana |
