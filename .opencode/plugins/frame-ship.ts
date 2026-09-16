@@ -1,29 +1,7 @@
 /**
- * frame-ship v0.3.0 — Frame→Ship workflow plugin for opencode
- *
- * Local plugin. Single-file, zero dependencies.
- * Location: .opencode/plugins/frame-ship.ts (auto-discovered per-project).
- * Global (style named path): "plugin": ["frame-ship@file:///D:/GitHub/frame-ship"]
- *   — requires the root package.json (name + main) so Bun can install the
- *   directory; skills resolve relative to this file via import.meta.url.
- *
- * What it does:
- * - Registers ./skills/ via `config.skills.paths` so the native `skill` tool discovers all 9 stages
- * - Injects the Frame→Ship chain contract + MANDATORY LOAD ORDER + role bindings + hard rules into every session
- * - Injects full guardrails inline AND points to AGENTS.md / skills/ as source of truth
- * - Injects the live using-frame-ship SKILL.md body via runtime file read (fallback: pointers only)
- * - Preserves chain across compaction so long sessions don't lose process
- *
- * Chain:
- *   frame-intent → translate-to-spec → propose-changes → review-security/review-architecture
- *     → execute-spec → quality-gate → verify-handoff → ship-release
- *
- * Skills (source of truth, in ./skills/):
- *   using-frame-ship (bootstrap),
- *   frame-intent, translate-to-spec, propose-changes,
- *   review-security, review-architecture, execute-spec,
- *   quality-gate, verify-handoff, ship-release
- *
+ * frame-ship v0.3.0 — Frame→Ship plugin (single-file, zero deps).
+ * Chain: see CHAIN const (single source of truth for order).
+ * Skills: ./skills/<stage>/SKILL.md. Location: .opencode/plugins/frame-ship.ts.
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
@@ -32,72 +10,27 @@ import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 const VERSION = "0.3.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
-// Compact always-on card. Full detail stays in skills/*/SKILL.md — this is the pointer + contract.
-const WORKFLOW_CARD = `${MARKER} Frame→Ship workflow (authoritative order, do not skip):
-frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release
+const CHAIN =
+  "frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
 
-MANDATORY LOAD ORDER — HARD STOP, no exceptions:
-1. skill(using-frame-ship) — bootstrap already injected here; do NOT skip, do NOT re-derive the chain by guess.
-2. skill(<stage>) via native skill tool — BEFORE any read/edit/bash/task for that stage. No skill = STOP.
-3. read(agents/<domain>/<agent>.md) — the ONE template for the dispatched role. Skill = process (order/gates), template = craft (how). Both required, every task, single AND multi.
-4. Only then: edit/bash/task. Pre-flight: skill loaded? template read (cite path)? packet SPEC/HARD/GATE/DOMAINS ready? If any NO → STOP, load first, retry max N=2 with different approach, then escalate to montilla. Never third loop, never sideways.
+// Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
+const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
+LOAD ORDER — HARD STOP: 1.skill(using-frame-ship) 2.skill(<stage>) via skill tool (no skill=STOP) 3.read(agents/<domain>/<agent>.md) skill=process,template=craft 4.then edit/bash/task. Pre-flight: skill? template cited? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate montilla. No 3rd loop, no sideways.
+Modes (frozen at frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+C-level template, task(general) per domain max2, each reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
+Triggers→skill: start/what-skills→using-frame-ship | initiative/OKRs→frame-intent(montilla,BRIEF+OKRs) | brief-approved→translate-to-spec(REQ+ARCHITECTURE+CONTRACTS) | pre-approval→propose-changes(PROPOSED_CHANGES,untouched) | auth/data/API→review-security(barrera,STRIDE) | API/model/cross-cut→review-architecture(vasquez,ADR) | approved→execute-spec(approved files,REQ→test) | impl-ready→quality-gate(CLOSED on fail) | complete→verify-handoff(HANDOFF,DoD) | verified→ship-release(NOTES+changelog+rollback).
+Roles: montilla briefs/gates/releases; vasquez ARCHITECTURE/contracts/arch verdicts; barrera security verdicts. No self-dispatch/approve.
+Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o c-levels+CEO waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
 
-Execution modes (frozen at frame-intent, rides every packet):
-- single: skill(stage) + read(1 template) then execute DIRECTLY (no task dispatch). Still produces test/evidence matrix + domain checks. Cite skill + template path in output.
-- multi-subagents (default): skill(stage) + read(C-level template), then task(subagent_type="general") per domain (max 2 parallel). Each task prompt MUST order the subagent to: read(stage SKILL.md) + read(its agent template) BEFORE acting, accept SPEC/HARD/GATE/DOMAINS by reference only, return deliverable + risks + assumptions + scoped evidence.
+// Short-form guardrails: every rule 1-14 present, greppable by number, same meaning. Full text: AGENTS.md.
+const GUARDRAILS_FULL = `${MARKER} Guardrails (BEFORE dispatch, AFTER verify; full text: AGENTS.md):
+Security: 1.Deny default; no secret/token/credential/session in code/config/logs/examples/events; finding w/o proof(diff/scan/log)=REFUTED. 2.OWASP: screen injection, broken authN/Z, data exposure, insecure deps, missing access; new endpoints/adapters/boundaries/payloads=trust boundaries. 3.Least privilege: minimum scope per interface/key/role/automation; wide/shared/cross-tenant=findings. 4.No freelance fixes: never rotate keys/patch prod/widen perms; report severity+location, owner remediates.
+Privacy (Ley 172-13): 5.Minimization: minimum PII; map flow source→store→log→third party. 6.Boundary hygiene: every port/adapter/event/log/prompt=PII checkpoint; mask/tokenize, allowlists. 7.Retention: every PII store declares purpose+TTL+deletion; purge expired post-snapshot. 8.Scoped export: PASS exports allowlisted evidence only; never full dump/PII in shares/lessons/bridge.
+Severity: 9.Critical(exploitable/prod/loss),High(probable),Medium(conditional),Low(hygiene). 10.Critical/High surface same session+severity+evidence+owner; Med/Low ride gate. 11.Residual explicit: APPROVE+conditions lists risk+owner; no silent PASS.
+Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 14.Respect attention—one point/paragraph; state assumptions on irreversible. FAIL→retry N=2 differently→escalate montilla. No 3rd loop, no sideways.`;
 
-Stage triggers — load the named skill before acting:
-- "session start / what skills / how does frame-ship work" → using-frame-ship (bootstrap, load first, re-load after compaction)
-- "start initiative / define OKRs / strategic planning" → frame-intent (owner: montilla/CEO, out: docs/briefs/BRIEF-<slug>.md + OKRs)
-- "brief approved / new domain spec" → translate-to-spec (owners: vasquez/barrera/dauhajre/subero/vera/santana/montero/espinoza, out: REQ-IDs + ARCHITECTURE.md + API_CONTRACTS.md)
-- "ready to implement / needs pre-approval" → propose-changes (owners: leaf specialists + C-level, out: docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md, repo untouched)
-- "touches auth/data/external API / CISO sign-off" → review-security (owner: barrera + security-reviewer/review-risk/privacy-engineer, out: SECURITY_REVIEW.md + STRIDE verdict Approved/Conditional/Rejected)
-- "modifies public API / data model / cross-cutting" → review-architecture (owner: vasquez + architect, out: ADR + contract verdict)
-- "implement approved spec / execute SPEC-XXX" → execute-spec (owners: backend/frontend/devops/data-engineer, impl only approved files, REQ-ID→test trace)
-- "run quality gate / gate SPEC-XXX" → quality-gate (gate keeper: owning C-level, montilla synthesizes; engineering: readability/reliability/refuter/resilience/risk/qa/data; other domains: single reviewer; CLOSED on any fail)
-- "work complete / needs review before ship" → verify-handoff (owner: owning C-level, out: HANDOFF.md via DoD checklist; no OPEN gate = no handoff)
-- "verified / ready to ship / tagged release" → ship-release (owners: montilla + vasquez/devops, out: RELEASE_NOTES.md + changelog + rollback plan + archive)
+const POINTERS = `${MARKER} Truth: AGENTS.md (creed, dispatch, guardrails 1-14) > skills/<stage>/SKILL.md+references/ > agents/<domain>/<agent>.md (REQUIRED read, skill=process/template=craft). Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
 
-Role bindings (single-primary-owner):
-montilla owns briefs + multi-domain gates + releases. vasquez owns ARCHITECTURE.md/API_CONTRACTS.md + arch verdicts. barrera owns security verdicts. Specialists never self-dispatch, never approve own proposal.
-
-Hard rules (non-negotiable):
-1. NEVER write code without an approved proposal.
-2. NEVER skip security review for auth/data/API changes.
-3. NEVER modify architecture contracts without an ADR.
-4. NEVER hand off with a CLOSED gate unless waived by c-levels + CEO with waiver record.
-5. ALWAYS trace REQ-ID → test → artifact → gate verdict.
-6. ALWAYS produce HANDOFF.md before shipping.
-7. Reference-only packets between stages — never paste full context.
-`;
-
-// Both: full guardrails inline + pointer to AGENTS.md (per user: "both").
-const GUARDRAILS_FULL = `${MARKER} Guardrails (enforced BEFORE dispatch, verified AFTER execution):
-Security baseline — deny by default:
-1. Deny by default; evidence or refuted — no secret/token/credential/session material in code, config, logs, examples, events. Finding without proof (diff/scan/log pointer) = REFUTED.
-2. OWASP by default — screen every change for injection, broken authN/Z, sensitive-data exposure, insecure deps, missing access controls. New endpoints/adapters/boundaries/payloads are trust boundaries until proven otherwise.
-3. Least privilege — minimum scope for every interface/key/role/automation. Wide interfaces, shared creds, cross-tenant mutable state = findings.
-4. No freelance fixes — never rotate keys, patch prod, or widen permissions yourself. Report severity + fix location; owner remediates.
-Privacy + data hygiene (Ley 172-13):
-5. Minimization — minimum PII for purpose. Map every PII flow: source → store → log → third party.
-6. Boundary hygiene — every port/adapter/event/log/prompt is a PII checkpoint. Mask/tokenize examples; allowlists over full objects.
-7. Retention explicit — every PII store declares purpose + TTL + deletion path. Purge expired state post-snapshot with governed deletes.
-8. Scoped export only — on PASS export allowlisted evidence for gated unit only. Never full dump; never PII in shares/signals/lessons/bridge.
-Severity + triage:
-9. Critical (exploitable/prod/data loss), High (probable impact), Medium (conditional/edge), Low (hygiene).
-10. Critical/High surface immediately, same session, with severity + evidence + owner. Medium/Low ride normal gate.
-11. Residual risk explicit — APPROVE with conditions lists remaining risk + owner. No silent PASS.
-Conduct: 12. No sugarcoating. 13. No busywork theater — guards earn keep or die. 14. Respect attention — one point per paragraph, state assumptions on irreversible steps.
-FAIL → retry N=2 with different approach → escalate. Never third loop, never sideways.`;
-
-const POINTERS = `${MARKER} Sources of truth (read before acting):
-- "Haces las cosas como para Dios…"), dispatch contract, guardrails 1-14.
-- skills/using-frame-ship/SKILL.md (bootstrap first), skills/frame-intent/SKILL.md, translate-to-spec, propose-changes, review-security, review-architecture, execute-spec, quality-gate, verify-handoff, ship-release + their references/ templates.
-- agents/<domain>/<agent>.md templates are REQUIRED reads (not optional cites) — skill + template, every task. Dispatch via task(subagent_type="general") with explicit read orders; no custom subagent_type until agents are natively registered.
-- Chain entry: frame-intent (after bootstrap).
-- Chain close: ship-release (lessons captured on PASS).`;
-
-const COMPACTION_REMINDER = `${MARKER} Frame→Ship survives compaction. Re-load using-frame-ship first, then the active stage skill + its agent template BEFORE resuming. Active chain: frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release. Keep REQ-ID→test→artifact trace, gate verdicts, execution_mode (single|multi-subagents), and current stage. No skill + template = STOP. No code without approved proposal. No handoff on CLOSED gate.`;
+const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill+template BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, execution_mode, stage. No skill+template=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;
