@@ -1,7 +1,7 @@
 # SKILLS — Frame→Ship chain
 
 ## OVERVIEW
-9 stage skills: process source of truth. Plugin only injects pointers; this dir defines behavior.
+10 dirs (bootstrap `using-frame-ship` + 9 stages): process source of truth. Plugin only injects pointers; this dir defines behavior.
 
 ## WHERE TO LOOK
 | Trigger | Skill | Out |
@@ -20,7 +20,7 @@
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
-- Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs).
+- Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs).
 - Commit closings: every stage ends with a work-unit commit step + example per `using-frame-ship/references/commit-convention.md` (guidance only, never gate enforcement); `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.

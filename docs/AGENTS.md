@@ -1,0 +1,30 @@
+# DOCS — artifact store
+
+## OVERVIEW
+Chain outputs only: `briefs/` (intent) → `specs/` (numbered lifecycle). No process here — process lives in `skills/`.
+
+## WHERE TO LOOK
+| Artifact | Location | Notes |
+|----------|----------|-------|
+| Product intent + OKRs | `briefs/BRIEF-<slug>.md`, `briefs/OKR-*.md` | 6 files; entry for `frame-intent` |
+| Design + decisions | `specs/10_design/ADR-*.md`, `SPEC-*.md` | 5 files; entry for `review-architecture` |
+| Testable requirements | `specs/15_requirements/REQ-*.md` | 2 files (`-engineering`, `-people`); `REQ-F/NF-001` shape |
+| Backlog | `specs/20_backlog/` | empty — next specs land here first |
+| Shipped notes | `specs/30_delivery/RELEASE_NOTES.md` | 1 file; `ship-release` output |
+| Work in flight | `specs/40_workspace/<owner>/` | 5 owner dirs (`barrera`, `santana`, `vasquez`, `single-demo`, `quality-gate`); see `specs/AGENTS.md` |
+| Gate verdicts | `specs/40_workspace/quality-gate/<spec-id>/` | per-reviewer verdicts + `GATE_REPORT.md`; `CLOSED` blocks handoff without waiver |
+| Closed history | `specs/50_archive/` | 5 files; read-only, never edit in place |
+
+## CONVENTIONS
+- Lifecycle order: `10_design → 15_requirements → 20_backlog → 30_delivery`, with `40_workspace/` as scratch and `50_archive/` as terminal. Numbers sort; never rename a number.
+- SCREAMING files only at store boundary: `BRIEF-*.md` in `briefs/`; `SPEC-*.md`, `REQ-*.md`, `ADR-*.md`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `RELEASE_NOTES.md` in `specs/`.
+- `40_workspace/<owner>/` holds per-owner drafts (`PROPOSED_CHANGES-*`, `IMPLEMENTATION_PLAN-*`, `TEST_MATRIX-*`, `HANDOFF-*`); promotion copies canonical files up the lifecycle, never moves scratch.
+- Trace rides filenames: `<spec-id>` suffix links proposal → plan → matrix → handoff → gate (e.g. `*-single-dispatcher.md`).
+- `OKR-*.md` pairs its `BRIEF-*.md` by slug suffix — never orphan an OKR.
+
+## ANTI-PATTERNS
+- Editing `50_archive/` in place — supersede with a new numbered spec instead.
+- Landing finished work directly in `40_workspace/` without promoting to its lifecycle number.
+- Mixing `BRIEF-` (intent) into `specs/` or `SPEC-/REQ-` (contract) into `briefs/`.
+- Committing secrets/PII in any artifact — mask before writing (privacy rules ride every export).
+- Quoting full specs across stages — link by `SPEC/HARD/GATE/DOMAINS` reference, never paste.

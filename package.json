@@ -1,7 +1,7 @@
 {
   "name": "frame-ship",
-  "version": "0.3.0",
-  "description": "Frame→Ship workflow plugin for opencode (9-skill chain: frame-intent to ship-release)",
+  "version": "0.4.0",
+  "description": "Frame→Ship workflow plugin for opencode (chain: frame-intent to ship-release)",
   "type": "module",
   "main": "./.opencode/plugins/frame-ship.ts",
   "exports": {

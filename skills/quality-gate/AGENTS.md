@@ -21,7 +21,7 @@ Only stage with a waiver path; all other stages block without override.
 - Engineering refs: `readability/reliability/refuter/resilience/qa-review.md`; domains: `finance/legal/marketing/people/security/data/revenue/automation-review.md` + `ops-review.md` lens.
 
 ## NOTES
-- Largest skill dir (15 files); only one with `engineering/` + `domains/` split — don't flatten.
+- Largest skill dir (18 files: SKILL + AGENTS + gate-report + waiver + 5 engineering + 9 domains); only one with `engineering/` + `domains/` split — don't flatten.
 
 ## ANTI-PATTERNS
 - Opening gate with any fail verdict — only waiver record overrides.
