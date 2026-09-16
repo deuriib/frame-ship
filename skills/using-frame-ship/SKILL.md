@@ -35,6 +35,11 @@ using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-
 
 ## 3. Process
 
+0. MANDATORY LOAD ORDER — HARD STOP. Before ANY task, edit, bash, or dispatch (single or multi-subagents):
+   1. `skill(using-frame-ship)` — this bootstrap (already injected; do not skip).
+   2. `skill(<stage>)` via native `skill` tool — BEFORE acting for that stage. No skill = STOP.
+   3. `read(agents/<domain>/<agent>.md)` — the ONE template for the dispatched role. Skill = process, template = craft. Both required, every time.
+   4. Pre-flight: skill loaded? template read (cite path)? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load first. FAIL → retry N=2 differently → escalate to `montilla`. Never third loop, never sideways.
 1. Check for relevant skills before any task — mandatory workflows, not
    suggestions. Load the named stage skill via the native `skill` tool before
    acting (see `references/tool-mapping.md`).
@@ -54,6 +59,9 @@ using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-
    changes, no handoff on CLOSED gate without c-levels + CEO waiver,
    `REQ-ID → test/evidence → artifact → gate verdict` trace, `HANDOFF.md` before ship,
    `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
+   Execution modes (frozen at `frame-intent`):
+   - `single`: `skill(stage)` + `read(1 agent template)` then execute DIRECTLY, no `task` dispatch. Still produces test/evidence matrix. Output cites skill + template path.
+   - `multi-subagents` (default): `skill(stage)` + `read(C-level template)`, then `task(subagent_type="general")` per domain (max 2 parallel). Each task prompt MUST order: read stage SKILL.md + read own agent template BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence.
 4. After compaction, re-load this skill first, then resume at the recorded
    stage with trace and gate verdicts intact.
 

@@ -26,8 +26,9 @@ canonical architecture contract. The brief is read-only here.
 
 ## 3. Process
 
+0. Pre-flight LOAD — HARD STOP (single AND multi): `skill(translate-to-spec)` loaded? `read(agents/c-level/<owner>.md)` for owning C-level done? Packet `SPEC:<brief-path>#OKRs / HARD:<mode> / GATE:<none-yet> / DOMAINS:<list>` ready? Any NO → STOP. Single = direct; multi = `task(general)` max 2 parallel, each ordered to read skill + template first.
 1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
-2. Route to C-levels by domains touched (8-domain catalogue in `../AGENTS.md`); cite `agents/c-level/<owner>.md` craft by path when relevant.
+2. Route to C-levels by domains touched (8-domain catalogue in `../AGENTS.md`); read the dispatched C-level template(s) fully, cite other `agents/c-level/<owner>.md` craft by path.
 3. Each produces a spec using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning C-level.
 4. `vasquez` consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).

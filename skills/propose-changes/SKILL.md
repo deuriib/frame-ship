@@ -27,6 +27,7 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 3. Process
 
+0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? `read(agents/<domain>/<agent>.md)` for proposing specialist + owning C-level template done? Any NO → STOP. Single = direct; multi = `task(general)` ordered to read skill + template first.
 1. Read the target spec (`docs/specs/20_backlog/` or individual spec file) including `execution_mode` and `Domains-touched`.
 2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward.
 3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).

@@ -1,0 +1,38 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+Format based on [Keep a Changelog](https://keepachangelog.com/).
+
+## [Unreleased]
+
+- None yet (next work queues here).
+
+## [v0.3.0] — 2026-09-16
+
+### Added
+
+- MANDATORY LOAD ORDER enforced in plugin + all 9 stage skills: `skill(stage)` + `read(agents/<domain>/<agent>.md)` BEFORE any task/edit/bash, single AND multi-subagents. HARD STOP + retry N=2 → escalate montilla.
+- Execution modes frozen: `single` = direct (no task) + skill/template cite; `multi-subagents` = `task(general)` max 2 parallel with read orders in prompt (general-purpose default until agents natively registered).
+- 68 agent templates: adapter `when run` → `REQUIRED inside frame-ship` + portable note fixed; dispatched ONE template read fully, rest path-cites.
+- Gate + handoff verification: `Load Evidence` section in `gate-report.md`, DoD + `HANDOFF.md` fail without skill/template/mode/packet cites.
+
+## [v0.3.1] — 2026-09-16
+
+### Changed
+
+- Vendored agent craft moved `skills/templates/agents/` → repo-root `agents/` (69 files, 9 subdirs, bytes-exact); live pointers rewritten in 7 files; `skills/templates/` removed (SPEC-003-agents-to-root; refs: `docs/specs/10_design/ADR-002-agents-to-root.md`, `docs/specs/40_workspace/vasquez/HANDOFF-003-agents-to-root.md`).
+
+### Fixed
+
+- Broken `../../templates/agents/README.md` relative links → `../../agents/README.md` resolves (SPEC-003, REQ-005).
+
+### Known issues
+
+- Mixed baseline: 10 tracked `M` files layer SPEC-002 + SPEC-003; committer verifies PASS-worthiness at commit time.
+- `docs/briefs|specs/**` old-path strings immutable by design.
+
+## [v0.3.0] — 2026-09-15
+
+### Added
+
+- 68 opencode agents vendored as reference-only templates + `execution_mode: single | multi-subagents` (SPEC-001-agent-templates; see `docs/specs/30_delivery/RELEASE_NOTES.md` v0.3.0-templates entry — old-path strings preserved as history).

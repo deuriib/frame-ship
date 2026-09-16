@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.2.0 — Frame→Ship workflow plugin for opencode
+ * frame-ship v0.3.0 — Frame→Ship workflow plugin for opencode
  *
  * Local plugin. Single-file, zero dependencies.
  * Location: .opencode/plugins/frame-ship.ts (auto-discovered per-project).
@@ -9,7 +9,7 @@
  *
  * What it does:
  * - Registers ./skills/ via `config.skills.paths` so the native `skill` tool discovers all 9 stages
- * - Injects the Frame→Ship chain contract + role bindings + hard rules into every session
+ * - Injects the Frame→Ship chain contract + MANDATORY LOAD ORDER + role bindings + hard rules into every session
  * - Injects full guardrails inline AND points to AGENTS.md / skills/ as source of truth
  * - Injects the live using-frame-ship SKILL.md body via runtime file read (fallback: pointers only)
  * - Preserves chain across compaction so long sessions don't lose process
@@ -29,12 +29,22 @@
 
 import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 
-const VERSION = "0.2.0";
+const VERSION = "0.3.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 // Compact always-on card. Full detail stays in skills/*/SKILL.md — this is the pointer + contract.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship workflow (authoritative order, do not skip):
 frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release
+
+MANDATORY LOAD ORDER — HARD STOP, no exceptions:
+1. skill(using-frame-ship) — bootstrap already injected here; do NOT skip, do NOT re-derive the chain by guess.
+2. skill(<stage>) via native skill tool — BEFORE any read/edit/bash/task for that stage. No skill = STOP.
+3. read(agents/<domain>/<agent>.md) — the ONE template for the dispatched role. Skill = process (order/gates), template = craft (how). Both required, every task, single AND multi.
+4. Only then: edit/bash/task. Pre-flight: skill loaded? template read (cite path)? packet SPEC/HARD/GATE/DOMAINS ready? If any NO → STOP, load first, retry max N=2 with different approach, then escalate to montilla. Never third loop, never sideways.
+
+Execution modes (frozen at frame-intent, rides every packet):
+- single: skill(stage) + read(1 template) then execute DIRECTLY (no task dispatch). Still produces test/evidence matrix + domain checks. Cite skill + template path in output.
+- multi-subagents (default): skill(stage) + read(C-level template), then task(subagent_type="general") per domain (max 2 parallel). Each task prompt MUST order the subagent to: read(stage SKILL.md) + read(its agent template) BEFORE acting, accept SPEC/HARD/GATE/DOMAINS by reference only, return deliverable + risks + assumptions + scoped evidence.
 
 Stage triggers — load the named skill before acting:
 - "session start / what skills / how does frame-ship work" → using-frame-ship (bootstrap, load first, re-load after compaction)
@@ -83,10 +93,11 @@ FAIL → retry N=2 with different approach → escalate. Never third loop, never
 const POINTERS = `${MARKER} Sources of truth (read before acting):
 - "Haces las cosas como para Dios…"), dispatch contract, guardrails 1-14.
 - skills/using-frame-ship/SKILL.md (bootstrap first), skills/frame-intent/SKILL.md, translate-to-spec, propose-changes, review-security, review-architecture, execute-spec, quality-gate, verify-handoff, ship-release + their references/ templates.
+- agents/<domain>/<agent>.md templates are REQUIRED reads (not optional cites) — skill + template, every task. Dispatch via task(subagent_type="general") with explicit read orders; no custom subagent_type until agents are natively registered.
 - Chain entry: frame-intent (after bootstrap).
 - Chain close: ship-release (lessons captured on PASS).`;
 
-const COMPACTION_REMINDER = `${MARKER} Frame→Ship survives compaction. Re-load using-frame-ship first, then resume. Active chain: frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release. Keep REQ-ID→test→artifact trace, gate verdicts, and current stage. No code without approved proposal. No handoff on CLOSED gate.`;
+const COMPACTION_REMINDER = `${MARKER} Frame→Ship survives compaction. Re-load using-frame-ship first, then the active stage skill + its agent template BEFORE resuming. Active chain: frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release. Keep REQ-ID→test→artifact trace, gate verdicts, execution_mode (single|multi-subagents), and current stage. No skill + template = STOP. No code without approved proposal. No handoff on CLOSED gate.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;

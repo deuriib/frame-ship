@@ -5,6 +5,7 @@
 **Date:** YYYY-MM-DD
 **Status:** complete | blocked | partial
 **Domains-Touched:** [per spec]
+**Load Evidence:** skill([stage]) + read(agents/[domain]/[agent].md) + mode(single|multi-subagents) — paths cited, missing = no handoff
 
 ## Deliverables
 
@@ -19,6 +20,7 @@
 
 - [ ] Acceptance criteria satisfied (all domains)
 - [ ] Tests/evidence linked per REQ-ID
+- [ ] Load evidence present (skill + template paths + mode + packet)
 - [ ] Domain checks passing (Common + touched-domain appendix in `dod-checklist.md`)
 - [ ] Security checks passing (if security-touched)
 - [ ] Documentation / filing / comms updated as applicable
