@@ -1,3 +1,56 @@
+# Release Notes: git-worktree skill (Unreleased)
+
+**Date:** 2026-09-16
+**Release Manager:** montilla
+**Specs Included:** SPEC-git-worktree-engineering, SPEC-git-worktree-automation, SPEC-git-worktree-security, SPEC-git-worktree-people
+**Domains-Touched:** [engineering, automation, security, people]
+**Ship Type:** rollout
+
+## Highlights
+
+- Isolated parallel lanes: max-2 repo-local worktrees give each SPEC lane its own checkout so two execute-spec lanes run without stepping on each other.
+- Fail-closed hygiene: repo-local placement, branch naming, dirty-tree blocks, and mutex rules keep parallel work safe by default on win32/pwsh.
+- Consent plus announce: people consent gate and announce template ship alongside the workflow so parallel lanes start with approval and end with a clear team note.
+
+## Changes
+
+### Features
+
+- git-worktree skill core (SKILL.md + 4 references: setup, dispatch, hygiene, mutex) enabling isolated parallel SPEC lanes (SPEC-git-worktree-engineering, engineering)
+- Dispatch + hygiene workflow with runbook: setup/dispatch/teardown lifecycle, branch-per-SPEC convention, dirty-tree fail-closed checks (SPEC-git-worktree-automation, automation)
+- Security guards policy: consent gate, least-privilege scope, no secrets/PII in worktree paths or logs, boundary hygiene per guardrails (SPEC-git-worktree-security, security)
+- People announce template + consent flow: pre-dispatch consent check and post-setup announce note for parallel-lane visibility (SPEC-git-worktree-people, people)
+
+### Fixes
+
+- §5 drift corrected gate-driven: skill §5 references aligned 1:1 with disk filenames (gate-driven fix)
+- Slash-canonical fix gate-driven: win32/pwsh path separators normalized to canonical slash form (gate-driven fix)
+- `$worktreeRoot` fix gate-driven: worktree root variable resolution corrected for repo-local placement (gate-driven fix)
+
+### Domain Ships
+
+- Automation: workflow enabled + runbook link — `skills/git-worktree/references/dispatch.md` + `hygiene.md` drive setup/dispatch/teardown (SPEC-git-worktree-automation)
+- People: announce template shipped — consent + announce flow in `skills/git-worktree/references/` people lane (SPEC-git-worktree-people)
+- Security: guards policy enabled — consent, least-privilege, no-secrets/PII rules per security lane (SPEC-git-worktree-security)
+- Engineering: skill files shipped — `skills/git-worktree/SKILL.md` + 4 references (SPEC-git-worktree-engineering)
+
+### Breaking Changes
+
+- None — supporting skill only, chain order unchanged, plugin untouched.
+
+## Known Issues
+
+- Mutex-wait note needs one-line clarification (Low hygiene residual — owner: engineering owner)
+- Setup-log timestamps inconsistent across pwsh hosts (Low hygiene residual — owner: automation owner)
+
+## Rollback / Undo
+
+- Code revert: `git checkout -- skills/git-worktree` plus `.gitignore` hunk revert plus docs revert restores the pre-skill tree. No archive or skill-file edits outside this scope.
+- Worktree residue: `git worktree remove <path> --force` per lane then `git worktree prune` clears residue; verify with `git worktree list`.
+- No external sends/filings/launches/deploys to undo. Owner: engineering owner + automation owner, ETA: < 15 min.
+
+---
+
 # Release Notes: v0.3.3
 
 **Date:** 2026-09-16
