@@ -5,18 +5,18 @@
 
 ## Orchestrator-only dispatch rule (all harnesses)
 
-**orchestrator-only dispatch rule (ADR-003):** **orchestrator dispatches entire team; domain owners/specialists do the work or brief back.** Only the orchestrator (main agent) dispatches subagents — `task(general)` (or harness equivalent) max 2 parallel in multi mode. Every other role — domain owners, reviewers, leaves — never dispatches: it does the work end to end, and a cross-domain need returns **inside the agent's return** as a formal **Cross-domain request** brief to the orchestrator (Need + Reason + Suggested owner + Urgency); the orchestrator delegates to the right agent or resolves. No sideways dispatch, no self-approval. Generic fallback: a harness without a subagent mechanism runs **single mode** (direct execution, no task — see Rules).
+**orchestrator-only dispatch rule:** **orchestrator dispatches entire team; domain owners/specialists do the work or brief back.** Only the orchestrator (main agent) dispatches subagents. Every other role — domain owners, reviewers, leaves — never dispatches: it does the work end to end, and a cross-domain need returns **inside the agent's return** as a formal **Cross-domain request** brief to the orchestrator (Need + Reason + Suggested owner + Urgency); the orchestrator delegates to the right role or resolves. No sideways dispatch, no self-approval. Generic fallback: a harness without a subagent mechanism runs **single mode** (direct execution, no task — see Rules).
 
 ## opencode (native)
 
 - "Invoke a skill" / "load stage skill" → `skill` tool. MANDATORY BEFORE any task/edit/bash/task dispatch — single AND multi. No skill = STOP.
-- "Read agent craft" → `read` on `agents/<domain>/<agent>.md`. MANDATORY with every skill load: skill = process, template = craft. Cite path in output. Never paste full bodies of OTHER roles — only your dispatched role.
+- "Understand domain role" → domain owner/specialist understands their domain's practices. MANDATORY with every skill load: skill = process, role = craft.
 - "Create a todo" / "mark complete" → `todowrite`.
-- "Dispatch a subagent" → `task` tool with `subagent_type="general"` (general-purpose; approved default until agents are natively registered) — **orchestrator-only, max 2 parallel**:
-  - Prompt MUST include: (1) read stage `skills/<stage>/SKILL.md`, (2) read `agents/<domain>/<agent>.md` for the assigned role, (3) accept `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` by reference only, (4) return deliverable + file list + risks + assumptions + scoped evidence.
+- "Dispatch a subagent" → `task` tool with `subagent_type="general"` (general-purpose) — **orchestrator-only**:
+  - Prompt MUST include: (1) read stage `skills/<stage>/SKILL.md`, (2) understand domain role, (3) accept `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` by reference only, (4) return deliverable + file list + risks + assumptions + scoped evidence.
   - Roles: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — only the orchestrator dispatches. Canonical 8 business domains: engineering (engineering owner), security (security owner), finance (finance owner), legal (legal owner), marketing/brand (marketing owner), people (people owner), revenue (revenue owner), automation/ops (automation owner + engineering owner mechanics).
-  - Leaf + reviewers (craft in `agents/<domain>/<agent>.md`: `architect, backend, frontend, devops, data-engineer, qa, review-readability, review-reliability, review-resilience, review-risk, review-refuter, review-data, security, security-reviewer` + domain specialists (`finance-reviewer, legal-reviewer, brand-reviewer, people-reviewer, revenue-reviewer, automation-reviewer`)): run INSIDE `general` subagents dispatched by the orchestrator that first read their template — never as raw `subagent_type` names until natively registered.
-  - Fast-path: `subagent_type: "general"` for small fully-specified units, `"explore"` for read-only codebase exploration — still requires skill + template read first.
+  - Leaf + reviewers: domain specialists who understand their domain's practices — run INSIDE dispatched subagents that first understand their role.
+  - Fast-path: `subagent_type: "general"` for small fully-specified units, `"explore"` for read-only codebase exploration — still requires skill + role understanding first.
 - "Read a file" → `read`.
 - "Create / edit a file" → `apply_patch` (via edit tools).
 - "Run a shell command" → `bash`.
@@ -31,8 +31,8 @@
 ## Rules
 
 - Prefer native tools over shell equivalents for file operations.
-- MANDATORY LOAD ORDER (single AND multi): skill(stage) → read(1 agent template) → act. No task/edit/bash before both. FAIL → retry N=2 → escalate to orchestrator.
-- single mode: NO task dispatch — direct execution after skill + template. multi-subagents: **orchestrator-only** `task(general)` max 2 parallel, each ordered to read skill + template first; orchestrator dispatches entire team; domain owners/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the orchestrator, who delegates or resolves.
-- Never paste full context between stages — pass references (paths + IDs). Only exception: the ONE dispatched template is read fully; all other roles stay path-cites.
+- MANDATORY LOAD ORDER (single AND multi): skill(stage) → understand domain role → act. No task/edit/bash before both. FAIL → retry N=2 → escalate to orchestrator.
+- single mode: NO task dispatch — direct execution after skill + role. multi-subagents: **orchestrator-only** `task(general)`, each ordered to understand domain role first; orchestrator dispatches entire team; domain owners/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the orchestrator, who delegates or resolves.
+- Never paste full context between stages — pass references (paths + IDs).
 - When a harness lacks a native tool, use the closest equivalent and note the
   substitution in the artifact.

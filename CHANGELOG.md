@@ -12,6 +12,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Per-stage commit closings (guidance only): every stage SKILL.md ends with a work-unit commit step + copy-paste example; shared format lives in `skills/using-frame-ship/references/commit-convention.md`.
 - `execute-spec` per-task rule: one commit per approved task/REQ-ID with `REQ-ID → test → artifact` in body; `implementation-plan.md` steps map 1:1 to commits; `test-matrix.md` gains `Commit` column.
 
+### Changed
+
+- Removed vendored agent templates (`agents/` — 69 files, 9 subdirs): skills now reference domain roles directly without requiring template reads; simplifies dispatch model across all 9 stages.
+- Simplified dispatching: removed `task(subagent_type="general")` max 2 parallel with template-read orders; replaced with domain role understanding (skills/execute-spec, skills/quality-gate, skills/frame-intent).
+- Fixed workspace path convention: `<agent>` → `<domain>` in `docs/specs/40_workspace/<domain>/` paths (skills/propose-changes, skills/review-architecture, skills/review-security).
+- Updated `skills/AGENTS.md`: removed vendored craft references, simplified role owner descriptions, removed execution mode template references.
+- Updated `skills/quality-gate/references/gate-report.md`: Load Evidence checklist now checks domain role understanding instead of template reads.
+
+### Removed
+
+- `agents/` directory (69 files, 9 subdirs): vendored agent templates removed from repo root; skills reference domain roles directly.
+
 ## [v0.3.3] — 2026-09-16
 
 ### Changed

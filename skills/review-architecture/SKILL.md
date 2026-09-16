@@ -26,7 +26,7 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 ## 3. Process
 
 0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches `task(general)` ordered to read skill + templates first.
-1. Read `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md`.
+1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md`.
 2. Compare against `ARCHITECTURE.md` + `API_CONTRACTS.md`.
 3. Produce/update ADR via `references/adr-template.md`.
 4. Issue review via `references/architecture-review.md`.

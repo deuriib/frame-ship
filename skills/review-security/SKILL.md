@@ -26,7 +26,7 @@ no parallel reviewer universe.
 ## 3. Process
 
 0. Pre-flight LOAD — HARD STOP: `skill(review-security)` loaded? Agent templates read for security owner + security reviewer? Any NO → STOP. Security owner runs inside the orchestrator's `task(general)` ordered to read skill + templates first (single = direct read).
-1. Read `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md`.
+1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md`.
 2. Produce security review output via `references/security-review-template.md`.
 3. Threat-model via `references/threat-model.md` (STRIDE).
 4. Issue verdict + conditions; block implementation on Rejected.

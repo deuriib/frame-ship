@@ -2,7 +2,6 @@
 
 ## OVERVIEW
 9 stage skills: process source of truth. Plugin only injects pointers; this dir defines behavior.
-Vendored craft: `agents/<domain>/<agent>.md` (68 templates, reference-only, skills cite by path).
 
 ## WHERE TO LOOK
 | Trigger | Skill | Out |
@@ -21,10 +20,10 @@ Vendored craft: `agents/<domain>/<agent>.md` (68 templates, reference-only, skil
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
-- Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs). Templates live in `agents/` outside stage counts (`skills/templates/` removed).
+- Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs).
 - Commit closings: every stage ends with a work-unit commit step + example per `using-frame-ship/references/commit-convention.md` (guidance only, never gate enforcement); `execute-spec` commits one per approved task/REQ-ID.
-- Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team (ADR-003: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the orchestrator); `engineering owner` arch; `security owner` security; leaf specialists impl.
-- Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets; templates add `Template-For` + `Execution` meta, never skill frontmatter.
+- Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
+- Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
 
 ## DOMAIN CATALOGUE (canonical — 8 business domains, full chain for all)
 

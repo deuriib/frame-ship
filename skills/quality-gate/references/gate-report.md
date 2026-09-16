@@ -32,7 +32,7 @@ Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touc
 ## Load Evidence (HARD STOP — missing = CLOSED)
 
 - [ ] Stage skill loaded: `skill(<stage>)` cited (name + trigger match)
-- [ ] Agent template read: `agents/<domain>/<agent>.md` cited (dispatched role only)
+- [ ] Domain owner/specialist role understood: domain role cited (dispatched role only)
 - [ ] Execution mode declared: `single` (direct, no task) or `multi-subagents` (`task(general)` max 2, read orders in prompt)
 - [ ] Packet intact: `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — no full-context paste
 - Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate orchestrator).

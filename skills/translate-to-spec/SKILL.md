@@ -24,9 +24,9 @@ canonical architecture contract. The brief is read-only here.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP (single AND multi): `skill(translate-to-spec)` loaded? Agent template read for owning domain owner? Packet `SPEC:<brief-path>#OKRs / HARD:<mode> / GATE:<none-yet> / DOMAINS:<list>` ready? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches via `task(general)` max 2 parallel, each ordered to read skill + template first; orchestrator dispatches entire team; domain owners do the work or brief back — the domain owner returns its spec to the orchestrator.
+0. Pre-flight LOAD — HARD STOP (single AND multi): `skill(translate-to-spec)` loaded? Owning domain owner identified? Packet `SPEC:<brief-path>#OKRs / HARD:<mode> / GATE:<none-yet> / DOMAINS:<list>` ready? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches, each ordered to understand domain role first; domain owners do the work or brief back.
 1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
-2. The orchestrator dispatches the owning domain owners by domains touched (8-domain catalogue in `../AGENTS.md`), max 2 parallel; each dispatched domain owner reads its own template fully, cites other `agents/<domain>/<agent>.md` craft by path, and returns its spec to the orchestrator.
+2. The orchestrator dispatches the owning domain owners by domains touched (8-domain catalogue in `../AGENTS.md`). Each dispatched domain owner understands their domain's practices and returns its spec to the orchestrator.
 3. Each dispatched domain owner produces a spec using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning domain owner. Orchestrator dispatches entire team; domain owners do the work or brief back — the domain owner returns its deliverable to the orchestrator (max 2 parallel).
 4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).

@@ -27,7 +27,7 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 
 - **Bound to:** orchestrator dispatches all gate reviewers; owning domain owner acts as gate keeper (engineering owner for engineering, else
   the domain owner); orchestrator synthesizes multi-domain gates.
-- Reviewers always run inside orchestrator-dispatched `task(subagent_type="general")` ordered to read this skill + their template first, and never approve their own work.
+- Reviewers are domain specialists who understand their domain's review criteria and never approve their own work.
 
 ## 3. Reviewer Routing Table
 
@@ -49,13 +49,13 @@ Execution mode (from spec `execution_mode`):
 - `single`: min gate `review-readability + review-risk + review-refuter + qa` (+ `review-data` for data specs). Still CLOSED on any ❌.
 - `multi-subagents` (default): full wave per routing table below + adversarial `review-refuter` before `qa`.
 
-Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for domain reviewers — the dispatched reviewer reads its ONE template fully (ordered in the orchestrator task prompt), others stay path-cites.
+Each reviewer understands their domain's review criteria. The orchestrator dispatches reviewers who understand their domain's practices.
 
 ## 4. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(quality-gate)` loaded? Owning domain owner template read? Each reviewer dispatched by orchestrator via `task(general)` whose prompt orders: read this skill + `references/gate-report.md` + its `agents/<domain>/<agent>.md` template BEFORE reviewing? Any NO → STOP.
+0. Pre-flight LOAD — HARD STOP: `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
 1. Identify touched domains from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
-2. Dispatch each required reviewer via orchestrator `task(subagent_type="general")` max 2 parallel (reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to read skill + template first).
+2. Dispatch each required reviewer via orchestrator (reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first).
 3. Each reviewer writes `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. Consolidate into `GATE_REPORT.md` via `references/gate-report.md`.
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).
