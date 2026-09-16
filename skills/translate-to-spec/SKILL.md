@@ -33,6 +33,7 @@ canonical architecture contract. The brief is read-only here.
 4. `vasquez` consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
 6. Hand off to `propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
+7. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth`.
 
 ## 4. What I won't do
 
@@ -46,3 +47,4 @@ canonical architecture contract. The brief is read-only here.
 - `references/architecture-template.md` — Architecture contract.
 - `references/requirements-template.md` — Requirements index.
 - `../../agents/README.md` — Vendored templates index.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).

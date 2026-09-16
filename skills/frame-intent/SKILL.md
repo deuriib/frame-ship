@@ -36,6 +36,7 @@ frame-intent → translate-to-spec → propose-changes → review-* → execute-
 4. Define 2–4 OKRs using `references/okr-template.md`.
 5. Identify required C-levels (vasquez-engineering, barrera-security, dauhajre-finance, subero-legal, vera-marketing, santana-people, montero-revenue, espinoza-automation per `../AGENTS.md` catalogue) and flag cross-cutting concerns (data lens where schema/PII involved). Read the ONE dispatched C-level template fully; cite other `agents/<domain>/<agent>.md` craft by path, never paste other bodies.
 6. Hand off the brief reference to `translate-to-spec` as `SPEC:<brief-path>#OKRs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
+7. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(brief-auth): add BRIEF-auth with OKRs and domains-touched`.
 
 ## 4. What I won't do
 
@@ -48,3 +49,4 @@ frame-intent → translate-to-spec → propose-changes → review-* → execute-
 - `references/product-brief.md` — Product Brief template (includes `execution_mode`).
 - `references/okr-template.md` — OKR template.
 - `../../agents/README.md` — Vendored agent templates index (reference-only craft).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).

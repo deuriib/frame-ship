@@ -31,6 +31,7 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 3. Produce/update ADR via `references/adr-template.md`.
 4. Issue review via `references/architecture-review.md`.
 5. Hand off to `execute-spec` if approved.
+6. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(adr-004): record ADR for session contract change`.
 
 ## 4. What I won't do
 
@@ -42,3 +43,4 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 
 - `references/adr-template.md` — Architecture Decision Record.
 - `references/architecture-review.md` — Contract compliance + verdict.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).

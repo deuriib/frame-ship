@@ -34,7 +34,8 @@ test → artifact traceability. Scope expansion requires a new proposal.
 4. Execute only targets in the approved change list (files AND non-code targets — no external sends/filings/launches beyond approval).
 5. Produce test/evidence matrix via `references/test-matrix.md` (tests for code, reviews/sign-offs/attestations for non-code, REQ-ID trace mandatory for all).
 6. Run domain quality checks (engineering: lint, types, tests, security; other domains: peer review, owner sign-off, controls check per plan).
-7. Hand off to `quality-gate` with `SPEC/HARD/GATE/DOMAINS` packet intact.
+7. Commit one work-unit commit per approved task/REQ-ID per `../using-frame-ship/references/commit-convention.md` (guidance only; never batch unrelated REQ-IDs). Body links `REQ-ID → test → artifact`. Examples: `feat(auth-001): add session store with REQ-001 test trace`, `fix(auth-002): enforce TTL per REQ-002`.
+8. Hand off to `quality-gate` with `SPEC/HARD/GATE/DOMAINS` packet intact.
 
 ## 4. What I won't do
 
@@ -47,3 +48,4 @@ test → artifact traceability. Scope expansion requires a new proposal.
 - `references/implementation-plan.md` — Steps + order + rollback points.
 - `references/test-matrix.md` — REQ-ID to test traceability.
 - `../../agents/README.md` — Execution modes + template index.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-task rule + examples (guidance only).

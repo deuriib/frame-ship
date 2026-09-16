@@ -30,6 +30,7 @@ and `review-risk` agents — no parallel reviewer universe.
 2. Produce `docs/specs/40_workspace/barrera/SECURITY_REVIEW.md` via `references/security-review-template.md`.
 3. Threat-model via `references/threat-model.md` (STRIDE).
 4. Issue verdict + conditions; block implementation on Rejected.
+5. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(sec-003): approve SECURITY_REVIEW with STRIDE verdict`.
 
 ## 4. What I won't do
 
@@ -41,3 +42,4 @@ and `review-risk` agents — no parallel reviewer universe.
 
 - `references/security-review-template.md` — Findings + verdict + sign-off.
 - `references/threat-model.md` — STRIDE attack surface analysis.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).

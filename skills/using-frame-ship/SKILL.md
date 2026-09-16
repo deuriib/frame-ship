@@ -75,3 +75,4 @@ using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-
 
 - `references/bootstrap-checklist.md` — Session-start and post-compaction checks.
 - `references/tool-mapping.md` — Action phrases to native tool names per harness.
+- `references/commit-convention.md` — Per-stage commit format + scope table + examples (guidance only).

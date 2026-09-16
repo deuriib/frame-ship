@@ -33,6 +33,7 @@ deployment order, and archival. Never ship without verification gates complete.
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
 4. Coordinate ship mechanics with rollback/undo plan: `devops` for deploys; owning C-level for filings/launches/closes/workflows.
 5. Archive completed spec to `docs/specs/50_archive/` with domain artifacts linked.
+6. Close with work-unit release commit per `../using-frame-ship/references/commit-convention.md` (guidance only; tag after commit). Example: `chore(release-0.4.0): ship SPEC-003 with notes and rollback plan`.
 
 ## 4. What I won't do
 
@@ -44,3 +45,4 @@ deployment order, and archival. Never ship without verification gates complete.
 
 - `references/release-notes.md` — Highlights/features/fixes/breaking/rollback.
 - `references/changelog-template.md` — Keep-a-Changelog format.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + release example (guidance only).

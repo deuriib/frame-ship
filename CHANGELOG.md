@@ -5,7 +5,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
-- None yet (next work queues here).
+### Added
+
+- Per-stage commit closings (guidance only): every stage SKILL.md ends with a work-unit commit step + copy-paste example; shared format lives in `skills/using-frame-ship/references/commit-convention.md`.
+- `execute-spec` per-task rule: one commit per approved task/REQ-ID with `REQ-ID → test → artifact` in body; `implementation-plan.md` steps map 1:1 to commits; `test-matrix.md` gains `Commit` column.
+
+## [v0.3.2] — 2026-09-16
+
+### Changed
+
+- Concise plugin prompt injections: `.opencode/plugins/frame-ship.ts` 223→156 lines (−31.3%, 11,098→7,620 chars), string literals + header only, zero behavior change (INTENT-2026-09-16-concise-plugin-prompts, REQ-001..REQ-006; gate OPEN, DoD PASS; restart required).
+- Single `CHAIN` const replaces 4x chain-order literals; guardrails as greppable 1:1 numbered checklist (14/14).
 
 ## [v0.3.0] — 2026-09-16
 

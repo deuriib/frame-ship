@@ -30,6 +30,7 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 3. Produce `docs/specs/40_workspace/<agent>/HANDOFF.md` via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows — with evidence links).
 4. All gates pass → hand off to `ship-release`.
 5. Gates fail → return to `execute-spec` with specific findings.
+6. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(handoff-003): verify DoD and route SPEC-003 to ship`.
 
 ## 4. What I won't do
 
@@ -41,3 +42,4 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 
 - `references/handoff-template.md` — Deliverables + DoD + next agent.
 - `references/dod-checklist.md` — Functional/quality/security/docs gates.
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).
