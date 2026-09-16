@@ -21,7 +21,7 @@ Vendored craft: `agents/<domain>/<agent>.md` (68 templates, reference-only, skil
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
-- Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs). Templates live in `agents/` outside stage counts (`skills/templates/` removed).
+- Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs). Templates live in `agents/` outside stage counts (`skills/templates/` removed); exception: `skills/templates/implementers/` is the scoped implementer-prompt location (4 portable prompts per REQ-005/ADR-003 §Decision.4 — craft stays at `agents/`).
 - Commit closings: every stage ends with a work-unit commit step + example per `using-frame-ship/references/commit-convention.md` (guidance only, never gate enforcement); `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `montilla` briefs/releases; `vasquez` arch; `barrera` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets; templates add `Template-For` + `Execution` meta, never skill frontmatter.
