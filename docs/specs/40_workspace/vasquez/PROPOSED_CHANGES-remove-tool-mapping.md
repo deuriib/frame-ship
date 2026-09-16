@@ -15,7 +15,7 @@ Elimino `skills/using-frame-ship/references/tool-mapping.md` y dejo `using-frame
 | Target | Change Type | Description |
 |--------|-------------|-------------|
 | `skills/using-frame-ship/references/tool-mapping.md` | file-delete | Borrar archivo (38 líneas: regla CEO-only + filas opencode/Codex/generic + Rules). REQ-001 |
-| `skills/using-frame-ship/SKILL.md §3.1 (L43-45)` | file-modify | Old: `acting (see \`references/tool-mapping.md\`).` → New: `acting — skill + domain role before any task/edit/bash/dispatch (see \`references/bootstrap-checklist.md\`).` REQ-002 |
+| `skills/using-frame-ship/SKILL.md §3.1 (L43-45)` | file-modify | Old: `acting (see \`references/tool-mapping.md\`).` → New: `acting.` (línea limpia; user-authorized amendment 2026-09-16: se retiró también la coletilla intermedia del checklist — el load order completo ya vive en §3.0 + `bootstrap-checklist.md`). REQ-002 |
 | `skills/using-frame-ship/SKILL.md §5 (L75-77)` | file-modify | Old: dos bullets (`bootstrap-checklist.md` + `tool-mapping.md — Action phrases…`). → New: un bullet `references/bootstrap-checklist.md — Session-start and post-compaction checks (incl. skill + role load order).` REQ-003 |
 | (verificación, sin archivo) | config-update | Grep `tool-mapping` = 0 en `skills/`, `.opencode/`, `AGENTS.md` raíz; `docs/` histórico excluido por diseño. REQ-004 |
 
