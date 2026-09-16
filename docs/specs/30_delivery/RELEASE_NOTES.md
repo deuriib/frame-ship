@@ -1,3 +1,38 @@
+# Release Notes: debugging skill (rollout)
+
+**Date:** 2026-09-16
+**Release Manager:** montilla (CEO)
+**Specs Included:** SPEC-debugging-engineering
+**Domains-Touched:** [engineering, automation/ops]
+**Ship Type:** rollout
+
+## Highlights
+
+- Native `skills/debugging/` live: Iron Law + 4 phases stop guess-fixes before they start.
+- Pre-proposal lens per ADR-005: runs before propose/execute, hands off via PROPOSED_CHANGES — chain order untouched.
+- 3-failure rule enforced: ≥3 failed fixes → question architecture + human escalation, never silent Fix #4.
+
+## Changes
+
+### Features
+
+- `skills/debugging/SKILL.md` + 3 references (root-cause-tracing, defense-in-depth, condition-based-waiting) (SPEC-debugging-engineering, engineering)
+- Sanitized boundary-evidence guidance: masked entry/exit, allowlisted evidence, condition polling (SPEC-debugging-engineering, automation/ops)
+
+### Breaking Changes
+
+- None — advisory skill only.
+
+## Known Issues
+
+- None.
+
+## Rollback / Undo
+
+Delete `skills/debugging/` dir; revert execute commit. No external sends/filings/launches/deploys. Owner: engineering owner, ETA <15 min.
+
+---
+
 # Release Notes: git-worktree skill (Unreleased)
 
 **Date:** 2026-09-16
