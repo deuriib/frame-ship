@@ -164,3 +164,46 @@
 ## Rollback / Undo
 
 `git revert e73eee0` — restores both README lines in one step. Evidence commits (`f1aa7a3`, gate `62a3667`, handoff `4707b79`) revert independently with no live-tree effect. No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA: immediate (< 2 min).
+
+---
+
+# Release Notes: skill-naming-convention (policy-enable rollout)
+
+**Date:** 2026-09-16
+**Release Manager:** orchestrator + engineering owner (release mechanics delegated to owning domain owner)
+**Specs Included:** SPEC-skill-naming-engineering
+**Domains-Touched:** [engineering]
+**Ship Type:** rollout (policy-enable — naming-convention freeze; docs-only verification unit, zero file changes)
+
+## Highlights
+
+- Canonical navigation frozen: inter-skill navigation cites (Previous/Next/handoff/trigger-route lines, chain diagrams in prose) use `frame-ship:{skill-name}` (e.g. `frame-ship:translate-to-spec`) per SPEC REQ-001. Prior PASS already normalized 10/10 `SKILL.md` navigation cites — this release freezes the rule, no re-edits.
+- C-1/C-2/C-3 carve-out frozen per SPEC §4 / REQ-002: (C-1) frontmatter `name:` bare kebab — loader contract; (C-2) filesystem paths/dir globs bare — file resolution; (C-3) native `skill()` tool args bare — harness-resolved tool namespace. No fourth bare form.
+- 15 cites KEEP bare under C-3: all 15 baseline `skill(...)` cites in `skills/` (10 `SKILL.md` §0/§3 lines + `gate-report.md:34`) dispositioned D-01..D-15 as tool-API context — zero canonicalizations, zero file changes. Re-grep acceptance: same 15 hits, 0 unmapped.
+- Full chain in `single` mode: brief → spec → proposal → min-gate (4/4 pass) → DoD PASS → this rollout. Zero-change verification/record unit: execute reproduced greps + scans, no implementation edits proposed or made.
+
+## Changes
+
+### Features
+
+- Naming-convention policy enabled: canonical rule + 3-row carve-out table + 15-cite disposition (D-01..D-15) + chain/dir surface map (S-01..S-06) frozen as the reference for every future cite (SPEC-skill-naming-engineering, engineering)
+
+### Fixes
+
+- N/A (no defect; convention freeze, not a bugfix)
+
+### Domain Ships
+
+- Engineering: policy rollout only — no contracts/filings/campaigns/workflows; plugin `CHAIN`/card injection strings (`frame-ship.ts:4,13-14,16,20,29`) RECORDED as automation-owner follow-up (S-05), not edited in this unit (SPEC-skill-naming-engineering)
+
+### Breaking Changes
+
+- None — docs-prose convention only; frontmatter/paths/runtime byte-identical per REQ-005; loader + tool namespaces unchanged.
+
+## Known Issues
+
+- None blocking. One owned non-blocking follow-up carried post-ship: S-05 plugin runtime strings need automation owner + `mise run typecheck` (informational, not a gate condition).
+
+## Rollback / Undo
+
+Zero-change release — nothing to revert in the live tree. Release commit itself reverts via `git revert <release-sha>` (docs-only, ETA < 5 min). Prior unit commits revert independently with no live-tree effect: proposal `ee218c7`, gate `e7e8836`, handoff `850c337` (spec `692ae76`, brief `71bbe0e`). No external sends/filings/launches/deploys to undo. Owner: engineering owner, ETA: immediate (< 5 min).
