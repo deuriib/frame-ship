@@ -10,6 +10,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Per-stage commit closings (guidance only): every stage SKILL.md ends with a work-unit commit step + copy-paste example; shared format lives in `skills/using-frame-ship/references/commit-convention.md`.
 - `execute-spec` per-task rule: one commit per approved task/REQ-ID with `REQ-ID → test → artifact` in body; `implementation-plan.md` steps map 1:1 to commits; `test-matrix.md` gains `Commit` column.
 
+## [v0.3.3] — 2026-09-16
+
+### Changed
+
+- Commit convention rewritten with work-unit scope syntax `type(<stage>/<work-unit>): subject` for all 9 stages; splitting rules mandate separate commits per distinct work unit (REQ-ID, brief, spec, proposal, ADR, review, gate, handoff, release); batching rules allow grouping only when plan explicitly groups or changes are tightly coupled (SPEC-commit-convention-v2; gate OPEN, DoD PASS).
+
 ## [v0.3.2] — 2026-09-16
 
 ### Changed
