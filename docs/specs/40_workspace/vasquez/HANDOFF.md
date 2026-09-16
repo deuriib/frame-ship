@@ -1,78 +1,41 @@
-# Handoff: vasquez (CTO)
+# Handoff: Engineering owner
 
-**Spec Reference:** INTENT-2026-09-16-concise-plugin-prompts (ad-hoc user intent; scope + REQ-001..REQ-006 defined in proposal — no BRIEF/SPEC)
-**Agent:** vasquez
+**Spec Reference:** SPEC-skill-naming-engineering (`docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md#REQ-001..005` + REQ-NF-001..003)
+**Agent:** Engineering owner
 **Date:** 2026-09-16
 **Status:** complete
-**Domains-Touched:** engineering
+**Domains-Touched:** [engineering]
 
 ## Deliverables
 
 | Artifact | Location / Evidence | Status |
 |----------|---------------------|--------|
-| Implementation | `.opencode/plugins/frame-ship.ts` @ `1a805bc` (223→156 lines, 20 insertions / 87 deletions, string literals + header only) | done |
-| Proposal (REQ-001..REQ-006, R-001..R-005) | `docs/specs/40_workspace/vasquez/PROPOSED_CHANGES.md` | done, approved |
-| Security review (Conditional, C-1..C-6 binding) | `docs/specs/40_workspace/barrera/SECURITY_REVIEW.md` | done — all conditions verified at gate |
-| Gate report OPEN | `docs/specs/40_workspace/quality-gate/plugin-001-concise-prompts/GATE_REPORT.md` | done |
-| Reviews (4×pass) | `docs/specs/40_workspace/quality-gate/plugin-001-concise-prompts/review-readability.md`, `review-risk.md`, `review-refuter.md`, `qa-review.md` | done |
-| Tests / Evidence | QA trace matrix `qa-review.md:22-32` (9/9 rows green) + `tsc` typecheck exit 0 (re-run 2026-09-16 from `.opencode/`) | done |
-| Docs | RELEASE_NOTES + changelog + rollback plan — owned by `ship-release` (this handoff is the input) | pending (next stage) |
-| Domain artifact | n/a — prompt-text-only change, no contracts/filings/campaigns/workflows | N/A |
+| Spec (REQ-001..005 + REQ-NF-001..003) | `docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md` | done |
+| REQ index | `docs/specs/15_requirements/REQ-skill-naming-engineering.md` | done |
+| Proposal (15-cite disposition D-01..D-15 + surface map S-01..S-06) | `docs/specs/40_workspace/vasquez/PROPOSED_CHANGES.md` | done, approved |
+| Tests / Evidence (8/8 REQ→evidence) | `docs/specs/40_workspace/quality-gate/skill-naming/qa-review.md:23-32` (E-001..E-008, 8/8 pass) | done |
+| Reviews (4×pass) | `docs/specs/40_workspace/quality-gate/skill-naming/readability-review.md`, `risk-review.md`, `refuter-review.md`, `qa-review.md` | done |
+| Gate report OPEN | `docs/specs/40_workspace/quality-gate/skill-naming/GATE_REPORT.md` (OPEN, 4/4 ✅) | done |
+| Docs | No user-facing surface; RELEASE_NOTES + changelog owned by `ship-release` (this handoff is the input) | pending (next stage) |
+| Domain artifact | n/a — docs-convention record unit, no contracts/filings/campaigns/workflows | N/A |
 
 ## Definition of Done Checklist
 
-Common (all domains):
-
-- [x] All acceptance criteria met — REQ-006a ≥30% (−31.3%: 11,098→7,620 chars), 006b semantic checklist 1:1, 006c `tsc` clean, 006d single-file zero-deps
-- [x] All REQ-IDs have linked evidence — REQ-001→T-001, REQ-002→T-002, REQ-003→T-003+RF-005, REQ-004→T-004+RF-006, REQ-005→T-005+RF-003, REQ-006a-d→T-001/T-002+T-003+RF-004+RF-007/T-006/T-007 (`qa-review.md:22-32`)
-- [x] Edge cases / failure modes handled — R-001..R-005 mitigated (verbatim-logic rule, CHAIN const, semantic checklist, <15 min single-file `git revert` rollback)
-- [x] Gate OPEN — `GATE_REPORT.md:3` OPEN, 4/4 reviewer pass, no COND items, no waiver needed
-- [x] Load evidence — stage skill + dispatched agent template cited (paths), execution_mode declared, packet intact — verified: `skills/verify-handoff/SKILL.md` loaded via skill tool; `agents/c-level/vasquez.md` read; mode `single`; packet reference-only throughout
-- [x] Docs/changelog updated for user-facing impact — session prompt changes every session's orientation surface; RELEASE_NOTES + changelog explicitly routed to `ship-release` as its owned output (see Next Agent)
-
-Engineering appendix (vasquez — engineering-touched):
-
-- [x] Lint passes with zero warnings — n/a (no lint harness in repo; style covered by readability pass, zero findings requiring action)
-- [x] Type checks pass — `tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts` exit 0, re-run 2026-09-16 from `.opencode/`
-- [x] Test coverage meets threshold — 6/6 REQ traced, 4/4 acceptance criteria evidenced; repo has no test harness (`tests/` empty) so the project typecheck IS the suite per QA verdict
-- [x] No TODO/FIXME left in code — `Select-String TODO|FIXME` on `.opencode/plugins/frame-ship.ts` returns zero hits (verified 2026-09-16)
-
-Security (touched via prompt-carried baseline — barrera lens):
-
-- [x] Security review conditions met — C-1..C-6 all verified against implemented diff (`review-risk.md:13-20`)
-- [x] No secrets in code/config/logs/examples — literal scan clean, re-verified post-implementation (C-5)
-- [x] Input validation at all boundaries — n/a (no new endpoints/adapters/boundaries/payloads; prompt-text-only change)
-
-Documentation:
-
-- [x] API docs updated OR domain artifact filed — n/a (no API surface change; logic byte-identical)
-- [ ] Changelog entry added — N/A with justification: owned by `ship-release` (RELEASE_NOTES + changelog + rollback + archive); this handoff is its input
-- [ ] ADR written — N/A with justification: no architecture contract changed (prompt literals only, logic verbatim per REQ-005)
-
-## Traceability
-
-- REQ-001 (dedupe card↔bootstrap) → `1a805bc` WORKFLOW_CARD 3,926→1,480 → qa T-001 pass → risk C-4 verified → this handoff
-- REQ-002 (triggers+pointers compact) → 9/9 triggers + owners + outputs addressable → qa T-002 pass → refuter RF-004 confirmed → this handoff
-- REQ-003 (guardrails 1:1) → 14/14 numbers greppable `frame-ship.ts:26-29` → qa T-003 + refuter RF-005 pass → risk C-1 verified → this handoff
-- REQ-004 (single CHAIN const) → 1 literal + 3 interpolations (`frame-ship.ts:13-14,17,31,33`) → qa T-004 + refuter RF-006 pass → risk C-2 verified → this handoff
-- REQ-005 (zero behavior change) → 0 logic lines touched (diff filter) → qa T-005 + refuter RF-003 pass → risk C-3 verified (`tsc` exit 0 re-run) → this handoff
-- REQ-006 (acceptance a–d) → −31.3% / semantic 1:1 / `tsc` clean / zero-deps → qa T-001/T-006/T-007 pass → GATE OPEN → this handoff
+- [x] Acceptance criteria satisfied (all domains) — AC-001..008 → E-001..E-008, 8/8 pass (`qa-review.md:13,38`)
+- [x] Tests/evidence linked per REQ-ID — REQ-001→E-001, REQ-002→E-002, REQ-003→E-003, REQ-004→E-004, REQ-005→E-005, REQ-NF-001→E-006, REQ-NF-002→E-007, REQ-NF-003→E-008 (`qa-review.md:23-32`)
+- [x] Load evidence present (skill + template paths + mode + packet) — `skill(verify-handoff)` loaded via skill tool; contract `skills/verify-handoff/SKILL.md` (§3 steps 1-6); templates `skills/verify-handoff/references/dod-checklist.md` + `references/handoff-template.md`; mode `single` (frozen at frame-intent, spec header); packet `SPEC/HARD/GATE/DOMAINS` intact by reference throughout
+- [x] Domain checks passing (Common + touched-domain appendix in `dod-checklist.md`) — Common 6/6 ✅; engineering appendix 4/4 ✅ (lint n/a→readability 0 findings; typecheck n/a→zero-change docs-only, no `tsc` re-run required per QA; coverage 8/8 REQ + 8/8 AC; no TODO/FIXME — zero file edits proposed)
+- [x] Security checks passing (if security-touched) — n/a (docs-only, no auth/data/API/PII surface; REQ-NF-001 scan = 0 per E-006)
+- [x] Documentation / filing / comms updated as applicable — n/a with justification: internal convention record, no API surface (SPEC §4), no ADR (no contract change); changelog + RELEASE_NOTES routed to `ship-release` as its owned output
 
 ## Blockers / Open Questions
 
-None blocking. Two owned non-blocking follow-ups carried to post-ship (from `GATE_REPORT.md:33-36`):
+None blocking. One owned non-blocking follow-up carried to post-ship (from `GATE_REPORT.md:31`):
 
-- F-1 (owner: vasquez): init/compact smoke on first opencode restart post-ship — confirm single injection, no duplication on retry (R-003/C-3 watch; rollback: single-file `git revert`, <15 min).
-- F-2 (owner: vasquez, watcher: barrera): orientation watch on first sessions — compact card + live bootstrap keep sessions constrained (RR-1/RR-2).
+- S-05 (owner: automation owner): plugin `CHAIN`/card injection strings (`frame-ship.ts:4,13-14,16,20,29`) RECORDED only, not edited in this unit (runtime risk); follow-up needs automation owner + `mise run typecheck`. Informational, not a gate condition.
 
-Note: this file supersedes the prior SPEC-001 handoff previously at this path (preserved in git history); per-unit copies follow the `HANDOFF-002-*` / `HANDOFF-003-*` naming pattern in this directory.
-
-## Lessons
-
-- Compact-pointer plugin form works: the live bootstrap body already carries full detail, so the hardcoded card can stay enforcement-posture-only (HARD STOP + routing + short-form rules with pointers) without losing gate teeth — refuter RF-007 confirmed.
-- Single `CHAIN` const kills a real 4x-literal drift vector; any future chain-order change now touches exactly one line.
-- Short-form guardrails stay enforceable only because every number remains greppable — the 1:1 numbered checklist (not prose similarity) is the property to preserve in future trims.
+Note: this file supersedes the prior plugin-001 concise-prompts handoff previously at this path (preserved in git history); per-unit copies follow the `HANDOFF-*-*` naming pattern in this directory.
 
 ## Next Agent
 
-`ship-release` (owners: montilla + vasquez/devops): produce RELEASE_NOTES.md + changelog + rollback plan + archive for `1a805bc`. Inputs: this HANDOFF.md (DoD PASS) + GATE_REPORT.md (OPEN) + commit `1a805bc`. Post-ship: F-1 restart smoke, then F-2 orientation watch. No findings returned to `execute-spec` — DoD PASS, route forward.
+`ship-release`: produce RELEASE_NOTES + changelog + rollback plan + archive for SPEC-skill-naming-engineering. Inputs: this HANDOFF.md (DoD PASS) + `GATE_REPORT.md` (OPEN) + commits `e7e8836` (gate) / `ee218c7` (proposal) / `692ae76` (spec) / `71bbe0e` (brief). Rollback: `git revert` of the execution commit(s) — docs-only, ETA < 5 min. No findings returned to `execute-spec` — DoD PASS, route forward.
