@@ -30,19 +30,9 @@ Each file, in order:
 
 1. Generic frontmatter (`name`, `description` only) — no harness keys.
 2. H1 craft heading + portable-use note.
-3. `Capabilities` (read/write/run/search/route needs for any harness), then `Working agreement` (inputs/outputs by reference, evidence rule, no-secrets + personal-data minimization).
-4. Original craft body (role, principles, responsibilities, workflow, output shape, constraints), scrubbed of harness lock-in.
-5. `Delegation` (plain-language contract: only montilla dispatches; every other role does the work end to end and briefs back cross-domain needs as a formal Cross-domain request — Need + Reason + Suggested owner + Urgency).
-6. `Frame-Ship adapter (REQUIRED inside frame-ship)` — 3 lines, the only harness-conditional section; craft may cite chain roles/stages by plain reference. Enforces skill + template load before acting, single/multi routing, STOP + N=2 + escalate.
-
-## Harness lock-in removed (vs 2026-09-15 vendoring)
-
-- opencode `mode`, `permission.task/bash/webfetch/websearch/external_directory`, `temperature`, `reasoning_effort`, `color`, `hidden`, `disable` → `Capabilities` needs.
-- `@agent` direct-dispatch syntax → `` `agent` `` plain references.
-- `SPEC:`/`HARD:`/`GATE:` packet jargon → plain words (spec, constraints, gate requirements).
-- Spanish execute footer normalized to English `Delegation` + adapter; craft language preserved (e.g. espinoza stays Spanish).
-- Mandatory doc resolve→query flow → generic `Reference docs` (consult official versioned docs via your harness; cite).
-- Hardcoded workspace allow-paths → generic guidance (dropped with permission blocks).
+3. Original craft body (role, principles, responsibilities, workflow, output shape, constraints), scrubbed of harness lock-in.
+4. `Delegation` (plain-language contract: only montilla dispatches; every other role does the work end to end and briefs back cross-domain needs as a formal Cross-domain request — Need + Reason + Suggested owner + Urgency).
+5. `Frame-Ship adapter (REQUIRED inside frame-ship)` — 3 lines, the only harness-conditional section; craft may cite chain roles/stages by plain reference. Enforces skill + template load before acting, single/multi routing, STOP + N=2 + escalate.
 
 ## Use
 
