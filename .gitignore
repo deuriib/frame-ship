@@ -48,4 +48,6 @@ coverage/
 # Temp
 tmp/
 temp/
+
+# Cargo (rust)
 .ruff_cache/
