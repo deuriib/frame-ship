@@ -1,98 +1,133 @@
-# Proposed Changes: vasquez (CTO)
+# Proposed Changes: Engineering specialist — skill-naming convention (residual-only)
 
-**Spec Reference:** INTENT-2026-09-16-concise-plugin-prompts (ad-hoc user intent, no BRIEF/SPEC — scope + REQ-IDs defined herein)
-**Agent:** vasquez
+**Spec Reference:** docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md#REQ-001..005 (+ REQ-NF-001..003)
+**REQ Index:** docs/specs/15_requirements/REQ-skill-naming-engineering.md
+**Agent:** Engineering specialist
 **Date:** 2026-09-16
-**Execution_Mode:** single
-**Domains-Touched:** engineering
+**Execution_Mode:** single (inherited from spec §header + BRIEF-skill-naming, frozen at frame-intent; not overridden)
+**Domains-Touched:** [engineering] (automation/ops conditional — plugin runtime strings RECORDED only, not edited; automation owner owns any runtime follow-up)
 
 ## Summary
 
-Condense the prompt-injection payload in `.opencode/plugins/frame-ship.ts` (single-file, zero-deps runtime) without losing behavior. The session-injected system text (~11,098 chars) duplicates the live-loaded `using-frame-ship` bootstrap body almost verbatim; this proposal shrinks the hardcoded cards to compact pointer-form, extracts one shared `CHAIN` const, and keeps all hooks, resolvers, and loader logic byte-identical in behavior. Repo stays untouched until approval.
+Freeze the canonical navigation form `` `frame-ship:{skill-name}` `` with the normative 3-row carve-out table, disposition all 15 bare `` `skill(...)` `` cites in `skills/` as C-3 KEEP-bare (tool-API namespace), and map every chain/dir surface per REQ-004 with the plugin `CHAIN`/card strings deferred to an automation-owner follow-up. This unit proposes **zero repository file modifications** — it is a verification/record unit: execute-spec will reproduce the greps and scans, quality-gate will enforce them. Prior content at this path (INTENT-2026-09-16-concise-plugin-prompts proposal) is preserved in git history; this revision retargets the path to SPEC-skill-naming-engineering per orchestrator packet.
 
 ## Changes
 
 | Target | Change Type | Description |
 |--------|-------------|-------------|
-| `.opencode/plugins/frame-ship.ts` (H1: header comment L1-28) | file-modify | Trim header to version + chain pointer + creed; move chain string to shared `CHAIN` const (REQ-004) |
-| `.opencode/plugins/frame-ship.ts` (H2: new `CHAIN` const) | file-modify | Single source for `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`; all cards + compaction reminder interpolate it (REQ-004) |
-| `.opencode/plugins/frame-ship.ts` (H3: `WORKFLOW_CARD` L36-72, 3,926 chars) | file-modify | Dedupe MANDATORY LOAD ORDER + execution modes + 9 stage triggers + role bindings + hard rules against live bootstrap body (4,458 chars, injected anyway): keep one-line contract + compact trigger table + hard-rules short-form with pointers to `skills/*/SKILL.md` (REQ-001, REQ-002) |
-| `.opencode/plugins/frame-ship.ts` (H4: `GUARDRAILS_FULL` L75-91, 1,979 chars) | file-modify | Compress guardrails 1-14 to short-form (one clause each, grouped Security/Privacy/Severity/Conduct) + pointer to AGENTS.md; every numbered rule still present and greppable (REQ-003) |
-| `.opencode/plugins/frame-ship.ts` (H5: `POINTERS` L93-98, 735 chars) | file-modify | Tighten to 3-bullet source-of-truth pointer; drop prose already stated in bootstrap body (REQ-002) |
-| `.opencode/plugins/frame-ship.ts` (H6: `COMPACTION_REMINDER` L100, 508 chars) | file-modify | Shorten to chain + reload order + trace keys using shared `CHAIN` const (REQ-004) |
-| `.opencode/plugins/frame-ship.ts` (logic L102-223: `hasMarker`, `fileUrlToPath`, `resolveSkillsDir`, `loadBootstrapBody`, hooks, exports) | file-modify | NO behavior change — verbatim preservation required; only string-literal contents above change (REQ-005) |
+| *(none — verification/record unit)* | — | No `file-create` / `file-modify` / `file-delete` proposed. All 15 `skill(...)` cites KEEP bare per C-3; frontmatter/paths/plugin runtime byte-identical per REQ-005. Execution = reproduce greps + scans (§Verification). |
 
-Change types per `skills/propose-changes/references/proposal-template.md` (`file-modify` for engineering).
+Change types per `skills/propose-changes/references/proposal-template.md` (`file-*` for engineering; zero rows = zero edits).
 
-### REQ-IDs (defined by this proposal — no prior SPEC)
+### Disposition table — 15 bare `skill(...)` cites (REQ-003, baseline verified 2026-09-16 via `rg -n "skill\(" skills/`)
 
-- **REQ-001** — Eliminate WORKFLOW_CARD ↔ bootstrap-body duplication (load order, exec modes, triggers, roles, hard rules stated once, in full, in the live body; card keeps compact form + pointers).
-- **REQ-002** — Compress trigger list + pointers to table/bullets; all 9 stages + owners + outputs still addressable.
-- **REQ-003** — Compress guardrails 1-14 to short-form; semantic checklist maps each number 1:1 (no rule dropped, merged, or reworded in meaning).
-- **REQ-004** — Single `CHAIN` const; chain string appears once in source, interpolated everywhere (kills 4x literal drift risk).
-- **REQ-005** — Zero behavior change: `config` idempotent path-append, `system.transform` 3-push + bootstrap + `hasMarker` dedupe, `compacting` single-push + dedupe, `resolveSkillsDir` import.meta-first resolution, `loadBootstrapBody` Bun-first/file-fallback/cache, dual named+default export.
-- **REQ-006** — Acceptance: (a) injected system payload (`WORKFLOW_CARD + GUARDRAILS_FULL + POINTERS + bootstrap`) reduced **≥30% chars** vs. 11,098 baseline; (b) semantic checklist passes 1:1 (7 hard rules, 14 guardrails, 9 triggers, load order 1-4, 2 exec modes, role bindings, chain order); (c) `tsc` typecheck clean per project command (below); (d) single-file, zero-deps invariant holds (`import type` only, no new imports).
+Every cite below is tool-invocation context (pre-flight load check or template checklist), NOT inter-skill navigation → disposition **KEEP bare under C-3**. Zero canonicalizations required; prior PASS already normalized all navigation cites to `frame-ship:`-form.
+
+| # | File:Line | Cite (verbatim) | Disposition | Carve-out |
+|---|-----------|-----------------|-------------|-----------|
+| D-01 | `skills/execute-spec/SKILL.md:28` | `` `skill(execute-spec)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-02 | `skills/execute-spec/SKILL.md:32` | `` `skill(execute-spec)` `` (`single` output-cites line) | KEEP bare — no edit | C-3 |
+| D-03 | `skills/review-architecture/SKILL.md:28` | `` `skill(review-architecture)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-04 | `skills/propose-changes/SKILL.md:28` | `` `skill(propose-changes)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-05 | `skills/verify-handoff/SKILL.md:27` | `` `skill(verify-handoff)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-06 | `skills/frame-intent/SKILL.md:32` | `` `skill(frame-intent)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-07 | `skills/quality-gate/SKILL.md:56` | `` `skill(quality-gate)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-08 | `skills/using-frame-ship/SKILL.md:39` | `` `skill(using-frame-ship)` `` (§3 load-order step 1) | KEEP bare — no edit | C-3 |
+| D-09 | `skills/using-frame-ship/SKILL.md:40` | `` `skill(<stage>)` `` (§3 load-order step 2, template arg) | KEEP bare — no edit | C-3 |
+| D-10 | `skills/using-frame-ship/SKILL.md:63` | `` `skill(stage)` `` (`single` mode line) | KEEP bare — no edit | C-3 |
+| D-11 | `skills/using-frame-ship/SKILL.md:64` | `` `skill(stage)` `` (`multi-subagents` mode line) | KEEP bare — no edit | C-3 |
+| D-12 | `skills/ship-release/SKILL.md:30` | `` `skill(ship-release)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-13 | `skills/review-security/SKILL.md:28` | `` `skill(review-security)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-14 | `skills/translate-to-spec/SKILL.md:27` | `` `skill(translate-to-spec)` `` (§0 pre-flight LOAD) | KEEP bare — no edit | C-3 |
+| D-15 | `skills/quality-gate/references/gate-report.md:34` | `` `skill(<stage>)` `` (stage-skill-loaded checklist) | KEEP bare — no edit | C-3 |
+
+Re-grep acceptance (execute-spec / gate): `rg -n "skill\(" skills/` → same 15 hits, 0 unmapped (15/15 rows above).
+
+### Chain/dir surface map (REQ-004 — informative; enforced here, plugin rows RECORDED not edited)
+
+| # | Surface | Form carried | Disposition |
+|---|---------|--------------|-------------|
+| S-01 | `AGENTS.md:14,25-26` (`skills/<stage>/SKILL.md`, `skills/<stage>/references/`, `skills/quality-gate/`) | bare (paths) | KEEP per C-2 |
+| S-02 | `AGENTS.md:65`, `skills/AGENTS.md` trigger table + catalogue paths + `frame-intent` bare cite (`skills/AGENTS.md:26`) | paths bare; navigation already `frame-ship:`-prefixed where applicable | KEEP per C-2 / REQ-001 |
+| S-03 | `README.md:31,62,86-88,125,187-196` (chain diagram `using-frame-ship → …` bare stage names; tree paths) | diagram + tree are dir/path context | KEEP bare per C-2; NOT navigation cites (no edit in this unit) |
+| S-04 | `skills/using-frame-ship/references/bootstrap-checklist.md:8` (chain `frame-intent → … → ship-release` bare) | bare chain shorthand in checklist | KEEP — checklist shorthand, navigation canon lives in SKILL.md Previous/Next/route lines (REQ-001) |
+| S-05 | `.opencode/plugins/frame-ship.ts:4,13-14,16,20,29` (`./skills/<stage>/SKILL.md`, `skills/*/SKILL.md`, `CHAIN`, `WORKFLOW_CARD`, `POINTERS`, `COMPACTION_REMINDER` strings incl. `skill(frame-ship:…)` load-order literals `:18`) | paths bare per C-2; runtime injection strings | RECORD ONLY — **not edited in this unit** (runtime risk). Follow-up owned by automation owner + typecheck (REQ-004) |
+| S-06 | All 10 `SKILL.md` Previous/Next/route/handoff lines + `using-frame-ship` diagram (`:23-25`) | `frame-ship:`-prefixed (prior PASS 10/10) | KEEP canonical per REQ-001 — no edit |
+
+### Carve-out table (normative, frozen per SPEC §4 / REQ-002 — exactly 3 rows, no fourth form)
+
+| # | Surface | Form | Example | Rationale |
+|---|---------|------|---------|-----------|
+| C-1 | Skill frontmatter `name:` | bare kebab, `name==dir` | `name: translate-to-spec` (`skills/translate-to-spec/SKILL.md:2`) | Loader contract — harness resolves by dir/name; prefix would break discovery |
+| C-2 | Filesystem paths / dir globs | bare | `skills/<stage>/SKILL.md`, `skills/*/SKILL.md`, `./skills/<stage>/SKILL.md` | File resolution — paths are not skill invocations |
+| C-3 | Native `skill()` tool args | bare | `` `skill(translate-to-spec)` `` (§0 pre-flights), `` `skill(<stage>)` `` / `` `skill(stage)` `` (`using-frame-ship` §3, `gate-report.md:34`) | Tool API namespace — harness resolves bare names; distinct from navigation cites |
 
 ## Rationale
 
-Measurement (`frame-ship.ts:36-100` vs `skills/using-frame-ship/SKILL.md:22-66`): the plugin injects the load order, exec modes, 9 triggers, role bindings, and hard rules in `WORKFLOW_CARD` and then injects the same content again via the live bootstrap body — ~3,900 of ~11,100 injected chars are near-verbatim duplicates. The bootstrap body is already the declared source of truth ("runtime file read keeps a single source of truth — no hardcoded copy to drift", `frame-ship.ts:151-152`), so the hardcoded copy is the one to shrink. Short-form guardrails stay greppable by number, preserving gate enforceability. One `CHAIN` const removes the current 4x literal (header L17-19, card L36-37, compaction L100, bootstrap L22-26) as a drift vector.
+REQ-001: navigation canon already holds (10/10 Previous/Next `frame-ship:`-prefixed, verified by `rg -n "frame-ship:" skills/` — 40+ hits, zero bare navigation cites outstanding); this proposal freezes the rule verbatim rather than re-editing. REQ-002: the 3-row table above is copied normatively from SPEC §4 — frontmatter/paths/tool-args each have a loader/tool rationale, closing the "third form" ambiguity for future cites. REQ-003: all 15 `skill(` hits are §0/§3 tool-API context (D-01..D-15), so KEEP-bare is the correct disposition — canonicalizing any of them would break the harness-resolved tool namespace. REQ-004: chain/dir surfaces split cleanly into C-2 paths vs REQ-001 navigation, with the plugin runtime explicitly deferred (single-file zero-deps runtime, needs automation owner + `mise run typecheck`). REQ-005: zero file edits → guard holds by construction; `git status` + diff stat at execute-spec will show only this proposal doc (plus its commit).
 
 ## Alternatives Considered
 
 | Alternative | Reason Rejected |
 |-------------|-----------------|
-| Delete `WORKFLOW_CARD` entirely, rely on bootstrap body alone | Card carries the HARD STOP + trigger routing the bootstrap states in prose; compact card keeps the enforcement posture without the prose cost |
-| Move card text to a second runtime-read file | Adds a second file read to the hot session-init path + new failure mode; hardcoded compact literals keep init synchronous-safe with the existing silent-fallback posture |
-| Compress the bootstrap `SKILL.md` instead | SKILL.md is the chain's process source of truth shared by all stages; shrinking it degrades every stage, while shrinking the plugin copy fixes the duplication at its source |
-| Paraphrase guardrails into fewer rules | Violates HARD constraint "preserve guardrails 1-14"; renumbering breaks every gate reference — short-form keeps all 14 numbers intact |
+| Canonicalize the 15 `skill(...)` cites to `skill(frame-ship:…)` | Breaks tool namespace — harness resolves bare names (C-3 rationale); SPEC REQ-002/003 explicitly keep them bare |
+| Edit plugin `CHAIN`/`WORKFLOW_CARD` strings in this unit | Runtime risk without automation owner; SPEC REQ-004 + HARD defer it — record-only here |
+| Rewrite `README.md:86-88` diagram + `bootstrap-checklist.md:8` to `frame-ship:`-form | Out of residual scope — those are path/checklist shorthand (C-2), not navigation cites; prior PASS deliberately preserved them |
+| Touch frontmatter `name:` or rename skill dirs | Violates loader contract + REQ-005 (no renames); prefix would break discovery |
 
 ## Approval Required From
 
-- [ ] Owning C-level: vasquez (engineering — session behavior for all 9 stages)
-- [ ] review-risk fast gate (flagged, per packet GATE): prompt trims touch the security-baseline wording — verdict required before execute-spec, full review wave runs at quality-gate
+- [ ] Owning domain owner: **engineering owner** (mandatory; [engineering] is the sole touched domain — approves proposal + C-1/C-2/C-3 freeze)
+- [ ] engineering owner for architecture impact: **same as above — no separate approval** (no API/model/cross-cutting surface; no `ARCHITECTURE.md`/`API_CONTRACTS.md` touched per SPEC §4)
+- [ ] security owner: **not required** (docs-only, no auth/data/external-API/PII surface; REQ-NF-001 scan scope only — security lens N/A at gate per REQ index Domain Controls)
 
-> **Rule:** No repository file modifications during proposal phase. Implementation file `.opencode/plugins/frame-ship.ts` stays untouched until approval + reviews pass.
+> **Rule:** No repository file modifications during proposal phase. Only this proposal doc is committed; implementation files stay untouched.
 
 ---
 
-# Risk Assessment: INTENT-2026-09-16-concise-plugin-prompts
+# Risk Assessment: SPEC-skill-naming-engineering
 
-**Proposer:** vasquez
+**Proposer:** Engineering specialist
 **Date:** 2026-09-16
-**Domains-Touched:** engineering
+**Domains-Touched:** [engineering] (automation/ops conditional record-only)
 
 ## Risk Matrix
 
 | ID | Risk | Likelihood | Impact | Mitigation |
 |----|------|-----------|--------|------------|
-| R-001 | Guardrail semantic loss — a trim rewords one of guardrails 1-14 and weakens enforcement (deny-by-default, PII, severity) | Med | High | REQ-003 1:1 semantic checklist enforced at quality-gate; review-risk fast gate must PASS before execute-spec; diff review restricted to string literals |
-| R-002 | Chain-order drift — compact card misstates the authoritative 9-stage order | Low | High | REQ-004 single `CHAIN` const interpolated everywhere; acceptance checklist asserts exact order string |
-| R-003 | Sessions depended on the duplicated (belt-and-suspenders) wording; compact form under-orients long sessions | Low | Med | Bootstrap full body still injected live; compaction reminder keeps chain + reload order; verify-handoff on first sessions after change watches for orientation failures |
-| R-004 | Refactor accidentally touches hook/resolver/loader logic (regression in skill registration, dedupe, path resolution) | Low | High | REQ-005 verbatim-logic rule; acceptance runs existing typecheck + manual init/compact smoke (restart opencode, confirm single injection, no duplication on retry) |
-| R-005 | Token saving under-delivers (short-forms bloat back during review) | Med | Low | REQ-006 ≥30% gate is PASS/FAIL on chars measured by the same python one-liner as baseline; reject creep in review |
+| R-001 | Over-canonicalization — a future editor prefixes a `skill()` tool arg or frontmatter `name:` and breaks harness/loader resolution | Med | Med | C-1/C-3 rows frozen with rationale; gate re-greps `skill\(` vs `frame-ship:`; this proposal dispositions 15/15 as KEEP |
+| R-002 | Under-canonicalization — a new navigation cite is written bare and reintroduces the ambiguous third form | Med | Low | Canonical rule frozen (REQ-001); quality-gate checks Previous/Next/route lines for `frame-ship:`-form |
+| R-003 | Scope creep — plugin runtime edit slips into execute-spec without automation owner | Low | Med | S-05 marked RECORD ONLY with owner; REQ-005 diff-stat check (`git status` shows proposal doc only) rejects runtime edits |
+| R-004 | Collision — overwriting this shared `PROPOSED_CHANGES.md` path obscures the prior concise-plugin-prompts proposal | Low | Low | Prior revision preserved in git history (revertible); follow-up proposals use per-spec suffix (`PROPOSED_CHANGES-skill-naming.md`) |
 
 ## Blast Radius
 
-Engineering (only domain touched): session behavior for **all 9 stages** — every session's system prompt changes. Failure mode is orientation/gate-enforcement degradation, not data loss: no services, no data stores, no customers, no revenue, no regulators affected. No PII flows in scope (no PII in prompt literals; proposal adds none). Worst case is a confusing or under-constrained session, caught by the semantic checklist + review-risk gate before ship.
+- **Systems:** none — docs prose/record only; no services, data stores, endpoints, or runtime behavior change (plugin byte-identical).
+- **Teams:** engineering (review load only: engineering owner approval + gate grep); automation owner informed of S-05 follow-up, no action required this unit.
+- **Customers:** none — no user-facing surface.
+- **Regulators:** none — no PII/auth/data in scope (Ley 172-13 minimization holds; scoped evidence = paths + line refs only).
+- **Revenue:** none — no pipeline/quota/billing surface.
 
 ## Rollback Plan
 
-Code revert only: `git revert` the single-file commit to `.opencode/plugins/frame-ship.ts`, then quit + restart opencode (config not hot-reloaded). Owner: vasquez. ETA: <15 min. No data migration, no external undo.
+`git revert` the single proposal-doc commit. Owner: Engineering specialist (commit author). ETA: **< 5 min** (docs-only, no migration, no external undo). Verify with `git status --short` clean + `git log --oneline -3`.
 
 ## Security Considerations
 
-Prompt text *is* the security baseline's carrier (guardrails 1-11 inline in `GUARDRAILS_FULL`). Any rewording is a security-relevant change: barrera lens via review-risk fast gate required (per packet GATE). No auth/data/API logic, no secrets, no credentials in scope — barrera deep audit NOT required; fast gate sufficient. Full review wave runs at quality-gate, not now.
+No auth, data exposure, or input-validation surface (docs-only cite inventory). REQ-NF-001: pattern scan over proposal + referenced cite lines for `secret|token|credential|session|password|api[_-]?key|ssn|passport` = expected 0; no PII added (paths + line refs only). Security owner review not required; full review wave runs at quality-gate only if scope expands.
 
 ## Domain Considerations
 
-Engineering only (vasquez). Delete non-touched domains: finance (dauhajre) — n/a; legal (subero) — n/a; marketing (vera) — n/a; people (santana) — n/a; revenue (montero) — n/a; automation/ops (espinoza + vasquez) — n/a beyond restart-opencode step in rollback.
+Engineering only. Delete non-touched domains: finance — n/a (no budget/controls); legal — n/a (no IP/regulatory/liability); marketing/brand — n/a (no GTM); people — n/a (no workload/culture change); revenue — n/a (no pipeline/quota); automation/ops — conditional record-only (S-05 plugin follow-up owned by automation owner, no runbook/capacity impact this unit).
 
 ---
 
-## Verification (this stage — proposal only, repo untouched)
+## Verification (this stage — proposal only, repo untouched except this doc)
 
-- [x] Target read: `.opencode/plugins/frame-ship.ts` (223 lines, 14,234 chars)
-- [x] Baseline measured: WORKFLOW_CARD 3,926 + GUARDRAILS_FULL 1,979 + POINTERS 735 + bootstrap body 4,458 = **11,098 injected chars**; compaction 508 chars
-- [x] Duplication cites: load-order/exec-modes (`frame-ship.ts:39-47` ≡ `SKILL.md:38-64`), triggers (`frame-ship.ts:49-59` ≡ `SKILL.md:46-55`), roles/rules (`frame-ship.ts:61-71` ≡ `SKILL.md:28-34,56-61`), chain 4x (`frame-ship.ts:17-19,36-37,100` + `SKILL.md:22-26`)
-- [ ] Approval: vasquez + review-risk fast gate (BLOCKED until granted)
-- [ ] Post-approval typecheck (execute-spec stage): from `.opencode/`: `npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts`
+- [x] Skill loaded: `frame-ship:propose-changes` via skill tool; contract cited: `skills/propose-changes/SKILL.md` (§3 Process steps 1-6, §4 Won't-do)
+- [x] SPEC read: `docs/specs/40_workspace/vasquez/SPEC-skill-naming-engineering.md` (REQ-001..005 + REQ-NF-001..003)
+- [x] REQ index read: `docs/specs/15_requirements/REQ-skill-naming-engineering.md`
+- [x] Templates used: `skills/propose-changes/references/proposal-template.md` + `skills/propose-changes/references/risk-assessment.md`
+- [x] Baseline grep: `rg -n "skill\(" skills/` → 15 hits (D-01..D-15 above); `rg -n "frame-ship:" skills/` → navigation cites already canonical
+- [ ] Approval: engineering owner (BLOCKED until granted — specialists never self-approve)
+- [ ] Post-approval commit: proposal doc only (see commit below); `git status --short` must show only `docs/specs/40_workspace/vasquez/PROPOSED_CHANGES.md`
