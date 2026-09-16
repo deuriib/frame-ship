@@ -11,6 +11,7 @@
  * - Registers ./skills/ via `config.skills.paths` so the native `skill` tool discovers all 9 stages
  * - Injects the Frame→Ship chain contract + role bindings + hard rules into every session
  * - Injects full guardrails inline AND points to AGENTS.md / skills/ as source of truth
+ * - Injects the live using-frame-ship SKILL.md body via runtime file read (fallback: pointers only)
  * - Preserves chain across compaction so long sessions don't lose process
  *
  * Chain:
@@ -108,8 +109,9 @@ function fileUrlToPath(url: string): string | undefined {
 // <repo-root>/.opencode/plugins/frame-ship.ts. Resolve relative to our own
 // location (import.meta.url) so global installs work from ANY cwd — never
 // assume cwd IS the frame-ship repo. Falls back to cwd only when our own URL
-// is unavailable (e.g. unit tests). No node: imports keeps zero-dep + no
-// @types/node so `tsc` stays clean.
+// is unavailable (e.g. unit tests). No static node: imports keeps zero-dep +
+// no @types/node so `tsc` stays clean (runtime read uses Bun.file first,
+// then a function-scoped dynamic import of node:fs/promises).
 function resolveSkillsDir(fallbackBase: string): string {
   try {
     const meta = import.meta as unknown as { url?: string };
@@ -135,6 +137,43 @@ function resolveSkillsDir(fallbackBase: string): string {
   return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
 }
 
+// Live bootstrap: SKILL.md body only (references stay file-based per scope).
+// Runtime file read keeps a single source of truth — no hardcoded copy to drift.
+const BOOTSTRAP_LABEL = `${MARKER} using-frame-ship bootstrap (live from skills/using-frame-ship/SKILL.md):`;
+const BOOTSTRAP_ACK = `NOTE: using-frame-ship is already loaded in this context — do not re-load it via the skill tool; route straight to the stage skill.`;
+let bootstrapCachePath = "";
+let bootstrapCacheText = "";
+
+async function loadBootstrapBody(skillsDir: string): Promise<string> {
+  const clean = (skillsDir || "").replace(/[/\\]+$/, "");
+  if (!clean || clean === "/skills") return "";
+  const skillFile = `${clean}/using-frame-ship/SKILL.md`;
+  if (bootstrapCachePath === skillFile && bootstrapCacheText) return bootstrapCacheText;
+  try {
+    let raw = "";
+    const bunFile = (globalThis as unknown as {
+      Bun?: { file: (p: string) => { text: () => Promise<string> } };
+    })?.Bun?.file;
+    if (typeof bunFile === "function") {
+      raw = await bunFile(skillFile).text();
+    } else {
+      // @ts-ignore — node types intentionally not installed; dynamic import only.
+      const fs = (await import("node:fs/promises")) as unknown as {
+        readFile: (p: string, enc: string) => Promise<string>;
+      };
+      raw = await fs.readFile(skillFile, "utf8");
+    }
+    const body = (raw || "").trim();
+    if (!body) return "";
+    const labeled = `${BOOTSTRAP_LABEL}\n${BOOTSTRAP_ACK}\n${body}`;
+    bootstrapCachePath = skillFile;
+    bootstrapCacheText = labeled;
+    return labeled;
+  } catch {
+    return ""; // silent fallback — pointers above still orient the session
+  }
+}
+
 export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInput) => {
   const fallbackBase = (directory || worktree || "").replace(/[/\\]+$/, "");
   const skillsDir = resolveSkillsDir(fallbackBase);
@@ -155,6 +194,8 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
       if (!Array.isArray(out.system)) return;
       if (hasMarker(out.system)) return; // idempotent — no duplication on retries
       out.system.push(WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS);
+      const bootstrap = await loadBootstrapBody(skillsDir);
+      if (bootstrap) out.system.push(bootstrap);
     },
     "experimental.session.compacting": async (_input: unknown, output: unknown) => {
       const out = output as { context?: unknown };
