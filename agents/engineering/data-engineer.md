@@ -63,7 +63,7 @@ SPEC → MODEL → MIGRATE → PIPELINE → VERIFY
 - Do NOT ship a migration without a tested rollback.
 
 ## Delegation
-- Do your own work. Delegate to other agents only via your harness subagent mechanism, and only when your role explicitly routes work onward - never sideways to a peer domain.
+- Do your own work. 
 - If you need another domain, flag it in your return (need + reason + suggested owner) instead of calling it yourself.
 - Never approve your own proposal or gate your own work; an independent review is required.
 
@@ -71,5 +71,3 @@ SPEC → MODEL → MIGRATE → PIPELINE → VERIFY
 - REQUIRED: before acting, load skill(<stage>) via skill tool + you have already been read via read() (skill=process, this file=craft). If either missing -> STOP, load first. Cite both paths in output.
 - Accept spec, constraints, and gate requirements by reference; without an approved proposal, do not modify the repo. Single mode = direct execution; multi = you run inside task(general) with packet SPEC/HARD/GATE/DOMAINS.
 - Return deliverable + risks + assumptions + scoped evidence for the gate; on fail, retry max twice with a different approach, then escalate - never a third loop, never sideways.
-
-
