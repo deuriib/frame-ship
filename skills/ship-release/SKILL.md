@@ -32,7 +32,7 @@ deployment order, and archival. Never ship without verification gates complete.
 2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable).
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
 4. Coordinate ship mechanics with rollback/undo plan: devops for deploys; owning domain owner for filings/launches/closes/workflows.
-5. Archive completed spec to `docs/specs/50_archive/` with domain artifacts linked.
+5. Archive by MOVE (never copy) completed spec to `docs/specs/50_archive/` with domain artifacts linked: `git mv <source-spec-path> docs/specs/50_archive/` then verify source path gone (`git status --short` shows `R` rename, no duplicate) before commit.
 6. Close with a release commit (tag after commit). Example: `chore(release-0.4.0): ship SPEC-003 with notes and rollback plan`.
 
 ## 4. What I won't do
