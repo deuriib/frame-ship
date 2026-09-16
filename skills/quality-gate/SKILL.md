@@ -25,9 +25,9 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 
 ## 2b. Role Binding (Org)
 
-- **Bound to:** owning C-level as gate keeper (`vasquez` for engineering, else
+- **Bound to:** the CEO dispatches all gate reviewers; owning C-level acts as gate keeper (`vasquez` for engineering, else
   the domain owner); `montilla` synthesizes multi-domain gates.
-- Reviewers always run inside `task(subagent_type="general")` ordered to read this skill + their template first, and never approve their own work.
+- Reviewers always run inside CEO-dispatched `task(subagent_type="general")` ordered to read this skill + their template first, and never approve their own work.
 
 ## 3. Reviewer Routing Table
 
@@ -49,13 +49,13 @@ Execution mode (from spec `execution_mode`):
 - `single`: min gate `review-readability + review-risk + review-refuter + qa` (+ `review-data` for data specs). Still CLOSED on any ❌.
 - `multi-subagents` (default): full wave per routing table below + adversarial `review-refuter` before `qa`.
 
-Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for domain reviewers — the dispatched reviewer reads its ONE template fully (ordered in task prompt), others stay path-cites.
+Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for domain reviewers — the dispatched reviewer reads its ONE template fully (ordered in the CEO task prompt), others stay path-cites.
 
 ## 4. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(quality-gate)` loaded? Owning C-level template read? Each reviewer dispatched via `task(general)` whose prompt orders: read this skill + `references/gate-report.md` + its `agents/<domain>/<agent>.md` template BEFORE reviewing? Any NO → STOP.
+0. Pre-flight LOAD — HARD STOP: `skill(quality-gate)` loaded? Owning C-level template read? Each reviewer dispatched by the CEO via `task(general)` whose prompt orders: read this skill + `references/gate-report.md` + its `agents/<domain>/<agent>.md` template BEFORE reviewing? Any NO → STOP.
 1. Identify touched domains from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
-2. Dispatch each required reviewer via `task(subagent_type="general")` (reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to read skill + template first).
+2. Dispatch each required reviewer via CEO `task(subagent_type="general")` max 2 parallel (reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to read skill + template first).
 3. Each reviewer writes `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. Consolidate into `GATE_REPORT.md` via `references/gate-report.md`.
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).

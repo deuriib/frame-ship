@@ -18,16 +18,16 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 2b. Role Binding (Org)
 
-- **Bound to:** owning C-level + domain specialists for all 8 business domains
+- **Bound to:** the CEO dispatches; owning C-level + domain specialists return proposals for all 8 business domains
   (see `../AGENTS.md` catalogue): engineering (`backend`, `frontend`, `devops`,
   `data-engineer` under `vasquez`), security (`barrera`), finance (`dauhajre`),
   legal (`subero`), marketing/brand (`vera`), people (`santana`), revenue
-  (`montero`), automation/ops (`espinoza` + `vasquez` mechanics).
+  (`montero`), automation/ops (`espinoza` + `vasquez` mechanics). C-levels return deliverables, never dispatch.
 - Specialists never self-dispatch, never approve their own proposal.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? `read(agents/<domain>/<agent>.md)` for proposing specialist + owning C-level template done? Any NO → STOP. Single = direct; multi = `task(general)` ordered to read skill + template first.
+0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? `read(agents/<domain>/<agent>.md)` for proposing specialist + owning C-level template done? Any NO → STOP. Single = direct, no task; multi = CEO dispatches via `task(general)` ordered to read skill + template first; C-level returns its proposal, never dispatches.
 1. Read the target spec (`docs/specs/20_backlog/` or individual spec file) including `execution_mode` and `Domains-touched`.
 2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward.
 3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).

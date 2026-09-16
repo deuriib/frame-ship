@@ -27,7 +27,7 @@ deployment order, and archival. Never ship without verification gates complete.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(ship-release)` loaded? `read(agents/c-level/montilla.md)` + owning C-level / `devops` template done? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = `task(subagent_type="general")` ordered to read skill + template first.
+0. Pre-flight LOAD — HARD STOP: `skill(ship-release)` loaded? `read(agents/c-level/montilla.md)` + owning C-level / `devops` template done? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = CEO dispatches `task(subagent_type="general")` ordered to read skill + template first.
 1. Verify all DoD checklists + gate reports are OPEN (with `SPEC/HARD/GATE/DOMAINS` intact).
 2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable).
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).

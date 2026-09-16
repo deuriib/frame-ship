@@ -25,7 +25,7 @@ and `review-risk` agents — no parallel reviewer universe.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(review-security)` loaded? `read(agents/c-level/barrera.md)` + `read(agents/security/security-reviewer.md)` done? Any NO → STOP. `barrera` runs via `task(general)` ordered to read skill + templates first (single = direct read).
+0. Pre-flight LOAD — HARD STOP: `skill(review-security)` loaded? `read(agents/c-level/barrera.md)` + `read(agents/security/security-reviewer.md)` done? Any NO → STOP. `barrera` runs inside the CEO's `task(general)` ordered to read skill + templates first (single = direct read).
 1. Read `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md`.
 2. Produce `docs/specs/40_workspace/barrera/SECURITY_REVIEW.md` via `references/security-review-template.md`.
 3. Threat-model via `references/threat-model.md` (STRIDE).
