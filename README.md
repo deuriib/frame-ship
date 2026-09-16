@@ -94,7 +94,7 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 **Bootstrap**
 
-- **using-frame-ship** — Chain contract + session-start/post-compaction checklist (includes tool-mapping reference)
+- **using-frame-ship** — Chain contract + session-start/post-compaction checklist
 
 **Frame**
 
@@ -233,7 +233,7 @@ Anti-patterns:
 
 - [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
 - [ ] General plugin adapters: Claude Code → Codex CLI → Cursor/Gemini → rest (one at a time, opencode stays green)
-- [ ] `docs/README.<harness>.md` per supported harness + tool-mapping per harness
+- [ ] `docs/README.<harness>.md` per supported harness
 - [ ] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
 - [ ] `docs/briefs` + `docs/specs` scaffolding (referenced by skills, not yet in repo)
 - [ ] Release automation via `ship-release` skill + tagged versions
