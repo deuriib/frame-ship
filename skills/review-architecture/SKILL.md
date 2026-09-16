@@ -3,7 +3,7 @@ name: review-architecture
 description: Review a proposal against the canonical architecture contract and record an ADR. Use when a change modifies public APIs, data models, or cross-cutting concerns.
 ---
 
-# Review-Architecture — CTO Architecture Review
+# Review-Architecture — Architecture Review
 
 > *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
 
@@ -19,24 +19,24 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 
 ## 2b. Role Binding (Org)
 
-- **Bound to:** `vasquez` (CTO) with `architect` for design input and `espinoza`
-  for independent review. Disputes arbitrated by `vasquez`; cross-domain needs
-  briefed to `montilla`.
+- **Bound to:** engineering owner with architect for design input and automation/ops owner
+  for independent review. Disputes arbitrated by engineering owner; cross-domain needs
+  briefed to orchestrator.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? `read(agents/c-level/vasquez.md)` + `read(agents/engineering/architect.md)` done? Any NO → STOP. Single = direct; multi = CEO dispatches `task(general)` ordered to read skill + templates first.
+0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches `task(general)` ordered to read skill + templates first.
 1. Read `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md`.
 2. Compare against `ARCHITECTURE.md` + `API_CONTRACTS.md`.
 3. Produce/update ADR via `references/adr-template.md`.
 4. Issue review via `references/architecture-review.md`.
 5. Hand off to `frame-ship:execute-spec` if approved.
-6. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `docs(adr-004): record ADR for session contract change`.
+6. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only).
 
 ## 4. What I won't do
 
 - Approve invariant violations without an explicit ADR.
-- Override `barrera` (CISO) on security conditions.
+- Override security domain owner on security conditions.
 - Modify the architecture contract without an ADR.
 
 ## 5. References

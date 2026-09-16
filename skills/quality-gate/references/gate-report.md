@@ -35,14 +35,14 @@ Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touc
 - [ ] Agent template read: `agents/<domain>/<agent>.md` cited (dispatched role only)
 - [ ] Execution mode declared: `single` (direct, no task) or `multi-subagents` (`task(general)` max 2, read orders in prompt)
 - [ ] Packet intact: `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — no full-context paste
-- [ ] Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate montilla).
+- Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate orchestrator).
 
 ## Escalations
 
-[Conflicting verdicts escalated to c-levels + montilla here]
+[Conflicting verdicts escalated to domain owners + orchestrator here]
 
 ## Sign-off
 
 - [ ] All reviewers pass or conditions met
-- [ ] Gate Keeper: owning C-level
-- [ ] Final authority (if waived): c-levels + montilla
+- [ ] Gate Keeper: owning domain owner
+- [ ] Final authority (if waived): domain owners + orchestrator

@@ -1,6 +1,6 @@
 # Quality Gate Waiver: SPEC-XXX
 
-**Issued By:** c-levels + montilla (CEO)
+**Issued By:** domain owners + orchestrator
 **Date:** YYYY-MM-DD
 **Gate Status at Waiver:** CLOSED
 
@@ -24,6 +24,6 @@
 
 ## Sign-off
 
-- [ ] montilla (CEO)
-- [ ] Relevant c-level(s)
-- [ ] barrera (CISO, for security waivers)
+- [ ] orchestrator
+- [ ] Relevant domain owner(s)
+- [ ] security owner (for security waivers)

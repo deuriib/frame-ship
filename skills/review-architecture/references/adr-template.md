@@ -1,7 +1,7 @@
 # ADR-XXX: {{TITLE}}
 
 **Date:** YYYY-MM-DD
-**Deciders:** vasquez (CTO), [relevant C-level]
+**Deciders:** engineering owner, [relevant domain owner]
 **Status:** proposed | accepted | superseded
 
 ## Context

@@ -1,6 +1,6 @@
 # Automation Review: SPEC-XXX
 
-**Reviewer:** automation-reviewer (espinoza/Automation) + vasquez (ops mechanics)
+**Reviewer:** automation-reviewer (automation owner) + engineering owner (ops mechanics)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

@@ -23,23 +23,23 @@ Vendored craft: `agents/<domain>/<agent>.md` (68 templates, reference-only, skil
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
 - Stage file counts: `quality-gate` 15+ files; `translate-to-spec` + `using-frame-ship` 4 (SKILL + 3 refs); all others 3 (SKILL + 2 refs). Templates live in `agents/` outside stage counts (`skills/templates/` removed).
 - Commit closings: every stage ends with a work-unit commit step + example per `using-frame-ship/references/commit-convention.md` (guidance only, never gate enforcement); `execute-spec` commits one per approved task/REQ-ID.
-- Role owners: `montilla` briefs/releases + is the sole dispatcher to the entire team (ADR-003: CEO dispatches entire team; c-levels/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the CEO); `vasquez` arch; `barrera` security; leaf specialists impl.
+- Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team (ADR-003: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the orchestrator); `engineering owner` arch; `security owner` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets; templates add `Template-For` + `Execution` meta, never skill frontmatter.
 
 ## DOMAIN CATALOGUE (canonical — 8 business domains, full chain for all)
 
-| # | Domain | Owner (C-level) | Gate reviewer | Gate template |
+| # | Domain | Owner (domain owner) | Gate reviewer | Gate template |
 |---|--------|-----------------|---------------|---------------|
-| 1 | engineering | vasquez (CTO) | readability, reliability, refuter, resilience, risk, qa (+data) | `quality-gate/references/engineering/` |
-| 2 | security | barrera (CISO) | security-reviewer | `quality-gate/references/domains/security-review.md` |
-| 3 | finance | dauhajre (CFO) | finance-reviewer | `quality-gate/references/domains/finance-review.md` |
-| 4 | legal | subero (CLO) | legal-reviewer | `quality-gate/references/domains/legal-review.md` |
-| 5 | marketing/brand | vera (CMO) | brand-reviewer | `quality-gate/references/domains/marketing-review.md` |
-| 6 | people | santana (CHRO-CPO) | people-reviewer | `quality-gate/references/domains/people-review.md` |
-| 7 | revenue | montero (CRO) | revenue-reviewer | `quality-gate/references/domains/revenue-review.md` |
-| 8 | automation/ops | espinoza (Automation) + vasquez (ops mechanics) | automation-reviewer (+ ops lens) | `quality-gate/references/domains/automation-review.md` + `ops-review.md` |
+| 1 | engineering | engineering owner | readability, reliability, refuter, resilience, risk, qa (+data) | `quality-gate/references/engineering/` |
+| 2 | security | security owner | security-reviewer | `quality-gate/references/domains/security-review.md` |
+| 3 | finance | finance owner | finance-reviewer | `quality-gate/references/domains/finance-review.md` |
+| 4 | legal | legal owner | legal-reviewer | `quality-gate/references/domains/legal-review.md` |
+| 5 | marketing/brand | marketing owner | brand-reviewer | `quality-gate/references/domains/marketing-review.md` |
+| 6 | people | people owner | people-reviewer | `quality-gate/references/domains/people-review.md` |
+| 7 | revenue | revenue owner | revenue-reviewer | `quality-gate/references/domains/revenue-review.md` |
+| 8 | automation/ops | automation owner + engineering owner (ops mechanics) | automation-reviewer (+ ops lens) | `quality-gate/references/domains/automation-review.md` + `ops-review.md` |
 
-- Data (`review-data`, `domains/data-review.md`) is a cross-cutting lens owned by `vasquez`, not a 9th business domain — attach to engineering specs or any spec with schema/lineage impact.
+- Data (`review-data`, `domains/data-review.md`) is a cross-cutting lens owned by `engineering owner`, not a 9th business domain — attach to engineering specs or any spec with schema/lineage impact.
 - Every spec declares `Domains-touched: [...]` from this catalogue; packet carries `SPEC/HARD/GATE/DOMAINS` end-to-end.
 
 ## ANTI-PATTERNS

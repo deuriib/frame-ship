@@ -1,6 +1,6 @@
 # Architecture Contract: {{DOMAIN}}
 
-**Owner:** vasquez (CTO) for engineering contracts; owning C-level for non-engineering domain contracts (link here, vasquez consolidates index only)
+**Owner:** engineering owner for engineering contracts; owning domain owner for non-engineering domain contracts (link here, engineering owner consolidates index only)
 **Version:** vN
 **Last Updated:** YYYY-MM-DD
 **Domains-Touched:** [per specs using this contract]
@@ -28,4 +28,4 @@
 
 - Performance: [target]
 - Availability: [target]
-- Security: [posture, barrera to confirm]
+- Security: [posture, security owner to confirm]

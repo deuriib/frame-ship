@@ -20,8 +20,8 @@
 
 ## Security Considerations
 
-[Auth, data exposure, input validation — barrera to confirm]
+[Auth, data exposure, input validation — security owner to confirm]
 
 ## Domain Considerations
 
-[Finance: budget/controls — dauhajre. Legal: IP/regulatory/liability — subero. Marketing: brand/GTM — vera. People: workload/culture/change plan — santana. Revenue: pipeline/quota — montero. Automation/ops: runbook/capacity/flags — espinoza + vasquez. Delete non-touched domains.]
+[Finance: budget/controls — finance owner. Legal: IP/regulatory/liability — legal owner. Marketing: brand/GTM — marketing owner. People: workload/culture/change plan — people owner. Revenue: pipeline/quota — revenue owner. Automation/ops: runbook/capacity/flags — automation owner + engineering owner. Delete non-touched domains.]

@@ -1,10 +1,10 @@
 # Product Brief: {{TITLE}}
 
 **ID:** BRIEF-XXX
-**Initiator:** montilla (CEO)
+**Initiator:** orchestrator
 **Date:** YYYY-MM-DD
 **Status:** draft | approved
-**Execution_Mode:** single | multi-subagents (chosen at frame-intent, default multi-subagents; all specs follow unless overridden per SPEC with CEO waiver)
+**Execution_Mode:** single | multi-subagents (chosen at frame-intent, default multi-subagents; all specs follow unless overridden per SPEC with orchestrator waiver)
 **Domains-Touched:** [subset of 8: engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — initial routing, refined at translate-to-spec]
 
 ## Problem Statement
@@ -29,17 +29,17 @@
 
 | Role | Agent | Involvement |
 |------|-------|-------------|
-| Sponsor | montilla | Decision authority |
-| Owner | [C-level per dominant domain] | Delivery ownership |
-| Touched | [other C-levels per Domains-Touched] | Review / sign-off |
+| Sponsor | orchestrator | Decision authority |
+| Owner | [domain owner per dominant domain] | Delivery ownership |
+| Touched | [other domain owners per Domains-Touched] | Review / sign-off |
 
 ## Constraints
 
-- Budget: [range, dauhajre to confirm]
-- Timeline: [horizon, vasquez to confirm feasibility for engineering, owning C-level for other domains]
-- Regulatory: [if applicable, subero/barrera]
-- Brand/GTM: [if applicable, vera/montero]
-- People/change: [if applicable, santana]
+- Budget: [range, finance owner to confirm]
+- Timeline: [horizon, engineering owner to confirm feasibility for engineering, owning domain owner for other domains]
+- Regulatory: [if applicable, legal owner/security owner]
+- Brand/GTM: [if applicable, marketing owner/revenue owner]
+- People/change: [if applicable, people owner]
 
 ## Open Questions
 

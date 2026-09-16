@@ -1,6 +1,6 @@
 # Finance Review: SPEC-XXX
 
-**Reviewer:** finance-reviewer (dauhajre/CFO)
+**Reviewer:** finance-reviewer (finance owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

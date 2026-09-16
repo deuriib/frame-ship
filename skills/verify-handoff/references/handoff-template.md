@@ -11,7 +11,7 @@
 | Artifact | Location / Evidence | Status |
 |----------|---------------------|--------|
 | Implementation | `src/feature/` | done |
-| Tests / Evidence | `tests/feature/` OR sign-off path (e.g. `docs/signoffs/dauhajre-close.md`) | done |
+| Tests / Evidence | `tests/feature/` OR sign-off path (e.g. `docs/signoffs/finance-owner-close.md`) | done |
 | Docs | `docs/feature.md` | pending |
 | Domain artifact | [e.g. `contracts/MSA-v3-signed.pdf` \| `campaigns/launch-q3/` \| `workflows/billing-close.md`] | done/pending/N/A |
 

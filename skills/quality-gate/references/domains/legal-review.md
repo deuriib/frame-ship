@@ -1,6 +1,6 @@
 # Legal Review: SPEC-XXX
 
-**Reviewer:** legal-reviewer (subero/CLO)
+**Reviewer:** legal-reviewer (legal owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

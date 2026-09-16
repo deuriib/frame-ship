@@ -1,9 +1,9 @@
 # Ops Review: SPEC-XXX
 
-**Reviewer:** devops + qa (vasquez/CTO, ops lens for espinoza automation specs)
+**Reviewer:** devops + qa (engineering owner, ops lens for automation owner specs)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
-**Belongs to:** automation/ops domain (espinoza owner, vasquez mechanics) — pair with `automation-review.md`; not a standalone 9th domain.
+**Belongs to:** automation/ops domain (automation owner, engineering owner mechanics) — pair with `automation-review.md`; not a standalone 9th domain.
 
 ## Checklist
 

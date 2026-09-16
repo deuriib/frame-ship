@@ -1,6 +1,6 @@
 # People Review: SPEC-XXX
 
-**Reviewer:** people-reviewer (santana/CHRO-CPO)
+**Reviewer:** people-reviewer (people owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

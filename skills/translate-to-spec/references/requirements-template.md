@@ -1,6 +1,6 @@
 # Requirements Index: {{INITIATIVE}}
 
-**Owner:** [C-level agent]
+**Owner:** [domain owner]
 **Brief Reference:** BRIEF-XXX
 **Domains-Touched:** [per brief]
 
@@ -20,9 +20,9 @@
 
 | Domain | Control | Owner |
 |--------|---------|-------|
-| finance | [budget/controls/audit] | dauhajre |
-| legal | [IP/regulatory/liability] | subero |
-| marketing | [brand/GTM] | vera |
-| people | [impact/change-plan] | santana |
-| revenue | [pipeline/quota] | montero |
-| automation/ops | [runbook/capacity] | espinoza + vasquez |
+| finance | [budget/controls/audit] | finance owner |
+| legal | [IP/regulatory/liability] | legal owner |
+| marketing | [brand/GTM] | marketing owner |
+| people | [impact/change-plan] | people owner |
+| revenue | [pipeline/quota] | revenue owner |
+| automation/ops | [runbook/capacity] | automation owner + engineering owner |

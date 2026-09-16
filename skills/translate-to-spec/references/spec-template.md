@@ -1,12 +1,12 @@
 # Spec: {{FEATURE/COMPONENT}}
 
 **ID:** SPEC-XXX
-**Owner:** [C-level agent — per 8-domain catalogue]
+**Owner:** [domain owner — per 8-domain catalogue]
 **Domains-Touched:** [subset of: engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops + data lens if applicable]
 **Brief Reference:** BRIEF-XXX
 **Status:** draft | review | approved | implemented
 **Priority:** P0 | P1 | P2
-**Execution_Mode:** single | multi-subagents (inherited from brief, overridden per SPEC only with CEO waiver)
+**Execution_Mode:** single | multi-subagents (inherited from brief, overridden per SPEC only with orchestrator waiver)
 
 ## 1. Context
 
@@ -24,7 +24,7 @@
 
 ## 4. Contracts & Interfaces
 
-[API signatures, data schemas, event definitions for engineering; for other domains: document/contract/campaign/policy/workflow targets + sign-off contracts (e.g. dauhajre controls, subero redline, vera brand). Delete non-applicable, never force API shape on non-code.]
+[API signatures, data schemas, event definitions for engineering; for other domains: document/contract/campaign/policy/workflow targets + sign-off contracts (e.g. finance owner controls, legal owner redline, marketing owner brand). Delete non-applicable, never force API shape on non-code.]
 
 ## 5. Out of Scope
 

@@ -1,7 +1,7 @@
 # OKRs: {{INITIATIVE}}
 
 **Period:** QX YYYY
-**Owner:** montilla (CEO)
+**Owner:** orchestrator
 
 ## Objective 1: [Qualitative goal]
 

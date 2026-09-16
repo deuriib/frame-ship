@@ -1,6 +1,6 @@
 # Marketing Review: SPEC-XXX
 
-**Reviewer:** brand-reviewer (vera/CMO)
+**Reviewer:** brand-reviewer (marketing owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

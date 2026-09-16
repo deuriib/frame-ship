@@ -1,6 +1,6 @@
 # Architecture Review: SPEC-XXX
 
-**Reviewer:** vasquez (CTO)
+**Reviewer:** engineering owner
 **Date:** YYYY-MM-DD
 **Verdict:** Approved | Conditional | Rejected
 
@@ -21,4 +21,4 @@
 
 ## Sign-off
 
-- [ ] vasquez (CTO)
+- [ ] engineering owner

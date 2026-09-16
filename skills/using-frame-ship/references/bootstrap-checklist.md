@@ -8,12 +8,12 @@
 - [ ] Chain order stated: `frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release`.
 - [ ] Current stage identified by trigger (see SKILL.md §3.2), stage skill loaded via `skill` tool BEFORE any read/edit/bash/task.
 - [ ] Dispatched agent template read via `read` (`agents/<domain>/<agent>.md`) — skill + template, every task, single AND multi. Path cited in output.
-- [ ] Execution mode declared: `single` (direct, no task) or `multi-subagents` via `task(general)` max 2 parallel with read orders in prompt — CEO dispatches entire team; c-levels/specialists do the work or brief back (cross-domain need → formal Cross-domain request brief to the CEO).
+- [ ] Execution mode declared: `single` (direct, no task) or `multi-subagents` via `task(general)` max 2 parallel with read orders in prompt — orchestrator dispatches entire team; domain owners/specialists do the work or brief back (cross-domain need → formal Cross-domain request brief to the orchestrator).
 - [ ] Hard rules acknowledged:
   - [ ] NEVER code without approved `PROPOSED_CHANGES.md`.
   - [ ] NEVER skip `review-security` for auth/data/API.
   - [ ] NEVER modify contracts without ADR.
-  - [ ] NEVER hand off on CLOSED gate without c-levels + CEO waiver record.
+  - [ ] NEVER hand off on CLOSED gate without domain owners + orchestrator waiver record.
   - [ ] ALWAYS trace `REQ-ID → test → artifact → gate verdict`.
   - [ ] ALWAYS produce `HANDOFF.md` before shipping.
   - [ ] Reference-only packets between stages.
@@ -28,6 +28,6 @@
 
 ## Domain catalogue (canonical — 8, full chain for all)
 
-- [ ] Domains resolved from `skills/AGENTS.md`: engineering (vasquez), security (barrera), finance (dauhajre), legal (subero), marketing/brand (vera), people (santana), revenue (montero), automation/ops (espinoza + vasquez).
+- [ ] Domains resolved from `skills/AGENTS.md`: engineering (engineering owner), security (security owner), finance (finance owner), legal (legal owner), marketing/brand (marketing owner), people (people owner), revenue (revenue owner), automation/ops (automation owner + engineering owner).
 - [ ] Spec packet carries `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — never paste full context.
 - [ ] Data (`review-data`) treated as cross-cutting lens, not a 9th domain.

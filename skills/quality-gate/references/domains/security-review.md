@@ -1,6 +1,6 @@
 # Security Review: SPEC-XXX
 
-**Reviewer:** security-reviewer (barrera/CISO)
+**Reviewer:** security-reviewer (security owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

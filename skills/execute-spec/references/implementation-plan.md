@@ -2,7 +2,7 @@
 
 **Agent:** [specialist name]
 **Date:** YYYY-MM-DD
-**Approved By:** owning C-level + vasquez, barrera (if engineering/security-relevant)
+**Approved By:** owning domain owner + engineering owner, security owner (if engineering/security-relevant)
 **Domains-Touched:** [per spec]
 
 ## Steps
@@ -26,9 +26,9 @@ Each step maps to one work-unit commit unless the plan explicitly groups them (s
 Domain checks (delete non-touched, keep evidence path):
 
 - [ ] Engineering: Lint / Tests / Security / Type checks passing
-- [ ] Finance: peer review + dauhajre controls sign-off
-- [ ] Legal: redline review + subero sign-off
-- [ ] Marketing: brand review + vera copy sign-off
-- [ ] People: santana impact/change-plan sign-off
-- [ ] Revenue: montero pipeline/quota check
-- [ ] Automation/ops: espinoza + vasquez runbook/flags/capacity check
+- [ ] Finance: peer review + finance owner controls sign-off
+- [ ] Legal: redline review + legal owner sign-off
+- [ ] Marketing: brand review + marketing owner copy sign-off
+- [ ] People: people owner impact/change-plan sign-off
+- [ ] Revenue: revenue owner pipeline/quota check
+- [ ] Automation/ops: automation owner + engineering owner runbook/flags/capacity check

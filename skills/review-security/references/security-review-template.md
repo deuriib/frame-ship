@@ -1,6 +1,6 @@
 # Security Review: SPEC-XXX
 
-**Reviewer:** barrera (CISO) via security-reviewer / review-risk
+**Reviewer:** security owner via security-reviewer / review-risk
 **Date:** YYYY-MM-DD
 **Verdict:** Approved | Conditional | Rejected
 
@@ -20,5 +20,5 @@ See `threat-model.md` for full STRIDE analysis.
 
 ## Sign-off
 
-- [ ] barrera (CISO)
-- [ ] vasquez (CTO, if architecture-impacting)
+- [ ] security owner
+- [ ] engineering owner (if architecture-impacting)

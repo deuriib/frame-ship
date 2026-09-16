@@ -1,6 +1,6 @@
 # Data Review: SPEC-XXX
 
-**Reviewer:** review-data (vasquez/CTO)
+**Reviewer:** review-data (engineering owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

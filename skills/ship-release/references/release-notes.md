@@ -1,7 +1,7 @@
 # Release Notes: vX.Y.Z
 
 **Date:** YYYY-MM-DD
-**Release Manager:** montilla (CEO) / COO function
+**Release Manager:** orchestrator / operations owner function
 **Specs Included:** SPEC-XXX, SPEC-YYY
 **Domains-Touched:** [per specs]
 **Ship Type:** deploy | filing | launch | close | rollout | policy-enable (delete as applicable; multi-domain ships list per-spec type)

@@ -1,6 +1,6 @@
 # Revenue Review: SPEC-XXX
 
-**Reviewer:** revenue-reviewer (montero/CRO)
+**Reviewer:** revenue-reviewer (revenue owner)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 
@@ -9,7 +9,7 @@
 - [ ] Pipeline impact quantified (stages, owners, ETA)
 - [ ] Quota/target impact validated
 - [ ] Pricing/packaging implications reviewed
-- [ ] GTM handoff to vera (marketing) aligned
+- GTM handoff to marketing owner aligned
 - [ ] Forecast/churn risk assessed
 - [ ] Commercial controls preserved (approvals, audit trail)
 

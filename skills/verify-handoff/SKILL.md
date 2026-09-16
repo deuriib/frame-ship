@@ -19,12 +19,12 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 
 ## 2b. Role Binding (Org)
 
-- **Bound to:** owning C-level gate (`vasquez` / `barrera` / domain owner) with
-  `montilla` synthesizing cross-domain handoffs.
+- **Bound to:** owning domain owner gate (engineering / security / domain owner) with
+  orchestrator synthesizing cross-domain handoffs.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(verify-handoff)` loaded? Owning C-level template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. Single = direct verify; multi = CEO dispatches `task(subagent_type="general")` ordered to read skill + template first. No OPEN gate = no handoff (waiver only c-levels + CEO).
+0. Pre-flight LOAD — HARD STOP: `skill(verify-handoff)` loaded? Owning domain owner template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. Single = direct verify; multi = orchestrator dispatches `task(subagent_type="general")` ordered to read skill + template first. No OPEN gate = no handoff (waiver only domain owners + orchestrator).
 1. Read spec + test/evidence matrix + `GATE_REPORT.md` with `SPEC/HARD/GATE/DOMAINS` packet intact.
 2. Run DoD via `references/dod-checklist.md` — Common section for all, Domain appendix only for touched domains.
 3. Produce `docs/specs/40_workspace/<agent>/HANDOFF.md` via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows — with evidence links).
