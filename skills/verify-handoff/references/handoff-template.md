@@ -5,7 +5,6 @@
 **Date:** YYYY-MM-DD
 **Status:** complete | blocked | partial
 **Domains-Touched:** [per spec]
-**Load Evidence:** skill([stage]) + read(agents/[domain]/[agent].md) + mode(single|multi-subagents) — paths cited, missing = no handoff
 
 ## Deliverables
 

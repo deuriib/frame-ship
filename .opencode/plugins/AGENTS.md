@@ -1,7 +1,7 @@
 # PLUGINS — opencode runtime
 
 ## OVERVIEW
-Single auto-discovered entry: `frame-ship.ts` v0.2.0. Zero deps, registers skills + injection.
+Single auto-discovered entry: `frame-ship.ts` v0.3.3. Zero deps, registers skills + injection.
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
@@ -16,6 +16,7 @@ Single auto-discovered entry: `frame-ship.ts` v0.2.0. Zero deps, registers skill
 ## CONVENTIONS
 - `export const FrameShipPlugin: Plugin` + mirrored `export default` (both shapes load); `import type` only, zero runtime deps, single file.
 - Constants prefixed with `${MARKER}` so injected strings are greppable.
+- Dispatch (ADR-003, CEO-only): **CEO dispatches entire team; c-levels/specialists do the work or brief back** — plugin injects the dispatch contract in `WORKFLOW_CARD` + `MONTILLA_OWNERSHIP`; `montilla` (CEO) is the sole dispatcher; cross-domain needs return as a formal Cross-domain request brief to the CEO, who delegates or resolves.
 - Defensive: return early if `output.system/context` not array.
 - Payloads: system gets `WORKFLOW_CARD + GUARDRAILS_FULL + POINTERS` + live bootstrap body; compacting gets `COMPACTION_REMINDER` only.
 - Header comment carries version + chain + creed; bump all three together.

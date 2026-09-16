@@ -8,7 +8,6 @@
 **Verdict (security-reviewer):** APPROVE with conditions (= Conditional)
 **Verdict (STRIDE):** Conditional
 **Skill:** skills/review-security/SKILL.md
-**Templates:** agents/c-level/barrera.md + agents/security/security-reviewer.md + agents/engineering/review-risk.md
 
 ## Scope
 

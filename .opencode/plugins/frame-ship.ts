@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.3.0 — Frame→Ship plugin (single-file, zero deps).
+ * frame-ship v0.3.3 — Frame→Ship plugin (single-file, zero deps).
  * Chain: see CHAIN const (single source of truth for order).
  * Skills: ./skills/<stage>/SKILL.md. Location: .opencode/plugins/frame-ship.ts.
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
@@ -7,7 +7,7 @@
 
 import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 
-const VERSION = "0.3.0";
+const VERSION = "0.3.3";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
@@ -16,7 +16,7 @@ const CHAIN =
 // Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
 LOAD ORDER — HARD STOP: 1.skill(frame-ship:using-frame-ship) 2.skill(frame-ship:<stage>) via skill tool (no skill=STOP) 3.read(agents/<domain>/<agent>.md) skill=process,template=craft 4.then edit/bash/task. Pre-flight: skill? template cited? SPEC/HARD/GATE/DOMAINS? NO→STOP, retry N=2, escalate montilla. No 3rd loop, no sideways.
-Modes (frozen at frame-ship:frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+C-level template, task(general) per domain max2, each reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
+Modes (frozen at frame-ship:frame-intent): single=skill+1 template, direct, cite both. multi=default: skill+C-level template, montilla (CEO) is the sole dispatcher — task(general) max2, CEO dispatches entire team; c-levels/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to CEO, who delegates to the right agent or resolves. Each dispatched agent reads skill+template first, packet by ref, returns deliverable+risks+assumptions+evidence.
 Triggers→skill: start/what-skills→frame-ship:using-frame-ship | initiative/OKRs→frame-ship:frame-intent(BRIEF+OKRs) | brief-approved→frame-ship:translate-to-spec(REQ+ARCHITECTURE+CONTRACTS) | pre-approval→frame-ship:propose-changes(PROPOSED_CHANGES,untouched) | auth/data/API→frame-ship:review-security(STRIDE) | API/model/cross-cut→frame-ship:review-architecture(ADR) | approved→frame-ship:execute-spec(approved files,REQ→test) | impl-ready→frame-ship:quality-gate(CLOSED on fail) | complete→frame-ship:verify-handoff(HANDOFF,DoD) | verified→frame-ship:ship-release(NOTES+changelog+rollback).
 Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o c-levels+CEO waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
 
@@ -31,7 +31,7 @@ const POINTERS = `${MARKER} Truth: AGENTS.md (creed, dispatch, guardrails 1-14) 
 
 const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill+template BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, execution_mode, stage. No skill+template=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
-const MONTILLA_OWNERSHIP = `${MARKER} You are Montilla (CEO): owner of frame-ship, guardrails, skills, agents, and dispatch.`;
+const MONTILLA_OWNERSHIP = `${MARKER} You are Montilla (CEO): owner of frame-ship, guardrails, skills, agents, and sole dispatcher to the entire team — c-levels/specialists do the work or brief back; cross-domain needs return as a formal Cross-domain request brief to you, and you delegate to the right agent (task(general) max 2 parallel) or resolve.`;
 
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;

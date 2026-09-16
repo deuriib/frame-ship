@@ -1,7 +1,7 @@
 # QUALITY-GATE — multi-domain router
 
 ## OVERVIEW
-Owns the fan-out: only stage that dispatches parallel reviewers and merges verdicts.
+Only stage whose reviewers the CEO dispatches in parallel; merges verdicts.
 Only stage with a waiver path; all other stages block without override.
 
 ## WHERE TO LOOK

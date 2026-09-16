@@ -22,12 +22,12 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
   (see `../AGENTS.md` catalogue): engineering (`backend`, `frontend`, `devops`,
   `data-engineer` under `vasquez`), security (`barrera`), finance (`dauhajre`),
   legal (`subero`), marketing/brand (`vera`), people (`santana`), revenue
-  (`montero`), automation/ops (`espinoza` + `vasquez` mechanics). C-levels return deliverables, never dispatch.
+  (`montero`), automation/ops (`espinoza` + `vasquez` mechanics). CEO dispatches entire team; c-levels/specialists do the work or brief back.
 - Specialists never self-dispatch, never approve their own proposal.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? `read(agents/<domain>/<agent>.md)` for proposing specialist + owning C-level template done? Any NO → STOP. Single = direct, no task; multi = CEO dispatches via `task(general)` ordered to read skill + template first; C-level returns its proposal, never dispatches.
+0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? `read(agents/<domain>/<agent>.md)` for proposing specialist + owning C-level template done? Any NO → STOP. Single = direct, no task; multi = CEO dispatches via `task(general)` ordered to read skill + template first; CEO dispatches entire team; c-levels/specialists do the work or brief back — the C-level returns its proposal to the CEO.
 1. Read the target spec (`docs/specs/20_backlog/` or individual spec file) including `execution_mode` and `Domains-touched`.
 2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward.
 3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).

@@ -20,7 +20,7 @@ test → artifact traceability. Scope expansion requires a new proposal.
 ## 2b. Role Binding (Org)
 
 - **Bound to:** owning C-level + domain specialists for all 8 business domains — engineering leafs (`backend`, `frontend`, `devops`, `data-engineer` under `vasquez`) plus domain executors (finance/legal/marketing/people/revenue/automation specialists under `dauhajre/subero/vera/santana/montero/espinoza`).
-- The CEO dispatches with reference-only packets (`SPEC:<path>#REQ / HARD:<execution_mode+constraints> / GATE:<verdicts> / DOMAINS:<list>`) via `task(subagent_type="general")` max 2 parallel, whose prompt orders the subagent to read this skill + its `agents/<domain>/<agent>.md` template first; C-levels return deliverables, never dispatch; specialists never self-dispatch.
+- The CEO dispatches with reference-only packets (`SPEC:<path>#REQ / HARD:<execution_mode+constraints> / GATE:<verdicts> / DOMAINS:<list>`) via `task(subagent_type="general")` max 2 parallel, whose prompt orders the subagent to read this skill + its `agents/<domain>/<agent>.md` template first; CEO dispatches entire team; c-levels/specialists do the work or brief back — cross-domain need → formal Cross-domain request brief to the CEO, who delegates or resolves; specialists never self-dispatch.
 - Craft templates: `agents/engineering/<agent>.md` and `agents/c-level/vasquez.md` for engineering, `agents/<domain>/<agent>.md` for other domains — the dispatched ONE is read fully, others cited by path.
 
 ## 3. Process
@@ -30,7 +30,7 @@ test → artifact traceability. Scope expansion requires a new proposal.
 2. Create implementation plan via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations).
 3. Dispatch by mode:
    - `single`: one specialist owns execution end-to-end (code or non-code) DIRECTLY, no `task`; still produces test/evidence matrix and runs domain checks. Output cites `skill(execute-spec)` + template path.
-   - `multi-subagents` (default): the CEO fans out via `task(subagent_type="general")` max 2 parallel per vasquez classify table (architect → design, leaf → impl, reviewers as subagents); non-engineering specs dispatch to the owning C-level, who returns the deliverable; each prompt orders read of this skill + `agents/<domain>/<agent>.md` first; no sideways dispatch, no C-level fan-out.
+   - `multi-subagents` (default): CEO dispatches entire team; c-levels/specialists do the work or brief back — montilla (CEO) calls `task(subagent_type="general")` max 2 parallel per vasquez classify table (architect → design, leaf → impl, reviewers as subagents); each prompt orders read of this skill + `agents/<domain>/<agent>.md` first; cross-domain need → formal Cross-domain request brief to the CEO, who delegates to the right agent or resolves; no sideways dispatch.
 4. Execute only targets in the approved change list (files AND non-code targets — no external sends/filings/launches beyond approval).
 5. Produce test/evidence matrix via `references/test-matrix.md` (tests for code, reviews/sign-offs/attestations for non-code, REQ-ID trace mandatory for all).
 6. Run domain quality checks (engineering: lint, types, tests, security; other domains: peer review, owner sign-off, controls check per plan).

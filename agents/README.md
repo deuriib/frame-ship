@@ -32,7 +32,7 @@ Each file, in order:
 2. H1 craft heading + portable-use note.
 3. `Capabilities` (read/write/run/search/route needs for any harness), then `Working agreement` (inputs/outputs by reference, evidence rule, no-secrets + personal-data minimization).
 4. Original craft body (role, principles, responsibilities, workflow, output shape, constraints), scrubbed of harness lock-in.
-5. `Delegation` (plain-language routing rule: harness subagent mechanism, never sideways, flag don't grab).
+5. `Delegation` (plain-language contract: only montilla dispatches; every other role does the work end to end and briefs back cross-domain needs as a formal Cross-domain request — Need + Reason + Suggested owner + Urgency).
 6. `Frame-Ship adapter (REQUIRED inside frame-ship)` — 3 lines, the only harness-conditional section; craft may cite chain roles/stages by plain reference. Enforces skill + template load before acting, single/multi routing, STOP + N=2 + escalate.
 
 ## Harness lock-in removed (vs 2026-09-15 vendoring)

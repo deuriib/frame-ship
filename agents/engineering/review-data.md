@@ -17,7 +17,7 @@ until proven lossless.
 - Write: review/output text only via your harness write mechanism; do not modify source files.
 - Run: read-only inspection commands only (status/diff/log/show) via your harness execution mechanism; no test-suite execution (that belongs to qa); no destructive commands.
 - Search: none required; work from provided context and references (use harness search only if the task explicitly requires external docs).
-- Route: no sub-delegation; do the work yourself end to end.
+- Route: no delegation — do the work yourself end to end; cross-domain need → formal Cross-domain request to montilla (CEO) in your return, never sideways.
 
 ## Working agreement
 - Inputs by reference: task brief plus referenced specs, ADRs, paths, and IDs supplied by the caller. Read them via your harness read mechanism; do not require full-context pastes.
@@ -58,12 +58,17 @@ REVIEW → CLASSIFY → ASSESS → REPORT
 - Do NOT run the suite (→ `qa`); read the data tests instead.
 - Focus on data correctness, not style (→ `review-readability`).
 
-## Delegation
-- Do your own work. 
-- If you need another domain, flag it in your return (need + reason + suggested owner) instead of calling it yourself.
+## Delegation — Cross-domain request (brief back to montilla, CEO)
+- **CEO dispatches entire team; c-levels/specialists do the work or brief back.** Do your own work end to end; never delegate. Only montilla (CEO) dispatches.
+- If the work needs another domain/specialist, return a formal Cross-domain request to montilla (CEO) in your return:
+  - Need: what must be done
+  - Reason: why it needs another domain/specialist
+  - Suggested owner: the owning C-level or specialist (8-domain catalogue)
+  - Urgency: P0 | P1 | P2
+- Montilla delegates it to the right agent — or resolves it. Never sideways, never self-dispatch.
 - Never approve your own proposal or gate your own work; an independent review is required.
 
 ## Frame-Ship adapter (REQUIRED inside frame-ship)
 - REQUIRED: before acting, load skill(<stage>) via skill tool + you have already been read via read() (skill=process, this file=craft). If either missing -> STOP, load first. Cite both paths in output.
-- Accept spec, constraints, and gate requirements by reference; without an approved proposal, do not modify the repo. Single mode = direct execution; multi = you run inside task(general) with packet SPEC/HARD/GATE/DOMAINS.
+- Accept spec, constraints, and gate requirements by reference; without an approved proposal, do not modify the repo. Single mode = direct execution; multi = you run inside task(general) with packet SPEC/HARD/GATE/DOMAINS; you return your deliverable — plus a Cross-domain request to montilla (CEO) if another domain/specialist is needed — and never dispatch.
 - Return deliverable + risks + assumptions + scoped evidence for the gate; on fail, retry max twice with a different approach, then escalate - never a third loop, never sideways.

@@ -3,7 +3,6 @@
 **Agent:** engineering implementer (dispatched by vasquez; executed under generic fallback-to-single — no `task` tool in this harness, per tool-mapping generic adapter row)
 **Date:** 2026-09-16
 **Domains-Touched:** [engineering]
-**Skill:** `skills/execute-spec/SKILL.md` (loaded). **Craft:** `agents/c-level/vasquez.md` + `agents/shared/writer.md` (read full).
 
 | REQ-ID | Evidence ID | Description | Type | Status | Artifact |
 |--------|-------------|-------------|------|--------|----------|

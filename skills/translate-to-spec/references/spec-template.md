@@ -7,7 +7,6 @@
 **Status:** draft | review | approved | implemented
 **Priority:** P0 | P1 | P2
 **Execution_Mode:** single | multi-subagents (inherited from brief, overridden per SPEC only with CEO waiver)
-**Packet:** SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<verdicts> / DOMAINS:<list>
 
 ## 1. Context
 

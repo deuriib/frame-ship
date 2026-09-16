@@ -34,6 +34,7 @@ Hooks: `config` → append `./skills/` to `skills.paths` (idempotent); `experime
 - Every SKILL body: `# Title — Sub` + creed quote `> *"Haces las cosas..."* + `1.Purpose/2.Chain/2b.Role/3.Process/4.Won't do/5.References`.
 - Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
 - Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
+- Dispatch (ADR-003, CEO-only): sole dispatcher is `montilla` (CEO) — **CEO dispatches entire team; c-levels/specialists do the work or brief back.** Cross-domain need → formal **Cross-domain request** brief to the CEO (Need + Reason + Suggested owner + Urgency), returned inside the agent's return; the CEO delegates to the right agent via `task(general)` max 2 parallel or resolves. No sideways, no self-dispatch.
 
 ## ANTI-PATTERNS (THIS PROJECT)
 - Code without approved `PROPOSED_CHANGES.md`.

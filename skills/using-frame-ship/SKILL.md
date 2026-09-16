@@ -61,7 +61,7 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
    Execution modes (frozen at `frame-ship:frame-intent`):
    - `single`: `skill(stage)` + `read(1 agent template)` then execute DIRECTLY, no `task` dispatch. Still produces test/evidence matrix. Output cites skill + template path.
-   - `multi-subagents` (default): `skill(stage)` + `read(C-level template)`, then the CEO runs `task(subagent_type="general")` per domain (max 2 parallel). Each task prompt MUST order: read stage SKILL.md + read own agent template BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence. C-levels return deliverables and never dispatch.
+   - `multi-subagents` (default): `skill(stage)` + `read(C-level template)`, then the CEO runs `task(subagent_type="general")` per domain (max 2 parallel) — **CEO dispatches entire team; c-levels/specialists do the work or brief back.** Each task prompt MUST order: read stage SKILL.md + read own agent template BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence. Cross-domain need → formal **Cross-domain request** brief to the CEO, who delegates to the right agent or resolves.
 4. After compaction, re-load this skill first, then resume at the recorded
    stage with trace and gate verdicts intact.
 
