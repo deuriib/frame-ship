@@ -17,12 +17,12 @@ of work. No briefs, specs, or code are produced here.
 ## 2. Chain Contract
 
 - Previous: none (bootstrap loads before chain entry)
-- Next: frame-intent (chain entry for new initiatives)
+- Next: frame-ship:frame-intent (chain entry for new initiatives)
 
 ```text
-using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-changes
-  → review-security/review-architecture → execute-spec → quality-gate
-  → verify-handoff → ship-release
+frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-changes
+  → frame-ship:review-security / frame-ship:review-architecture → frame-ship:execute-spec → frame-ship:quality-gate
+  → frame-ship:verify-handoff → frame-ship:ship-release
 ```
 
 ## 2b. Role Binding (Org)
@@ -44,22 +44,22 @@ using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-
    suggestions. Load the named stage skill via the native `skill` tool before
    acting (see `references/tool-mapping.md`).
 2. Route by trigger, never by guess:
-   - new initiative / OKRs / strategic planning → `frame-intent`
-   - brief approved / new domain spec → `translate-to-spec`
-   - ready to implement / needs pre-approval → `propose-changes`
-   - touches auth/data/external API → `review-security`
-   - modifies public API / data model / cross-cutting → `review-architecture`
-   - approved spec → `execute-spec`
-   - implementation ready for review → `quality-gate`
-   - work complete, needs review before ship → `verify-handoff`
-   - verified, ready to ship → `ship-release`
+   - new initiative / OKRs / strategic planning → `frame-ship:frame-intent`
+   - brief approved / new domain spec → `frame-ship:translate-to-spec`
+   - ready to implement / needs pre-approval → `frame-ship:propose-changes`
+   - touches auth/data/external API → `frame-ship:review-security`
+   - modifies public API / data model / cross-cutting → `frame-ship:review-architecture`
+   - approved spec → `frame-ship:execute-spec`
+   - implementation ready for review → `frame-ship:quality-gate`
+   - work complete, needs review before ship → `frame-ship:verify-handoff`
+   - verified, ready to ship → `frame-ship:ship-release`
 3. Enforce the hard rules on every step (see `references/bootstrap-checklist.md`):
    proposal before code (or before external send/filing/launch for non-code),
    security review for auth/data/API, ADR for contract
    changes, no handoff on CLOSED gate without c-levels + CEO waiver,
    `REQ-ID → test/evidence → artifact → gate verdict` trace, `HANDOFF.md` before ship,
    `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
-   Execution modes (frozen at `frame-intent`):
+   Execution modes (frozen at `frame-ship:frame-intent`):
    - `single`: `skill(stage)` + `read(1 agent template)` then execute DIRECTLY, no `task` dispatch. Still produces test/evidence matrix. Output cites skill + template path.
    - `multi-subagents` (default): `skill(stage)` + `read(C-level template)`, then `task(subagent_type="general")` per domain (max 2 parallel). Each task prompt MUST order: read stage SKILL.md + read own agent template BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence.
 4. After compaction, re-load this skill first, then resume at the recorded

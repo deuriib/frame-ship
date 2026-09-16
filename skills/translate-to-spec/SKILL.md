@@ -14,8 +14,8 @@ canonical architecture contract. The brief is read-only here.
 
 ## 2. Chain Contract
 
-- Previous: frame-intent
-- Next: propose-changes
+- Previous: frame-ship:frame-intent
+- Next: frame-ship:propose-changes
 
 ## 2b. Role Binding (Org)
 
@@ -32,13 +32,13 @@ canonical architecture contract. The brief is read-only here.
 3. Each produces a spec using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning C-level.
 4. `vasquez` consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
-6. Hand off to `propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
+6. Hand off to `frame-ship:propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 7. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only). Example: `feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth`.
 
 ## 4. What I won't do
 
 - Approve specs without `barrera` review for security-relevant domains.
-- Modify the brief (escalate to `frame-intent`).
+- Modify the brief (escalate to `frame-ship:frame-intent`).
 - Bypass the canonical architecture contract.
 
 ## 5. References
@@ -47,4 +47,4 @@ canonical architecture contract. The brief is read-only here.
 - `references/architecture-template.md` — Architecture contract.
 - `references/requirements-template.md` — Requirements index.
 - `../../agents/README.md` — Vendored templates index.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

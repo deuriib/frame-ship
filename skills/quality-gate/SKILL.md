@@ -15,11 +15,11 @@ sign". Reuses existing reviewers — creates none except the data dupla.
 
 ## 2. Chain Contract
 
-- Previous: execute-spec
-- Next: verify-handoff (only on OPEN gate)
+- Previous: frame-ship:execute-spec
+- Next: frame-ship:verify-handoff (only on OPEN gate)
 
 ```text
-execute-spec → quality-gate → verify-handoff → ship-release
+frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handoff → frame-ship:ship-release
                      ↑ (c-levels + CEO waive only, via waiver record)
 ```
 
@@ -59,7 +59,7 @@ Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for 
 3. Each reviewer writes `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. Consolidate into `GATE_REPORT.md` via `references/gate-report.md`.
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).
-6. All ✅ → gate OPEN → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
+6. All ✅ → gate OPEN → hand off to `frame-ship:verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 7. Waivers only by c-levels + CEO via `references/waiver-template.md`.
 8. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only; never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
 
@@ -75,4 +75,4 @@ Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for 
 - `references/waiver-template.md` — C-levels + CEO override record.
 - `references/engineering/` — readability, reliability, refuter, resilience, qa checklists.
 - `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

@@ -15,8 +15,8 @@ and `review-risk` agents — no parallel reviewer universe.
 
 ## 2. Chain Contract
 
-- Previous: propose-changes
-- Next: execute-spec (only on Approved or Conditional-with-conditions-met)
+- Previous: frame-ship:propose-changes
+- Next: frame-ship:execute-spec (only on Approved or Conditional-with-conditions-met)
 
 ## 2b. Role Binding (Org)
 
@@ -42,4 +42,4 @@ and `review-risk` agents — no parallel reviewer universe.
 
 - `references/security-review-template.md` — Findings + verdict + sign-off.
 - `references/threat-model.md` — STRIDE attack surface analysis.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

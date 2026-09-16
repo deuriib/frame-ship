@@ -13,8 +13,8 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 2. Chain Contract
 
-- Previous: translate-to-spec
-- Next: review-security / review-architecture (as required), then execute-spec
+- Previous: frame-ship:translate-to-spec
+- Next: frame-ship:review-security / frame-ship:review-architecture (as required), then frame-ship:execute-spec
 
 ## 2b. Role Binding (Org)
 
@@ -32,7 +32,7 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward.
 3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).
 4. Identify approvers by domain (owning C-level mandatory; `vasquez` for engineering/architecture impact; `barrera` for auth/data/API/PII) and block until approval.
-5. Hand off to `review-security` / `review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.
+5. Hand off to `frame-ship:review-security` / `frame-ship:review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.
 6. Close with work-unit commit per `../using-frame-ship/references/commit-convention.md` (guidance only; the proposal doc itself is committed, impl files stay untouched). Example: `docs(proposal-003): add PROPOSED_CHANGES for auth with blast radius`.
 
 ## 4. What I won't do
@@ -45,4 +45,4 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 - `references/proposal-template.md` — Proposed-changes template.
 - `references/risk-assessment.md` — Risk matrix + blast radius + rollback.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + per-stage examples (guidance only; see `frame-ship:using-frame-ship`).

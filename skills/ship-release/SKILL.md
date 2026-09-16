@@ -14,7 +14,7 @@ deployment order, and archival. Never ship without verification gates complete.
 
 ## 2. Chain Contract
 
-- Previous: verify-handoff
+- Previous: frame-ship:verify-handoff
 - Next: none (chain close; lessons captured by owning C-level on PASS)
 
 ## 2b. Role Binding (Org)
@@ -45,4 +45,4 @@ deployment order, and archival. Never ship without verification gates complete.
 
 - `references/release-notes.md` — Highlights/features/fixes/breaking/rollback.
 - `references/changelog-template.md` — Keep-a-Changelog format.
-- `../using-frame-ship/references/commit-convention.md` — Commit format + release example (guidance only).
+- `../using-frame-ship/references/commit-convention.md` — Commit format + release example (guidance only; see `frame-ship:using-frame-ship`).
