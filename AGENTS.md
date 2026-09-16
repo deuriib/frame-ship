@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-09-15
-**Commit:** n/a (not a git repo)
-**Branch:** n/a
+**Generated:** 2026-09-16
+**Commit:** 19532cd (repo git verificado vía `git rev-parse --short HEAD`)
+**Branch:** main (verificada vía `git branch --show-current`)
 
 ## OVERVIEW
 frame-ship: local opencode plugin + 9-skill Frame→Ship chain. Stack: 1 TS file + 31 Markdown skill templates.
@@ -14,7 +14,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain. Stack: 1 TS file
 ├── skills/<stage>/SKILL.md + references/*.md  # 9 stages, process source of truth
 └── tests/  # empty, no harness
 ```
-`docs/briefs|specs/*` referenced by skills does NOT exist in repo.
+`docs/briefs/BRIEF-agent-templates.md` + `docs/specs/10_design|20_backlog|30_delivery|40_workspace|50_archive/` existen en repo (ver `docs/` listing).
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
@@ -53,5 +53,5 @@ No build/test scripts in repo. `tests/` empty.
 ## NOTES
 - `.opencode/.gitignore` ignores `node_modules/package.json/package-lock.json/bun.lock` — don't commit those.
 - `AGENTS.md` absent before this run; plugin points to it as source of truth — this file fills that gap.
-- Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`.
+- Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
 - Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
