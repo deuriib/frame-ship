@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Removed
+
+- `skills/using-frame-ship/references/tool-mapping.md` (engineering, SPEC-remove-tool-mapping-engineering): CEO-only dispatch contract now single-sourced in `using-frame-ship/SKILL.md` + checklist + AGENTS.md + plugin; SKILL §3/§5 reworded, zero live pointers (gate OPEN, DoD PASS).
+
 ## [v0.4.0] — 2026-09-16
 
 ### Added
