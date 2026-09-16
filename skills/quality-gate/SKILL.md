@@ -31,27 +31,34 @@ execute-spec → quality-gate → verify-handoff → ship-release
 
 ## 3. Reviewer Routing Table
 
-| Domain | Reviewers (actual agent names) |
-|--------|--------------------------------|
-| engineering | review-readability, review-reliability, review-refuter, review-resilience, review-risk, qa, review-data (data specs) |
-| security | security-reviewer |
-| finance | finance-reviewer |
-| legal | legal-reviewer |
-| brand/marketing | brand-reviewer |
-| people | people-reviewer |
-| revenue | revenue-reviewer |
-| data | review-data + data-engineer lineage check |
+| Domain | Owner | Reviewers (actual agent names) |
+|--------|-------|--------------------------------|
+| engineering | vasquez | review-readability, review-reliability, review-refuter, review-resilience, review-risk, qa, review-data (data specs) |
+| security | barrera | security-reviewer |
+| finance | dauhajre | finance-reviewer |
+| legal | subero | legal-reviewer |
+| brand/marketing | vera | brand-reviewer |
+| people | santana | people-reviewer |
+| revenue | montero | revenue-reviewer |
+| automation/ops | espinoza (+ vasquez mechanics) | automation-reviewer (+ ops lens) |
+| data (cross-cutting lens) | vasquez | review-data + data-engineer lineage check |
 
-A spec spanning multiple domains needs ALL touched-domain reviewers to sign.
+A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Domains-touched` comes from the spec packet; data lens attaches to any spec with schema/lineage/PII-store impact.
+
+Execution mode (from spec `execution_mode`):
+- `single`: min gate `review-readability + review-risk + review-refuter + qa` (+ `review-data` for data specs). Still CLOSED on any ❌.
+- `multi-subagents` (default): full wave per routing table below + adversarial `review-refuter` before `qa`.
+
+Templates: `agents/engineering/*` for engineering wave, `agents/<domain>/*` for domain reviewers — cited by path, never pasted.
 
 ## 4. Process
 
-1. Identify touched domains from spec tags/requirements.
-2. Dispatch each required reviewer as subagent (reference-only packet).
+1. Identify touched domains from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
+2. Dispatch each required reviewer as subagent (reference-only `SPEC/HARD/GATE/DOMAINS` packet).
 3. Each reviewer writes `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. Consolidate into `GATE_REPORT.md` via `references/gate-report.md`.
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).
-6. All ✅ → gate OPEN → hand off to `verify-handoff`.
+6. All ✅ → gate OPEN → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 7. Waivers only by c-levels + CEO via `references/waiver-template.md`.
 
 ## 5. What I won't do
@@ -65,4 +72,4 @@ A spec spanning multiple domains needs ALL touched-domain reviewers to sign.
 - `references/gate-report.md` — Consolidated verdicts + conditions.
 - `references/waiver-template.md` — C-levels + CEO override record.
 - `references/engineering/` — readability, reliability, refuter, resilience, qa checklists.
-- `references/domains/` — finance, legal, marketing, people, security, data, ops checklists.
+- `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.

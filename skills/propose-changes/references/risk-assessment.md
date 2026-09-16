@@ -2,6 +2,7 @@
 
 **Proposer:** [Agent]
 **Date:** YYYY-MM-DD
+**Domains-Touched:** [per proposal]
 
 ## Risk Matrix
 
@@ -11,12 +12,16 @@
 
 ## Blast Radius
 
-[What systems/teams are affected if this change fails?]
+[What systems/teams/customers/regulators/revenue are affected if this change fails? Split by domain when multi-domain: engineering (services/data), finance (budget/controls), legal (exposure), marketing (brand/GTM), people (team/culture), revenue (pipeline/targets), automation/ops (runbooks/capacity).]
 
 ## Rollback Plan
 
-[How to revert if issues arise]
+[How to revert if issues arise — code revert AND non-code undo: retract comms, void filing, reverse close entry, disable workflow, with owner + ETA.]
 
 ## Security Considerations
 
 [Auth, data exposure, input validation — barrera to confirm]
+
+## Domain Considerations
+
+[Finance: budget/controls — dauhajre. Legal: IP/regulatory/liability — subero. Marketing: brand/GTM — vera. People: workload/culture/change plan — santana. Revenue: pipeline/quota — montero. Automation/ops: runbook/capacity/flags — espinoza + vasquez. Delete non-touched domains.]

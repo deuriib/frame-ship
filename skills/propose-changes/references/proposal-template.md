@@ -3,6 +3,8 @@
 **Spec Reference:** SPEC-XXX
 **Agent:** [name]
 **Date:** YYYY-MM-DD
+**Execution_Mode:** single | multi-subagents (inherited from spec)
+**Domains-Touched:** [engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — delete as applicable, must match spec]
 
 ## Summary
 
@@ -10,9 +12,15 @@
 
 ## Changes
 
-| File/Component | Change Type | Description |
-|----------------|-------------|-------------|
-| `api/v2/users.ts` | modify | Add pagination params |
+| Target | Change Type | Description |
+|--------|-------------|-------------|
+| `api/v2/users.ts` | file-modify | Add pagination params |
+| `contracts/MSA-v3.md` | document-create | Redline liability cap per SPEC-XXX |
+| `campaigns/launch-q3.md` | campaign-update | Reposition messaging per vera brief |
+| `policies/retention.md` | policy-update | Set PII TTL + deletion path |
+| `workflows/billing-close.md` | workflow-update | Add dauhajre sign-off step |
+
+Change types: `file-create | file-modify | file-delete | document-create | campaign-update | contract-update | policy-update | model-update | workflow-update | config-update`. Engineering proposals use `file-*`; non-engineering proposals use document/campaign/contract/policy/workflow rows — same table, no forced file path.
 
 ## Rationale
 
@@ -26,7 +34,8 @@
 
 ## Approval Required From
 
-- [ ] vasquez (CTO)
-- [ ] barrera (CISO, if security-relevant)
+- [ ] Owning C-level: [vasquez | barrera | dauhajre | subero | vera | santana | montero | espinoza — per Domains-Touched]
+- [ ] vasquez (CTO, if architecture/API/model/cross-cutting impact)
+- [ ] barrera (CISO, if auth/data/external-API/PII impact)
 
-> **Rule:** No repository file modifications during proposal phase.
+> **Rule:** No repository file modifications during proposal phase. For non-code domains, no external sends/filings/launches during proposal phase either.

@@ -7,8 +7,8 @@ Only stage with a waiver path; all other stages block without override.
 ## WHERE TO LOOK
 | Domain | Reviewers | Template dir |
 |--------|-----------|--------------|
-| engineering | readability, reliability, refuter, resilience, risk, qa (+data) | `references/engineering/` (5) |
-| security/people/finance/legal/brand/revenue/data | single reviewer each | `references/domains/` (7) |
+| engineering | readability, reliability, refuter, resilience, risk, qa (+data lens) | `references/engineering/` (5) |
+| security/finance/legal/brand/people/revenue/automation | single reviewer each (+ ops lens for automation) | `references/domains/` (9: finance, legal, marketing, people, security, data, revenue, automation, ops) |
 | consolidated | gate keeper (owning C-level) | `references/gate-report.md` |
 | override | c-levels + CEO only | `references/waiver-template.md` |
 
@@ -18,7 +18,7 @@ Only stage with a waiver path; all other stages block without override.
 - Multi-domain specs need ALL touched-domain sign-offs.
 - Verdict row shape: `| Domain | Reviewer | Verdict | Findings | Artifact |` (`gate-report.md:9-18`).
 - Waiver requires c-levels + CEO sign-off block; `CONDITIONAL` needs `COND-00x` checklist cleared.
-- Engineering refs: `readability/reliability/refuter/resilience/qa-review.md`; domains: `finance/legal/marketing/people/security/data/ops-review.md`.
+- Engineering refs: `readability/reliability/refuter/resilience/qa-review.md`; domains: `finance/legal/marketing/people/security/data/revenue/automation-review.md` + `ops-review.md` lens.
 
 ## NOTES
 - Largest skill dir (15 files); only one with `engineering/` + `domains/` split — don't flatten.

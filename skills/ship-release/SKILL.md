@@ -20,21 +20,24 @@ deployment order, and archival. Never ship without verification gates complete.
 ## 2b. Role Binding (Org)
 
 - **Bound to:** `montilla` (CEO) delegating orchestration to the COO function
-  with `vasquez` (CTO) + `devops` for deployment mechanics.
+  with owning C-level + `vasquez` (CTO) + `devops` for deployment mechanics.
+  Non-code ships delegate mechanics to the owning C-level (e.g. `subero` for
+  filing, `vera`/`montero` for launch, `dauhajre` for close, `espinoza` for
+  workflow enablement).
 
 ## 3. Process
 
-1. Verify all DoD checklists + gate reports are OPEN.
-2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md`.
-3. Update changelog via `references/changelog-template.md`.
-4. Coordinate `devops` deployment with rollback plan.
-5. Archive completed spec to `docs/specs/50_archive/`.
+1. Verify all DoD checklists + gate reports are OPEN (with `SPEC/HARD/GATE/DOMAINS` intact).
+2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable).
+3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
+4. Coordinate ship mechanics with rollback/undo plan: `devops` for deploys; owning C-level for filings/launches/closes/workflows.
+5. Archive completed spec to `docs/specs/50_archive/` with domain artifacts linked.
 
 ## 4. What I won't do
 
-- Ship without verification gates complete.
-- Skip changelog for user-facing changes.
-- Deploy without a rollback plan.
+- Ship without verification gates complete (OPEN or waived CONDITIONAL/CLOSED with record).
+- Skip changelog for user-facing changes (any domain — code or non-code).
+- Ship without a rollback/undo plan (revert + retract/void/reverse/disable with owner).
 
 ## 5. References
 

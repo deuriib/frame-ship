@@ -49,10 +49,11 @@ using-frame-ship (bootstrap) → frame-intent → translate-to-spec → propose-
    - work complete, needs review before ship → `verify-handoff`
    - verified, ready to ship → `ship-release`
 3. Enforce the hard rules on every step (see `references/bootstrap-checklist.md`):
-   proposal before code, security review for auth/data/API, ADR for contract
+   proposal before code (or before external send/filing/launch for non-code),
+   security review for auth/data/API, ADR for contract
    changes, no handoff on CLOSED gate without c-levels + CEO waiver,
-   `REQ-ID → test → artifact → gate verdict` trace, `HANDOFF.md` before ship,
-   reference-only packets between stages.
+   `REQ-ID → test/evidence → artifact → gate verdict` trace, `HANDOFF.md` before ship,
+   `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
 4. After compaction, re-load this skill first, then resume at the recorded
    stage with trace and gate verdicts intact.
 

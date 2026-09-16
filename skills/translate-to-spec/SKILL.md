@@ -26,12 +26,12 @@ canonical architecture contract. The brief is read-only here.
 
 ## 3. Process
 
-1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context).
-2. Route to C-levels by domains touched.
-3. Each produces a spec using `references/spec-template.md`.
-4. `vasquez` consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md`.
-5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md`.
-6. Hand off to `propose-changes`.
+1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
+2. Route to C-levels by domains touched (8-domain catalogue in `../AGENTS.md`); cite `agents/c-level/<owner>.md` craft by path when relevant.
+3. Each produces a spec using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning C-level.
+4. `vasquez` consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
+5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
+6. Hand off to `propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 
 ## 4. What I won't do
 
@@ -41,6 +41,7 @@ canonical architecture contract. The brief is read-only here.
 
 ## 5. References
 
-- `references/spec-template.md` — Spec with Context/REQ/AC/Contracts/Out-of-scope.
+- `references/spec-template.md` — Spec with Context/REQ/AC/Contracts/Out-of-scope (includes `execution_mode` + packet).
 - `references/architecture-template.md` — Architecture contract.
 - `references/requirements-template.md` — Requirements index.
+- `../../agents/README.md` — Vendored templates index.

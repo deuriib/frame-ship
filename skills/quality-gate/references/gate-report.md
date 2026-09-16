@@ -2,7 +2,7 @@
 
 **Date:** YYYY-MM-DD
 **Gate Status:** OPEN | CONDITIONAL | CLOSED
-**Domains Touched:** engineering, security, finance
+**Domains Touched:** [subset of 8: engineering, security, finance, legal, marketing/brand, people, revenue, automation/ops + data lens if applicable]
 
 ## Reviewer Verdicts
 
@@ -16,6 +16,14 @@
 | engineering | qa | pass | 0 | `engineering/qa-review.md` |
 | engineering | review-data | pass | 0 | `domains/data-review.md` |
 | security | security-reviewer | pass | 0 | `domains/security-review.md` |
+| finance | finance-reviewer | pass | 0 | `domains/finance-review.md` |
+| legal | legal-reviewer | pass | 0 | `domains/legal-review.md` |
+| marketing/brand | brand-reviewer | pass | 0 | `domains/marketing-review.md` |
+| people | people-reviewer | pass | 0 | `domains/people-review.md` |
+| revenue | revenue-reviewer | pass | 0 | `domains/revenue-review.md` |
+| automation/ops | automation-reviewer | pass | 0 | `domains/automation-review.md` (+ `domains/ops-review.md` lens when infra-touched) |
+
+Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touched rows.
 
 ## Conditions for Opening
 

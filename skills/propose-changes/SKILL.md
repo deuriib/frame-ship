@@ -18,16 +18,20 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 2b. Role Binding (Org)
 
-- **Bound to:** leaf specialists (`backend`, `frontend`, `devops`, `data-engineer`)
-  and owning C-levels for domain proposals.
+- **Bound to:** owning C-level + domain specialists for all 8 business domains
+  (see `../AGENTS.md` catalogue): engineering (`backend`, `frontend`, `devops`,
+  `data-engineer` under `vasquez`), security (`barrera`), finance (`dauhajre`),
+  legal (`subero`), marketing/brand (`vera`), people (`santana`), revenue
+  (`montero`), automation/ops (`espinoza` + `vasquez` mechanics).
+- Specialists never self-dispatch, never approve their own proposal.
 
 ## 3. Process
 
-1. Read the target spec (`docs/specs/20_backlog/` or individual spec file).
-2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md`.
-3. Include risk assessment via `references/risk-assessment.md`.
-4. Identify approvers and block until approval.
-5. Hand off to `review-security` / `review-architecture` as required.
+1. Read the target spec (`docs/specs/20_backlog/` or individual spec file) including `execution_mode` and `Domains-touched`.
+2. Produce `docs/specs/40_workspace/<agent>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward.
+3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).
+4. Identify approvers by domain (owning C-level mandatory; `vasquez` for engineering/architecture impact; `barrera` for auth/data/API/PII) and block until approval.
+5. Hand off to `review-security` / `review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.
 
 ## 4. What I won't do
 

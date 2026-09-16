@@ -22,3 +22,9 @@
 - [ ] Active stage + spec ID + gate verdicts restored from trace.
 - [ ] Next stage skill loaded before continuing.
 - [ ] No code written until proposal approval is re-confirmed.
+
+## Domain catalogue (canonical — 8, full chain for all)
+
+- [ ] Domains resolved from `skills/AGENTS.md`: engineering (vasquez), security (barrera), finance (dauhajre), legal (subero), marketing/brand (vera), people (santana), revenue (montero), automation/ops (espinoza + vasquez).
+- [ ] Spec packet carries `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — never paste full context.
+- [ ] Data (`review-data`) treated as cross-cutting lens, not a 9th domain.

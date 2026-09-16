@@ -30,10 +30,11 @@ frame-intent → translate-to-spec → propose-changes → review-* → execute-
 ## 3. Process
 
 1. Ask the initiator: What problem? Who is affected? What does success look like?
-2. Produce `docs/briefs/BRIEF-<slug>.md` using `references/product-brief.md`.
-3. Define 2–4 OKRs using `references/okr-template.md`.
-4. Identify required C-levels (vasquez, dauhajre, subero, vera, santana, barrera, montero, espinoza) and flag cross-cutting concerns.
-5. Hand off the brief reference to `translate-to-spec`.
+2. Ask execution mode once per initiative: `single` (one specialist + min gate, small fully-specified units) or `multi-subagents` (default, fan-out + full review wave). Freeze as `execution_mode` in brief; all specs follow it unless overridden per SPEC with CEO waiver.
+3. Produce `docs/briefs/BRIEF-<slug>.md` using `references/product-brief.md` with `Domains-touched` declared from the 8-domain catalogue.
+4. Define 2–4 OKRs using `references/okr-template.md`.
+5. Identify required C-levels (vasquez-engineering, barrera-security, dauhajre-finance, subero-legal, vera-marketing, santana-people, montero-revenue, espinoza-automation per `../AGENTS.md` catalogue) and flag cross-cutting concerns (data lens where schema/PII involved). Cite vendored craft in `agents/<domain>/<agent>.md` by path when relevant, never paste bodies.
+6. Hand off the brief reference to `translate-to-spec` as `SPEC:<brief-path>#OKRs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 
 ## 4. What I won't do
 
@@ -43,5 +44,6 @@ frame-intent → translate-to-spec → propose-changes → review-* → execute-
 
 ## 5. References
 
-- `references/product-brief.md` — Product Brief template.
+- `references/product-brief.md` — Product Brief template (includes `execution_mode`).
 - `references/okr-template.md` — OKR template.
+- `../../agents/README.md` — Vendored agent templates index (reference-only craft).

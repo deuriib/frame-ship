@@ -4,22 +4,24 @@
 **Agent:** [name]
 **Date:** YYYY-MM-DD
 **Status:** complete | blocked | partial
+**Domains-Touched:** [per spec]
 
 ## Deliverables
 
-| Artifact | Location | Status |
-|----------|----------|--------|
+| Artifact | Location / Evidence | Status |
+|----------|---------------------|--------|
 | Implementation | `src/feature/` | done |
-| Tests | `tests/feature/` | done |
+| Tests / Evidence | `tests/feature/` OR sign-off path (e.g. `docs/signoffs/dauhajre-close.md`) | done |
 | Docs | `docs/feature.md` | pending |
+| Domain artifact | [e.g. `contracts/MSA-v3-signed.pdf` \| `campaigns/launch-q3/` \| `workflows/billing-close.md`] | done/pending/N/A |
 
 ## Definition of Done Checklist
 
-- [ ] Acceptance criteria satisfied
-- [ ] Tests passing
-- [ ] No lint issues
-- [ ] Security checks passing
-- [ ] Documentation updated
+- [ ] Acceptance criteria satisfied (all domains)
+- [ ] Tests/evidence linked per REQ-ID
+- [ ] Domain checks passing (Common + touched-domain appendix in `dod-checklist.md`)
+- [ ] Security checks passing (if security-touched)
+- [ ] Documentation / filing / comms updated as applicable
 
 ## Blockers / Open Questions
 
