@@ -48,3 +48,4 @@ coverage/
 # Temp
 tmp/
 temp/
+.ruff_cache/
