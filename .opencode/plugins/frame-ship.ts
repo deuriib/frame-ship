@@ -111,6 +111,25 @@ function resolveAgentsDir(fallbackBase: string): string {
 // files once; double-init replays serve from memory. Misses are never cached.
 const agentFileCache = new Map<string, string>();
 
+// Bounded init I/O: a read that never settles (hung handle, wedged mount)
+// must not stall the `config` hook. Every read races a small timeout —
+// timeout wins → miss ("", entry skipped, uncached so retry self-heals).
+// Timer cleared on settle; the raced read never rejects (inner try/catch),
+// so the race loser cannot surface an unhandled rejection. Zero-dep
+// (Promise.race + setTimeout only). Local 2-6KB reads land in single-digit
+// ms; 2000ms is generous headroom against false skips on loaded disks.
+const READ_TIMEOUT_MS = 2000;
+
+function withTimeout(task: Promise<string>, ms: number): Promise<string | undefined> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<undefined>((resolve) => {
+    timer = setTimeout(() => resolve(undefined), ms);
+  });
+  return Promise.race([task, timeout]).finally(() => {
+    if (timer !== undefined) clearTimeout(timer);
+  });
+}
+
 // Bun.file first, dynamic node:fs/promises fallback (no static node: import so
 // `tsc` stays clean without @types/node). Silent "" on miss — the caller
 // skips the entry, init never wedges. Never echoes contents into errors.
@@ -118,19 +137,29 @@ async function readTextFile(path: string): Promise<string> {
   const cached = agentFileCache.get(path);
   if (cached !== undefined) return cached;
   try {
-    let raw = "";
-    const bunFile = (globalThis as unknown as {
-      Bun?: { file: (p: string) => { text: () => Promise<string> } };
-    })?.Bun?.file;
-    if (typeof bunFile === "function") {
-      raw = await bunFile(path).text();
-    } else {
-      // @ts-ignore — node types intentionally not installed; dynamic import only.
-      const fs = (await import("node:fs/promises")) as unknown as {
-        readFile: (p: string, enc: string) => Promise<string>;
-      };
-      raw = await fs.readFile(path, "utf8");
-    }
+    // Eager read, never rejects (inner try/catch) so the timeout race below
+    // stays rejection-free from both sides.
+    const read: Promise<string> = (async (): Promise<string> => {
+      try {
+        const bunFile = (globalThis as unknown as {
+          Bun?: { file: (p: string) => { text: () => Promise<string> } };
+        })?.Bun?.file;
+        if (typeof bunFile === "function") {
+          return await bunFile(path).text();
+        }
+        // @ts-ignore — node types intentionally not installed; dynamic import only.
+        const fs = (await import("node:fs/promises")) as unknown as {
+          readFile: (p: string, enc: string) => Promise<string>;
+        };
+        return await fs.readFile(path, "utf8");
+      } catch {
+        return "";
+      }
+    })();
+    // Timeout-as-miss: a hung read resolves undefined → skip the entry, and —
+    // like any miss — is never cached, so a retry self-heals.
+    const raw = await withTimeout(read, READ_TIMEOUT_MS);
+    if (raw === undefined) return "";
     const text = raw || "";
     agentFileCache.set(path, text);
     return text;
