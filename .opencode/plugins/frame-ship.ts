@@ -79,6 +79,80 @@ function resolveSkillsDir(fallbackBase: string): string {
   return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
 }
 
+// Agents live at <repo-root>/agents/ next to this file — same trust root as
+// the skills lane. Mirrors resolveSkillsDir (own import.meta.url first,
+// directory || worktree fallback); plain string join, no static node: import.
+function resolveAgentsDir(fallbackBase: string): string {
+  try {
+    const meta = import.meta as unknown as { url?: string };
+    const url = meta?.url;
+    if (typeof url === "string" && url.startsWith("file:")) {
+      const filePath = fileUrlToPath(url);
+      if (filePath) {
+        const parts = filePath.split("/");
+        // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
+        if (
+          parts.length >= 4 &&
+          parts[parts.length - 2] === "plugins" &&
+          parts[parts.length - 3] === ".opencode"
+        ) {
+          const root = parts.slice(0, parts.length - 3).join("/") || "/";
+          return `${root.replace(/[/\\]+$/, "")}/agents`;
+        }
+      }
+    }
+  } catch {
+    // fall through to cwd-based fallback
+  }
+  return `${fallbackBase.replace(/[/\\]+$/, "")}/agents`;
+}
+
+// Per-path cache (mirrors the bootstrapCache precedent): init reads 74 small
+// files once; double-init replays serve from memory. Misses are never cached.
+const agentFileCache = new Map<string, string>();
+
+// Bun.file first, dynamic node:fs/promises fallback (no static node: import so
+// `tsc` stays clean without @types/node). Silent "" on miss — the caller
+// skips the entry, init never wedges. Never echoes contents into errors.
+async function readTextFile(path: string): Promise<string> {
+  const cached = agentFileCache.get(path);
+  if (cached !== undefined) return cached;
+  try {
+    let raw = "";
+    const bunFile = (globalThis as unknown as {
+      Bun?: { file: (p: string) => { text: () => Promise<string> } };
+    })?.Bun?.file;
+    if (typeof bunFile === "function") {
+      raw = await bunFile(path).text();
+    } else {
+      // @ts-ignore — node types intentionally not installed; dynamic import only.
+      const fs = (await import("node:fs/promises")) as unknown as {
+        readFile: (p: string, enc: string) => Promise<string>;
+      };
+      raw = await fs.readFile(path, "utf8");
+    }
+    const text = raw || "";
+    agentFileCache.set(path, text);
+    return text;
+  } catch {
+    return "";
+  }
+}
+
+// First ---...--- fence → description (description: "..." or '...', verbatim,
+// never rewritten); remainder trimmed → prompt. No fence → empty description,
+// whole input trimmed as prompt.
+function parseAgentFile(raw: string): { description: string; prompt: string } {
+  const text = raw || "";
+  const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+  if (!fence) return { description: "", prompt: text.trim() };
+  const frontmatter = fence[1] || "";
+  const descMatch = frontmatter.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
+  const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
+  const prompt = text.slice(fence[0].length).trim();
+  return { description, prompt };
+}
+
 // Live bootstrap: SKILL.md body only (references stay file-based per scope).
 // Runtime file read keeps a single source of truth — no hardcoded copy to drift.
 const BOOTSTRAP_LABEL = `${MARKER} frame-ship:using-frame-ship bootstrap:`;
