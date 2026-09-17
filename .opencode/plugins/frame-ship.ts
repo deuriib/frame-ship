@@ -291,11 +291,41 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
     // `skills.paths` (scanned recursively for **/SKILL.md). Idempotent:
     // never duplicates, never clobbers user paths.
     config: async (cfg: Config) => {
-      const c = cfg as Config & { skills?: { paths?: string[] } };
+      const c = cfg as Config & {
+        skills?: { paths?: string[] };
+        agents?: Record<string, { description: string; prompt: string; mode: AgentMode }>;
+        agent?: Record<string, { description: string; prompt: string; mode: AgentMode }>;
+        default_agent?: string;
+        subagent_depth?: number;
+      };
       c.skills ??= {};
       c.skills.paths ??= [];
-      if (!skillsDir || skillsDir === "/skills") return; // no resolvable base — don't pollute
-      if (!c.skills.paths.includes(skillsDir)) c.skills.paths.push(skillsDir);
+      if (skillsDir && skillsDir !== "/skills") {
+        if (!c.skills.paths.includes(skillsDir)) c.skills.paths.push(skillsDir);
+      }
+      // Roster lane (additive): fill `config.agents` + `config.agent` mirror
+      // per MANIFEST entry, plus `default_agent` + `subagent_depth`. `??=`
+      // on every insert — never overwrites user keys; a loader miss skips
+      // the entry, never throws init.
+      const agentsDir = resolveAgentsDir(fallbackBase);
+      if (agentsDir && agentsDir !== "/agents") {
+        c.agents ??= {};
+        c.agent ??= {};
+        for (const entry of AGENTS_MANIFEST) {
+          const hasAgents = c.agents[entry.key] !== undefined;
+          const hasAgent = c.agent[entry.key] !== undefined;
+          if (hasAgents && hasAgent) continue;
+          const raw = await readTextFile(`${agentsDir}/${entry.file}`);
+          if (!raw) continue;
+          const parsed = parseAgentFile(raw);
+          if (!parsed.prompt) continue;
+          const record = { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
+          if (!hasAgents) c.agents[entry.key] ??= record;
+          if (!hasAgent) c.agent[entry.key] ??= record;
+        }
+      }
+      c.default_agent ??= "montilla";
+      c.subagent_depth ??= 2;
     },
     "experimental.chat.system.transform": async (_input: unknown, output: unknown) => {
       const out = output as { system?: unknown };
