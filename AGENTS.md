@@ -5,13 +5,13 @@
 **Branch:** main (verificada vía `git branch --show-current`)
 
 ## OVERVIEW
-frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap). Stack: 1 TS runtime (154 lines, v0.4.0) + `skills/` templates + `docs/` artifact store.
+frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (154 lines, v0.4.0) + `skills/` templates + `docs/` artifact store.
 
 ## STRUCTURE
 ```
 ./
 ├── .opencode/plugins/frame-ship.ts  # runtime: injects chain into context (ver `.opencode/plugins/AGENTS.md`)
-├── skills/<stage>/SKILL.md + references/*.md  # 10 dirs (bootstrap + 9 stages), process source of truth (ver `skills/AGENTS.md`)
+├── skills/<stage>/SKILL.md + references/*.md  # 13 dirs (bootstrap + 9 stages + 3 supporting), process source of truth (ver `skills/AGENTS.md`)
 ├── docs/briefs/ + docs/specs/10_design|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
 ├── tests/  # empty, no harness
 ├── mise.toml  # toolchain: node 22, tasks typecheck/install
@@ -22,7 +22,8 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap). St
 | Task | Location | Notes |
 |------|----------|-------|
 | Change session behavior | `.opencode/plugins/frame-ship.ts` | single-file, zero deps |
-| Change stage process | `skills/<stage>/SKILL.md` | 10 dirs, identical body shape |
+| Change stage process | `skills/<stage>/SKILL.md` | 13 dirs (10 chain + 3 supporting), identical body shape |
+| Supporting skills (worktree/debug/pr) | `skills/git-worktree/`, `debugging/`, `pull-request/` | opt-in transversal tools |
 | Change output shape | `skills/<stage>/references/` | bracket placeholders |
 | Gate routing/waivers | `skills/quality-gate/` | only multi-reviewer domain |
 | Find briefs/specs/releases | `docs/briefs/`, `docs/specs/` | lifecycle 10→50, per-domain workspace |

@@ -1,9 +1,9 @@
 # SKILLS — Frame→Ship chain
 
 ## OVERVIEW
-10 dirs (bootstrap `using-frame-ship` + 9 stages): process source of truth. Plugin only injects pointers; this dir defines behavior.
+13 dirs (bootstrap `using-frame-ship` + 9 stages + 3 supporting skills): process source of truth. Plugin only injects pointers; this dir defines behavior.
 
-## WHERE TO LOOK
+## WHERE TO LOOK — Core 9-Stage Chain
 | Trigger | Skill | Out |
 |---------|-------|-----|
 | new initiative / OKRs | `frame-intent/` | `BRIEF-<slug>.md` |
@@ -16,11 +16,18 @@
 | complete | `verify-handoff/` | `HANDOFF.md` |
 | verified | `ship-release/` | notes + changelog + rollback |
 
+## SUPPORTING SKILLS (transversal / opt-in)
+| Trigger | Skill | Out | Coupling / Stage Handoff |
+|---------|-------|-----|--------------------------|
+| bug report / failed test / unexpected behavior | `debugging/` | RCA Fases 1-4 + failing reproduction | feeds into `propose-changes` |
+| parallel execute-spec lanes (multi-subagents) | `git-worktree/` | `.worktrees/<spec-id>` isolated lane | supporting in `execute-spec` |
+| branch / pull request / ready-for-review | `pull-request/` | PR with ≤400 lines & checks | input to `quality-gate` |
+
 ## CONVENTIONS
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
-- Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `translate-to-spec` 4 (SKILL + 3 refs); `using-frame-ship` 3 (SKILL + 2 refs); all others 3 (SKILL + 2 refs).
+- Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `git-worktree` 5 (SKILL + 4 refs); `translate-to-spec` 4 (SKILL + 3 refs); `debugging` 4 (SKILL + 3 refs); `using-frame-ship` 3 (SKILL + 2 refs); `pull-request` 3 (SKILL + 2 refs); all others 3 (SKILL + 2 refs).
 - Commit closings: every stage ends with a commit step + example; `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
