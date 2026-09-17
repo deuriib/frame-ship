@@ -5,6 +5,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.6.0] — 2026-09-17
+
+### Added
+
+- Agent roster in the single-file plugin: static 74-key `AGENTS_MANIFEST` (`montilla` primary + 8 C-levels + 65 specialists, `espinoza-specialist` alias) + loader (`resolveAgentsDir`, `readTextFile`, `parseAgentFile`) + `config.agents`/`config.agent` mirror with `default_agent="montilla"` + `subagent_depth=2`, never clobbering user overrides ([engineering], SPEC-agents-into-plugin-engineering; gate OPEN 6/6, DoD PASS; `.opencode/plugins/frame-ship.ts` v0.6.0, 403 lines, zero deps, restart opencode to take effect).
+- Loader hardening: BOM/whitespace strip + unclosed-fence fallback, guarded defaults on miss lanes, `READ_TIMEOUT_MS=2000` race-as-miss, independent mirror records ([engineering], same spec; remediation `253c94e`, `92a4941`, `ab64ca1`, `14eaa4e`, evidence matrix C-001..C-005).
+
+### Known issues
+
+- Plugin-only ship per CEO ruling: `agents/` stays untracked — fresh-clone installs run degraded via graceful miss lanes until roster packaging is resolved (track after secret/PII scan, or external roster source). No breaking changes; rollback = single-file `git revert`, ETA < 15 min.
+
 ## [v0.5.0] — 2026-09-17
 
 ### Added

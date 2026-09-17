@@ -409,3 +409,52 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 ## Rollback / Undo
 
 `agy plugin disable frame-ship` (immediate) → `agy plugin uninstall frame-ship` → `git revert` of `2c461a6`. `skills/` needs no rollback (untouched). No external sends/filings/launches/deploys. Owner: engineering owner, ETA < 10 min.
+
+---
+
+# Release Notes: v0.6.0 — agents into plugin (rollout)
+
+**Date:** 2026-09-17
+**Release Manager:** vasquez (CTO, engineering owner — orchestrator-delegated ship mechanics, single-domain)
+**Specs Included:** SPEC-agents-into-plugin-engineering
+**Domains-Touched:** [engineering] (data lens N/A — no schemas/lineage/stores, file bodies only)
+**Ship Type:** rollout (local plugin — restart opencode to take effect)
+
+## Highlights
+
+- Installing frame-ship alone now brings the full agent roster: 74 keys (`montilla` primary + 8 C-levels `all` + 65 specialists `subagent`, `espinoza-specialist` alias) mirrored into `config.agents` + `config.agent`, with `default_agent="montilla"` + `subagent_depth=2` — never clobbering user overrides.
+- Hardened loader: BOM/leading-whitespace strip + unclosed-fence fallback (no frontmatter leak into prompts), guarded defaults (missed lanes leave config untouched), `READ_TIMEOUT_MS=2000` race-as-miss (bounded ~148s worst case, no infinite stall), independent mirror records.
+- Single-file contract holds: `.opencode/plugins/frame-ship.ts` v0.6.0 (403 lines), zero deps, `mise run typecheck` clean, double-init byte-stable, secret scan 0 findings.
+
+## Changes
+
+### Features
+
+- Static `AGENTS_MANIFEST` (74 entries) + `resolveAgentsDir` / `readTextFile` (Bun.file first, dynamic `node:fs/promises` fallback) + `parseAgentFile` (description from own frontmatter, body with fences stripped) ported into the single-file runtime (REQ-001, REQ-002 — SPEC-agents-into-plugin-engineering, engineering)
+- `config` hook fills `config.agents` + `config.agent` mirror idempotently with guarded defaults (`??=` only inside populated-roster guard) (REQ-003 — same spec, engineering)
+- Version triple bumped together: header comment + `VERSION` + `MARKER` → v0.6.0, manifest quadruple (`package.json` → 0.6.0), `.opencode/plugins/AGENTS.md` ref cells re-verified (REQ-004 — same spec, engineering)
+
+### Fixes
+
+- Dangling defaults cleared: skipped/total-miss lanes no longer write defaults or empty mirrors (COND reliability-001 / resilience COND-RS-02 / risk COND-RK-01, cleared by `253c94e` — same spec, engineering)
+- Malformed-frontmatter fence leak cleared: BOM strip + unclosed-fence fallback filter frontmatter lines (COND reliability-002 / risk COND-RK-02, cleared by `92a4941` — same spec, engineering)
+- No-timeout stall cleared: `withTimeout` race-as-miss with cleared timers, rejection-free (COND resilience-001 / risk COND-RK-03, cleared by `ab64ca1` — same spec, engineering)
+- Shared mirror record split into independent literals per entry; stale `AGENTS.md` line refs + root manifest aligned; remediation matrix committed as auditable evidence (advisories, closed by `14eaa4e` + `2966f15` + `220e2b4` — same spec, engineering)
+
+### Breaking Changes
+
+- None — additive roster lane only; skills registration, injection cards, chain order, and API contracts (v1, unchanged, no ADR) untouched.
+
+## Known Issues
+
+- **Roster-pending condition (CEO ruling 1, binding): plugin-only ship — `agents/` stays untracked (77 files: 74 roster + `AGENTS.md` + `README.md` + `delegation-contract.md`, 0 tracked).** Runtime proven WITH roster present (qa 8/8 both lanes, refuter 74/74 disk scan, matrix C-001..C-005). Fresh-clone installs run degraded via graceful miss lanes until roster packaging is resolved (track `agents/` after a dedicated secret/PII scan, or document an external roster source). Owner: orchestrator. Break condition: if the release contract requires install-alone-brings-roster with zero external fetch, tracking becomes a hard ship-blocker.
+- Pre-seed edge: custom-only roster + skipped lane can still receive `default_agent: "montilla"` via `??=` (explicit user defaults always preserved). User-owned config; narrow, recorded. Owner: vasquez.
+- Bare-fence debris: bare `---` w/o trailing newline → plain-trim prompt (cosmetic, no metadata leak); empty-`description` files still register. Owner: vasquez.
+- Silent-fallback advisory (RS-003): partial roster loss invisible at runtime; contents-free numeric skip-count is safe future hardening. Owner: vasquez.
+- Out-of-scope live `0.5.0` refs outside touched files (`README.md` snippets, `hooks/context-inject.ts` parity marker, `CHANGELOG.md` history below kept as history) remain for a later spec. Owner: orchestrator.
+
+## Rollback / Undo
+
+- `git revert` of the impl + remediation range (touching only `.opencode/plugins/frame-ship.ts` + `.opencode/plugins/AGENTS.md` refs + `package.json` manifest + matrix file) restores the v0.5.0 runtime — roster lane removed, skills lane intact. No data migration, no external undo, no key rotation (guardrail 4: owner remediates).
+- Verify rollback: `config.agents` roster keys absent; `skills.paths` registration + 3-card injection + compaction unchanged; `mise run typecheck` green.
+- Owner: vasquez (engineering owner). ETA: < 15 min (NF-004 holds). Restart opencode after revert to take effect.
