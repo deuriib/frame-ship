@@ -1,6 +1,6 @@
 # frame-ship
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ![Node](https://img.shields.io/badge/node-22%20LTS-339933?logo=node.js&logoColor=white)
 ![Mise](https://img.shields.io/badge/mise-managed-7950ED?logo=mise&logoColor=white)
@@ -28,7 +28,7 @@ A complete delivery methodology for your coding agents, built on top of a set of
 
 ## How it works
 
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into writing code. Instead, it loads `using-frame-ship` and asks what you're really trying to do.
+It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it _doesn't_ just jump into writing code. Instead, it loads `using-frame-ship` and asks what you're really trying to do.
 
 Once it's teased a brief out of the conversation (`frame-intent`), it shows it to you in chunks short enough to actually read and digest — problem, affected who, success criteria, OKRs.
 
@@ -49,7 +49,7 @@ Add the plugin by name + source in your opencode config (`~/.config/opencode/ope
 ```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["frame-ship@github:deuriib/frame-ship"]
+  "plugin": ["frame-ship@github:deuriib/frame-ship"],
 }
 ```
 
@@ -74,7 +74,7 @@ This repo root **is** the agy plugin source (root-drop layout — `agy plugin in
 Install globally:
 
 ```bash
-agy plugin install .
+agy plugin install https://github.com/deuriib/frame-ship
 agy plugin list        # frame-ship appears
 ```
 
@@ -90,13 +90,13 @@ Prerequisites: [Antigravity CLI](https://antigravity.google/docs/cli/overview/) 
 
 What maps to what (opencode → agy):
 
-| OpenCode plugin | Antigravity CLI equivalent |
-|---|---|
-| `experimental.chat.system.transform` — WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS | `rules/frame-ship.md` — automatically injected into agent context |
-| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md` | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
-| `config` hook — appends skillsDir to `config.skills.paths` | Plugin `skills/` directory auto-discovered (same files, zero copies) |
-| `experimental.session.compacting` — COMPACTION_REMINDER | No compaction event in agy — the hook injects the reminder when `initialNumSteps >= 40` |
-| `hasMarker` idempotency | `invocationNum === 0` guard — bootstrap injected exactly once per session |
+| OpenCode plugin                                                                 | Antigravity CLI equivalent                                                                                   |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `experimental.chat.system.transform` — WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS | `rules/frame-ship.md` — automatically injected into agent context                                            |
+| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
+| `config` hook — appends skillsDir to `config.skills.paths`                      | Plugin `skills/` directory auto-discovered (same files, zero copies)                                         |
+| `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — the hook injects the reminder when `initialNumSteps >= 40`                      |
+| `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
 
 Local replay (no `agy` binary needed):
 
@@ -164,7 +164,7 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 ## Philosophy
 
-- **Excellence as creed** — *"Haces las cosas como para Dios…"* Non-negotiable.
+- **Excellence as creed** — _"Haces las cosas como para Dios…"_ Non-negotiable.
 - **Proposal before code** — Never write code without an approved proposal.
 - **Systematic over ad-hoc** — Fixed chain order. Do not skip stages.
 - **Deny by default** — No secrets in code/config/logs/examples. Finding without proof (diff/scan/log pointer) = REFUTED. OWASP on every change; new endpoints/boundaries are trust boundaries until proven otherwise.
@@ -206,7 +206,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.5.0"]
+  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.5.0"],
 }
 ```
 
@@ -241,7 +241,7 @@ Project structure:
 │   ├── quality-gate/           # → GATE_REPORT.md (multi-reviewer)
 │   ├── verify-handoff/         # → HANDOFF.md via DoD
 │   └── ship-release/           # → RELEASE_NOTES.md + changelog + rollback
-├── tests/                      # empty, harness TBD (see Roadmap)
+├── tests/                      # harness TBD (see Roadmap)
 ├── AGENTS.md                   # project knowledge base (source of truth)
 ├── LICENSE.md                  # MIT
 └── README.md
