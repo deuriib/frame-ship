@@ -6,7 +6,7 @@
 
 ## OVERVIEW
 
-frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (154 lines, v0.5.0) + `skills/` templates + `docs/` artifact store.
+frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (403 lines, v0.6.0) + `skills/` templates + `docs/` artifact store.
 
 ## STRUCTURE
 
@@ -17,7 +17,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 
 ├── docs/briefs/ + docs/specs/10_design|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
 ├── tests/ harness TBD (see Roadmap)
 ├── mise.toml  # toolchain: node 22, tasks typecheck/install
-└── package.json  # v0.5.0 (matches plugin header)
+└── package.json  # v0.6.0 (matches plugin header)
 ```
 
 ## WHERE TO LOOK
@@ -76,4 +76,4 @@ No build/test scripts in repo. `tests/` empty.
 - Sub-AGENTS map: `skills/AGENTS.md` (chain + 8-domain catalogue) → `skills/quality-gate/AGENTS.md` (router split); `.opencode/plugins/AGENTS.md` (runtime); `docs/AGENTS.md` → `docs/specs/AGENTS.md` (artifact lifecycle).
 - Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
 - Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
-- Version aligned: root `package.json` v0.5.0 matches plugin header `v0.5.0` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
+- Version aligned: root `package.json` v0.6.0 matches plugin header `v0.6.0` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
