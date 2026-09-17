@@ -331,3 +331,42 @@ Zero-change release — nothing to revert in the live tree. Release commit itsel
 ## Rollback / Undo
 
 Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. No external sends/filings/launches/deploys to undo. Owner: engineering owner, ETA < 15 min.
+
+---
+
+# Release Notes: agy plugin 1:1 with opencode (rollout)
+
+**Date:** 2026-09-17
+**Release Manager:** montilla (CEO)
+**Specs Included:** SPEC-agy-plugin-engineering
+**Domains-Touched:** [engineering, security, automation/ops]
+**Ship Type:** rollout
+
+## Highlights
+
+- Repo root IS the agy plugin: `agy plugin install .` stages `frame-ship` with zero subdir indirection.
+- 1:1 context parity with the opencode plugin: same `skills/` (zero copies), verbatim cards in `rules/frame-ship.md`, live bootstrap via PreInvocation `injectSteps`.
+- TypeScript hooks via `bun`: context injector (first-invocation + compaction reminder), `run_command` safety gate (deny/ask), write-event observer (never blocks).
+
+## Changes
+
+### Features
+
+- `plugin.json` + `hooks.json` at root: 3 named hooks (`frame-ship-context`, `safety-gate`, `format-note`), all `bun ./hooks/*.ts`, timeout 10 (SPEC-agy-plugin-engineering, engineering)
+- `hooks/context-inject.ts`: self-locating root resolution (opencode `resolveSkillsDir` parity), live SKILL.md read with pointer fallback, threshold reminder (SPEC-agy-plugin-engineering, engineering)
+- `hooks/safety-gate.ts` + `hooks/format-note.ts`: deny-list/ask-grey-zone gate + `{}` observer, rule-only reasons (SPEC-agy-plugin-engineering, security)
+- `rules/frame-ship.md`: verbatim workflow/guardrails/pointers cards + version lockstep + 1:1 mapping table (SPEC-agy-plugin-engineering, engineering)
+- README Antigravity section: global + workspace install, `/hooks` verify, replay, rollback (SPEC-agy-plugin-engineering, automation/ops)
+
+### Breaking Changes
+
+- None — additive root files; opencode runtime, `skills/` content, chain order untouched.
+
+## Known Issues
+
+- Staged-path verify (`agy plugin list` + `/hooks` on an agy host) outstanding by environment — waived (WAIVER.md, expires on verify or 30 days). Owner: engineering owner.
+- agy skill-recursion (`skills/*/SKILL.md` discovery) assumed — verify at install; flat-shim fallback documented. Owner: engineering owner.
+
+## Rollback / Undo
+
+`agy plugin disable frame-ship` (immediate) → `agy plugin uninstall frame-ship` → `git revert` of `2c461a6`. `skills/` needs no rollback (untouched). No external sends/filings/launches/deploys. Owner: engineering owner, ETA < 10 min.
