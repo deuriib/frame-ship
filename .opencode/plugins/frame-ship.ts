@@ -243,6 +243,7 @@ interface AgentManifestEntry {
   key: string;
   file: string;
   mode: AgentMode;
+  hidden?: boolean;
 }
 
 // Static roster manifest — 74 keys, re-verified by fresh `agents/**/*.md`
@@ -250,18 +251,20 @@ interface AgentManifestEntry {
 // delegation-contract.md). Key = file stem; sole alias:
 // `engineering/espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
 // keeps key `espinoza`). Modes: `montilla` primary, 8 C-levels `all`,
-// 65 specialists `subagent`. Bodies/descriptions are read by path at init —
+// 65 specialists `subagent`. Optional `hidden`: 8 C-levels `all` carry
+// `hidden: true` (montilla stays visible; subagents carry no flag — hidden
+// by host default). Bodies/descriptions are read by path at init —
 // never pasted here (reference-only provenance).
 const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
   { key: "montilla", file: "c-level/montilla.md", mode: "primary" },
-  { key: "barrera", file: "c-level/barrera.md", mode: "all" },
-  { key: "dauhajre", file: "c-level/dauhajre.md", mode: "all" },
-  { key: "espinoza", file: "c-level/espinoza.md", mode: "all" },
-  { key: "montero", file: "c-level/montero.md", mode: "all" },
-  { key: "santana", file: "c-level/santana.md", mode: "all" },
-  { key: "subero", file: "c-level/subero.md", mode: "all" },
-  { key: "vasquez", file: "c-level/vasquez.md", mode: "all" },
-  { key: "vera", file: "c-level/vera.md", mode: "all" },
+  { key: "barrera", file: "c-level/barrera.md", mode: "all", hidden: true },
+  { key: "dauhajre", file: "c-level/dauhajre.md", mode: "all", hidden: true },
+  { key: "espinoza", file: "c-level/espinoza.md", mode: "all", hidden: true },
+  { key: "montero", file: "c-level/montero.md", mode: "all", hidden: true },
+  { key: "santana", file: "c-level/santana.md", mode: "all", hidden: true },
+  { key: "subero", file: "c-level/subero.md", mode: "all", hidden: true },
+  { key: "vasquez", file: "c-level/vasquez.md", mode: "all", hidden: true },
+  { key: "vera", file: "c-level/vera.md", mode: "all", hidden: true },
   { key: "architect", file: "engineering/architect.md", mode: "subagent" },
   { key: "automation-engineer", file: "engineering/automation-engineer.md", mode: "subagent" },
   { key: "automation-reviewer", file: "engineering/automation-reviewer.md", mode: "subagent" },
@@ -340,8 +343,8 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
     config: async (cfg: Config) => {
       const c = cfg as Config & {
         skills?: { paths?: string[] };
-        agents?: Record<string, { description: string; prompt: string; mode: AgentMode }>;
-        agent?: Record<string, { description: string; prompt: string; mode: AgentMode }>;
+        agents?: Record<string, { description: string; prompt: string; mode: AgentMode; hidden?: boolean }>;
+        agent?: Record<string, { description: string; prompt: string; mode: AgentMode; hidden?: boolean }>;
         default_agent?: string;
         subagent_depth?: number;
       };
@@ -369,8 +372,8 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
           // Separate object per mirror — no shared identity across the alias
           // boundary (a write via `config.agents[k]` stays invisible via
           // `config.agent[k]`).
-          if (!hasAgents) (c.agents ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
-          if (!hasAgent) (c.agent ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
+          if (!hasAgents) (c.agents ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode, ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}) };
+          if (!hasAgent) (c.agent ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode, ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}) };
         }
         // Guard the defaults: a skipped/fully-missed lane must not leave a
         // `default_agent` pointing at a key that was never registered.

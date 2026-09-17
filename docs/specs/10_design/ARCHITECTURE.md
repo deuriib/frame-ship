@@ -15,7 +15,7 @@
 
 | Component | Responsibility | Interface |
 |-----------|---------------|-----------|
-| `AGENTS_MANIFEST` | Static roster: 74 entries `{ key, file, mode }`; `engineering/espinoza.md` aliased to `espinoza-specialist` | TS const array; modes `primary \| all \| subagent` |
+| `AGENTS_MANIFEST` | Static roster: 74 entries `{ key, file, mode, hidden? }`; `engineering/espinoza.md` aliased to `espinoza-specialist`; hidden overlay: 8 C-level `all` carry `hidden:true`, `montilla` visible, 65 subagents no flag | TS const array; modes `primary \| all \| subagent`; `hidden?: boolean` optional-only |
 | `resolveAgentsDir` | Locate `<root>/agents/` from own `import.meta.url` (fallback `directory \|\| worktree`) | `(fallbackBase: string) => string` (mirrors `resolveSkillsDir`) |
 | `readTextFile` | Read one agent file: `Bun.file` first, dynamic `node:fs/promises` fallback | `(path: string) => Promise<string>`; silent `""` on miss |
 | `parseAgentFile` | Split frontmatter `description` from clean body (strip `---` fences) | `(raw: string) => { description, prompt }` |
