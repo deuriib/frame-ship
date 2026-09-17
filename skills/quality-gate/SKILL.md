@@ -15,8 +15,8 @@ sign". Reuses existing reviewers — creates none except the data dupla.
 
 ## 2. Chain Contract
 
-- Previous: frame-ship:execute-spec
-- Next: frame-ship:verify-handoff (only on OPEN gate)
+- Previous: frame-ship:execute-spec | (optional branch PR) frame-ship:pull-request
+- Next: frame-ship:verify-handoff (only on OPEN gate) | (on failure/bug) frame-ship:debugging → frame-ship:propose-changes
 
 ```text
 frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handoff → frame-ship:ship-release

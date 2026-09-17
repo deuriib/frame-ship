@@ -15,7 +15,8 @@ test → artifact traceability. Scope expansion requires a new proposal.
 ## 2. Chain Contract
 
 - Previous: frame-ship:propose-changes (+ frame-ship:review-security / frame-ship:review-architecture approvals)
-- Next: frame-ship:quality-gate
+- Supporting: (optional / multi-subagents) frame-ship:git-worktree
+- Next: frame-ship:quality-gate | (optional before review) frame-ship:pull-request
 
 ## 2b. Role Binding (Org)
 

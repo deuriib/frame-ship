@@ -53,6 +53,9 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    - implementation ready for review → `frame-ship:quality-gate`
    - work complete, needs review before ship → `frame-ship:verify-handoff`
    - verified, ready to ship → `frame-ship:ship-release`
+   - bug report / failed test / unexpected behavior (pre-proposal triage) → `frame-ship:debugging`
+   - parallel execution lanes setup (multi-subagents) → `frame-ship:git-worktree`
+   - branch / pull request / ready-for-review → `frame-ship:pull-request`
 3. Enforce the hard rules on every step (see `references/bootstrap-checklist.md`):
    proposal before code (or before external send/filing/launch for non-code),
    security review for auth/data/API, ADR for contract

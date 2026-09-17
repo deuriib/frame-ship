@@ -13,7 +13,7 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 2. Chain Contract
 
-- Previous: frame-ship:translate-to-spec
+- Previous: frame-ship:translate-to-spec | (optional defect triage) frame-ship:debugging
 - Next: frame-ship:review-security / frame-ship:review-architecture (as required), then frame-ship:execute-spec
 
 ## 2b. Role Binding (Org)
