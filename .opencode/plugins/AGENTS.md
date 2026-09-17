@@ -1,15 +1,15 @@
 # PLUGINS — opencode runtime
 
 ## OVERVIEW
-Single auto-discovered entry: `frame-ship.ts` v0.6.0 (350 lines). Zero deps, registers skills + agents + injection.
+Single auto-discovered entry: `frame-ship.ts` v0.6.0 (403 lines). Zero deps, registers skills + agents + injection.
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
 |------|----------|-------|
-| Skills registration | `frame-ship.ts:127-132` | `config` hook, appends `<root>/skills` to `skills.paths` (idempotent, never clobbers) |
-| System injection | `frame-ship.ts:134-141` | `experimental.chat.system.transform`, pushes 3 cards + live `using-frame-ship/SKILL.md` body (silent fallback to 3 on read failure) |
-| Bootstrap loader | `frame-ship.ts:89-117` | `loadBootstrapBody()` — `Bun.file` first, dynamic `node:fs/promises` fallback, per-path cache; label + already-loaded ack + SKILL.md body |
-| Compaction | `frame-ship.ts:142-147` | `experimental.session.compacting`, pushes 1 reminder |
+| Skills registration | `frame-ship.ts:348-352` | `config` hook, appends `<root>/skills` to `skills.paths` (idempotent, never clobbers) |
+| System injection | `frame-ship.ts:383-390` | `experimental.chat.system.transform`, pushes 3 cards + live `using-frame-ship/SKILL.md` body (silent fallback to 3 on read failure) |
+| Bootstrap loader | `frame-ship.ts:210-238` | `loadBootstrapBody()` — `Bun.file` first, dynamic `node:fs/promises` fallback, per-path cache; label + already-loaded ack + SKILL.md body |
+| Compaction | `frame-ship.ts:391-396` | `experimental.session.compacting`, pushes 1 reminder |
 | Dedupe | `frame-ship.ts:33-36` | `hasMarker()` checks `MARKER` before push; `includes()` before paths push |
 | Version | `frame-ship.ts:10-11` | `VERSION` + `MARKER` must bump together |
 
