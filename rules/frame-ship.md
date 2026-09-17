@@ -2,8 +2,6 @@
 
 > *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
 
-Version lockstep: this file mirrors `.opencode/plugins/frame-ship.ts` `v0.4.0` (`WORKFLOW_CARD`, `GUARDRAILS_FULL`, `POINTERS`). Bump together — gate greps `[frame-ship v0.4.0]` in both.
-
 ## Chain (do not skip)
 
 ```text
@@ -45,7 +43,3 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 - **Privacy (Ley 172-13):** minimization; every port/adapter/event/log/prompt is a PII checkpoint (mask/tokenize, allowlists); every PII store declares purpose + TTL + deletion; PASS exports carry allowlisted evidence only.
 - **Severity:** Critical (exploitable/prod/loss), High (probable), Medium (conditional), Low (hygiene). Critical/High surface same session with severity + evidence + owner. Residual risk explicit — no silent PASS.
 - **Conduct:** no sugarcoating; no busywork theater; respect attention (one point per paragraph; state assumptions on irreversible calls). FAIL → retry N=2 differently → escalate. No third loop, no sideways.
-
-## Truth
-
-`AGENTS.md` (creed, guardrails 1-14) > `skills/<stage>/SKILL.md` + `references/`. Entry `frame-intent`; close `ship-release` (lessons on PASS). The `skills/` directory at the plugin root is the same directory the opencode plugin registers — one source of truth, two harnesses.
