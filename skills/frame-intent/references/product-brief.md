@@ -6,6 +6,9 @@
 **Status:** draft | approved
 **Execution_Mode:** single | multi-subagents (chosen at frame-intent, default multi-subagents; all specs follow unless overridden per SPEC with orchestrator waiver)
 **Domains-Touched:** [subset of 8: engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — initial routing, refined at translate-to-spec]
+**Classification:** spike-equivalent (answer-only, no file) | bounded-initiative (short BRIEF in chat) | architectural-initiative (full BRIEF file) — announced + overrideable, one-way ratchet
+**Framings-Considered:** [2–3 framings with trade-offs + recommendation + YAGNI cut]
+**Approval:** [gate type: nod | chat-yes | file-approval — approver + date]
 
 ## Problem Statement
 
