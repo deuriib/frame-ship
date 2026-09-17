@@ -65,7 +65,45 @@ Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github
 
 For development on frame-ship itself (live local changes), use a local path instead — see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md). Never commit a `file:///` path to a shared config.
 
-> Note: full per-harness guides (`docs/README.<harness>.md`) land as each adapter ships. Today: opencode only.
+> Note: full per-harness guides (`docs/README.<harness>.md`) land as each adapter ships. Today: opencode + Antigravity CLI (agy).
+
+### Antigravity CLI (agy)
+
+This repo root **is** the agy plugin source (root-drop layout — `agy plugin install .`). Handlers are TypeScript executed via `bun`, and context injection is 1:1 with the opencode plugin (same cards, same bootstrap, same `skills/`).
+
+Install globally:
+
+```bash
+agy plugin install .
+agy plugin list        # frame-ship appears
+```
+
+Or per-workspace: `agy plugin install /path/to/frame-ship` from any checkout. Verify loaded hooks in the TUI with `/hooks`. Disable/enable without deleting assets:
+
+```bash
+agy plugin disable frame-ship
+agy plugin enable frame-ship
+agy plugin uninstall frame-ship   # purge + rollback (ETA < 10 min with git revert)
+```
+
+Prerequisites: [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (`agy` v1.2.0), [`bun`](https://bun.sh/) ≥ 1.x on PATH.
+
+What maps to what (opencode → agy):
+
+| OpenCode plugin | Antigravity CLI equivalent |
+|---|---|
+| `experimental.chat.system.transform` — WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS | `rules/frame-ship.md` — automatically injected into agent context |
+| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md` | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
+| `config` hook — appends skillsDir to `config.skills.paths` | Plugin `skills/` directory auto-discovered (same files, zero copies) |
+| `experimental.session.compacting` — COMPACTION_REMINDER | No compaction event in agy — the hook injects the reminder when `initialNumSteps >= 40` |
+| `hasMarker` idempotency | `invocationNum === 0` guard — bootstrap injected exactly once per session |
+
+Local replay (no `agy` binary needed):
+
+```bash
+bun ./hooks/safety-gate.ts < hooks/fixtures/pretool-allow.json
+bun ./hooks/context-inject.ts < hooks/fixtures/preinvocation-first.json
+```
 
 ## The Basic Workflow
 
@@ -178,6 +216,15 @@ Project structure:
 
 ```text
 ./
+├── plugin.json                   # agy marker: name frame-ship (agy plugin install .)
+├── hooks.json                    # frame-ship-context + safety-gate + format-note
+├── hooks/
+│   ├── context-inject.ts         # PreInvocation → injectSteps (1:1 context parity, bun)
+│   ├── safety-gate.ts            # PreToolUse gate on run_command (bun)
+│   ├── format-note.ts            # PostToolUse observer → {} (bun)
+│   └── fixtures/                 # replay vectors (allow/deny/secret/{}/first/compact)
+├── rules/
+│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.4.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── .opencode/
 │   ├── INSTALL.md              # named-path install: git (use) + file:/// (dev)
@@ -232,7 +279,7 @@ Anti-patterns:
 ## Roadmap
 
 - [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
-- [ ] General plugin adapters: Antigravity CLI (agy) → Zed → VS Code → rest (one at a time, opencode stays green)
+- [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via bun, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
 - [ ] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
 - [ ] `docs/briefs` + `docs/specs` scaffolding (referenced by skills, not yet in repo)

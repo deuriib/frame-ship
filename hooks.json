@@ -1,0 +1,39 @@
+{
+  "frame-ship-context": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "bun ./hooks/context-inject.ts",
+        "timeout": 10
+      }
+    ]
+  },
+  "safety-gate": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun ./hooks/safety-gate.ts",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "format-note": {
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun ./hooks/format-note.ts",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
