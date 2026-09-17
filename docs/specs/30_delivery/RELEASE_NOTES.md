@@ -1,3 +1,42 @@
+# Release Notes: Supporting Skills Workflow Integration (rollout)
+
+**Date:** 2026-09-16
+**Release Manager:** orchestrator
+**Specs Included:** SPEC-supporting-skills-integration
+**Domains-Touched:** [engineering]
+**Ship Type:** rollout
+
+## Highlights
+
+- Formalizada la integración de las 3 Supporting Skills (`git-worktree`, `debugging`, `pull-request`) en la gobernanza y contratos del sistema.
+- `skills/AGENTS.md` y `AGENTS.md` raíz actualizados a 13 directorios de habilidades con catálogo de triggers y acoples.
+- Disparadores de opt-in agregados al enrutador de `skills/using-frame-ship/SKILL.md`.
+- Rutas condicionales (`Previous`, `Next`, `Supporting`) explicitadas directamente en los Chain Contracts de `propose-changes`, `execute-spec` y `quality-gate`.
+
+## Changes
+
+### Features
+
+- `skills/AGENTS.md` + `AGENTS.md`: catálogo oficial de Supporting Skills y recuento a 13 dirs (REQ-SSI-001, REQ-SSI-002).
+- `skills/using-frame-ship/SKILL.md`: enrutamiento por disparador para debugging, git-worktree y pull-request (REQ-SSI-003).
+- `skills/propose-changes/SKILL.md`: `Previous: ... | (optional defect triage) frame-ship:debugging` (REQ-SSI-004).
+- `skills/execute-spec/SKILL.md`: `Supporting: (optional / multi-subagents) frame-ship:git-worktree` y `Next: ... | frame-ship:pull-request` (REQ-SSI-005).
+- `skills/quality-gate/SKILL.md`: `Previous: ... | frame-ship:pull-request` y loop de retorno por fallo a `debugging` (REQ-SSI-006).
+
+### Breaking Changes
+
+- None.
+
+## Known Issues
+
+- None.
+
+## Rollback / Undo
+
+- `git revert <release-commit>` restaura el estado previo de los contratos sin impacto colateral.
+
+---
+
 # Release Notes: debugging skill (rollout)
 
 **Date:** 2026-09-16

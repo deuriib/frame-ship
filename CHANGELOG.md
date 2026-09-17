@@ -9,6 +9,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 - Antigravity CLI (agy) plugin at repo root: `plugin.json` + `hooks.json` + `hooks/*.ts` via bun (context-inject PreInvocation, safety-gate PreToolUse, format-note PostToolUse) + `rules/frame-ship.md` verbatim cards, 1:1 context parity with the opencode plugin, `skills/` reused verbatim ([engineering, security, automation/ops], SPEC-agy-plugin-engineering; gate OPEN 5/5 + waiver, DoD PASS).
 - git-worktree supporting skill: isolated parallel SPEC lanes (max-2, repo-local worktrees) with fail-closed hygiene + consent/announce flow ([engineering, automation, security, people], SPEC-git-worktree-engineering, SPEC-git-worktree-automation, SPEC-git-worktree-security, SPEC-git-worktree-people; gate OPEN 9/9, DoD 47/47).
+- Supporting skills integration: `git-worktree`, `debugging`, `pull-request` formally catalogued in `skills/AGENTS.md` (13 dirs) + opt-in triggers in `using-frame-ship` + conditional `Previous`/`Supporting`/`Next` in Chain Contracts of `propose-changes`, `execute-spec`, `quality-gate` ([engineering], SPEC-supporting-skills-integration; gate OPEN 4/4, DoD PASS).
 
 ### Changed
 
