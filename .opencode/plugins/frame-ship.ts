@@ -141,16 +141,34 @@ async function readTextFile(path: string): Promise<string> {
 
 // First ---...--- fence → description (description: "..." or '...', verbatim,
 // never rewritten); remainder trimmed → prompt. No fence → empty description,
-// whole input trimmed as prompt.
+// whole input trimmed as prompt. Hardened: leading BOM/whitespace stripped
+// before the fence match; a fence that opens-but-never-closes falls back to
+// description-or-empty + body with fence/metadata lines removed, so raw
+// frontmatter never leaks into the prompt. Pure string ops, no logging —
+// never throws, never echoes contents.
 function parseAgentFile(raw: string): { description: string; prompt: string } {
-  const text = raw || "";
+  const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
   const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
-  if (!fence) return { description: "", prompt: text.trim() };
-  const frontmatter = fence[1] || "";
-  const descMatch = frontmatter.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
-  const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
-  const prompt = text.slice(fence[0].length).trim();
-  return { description, prompt };
+  if (fence) {
+    const frontmatter = fence[1] || "";
+    const descMatch = frontmatter.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
+    const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
+    const prompt = text.slice(fence[0].length).trim();
+    return { description, prompt };
+  }
+  const open = text.match(/^---\s*\r?\n([\s\S]*)$/);
+  if (open) {
+    const inner = open[1] || "";
+    const descMatch = inner.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
+    const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
+    const prompt = inner
+      .split(/\r?\n/)
+      .filter((line) => !/^\s*(---\s*|name\s*:|description\s*:)/.test(line))
+      .join("\n")
+      .trim();
+    return { description, prompt };
+  }
+  return { description: "", prompt: text.trim() };
 }
 
 // Live bootstrap: SKILL.md body only (references stay file-based per scope).
