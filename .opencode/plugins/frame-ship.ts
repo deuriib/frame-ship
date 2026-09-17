@@ -366,9 +366,11 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
           if (!raw) continue;
           const parsed = parseAgentFile(raw);
           if (!parsed.prompt) continue;
-          const record = { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
-          if (!hasAgents) (c.agents ??= {})[entry.key] ??= record;
-          if (!hasAgent) (c.agent ??= {})[entry.key] ??= record;
+          // Separate object per mirror — no shared identity across the alias
+          // boundary (a write via `config.agents[k]` stays invisible via
+          // `config.agent[k]`).
+          if (!hasAgents) (c.agents ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
+          if (!hasAgent) (c.agent ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode };
         }
         // Guard the defaults: a skipped/fully-missed lane must not leave a
         // `default_agent` pointing at a key that was never registered.
