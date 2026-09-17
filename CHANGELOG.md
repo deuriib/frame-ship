@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.5.0] — 2026-09-17
+
 ### Added
 
 - Antigravity CLI (agy) plugin at repo root: `plugin.json` + `hooks.json` + `hooks/*.ts` via bun (context-inject PreInvocation, safety-gate PreToolUse, format-note PostToolUse) + `rules/frame-ship.md` verbatim cards, 1:1 context parity with the opencode plugin, `skills/` reused verbatim ([engineering, security, automation/ops], SPEC-agy-plugin-engineering; gate OPEN 5/5 + waiver, DoD PASS).

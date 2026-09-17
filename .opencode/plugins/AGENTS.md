@@ -1,7 +1,7 @@
 # PLUGINS — opencode runtime
 
 ## OVERVIEW
-Single auto-discovered entry: `frame-ship.ts` v0.4.0 (154 lines). Zero deps, registers skills + injection.
+Single auto-discovered entry: `frame-ship.ts` v0.5.0 (154 lines). Zero deps, registers skills + injection.
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
