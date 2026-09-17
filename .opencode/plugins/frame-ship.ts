@@ -116,6 +116,98 @@ async function loadBootstrapBody(skillsDir: string): Promise<string> {
   }
 }
 
+type AgentMode = "primary" | "all" | "subagent";
+
+interface AgentManifestEntry {
+  key: string;
+  file: string;
+  mode: AgentMode;
+}
+
+// Static roster manifest — 74 keys, re-verified by fresh `agents/**/*.md`
+// disk re-scan at execute time (77 files minus AGENTS.md, README.md,
+// delegation-contract.md). Key = file stem; sole alias:
+// `engineering/espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
+// keeps key `espinoza`). Modes: `montilla` primary, 8 C-levels `all`,
+// 65 specialists `subagent`. Bodies/descriptions are read by path at init —
+// never pasted here (reference-only provenance).
+const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
+  { key: "montilla", file: "c-level/montilla.md", mode: "primary" },
+  { key: "barrera", file: "c-level/barrera.md", mode: "all" },
+  { key: "dauhajre", file: "c-level/dauhajre.md", mode: "all" },
+  { key: "espinoza", file: "c-level/espinoza.md", mode: "all" },
+  { key: "montero", file: "c-level/montero.md", mode: "all" },
+  { key: "santana", file: "c-level/santana.md", mode: "all" },
+  { key: "subero", file: "c-level/subero.md", mode: "all" },
+  { key: "vasquez", file: "c-level/vasquez.md", mode: "all" },
+  { key: "vera", file: "c-level/vera.md", mode: "all" },
+  { key: "architect", file: "engineering/architect.md", mode: "subagent" },
+  { key: "automation-engineer", file: "engineering/automation-engineer.md", mode: "subagent" },
+  { key: "automation-reviewer", file: "engineering/automation-reviewer.md", mode: "subagent" },
+  { key: "backend", file: "engineering/backend.md", mode: "subagent" },
+  { key: "data-engineer", file: "engineering/data-engineer.md", mode: "subagent" },
+  { key: "devops", file: "engineering/devops.md", mode: "subagent" },
+  { key: "espinoza-specialist", file: "engineering/espinoza.md", mode: "subagent" },
+  { key: "frontend", file: "engineering/frontend.md", mode: "subagent" },
+  { key: "qa", file: "engineering/qa.md", mode: "subagent" },
+  { key: "review-data", file: "engineering/review-data.md", mode: "subagent" },
+  { key: "review-readability", file: "engineering/review-readability.md", mode: "subagent" },
+  { key: "review-refuter", file: "engineering/review-refuter.md", mode: "subagent" },
+  { key: "review-reliability", file: "engineering/review-reliability.md", mode: "subagent" },
+  { key: "review-resilience", file: "engineering/review-resilience.md", mode: "subagent" },
+  { key: "review-risk", file: "engineering/review-risk.md", mode: "subagent" },
+  { key: "grc-analyst", file: "security/grc-analyst.md", mode: "subagent" },
+  { key: "iam-specialist", file: "security/iam-specialist.md", mode: "subagent" },
+  { key: "incident-responder", file: "security/incident-responder.md", mode: "subagent" },
+  { key: "privacy-engineer", file: "security/privacy-engineer.md", mode: "subagent" },
+  { key: "security", file: "security/security.md", mode: "subagent" },
+  { key: "security-reviewer", file: "security/security-reviewer.md", mode: "subagent" },
+  { key: "accountant", file: "finance/accountant.md", mode: "subagent" },
+  { key: "cost-analyst", file: "finance/cost-analyst.md", mode: "subagent" },
+  { key: "credit-analyst", file: "finance/credit-analyst.md", mode: "subagent" },
+  { key: "finance-reviewer", file: "finance/finance-reviewer.md", mode: "subagent" },
+  { key: "financial-analyst", file: "finance/financial-analyst.md", mode: "subagent" },
+  { key: "fpna-analyst", file: "finance/fpna-analyst.md", mode: "subagent" },
+  { key: "internal-auditor", file: "finance/internal-auditor.md", mode: "subagent" },
+  { key: "investment-analyst", file: "finance/investment-analyst.md", mode: "subagent" },
+  { key: "payroll-specialist", file: "finance/payroll-specialist.md", mode: "subagent" },
+  { key: "personal-finance", file: "finance/personal-finance.md", mode: "subagent" },
+  { key: "personal-investor", file: "finance/personal-investor.md", mode: "subagent" },
+  { key: "risk-analyst", file: "finance/risk-analyst.md", mode: "subagent" },
+  { key: "tax-specialist", file: "finance/tax-specialist.md", mode: "subagent" },
+  { key: "treasurer", file: "finance/treasurer.md", mode: "subagent" },
+  { key: "compliance-officer", file: "legal/compliance-officer.md", mode: "subagent" },
+  { key: "contract-drafter", file: "legal/contract-drafter.md", mode: "subagent" },
+  { key: "ip-counsel", file: "legal/ip-counsel.md", mode: "subagent" },
+  { key: "labor-counsel", file: "legal/labor-counsel.md", mode: "subagent" },
+  { key: "legal-researcher", file: "legal/legal-researcher.md", mode: "subagent" },
+  { key: "legal-reviewer", file: "legal/legal-reviewer.md", mode: "subagent" },
+  { key: "litigation-counsel", file: "legal/litigation-counsel.md", mode: "subagent" },
+  { key: "privacy-counsel", file: "legal/privacy-counsel.md", mode: "subagent" },
+  { key: "brand-reviewer", file: "marketing/brand-reviewer.md", mode: "subagent" },
+  { key: "brand-strategist", file: "marketing/brand-strategist.md", mode: "subagent" },
+  { key: "content-strategist", file: "marketing/content-strategist.md", mode: "subagent" },
+  { key: "copywriter", file: "marketing/copywriter.md", mode: "subagent" },
+  { key: "email-marketer", file: "marketing/email-marketer.md", mode: "subagent" },
+  { key: "marketing-analyst", file: "marketing/marketing-analyst.md", mode: "subagent" },
+  { key: "ppc-specialist", file: "marketing/ppc-specialist.md", mode: "subagent" },
+  { key: "seo", file: "marketing/seo.md", mode: "subagent" },
+  { key: "social-media", file: "marketing/social-media.md", mode: "subagent" },
+  { key: "friction-mediator", file: "people/friction-mediator.md", mode: "subagent" },
+  { key: "people-operations", file: "people/people-operations.md", mode: "subagent" },
+  { key: "people-reviewer", file: "people/people-reviewer.md", mode: "subagent" },
+  { key: "performance-analyst", file: "people/performance-analyst.md", mode: "subagent" },
+  { key: "deal-closer", file: "revenue/deal-closer.md", mode: "subagent" },
+  { key: "funnel-optimizer", file: "revenue/funnel-optimizer.md", mode: "subagent" },
+  { key: "pricing-strategist", file: "revenue/pricing-strategist.md", mode: "subagent" },
+  { key: "revenue-reviewer", file: "revenue/revenue-reviewer.md", mode: "subagent" },
+  { key: "revops-analyst", file: "revenue/revops-analyst.md", mode: "subagent" },
+  { key: "explore", file: "shared/explore.md", mode: "subagent" },
+  { key: "general", file: "shared/general.md", mode: "subagent" },
+  { key: "scout", file: "shared/scout.md", mode: "subagent" },
+  { key: "writer", file: "shared/writer.md", mode: "subagent" },
+];
+
 export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInput) => {
   const fallbackBase = (directory || worktree || "").replace(/[/\\]+$/, "");
   const skillsDir = resolveSkillsDir(fallbackBase);
