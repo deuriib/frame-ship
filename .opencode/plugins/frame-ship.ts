@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.5.0 — Frame→Ship plugin (single-file, zero deps).
+ * frame-ship v0.6.0 — Frame→Ship plugin (single-file, zero deps).
  * Chain: see CHAIN const (single source of truth for order).
  * Skills: ./skills/<stage>/SKILL.md. Location: .opencode/plugins/frame-ship.ts.
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
@@ -7,7 +7,7 @@
 
 import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
 
-const VERSION = "0.5.0";
+const VERSION = "0.6.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
