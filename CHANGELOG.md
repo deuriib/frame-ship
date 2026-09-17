@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+
+- C-level chat roster declutter: optional `hidden` in `AGENTS_MANIFEST` + `config.agents`/`config.agent` mirror; 8 C-level `mode:all` `hidden:true` (`barrera`, `dauhajre`, `espinoza`, `montero`, `santana`, `subero`, `vasquez`, `vera`), `montilla` visible, 0 subagent flags; backward-compatible exact shape `hidden:true` ([engineering], SPEC-hidden-flag-engineering; gate OPEN 4/4, DoD PASS; restart opencode to take effect).
+
 ## [v0.6.0] — 2026-09-17
 
 ### Added

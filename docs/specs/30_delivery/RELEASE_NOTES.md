@@ -458,3 +458,47 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 - `git revert` of the impl + remediation range (touching only `.opencode/plugins/frame-ship.ts` + `.opencode/plugins/AGENTS.md` refs + `package.json` manifest + matrix file) restores the v0.5.0 runtime — roster lane removed, skills lane intact. No data migration, no external undo, no key rotation (guardrail 4: owner remediates).
 - Verify rollback: `config.agents` roster keys absent; `skills.paths` registration + 3-card injection + compaction unchanged; `mise run typecheck` green.
 - Owner: vasquez (engineering owner). ETA: < 15 min (NF-004 holds). Restart opencode after revert to take effect.
+
+---
+
+# Release Notes: hidden-flag manifest overlay (rollout)
+
+**Date:** 2026-09-17
+**Release Manager:** vasquez (CTO, engineering owner — orchestrator-delegated ship mechanics, single-domain)
+**Specs Included:** SPEC-hidden-flag-engineering
+**Domains-Touched:** [engineering] (data lens N/A — no schemas/lineage/stores)
+**Ship Type:** rollout (local plugin — restart opencode to take effect)
+
+## Highlights
+
+- C-level chat roster decluttered: `montilla` only visible; 8 C-level `mode:all` (`barrera`, `dauhajre`, `espinoza`, `montero`, `santana`, `subero`, `vasquez`, `vera`) carry exact `hidden:true`; 65 subagents untouched (hidden by default in host).
+- Backward-compatible optional-only overlay: `AgentManifestEntry.hidden?: boolean` + conditional spread in both mirror inserts — absent flag = byte-identical objects, no migration.
+- Full chain in `single` mode: brief → spec → proposal → arch review (APPROVED, ADR waived) → exec (`91cff38`) → min-gate (4/4 pass) → DoD PASS → this rollout. Version triple untouched v0.6.0 (docs-only ship, no bump per SPEC §5).
+
+## Changes
+
+### Features
+
+- `AgentManifestEntry` gains optional `hidden?: boolean` (`frame-ship.ts:242-247`) — `AgentMode` unchanged (REQ-001 — SPEC-hidden-flag-engineering, engineering)
+- 8 C-level `mode:all` entries carry exact `hidden:true` boolean literal; `montilla` (primary) has no hidden field (REQ-002 — same spec, engineering)
+- Subagents untouched: 0 `hidden` on all 65 `mode:subagent` lines (REQ-003 — same spec, engineering)
+- Config mirror propagates hidden when present: both Record types gain `hidden?: boolean` + `...(entry.hidden !== undefined ? { hidden: entry.hidden } : {})` on both inserts (REQ-004 — same spec, engineering)
+- `docs/specs/10_design/ARCHITECTURE.md` INV-004 overlay sentence (contract doc touch, not a decision change — same spec, engineering)
+
+### Fixes
+
+- N/A (no defect; display-overlay addition)
+
+### Breaking Changes
+
+- None — additive optional flag; absent = host default (visible for primary/all, hidden for subagent); single-file zero-dep holds, `mise run typecheck` green.
+
+## Known Issues
+
+- Host ignoring unknown `hidden` leaves roster undecluttered but harmless — no wedge, no data loss. Owner: engineering.
+
+## Rollback / Undo
+
+- `git revert 91cff38` restores the pre-flag tree (manifest interface + 8 entries + mirror types/inserts + ARCHITECTURE.md overlay). No data migration, no external sends/filings/launches/deploys, no key rotation (guardrail 4: owner remediates).
+- Verify rollback: C-level `mode:all` lines have no `hidden`; mirror inserts are `{ description, prompt, mode }` only; `mise run typecheck` green.
+- Release commit itself reverts via `git revert <release-sha>` (docs-only, ETA < 5 min). Owner: vasquez (engineering owner). ETA: < 10 min. Restart opencode after revert to take effect.
