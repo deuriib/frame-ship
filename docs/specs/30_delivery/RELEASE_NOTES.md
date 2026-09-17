@@ -295,3 +295,39 @@ Delete `skills/debugging/` dir; revert execute commit. No external sends/filings
 ## Rollback / Undo
 
 Zero-change release — nothing to revert in the live tree. Release commit itself reverts via `git revert <release-sha>` (docs-only, ETA < 5 min). Prior unit commits revert independently with no live-tree effect: proposal `ee218c7`, gate `e7e8836`, handoff `850c337` (spec `692ae76`, brief `71bbe0e`). No external sends/filings/launches/deploys to undo. Owner: engineering owner, ETA: immediate (< 5 min).
+
+---
+
+# Release Notes: brainstorm → frame-intent (rollout)
+
+**Date:** 2026-09-16
+**Release Manager:** montilla (CEO)
+**Specs Included:** SPEC-brainstorm-frame-intent-engineering
+**Domains-Touched:** [engineering, people]
+**Ship Type:** rollout
+
+## Highlights
+
+- Chain entry now classifies first: `spike-equivalent / bounded-initiative / architectural-initiative` with announce + override + one-way ratchet — hidden complexity upgrades early instead of failing downstream.
+- HARD-GATE on every brief: ceremony scales with size (nod → chat-yes → file approval), the approval itself never does.
+- Elicitation discipline folded in: one-question-at-a-time, 2–3 framings with recommendation + YAGNI, decomposition rule, sectioned approval, self-review + user review gate — outputs stay BRIEF + OKRs per ADR-006.
+
+## Changes
+
+### Features
+
+- `skills/frame-intent/SKILL.md` §3 rewritten (13 steps + Red Flags table); §4 hardened against sideways skills and gate skips (SPEC-brainstorm-frame-intent-engineering, engineering)
+- `skills/frame-intent/references/product-brief.md` gains `Classification:` / `Framings-considered:` / `Approval:` placeholders (same spec, engineering)
+- Full chain in `single` mode: brief → spec → proposal → arch review (ADR-006) → exec → min-gate + people (5/5 pass) → DoD PASS → this rollout
+
+### Breaking Changes
+
+- None — in-place upgrade; brief authors get 3 new optional fields, chain order and packet contract unchanged.
+
+## Known Issues
+
+- Spike→answer-only vs mini-BRIEF mapping stays open (BRIEF open question) — first real brief on the new flow confirms it. Owner: orchestrator.
+
+## Rollback / Undo
+
+Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. No external sends/filings/launches/deploys to undo. Owner: engineering owner, ETA < 15 min.

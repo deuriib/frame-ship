@@ -9,6 +9,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 - git-worktree supporting skill: isolated parallel SPEC lanes (max-2, repo-local worktrees) with fail-closed hygiene + consent/announce flow ([engineering, automation, security, people], SPEC-git-worktree-engineering, SPEC-git-worktree-automation, SPEC-git-worktree-security, SPEC-git-worktree-people; gate OPEN 9/9, DoD 47/47).
 
+### Changed
+
+- `frame-intent` classify-first elicitation: spike/bounded/architectural classification + HARD-GATE + one-at-a-time questions + 2–3 framings/YAGNI + decompose rule + sectioned approval + self-review + Red Flags ([engineering, people], SPEC-brainstorm-frame-intent-engineering; ADR-006; gate OPEN 5/5, DoD PASS). Brief template gains `Classification`/`Framings-considered`/`Approval` fields; outputs stay BRIEF + OKRs.
+
 ### Removed
 
 - `skills/using-frame-ship/references/tool-mapping.md` (engineering, SPEC-remove-tool-mapping-engineering): CEO-only dispatch contract now single-sourced in `using-frame-ship/SKILL.md` + checklist + AGENTS.md + plugin; SKILL §3/§5 reworded, zero live pointers (gate OPEN, DoD PASS).
