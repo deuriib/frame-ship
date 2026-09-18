@@ -11,7 +11,7 @@ const VERSION = "0.6.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
-  "frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
+  "frame-intent → translate-to-spec → propose-changes → review-review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
 
 // Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
@@ -21,7 +21,7 @@ Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for con
 
 // Short-form guardrails: every rule 1-14 present, greppable by number, same meaning. Full text: AGENTS.md.
 const GUARDRAILS_FULL = `${MARKER} Guardrails (BEFORE dispatch, AFTER verify; full text: AGENTS.md):
-Security: 1.Deny default; no secret/token/credential/session in code/config/logs/examples/events; finding w/o proof(diff/scan/log)=REFUTED. 2.OWASP: screen injection, broken authN/Z, data exposure, insecure deps, missing access; new endpoints/adapters/boundaries/payloads=trust boundaries. 3.Least privilege: minimum scope per interface/key/role/automation; wide/shared/cross-tenant=findings. 4.No freelance fixes: never rotate keys/patch prod/widen perms; report severity+location, owner remediates.
+Security: 1.Deny default; no secret/token/credential/session in code/config/logs/examples/events; finding w/o proof(diff/scan/log)=REFUTED. 2.OWASP: screen injection, broken authN/Z, data exposure, insecure deps, missing access; new endpoints/adapters/boundaries/payloads=trust boundaries. 3.Least privilege: minimum scope per interface/key/role/automation; wide/cross-tenant=findings. 4.No freelance fixes: never rotate keys/patch prod/widen perms; report severity+location, owner remediates.
 Privacy (Ley 172-13): 5.Minimization: minimum PII; map flow source→store→log→third party. 6.Boundary hygiene: every port/adapter/event/log/prompt=PII checkpoint; mask/tokenize, allowlists. 7.Retention: every PII store declares purpose+TTL+deletion; purge expired post-snapshot. 8.Scoped export: PASS exports allowlisted evidence only; never full dump/PII in shares/lessons/bridge.
 Severity: 9.Critical(exploitable/prod/loss),High(probable),Medium(conditional),Low(hygiene). 10.Critical/High surface same session+severity+evidence+owner; Med/Low ride gate. 11.Residual explicit: APPROVE+conditions lists risk+owner; no silent PASS.
 Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 14.Respect attention—one point/paragraph; state assumptions on irreversible. FAIL→retry N=2 differently→escalate orchestrator. No 3rd loop, no sideways.`;
@@ -120,7 +120,10 @@ const agentFileCache = new Map<string, string>();
 // ms; 2000ms is generous headroom against false skips on loaded disks.
 const READ_TIMEOUT_MS = 2000;
 
-function withTimeout(task: Promise<string>, ms: number): Promise<string | undefined> {
+function withTimeout(
+  task: Promise<string>,
+  ms: number,
+): Promise<string | undefined> {
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<undefined>((resolve) => {
     timer = setTimeout(() => resolve(undefined), ms);
@@ -141,9 +144,11 @@ async function readTextFile(path: string): Promise<string> {
     // stays rejection-free from both sides.
     const read: Promise<string> = (async (): Promise<string> => {
       try {
-        const bunFile = (globalThis as unknown as {
-          Bun?: { file: (p: string) => { text: () => Promise<string> } };
-        })?.Bun?.file;
+        const bunFile = (
+          globalThis as unknown as {
+            Bun?: { file: (p: string) => { text: () => Promise<string> } };
+          }
+        )?.Bun?.file;
         if (typeof bunFile === "function") {
           return await bunFile(path).text();
         }
@@ -180,16 +185,30 @@ function parseAgentFile(raw: string): { description: string; prompt: string } {
   const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
   if (fence) {
     const frontmatter = fence[1] || "";
-    const descMatch = frontmatter.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
-    const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
+    const descMatch = frontmatter.match(
+      /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+    );
+    const description = (
+      descMatch?.[1] ??
+      descMatch?.[2] ??
+      descMatch?.[3] ??
+      ""
+    ).trim();
     const prompt = text.slice(fence[0].length).trim();
     return { description, prompt };
   }
   const open = text.match(/^---\s*\r?\n([\s\S]*)$/);
   if (open) {
     const inner = open[1] || "";
-    const descMatch = inner.match(/^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m);
-    const description = (descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "").trim();
+    const descMatch = inner.match(
+      /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+    );
+    const description = (
+      descMatch?.[1] ??
+      descMatch?.[2] ??
+      descMatch?.[3] ??
+      ""
+    ).trim();
     const prompt = inner
       .split(/\r?\n/)
       .filter((line) => !/^\s*(---\s*|name\s*:|description\s*:)/.test(line))
@@ -211,12 +230,15 @@ async function loadBootstrapBody(skillsDir: string): Promise<string> {
   const clean = (skillsDir || "").replace(/[/\\]+$/, "");
   if (!clean || clean === "/skills") return "";
   const skillFile = `${clean}/using-frame-ship/SKILL.md`;
-  if (bootstrapCachePath === skillFile && bootstrapCacheText) return bootstrapCacheText;
+  if (bootstrapCachePath === skillFile && bootstrapCacheText)
+    return bootstrapCacheText;
   try {
     let raw = "";
-    const bunFile = (globalThis as unknown as {
-      Bun?: { file: (p: string) => { text: () => Promise<string> } };
-    })?.Bun?.file;
+    const bunFile = (
+      globalThis as unknown as {
+        Bun?: { file: (p: string) => { text: () => Promise<string> } };
+      }
+    )?.Bun?.file;
     if (typeof bunFile === "function") {
       raw = await bunFile(skillFile).text();
     } else {
@@ -249,90 +271,153 @@ interface AgentManifestEntry {
 // Static roster manifest — 74 keys, re-verified by fresh `agents/**/*.md`
 // disk re-scan at execute time (77 files minus AGENTS.md, README.md,
 // delegation-contract.md). Key = file stem; sole alias:
-// `engineering/espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
+// `espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
 // keeps key `espinoza`). Modes: `montilla` primary, 8 C-levels `all`,
 // 65 specialists `subagent`. Optional `hidden`: 8 C-levels `all` carry
 // `hidden: true` (montilla stays visible; subagents carry no flag — hidden
 // by host default). Bodies/descriptions are read by path at init —
 // never pasted here (reference-only provenance).
 const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
-  { key: "montilla", file: "c-level/montilla.md", mode: "primary" },
-  { key: "barrera", file: "c-level/barrera.md", mode: "all", hidden: true },
-  { key: "dauhajre", file: "c-level/dauhajre.md", mode: "all", hidden: true },
-  { key: "espinoza", file: "c-level/espinoza.md", mode: "all", hidden: true },
-  { key: "montero", file: "c-level/montero.md", mode: "all", hidden: true },
-  { key: "santana", file: "c-level/santana.md", mode: "all", hidden: true },
-  { key: "subero", file: "c-level/subero.md", mode: "all", hidden: true },
-  { key: "vasquez", file: "c-level/vasquez.md", mode: "all", hidden: true },
-  { key: "vera", file: "c-level/vera.md", mode: "all", hidden: true },
-  { key: "architect", file: "engineering/architect.md", mode: "subagent" },
-  { key: "automation-engineer", file: "engineering/automation-engineer.md", mode: "subagent" },
-  { key: "automation-reviewer", file: "engineering/automation-reviewer.md", mode: "subagent" },
-  { key: "backend", file: "engineering/backend.md", mode: "subagent" },
-  { key: "data-engineer", file: "engineering/data-engineer.md", mode: "subagent" },
-  { key: "devops", file: "engineering/devops.md", mode: "subagent" },
-  { key: "espinoza-specialist", file: "engineering/espinoza.md", mode: "subagent" },
-  { key: "frontend", file: "engineering/frontend.md", mode: "subagent" },
-  { key: "qa", file: "engineering/qa.md", mode: "subagent" },
-  { key: "review-data", file: "engineering/review-data.md", mode: "subagent" },
-  { key: "review-readability", file: "engineering/review-readability.md", mode: "subagent" },
-  { key: "review-refuter", file: "engineering/review-refuter.md", mode: "subagent" },
-  { key: "review-reliability", file: "engineering/review-reliability.md", mode: "subagent" },
-  { key: "review-resilience", file: "engineering/review-resilience.md", mode: "subagent" },
-  { key: "review-risk", file: "engineering/review-risk.md", mode: "subagent" },
-  { key: "grc-analyst", file: "security/grc-analyst.md", mode: "subagent" },
-  { key: "iam-specialist", file: "security/iam-specialist.md", mode: "subagent" },
-  { key: "incident-responder", file: "security/incident-responder.md", mode: "subagent" },
-  { key: "privacy-engineer", file: "security/privacy-engineer.md", mode: "subagent" },
-  { key: "security", file: "security/security.md", mode: "subagent" },
-  { key: "security-reviewer", file: "security/security-reviewer.md", mode: "subagent" },
-  { key: "accountant", file: "finance/accountant.md", mode: "subagent" },
-  { key: "cost-analyst", file: "finance/cost-analyst.md", mode: "subagent" },
-  { key: "credit-analyst", file: "finance/credit-analyst.md", mode: "subagent" },
-  { key: "finance-reviewer", file: "finance/finance-reviewer.md", mode: "subagent" },
-  { key: "financial-analyst", file: "finance/financial-analyst.md", mode: "subagent" },
-  { key: "fpna-analyst", file: "finance/fpna-analyst.md", mode: "subagent" },
-  { key: "internal-auditor", file: "finance/internal-auditor.md", mode: "subagent" },
-  { key: "investment-analyst", file: "finance/investment-analyst.md", mode: "subagent" },
-  { key: "payroll-specialist", file: "finance/payroll-specialist.md", mode: "subagent" },
-  { key: "personal-finance", file: "finance/personal-finance.md", mode: "subagent" },
-  { key: "personal-investor", file: "finance/personal-investor.md", mode: "subagent" },
-  { key: "risk-analyst", file: "finance/risk-analyst.md", mode: "subagent" },
-  { key: "tax-specialist", file: "finance/tax-specialist.md", mode: "subagent" },
-  { key: "treasurer", file: "finance/treasurer.md", mode: "subagent" },
-  { key: "compliance-officer", file: "legal/compliance-officer.md", mode: "subagent" },
-  { key: "contract-drafter", file: "legal/contract-drafter.md", mode: "subagent" },
-  { key: "ip-counsel", file: "legal/ip-counsel.md", mode: "subagent" },
-  { key: "labor-counsel", file: "legal/labor-counsel.md", mode: "subagent" },
-  { key: "legal-researcher", file: "legal/legal-researcher.md", mode: "subagent" },
-  { key: "legal-reviewer", file: "legal/legal-reviewer.md", mode: "subagent" },
-  { key: "litigation-counsel", file: "legal/litigation-counsel.md", mode: "subagent" },
-  { key: "privacy-counsel", file: "legal/privacy-counsel.md", mode: "subagent" },
-  { key: "brand-reviewer", file: "marketing/brand-reviewer.md", mode: "subagent" },
-  { key: "brand-strategist", file: "marketing/brand-strategist.md", mode: "subagent" },
-  { key: "content-strategist", file: "marketing/content-strategist.md", mode: "subagent" },
-  { key: "copywriter", file: "marketing/copywriter.md", mode: "subagent" },
-  { key: "email-marketer", file: "marketing/email-marketer.md", mode: "subagent" },
-  { key: "marketing-analyst", file: "marketing/marketing-analyst.md", mode: "subagent" },
-  { key: "ppc-specialist", file: "marketing/ppc-specialist.md", mode: "subagent" },
-  { key: "seo", file: "marketing/seo.md", mode: "subagent" },
-  { key: "social-media", file: "marketing/social-media.md", mode: "subagent" },
-  { key: "friction-mediator", file: "people/friction-mediator.md", mode: "subagent" },
-  { key: "people-operations", file: "people/people-operations.md", mode: "subagent" },
-  { key: "people-reviewer", file: "people/people-reviewer.md", mode: "subagent" },
-  { key: "performance-analyst", file: "people/performance-analyst.md", mode: "subagent" },
-  { key: "deal-closer", file: "revenue/deal-closer.md", mode: "subagent" },
-  { key: "funnel-optimizer", file: "revenue/funnel-optimizer.md", mode: "subagent" },
-  { key: "pricing-strategist", file: "revenue/pricing-strategist.md", mode: "subagent" },
-  { key: "revenue-reviewer", file: "revenue/revenue-reviewer.md", mode: "subagent" },
-  { key: "revops-analyst", file: "revenue/revops-analyst.md", mode: "subagent" },
-  { key: "explore", file: "shared/explore.md", mode: "subagent" },
-  { key: "general", file: "shared/general.md", mode: "subagent" },
-  { key: "scout", file: "shared/scout.md", mode: "subagent" },
-  { key: "writer", file: "shared/writer.md", mode: "subagent" },
+  { key: "montilla", file: "montilla.md", mode: "primary" },
+  { key: "barrera", file: "barrera.md", mode: "all", hidden: true },
+  { key: "dauhajre", file: "dauhajre.md", mode: "all", hidden: true },
+  { key: "espinoza", file: "espinoza.md", mode: "all", hidden: true },
+  { key: "montero", file: "montero.md", mode: "all", hidden: true },
+  { key: "santana", file: "santana.md", mode: "all", hidden: true },
+  { key: "subero", file: "subero.md", mode: "all", hidden: true },
+  { key: "vasquez", file: "vasquez.md", mode: "all", hidden: true },
+  { key: "vera", file: "vera.md", mode: "all", hidden: true },
+  { key: "architect", file: "architect.md", mode: "subagent" },
+  {
+    key: "automation-engineer",
+    file: "automation-engineer.md",
+    mode: "subagent",
+  },
+  {
+    key: "automation-reviewer",
+    file: "automation-reviewer.md",
+    mode: "subagent",
+  },
+  { key: "backend", file: "backend.md", mode: "subagent" },
+  { key: "data-engineer", file: "data-engineer.md", mode: "subagent" },
+  { key: "devops", file: "devops.md", mode: "subagent" },
+  { key: "espinoza-specialist", file: "espinoza.md", mode: "subagent" },
+  { key: "frontend", file: "frontend.md", mode: "subagent" },
+  { key: "qa", file: "qa.md", mode: "subagent" },
+  { key: "review-data", file: "review-data.md", mode: "subagent" },
+  {
+    key: "review-readability",
+    file: "review-readability.md",
+    mode: "subagent",
+  },
+  { key: "review-refuter", file: "review-refuter.md", mode: "subagent" },
+  {
+    key: "review-reliability",
+    file: "review-reliability.md",
+    mode: "subagent",
+  },
+  { key: "review-resilience", file: "review-resilience.md", mode: "subagent" },
+  { key: "review-risk", file: "review-risk.md", mode: "subagent" },
+  { key: "grc-analyst", file: "grc-analyst.md", mode: "subagent" },
+  { key: "iam-specialist", file: "iam-specialist.md", mode: "subagent" },
+  {
+    key: "incident-responder",
+    file: "incident-responder.md",
+    mode: "subagent",
+  },
+  { key: "privacy-engineer", file: "privacy-engineer.md", mode: "subagent" },
+  { key: "security", file: "security.md", mode: "subagent" },
+  { key: "security-reviewer", file: "security-reviewer.md", mode: "subagent" },
+  { key: "accountant", file: "accountant.md", mode: "subagent" },
+  { key: "cost-analyst", file: "cost-analyst.md", mode: "subagent" },
+  { key: "credit-analyst", file: "credit-analyst.md", mode: "subagent" },
+  { key: "finance-reviewer", file: "finance-reviewer.md", mode: "subagent" },
+  { key: "financial-analyst", file: "financial-analyst.md", mode: "subagent" },
+  { key: "fpna-analyst", file: "fpna-analyst.md", mode: "subagent" },
+  { key: "internal-auditor", file: "internal-auditor.md", mode: "subagent" },
+  {
+    key: "investment-analyst",
+    file: "investment-analyst.md",
+    mode: "subagent",
+  },
+  {
+    key: "payroll-specialist",
+    file: "payroll-specialist.md",
+    mode: "subagent",
+  },
+  { key: "personal-finance", file: "personal-finance.md", mode: "subagent" },
+  { key: "personal-investor", file: "personal-investor.md", mode: "subagent" },
+  { key: "risk-analyst", file: "risk-analyst.md", mode: "subagent" },
+  { key: "tax-specialist", file: "tax-specialist.md", mode: "subagent" },
+  { key: "treasurer", file: "treasurer.md", mode: "subagent" },
+  {
+    key: "compliance-officer",
+    file: "compliance-officer.md",
+    mode: "subagent",
+  },
+  { key: "contract-drafter", file: "contract-drafter.md", mode: "subagent" },
+  { key: "ip-counsel", file: "ip-counsel.md", mode: "subagent" },
+  { key: "labor-counsel", file: "labor-counsel.md", mode: "subagent" },
+  { key: "legal-researcher", file: "legal-researcher.md", mode: "subagent" },
+  { key: "legal-reviewer", file: "legal-reviewer.md", mode: "subagent" },
+  {
+    key: "litigation-counsel",
+    file: "litigation-counsel.md",
+    mode: "subagent",
+  },
+  { key: "privacy-counsel", file: "privacy-counsel.md", mode: "subagent" },
+  { key: "brand-reviewer", file: "brand-reviewer.md", mode: "subagent" },
+  { key: "brand-strategist", file: "brand-strategist.md", mode: "subagent" },
+  {
+    key: "content-strategist",
+    file: "content-strategist.md",
+    mode: "subagent",
+  },
+  { key: "copywriter", file: "copywriter.md", mode: "subagent" },
+  { key: "email-marketer", file: "email-marketer.md", mode: "subagent" },
+  { key: "marketing-analyst", file: "marketing-analyst.md", mode: "subagent" },
+  { key: "ppc-specialist", file: "ppc-specialist.md", mode: "subagent" },
+  { key: "seo", file: "seo.md", mode: "subagent" },
+  { key: "social-media", file: "social-media.md", mode: "subagent" },
+  {
+    key: "friction-mediator",
+    file: "people/friction-mediator.md",
+    mode: "subagent",
+  },
+  {
+    key: "people-operations",
+    file: "people/people-operations.md",
+    mode: "subagent",
+  },
+  {
+    key: "people-reviewer",
+    file: "people/people-reviewer.md",
+    mode: "subagent",
+  },
+  {
+    key: "performance-analyst",
+    file: "people/performance-analyst.md",
+    mode: "subagent",
+  },
+  { key: "deal-closer", file: "deal-closer.md", mode: "subagent" },
+  { key: "funnel-optimizer", file: "funnel-optimizer.md", mode: "subagent" },
+  {
+    key: "pricing-strategist",
+    file: "pricing-strategist.md",
+    mode: "subagent",
+  },
+  { key: "revenue-reviewer", file: "revenue-reviewer.md", mode: "subagent" },
+  { key: "revops-analyst", file: "revops-analyst.md", mode: "subagent" },
+  { key: "explore", file: "explore.md", mode: "subagent" },
+  { key: "general", file: "general.md", mode: "subagent" },
+  { key: "scout", file: "scout.md", mode: "subagent" },
+  { key: "writer", file: "writer.md", mode: "subagent" },
 ];
 
-export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInput) => {
+export const FrameShipPlugin: Plugin = async ({
+  directory,
+  worktree,
+}: PluginInput) => {
   const fallbackBase = (directory || worktree || "").replace(/[/\\]+$/, "");
   const skillsDir = resolveSkillsDir(fallbackBase);
 
@@ -343,8 +428,24 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
     config: async (cfg: Config) => {
       const c = cfg as Config & {
         skills?: { paths?: string[] };
-        agents?: Record<string, { description: string; prompt: string; mode: AgentMode; hidden?: boolean }>;
-        agent?: Record<string, { description: string; prompt: string; mode: AgentMode; hidden?: boolean }>;
+        agents?: Record<
+          string,
+          {
+            description: string;
+            prompt: string;
+            mode: AgentMode;
+            hidden?: boolean;
+          }
+        >;
+        agent?: Record<
+          string,
+          {
+            description: string;
+            prompt: string;
+            mode: AgentMode;
+            hidden?: boolean;
+          }
+        >;
         default_agent?: string;
         subagent_depth?: number;
       };
@@ -372,8 +473,20 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
           // Separate object per mirror — no shared identity across the alias
           // boundary (a write via `config.agents[k]` stays invisible via
           // `config.agent[k]`).
-          if (!hasAgents) (c.agents ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode, ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}) };
-          if (!hasAgent) (c.agent ??= {})[entry.key] ??= { description: parsed.description, prompt: parsed.prompt, mode: entry.mode, ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}) };
+          if (!hasAgents)
+            (c.agents ??= {})[entry.key] ??= {
+              description: parsed.description,
+              prompt: parsed.prompt,
+              mode: entry.mode,
+              ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}),
+            };
+          if (!hasAgent)
+            (c.agent ??= {})[entry.key] ??= {
+              description: parsed.description,
+              prompt: parsed.prompt,
+              mode: entry.mode,
+              ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}),
+            };
         }
         // Guard the defaults: a skipped/fully-missed lane must not leave a
         // `default_agent` pointing at a key that was never registered.
@@ -383,7 +496,10 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
         }
       }
     },
-    "experimental.chat.system.transform": async (_input: unknown, output: unknown) => {
+    "experimental.chat.system.transform": async (
+      _input: unknown,
+      output: unknown,
+    ) => {
       const out = output as { system?: unknown };
       if (!Array.isArray(out.system)) return;
       if (hasMarker(out.system)) return; // idempotent — no duplication on retries
@@ -391,7 +507,10 @@ export const FrameShipPlugin: Plugin = async ({ directory, worktree }: PluginInp
       const bootstrap = await loadBootstrapBody(skillsDir);
       if (bootstrap) out.system.push(bootstrap);
     },
-    "experimental.session.compacting": async (_input: unknown, output: unknown) => {
+    "experimental.session.compacting": async (
+      _input: unknown,
+      output: unknown,
+    ) => {
       const out = output as { context?: unknown };
       if (!Array.isArray(out.context)) return;
       if (hasMarker(out.context)) return;
