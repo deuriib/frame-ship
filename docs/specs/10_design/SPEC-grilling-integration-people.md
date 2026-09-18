@@ -72,7 +72,7 @@ whether the wording is humane enough to use.
   1. Opt-in: "¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento para parar sin penalidad."
   2. One-at-a-time: "Hago una sola pregunta, espero tu respuesta, luego sigo."
   3. Anti-sycophancy: "Mi respuesta recomendada es X — ¿dónde puede estar mal?"
-  4. Warmth: "Reto cálido y directo: sin modo relentless. Si el tono aprieta, dilo y pausamos."
+  4. Warmth (intent-match paraphrase (T-010)): "Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos."
   5. Masking: "Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)."
   6. Ratchet: "Profundidad solo sube (spike→bounded→architectural), nunca baja mid-initiative."
 - Sign-off: people owner (this spec, tone/attention/opt-in); engineering owner (budget co-sign REQ-P-004);
