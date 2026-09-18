@@ -39,9 +39,10 @@ Pre-approval challenge round inside `propose-changes` only — never a new
 stage, never a new reviewer. Trigger — fires on ANY of: auth/data/API/PII
 surface; multi-domain scope; blast radius mentioning
 customers/regulators/revenue; approver request. On trigger, open with the
-opt-in line ("¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la
+opt-in line ("¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la
 vez)? Di sí para empezar o `salir` en cualquier momento para parar sin
-penalidad."), run exactly one budgeted pass, then terminal approve/reject —
+penalidad."), run exactly one budgeted pass (pass = ≤3 questions; question 4
+(N+1) = FAIL, blocked, must stop), then terminal approve/reject —
 no second pass without approver request. Repo files stay untouched during the
 round; the round challenges blast radius and rollback before code is allowed.
 Same human contract as C1: one question at a time ("Hago una sola pregunta,

@@ -28,7 +28,8 @@
 
 ## C2 budget note (REQ-002 — additive)
 
-One-pass budget: a triggered challenge round runs exactly once, then terminal
+One-pass budget: a triggered challenge round runs exactly once, where pass
+= ≤3 questions (question 4/N+1 = FAIL, blocked), then terminal
 approve/reject; no second pass without approver request. Blast-radius trigger
 pointer: any blast-radius line mentioning customers/regulators/revenue fires
 the C2 round. Rollback/approve-reject terminal preserved — the round challenges

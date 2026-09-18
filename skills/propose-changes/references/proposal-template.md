@@ -45,7 +45,8 @@ Change types: `file-create | file-modify | file-delete | document-create | campa
 - Trigger checklist — challenge round fires on ANY: auth/data/API/PII surface;
   multi-domain scope; blast radius mentioning customers/regulators/revenue;
   approver request.
-- One-pass budget: exactly one budgeted round per trigger, then terminal
+- One-pass budget: exactly one budgeted round per trigger (pass = ≤3
+  questions; question 4 (N+1) = FAIL, blocked), then terminal
   approve/reject; re-challenge only on approver request; pause/exit offered
   after the round.
 - Masking reminder: grill prompt + every export carry the people SPEC §4

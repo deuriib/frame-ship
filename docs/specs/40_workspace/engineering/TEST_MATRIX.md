@@ -21,7 +21,7 @@
 | REQ-001 | E-005 | C1 sample round: synthetic bounded initiative, 2 questions within cap 3, 1:1 turn-taking, falsifiable-bet recorded, 0 PII/secrets | Review | pass | 48757e8 |
 | REQ-001 | E-006 | C1 diff is file-modify only on `skills/frame-intent/SKILL.md` (+22 lines, one `### C1` section); no new dir/stage/reviewer/dep | Review | pass | 48757e8 |
 | REQ-002 | E-007 | C2 trigger list verbatim-in-intent: auth/data/API/PII, multi-domain, blast radius mentioning customers/regulators/revenue, approver request | Review | pass | (this commit) |
-| REQ-002 | E-008 | C2 one-pass budget verbatim-in-intent: exactly one budgeted pass, terminal approve/reject, no second pass without approver request | Review | pass | (this commit) |
+| REQ-002 | E-008 | C2 one-pass budget bound: exactly one budgeted pass where pass = ≤3 questions, Q4 (N+1) = FAIL blocked, terminal approve/reject, no second pass without approver request (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
 | REQ-002 | E-009 | C2 repo-untouched-during-grill rule + blast-radius/rollback challenge framing | Review | pass | (this commit) |
 | REQ-002 | E-010 | C2 human contract verbatim-in-intent (same five clauses as C1 + pause/exit before approve/reject) | Review | pass | (this commit) |
 | REQ-002 | E-011 | C2 sample round: synthetic API-surface proposal, trigger FIRES, one-pass Q1 on rollback, terminal approve, 0 PII/secrets, allowlisted export | Review | pass | (this commit) |
@@ -35,6 +35,7 @@
 | REQ-NF-001 | E-018 | Banned-lexicon grep = 0 on all 6 touched files: `rg -i -n "relentless\|interrogat\|drill\|corner\|trap\|relentless-mode"` → exit 1, no hits | Review | pass | (this commit) |
 | REQ-NF-001 | E-019 | Secret/PII scan: hits are policy-word declarations only (masking clause + "0 PII/secrets" claims), 0 values/assignments/tokens — REFUTED-pattern per S-C12-005 | Review | pass | (this commit) |
 | REQ-P-001..006 | E-020 | People inserts 1–6 intent-match in C1+C2 touchpoints (wrap-safe grep: `salir` 2+1, `una sola pregunta` 1+1, `estar mal` 1+1, `cálido` 1+1, `privacidad` 1+1+1, `solo sube` ratchet, `hard cap` budgets, one-pass, pause/exit); people-owner co-sign collected at quality-gate (REQ-P-004 co-owned) | Sign-off | pass (impl) / pending co-sign at gate | (this commit) |
+| REQ-002 | E-021 | C2 N+1 FAIL demo: `SAMPLE-grilling-C2.md` N+1 section — Q1–Q3 consume ≤3 budget, attempted Q4 BLOCKED with `grill: N+1 blocked` recorded, no answer taken (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
 
 Types per `references/test-matrix.md`. Skill-text unit: review/sign-off with artifact path — REQ-ID trace mandatory, satisfied per row.
 

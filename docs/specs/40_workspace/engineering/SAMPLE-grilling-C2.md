@@ -9,9 +9,10 @@ endpoint. Trigger check: touches API surface → FIRES (auth/data/API/PII
 trigger). Blast radius mentions internal consumers only — no
 customers/regulators/revenue line in this sample.
 
-**Opener (opt-in + exit hatch):** "¿Quieres una ronda de desafío opt-in (máx N
+**Opener (opt-in + exit hatch):** "¿Quieres una ronda de desafío opt-in (máx 3
 preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento
-para parar sin penalidad." → Answer: sí.
+para parar sin penalidad." → Answer: sí. Budget: one pass = ≤3 questions
+(COND-R1/P3/Q3/S3).
 
 **Turn-taking:** "Hago una sola pregunta, espero tu respuesta, luego sigo."
 
@@ -31,3 +32,8 @@ needs a config push instead.
 on approver request). Pause/exit offered: "¿Aprobamos, rechazamos, o pausamos
 aquí?" → approve. Repo files untouched during the round (proposal phase
 holds). Export: allowlisted evidence only (this file + scan log).
+
+**N+1 FAIL demo (COND-R1):** attempted Q4 ("¿Y si el flag no existe en una
+región?") after Q1–Q3 consumed the ≤3 budget → BLOCKED: `grill: N+1 blocked
+(pass = ≤3 questions)` recorded, round stops, no Q4 answer taken. Proves the
+cap is enumerable: 3 = PASS, 4 = FAIL.
