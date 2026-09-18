@@ -1,6 +1,6 @@
 # Proposed Changes: barrera — security lane C3+C4 (grilling integration)
 
-**Spec Reference:** `docs/specs/40_workspace/security/SPEC-grilling-integration-security.md#REQ-SEC-001..007` + `docs/specs/10_design/SPEC-grilling-integration-engineering.md#REQ-003..004` + people slice `docs/specs/10_design/SPEC-grilling-integration-people.md#REQ-P-001..006` (woven by reference) + brief `docs/briefs/BRIEF-grilling-integration.md` (read-only, approved 2026-09-18)
+**Spec Reference:** `docs/specs/20_backlog/SPEC-grilling-integration-security.md#REQ-SEC-001..007` (canonical per orchestrator COND-S4 ruling; `50_archive/` copy is terminal history) + `docs/specs/10_design/SPEC-grilling-integration-engineering.md#REQ-003..004` + people slice `docs/specs/10_design/SPEC-grilling-integration-people.md#REQ-P-001..006` (woven by reference) + brief `docs/briefs/BRIEF-grilling-integration.md` (read-only, approved 2026-09-18)
 **Agent:** barrera (CISO) — domain chain owner, security
 **Date:** 2026-09-18
 **Execution_Mode:** multi-subagents (max 2 parallel lanes; inherited from brief; per-SPEC override only with orchestrator waiver)
