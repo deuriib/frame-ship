@@ -5,7 +5,7 @@ description: Review a proposal against the canonical architecture contract and r
 
 # Review-Architecture — Architecture Review
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## 1. Purpose
 
@@ -25,7 +25,7 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches `task(general)` ordered to read skill + templates first.
+0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
 1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical — only `PROPOSED_CHANGES.md`, never `PROPOSED_CHANGES-*.md`).
 2. Compare against `ARCHITECTURE.md` + `API_CONTRACTS.md` (canonical singletons — update-in-place, never `ARCHITECTURE-*.md` / `API_CONTRACT-*.md`).
 3. Produce/update ADR via `references/adr-template.md`.

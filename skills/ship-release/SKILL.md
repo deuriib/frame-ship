@@ -5,7 +5,7 @@ description: Orchestrate release shipping including release notes, changelog, an
 
 # Ship-Release — Release Orchestration
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## 1. Purpose
 
@@ -27,7 +27,7 @@ deployment order, and archival. Never ship without verification gates complete.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(ship-release)` loaded? Agent templates read for orchestrator + owning domain owner / devops? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = orchestrator dispatches `task(subagent_type="general")` ordered to read skill + template first.
+0. Pre-flight LOAD — HARD STOP: `skill(ship-release)` loaded? Agent templates read for orchestrator + owning domain owner / devops? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
 1. Verify all DoD checklists + gate reports are OPEN (with `SPEC/HARD/GATE/DOMAINS` intact).
 2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `RELEASE_NOTES.md`, never `RELEASE_NOTES-*.md`).
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).

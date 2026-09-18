@@ -5,7 +5,7 @@ description: Verify completed implementation meets Definition of Done and produc
 
 # Verify-Handoff — Definition of Done Verification
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## 1. Purpose
 
@@ -24,7 +24,7 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(verify-handoff)` loaded? Owning domain owner template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. Single = direct verify; multi = orchestrator dispatches `task(subagent_type="general")` ordered to read skill + template first. No OPEN gate = no handoff (waiver only domain owners + orchestrator).
+0. Pre-flight LOAD — HARD STOP: `skill(verify-handoff)` loaded? Owning domain owner template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. Single = direct verify; multi = orchestrator dispatches ordered to read skill. No OPEN gate = no handoff (waiver only domain owners + orchestrator).
 1. Read spec + test/evidence matrix + `GATE_REPORT.md` with `SPEC/HARD/GATE/DOMAINS` packet intact.
 2. Run DoD via `references/dod-checklist.md` — Common section for all, Domain appendix only for touched domains.
 3. Produce `docs/specs/40_workspace/<domain>/HANDOFF.md` via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows — with evidence links). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `HANDOFF.md`, never `HANDOFF-*.md`).

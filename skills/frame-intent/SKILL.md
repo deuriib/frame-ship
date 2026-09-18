@@ -5,7 +5,7 @@ description: Convert strategic direction into a structured Product Brief and OKR
 
 # Frame-Intent — Strategic Intent to Product Brief
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## 1. Purpose
 
@@ -35,8 +35,8 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
    - `spike-equivalent` — a feasibility question whose output is an answer, not a brief. Present probe in 2-3 sentences, get a nod, report a recommendation; anything built stays labeled throwaway.
    - `bounded-initiative` — a well-scoped intent with an existing flow to change. Ask the questions that matter, present a short BRIEF in chat, and STOP for an explicit yes. No BRIEF file.
    - `architectural-initiative` — new direction, new subsystem, restructure of how parts fit together. Follow the full flow below and write the BRIEF file.
-   Ratchet is one-way: hidden complexity upgrades the path — stop, say so, step up. Nothing downgrades mid-initiative. When in doubt, take the heavier path.
-3. Ask execution mode once per initiative: `single` (direct, no `task`, one specialist + min gate, small fully-specified units) or `multi-subagents` (default, `task(subagent_type="general")` max 2 parallel + full review wave). Freeze as `execution_mode` in brief; all specs follow it unless overridden per SPEC with orchestrator waiver.
+     Ratchet is one-way: hidden complexity upgrades the path — stop, say so, step up. Nothing downgrades mid-initiative. When in doubt, take the heavier path.
+3. Ask execution mode once per initiative: `single` (direct, no `task`, one specialist + min gate, small fully-specified units) or `multi-subagents` (default, max 2 parallel + full review wave). Freeze as `execution_mode` in brief; all specs follow it unless overridden per SPEC with orchestrator waiver.
 4. Elicit one question at a time — multiple-choice preferred, open-ended fine. Focus on purpose, constraints, success criteria. One question per message; break deeper topics into follow-ups.
 5. Propose 2–3 framings with trade-offs, lead with the recommendation and why. YAGNI ruthlessly — cut every non-essential scope from each framing before presenting.
 6. Present the BRIEF in sections scaled to complexity; ask after each section whether it looks right. Cover problem, outcome, scope, stakeholders, constraints.
@@ -50,13 +50,13 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 
 ### Red Flags (adapted — approval scales, never skipped)
 
-| Thought | Reality |
-|---------|---------|
-| "Too simple to need a brief" | Simple means a short brief in chat, not no brief. Two sentences, then approval. |
-| "I'll call it bounded to skip the file" | Reaching for a label to skip work IS the doubt — take the heavier path. |
-| "The design is obvious — start while they read" | The gate is the approval, not the length. Present, then stop until yes. |
-| "They approved the probe, so the follow-up is approved" | Each initiative gets its own classification and its own approval. |
-| "It grew, but almost done — no re-classify" | Hidden complexity upgrades the path. Stop and say so. |
+| Thought                                                 | Reality                                                                         |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| "Too simple to need a brief"                            | Simple means a short brief in chat, not no brief. Two sentences, then approval. |
+| "I'll call it bounded to skip the file"                 | Reaching for a label to skip work IS the doubt — take the heavier path.         |
+| "The design is obvious — start while they read"         | The gate is the approval, not the length. Present, then stop until yes.         |
+| "They approved the probe, so the follow-up is approved" | Each initiative gets its own classification and its own approval.               |
+| "It grew, but almost done — no re-classify"             | Hidden complexity upgrades the path. Stop and say so.                           |
 
 ## 4. What I won't do
 

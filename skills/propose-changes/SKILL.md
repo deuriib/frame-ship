@@ -5,7 +5,7 @@ description: Produce a structured PROPOSED_CHANGES.md for a spec without modifyi
 
 # Propose-Changes — Proposal Without Code
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## 1. Purpose
 
@@ -25,7 +25,7 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? Agent template read for proposing specialist + owning domain owner? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches via `task(general)` ordered to read skill + template first; orchestrator dispatches entire team; domain owners/specialists do the work or brief back — the domain owner returns its proposal to the orchestrator.
+0. Pre-flight LOAD — HARD STOP: `skill(propose-changes)` loaded? Agent template read for proposing specialist + owning domain owner? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches ordered to read skill; orchestrator dispatches entire team; domain owners/specialists do the work or brief back — the domain owner returns its proposal to the orchestrator.
 1. Read the target spec (`docs/specs/20_backlog/` or individual spec file) including `execution_mode` and `Domains-touched`.
 2. Produce `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` via `references/proposal-template.md` carrying `execution_mode` + `DOMAINS` forward. Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `PROPOSED_CHANGES.md`, never `PROPOSED_CHANGES-*.md`).
 3. Include risk assessment via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).
