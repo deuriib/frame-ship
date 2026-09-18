@@ -1,52 +1,50 @@
-# Handoff: Engineering Lane — Per-Lane Singleton Consolidation (Singleton Canonical)
+# Handoff: vasquez (CTO) — Antigravity Discovery-Path Fix
 
-**From:** vasquez (CTO) — engineering owner
+**Spec Reference:** `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md` (Antigravity Discovery-Path Fix, 2026-09-18; diagnosis `ses_f4dbd8fecffez6VfQUqdImYsr8`)
+**Agent:** vasquez (CTO) — engineering owner
 **Date:** 2026-09-18
-**Spec:** `SPEC-singleton-consolidation-engineering.md`
-**Status:** consolidates-and-supersedes all prior lane handoffs listed below (history preserved in `50_archive/`)
+**Status:** complete
+**Domains-Touched:** [engineering]
 
-## Outcome
+> **Singleton note:** this file reuses the canonical `40_workspace/engineering/HANDOFF.md` slot (update-in-place, never suffix). Prior content (singleton-consolidation handoff, 2026-09-18) is superseded by this unit and recoverable from git history (`git log -- docs/specs/40_workspace/engineering/HANDOFF.md`).
 
-Engineering lane consolidated to the 9-type singleton. 58 suffixed variants moved to `50_archive/` byte-identical (copy → hash-verify → delete). No purge, no repo-wide lock, no impl touched.
+## Deliverables
 
-## Prior Handoffs Superseded (all moved to `50_archive/`)
+| Artifact | Location / Evidence | Status |
+|----------|---------------------|--------|
+| Implementation | `.agents/rules/frame-ship.md` (new, Always On mirror) + `.agents/hooks.json` (new canonical) + `AGENTS.md` +1 bridge line; root `hooks.json` deleted; `plugin.json` untouched | done |
+| Tests / Evidence | `docs/specs/40_workspace/engineering/TEST_MATRIX.md` V-001..V-007 all PASS (docs/config-only; evidence = diffs, listings, JSON validation) + `IMPLEMENTATION_PLAN.md` steps 1–6 | done |
+| Gate | `docs/specs/40_workspace/quality-gate/antigravity-discovery-path/GATE_REPORT.md` — **OPEN** (min-review: readability ✅, risk ✅ no-trigger, refuter ✅ + 1 Low residual, qa ✅ 5/5 functional) | done |
+| Docs | `AGENTS.md` NOTES bridge (pointer only, no pasted context) | done |
+| Domain artifact | N/A (config/docs-only, no auth/data/API/PII, no behavior change, v0.6.0 lockstep held) | N/A |
 
-| Source | Subject |
-|--------|---------|
-| `HANDOFF-002-portable.md` | 002-portable |
-| `HANDOFF-003-agents-to-root.md` | 003-agents-to-root |
-| `HANDOFF-agy-plugin.md` | agy-plugin |
-| `HANDOFF-brainstorm-frame-intent.md` | brainstorm-frame-intent |
-| `HANDOFF-commit-convention purge.md` | commit-convention purge |
-| `HANDOFF-debugging.md` | debugging |
-| `HANDOFF-git-worktree.md` | git-worktree |
-| `HANDOFF-hidden-flag.md` | hidden-flag |
-| `HANDOFF-pull-request.md` | pull-request |
-| `HANDOFF-remove-tool-mapping.md` | remove-tool-mapping |
-| `HANDOFF-residual-cleanup.md` | residual-cleanup |
-| `HANDOFF-skill-refs-normalization.md` | skill-refs-normalization |
-| `HANDOFF-supporting-skills-integration.md` | supporting-skills-integration |
-| `HANDOFF-version-sync-0.6.0.md` | version-sync-0.6.0 |
+## Definition of Done Checklist
 
-Per-handoff lessons remain readable in the archived originals; the standing lesson of this unit: **suffix-per-variant was the drift mechanism — the singleton rule (create-if-missing / update-in-place / never-suffix) is now the lane's file discipline.**
+- [x] Acceptance criteria satisfied — 5/5 verify-runbook checks functionally met (mirror body identical, Always On + footer intact, hooks semantic-identical + single source resolves + JSON valid, plugin.json valid + untouched, bridge resolves)
+- [x] Tests/evidence linked per REQ-ID — V-001..V-007 in TEST_MATRIX, each with linked artifact/command output
+- [x] Load evidence present — skills `quality-gate` + `verify-handoff` loaded and cited; mode `single`; packet `SPEC:engineering/PROPOSED_CHANGES.md / HARD:single+5-step blast radius, runtimes untouched, v0.6.0 lockstep / GATE:OPEN / DOMAINS:[engineering]` intact, reference-only
+- [x] Domain checks passing — Common 6/6; Engineering appendix N/A with justification (zero code paths, runtimes untouched); no other domain touched
+- [x] Security checks passing — not security-touched; guardrails screened (no secrets, same hook commands/timeouts, no new trust boundary/privilege/PII); review-risk + architect/ADR not triggered per proposal §Approval
+- [x] Documentation updated — AGENTS.md bridge; changelog N/A (internal-only config, justification in proposal blast radius); ADR explicitly waived (no contract change — `plugin.json` edit not elected)
 
-## DoD Verification (verify-handoff, 2026-09-18 — skill `verify-handoff`)
+## Residual Risks (owned, carried forward)
 
-Gate OPEN required — held: `docs/specs/40_workspace/quality-gate/singleton-consolidation-engineering/GATE_REPORT.md` = OPEN 4/4.
+- **R-001** (Med/Med, owner vasquez): mirror drifts from source on future edits — footer lockstep + drift-check diff in runbook; future rule edits update both paths in one unit.
+- **R-004** (Low/Med, owner vasquez): stranded consumer on removed root `hooks.json` — rollback `git checkout -- hooks.json`, ETA < 10 min.
+- **F-001** (Low, owner vasquez): TEST_MATRIX V-003 "byte-identical" wording overstated — verified semantic-identical (769 B CRLF vs 730 B LF, whitespace-only variance); claim frozen as evidence, correction recorded here, no rework.
 
-| DoD item | Status | Evidence |
-|----------|--------|----------|
-| qa verdict green | ✅ | `quality-gate/singleton-consolidation-engineering/qa.md` — 58/58 moves verified, scan clean |
-| ADR updated or explicitly waived | ✅ waived | No new design; lane files link `10_design/` truth (rationale in proposal approvals + gate report) |
-| Docs touched | ✅ | 9 canonicals + `15_requirements/REQ-singleton-consolidation-engineering.md` + 5 gate files |
-| Review wave, no Critical/High | ✅ | readability ✅, risk ✅ (no C/H), refuter ✅ (4 refuted), qa ✅ |
+No Critical/High findings. No waiver (gate OPEN on merits).
 
-Next agent: `frame-ship:ship-release`.
+## Lesson Capture
 
-## Rollback
+1. **Claim what you verified, verbatim what you mean.** "Byte-identical" is a hash claim; this unit earned "semantic-identical" (canonical-JSON equal, whitespace variance from editor normalization). Before a future mirror dispatch, recall: normalize line endings (LF) at write time or word the matrix entry as semantic-identity with the canonicalization command attached. Evidence wording is a contract — overstatement is a finding even when function holds.
+2. **Additive before destructive is the rollback strategy.** Steps 1–2 landed and verified before step 5 removed the root twin; rollback before removal was delete-only. Keep that ordering in every move-then-delete plan.
+3. **Conditional edits are the reversible default.** The `plugin.json` surfaces edit was gated on schema support, inspected read-only first, and correctly not elected — which is also what kept the architect/ADR trigger dormant. When in doubt, make the no-change path the default and force the change to justify itself.
 
-Reverse any move per the record tables above; delete the 8 newly created canonicals if a full revert is ordered (this proposal file stays as audit trail). ETA < 15 min; owner vasquez.
+## Blockers / Open Questions
 
-## Cross-Domain Request (to montilla, orchestrator)
+None.
 
-Non-engineering lanes still carry suffixed variants and belong to their owners — security (`SECURITY_REVIEW-*.md`, `THREAT_MODEL-*`, `TEST_MATRIX-git-worktree-security.md`, …), people (8 files), automation (`HANDOFF-git-worktree.md`), single-demo (lowercase `implementation-plan.md` / `test-matrix.md`, `RELEASE_NOTES-demo.md`, `SECURITY_REVIEW.md`), quality-gate subdirs. Request: dispatch each owning owner to run the same singleton consolidation in their lane. Engineering does not touch them (no sideways).
+## Next Agent
+
+`frame-ship:ship-release` — verified work ready to ship. Packet by reference: SPEC/HARD/GATE/DOMAINS as above + this HANDOFF. No cross-domain need (engineering-only; no Cross-domain request to montilla).
