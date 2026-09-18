@@ -33,6 +33,8 @@ One-pass budget: a triggered challenge round runs exactly once, where pass
 approve/reject; approver-requested re-grill ≤1 extra pass (total ≤2), then
 Retry N=2 → escalate orchestrator. Exit before decision = pause + recorded
 `grill: exited` + escalate, proposal stays unapproved. Blast-radius trigger
-pointer: any blast-radius line mentioning customers/regulators/revenue fires
-the C2 round. Rollback/approve-reject terminal preserved — the round challenges
+pointer: any blast-radius line mentioning customers/regulators/revenue (with
+synonyms: users/clients/members/consumers, GDPR/Ley 172-13/authorities,
+pipeline/quota/money) fires the C2 round — independent scan rule applies
+even when prose says "internal only". Rollback/approve-reject terminal preserved — the round challenges
 the plan, it never rewrites it.

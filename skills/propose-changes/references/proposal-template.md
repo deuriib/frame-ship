@@ -43,7 +43,10 @@ Change types: `file-create | file-modify | file-delete | document-create | campa
 ## C2 challenge hook (REQ-002 — additive, no new required section)
 
 - Trigger checklist — challenge round fires on ANY: auth/data/API/PII surface;
-  multi-domain scope; blast radius mentioning customers/regulators/revenue;
+  multi-domain scope; blast radius mentioning customers/regulators/revenue
+  (synonyms fire: customers/users/clients/members/consumers; regulators/GDPR/
+  Ley 172-13/authorities; revenue/pipeline/quota/money; independent
+  blast-radius + API-surface scan fires even when prose says "internal only");
   approver request.
 - One-pass budget: exactly one budgeted round per trigger (pass = ≤3
   questions; question 4 (N+1) = FAIL, blocked), then terminal

@@ -37,3 +37,9 @@ holds). Export: allowlisted evidence only (this file + scan log).
 región?") after Q1–Q3 consumed the ≤3 budget → BLOCKED: `grill: N+1 blocked
 (pass = ≤3 questions)` recorded, round stops, no Q4 answer taken. Proves the
 cap is enumerable: 3 = PASS, 4 = FAIL.
+
+**Evasion negative demo (COND-R3):** hostile phrasing "API change for users,
+internal consumers only" omits the literal words customers/regulators/revenue
+→ STILL FIRES via (a) synonym table (users = customers synonym) + (b)
+independent API-surface scan (touches API surface = prong 1). Proves omission
+does not dodge: evasion attempt → grill fires.

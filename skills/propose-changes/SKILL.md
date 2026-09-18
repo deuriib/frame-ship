@@ -38,7 +38,10 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 Pre-approval challenge round inside `propose-changes` only — never a new
 stage, never a new reviewer. Trigger — fires on ANY of: auth/data/API/PII
 surface; multi-domain scope; blast radius mentioning
-customers/regulators/revenue; approver request. On trigger, open with the
+customers/regulators/revenue (synonyms fire: customers/users/clients/members/
+consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/
+money — independent blast-radius + API-surface scan fires even when prose
+self-reports "internal only"); approver request. On trigger, open with the
 opt-in line ("¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la
 vez)? Di sí para empezar o `salir` en cualquier momento para parar sin
 penalidad."), run exactly one budgeted pass (pass = ≤3 questions; question 4
