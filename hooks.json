@@ -3,7 +3,7 @@
     "PreInvocation": [
       {
         "type": "command",
-        "command": "node ./hooks/context-inject.ts",
+        "command": "bun ./hooks/context-inject.ts",
         "timeout": 10
       }
     ]
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ./hooks/safety-gate.ts",
+            "command": "bun ./hooks/safety-gate.ts",
             "timeout": 10
           }
         ]
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ./hooks/format-note.ts",
+            "command": "bun ./hooks/format-note.ts",
             "timeout": 10
           }
         ]
