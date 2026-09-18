@@ -25,3 +25,11 @@
 ## Domain Considerations
 
 [Finance: budget/controls — finance owner. Legal: IP/regulatory/liability — legal owner. Marketing: brand/GTM — marketing owner. People: workload/culture/change plan — people owner. Revenue: pipeline/quota — revenue owner. Automation/ops: runbook/capacity/flags — automation owner + engineering owner. Delete non-touched domains.]
+
+## C2 budget note (REQ-002 — additive)
+
+One-pass budget: a triggered challenge round runs exactly once, then terminal
+approve/reject; no second pass without approver request. Blast-radius trigger
+pointer: any blast-radius line mentioning customers/regulators/revenue fires
+the C2 round. Rollback/approve-reject terminal preserved — the round challenges
+the plan, it never rewrites it.

@@ -33,6 +33,25 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 5. Hand off to `frame-ship:review-security` / `frame-ship:review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.
 6. Close with a commit (the proposal doc itself is committed, impl files stay untouched). Example: `docs(proposal-003): add PROPOSED_CHANGES for auth with blast radius`.
 
+### C2 — Pre-approval challenge trigger + one-pass budget (REQ-002)
+
+Pre-approval challenge round inside `propose-changes` only — never a new
+stage, never a new reviewer. Trigger — fires on ANY of: auth/data/API/PII
+surface; multi-domain scope; blast radius mentioning
+customers/regulators/revenue; approver request. On trigger, open with the
+opt-in line ("¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la
+vez)? Di sí para empezar o `salir` en cualquier momento para parar sin
+penalidad."), run exactly one budgeted pass, then terminal approve/reject —
+no second pass without approver request. Repo files stay untouched during the
+round; the round challenges blast radius and rollback before code is allowed.
+Same human contract as C1: one question at a time ("Hago una sola pregunta,
+espero tu respuesta, luego sigo."), disagreement invite on every recommended
+answer ("Mi respuesta recomendada es X — ¿dónde puede estar mal?"), warmth
+("Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta,
+dilo y pausamos."), masking ("Por tu privacidad: no compartas
+PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13).").
+After the round, offer pause/exit before the approve/reject decision.
+
 ## 4. What I won't do
 
 - Modify implementation files during proposal phase (only `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` + risk assessment are produced and committed).

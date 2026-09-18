@@ -39,3 +39,15 @@ Change types: `file-create | file-modify | file-delete | document-create | campa
 - [ ] security owner (if auth/data/external-API/PII impact)
 
 > **Rule:** No repository file modifications during proposal phase. For non-code domains, no external sends/filings/launches during proposal phase either.
+
+## C2 challenge hook (REQ-002 — additive, no new required section)
+
+- Trigger checklist — challenge round fires on ANY: auth/data/API/PII surface;
+  multi-domain scope; blast radius mentioning customers/regulators/revenue;
+  approver request.
+- One-pass budget: exactly one budgeted round per trigger, then terminal
+  approve/reject; re-challenge only on approver request; pause/exit offered
+  after the round.
+- Masking reminder: grill prompt + every export carry the people SPEC §4
+  masking clause ("Por tu privacidad: no compartas PII/secretos/tokens en esta
+  ronda; enmascaramos todo export (Ley 172-13)."); allowlisted evidence only.
