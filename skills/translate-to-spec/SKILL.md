@@ -28,7 +28,7 @@ canonical architecture contract. The brief is read-only here.
 1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
 2. The orchestrator dispatches the owning domain owners by domains touched (8-domain catalogue in `../AGENTS.md`). Each dispatched domain owner understands their domain's practices and returns its spec to the orchestrator.
 3. Each dispatched domain owner produces a spec using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning domain owner. Orchestrator dispatches entire team; domain owners do the work or brief back — the domain owner returns its deliverable to the orchestrator (max 2 parallel).
-4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes).
+4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `ARCHITECTURE.md`, never `ARCHITECTURE-*.md`; only `API_CONTRACT.md`, never `API_CONTRACT-*.md`).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
 6. Hand off to `frame-ship:propose-changes` as `SPEC:<spec-path>#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 7. Close with a commit. Example: `feat(spec-003): add REQ-IDs and ARCHITECTURE contract for auth`.

@@ -2,7 +2,7 @@
 
 **Owner:** automation owner + engineering owner (ops mechanics)
 **Spec:** `docs/specs/20_backlog/SPEC-git-worktree-automation.md#REQ-AUTO-001..007`
-**Architecture:** `docs/specs/10_design/ARCHITECTURE-git-worktree.md` (INV-002, INV-003, INV-007)
+**Architecture:** `docs/specs/10_design/ARCHITECTURE-git-worktree.md` (INV-002, INV-003, INV-007; historical suffixed pointer — new work uses the singleton `ARCHITECTURE.md` per lane, create-if-missing else update-in-place, never suffix)
 **Status:** pwsh-only — POSIX dollar-paren command substitution is banned in every block below.
 **Scope note:** this file owns automation/ops mechanics only — create, verify,
 serialized setup, baseline gate, remove plus TTL, capacity guard. Skill shape,
@@ -149,7 +149,7 @@ git worktree list
 
 Live count MUST be at or below 2 at every phase: after create, before
 baseline, and after remove. Count evidence is a `git worktree list` snapshot
-referenced in the gate packet (see TEST_MATRIX C-003). `.worktrees/` stays
+referenced in the gate packet (see TEST_MATRIX C-003 in the singleton `TEST_MATRIX.md` per lane — create-if-missing else update-in-place, never `TEST_MATRIX-*.md`). `.worktrees/` stays
 git-ignored and fail-closed — no worktree contents committed, no
 secrets or PII in worktree paths, logs, or gate evidence (allowlisted
 evidence only, Ley 172-13 minimization).

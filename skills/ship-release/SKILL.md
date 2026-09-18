@@ -29,7 +29,7 @@ deployment order, and archival. Never ship without verification gates complete.
 
 0. Pre-flight LOAD — HARD STOP: `skill(ship-release)` loaded? Agent templates read for orchestrator + owning domain owner / devops? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = orchestrator dispatches `task(subagent_type="general")` ordered to read skill + template first.
 1. Verify all DoD checklists + gate reports are OPEN (with `SPEC/HARD/GATE/DOMAINS` intact).
-2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable).
+2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `RELEASE_NOTES.md`, never `RELEASE_NOTES-*.md`).
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
 4. Coordinate ship mechanics with rollback/undo plan: devops for deploys; owning domain owner for filings/launches/closes/workflows.
 5. Archive by MOVE (never copy) completed spec to `docs/specs/50_archive/` with domain artifacts linked: `git mv <source-spec-path> docs/specs/50_archive/` then verify source path gone (`git status --short` shows `R` rename, no duplicate) before commit.

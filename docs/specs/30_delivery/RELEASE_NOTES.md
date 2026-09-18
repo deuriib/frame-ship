@@ -634,3 +634,47 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 ## Rollback / Undo
 
 - Move the archived originals back per the consolidation record tables in each canonical; delete the 8 newly created canonicals on full revert (`git revert <release-sha>` for the delivery commit). No external sends/filings/launches/deploys to undo. Owner: barrera, ETA < 15 min.
+
+---
+
+# Release Notes: singleton skill-hardening (policy-enable)
+
+**Date:** 2026-09-18
+**Release Manager:** vasquez (CTO, engineering owner — single-domain ship)
+**Specs Included:** SPEC-singleton-skill-hardening
+**Domains-Touched:** [engineering]
+**Ship Type:** policy-enable (skills process text only — restart opencode to take effect)
+
+## Highlights
+
+- Singleton file discipline now enforced in skill prose: 10 skill files, 16 insertions — every lane canonical carries create-if-missing / update-in-place / never-suffix wording (`execute-spec`, `propose-changes`, `review-architecture`, `review-security`, `ship-release`, `translate-to-spec`, `verify-handoff`, `git-worktree` refs, `spec-template` singleton footer).
+- Historical suffixed pointers annotated, not rewritten: `git-worktree` refs mark old `TEST_MATRIX-*` / `ARCHITECTURE-*` paths as historical with the singleton pointer forward — no history rewrite, no impl touched.
+- Full chain in `single` mode: proposal → min-gate (readability + refuter, OPEN) → DoD PASS → this enable. ADR waived (no new design; wording guardrails only). No lane moves per ship HARD constraint (skills/ diff + delivery notes only).
+- Changelog: N/A — internal-only process-text hardening, no user-facing change (justification recorded per ship-release §3).
+- Precedents: `07a75de` (engineering lane), `7cfa9b6` (security lane), `796ed1b` (automation lane).
+
+## Changes
+
+### Features
+
+- N/A (no new behavior — discipline wording only)
+
+### Fixes
+
+- N/A (no defect; drift-prevention guardrails)
+
+### Removed
+
+- None (no purge — annotations only, zero deletions of live paths)
+
+### Breaking Changes
+
+- None — additive wording; chain order, contracts, and file paths untouched.
+
+## Known Issues
+
+- Other lanes still carry suffixed variants (people, single-demo, quality-gate subdirs) — their owners' scope via montilla; engineering does not touch them. Owner: orchestrator.
+
+## Rollback / Undo
+
+- `git revert <release-sha>` restores pre-hardening skill prose (10 files). No data migration, no external sends/filings/launches/deploys. Owner: vasquez, ETA < 5 min. Restart opencode after revert to take effect.

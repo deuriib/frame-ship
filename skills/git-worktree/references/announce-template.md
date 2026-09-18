@@ -2,7 +2,7 @@
 
 **Owner:** people owner (santana)
 **Spec:** `docs/specs/20_backlog/SPEC-git-worktree-people.md#REQ-PPL-001..005` (SPEC §4 verbatim)
-**Architecture:** `docs/specs/10_design/ARCHITECTURE-git-worktree.md` INV-008 (adopted verbatim)
+**Architecture:** `docs/specs/10_design/ARCHITECTURE-git-worktree.md` INV-008 (adopted verbatim; historical suffixed pointer — new work uses the singleton `ARCHITECTURE.md` per lane, create-if-missing else update-in-place, never suffix).
 **Scope note:** this file owns announce/consent/refusal wording only. Skill mechanics (`worktree-lifecycle.md`), pwsh flow (`pwsh-flow.md`), security gates (`guards.md`), and `.gitignore` live with sibling lanes — complement, never duplicate. Consumed by reference from `worktree-lifecycle.md` §1/§3. Single writer: people lane.
 
 ## 1. Create line (exactly once per create, consent prompt included)
@@ -60,4 +60,4 @@ Cross-domain request → orchestrator: [Need] <wording/DX feedback> [Reason] <wh
 
 - Transcript evidence is scoped excerpts only (allowlisted paths + redacted slot values); full-transcript dumps refused.
 - Slots carry no secrets/PII (`<donde>/<rama>/<porque>/<limpieza>`, `<n> archivos`); scan before share.
-- Exactly-once count verified in 2-SPEC dry run and recorded in `TEST_MATRIX-git-worktree-people.md`.
+- Exactly-once count verified in 2-SPEC dry run and recorded in `TEST_MATRIX-git-worktree-people.md` (historical suffixed pointer — new work uses the singleton `TEST_MATRIX.md` per lane, create-if-missing else update-in-place, never suffix).

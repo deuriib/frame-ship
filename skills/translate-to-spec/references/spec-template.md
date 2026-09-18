@@ -39,3 +39,5 @@
 | Requirement | Acceptance Criterion | Proposed Change | Evidence |
 |-------------|---------------------|-----------------|----------|
 | REQ-001 | AC-001 | PROPOSED_CHANGES.md | test ID or sign-off path |
+
+Singleton: per lane, create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per type (only `PROPOSED_CHANGES.md`, never `PROPOSED_CHANGES-*.md`).
