@@ -51,7 +51,12 @@ answer ("Mi respuesta recomendada es X — ¿dónde puede estar mal?"), warmth
 ("Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta,
 dilo y pausamos."), masking ("Por tu privacidad: no compartas
 PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13).").
-After the round, offer pause/exit before the approve/reject decision.
+After the round, offer pause/exit before the approve/reject decision. Retry
+N=2 → escalate orchestrator. No-answer after 2 reminders → recorded
+`grill: stalled` + escalate, proposal pauses. Approver-requested re-grill ≤1
+extra pass (total ≤2 passes), then Retry N=2 → escalate orchestrator. Exit
+before approve/reject = pause + recorded `grill: exited` + escalate;
+proposal stays unapproved (no silent promote).
 
 ## 4. What I won't do
 

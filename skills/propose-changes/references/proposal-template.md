@@ -47,8 +47,10 @@ Change types: `file-create | file-modify | file-delete | document-create | campa
   approver request.
 - One-pass budget: exactly one budgeted round per trigger (pass = ≤3
   questions; question 4 (N+1) = FAIL, blocked), then terminal
-  approve/reject; re-challenge only on approver request; pause/exit offered
-  after the round.
+  approve/reject; approver-requested re-challenge ≤1 extra pass (total ≤2),
+  then Retry N=2 → escalate orchestrator; pause/exit offered
+  after the round. Exit before decision = pause + recorded `grill: exited` +
+  escalate, proposal stays unapproved (no silent promote).
 - Masking reminder: grill prompt + every export carry the people SPEC §4
   masking clause ("Por tu privacidad: no compartas PII/secretos/tokens en esta
   ronda; enmascaramos todo export (Ley 172-13)."); allowlisted evidence only.

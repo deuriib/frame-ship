@@ -36,6 +36,7 @@
 | REQ-NF-001 | E-019 | Secret/PII scan: hits are policy-word declarations only (masking clause + "0 PII/secrets" claims), 0 values/assignments/tokens — REFUTED-pattern per S-C12-005 | Review | pass | (this commit) |
 | REQ-P-001..006 | E-020 | People inserts 1–6 intent-match in C1+C2 touchpoints (wrap-safe grep: `salir` 2+1, `una sola pregunta` 1+1, `estar mal` 1+1, `cálido` 1+1, `privacidad` 1+1+1, `solo sube` ratchet, `hard cap` budgets, one-pass, pause/exit); people-owner co-sign collected at quality-gate (REQ-P-004 co-owned) | Sign-off | pass (impl) / pending co-sign at gate | (this commit) |
 | REQ-002 | E-021 | C2 N+1 FAIL demo: `SAMPLE-grilling-C2.md` N+1 section — Q1–Q3 consume ≤3 budget, attempted Q4 BLOCKED with `grill: N+1 blocked` recorded, no answer taken (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
+| REQ-006 | E-022 | Round-level Retry N=2 → escalate in C1 + C2 text + C2 pre-decision exit-terminal (exit = pause + `grill: exited` + escalate, proposal unapproved) + stall rule (2 reminders → `grill: stalled` + escalate) (COND-R2/S1) | Review | pass | (this commit) |
 
 Types per `references/test-matrix.md`. Skill-text unit: review/sign-off with artifact path — REQ-ID trace mandatory, satisfied per row.
 

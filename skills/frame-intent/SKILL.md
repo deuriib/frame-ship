@@ -68,7 +68,9 @@ pausamos." Masking on every round: "Por tu privacidad: no compartas
 PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)."
 Challenger runs a falsifiable-bet prompt over the 2–3 framings (what evidence
 would kill each framing?) and records the output in `Framings-Considered`.
-After the round, offer pause/exit before continuing to the BRIEF.
+After the round, offer pause/exit before continuing to the BRIEF. Retry N=2
+→ escalate orchestrator. No-answer after 2 reminders → recorded
+`grill: stalled` + escalate, initiative pauses (no silent hang).
 
 ### Red Flags (adapted — approval scales, never skipped)
 

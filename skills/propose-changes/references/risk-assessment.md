@@ -30,7 +30,9 @@
 
 One-pass budget: a triggered challenge round runs exactly once, where pass
 = ≤3 questions (question 4/N+1 = FAIL, blocked), then terminal
-approve/reject; no second pass without approver request. Blast-radius trigger
+approve/reject; approver-requested re-grill ≤1 extra pass (total ≤2), then
+Retry N=2 → escalate orchestrator. Exit before decision = pause + recorded
+`grill: exited` + escalate, proposal stays unapproved. Blast-radius trigger
 pointer: any blast-radius line mentioning customers/regulators/revenue fires
 the C2 round. Rollback/approve-reject terminal preserved — the round challenges
 the plan, it never rewrites it.
