@@ -8,8 +8,9 @@ sample BRIEF `Framings-Considered`. Synthetic initiative, 0 PII/secrets.
 bounded → budget 2–3 questions (hard cap 3).
 
 **Opener (opt-in + exit hatch):** "¿Quieres una ronda de desafío opt-in (máx 3
-preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento
-para parar sin penalidad." → Answer: sí.
+preguntas, una a la vez)? Di sí para empezar o `exit/salir` en cualquier momento
+para parar sin penalidad." → Answer: sí. Budget: bounded typical 2–3, hard cap
+3 (1 = early close, NOT a violation; 0 = invalid).
 
 **Turn-taking:** "Hago una sola pregunta, espero tu respuesta, luego sigo."
 

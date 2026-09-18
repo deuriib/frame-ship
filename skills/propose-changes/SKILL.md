@@ -37,7 +37,7 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 - Scope: pre-approval challenge round inside `propose-changes` only — never a new stage, never a new reviewer. Glossary: see C1 (`skills/frame-intent/SKILL.md` §C1) — `challenge` = the round, `grill`/`ronda` aliases only; not redefined here.
 - Trigger — fires on ANY of: auth/data/API/PII surface; multi-domain scope; blast radius mentioning customers/regulators/revenue (synonyms fire: customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money — independent blast-radius + API-surface scan fires even when prose self-reports "internal only"); approver request.
-- Opener (exit word `salir`, cap bound): "¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento para parar sin penalidad." (canonical: people SPEC §4 inserts 1–2).
+- Opener (exit alias `exit/salir`, cap bound): "¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la vez)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." (canonical: people SPEC §4 inserts 1–2).
 - One-pass budget: exactly one budgeted pass per trigger, where pass = ≤3 questions; question 4 (N+1) = FAIL (blocked, must stop); then terminal approve/reject — no second pass without approver request.
 - Approver-requested re-grill: ≤1 extra pass (total ≤2 passes), then Retry N=2 → escalate orchestrator.
 - Exit terminal (pre-decision): exit before approve/reject = pause + recorded `grill: exited` + escalate; proposal stays unapproved (no silent promote).

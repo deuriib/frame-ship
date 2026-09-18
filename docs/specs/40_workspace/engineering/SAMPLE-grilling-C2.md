@@ -10,7 +10,7 @@ trigger). Blast radius mentions internal consumers only — no
 customers/regulators/revenue line in this sample.
 
 **Opener (opt-in + exit hatch):** "¿Quieres una ronda de desafío opt-in (máx 3
-preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento
+preguntas, una a la vez)? Di sí para empezar o `exit/salir` en cualquier momento
 para parar sin penalidad." → Answer: sí. Budget: one pass = ≤3 questions
 (COND-R1/P3/Q3/S3).
 
