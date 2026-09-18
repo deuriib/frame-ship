@@ -11,7 +11,7 @@ const VERSION = "0.6.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
-  "frame-intent → translate-to-spec → propose-changes → review-review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
+  "frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
 
 // Compact pointer-form card. Full detail lives in skills/*/SKILL.md + live bootstrap body — this keeps contract + routing only.
 const WORKFLOW_CARD = `${MARKER} Frame→Ship: ${CHAIN} (do not skip).
