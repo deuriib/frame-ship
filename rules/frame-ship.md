@@ -1,6 +1,11 @@
+---
+description: Frame-Ship chain contract — enforce stage load order + guardrails on every session
+alwaysApply: true
+---
+
 # frame-ship — persistent rules for agy
 
-> *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
+> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
 ## Chain (do not skip)
 
@@ -43,5 +48,6 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 - **Privacy (Ley 172-13):** minimization; every port/adapter/event/log/prompt is a PII checkpoint (mask/tokenize, allowlists); every PII store declares purpose + TTL + deletion; PASS exports carry allowlisted evidence only.
 - **Severity:** Critical (exploitable/prod/loss), High (probable), Medium (conditional), Low (hygiene). Critical/High surface same session with severity + evidence + owner. Residual risk explicit — no silent PASS.
 - **Conduct:** no sugarcoating; no busywork theater; respect attention (one point per paragraph; state assumptions on irreversible calls). FAIL → retry N=2 differently → escalate. No third loop, no sideways.
+- **Commit** always use work-unit commits.
 
 Version lockstep: [frame-ship v0.6.0] — bump with `.opencode/plugins/frame-ship.ts` + `hooks/context-inject.ts`.
