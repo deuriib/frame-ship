@@ -4,22 +4,22 @@
 > (opencode, Claude Code, Cursor, generic LLM subagents): load the file as a
 > persona/subagent as-is, pass inputs by reference, expect deliverable +
 > file list + risks + assumptions.
-> Inside frame-ship, dispatch uses `skill(<stage>)` + `read(agents/<domain>/<agent>.md)` before acting (single AND multi). Skills own the process; this file owns the craft.
+> Inside frame-ship, dispatch uses `skill(<stage>)` + `read(agents/<agent>.md)` before acting (single AND multi). Skills own the process; this file owns the craft.
 
 ## Layout
 
-`agents/<domain>/<agent>.md` — central, no duplicate bodies.
+`agents/<agent>.md` — central, no duplicate bodies.
 
-- `c-level/` (9): montilla, vasquez, dauhajre, subero, vera, santana, barrera, montero, espinoza — orchestrate stages+gates
-- `engineering/` (15): architect, automation-engineer, automation-reviewer, backend, frontend, devops, data-engineer, espinoza, qa, review-data, review-readability, review-refuter, review-reliability, review-resilience, review-risk — build + review wave (+ vasquez = 16 pilot slice)
-- `security/` (6): security, security-reviewer, iam-specialist, privacy-engineer, incident-responder, grc-analyst
-- `finance/` (14): accountant, cost-analyst, credit-analyst, financial-analyst, fpna-analyst, internal-auditor, investment-analyst, personal-finance, personal-investor, risk-analyst, tax-specialist, treasurer, payroll-specialist, finance-reviewer
-- `legal/` (8): compliance-officer, contract-drafter, ip-counsel, labor-counsel, legal-researcher, legal-reviewer, litigation-counsel, privacy-counsel
-- `marketing/` (9): brand-reviewer, brand-strategist, content-strategist, copywriter, email-marketer, marketing-analyst, ppc-specialist, seo, social-media
-- `people/` (4): friction-mediator, people-operations, people-reviewer, performance-analyst
-- `revenue/` (5): deal-closer, funnel-optimizer, pricing-strategist, revops-analyst, revenue-reviewer
-- `shared/` (1): writer
-- `agents/delegation-contract.md`: canonical contract (excluded from manifest)
+- `c-level` (9): montilla, vasquez, dauhajre, subero, vera, santana, barrera, montero, espinoza — orchestrate stages+gates
+- `engineering` (15): architect, automation-engineer, automation-reviewer, backend, frontend, devops, data-engineer, espinoza, qa, review-data, review-readability, review-refuter, review-reliability, review-resilience, review-risk — build + review wave (+ vasquez = 16 pilot slice)
+- `security` (6): security, security-reviewer, iam-specialist, privacy-engineer, incident-responder, grc-analyst
+- `finance` (14): accountant, cost-analyst, credit-analyst, financial-analyst, fpna-analyst, internal-auditor, investment-analyst, personal-finance, personal-investor, risk-analyst, tax-specialist, treasurer, payroll-specialist, finance-reviewer
+- `legal` (8): compliance-officer, contract-drafter, ip-counsel, labor-counsel, legal-researcher, legal-reviewer, litigation-counsel, privacy-counsel
+- `marketing` (9): brand-reviewer, brand-strategist, content-strategist, copywriter, email-marketer, marketing-analyst, ppc-specialist, seo, social-media
+- `people` (4): friction-mediator, people-operations, people-reviewer, performance-analyst
+- `revenue` (5): deal-closer, funnel-optimizer, pricing-strategist, revops-analyst, revenue-reviewer
+- `shared` (1): writer
+- `core/delegation-contract.md`: canonical contract (excluded from manifest)
 
 ## Template Schema
 
