@@ -678,3 +678,38 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 ## Rollback / Undo
 
 - `git revert <release-sha>` restores pre-hardening skill prose (10 files). No data migration, no external sends/filings/launches/deploys. Owner: vasquez, ETA < 5 min. Restart opencode after revert to take effect.
+
+---
+
+# Release Notes: guards DRILL singleton wording (automation close)
+
+**Date:** 2026-09-18
+**Release Manager:** espinoza (automation owner — single-domain ship, execution_mode=single)
+**Specs Included:** DRILL one-liner — `skills/git-worktree/references/guards.md` §5 singleton wording (1 ins / 1 del)
+**Domains-Touched:** [automation]
+**Ship Type:** close (internal close-out; docs-only wording, no deploy, filing, launch, or workflow enablement)
+
+## Highlights
+
+- §5 drill step now pins the lane singleton: drill logs attach to the lane singleton `DRILL.md` — create-if-missing else update-in-place, never `DRILL-*.md`.
+- Verified by espinoza: readability PASS, automation-reviewer APPROVE-conditional, barrera APPROVE held with §4/§7 carried. GATE CONDITIONAL already — ship-release only, no re-gate.
+- Single file touched: `skills/git-worktree/references/guards.md` (1 ins / 1 del). No lane moves. Precedents `4753f55`, `796ed1b`.
+- Changelog: N/A — internal-only docs wording, no user-facing change (justification recorded per ship-release §3).
+
+## Changes
+
+### Fixes
+
+- `skills/git-worktree/references/guards.md:104` — §5 drill-log line gains singleton sentence (DRILL one-liner, automation)
+
+### Breaking Changes
+
+- None — additive wording; drill probe order, gate proofs, and lane paths untouched.
+
+## Known Issues
+
+- None new. §4/§7 conditions carried per barrera APPROVE-held (not closed by this hunk).
+
+## Rollback / Undo
+
+- `git revert <release-sha>` restores the pre-singleton §5 line (one-line revert). No data migration, no external sends/filings/launches/deploys. Owner: vasquez, ETA < 5 min.

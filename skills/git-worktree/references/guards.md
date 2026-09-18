@@ -101,7 +101,7 @@ Drill:
    (each submodule pinned to an explicit SHA, no recursive/unpinned entries).
 4. Unpinned or recursive submodule without a recorded security-owner
    exception = gate finding; checkout stays refused.
-5. Attach the drill log (probe output + refuse-or-verify decision) to gate evidence.
+5. Attach the drill log (probe output + refuse-or-verify decision) to gate evidence. Singleton: drill logs attach to the lane singleton `DRILL.md` — create-if-missing else update-in-place, never `DRILL-*.md`.
 
 ## 6. Sandbox fallback `Temp\opencode` (REQ-SEC-006)
 
