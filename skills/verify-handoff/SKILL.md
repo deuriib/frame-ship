@@ -32,6 +32,25 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 5. Gates fail → return to `frame-ship:execute-spec` with specific findings.
 6. Close with a commit. Example: `docs(handoff-003): verify DoD and route SPEC-003 to ship`.
 
+## 3a. C4 — REQ→evidence-link presence check (surgical, security-owned)
+
+Every REQ links evidence (test/scan/log/review-link), not a tick; missing link
+= FAIL, no handoff. Attestation-alone = FAIL. Every C4 FAIL lists
+`residual-risk + owner`. Re-litigation of settled gate verdicts banned —
+findings return to `frame-ship:execute-spec` instead. Retry N=2 → escalate
+orchestrator. `SPEC/HARD/GATE/DOMAINS` packets preserved. PII checkpoint
+(REQ-SEC-003/004 + REQ-P-006 co-sign): zero
+PII/secrets/tokens/credentials/sessions in handoff text, grill
+questions/answers/prompts/logs/examples/exports; every
+prompt/adapter/event/log/export is a declared PII checkpoint (mask/tokenize +
+allowlist); allowlisted evidence only; Ley 172-13 minimization. Wide/cross-tenant
+disclosure = finding. No-freelance-fix: findings report `severity + location +
+evidence`, owner remediates — never rotate keys/patch prod/widen perms.
+Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
+proof surfaces same session. Tone (REQ-P-003/006 co-sign, people owner verifies
+at gate): warm and direct — one item at a time; say `salir` / pause anytime, no
+penalty; masking reminder rides every export.
+
 ## 4. What I won't do
 
 - Approve without the full DoD checklist.

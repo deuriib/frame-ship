@@ -7,7 +7,8 @@
 ## Common (all 8 domains)
 
 - [ ] All acceptance criteria met
-- [ ] All REQ-IDs have linked evidence (test OR review/sign-off/attestation)
+- [ ] All REQ-IDs have linked evidence (link present; attestation-alone = FAIL; missing link = FAIL, no handoff)
+- [ ] C4 FAIL lists `residual-risk + owner` (security lane; silent PASS = FAIL)
 - [ ] Edge cases / failure modes handled
 - [ ] Gate OPEN (or CONDITIONAL conditions cleared + waiver recorded if applicable)
 - [ ] Load evidence: stage skill + dispatched agent template cited (paths), execution_mode declared, packet intact — missing = FAIL, no handoff
