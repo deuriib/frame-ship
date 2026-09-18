@@ -77,3 +77,4 @@ No build/test scripts in repo. `tests/` empty.
 - Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
 - Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
 - Version aligned: root `package.json` v0.6.0 matches plugin header `v0.6.0` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
+- Antigravity discovery path: chain contract lives at `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`); hooks at `.agents/hooks.json`.

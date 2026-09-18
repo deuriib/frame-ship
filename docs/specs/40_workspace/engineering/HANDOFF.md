@@ -43,7 +43,7 @@ No Critical/High findings. No waiver (gate OPEN on merits).
 
 ## Blockers / Open Questions
 
-None.
+- **C-001 (ship-release condition, owner vasquez, authorized by montilla 2026-09-18):** disk drifted post-gate — `.agents/hooks.json` carries `node ./hooks/...` (gate verified `bun`, semantic-identical claim no longer holds) and `plugin.json` carries a `bun→node` description edit (gate verified byte-identical). Shipped as-is per CEO ruling with this condition recorded; follow-up lane re-verifies hook execution under node and either restores `bun` or re-gates on `node`. Rollback covers it: `git checkout -- hooks.json` + revert release commit restores root twin and prior descriptions, ETA < 10 min.
 
 ## Next Agent
 

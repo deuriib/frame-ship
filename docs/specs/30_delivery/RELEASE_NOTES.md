@@ -713,3 +713,44 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 ## Rollback / Undo
 
 - `git revert <release-sha>` restores the pre-singleton §5 line (one-line revert). No data migration, no external sends/filings/launches/deploys. Owner: vasquez, ETA < 5 min.
+
+---
+
+# Release Notes: Antigravity discovery-path fix (rollout)
+
+**Date:** 2026-09-18
+**Release Manager:** vasquez (CTO, engineering owner — orchestrator-delegated ship mechanics, single-domain)
+**Specs Included:** Antigravity Discovery-Path Fix (`docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`, 2026-09-18; diagnosis `ses_f4dbd8fecffez6VfQUqdImYsr8`)
+**Domains-Touched:** [engineering]
+**Ship Type:** rollout (local config/docs; Antigravity discovery-path fix)
+
+## Highlights
+
+- Chain contract now on the Antigravity discovery path: `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`, v0.6.0 lockstep held, no bump).
+- Single-source hooks: `.agents/hooks.json` canonical, root `hooks.json` removed post-verification (git history preserves it).
+- One-line by-reference bridge in root `AGENTS.md`; `plugin.json` structurally unchanged (no surfaces field elected, no ADR trigger).
+- Full chain in `single` mode: proposal → min-gate (readability + risk + refuter + qa, OPEN with 1 Low residual F-001) → DoD 6/6 PASS → this rollout.
+- Changelog: N/A — internal-only config/docs, no user-facing change (justification recorded per ship-release §3; precedent: singleton-consolidation lanes).
+- Archive: N/A — no `SPEC-*.md` contract file exists for this diagnosis-driven unit; workspace singletons stay live per singleton discipline (precedent: guards-drill release `5d2c897`, notes + impl only).
+
+## Changes
+
+### Fixes
+
+- Antigravity pathing miss (`rules/frame-ship.md` invisible off `rules/`): mirrored verbatim + Always On frontmatter (Antigravity Discovery-Path Fix, engineering)
+- Dual-source hook drift risk: root twin removed, `.agents/hooks.json` is the single source (Antigravity Discovery-Path Fix, engineering)
+
+### Breaking Changes
+
+- None — additive mirror + move-then-delete; runtimes (`.opencode/plugins/frame-ship.ts`, `hooks/context-inject.ts`), `rules/` source, `skills/` untouched.
+
+## Known Issues
+
+- **C-001** (condition, owner vasquez, authorized montilla 2026-09-18): post-gate disk drift — `.agents/hooks.json` runs `node ./hooks/...` (gate verified `bun`); `plugin.json` description reads `node` (gate verified byte-identical `bun`). Follow-up lane re-verifies hook execution under node or restores `bun`.
+- **R-001** (Med/Med, vasquez): mirror drifts from source on future edits — footer lockstep + drift-check diff in runbook carry the mitigation.
+- **R-004** (Low/Med, vasquez): stranded consumer on removed root `hooks.json` — rollback `git checkout -- hooks.json`, ETA < 10 min.
+- **F-001** (Low, vasquez): TEST_MATRIX V-003 "byte-identical" wording overstated — semantic-identical verified (769 B CRLF vs 730 B LF, whitespace-only variance).
+
+## Rollback / Undo
+
+- `git revert <release-sha>` restores the pre-ship tree; additionally `git checkout -- hooks.json` restores the root twin (mirror is additive until the root-removal step, so rollback before removal is delete-only). No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA < 10 min.
