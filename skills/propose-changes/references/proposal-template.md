@@ -57,3 +57,4 @@ Change types: `file-create | file-modify | file-delete | document-create | campa
 - Masking reminder: grill prompt + every export carry the people SPEC §4
   masking clause ("Por tu privacidad: no compartas PII/secretos/tokens en esta
   ronda; enmascaramos todo export (Ley 172-13)."); allowlisted evidence only.
+- Single source: glossary lives once in C1 (`skills/frame-intent/SKILL.md` §C1); opener/warmth/masking canonical wording lives in people SPEC §4 inserts 1–6 — this hook points there, never redefines.

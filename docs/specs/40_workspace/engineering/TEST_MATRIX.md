@@ -38,6 +38,7 @@
 | REQ-002 | E-021 | C2 N+1 FAIL demo: `SAMPLE-grilling-C2.md` N+1 section — Q1–Q3 consume ≤3 budget, attempted Q4 BLOCKED with `grill: N+1 blocked` recorded, no answer taken (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
 | REQ-006 | E-022 | Round-level Retry N=2 → escalate in C1 + C2 text + C2 pre-decision exit-terminal (exit = pause + `grill: exited` + escalate, proposal unapproved) + stall rule (2 reminders → `grill: stalled` + escalate) (COND-R2/S1) | Review | pass | (this commit) |
 | REQ-002 | E-023 | Trigger synonym hardening (customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money) + independent blast-radius/API-surface scan rule + evasion negative demo (`SAMPLE-grilling-C2.md` evasion section: "users/internal only" → STILL FIRES) (COND-R3) | Review | pass | (this commit) |
+| REQ-001 | E-024 | Glossary (challenge/grill/ronda defined once in C1, C2 points to C1) + block breakup (one bullet per rule C1/C2) + all placeholders bound (C1 opener N = 1/3/5 per classification, C2 máx 3, no naked N) + single-source pointers to people SPEC §4 + untouched aligned (files + external sends) (COND-D1/D3/D4/D5) | Review | pass | (this commit) |
 
 Types per `references/test-matrix.md`. Skill-text unit: review/sign-off with artifact path — REQ-ID trace mandatory, satisfied per row.
 

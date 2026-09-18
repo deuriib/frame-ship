@@ -50,27 +50,20 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 
 ### C1 — Classification-scaled challenger (opt-in plug-in, REQ-001)
 
-Opt-in challenge round inside `frame-intent` only — never a new stage, never
-mandatory, never a reason to skip the HARD-GATE. Opener (exit word `salir`):
-"¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez)? Di sí
-para empezar o `salir` en cualquier momento para parar sin penalidad." Exit =
-immediate stop, no re-ask in same stage, no penalty, recorded
-`grill: declined/exited`. Budgets, N per classification (default proposed,
-joint engineering + people sign-off at gate): spike 1 question hard cap;
-bounded 2–3 (hard cap 3); architectural full challenge hard cap 5 (4 core +
-1 frontier-empty). One-way ratchet: "Profundidad solo sube
-(spike→bounded→architectural), nunca baja mid-initiative." Turn-taking: "Hago
-una sola pregunta, espero tu respuesta, luego sigo." Every recommended answer
-carries the disagreement invite: "Mi respuesta recomendada es X — ¿dónde
-puede estar mal?" (where could this be wrong?). Warmth on every round: "Reto
-cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y
-pausamos." Masking on every round: "Por tu privacidad: no compartas
-PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)."
-Challenger runs a falsifiable-bet prompt over the 2–3 framings (what evidence
-would kill each framing?) and records the output in `Framings-Considered`.
-After the round, offer pause/exit before continuing to the BRIEF. Retry N=2
-→ escalate orchestrator. No-answer after 2 reminders → recorded
-`grill: stalled` + escalate, initiative pauses (no silent hang).
+- Scope: opt-in challenge round inside `frame-intent` only — never a new stage, never mandatory, never a reason to skip the HARD-GATE.
+- Glossary (single source for C1+C2 — C2 points here, never redefines): `challenge` = the budgeted round; `grill` = informal collective noun for C1–C4 rounds only; `ronda` = Spanish alias for `challenge` in openers.
+- Opener (exit word `salir`): "¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez — N = 1 spike / 3 bounded / 5 architectural)? Di sí para empezar o `salir` en cualquier momento para parar sin penalidad." (canonical: `docs/specs/10_design/SPEC-grilling-integration-people.md` §4 inserts 1–2).
+- Exit: immediate stop, no re-ask in same stage, no penalty, recorded `grill: declined/exited`.
+- Budgets, N per classification (default proposed, joint engineering + people sign-off at gate): spike 1 question hard cap; bounded 2–3 (hard cap 3); architectural full challenge hard cap 5 (4 core + 1 frontier-empty).
+- N+1 enforcement: question N+1 = FAIL (blocked, must stop); declared prompt text, enforced by agent discipline + gate review.
+- One-way ratchet: "Profundidad solo sube (spike→bounded→architectural), nunca baja mid-initiative." (canonical: people SPEC §4 insert 6).
+- Turn-taking: "Hago una sola pregunta, espero tu respuesta, luego sigo." (canonical: people SPEC §4 insert 2).
+- Disagreement invite on every recommended answer: "Mi respuesta recomendada es X — ¿dónde puede estar mal?" (where could this be wrong?) (canonical: people SPEC §4 insert 3).
+- Warmth on every round: "Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos." (intent-match paraphrase per T-010 of people SPEC §4 insert 4; single source §4).
+- Masking on every round: "Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)." (canonical: people SPEC §4 insert 5).
+- Falsifiable-bet prompt: challenger runs a falsifiable-bet prompt over the 2–3 framings (what evidence would kill each framing?) and records the output in `Framings-Considered`.
+- Pause/exit: after the round, offer pause/exit before continuing to the BRIEF.
+- Stall breaker: Retry N=2 → escalate orchestrator. No-answer after 2 reminders → recorded `grill: stalled` + escalate, initiative pauses (no silent hang).
 
 ### Red Flags (adapted — approval scales, never skipped)
 

@@ -37,4 +37,4 @@ pointer: any blast-radius line mentioning customers/regulators/revenue (with
 synonyms: users/clients/members/consumers, GDPR/Ley 172-13/authorities,
 pipeline/quota/money) fires the C2 round — independent scan rule applies
 even when prose says "internal only". Rollback/approve-reject terminal preserved — the round challenges
-the plan, it never rewrites it.
+the plan, it never rewrites it. Glossary single source C1 (`skills/frame-intent/SKILL.md` §C1); canonical clauses single source people SPEC §4.

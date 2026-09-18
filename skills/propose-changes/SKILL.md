@@ -35,31 +35,16 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ### C2 — Pre-approval challenge trigger + one-pass budget (REQ-002)
 
-Pre-approval challenge round inside `propose-changes` only — never a new
-stage, never a new reviewer. Trigger — fires on ANY of: auth/data/API/PII
-surface; multi-domain scope; blast radius mentioning
-customers/regulators/revenue (synonyms fire: customers/users/clients/members/
-consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/
-money — independent blast-radius + API-surface scan fires even when prose
-self-reports "internal only"); approver request. On trigger, open with the
-opt-in line ("¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la
-vez)? Di sí para empezar o `salir` en cualquier momento para parar sin
-penalidad."), run exactly one budgeted pass (pass = ≤3 questions; question 4
-(N+1) = FAIL, blocked, must stop), then terminal approve/reject —
-no second pass without approver request. Repo files stay untouched during the
-round; the round challenges blast radius and rollback before code is allowed.
-Same human contract as C1: one question at a time ("Hago una sola pregunta,
-espero tu respuesta, luego sigo."), disagreement invite on every recommended
-answer ("Mi respuesta recomendada es X — ¿dónde puede estar mal?"), warmth
-("Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta,
-dilo y pausamos."), masking ("Por tu privacidad: no compartas
-PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13).").
-After the round, offer pause/exit before the approve/reject decision. Retry
-N=2 → escalate orchestrator. No-answer after 2 reminders → recorded
-`grill: stalled` + escalate, proposal pauses. Approver-requested re-grill ≤1
-extra pass (total ≤2 passes), then Retry N=2 → escalate orchestrator. Exit
-before approve/reject = pause + recorded `grill: exited` + escalate;
-proposal stays unapproved (no silent promote).
+- Scope: pre-approval challenge round inside `propose-changes` only — never a new stage, never a new reviewer. Glossary: see C1 (`skills/frame-intent/SKILL.md` §C1) — `challenge` = the round, `grill`/`ronda` aliases only; not redefined here.
+- Trigger — fires on ANY of: auth/data/API/PII surface; multi-domain scope; blast radius mentioning customers/regulators/revenue (synonyms fire: customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money — independent blast-radius + API-surface scan fires even when prose self-reports "internal only"); approver request.
+- Opener (exit word `salir`, cap bound): "¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la vez)? Di sí para empezar o `salir` en cualquier momento para parar sin penalidad." (canonical: people SPEC §4 inserts 1–2).
+- One-pass budget: exactly one budgeted pass per trigger, where pass = ≤3 questions; question 4 (N+1) = FAIL (blocked, must stop); then terminal approve/reject — no second pass without approver request.
+- Approver-requested re-grill: ≤1 extra pass (total ≤2 passes), then Retry N=2 → escalate orchestrator.
+- Exit terminal (pre-decision): exit before approve/reject = pause + recorded `grill: exited` + escalate; proposal stays unapproved (no silent promote).
+- Stall breaker: Retry N=2 → escalate orchestrator. No-answer after 2 reminders → recorded `grill: stalled` + escalate, proposal pauses.
+- Untouched rule: repo files stay untouched during the round AND no external sends/filings/launches (proposal-phase rule holds inside the grill); the round challenges blast radius and rollback before code is allowed.
+- Human contract (same as C1, single source people SPEC §4 inserts 2–5): one question at a time ("Hago una sola pregunta, espero tu respuesta, luego sigo."); disagreement invite on every recommended answer ("Mi respuesta recomendada es X — ¿dónde puede estar mal?"); warmth ("Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos." — intent-match paraphrase per T-010); masking ("Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13).").
+- Pause/exit: after the round, offer pause/exit before the approve/reject decision.
 
 ## 4. What I won't do
 
