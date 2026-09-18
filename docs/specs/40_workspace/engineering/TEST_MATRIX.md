@@ -17,7 +17,7 @@
 | REQ-001 | E-001 | C1 budgets verbatim-in-intent: spike 1 hard cap / bounded 2–3 cap 3 / architectural cap 5 (4 core + 1 frontier-empty), joint engineering + people sign-off noted | Review | pass | 48757e8 |
 | REQ-001 | E-002 | C1 one-way ratchet verbatim-in-intent: "Profundidad solo sube (spike→bounded→architectural), nunca baja mid-initiative" | Review | pass | 48757e8 |
 | REQ-001 | E-003 | C1 falsifiable-bet prompt over 2–3 framings, output recorded in `Framings-Considered` | Review | pass | 48757e8 |
-| REQ-001 | E-004 | C1 human contract verbatim-in-intent: opt-in + `salir` exit hatch / one-at-a-time / disagreement invite "¿dónde puede estar mal?" / warmth / masking (Ley 172-13) / pause-exit offer | Review | pass | 48757e8 |
+| REQ-001 | E-004 | C1 human contract verbatim-in-intent: opt-in + `exit/salir` exit hatch / one-at-a-time / disagreement invite "¿dónde puede estar mal?" / warmth / masking (Ley 172-13) / pause-exit offer | Review | pass | 48757e8 |
 | REQ-001 | E-005 | C1 sample round: synthetic bounded initiative, 2 questions within cap 3, 1:1 turn-taking, falsifiable-bet recorded, 0 PII/secrets | Review | pass | 48757e8 |
 | REQ-001 | E-006 | C1 diff is file-modify only on `skills/frame-intent/SKILL.md` (+22 lines, one `### C1` section); no new dir/stage/reviewer/dep | Review | pass | 48757e8 |
 | REQ-002 | E-007 | C2 trigger list verbatim-in-intent: auth/data/API/PII, multi-domain, blast radius mentioning customers/regulators/revenue, approver request | Review | pass | (this commit) |
@@ -34,7 +34,7 @@
 | REQ-006 | E-017 | Chain invariants intact: proposal-before-code held (skill text landed only at execute-spec under Conditional clearance); STRIDE/ADR cores untouched; N=2 → escalate + reference-only packets preserved | Review | pass | (this commit) |
 | REQ-NF-001 | E-018 | Banned-lexicon grep = 0 on all 6 touched files: `rg -i -n "relentless\|interrogat\|drill\|corner\|trap\|relentless-mode"` → exit 1, no hits | Review | pass | (this commit) |
 | REQ-NF-001 | E-019 | Secret/PII scan: hits are policy-word declarations only (masking clause + "0 PII/secrets" claims), 0 values/assignments/tokens — REFUTED-pattern per S-C12-005 | Review | pass | (this commit) |
-| REQ-P-001..006 | E-020 | People inserts 1–6 intent-match in C1+C2 touchpoints (wrap-safe grep: `salir` 2+1, `una sola pregunta` 1+1, `estar mal` 1+1, `cálido` 1+1, `privacidad` 1+1+1, `solo sube` ratchet, `hard cap` budgets, one-pass, pause/exit); people-owner co-sign collected at quality-gate (REQ-P-004 co-owned) | Sign-off | pass (impl) / pending co-sign at gate | (this commit) |
+| REQ-P-001..006 | E-020 | People inserts 1–6 intent-match in C1+C2 touchpoints (wrap-safe grep: `exit/salir` alias 2 skills + 2 samples, `una sola pregunta` 1+1, `estar mal` 1+1, `cálido` 1+1, `privacidad` 1+1+1, `solo sube` ratchet, `hard cap` budgets, one-pass, pause/exit); C1 budget + ratchet co-signed per people-reviewer RULING 3, C2-cap mechanics landed (8d673b1 + N+1 demo) — people re-confirm at re-verification | Sign-off | conditional (impl done, co-sign pending at gate) | c5cde40 (alias/floor/default) |
 | REQ-002 | E-021 | C2 N+1 FAIL demo: `SAMPLE-grilling-C2.md` N+1 section — Q1–Q3 consume ≤3 budget, attempted Q4 BLOCKED with `grill: N+1 blocked` recorded, no answer taken (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
 | REQ-006 | E-022 | Round-level Retry N=2 → escalate in C1 + C2 text + C2 pre-decision exit-terminal (exit = pause + `grill: exited` + escalate, proposal unapproved) + stall rule (2 reminders → `grill: stalled` + escalate) (COND-R2/S1) | Review | pass | (this commit) |
 | REQ-002 | E-023 | Trigger synonym hardening (customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money) + independent blast-radius/API-surface scan rule + evasion negative demo (`SAMPLE-grilling-C2.md` evasion section: "users/internal only" → STILL FIRES) (COND-R3) | Review | pass | (this commit) |
@@ -46,17 +46,18 @@ Types per `references/test-matrix.md`. Skill-text unit: review/sign-off with art
 
 - Unit coverage: N/A (skill-text-only, no code paths — justification: docs-only SPEC cycle, no runtime/plugin change; `mise run typecheck` env-blocked on this runner — missing `.opencode` task dir, os error 267, pre-existing harness issue; no `.ts`/`.json` touched so unaffected claim holds, re-verify at gate on healthy runner)
 - Integration coverage: N/A (same justification)
-- Evidence coverage: 21/21 rows with linked artifact + command output above
+- Evidence coverage: 20/21 rows pass + 1 conditional (E-020, co-sign pending — C1 co-signed per people-reviewer RULING 3, C2-cap mechanics landed, re-confirm at re-verification)
 - Acceptance criteria covered: AC-001 (C1/C2 present + samples) + AC-004 (invariants) + AC-005 (trace) for the C1+C2 scope; AC-002/AC-003 belong to the sibling security C3+C4 lane, untouched here
 
 ## Scan log (C-2 proof, not attestation)
 
 - Banned lexicon: `rg -i -n "relentless|interrogat|drill|corner|trap|relentless-mode" skills/frame-intent/SKILL.md skills/propose-changes/SKILL.md skills/propose-changes/references/proposal-template.md skills/propose-changes/references/risk-assessment.md docs/specs/40_workspace/engineering/SAMPLE-grilling-C1.md docs/specs/40_workspace/engineering/SAMPLE-grilling-C2.md` → **0 hits (exit 1) = PASS**
 - Secret/PII: same file set, `rg -i -n "api_key|apikey|secret|passwd|password\s*[:=]|credential|session\s*[:=]|bearer|BEGIN [A-Z ]*PRIVATE KEY"` → hits are the masking-clause declarations + "0 PII/secrets" synthetic claims only, **0 values = PASS**
-- Clause presence (wrap-safe fragments): opt-in/`salir`, `una sola pregunta`, `estar mal`, `cálido`, `privacidad`, `solo sube`, `hard cap`, one-pass, pause/exit — **present in all required touchpoints = PASS** (risk-assessment carries budget + trigger pointer only, by proposal design)
+- Clause presence (wrap-safe fragments): opt-in/`exit/salir`, `una sola pregunta`, `estar mal`, `cálido`, `privacidad`, `solo sube`, `hard cap`, one-pass, pause/exit — **present in all required touchpoints = PASS** (risk-assessment carries budget + trigger pointer only, by proposal design)
 - Scope: `git status` at commit time shows only the approved change list + plan/matrix singletons + 2 samples; sibling-lane files (`security/IMPLEMENTATION_PLAN.md`, `quality-gate/references/waiver-template.md`) left uncommitted in tree for their lane; **no new skill dir / stage / reviewer / dep = PASS**
 
 ## Commits
 
 - REQ-001: `48757e8` — `skills/frame-intent/SKILL.md` + `SAMPLE-grilling-C1.md` + `IMPLEMENTATION_PLAN.md`
-- REQ-002: this commit — `skills/propose-changes/SKILL.md` + `proposal-template.md` + `risk-assessment.md` + `SAMPLE-grilling-C2.md` + this matrix
+- REQ-002: prior lane commits — `skills/propose-changes/SKILL.md` + `proposal-template.md` + `risk-assessment.md` + `SAMPLE-grilling-C2.md` + this matrix
+- Fix loop (this session): `8d673b1` C2 cap ≤3 + pass-def + N+1 demo (COND-P3) · `8ab7271` N=2 + exit-terminal (COND-R2/S1) · `1a16100` trigger synonym hardening + evasion demo (COND-R3) · `7690f57` glossary + breakup + bound placeholders (COND-D1/D3/D4/D5) · `c5cde40` exit/salir alias + bounded floor + unclassified default (COND-P5/RL-008) · this commit E-020 conditional relabel + honest counts (COND-P4/D5/Q2/K3)
