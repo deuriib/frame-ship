@@ -63,6 +63,29 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 7. Waivers only by domain owners + orchestrator via `references/waiver-template.md`.
 8. Close with a commit (never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
 
+## 4b. C3 — CONDITIONAL/waiver interrogation lane (surgical, security-owned)
+
+Amplifies the existing `review-refuter` output: every CONDITIONAL/waiver
+justification is interrogated against the normative three-block bar in
+`references/waiver-template.md` (`Accepted-risk` + `Compensating-controls +
+owner` + `Expiry/Re-review date-or-condition + owner`) and recorded per-block
+pass/fail in the C3 row of `references/gate-report.md`. Missing block = FAIL,
+no promotion. Every C3-interrogated CONDITIONAL lists `residual-risk + owner`
+(or explicit `none + owner`) — silent APPROVE+conditions = FAIL. Expiry default:
+90 days or next release, whichever first (orchestrator-confirmed; re-review
+owner mandatory). Authority limits (verbatim): CLOSED stays CLOSED without
+recorded `domain-owners + orchestrator` sign-off. Full re-review banned — C3
+interrogates the waiver sample against this bar only, never re-runs the routing
+table. Retry N=2 → escalate orchestrator. PII checkpoint (REQ-SEC-003/004 +
+REQ-P-006 co-sign): zero PII/secrets/tokens/credentials/sessions in grill
+questions/answers/prompts/logs/examples/exports; every
+prompt/adapter/event/log/export is a declared PII checkpoint (mask/tokenize +
+allowlist); allowlisted evidence only; Ley 172-13 minimization. Wide/cross-tenant
+disclosure = finding. No-freelance-fix: findings report `severity + location +
+evidence`, owner remediates — never rotate keys/patch prod/widen perms.
+Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
+proof surfaces same session. No routing-table change.
+
 ## 5. What I won't do
 
 - Open a gate with any ❌ verdict (only domain owners + orchestrator waive).
