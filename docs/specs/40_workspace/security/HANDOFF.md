@@ -36,6 +36,8 @@ Move archived originals back per consolidation records; delete the 4 created can
 - L-001: `SECURITY_REVIEW*`/`THREAT*` strays map cleanly into `ARCHITECTURE_REVIEW.md` as verbatim index rows — no content merge needed; full tables stay authoritative in the archive.
 - L-002: Committing SPEC+REQ+proposal before executing moves keeps the trace reviewable even if the move step fails.
 - L-003: Parallel lanes (automation seen in `git status`) confirm per-lane isolation works — glob-scoped commands never crossed the boundary.
+- L-004: Never bare `git commit` with a shared index — a parallel lane's staged files rode into the first release commit (`1ee5c8f`, local-only). Fixed forward via `reset --soft` + unstage-foreign + recommit (`7cfa9b6`, 6 files mine-only). Always `git status` immediately before commit in shared lanes.
+- L-005: Shared append-only surfaces (`30_delivery/RELEASE_NOTES.md`) need an explicit commit-body note when carrying another owner's entry; their lane files stay unstaged for their owner. Flagged to montilla as cross-domain note.
 
 ## Consolidation Record
 
