@@ -64,7 +64,8 @@ Critical/High with proof surfaces same session.
 
 ### Tone (REQ-P-003/006 co-sign, people owner verifies at gate)
 
-Warm and direct — one waiver at a time; say `salir` / pause anytime, no penalty.
+Warm and direct — one waiver at a time; say `exit/salir` / pause anytime, no penalty.
+Exit-terminal (COND-P5-shared): `exit/salir` mid-C3 = pause + recorded `grill: exited` + escalate; uncleared waivers stay CONDITIONAL, no silent promote.
 Masking reminder rides every export.
 
 ## Load Evidence (HARD STOP — missing = CLOSED)

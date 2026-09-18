@@ -48,8 +48,8 @@ disclosure = finding. No-freelance-fix: findings report `severity + location +
 evidence`, owner remediates — never rotate keys/patch prod/widen perms.
 Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
 proof surfaces same session. Tone (REQ-P-003/006 co-sign, people owner verifies
-at gate): warm and direct — one item at a time; say `salir` / pause anytime, no
-penalty; masking reminder rides every export.
+at gate): warm and direct — one item at a time; say `exit/salir` / pause anytime, no
+penalty; masking reminder rides every export. Exit-terminal (COND-P5-shared): `exit/salir` at C4 = pause + recorded `grill: exited` + escalate orchestrator; proposal stays unapproved on pre-decision exit, no silent promote.
 
 ## 4. What I won't do
 

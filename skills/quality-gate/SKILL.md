@@ -84,7 +84,7 @@ allowlist); allowlisted evidence only; Ley 172-13 minimization. Wide/cross-tenan
 disclosure = finding. No-freelance-fix: findings report `severity + location +
 evidence`, owner remediates — never rotate keys/patch prod/widen perms.
 Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
-proof surfaces same session. No routing-table change.
+proof surfaces same session. Exit-terminal (COND-P5-shared): `exit/salir` at C3 = pause + recorded `grill: exited` + escalate orchestrator; uncleared waivers stay CONDITIONAL, no silent promote. No routing-table change.
 
 ## 5. What I won't do
 
