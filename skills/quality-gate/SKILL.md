@@ -63,7 +63,11 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 7. Waivers only by domain owners + orchestrator via `references/waiver-template.md`.
 8. Close with a commit (never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
 
-## 4b. C3 — CONDITIONAL/waiver interrogation lane (surgical, security-owned)
+## 4b. C3 — CONDITIONAL/waiver interrogation lane (security-owned)
+
+> **Surgical scope:** C3 interrogates every CONDITIONAL/waiver justification
+> against the three-block bar only (see below). It does NOT re-run the routing
+> table, re-dispatch all reviewers, or re-review the full spec.
 
 Amplifies the existing `review-refuter` output: every CONDITIONAL/waiver
 justification is interrogated against the normative three-block bar in
