@@ -75,7 +75,7 @@ no promotion. Every C3-interrogated CONDITIONAL lists `residual-risk + owner`
 90 days or next release, whichever first (orchestrator-confirmed; re-review
 owner mandatory). Authority limits (verbatim): CLOSED stays CLOSED without
 recorded `domain-owners + orchestrator` sign-off. Full re-review banned — C3
-interrogates the waiver sample against this bar only, never re-runs the routing
+interrogates every waiver against this bar only (every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies), never re-runs the routing
 table. Retry N=2 → escalate orchestrator. PII checkpoint (REQ-SEC-003/004 +
 REQ-P-006 co-sign): zero PII/secrets/tokens/credentials/sessions in grill
 questions/answers/prompts/logs/examples/exports; every

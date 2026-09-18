@@ -36,13 +36,14 @@ Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touc
 > `Compensating-controls + owner` + `Expiry/Re-review date-or-condition +
 > owner`). Missing block = FAIL, no promotion.
 
-| Waiver sample | Accepted-risk | Compensating-controls + owner | Expiry + re-review owner | Verdict |
+| Waiver (every CONDITIONAL — one row per waiver; rows = CONDITIONALs; sample-of-one never satisfies) | Accepted-risk | Compensating-controls + owner | Expiry + re-review owner | Verdict |
 |---------------|---------------|-------------------------------|--------------------------|---------|
 | [waiver link] | pass / fail | pass / fail | pass / fail | PASS / FAIL |
 
 **Residual-risk:** [risk + owner, or explicit `none + owner` — silent APPROVE+conditions = FAIL]
 
-Full re-review banned — C3 reviews the waiver sample against this bar only,
+Full re-review banned — C3 reviews every waiver against this bar only
+(every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies),
 never re-runs the routing table. CLOSED stays CLOSED without recorded
 `domain-owners + orchestrator` sign-off. Retry N=2 → escalate orchestrator.
 Expiry default: 90 days or next release, whichever first

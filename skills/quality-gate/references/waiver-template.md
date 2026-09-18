@@ -27,8 +27,8 @@
 **Residual-risk:** [risk + owner, or explicit `none + owner` — silent PASS = FAIL]
 
 CLOSED stays CLOSED without recorded `domain-owners + orchestrator` sign-off.
-Retry N=2 → escalate orchestrator. Full re-review banned — C3 interrogates the
-waiver sample against this bar only, never re-runs the routing table.
+Retry N=2 → escalate orchestrator. Full re-review banned — C3 interrogates every
+waiver against this bar only (every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies), never re-runs the routing table.
 
 ## Accepted Risk
 
