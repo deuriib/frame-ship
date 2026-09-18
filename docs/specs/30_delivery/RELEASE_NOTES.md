@@ -502,3 +502,46 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 - `git revert 91cff38` restores the pre-flag tree (manifest interface + 8 entries + mirror types/inserts + ARCHITECTURE.md overlay). No data migration, no external sends/filings/launches/deploys, no key rotation (guardrail 4: owner remediates).
 - Verify rollback: C-level `mode:all` lines have no `hidden`; mirror inserts are `{ description, prompt, mode }` only; `mise run typecheck` green.
 - Release commit itself reverts via `git revert <release-sha>` (docs-only, ETA < 5 min). Owner: vasquez (engineering owner). ETA: < 10 min. Restart opencode after revert to take effect.
+
+---
+
+# Release Notes: per-lane singleton consolidation — engineering lane (internal close)
+
+**Date:** 2026-09-18
+**Release Manager:** vasquez (CTO, engineering owner)
+**Specs Included:** SPEC-singleton-consolidation-engineering (shipped spec archived to `docs/specs/50_archive/` per lifecycle)
+**Domains-Touched:** [engineering]
+**Ship Type:** close (internal close-out; no deploy, filing, launch, or workflow enablement)
+
+## Highlights
+
+- Engineering lane consolidated 63 → 13 files: exactly one canonical UPPER_SNAKE file per each of the 9 singleton types (`RELEASE_NOTES.md`, `ARCHITECTURE_REVIEW.md`, `DRILL.md`, `HANDOFF.md`, `IMPLEMENTATION_PLAN.md`, `PROPOSED_CHANGES.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACT.md`) plus 4 out-of-scope `SPEC-*.md` (SPEC is not a singleton type).
+- 58 suffixed variants moved to `50_archive/` byte-identical (copy → hash-verify → delete-original, `MOVED_OK=58/58`); prior canonical `PROPOSED_CHANGES.md` (hidden-flag) preserved at `50_archive/PROPOSED_CHANGES-hidden-flag.md` (hash `7BD6AE17…` verified). Zero purge, zero repo-wide lock, zero impl touched.
+- Full chain in `single` mode: chat-brief → spec → proposal → min-gate (readability + risk + refuter + qa, 4/4 pass, OPEN) → DoD PASS → this close. ADR waived (no new design; lane files link `10_design/` truth). Security fast-gate screen only (docs-only, scan 0 hits).
+- Changelog: N/A — internal-only docs reorganization, no user-facing change (justification recorded per ship-release §3).
+
+## Changes
+
+### Features
+
+- N/A (close-out only — no new behavior)
+
+### Fixes
+
+- N/A (no defect; file-discipline enforcement)
+
+### Removed
+
+- None (no purge — all 58 variants + 1 preserved prior canonical live on in `50_archive/`)
+
+### Breaking Changes
+
+- None — old suffixed lane paths no longer exist in the lane; history reachable via consolidation record tables in each canonical + `50_archive/` originals.
+
+## Known Issues
+
+- Other lanes still carry suffixed variants (security, people, automation, single-demo, quality-gate subdirs) — Cross-domain request to montilla filed in lane `HANDOFF.md`; engineering does not touch them. Owner: orchestrator.
+
+## Rollback / Undo
+
+- Reverse archived moves per consolidation record tables (each canonical carries source → archive map); delete the 8 newly created canonicals (proposal file stays as audit trail). `git revert <release-sha>` for the delivery commit. No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA < 15 min.
