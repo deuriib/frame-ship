@@ -1,6 +1,6 @@
 ---
 description: Frame-Ship chain contract — enforce stage load order + guardrails on every session
-alwaysApply: true
+always_on: true
 ---
 
 # frame-ship — persistent rules for agy
