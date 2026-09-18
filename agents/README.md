@@ -28,7 +28,7 @@ Each file, in order:
 1. Generic frontmatter (`name`, `description` only) — no harness keys.
 2. H1 craft heading + portable-use note.
 3. Original craft body (role, principles, responsibilities, workflow, output shape, constraints), scrubbed of harness lock-in.
-4. `Delegation` — single-line reference to canonical contract (`agents/delegation-contract.md`); no duplicated text.
+4. `Delegation` — single-line reference to canonical contract (`agents/core/delegation-contract.md`); no duplicated text.
 
 ## Use
 

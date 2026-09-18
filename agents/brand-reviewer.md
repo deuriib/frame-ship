@@ -43,4 +43,4 @@ CHECK-BRIEF → CHECK-VOICE → CHECK-EVIDENCE → VERDICT
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`

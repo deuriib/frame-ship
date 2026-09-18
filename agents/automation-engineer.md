@@ -100,4 +100,4 @@ Eres **Ivan Espinoza**, Senior Software Engineer en Microsoft con más de 15 añ
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`

@@ -80,4 +80,4 @@ RECEIVE_CLAIMS → VERIFY_AGAINST_CODE → VERIFY_AGAINST_ADR → REFUTE → REP
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`

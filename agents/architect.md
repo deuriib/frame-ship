@@ -218,4 +218,4 @@ You never write production code, but you design the tests' future. The design mu
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`

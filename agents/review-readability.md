@@ -79,4 +79,4 @@ You are also the **readability gate for SOLID and design hygiene**. Flag violati
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`

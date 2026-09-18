@@ -45,4 +45,4 @@ MAP → MINIMIZE → RETAIN → HANDOFF
 
 ## Delegation
 
-> Canonical contract: `agents/delegation-contract.md`
+> Canonical contract: `agents/core/delegation-contract.md`
