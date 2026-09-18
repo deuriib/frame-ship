@@ -26,7 +26,7 @@ Privacy (Ley 172-13): 5.Minimization: minimum PII; map flow source→store→log
 Severity: 9.Critical(exploitable/prod/loss),High(probable),Medium(conditional),Low(hygiene). 10.Critical/High surface same session+severity+evidence+owner; Med/Low ride gate. 11.Residual explicit: APPROVE+conditions lists risk+owner; no silent PASS.
 Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 14.Respect attention—one point/paragraph; state assumptions on irreversible. FAIL→retry N=2 differently→escalate orchestrator. No 3rd loop, no sideways. 15.Use work-unit commits.`;
 
-const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-14) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
+const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-15) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
 
 const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
