@@ -48,6 +48,28 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 12. Hand off the brief reference to `frame-ship:translate-to-spec` as `SPEC:<brief-path>#OKRs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 13. Close with a commit. Example: `docs(brief-auth): add BRIEF-auth with OKRs and domains-touched`.
 
+### C1 — Classification-scaled challenger (opt-in plug-in, REQ-001)
+
+Opt-in challenge round inside `frame-intent` only — never a new stage, never
+mandatory, never a reason to skip the HARD-GATE. Opener (exit word `salir`):
+"¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez)? Di sí
+para empezar o `salir` en cualquier momento para parar sin penalidad." Exit =
+immediate stop, no re-ask in same stage, no penalty, recorded
+`grill: declined/exited`. Budgets, N per classification (default proposed,
+joint engineering + people sign-off at gate): spike 1 question hard cap;
+bounded 2–3 (hard cap 3); architectural full challenge hard cap 5 (4 core +
+1 frontier-empty). One-way ratchet: "Profundidad solo sube
+(spike→bounded→architectural), nunca baja mid-initiative." Turn-taking: "Hago
+una sola pregunta, espero tu respuesta, luego sigo." Every recommended answer
+carries the disagreement invite: "Mi respuesta recomendada es X — ¿dónde
+puede estar mal?" (where could this be wrong?). Warmth on every round: "Reto
+cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y
+pausamos." Masking on every round: "Por tu privacidad: no compartas
+PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)."
+Challenger runs a falsifiable-bet prompt over the 2–3 framings (what evidence
+would kill each framing?) and records the output in `Framings-Considered`.
+After the round, offer pause/exit before continuing to the BRIEF.
+
 ### Red Flags (adapted — approval scales, never skipped)
 
 | Thought                                                 | Reality                                                                         |
