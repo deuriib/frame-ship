@@ -42,6 +42,8 @@ Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touc
 
 **Residual-risk:** [risk + owner, or explicit `none + owner` — silent APPROVE+conditions = FAIL]
 
+Substance backstop (COND-K1/SEC1/Q4-shared): presence ≠ substance — a vacuous box-tick (`Accepted-risk: low because low`, owner `someone`, `Expiry: later`) FAILs via a recorded reviewer-judgment reason, never passes silently. Demo: `docs/specs/40_workspace/security/SAMPLE-grilling-C3-thin-FAIL.md` (3-waiver fixture: thin FAIL, missing-block FAIL, full PASS — every waiver gets a row).
+
 Full re-review banned — C3 reviews every waiver against this bar only
 (every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies),
 never re-runs the routing table. CLOSED stays CLOSED without recorded

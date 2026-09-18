@@ -7,7 +7,7 @@
 ## Common (all 8 domains)
 
 - [ ] All acceptance criteria met
-- [ ] All REQ-IDs have linked evidence (link present; attestation-alone = FAIL; missing link = FAIL, no handoff)
+- [ ] All REQ-IDs have linked evidence (link present AND resolves AND relevant; attestation-alone = FAIL; missing link = FAIL; dead/irrelevant link = FAIL with recorded reviewer-judgment reason; no handoff. Demo: `docs/specs/40_workspace/security/SAMPLE-grilling-C4-deadlink-FAIL.md`)
 - [ ] C4 FAIL lists `residual-risk + owner` (security lane; silent PASS = FAIL)
 - [ ] Edge cases / failure modes handled
 - [ ] Gate OPEN (or CONDITIONAL conditions cleared + waiver recorded if applicable)
