@@ -29,3 +29,11 @@ Ningún ADR nuevo: sin decisión arquitectónica significativa (docs-only, sin i
 - vasquez: Approved — pasa a `execute-spec` solo archivos de change-list.
 - architect: Sin trade-off de estructuras/patrones (N/A — KISS/YAGNI rispettati).
 - No override a barrera: veredicto seguridad `Approved N/A` se respeta.
+
+---
+
+## Consolidation Record (singleton unit, 2026-09-18)
+
+**Skill:** `D:\GitHub\frame-ship\skills\review-architecture\SKILL.md` (single mode, screen only)
+
+Prior docs-fix review (§§1-31) preserved above as audit trail — updated in place, not replaced. Singleton verdict: **Approved sin ADR** — no new design; lane `ARCHITECTURE.md`/`API_CONTRACT.md` link (not fork) the numbered-store truth (`10_design/ARCHITECTURE.md`, `API_CONTRACTS.md`); 3 moves are byte-identical file moves, 6 creates/updates are docs-only slot fills. No public API / data model / cross-cutting change. Source → archive map: `RELEASE_NOTES-demo.md` → `50_archive/RELEASE_NOTES-demo-single-demo.md`; `implementation-plan.md` → `50_archive/implementation-plan-single-demo.md`; `test-matrix.md` → `50_archive/test-matrix-single-demo.md`.
