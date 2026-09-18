@@ -4,7 +4,7 @@
 **Date:** 2026-09-18  
 **Verdict:** CONDITIONAL (29/31 CLEARED, 1 PARTIAL, 1 PENDING)  
 **Skill:** `frame-ship:quality-gate` via skill tool  
-**Commits:** 1428dc4 (summary) + e45242b (report) + 5cd163f (re-verification in review-refuter.md)
+**Commits:** 9388822 (final) + 1428dc4 (summary) + e45242b (report) + 5cd163f (re-verification in review-refuter.md)
 
 ## Per-Condition CLEARED/NOT-CLEARED
 
@@ -72,6 +72,7 @@ No handoff until conditions clear (waiver only by domain owners + orchestrator).
 ## Commits
 
 ```
+9388822 docs(gate-grilling): review-refuter re-verification final summary
 1428dc4 docs(gate-grilling): review-refuter re-verification summary
 e45242b docs(gate-grilling): review-refuter re-verification summary report
 5cd163f docs(gate-grilling): review-refuter re-verification — 29/31 conditions CLEARED, 1 PARTIAL, 1 PENDING
