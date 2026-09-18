@@ -1,5 +1,5 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "frame-ship",
-  "description": "Frame-Ship methodology for agy — chain context injection plus TypeScript hook handlers run via node."
+  "description": "Frame-Ship methodology for agy — from strategic intent to shipped release."
 }
