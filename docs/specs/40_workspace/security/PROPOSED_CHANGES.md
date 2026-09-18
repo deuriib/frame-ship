@@ -1,6 +1,6 @@
 # Proposed Changes: SPEC-singleton-consolidation-security
 
-**Spec Reference:** `docs/specs/40_workspace/security/SPEC-singleton-consolidation-security.md#REQ-001..004+NF-001..002`
+**Spec Reference:** `docs/specs/50_archive/SPEC-singleton-consolidation-security.md#REQ-001..004+NF-001..002` (archived at ship per lifecycle)
 **Agent:** barrera (CISO) — domain chain owner, security
 **Date:** 2026-09-18
 **Execution_Mode:** single (direct, no dispatch, min gate)

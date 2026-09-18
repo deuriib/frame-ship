@@ -545,3 +545,92 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 ## Rollback / Undo
 
 - Reverse archived moves per consolidation record tables (each canonical carries source → archive map); delete the 8 newly created canonicals (proposal file stays as audit trail). `git revert <release-sha>` for the delivery commit. No external sends/filings/launches/deploys to undo. Owner: vasquez, ETA < 15 min.
+
+---
+
+# Release Notes: per-lane singleton consolidation — automation lane (internal close)
+
+**Date:** 2026-09-18
+**Release Manager:** espinoza (Senior Automation Consultant, automation owner)
+**Specs Included:** SPEC-singleton-consolidation-automation (shipped spec archived to `docs/specs/50_archive/` per lifecycle)
+**Domains-Touched:** [automation/ops]
+**Ship Type:** close (internal close-out; no deploy, filing, launch, or workflow enablement)
+
+## Highlights
+
+- Automation lane consolidated 1 → 10 files: exactly one canonical UPPER_SNAKE file per each of the 9 singleton types (`RELEASE_NOTES.md`, `ARCHITECTURE_REVIEW.md`, `DRILL.md`, `HANDOFF.md`, `IMPLEMENTATION_PLAN.md`, `PROPOSED_CHANGES.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACT.md`) plus out-of-scope `SPEC-singleton-consolidation-automation.md` (SPEC is not a singleton type; archived at ship per lifecycle).
+- 1 suffixed variant (`HANDOFF-git-worktree.md`, SPEC-git-worktree-automation gate, 12/12 DoD 2026-09-16) merged by index + reference into canonical `HANDOFF.md` and moved to `50_archive/HANDOFF-git-worktree-automation.md` byte-identical (copy → hash-verify → delete-original, `D74C6E06…CF76` HASH_MATCH, `MOVED_OK=1/1`). Archived name carries the `-automation` lane infix (bare `HANDOFF-git-worktree.md` lineage exists in engineering archive history — collision-safe provenance). Zero purge, zero repo-wide lock, zero impl touched.
+- ROI contract validated: BEFORE (1 suffixed, 0 canonicals — lookup needs suffix knowledge) → AFTER (9 canonicals, 0 suffixed — single predictable path per type); one-time cost < 10 min, ~5 min/search saved on every future automation write.
+- Full chain in `single` mode: brief → spec → proposal → min-gate (readability + risk + refuter + qa with automation-reviewer lens, 4/4 pass, OPEN, automation-reviewer APPROVE) → DoD PASS → this close. ADR waived (no new design; lane files link `10_design/` truth). Security fast-gate screen only (docs-only, 2 scan hits both prohibition clauses).
+- Changelog: N/A — internal-only docs reorganization, no user-facing change (justification recorded per ship-release §3).
+- Precedent: engineering lane commit `07a75de` (58 moves, min-gate 4/4).
+
+## Changes
+
+### Features
+
+- N/A (close-out only — no new behavior)
+
+### Fixes
+
+- N/A (no defect; file-discipline enforcement)
+
+### Removed
+
+- None (no purge — the 1 variant lives on in `50_archive/`)
+
+### Breaking Changes
+
+- None — the old suffixed lane path no longer exists in the lane; history reachable via consolidation record tables in each canonical + the `50_archive/` original.
+
+## Known Issues
+
+- Other lanes still carry suffixed variants (security, people, single-demo, quality-gate subdirs) — Cross-domain request to montilla filed in lane `HANDOFF.md`; automation does not touch them. Owner: orchestrator.
+
+## Rollback / Undo
+
+- Move the archived original back per the consolidation record table in lane `HANDOFF.md`; delete the 8 newly created canonicals on full revert (`git revert <release-sha>` for the delivery commit). No external sends/filings/launches/deploys to undo. Owner: espinoza, ETA < 10 min.
+
+---
+
+# Release Notes: per-lane singleton consolidation — security lane (internal close)
+
+**Date:** 2026-09-18
+**Release Manager:** barrera (CISO, security owner)
+**Specs Included:** SPEC-singleton-consolidation-security (shipped spec archived to `docs/specs/50_archive/` per lifecycle)
+**Domains-Touched:** [security]
+**Ship Type:** close (internal close-out; no deploy, filing, launch, or workflow enablement)
+
+## Highlights
+
+- Security lane consolidated 14 → 10 files: exactly one canonical UPPER_SNAKE file per each of the 9 singleton types (`RELEASE_NOTES.md`, `ARCHITECTURE_REVIEW.md`, `DRILL.md`, `HANDOFF.md`, `IMPLEMENTATION_PLAN.md`, `PROPOSED_CHANGES.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACT.md`) plus out-of-scope `SPEC-singleton-consolidation-security.md` (SPEC is not a singleton type; archived at ship per lifecycle).
+- 14 originals moved to `50_archive/` byte-identical (copy → SHA256-verify → delete-original, 14/14 HASH_MATCH; git records 14 renames with 0-line diffs). Security-type strays mapped into the 9: 6× `SECURITY_REVIEW*` (1 Approved + 5 Conditional, verdicts verbatim) + 4× `THREAT*` indexed in canonical `ARCHITECTURE_REVIEW.md`; `HANDOFF-git-worktree.md` archived as `HANDOFF-git-worktree-security.md` (bare name already holds the engineering lane's same-named file — same precedent as engineering `PROPOSED_CHANGES-hidden-flag.md`). Zero purge, zero repo-wide lock, zero impl touched.
+- Full chain in `single` mode: brief → spec → proposal → min-gate (readability + risk + refuter + qa with security-reviewer lens, 4/4 pass, OPEN, security-reviewer APPROVE with no conditions) → DoD 7/7 PASS → this close. ADR waived (no new design; lane files link `10_design/` truth). Credential/PII-shape scans = 0 hits.
+- Changelog: N/A — internal-only docs reorganization, no user-facing change (justification recorded per ship-release §3).
+- Precedent: engineering lane commit `07a75de` (58 moves, min-gate 4/4); automation lane (same close shape).
+
+## Changes
+
+### Features
+
+- N/A (close-out only — no new behavior)
+
+### Fixes
+
+- N/A (no defect; file-discipline enforcement)
+
+### Removed
+
+- None (no purge — all 14 originals live on in `50_archive/`)
+
+### Breaking Changes
+
+- None — old suffixed lane paths no longer exist in the lane; history reachable via consolidation record tables in each canonical + the `50_archive/` originals.
+
+## Known Issues
+
+- Other lanes still carry suffixed variants (people, single-demo, quality-gate subdirs) — engineering and automation lanes already closed by their owners; remaining lanes are their owners' scope, not security's. No cross-domain action needed from this lane; any orchestration via montilla. Owner: orchestrator.
+
+## Rollback / Undo
+
+- Move the archived originals back per the consolidation record tables in each canonical; delete the 8 newly created canonicals on full revert (`git revert <release-sha>` for the delivery commit). No external sends/filings/launches/deploys to undo. Owner: barrera, ETA < 15 min.

@@ -3,7 +3,7 @@
 **Owner:** barrera (CISO) — domain chain owner, security
 **Brief Reference:** bounded singleton brief approved 2026-09-18 (per-lane singleton rule)
 **Domains-Touched:** [security]
-**Spec:** docs/specs/40_workspace/security/SPEC-singleton-consolidation-security.md
+**Spec:** docs/specs/50_archive/SPEC-singleton-consolidation-security.md (archived at ship per lifecycle)
 **Execution_Mode:** single
 
 ## Functional Requirements

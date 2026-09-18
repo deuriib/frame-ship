@@ -2,7 +2,7 @@
 
 **Reviewer:** barrera (CISO) — domain chain owner, security
 **Date:** 2026-09-18
-**Spec Reference:** `SPEC-singleton-consolidation-security#REQ-003`
+**Spec Reference:** `docs/specs/50_archive/SPEC-singleton-consolidation-security.md#REQ-003` (archived at ship per lifecycle)
 **Execution_Mode:** single
 **Skill:** `skills/execute-spec/SKILL.md` (consolidation index; verdict authority stays in archived originals)
 
