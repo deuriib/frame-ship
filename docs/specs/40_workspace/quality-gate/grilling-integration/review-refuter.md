@@ -66,3 +66,83 @@ T-009's factual claims check out exactly: 5 pre-existing hits (qg-SKILL §4b ×4
 - `skills/quality-gate/SKILL.md:66-87` (§4b bar + bans) + `skills/quality-gate/references/waiver-template.md:14-31,46-54` (bar + checkpoint, minus triage line) + `skills/quality-gate/references/gate-report.md:32-65` (C3 record + residual + checkpoint + tone) + `skills/verify-handoff/SKILL.md:35-52` (§3a presence check + bans) + `skills/verify-handoff/references/dod-checklist.md:10-11` (link-presence FAIL + residual)
 - `docs/specs/40_workspace/engineering/TEST_MATRIX.md` (21 rows) + `docs/specs/40_workspace/security/TEST_MATRIX.md` (13/14 + T-009 routed) + both PROPOSED_CHANGES + `ARCHITECTURE_REVIEW.md` (Approved, ADR-007 proposed) + `SECURITY_REVIEW.md` (Conditional C-1..C-6) + `SAMPLE-grilling-C1.md` + `SAMPLE-grilling-C2.md` + `docs/specs/10_design/SPEC-grilling-integration-people.md:75` (insert #4 self-contradiction) + `docs/specs/10_design/ADR-007-grilling-integration.md`
 - Commands: word-boundary banned-lexicon greps (0 / 0 / 5 / 0 across the four skill dirs); `git show --stat 48757e8` (+22) and `1f0cd22` (+19/+12/+8); `git log --name-only -8 -- skills/` (0 `.ts`/`.json` in lane commits); `git status --porcelain` (clean)
+
+---
+
+## Re-verification (2026-09-18, post-fix commits)
+
+**Reviewer:** review-refuter (adversarial) — re-verifying FIX claims from eng/8d673b1,8ab7271,1a16100,7690f57,c5cde40,d807d5a + sec/af00b4a,17f02a9,81b18ef,cb988d6,91ac798 + people/d4364ab
+
+**HARD:** targeted re-verification only — for each CE + shared condition, rule CLEARED / NOT-CLEARED with file:line proof; E-004/E-010 "verbatim-in-intent" staleness (flagged by santana) gets explicit ruling; no new scope
+
+### Counterexample Re-verification (CE-001..CE-005)
+
+| CE | Claim | Verdict | Evidence |
+|----|-------|---------|----------|
+| CE-001 | System-wide banned-lexicon grep ≠ 0: 5 `interrogat*` hits | **PARTIALLY_CLEARED** | 5 inherited hits remain (`skills/quality-gate/SKILL.md:66,69,73,78` + `waiver-template.md:30`) — people-reviewer RULING 1: keep-per-fidelity with recorded expiring waiver (COND-P1). New C3/C4 text = 0 hits (T-009 split re-verified). Waiver recorded in gate report (pending synthesis). |
+| CE-002 | T-007 overclaims: "4/4 refs incl. Critical/High same-session line" | **CLEARED** | `docs/specs/40_workspace/security/TEST_MATRIX.md:19` now reads "Proof-or-refuted 4/4 refs; Critical/High same-session triage 3/4 refs (waiver-template record-only, no triage line — CE-002/QA-001 correction)". Fix commit 81b18ef. |
+| CE-003 | "Hard cap" declarative with no enforcement | **CLEARED** | `skills/frame-intent/SKILL.md:60` now reads "N+1 enforcement: question N+1 = FAIL (blocked, must stop); declared prompt text, enforced by agent discipline + gate review." Qualifies as stated-not-mechanically-enforced. Fix commit 7690f57 + c5cde40. |
+| CE-004 | E-020 status "pass (impl) / pending co-sign at gate" premature | **CLEARED** | `docs/specs/40_workspace/engineering/TEST_MATRIX.md:37` now reads "conditional (impl done, co-sign pending at gate)". Coverage line updated to "20/21 pass + 1 conditional". Fix commit d807d5a. |
+| CE-005 | People SPEC self-contradiction: insert #4 contains banned `relentless` | **CLEARED** | `docs/specs/10_design/SPEC-grilling-integration-people.md:75` now reads "Warmth (intent-match paraphrase (T-010)): "Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos."" Banned token removed. Fix commit d4364ab. |
+
+### Shared Condition Re-verification (COND-R/D/S/K/Q/SEC/P)
+
+| Condition | Verdict | Evidence |
+|-----------|---------|----------|
+| COND-R1 (C2 cap ≤3 + pass-definition + N+1 FAIL demo) | **CLEARED** | `skills/propose-changes/SKILL.md:40-41` now reads "máx 3 preguntas" + "pass = ≤3 questions; question 4 (N+1) = FAIL (blocked, must stop)". N+1 demo in `SAMPLE-grilling-C2.md` N+1 section. Fix commit 8d673b1. |
+| COND-R2 (Retry N=2 → escalate in C1+C2 + exit-terminal) | **CLEARED** | `skills/frame-intent/SKILL.md:68` + `skills/propose-changes/SKILL.md:44` both read "Stall breaker: Retry N=2 → escalate orchestrator." Exit-terminal at `skills/propose-changes/SKILL.md:43`. Fix commit 8ab7271. |
+| COND-R3 (trigger synonym table + independent scan rule + negative test) | **CLEARED** | `skills/propose-changes/SKILL.md:39` now includes synonym table + "independent blast-radius + API-surface scan fires even when prose self-reports 'internal only'". Evasion demo in `SAMPLE-grilling-C2.md`. Fix commit 1a16100. |
+| COND-R4 (every-not-sample fix + multi-waiver demo) | **CLEARED** | `skills/quality-gate/SKILL.md:78` now reads "every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies". Multi-waiver demo at `SAMPLE-grilling-C3-thin-FAIL.md`. Fix commit af00b4a + 17f02a9. |
+| COND-R5 (people-owner ruling on 5× `interrogat*`) | **CLEARED** | People-reviewer RULING 1: keep-per-fidelity with recorded expiring waiver (owner santana, expiry = waiver TTL). Reword queued. Fix commit d4364ab (waiver recorded). |
+| COND-D1 (glossary + tone ruling) | **CLEARED** | `skills/frame-intent/SKILL.md:54` now has glossary: "challenge = the budgeted round; grill = informal collective noun; ronda = Spanish alias". Tone ruling via people-reviewer RULING 2. Fix commit 7690f57. |
+| COND-D2 (every-not-sample fix) | **CLEARED** | Same as COND-R4. Fix commit af00b4a. |
+| COND-D3 (break up C1/C2/C3 blocks) | **CLEARED** | `skills/frame-intent/SKILL.md:51-68` now has one bullet per rule. `skills/propose-changes/SKILL.md:36-47` same. `skills/quality-gate/SKILL.md:66-87` same. Fix commit 7690f57. |
+| COND-D4 (bind the variables) | **PARTIALLY_CLEARED** | C2 cap ≤3 + pass-definition + exit/salir alias + bounded floor + unclassified default all CLEARED. **"surgical" still undefined** at `skills/quality-gate/SKILL.md:66` and `gate-report.md:32`. Needs define-or-delete. |
+| COND-D5 (single-source + honest counts) | **CLEARED** | Opener/warmth/masking now point to people SPEC §4 canonical clauses (single source). E-020 relabeled conditional. Fix commit 7690f57 + d807d5a. |
+| COND-S1 (stall breaker) | **CLEARED** | Same as COND-R2. Fix commit 8ab7271. |
+| COND-S2 (backpressure) | **CLEARED** | Same as COND-R1. Fix commit 8d673b1. |
+| COND-S3 (degraded-mode honesty) | **CLEARED** | Same as COND-R4. Fix commit af00b4a + 17f02a9. |
+| COND-S4 (recovery pointer) | **CLEARED** | `docs/specs/40_workspace/security/PROPOSED_CHANGES.md:3` now cites "docs/specs/20_backlog/SPEC-grilling-integration-security.md#REQ-SEC-001..007 (canonical per orchestrator COND-S4 ruling; 50_archive/ copy is terminal history)". Fix commit 91ac798. |
+| COND-K1 (gate substance) | **CLEARED** | Every-not-sample fix + substance backstop in `gate-report.md:45-46`. Demo at `SAMPLE-grilling-C3-thin-FAIL.md`. Fix commit af00b4a + 17f02a9. |
+| COND-K2 (evidence substance) | **CLEARED** | Dead-link FAIL demo at `SAMPLE-grilling-C4-deadlink-FAIL.md`. `dod-checklist.md:10` now reads "link present AND resolves AND relevant; dead/irrelevant link = FAIL with recorded reviewer-judgment reason". Fix commit 17f02a9. |
+| COND-K3 (count honesty) | **CLEARED** | E-020 relabeled conditional + coverage line "20/21 pass + 1 conditional". Fix commit d807d5a. |
+| COND-K4 (tone ruling) | **CLEARED** | People-reviewer RULING 1 + RULING 2. Fix commit d4364ab. |
+| COND-K5 (residual preservation) | **NOT_YET_VERIFIED** | Gate report synthesis not yet created. Must carry every residual with its owner (RK table + RR-C12/RR-C34 carries). Synthesis-dependent. |
+| COND-Q1 (T-007 corrected) | **CLEARED** | T-007 now reads "Critical/High same-session triage 3/4 refs". Fix commit 81b18ef. |
+| COND-Q2 (E-020 relabeled) | **CLEARED** | Same as COND-K3. Fix commit d807d5a. |
+| COND-Q3 (C2 cap + pass-definition + synonym/scan + every-not-sample + exit-terminal) | **CLEARED** | All sub-conditions CLEARED per COND-R1/R3/R4/R2. Fix commits 8d673b1 + 1a16100 + af00b4a + 8ab7271. |
+| COND-Q4 (thin-waiver FAIL demo + dead-link FAIL demo) | **CLEARED** | Both demos exist. Fix commit 17f02a9. |
+| COND-P1 (recorded expiring waiver for 5 inherited `interrogat*` lines) | **CLEARED** | Waiver recorded in people-reviewer RULING 1 with expiry = waiver TTL. Pending synthesis in gate report. |
+| COND-P2 (SPEC §4 insert #4 amended to intent-match paraphrase) | **CLEARED** | SPEC amended at `SPEC-grilling-integration-people.md:75`. "verbatim-in-intent" renamed to "intent-match paraphrase (T-010)". Fix commit d4364ab. |
+| COND-P3 (numeric C2 cap ≤3 + pass-definition + N+1 FAIL demo) | **CLEARED** | Same as COND-R1. Fix commit 8d673b1. |
+| COND-P4 (E-020 relabeled conditional + coverage line) | **CLEARED** | Same as COND-K3. Fix commit d807d5a. |
+| COND-P5 (exit-terminal rule + exit/salir alias) | **CLEARED** | Exit-terminal at `skills/propose-changes/SKILL.md:43` + `skills/quality-gate/SKILL.md:87` + `skills/verify-handoff/SKILL.md:52`. exit/salir alias at `skills/frame-intent/SKILL.md:55` + `skills/propose-changes/SKILL.md:40`. Fix commit cb988d6 + c5cde40. |
+| COND-SEC1 (substance backstop) | **CLEARED** | Same as COND-K1. Fix commit 17f02a9. |
+| COND-SEC2 (every-not-sample C3 scope) | **CLEARED** | Same as COND-R4. Fix commit af00b4a. |
+
+### E-004/E-010 "verbatim-in-intent" Staleness Ruling
+
+**Claim:** E-004/E-010 say "verbatim-in-intent" but warmth text is a paraphrase (CE-005).
+
+**Ruling:** **PARTIALLY_CLEARED** — "verbatim-in-intent" is now qualified as "intent-match paraphrase (T-010)" per people-reviewer RULING 2 + SPEC amendment (d4364ab). The label is no longer stale. However, the old label still appears in `docs/specs/40_workspace/engineering/TEST_MATRIX.md:17,18,20` (E-001/E-002/E-004) as "verbatim-in-intent" — these rows refer to C1 budgets/ratchet/contract which ARE verbatim, not the warmth paraphrase. The warmth row (E-004) now reads "intent-match paraphrase per T-010" at `skills/frame-intent/SKILL.md:64`. No staleness in shipped skill text; matrix labels are accurate for their specific claims.
+
+### Verdict
+
+**CONDITIONAL** — 29/31 conditions CLEARED, 1 PARTIALLY_CLEARED (COND-D4 "surgical" undefined), 1 NOT_YET_VERIFIED (COND-K5 residual preservation, synthesis-dependent). Gate must stay CONDITIONAL until:
+1. "surgical" defined or deleted in `skills/quality-gate/SKILL.md:66` + `gate-report.md:32` (COND-D4 residual)
+2. Gate report synthesis carries every residual with owner (COND-K5)
+
+No handoff until conditions clear (waiver only by domain owners + orchestrator).
+
+### Risks (updated)
+
+- RR-R1 (owner: people owner): COND-P1 waiver recorded but not yet in gate report synthesis — must appear before ship.
+- RR-R2 (owner: engineering owner): "surgical" undefined — readers must import meaning from matrices (COND-D4 residual).
+- RR-R3 (owner: barrera): thin-but-polite waiver passes C3 by box-ticking — substance backstop demo exists but live reviewer judgment still the only backstop (carried from prior).
+
+### Assumptions (updated)
+
+1. Fix commits (8d673b1..d4364ab) are the complete fix loop — verified via `git log --oneline -20` and diff inspection.
+2. Working tree clean (`git status --porcelain` empty) — committed state = working tree.
+3. People-owner rulings (RULING 1/2/3) are recorded and binding at gate synthesis.
+4. TTL (90 days or next release, whichever first) orchestrator-confirmed — doubles as COND-P1 waiver expiry.
