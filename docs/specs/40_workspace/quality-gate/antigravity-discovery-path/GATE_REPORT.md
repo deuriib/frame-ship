@@ -20,7 +20,7 @@ Source: `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md` (2026-09-18, A
 | 5. Remove root `hooks.json` post-verification | Yes, deleted | `Test-Path hooks.json` False; git history preserves it (`git diff HEAD` shows 39 deletions); rollback `git checkout -- hooks.json` |
 | 6. Runtimes untouched | Yes | `git status` clean for `.opencode/plugins/frame-ship.ts`, `hooks/context-inject.ts`, `rules/frame-ship.md`, `skills/` |
 
-**Scope expansion:** none. No files outside the proposal's blast radius; no behavior change to either runtime; version lockstep held at v0.6.0 (no bump).
+**Scope expansion:** none. No files outside the proposal's blast radius; no behavior change to either runtime; version lockstep held at v0.6.1 (no bump).
 
 ## Reviewer Verdicts (min-review, single mode)
 
@@ -64,7 +64,7 @@ None — no COND items. (F-001 accepted as documented residual, not a gate condi
 - [x] Stage skill loaded: `skill(quality-gate)` cited (trigger: implementation ready for review)
 - [x] Domain owner/specialist role understood: vasquez (CTO), engineering owner, gate keeper — domain role cited
 - [x] Execution mode declared: `single` (direct, no task dispatch; docs/config-only unit)
-- [x] Packet intact: `SPEC:docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md / HARD:single+5-step blast radius, runtimes untouched, v0.6.0 lockstep / GATE:this report (OPEN) / DOMAINS:[engineering]` — reference-only, no full-context paste
+- [x] Packet intact: `SPEC:docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md / HARD:single+5-step blast radius, runtimes untouched, v0.6.1 lockstep / GATE:this report (OPEN) / DOMAINS:[engineering]` — reference-only, no full-context paste
 
 ## Escalations
 

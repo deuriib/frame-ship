@@ -8,7 +8,7 @@
 
 | REQ-ID | Evidence ID | Description | Type | Status | Commit |
 |--------|-------------|-------------|------|--------|--------|
-| REQ-NF docs | C-001 | AGENTS.md 4 line-ref cells → v0.6.0 actuals (skills 348-352, injection 383-390, loader 210-238, compacting 391-396; dedupe 33-36 + version 10-11 re-verified) + count 350→403; root `package.json` 0.5.0→0.6.0 (header+VERSION+MARKER+manifest quadruple) | Review (read-back verify) | pass | 2966f15 |
+| REQ-NF docs | C-001 | AGENTS.md 4 line-ref cells → v0.6.1 actuals (skills 348-352, injection 383-390, loader 210-238, compacting 391-396; dedupe 33-36 + version 10-11 re-verified) + count 350→403; root `package.json` 0.5.0→0.6.1 (header+VERSION+MARKER+manifest quadruple) | Review (read-back verify) | pass | 2966f15 |
 | REQ-003 / NF-002 | C-002 | Guarded defaults: skipped lane leaves config untouched; total-miss lane sets no defaults and creates no empty mirrors; happy path still 74/74 + defaults montilla/2 | Integration (hook replay) | pass | 253c94e |
 | REQ-002 / NF-003 | C-003 | parseAgentFile adversarial fixture: BOM prefix, unclosed fence, leading-newline prefix → description extracted + zero fence/metadata lines in prompt; well-formed control unchanged; 5-agent spot-check regression (d=158/216/246/200/154) | Integration (hook replay w/ fixture) | pass | 92a4941 |
 | REQ-NF-001 | C-004 | Timeout-race-as-miss: never-settling read settles hook in ~2s (READ_TIMEOUT_MS=2000), hung entry skipped, lane populates 73, defaults hold on partial roster; happy path 57ms node / 134ms bun (no per-read penalty, timers cleared, no unhandled rejections) | Integration (hook replay w/ hang stub; node lane — Bun global readonly under bun, mechanism runtime-agnostic) | pass | ab64ca1 |

@@ -16,13 +16,13 @@
 | Tests / Evidence | `docs/specs/40_workspace/engineering/TEST_MATRIX.md` V-001..V-007 all PASS (docs/config-only; evidence = diffs, listings, JSON validation) + `IMPLEMENTATION_PLAN.md` steps 1–6 | done |
 | Gate | `docs/specs/40_workspace/quality-gate/antigravity-discovery-path/GATE_REPORT.md` — **OPEN** (min-review: readability ✅, risk ✅ no-trigger, refuter ✅ + 1 Low residual, qa ✅ 5/5 functional) | done |
 | Docs | `AGENTS.md` NOTES bridge (pointer only, no pasted context) | done |
-| Domain artifact | N/A (config/docs-only, no auth/data/API/PII, no behavior change, v0.6.0 lockstep held) | N/A |
+| Domain artifact | N/A (config/docs-only, no auth/data/API/PII, no behavior change, v0.6.1 lockstep held) | N/A |
 
 ## Definition of Done Checklist
 
 - [x] Acceptance criteria satisfied — 5/5 verify-runbook checks functionally met (mirror body identical, Always On + footer intact, hooks semantic-identical + single source resolves + JSON valid, plugin.json valid + untouched, bridge resolves)
 - [x] Tests/evidence linked per REQ-ID — V-001..V-007 in TEST_MATRIX, each with linked artifact/command output
-- [x] Load evidence present — skills `quality-gate` + `verify-handoff` loaded and cited; mode `single`; packet `SPEC:engineering/PROPOSED_CHANGES.md / HARD:single+5-step blast radius, runtimes untouched, v0.6.0 lockstep / GATE:OPEN / DOMAINS:[engineering]` intact, reference-only
+- [x] Load evidence present — skills `quality-gate` + `verify-handoff` loaded and cited; mode `single`; packet `SPEC:engineering/PROPOSED_CHANGES.md / HARD:single+5-step blast radius, runtimes untouched, v0.6.1 lockstep / GATE:OPEN / DOMAINS:[engineering]` intact, reference-only
 - [x] Domain checks passing — Common 6/6; Engineering appendix N/A with justification (zero code paths, runtimes untouched); no other domain touched
 - [x] Security checks passing — not security-touched; guardrails screened (no secrets, same hook commands/timeouts, no new trust boundary/privilege/PII); review-risk + architect/ADR not triggered per proposal §Approval
 - [x] Documentation updated — AGENTS.md bridge; changelog N/A (internal-only config, justification in proposal blast radius); ADR explicitly waived (no contract change — `plugin.json` edit not elected)

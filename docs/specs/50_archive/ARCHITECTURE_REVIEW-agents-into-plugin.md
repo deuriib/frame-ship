@@ -10,16 +10,16 @@
 
 ## Contract Compliance
 
-| Invariant | Status | Notes |
-|-----------|--------|-------|
-| INV-001 (single-file zero-dep, tsc clean) | pass | Proposal touches one committed file (`.opencode/plugins/frame-ship.ts`); no new imports, no static `node:` import, no `package.json` deps; AC-003 (`mise run typecheck` green + diff stat) gates it at execute-spec |
-| INV-002 (idempotent, never clobbers) | pass | REQ-003 row: `??=` per `config.agents`/`config.agent` key + `??=` defaults; mirrors proven `skills.paths` `includes()` precedent (frame-ship.ts:127-132); AC-004 double-init replay log gates it |
-| INV-003 (prompts are bodies only) | pass | `parseAgentFile` strips `---` fences; `description` verbatim from each file's own frontmatter, never rewritten; AC-002 5-agent spot-check (montilla, vasquez, backend, qa, scout) gates it |
-| INV-004 (roster-exact, 74 keys, sole alias) | pass | MANIFEST 74 entries; `montilla` primary; 8 C-levels `all`; 65 `subagent`; sole alias `espinoza-specialist` → `engineering/espinoza.md`; excluded `AGENTS.md`/`README.md`/`delegation-contract.md`; AC-001 key-count gates drift (R-001) |
-| INV-005 (defaults stable) | pass | `default_agent ??= "montilla"`, `subagent_depth ??= 2` — apply only when unset; user overrides win; no later SPEC + CEO waiver in play |
-| INV-006 (version triple together) | pass | Header comment + `VERSION` + `MARKER` v0.5.0 → v0.6.0 in one commit; `.opencode/plugins/AGENTS.md` ref follows (API_CONTRACTS §5); AC-003 version-grep gates it |
-| INV-007 (reference-only provenance) | pass | Agent files read by path at init; no bodies pasted into plugin source or specs beyond AC-002 excerpts; proposal itself modifies no impl files |
-| INV-008 (deny-default, no echo) | pass | No secrets/tokens/PII in code/config/logs/examples; loader silent `""` on miss, never echoes contents into reasons/errors; AC-005 pattern scan gates it; concurs with security light-screen Checks 1–3 (all PASS) |
+| Invariant                                   | Status | Notes                                                                                                                                                                                                                                   |
+| ------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| INV-001 (single-file zero-dep, tsc clean)   | pass   | Proposal touches one committed file (`.opencode/plugins/frame-ship.ts`); no new imports, no static `node:` import, no `package.json` deps; AC-003 (`mise run typecheck` green + diff stat) gates it at execute-spec                     |
+| INV-002 (idempotent, never clobbers)        | pass   | REQ-003 row: `??=` per `config.agents`/`config.agent` key + `??=` defaults; mirrors proven `skills.paths` `includes()` precedent (frame-ship.ts:127-132); AC-004 double-init replay log gates it                                        |
+| INV-003 (prompts are bodies only)           | pass   | `parseAgentFile` strips `---` fences; `description` verbatim from each file's own frontmatter, never rewritten; AC-002 5-agent spot-check (montilla, vasquez, backend, qa, scout) gates it                                              |
+| INV-004 (roster-exact, 74 keys, sole alias) | pass   | MANIFEST 74 entries; `montilla` primary; 8 C-levels `all`; 65 `subagent`; sole alias `espinoza-specialist` → `engineering/espinoza.md`; excluded `AGENTS.md`/`README.md`/`delegation-contract.md`; AC-001 key-count gates drift (R-001) |
+| INV-005 (defaults stable)                   | pass   | `default_agent ??= "montilla"`, `subagent_depth ??= 2` — apply only when unset; user overrides win; no later SPEC + CEO waiver in play                                                                                                  |
+| INV-006 (version triple together)           | pass   | Header comment + `VERSION` + `MARKER` v0.5.0 → v0.6.1 in one commit; `.opencode/plugins/AGENTS.md` ref follows (API_CONTRACTS §5); AC-003 version-grep gates it                                                                         |
+| INV-007 (reference-only provenance)         | pass   | Agent files read by path at init; no bodies pasted into plugin source or specs beyond AC-002 excerpts; proposal itself modifies no impl files                                                                                           |
+| INV-008 (deny-default, no echo)             | pass   | No secrets/tokens/PII in code/config/logs/examples; loader silent `""` on miss, never echoes contents into reasons/errors; AC-005 pattern scan gates it; concurs with security light-screen Checks 1–3 (all PASS)                       |
 
 Contract-shape check: proposal §Changes maps 1:1 onto ARCHITECTURE.md Components + Data Flow and API_CONTRACTS §§1–5 (MANIFEST → §1, loaders → §3, hook extension → §§2/4, triple → §5). Zero divergence found — no renamed keys, no new surface, no altered defaults, no canonical edits proposed (CEO ruling 2 honored).
 
@@ -53,7 +53,7 @@ None — 8/8 invariants pass, no divergence, no conditions imposed by this revie
 ## Assumptions
 
 1. Disk roster at execute time still resolves to 74 keys (77 files minus 3 excluded); execute-spec re-verifies (proposal Assumption 2).
-2. Next version v0.6.0 (minor, additive lane); gate/orchestrator may rule otherwise — triple moves together regardless.
+2. Next version v0.6.1 (minor, additive lane); gate/orchestrator may rule otherwise — triple moves together regardless.
 3. Stale `PROPOSED_CHANGES.md` reuse is workspace scratch, not history rewrite; naming/promotion questions ride to gate per CEO ruling (2).
 4. Single-domain (engineering); any cross-domain need arising later goes as formal Cross-domain request to orchestrator, never sideways — none at this stage.
 

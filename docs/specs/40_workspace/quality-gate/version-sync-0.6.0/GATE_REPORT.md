@@ -1,4 +1,4 @@
-# Quality Gate Report: version-sync-0.6.0
+# Quality Gate Report: version-sync-0.6.1
 
 **Date:** 2026-09-17
 **Gate Status:** OPEN
@@ -6,16 +6,16 @@
 
 ## Packet
 
-SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.0.md` / HARD:single (direct, no task); text-edits only; archive/history excluded; commits `482dd91` + `3c0d58d` / GATE:this report (4/4 pass, 0 findings, 1 advisory residual) / DOMAINS:[engineering]
+SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.1.md` / HARD:single (direct, no task); text-edits only; archive/history excluded; commits `482dd91` + `3c0d58d` / GATE:this report (4/4 pass, 0 findings, 1 advisory residual) / DOMAINS:[engineering]
 
 ## Reviewer Verdicts
 
 | Domain | Reviewer (actual agent) | Verdict | Findings | Artifact |
 |--------|-------------------------|---------|----------|----------|
-| engineering | review-readability | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.0/readability-review.md` |
-| engineering | review-risk | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.0/risk-review.md` |
-| engineering | review-refuter | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.0/refuter-review.md` |
-| engineering | qa | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.0/qa-review.md` |
+| engineering | review-readability | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.1/readability-review.md` |
+| engineering | review-risk | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.1/risk-review.md` |
+| engineering | review-refuter | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.1/refuter-review.md` |
+| engineering | qa | pass | 0 | `docs/specs/40_workspace/quality-gate/version-sync-0.6.1/qa-review.md` |
 
 Single min gate per `skills/quality-gate/SKILL.md` §3 (readability + risk + refuter + qa); no data lens (no schema/lineage/PII-store impact); no other domains touched. Non-touched domain rows deleted per template.
 

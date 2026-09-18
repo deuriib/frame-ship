@@ -21,8 +21,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const VERSION = "0.6.0";
-// [frame-ship v0.6.0] parity marker — keep in lockstep with .opencode/plugins/frame-ship.ts + rules/frame-ship.md.
+const VERSION = "0.6.1";
+// [frame-ship v0.6.1] parity marker — keep in lockstep with .opencode/plugins/frame-ship.ts + rules/frame-ship.md.
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =

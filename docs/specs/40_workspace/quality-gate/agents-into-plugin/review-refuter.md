@@ -4,7 +4,7 @@
 **Date:** 2026-09-17
 **Verdict:** ✅ pass ("could not falsify" — claims hold; 4 advisory Low/Info findings, none gate-blocking)
 **SPEC:** `docs/specs/40_workspace/engineering/SPEC-agents-into-plugin-engineering.md` (REQ-001..004 + NF-001..004)
-**Under review:** `.opencode/plugins/frame-ship.ts` v0.6.0 (impl commits `9f8328b`, `69de0f4`, `6eae5a8`, `a91a486`) + `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
+**Under review:** `.opencode/plugins/frame-ship.ts` v0.6.1 (impl commits `9f8328b`, `69de0f4`, `6eae5a8`, `a91a486`) + `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
 
 ## Mission
 
@@ -46,7 +46,7 @@ Attempt to **falsify** the implementer's claims against the real code. Success =
 |----|---------------|--------|--------------|----------|
 | CE-001 | Shared `record` reference: `c.agents[k]` and `c.agent[k]` point to the **same object** (frame-ship.ts:322-324). Mutating one side's entry mutates the other | Low — harness treats config as read-only, but any consumer writing `config.agents.x.description` silently corrupts the mirror (violates the spirit of "never-clobber" across the mirror boundary) | Sim T4: after one hook run, `cfg.agents.k1.description = 'MUTATED'` → `cfg.agent.k1.description === 'MUTATED'` → `YES-shared-ref`. Fix: `c.agents[k] ??= {...record}` / separate literals | ⚠️ Low |
 | CE-002 | BOM (`\uFEFF`) or leading-newline prefix defeats the `^---` fence anchor → **entire raw file incl. frontmatter becomes the prompt** | Latent Low — full disk scan proves 0 affected files today (no BOM, all 74 start with `---`), so AC-002 holds; a future editor-added BOM reopens it | Adversarial run: `bom: {"description":"","prompt":"---\nname: x\ndescription: ...` — description lost AND frontmatter leaks into prompt. Fix: strip leading `\uFEFF`/whitespace before matching | ⚠️ Low (latent) |
-| CE-003 | Root `package.json` still `0.5.0` while plugin header is `0.6.0` — version-manifest drift vs the project convention (AGENTS.md: "bump header + VERSION + MARKER + manifest together") | Low — SPEC REQ-004's triple (header + VERSION + MARKER, all inside the plugin file) **is** together at v0.6.0 (lines 2, 10, 11); only the root manifest ref lags. Needs an explicit ruling (align it or declare root manifest out of the triple) | `package.json: "version": "0.5.0"` vs `frame-ship.ts:2 v0.6.0` | ⚠️ Low |
+| CE-003 | Root `package.json` still `0.5.0` while plugin header is `0.6.1` — version-manifest drift vs the project convention (AGENTS.md: "bump header + VERSION + MARKER + manifest together") | Low — SPEC REQ-004's triple (header + VERSION + MARKER, all inside the plugin file) **is** together at v0.6.1 (lines 2, 10, 11); only the root manifest ref lags. Needs an explicit ruling (align it or declare root manifest out of the triple) | `package.json: "version": "0.5.0"` vs `frame-ship.ts:2 v0.6.1` | ⚠️ Low |
 | CE-004 | Commit messages cite `TEMP verify.ts` AC-001/AC-004 GREEN logs that are **not in the repo** — test evidence is not independently auditable from the repo alone | Info — behavior re-verified independently by this review (RF-001..RF-011 with logs above); traceability gap only, not a behavior gap | `git show 6eae5a8` / `a91a486` messages reference TEMP script; no such file committed. Recommend attaching the log excerpt to the gate packet | ⚠️ Info |
 
 ## Claim table

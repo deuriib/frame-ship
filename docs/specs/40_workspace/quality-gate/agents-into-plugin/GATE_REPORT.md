@@ -10,7 +10,7 @@
 **Proposal:** `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
 **Prior gates:** security Approved (0 findings) + architecture Approved (no-ADR, additive within v1 contracts)
 **Impl range:** `9f8328b`, `69de0f4`, `6eae5a8`, `a91a486` + remediation `253c94e`, `92a4941`, `ab64ca1`, `14eaa4e`, `2966f15`, `220e2b4`
-**Under review:** `.opencode/plugins/frame-ship.ts` v0.6.0 (403 lines @ HEAD) + `.opencode/plugins/AGENTS.md` ref cells + `package.json` manifest 0.6.0
+**Under review:** `.opencode/plugins/frame-ship.ts` v0.6.1 (403 lines @ HEAD) + `.opencode/plugins/AGENTS.md` ref cells + `package.json` manifest 0.6.1
 
 ## Reviewer Verdicts
 
@@ -34,7 +34,7 @@ All conditions raised during the wave are CLEARED with code-diff proof + evidenc
 - [x] COND reliability-002 / risk COND-RK-02 (RL-002 malformed/BOM fence leak) → CLEARED by `92a4941` (BOM/leading-WS strip + unclosed-fence fallback filters frontmatter lines; INV-003 holds; matrix C-003).
 - [x] COND resilience-001 / risk COND-RK-03 (RS-001 no-timeout stall) → CLEARED by `ab64ca1` (`READ_TIMEOUT_MS=2000` + `withTimeout` race-as-miss; timers cleared; race rejection-free; matrix C-004).
 - [x] Advisory RL-003 / CE-001 / RK-004 (shared mirror record) → CLOSED by `14eaa4e` (independent literals per mirror; matrix C-005).
-- [x] Advisory CE-003 / RK-005 (root manifest 0.5.0 vs plugin 0.6.0) → CLOSED by `2966f15` (`package.json` → 0.6.0).
+- [x] Advisory CE-003 / RK-005 (root manifest 0.5.0 vs plugin 0.6.1) → CLOSED by `2966f15` (`package.json` → 0.6.1).
 - [x] Advisory CE-004 (TEMP verify logs not in repo) → CLOSED by `220e2b4` (remediation matrix C-001..C-005 committed as auditable evidence).
 
 No CONDITIONAL items remain. No waivers needed — nothing waived, everything fixed and re-verified.
@@ -46,7 +46,7 @@ No CONDITIONAL items remain. No waivers needed — nothing waived, everything fi
 3. **All-hung bound:** ~74×2s ≈ 148s bounded stall worst case (not infinite); self-DoS only, local trusted FS.
 4. **Silent-fallback advisory:** zero-observability silent fallback stands — partial roster loss invisible at runtime; contents-free numeric skip-count is a safe future hardening (RS-003, endorsed by risk).
 5. **Bootstrap reject-only precedent:** `loadBootstrapBody` single-read keeps its reject-only shape (no timeout race) — explicitly out of COND scope; lower exposure than the 74-chain. (Matrix assumption 3.)
-6. **Out-of-scope live 0.5.0 refs:** any remaining live-doc references to v0.5.0 outside this spec's touched files are out of scope for this gate (this gate's triple/quadruple is aligned at v0.6.0).
+6. **Out-of-scope live 0.5.0 refs:** any remaining live-doc references to v0.5.0 outside this spec's touched files are out of scope for this gate (this gate's triple/quadruple is aligned at v0.6.1).
 7. **`agents/` untracked ruling:** `agents/` is untracked in git (`?? agents/`) while the plugin is tracked. Runtime behaves per SPEC with the roster present (proven by qa replays + refuter disk scan 74/74). Whether `agents/` should be tracked before ship is routed to verify-handoff/orchestrator — flagged, not held.
 
 ## Rollback

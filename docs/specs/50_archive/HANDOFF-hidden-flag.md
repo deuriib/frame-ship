@@ -35,4 +35,4 @@ Small optional display flags ride conditional spread (`...(cond ? {k:v} : {})`) 
 
 ## Next
 
-`frame-ship:ship-release` — commit + release notes decision (version triple untouched v0.6.0; ship-release decides bump or docs-only). No cross-domain need; no waiver.
+`frame-ship:ship-release` — commit + release notes decision (version triple untouched v0.6.1; ship-release decides bump or docs-only). No cross-domain need; no waiver.

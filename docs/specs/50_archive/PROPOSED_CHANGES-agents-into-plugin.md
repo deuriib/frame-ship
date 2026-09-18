@@ -15,15 +15,15 @@ Port the proven `frame-ship-agents` roster mechanism (static MANIFEST + file loa
 
 ## Changes
 
-| Target | Change Type | Description |
-|--------|-------------|-------------|
-| `.opencode/plugins/frame-ship.ts` | file-modify | REQ-001: add `AGENTS_MANIFEST` const — 74 entries `{ key, file, mode }` (`montilla` primary; 8 C-levels `all`; 65 specialists `subagent`; `engineering/espinoza.md` aliased to key `espinoza-specialist`); excluded: `AGENTS.md`, `README.md`, `delegation-contract.md` |
-| `.opencode/plugins/frame-ship.ts` | file-modify | REQ-002: add `resolveAgentsDir(fallbackBase)` (mirrors `resolveSkillsDir` from own `import.meta.url`, fallback `directory \|\| worktree`) + `readTextFile(path)` (Bun.file first, dynamic `node:fs/promises` fallback, silent `""` on miss) + `parseAgentFile(raw)` (`description` verbatim from own frontmatter, `prompt` = body with `---` fences stripped) |
-| `.opencode/plugins/frame-ship.ts` | file-modify | REQ-003: extend existing `config` hook — after skills.paths block, fill `config.agents[key] ??=` + `config.agent[key] ??=` mirror per MANIFEST entry, `default_agent ??= "montilla"`, `subagent_depth ??= 2`; never overwrite existing user keys; skip-entry on loader miss, never throw init |
-| `.opencode/plugins/frame-ship.ts` | file-modify | REQ-004 + REQ-NF-001/002: version triple bump together (header comment + `VERSION` + `MARKER`, v0.5.0 → v0.6.0); no new imports, no static `node:` import, `mise run typecheck` stays green |
-| `.opencode/plugins/AGENTS.md` | file-modify | Version ref follows the triple in the same commit (API_CONTRACTS §5); no behavior-text change |
-| `agents/**/*.md` | — (read-only source) | NO CHANGE, stays untracked/uncommitted per CEO ruling (1); bodies + own frontmatter descriptions are the source of truth, read by path at init |
-| `docs/specs/10_design/ARCHITECTURE.md` + `API_CONTRACTS.md` | — (canonical v1) | NO CHANGE per CEO ruling (2); naming + workspace-promotion questions ride to gate |
+| Target                                                      | Change Type          | Description                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.opencode/plugins/frame-ship.ts`                           | file-modify          | REQ-001: add `AGENTS_MANIFEST` const — 74 entries `{ key, file, mode }` (`montilla` primary; 8 C-levels `all`; 65 specialists `subagent`; `engineering/espinoza.md` aliased to key `espinoza-specialist`); excluded: `AGENTS.md`, `README.md`, `delegation-contract.md`                                                                                       |
+| `.opencode/plugins/frame-ship.ts`                           | file-modify          | REQ-002: add `resolveAgentsDir(fallbackBase)` (mirrors `resolveSkillsDir` from own `import.meta.url`, fallback `directory \|\| worktree`) + `readTextFile(path)` (Bun.file first, dynamic `node:fs/promises` fallback, silent `""` on miss) + `parseAgentFile(raw)` (`description` verbatim from own frontmatter, `prompt` = body with `---` fences stripped) |
+| `.opencode/plugins/frame-ship.ts`                           | file-modify          | REQ-003: extend existing `config` hook — after skills.paths block, fill `config.agents[key] ??=` + `config.agent[key] ??=` mirror per MANIFEST entry, `default_agent ??= "montilla"`, `subagent_depth ??= 2`; never overwrite existing user keys; skip-entry on loader miss, never throw init                                                                 |
+| `.opencode/plugins/frame-ship.ts`                           | file-modify          | REQ-004 + REQ-NF-001/002: version triple bump together (header comment + `VERSION` + `MARKER`, v0.5.0 → v0.6.1); no new imports, no static `node:` import, `mise run typecheck` stays green                                                                                                                                                                   |
+| `.opencode/plugins/AGENTS.md`                               | file-modify          | Version ref follows the triple in the same commit (API_CONTRACTS §5); no behavior-text change                                                                                                                                                                                                                                                                 |
+| `agents/**/*.md`                                            | — (read-only source) | NO CHANGE, stays untracked/uncommitted per CEO ruling (1); bodies + own frontmatter descriptions are the source of truth, read by path at init                                                                                                                                                                                                                |
+| `docs/specs/10_design/ARCHITECTURE.md` + `API_CONTRACTS.md` | — (canonical v1)     | NO CHANGE per CEO ruling (2); naming + workspace-promotion questions ride to gate                                                                                                                                                                                                                                                                             |
 
 Change types per `propose-changes` template (`file-*` for engineering). No other repository file is in scope.
 
@@ -37,12 +37,12 @@ Change types per `propose-changes` template (`file-*` for engineering). No other
 
 ## Alternatives Considered
 
-| Alternative | Reason Rejected |
-|-------------|-----------------|
-| B — two plugins side-by-side (`frame-ship` + `frame-ship-agents`) | Duplicate resolvers + dual versioning + dual install; brief framing cut it |
-| C — dynamic glob discovery instead of static MANIFEST | Non-deterministic modes + more init I/O; manifest drift is cheaper to police via AC-001 count check |
-| D — subset roster (only C-levels or only engineering) | Breaks KR-1.1 (74 keys) and leaves dispatch gaps; full roster assumed per brief open question |
-| Patch version (v0.5.1) instead of v0.6.0 | New subsystem lane is additive behavior, not a fix; minor bump is the default — gate may rule otherwise |
+| Alternative                                                       | Reason Rejected                                                                                         |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| B — two plugins side-by-side (`frame-ship` + `frame-ship-agents`) | Duplicate resolvers + dual versioning + dual install; brief framing cut it                              |
+| C — dynamic glob discovery instead of static MANIFEST             | Non-deterministic modes + more init I/O; manifest drift is cheaper to police via AC-001 count check     |
+| D — subset roster (only C-levels or only engineering)             | Breaks KR-1.1 (74 keys) and leaves dispatch gaps; full roster assumed per brief open question           |
+| Patch version (v0.5.1) instead of v0.6.1                          | New subsystem lane is additive behavior, not a fix; minor bump is the default — gate may rule otherwise |
 
 ## Approval Required From
 
@@ -63,13 +63,13 @@ Change types per `propose-changes` template (`file-*` for engineering). No other
 
 ## Risk Matrix
 
-| ID | Risk | Likelihood | Impact | Mitigation |
-|----|------|-----------|--------|------------|
-| R-001 | Manifest drift — roster file renamed/added, MANIFEST key missing or stale | Med | Med | Generate MANIFEST from a fresh `agents/**/*.md` scan at execute time; AC-001 key-count (74) check blocks completion; INV-004 roster-exact |
-| R-002 | Double-init duplication or user-override clobber in `config.agents`/`config.agent` | Low | High | `??=` per key + `includes()` for paths (INV-002); AC-004 double-init replay log (`JSON.stringify` before == after second run) |
-| R-003 | Frontmatter leak into prompts, or secrets/PII echoed in code/logs/errors | Low | High | `parseAgentFile` strips `---` fences; `description` verbatim from frontmatter, never rewritten; AC-005 pattern scan = 0 findings; loader never echoes contents (INV-008, REQ-NF-003) |
-| R-004 | Init I/O failure (agents dir unresolvable) wedges sessions | Low | Med | Silent `""` skip-entry, never throw; skills lane works independently (ARCHITECTURE availability); guard-clause returns before polluting config |
-| R-005 | Version triple drift (header / `VERSION` / `MARKER` out of sync) | Low | Low | Single-commit triple edit + `API_CONTRACTS.md` ref follow; AC-003 version-grep evidence (header+VERSION+MARKER) |
+| ID    | Risk                                                                               | Likelihood | Impact | Mitigation                                                                                                                                                                           |
+| ----- | ---------------------------------------------------------------------------------- | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| R-001 | Manifest drift — roster file renamed/added, MANIFEST key missing or stale          | Med        | Med    | Generate MANIFEST from a fresh `agents/**/*.md` scan at execute time; AC-001 key-count (74) check blocks completion; INV-004 roster-exact                                            |
+| R-002 | Double-init duplication or user-override clobber in `config.agents`/`config.agent` | Low        | High   | `??=` per key + `includes()` for paths (INV-002); AC-004 double-init replay log (`JSON.stringify` before == after second run)                                                        |
+| R-003 | Frontmatter leak into prompts, or secrets/PII echoed in code/logs/errors           | Low        | High   | `parseAgentFile` strips `---` fences; `description` verbatim from frontmatter, never rewritten; AC-005 pattern scan = 0 findings; loader never echoes contents (INV-008, REQ-NF-003) |
+| R-004 | Init I/O failure (agents dir unresolvable) wedges sessions                         | Low        | Med    | Silent `""` skip-entry, never throw; skills lane works independently (ARCHITECTURE availability); guard-clause returns before polluting config                                       |
+| R-005 | Version triple drift (header / `VERSION` / `MARKER` out of sync)                   | Low        | Low    | Single-commit triple edit + `API_CONTRACTS.md` ref follow; AC-003 version-grep evidence (header+VERSION+MARKER)                                                                      |
 
 ## Blast Radius
 
@@ -98,20 +98,20 @@ Change types per `propose-changes` template (`file-*` for engineering). No other
 
 ## Traceability (proposal stage)
 
-| Requirement | Acceptance Criterion | Proposed Change | Planned Evidence (execute-spec) |
-|-------------|---------------------|-----------------|---------------------------------|
-| REQ-001 | AC-001 | MANIFEST row | config dump key count (74) |
-| REQ-002 | AC-002 | loader row | 5-agent spot-check excerpts (montilla, vasquez, backend, qa, scout) |
-| REQ-003 | AC-001, AC-004 | config-hook row | config dump + double-init replay log |
-| REQ-004 | AC-003 | triple-bump row | version grep (header+VERSION+MARKER) |
-| REQ-NF-001 | AC-003 | triple-bump row | `mise run typecheck` log + diff stat |
-| REQ-NF-002 | AC-004 | config-hook row | double-init replay log |
-| REQ-NF-003 | AC-005 | all rows (INV-008) | pattern scan log (0 findings) |
-| REQ-NF-004 | — (process) | rollback plan above | revert note + ETA |
+| Requirement | Acceptance Criterion | Proposed Change     | Planned Evidence (execute-spec)                                     |
+| ----------- | -------------------- | ------------------- | ------------------------------------------------------------------- |
+| REQ-001     | AC-001               | MANIFEST row        | config dump key count (74)                                          |
+| REQ-002     | AC-002               | loader row          | 5-agent spot-check excerpts (montilla, vasquez, backend, qa, scout) |
+| REQ-003     | AC-001, AC-004       | config-hook row     | config dump + double-init replay log                                |
+| REQ-004     | AC-003               | triple-bump row     | version grep (header+VERSION+MARKER)                                |
+| REQ-NF-001  | AC-003               | triple-bump row     | `mise run typecheck` log + diff stat                                |
+| REQ-NF-002  | AC-004               | config-hook row     | double-init replay log                                              |
+| REQ-NF-003  | AC-005               | all rows (INV-008)  | pattern scan log (0 findings)                                       |
+| REQ-NF-004  | — (process)          | rollback plan above | revert note + ETA                                                   |
 
 ## Assumptions
 
-1. Next version is **v0.6.0** (minor: additive lane, not a fix) — gate/orchestrator may rule otherwise; triple moves together regardless.
+1. Next version is **v0.6.1** (minor: additive lane, not a fix) — gate/orchestrator may rule otherwise; triple moves together regardless.
 2. Disk scan shows 77 `agents/**/*.md` files minus 3 excluded (`AGENTS.md`, `README.md`, `delegation-contract.md`) = **74 roster keys**; execute-spec re-verifies at implementation time (AC-001 counts keys, not files).
 3. This file **supersedes the stale `PROPOSED_CHANGES.md` content** from the already-shipped SPEC-supporting-skills-integration (shipped c971728) — workspace scratch reuse, not history rewrite. Per CEO ruling (2), any naming (`PROPOSED_CHANGES.md` vs `PROPOSED_CHANGES-<spec-id>.md`) or workspace-promotion question rides to gate.
 4. No cross-domain need at proposal stage — single-domain spec; any cross-domain need arising later goes as a formal Cross-domain request brief to the orchestrator, never sideways.

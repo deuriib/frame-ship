@@ -412,7 +412,7 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 
 ---
 
-# Release Notes: v0.6.0 — agents into plugin (rollout)
+# Release Notes: v0.6.1 — agents into plugin (rollout)
 
 **Date:** 2026-09-17
 **Release Manager:** vasquez (CTO, engineering owner — orchestrator-delegated ship mechanics, single-domain)
@@ -424,7 +424,7 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 
 - Installing frame-ship alone now brings the full agent roster: 74 keys (`montilla` primary + 8 C-levels `all` + 65 specialists `subagent`, `espinoza-specialist` alias) mirrored into `config.agents` + `config.agent`, with `default_agent="montilla"` + `subagent_depth=2` — never clobbering user overrides.
 - Hardened loader: BOM/leading-whitespace strip + unclosed-fence fallback (no frontmatter leak into prompts), guarded defaults (missed lanes leave config untouched), `READ_TIMEOUT_MS=2000` race-as-miss (bounded ~148s worst case, no infinite stall), independent mirror records.
-- Single-file contract holds: `.opencode/plugins/frame-ship.ts` v0.6.0 (403 lines), zero deps, `mise run typecheck` clean, double-init byte-stable, secret scan 0 findings.
+- Single-file contract holds: `.opencode/plugins/frame-ship.ts` v0.6.1 (403 lines), zero deps, `mise run typecheck` clean, double-init byte-stable, secret scan 0 findings.
 
 ## Changes
 
@@ -432,7 +432,7 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 
 - Static `AGENTS_MANIFEST` (74 entries) + `resolveAgentsDir` / `readTextFile` (Bun.file first, dynamic `node:fs/promises` fallback) + `parseAgentFile` (description from own frontmatter, body with fences stripped) ported into the single-file runtime (REQ-001, REQ-002 — SPEC-agents-into-plugin-engineering, engineering)
 - `config` hook fills `config.agents` + `config.agent` mirror idempotently with guarded defaults (`??=` only inside populated-roster guard) (REQ-003 — same spec, engineering)
-- Version triple bumped together: header comment + `VERSION` + `MARKER` → v0.6.0, manifest quadruple (`package.json` → 0.6.0), `.opencode/plugins/AGENTS.md` ref cells re-verified (REQ-004 — same spec, engineering)
+- Version triple bumped together: header comment + `VERSION` + `MARKER` → v0.6.1, manifest quadruple (`package.json` → 0.6.1), `.opencode/plugins/AGENTS.md` ref cells re-verified (REQ-004 — same spec, engineering)
 
 ### Fixes
 
@@ -473,7 +473,7 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 
 - C-level chat roster decluttered: `montilla` only visible; 8 C-level `mode:all` (`barrera`, `dauhajre`, `espinoza`, `montero`, `santana`, `subero`, `vasquez`, `vera`) carry exact `hidden:true`; 65 subagents untouched (hidden by default in host).
 - Backward-compatible optional-only overlay: `AgentManifestEntry.hidden?: boolean` + conditional spread in both mirror inserts — absent flag = byte-identical objects, no migration.
-- Full chain in `single` mode: brief → spec → proposal → arch review (APPROVED, ADR waived) → exec (`91cff38`) → min-gate (4/4 pass) → DoD PASS → this rollout. Version triple untouched v0.6.0 (docs-only ship, no bump per SPEC §5).
+- Full chain in `single` mode: brief → spec → proposal → arch review (APPROVED, ADR waived) → exec (`91cff38`) → min-gate (4/4 pass) → DoD PASS → this rollout. Version triple untouched v0.6.1 (docs-only ship, no bump per SPEC §5).
 
 ## Changes
 
@@ -726,7 +726,7 @@ Revert execute commit(s) on `skills/frame-intent/`; delete added brief fields. N
 
 ## Highlights
 
-- Chain contract now on the Antigravity discovery path: `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`, v0.6.0 lockstep held, no bump).
+- Chain contract now on the Antigravity discovery path: `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`, v0.6.1 lockstep held, no bump).
 - Single-source hooks: `.agents/hooks.json` canonical, root `hooks.json` removed post-verification (git history preserves it).
 - One-line by-reference bridge in root `AGENTS.md`; `plugin.json` structurally unchanged (no surfaces field elected, no ADR trigger).
 - Full chain in `single` mode: proposal → min-gate (readability + risk + refuter + qa, OPEN with 1 Low residual F-001) → DoD 6/6 PASS → this rollout.

@@ -5,7 +5,7 @@
 **Verdict:** ✅ PASS (delta re-verification 2026-09-17 — COND-001 + COND-002 both CLEARED; was ⚠️ CONDITIONAL)
 
 **Packet:** `SPEC:docs/specs/40_workspace/engineering/SPEC-agents-into-plugin-engineering.md#REQ-001..004+NF-001..004 / HARD:multi-subagents+single-file-zero-deps-idempotent-tsc-clean / GATE:security-Approved-0-findings+architecture-Approved-no-ADR+impl-9f8328b-69de0f4-6eae5a8-a91a486 / DOMAINS:engineering`
-**Under review:** `.opencode/plugins/frame-ship.ts` (v0.6.0, 350 lines) + `.opencode/plugins/AGENTS.md` ref line · Proposal: `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
+**Under review:** `.opencode/plugins/frame-ship.ts` (v0.6.1, 350 lines) + `.opencode/plugins/AGENTS.md` ref line · Proposal: `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
 
 ## Checklist
 
@@ -46,7 +46,7 @@
 - **Roster exact:** disk 74 roster files (77 scanned − `AGENTS.md`/`README.md`/`delegation-contract.md`) == MANIFEST 74 keys; sole alias `espinoza-specialist → engineering/espinoza.md` correct, c-level `espinoza` intact; modes 1×`primary` (montilla) + 8×`all` + 65×`subagent`. All 74 disk files carry `description:` + well-formed fence (scan 2026-09-17).
 - **REQ-002 loader:** `resolveAgentsDir` mirrors `resolveSkillsDir` precedent; `readTextFile` Bun-first + dynamic `node:fs/promises` fallback, no static `node:` import; `parseAgentFile` handles `\r\n`, double/single/unquoted descriptions, strips fence from prompt.
 - **REQ-003 idempotency + never-clobber:** `??=` on every insert (skills paths via `includes`, agents per-key dual-side, `default_agent`, `subagent_depth`); user overrides on either mirror survive independently; misses uncached → second init self-heals.
-- **REQ-004/NF-001 triple + zero-dep:** header `v0.6.0` + `VERSION="0.6.0"` + derived `MARKER` move together (lines 1-2, 10-11); `import type` only; **`mise run typecheck` re-run 2026-09-17 → EXIT 0**.
+- **REQ-004/NF-001 triple + zero-dep:** header `v0.6.1` + `VERSION="0.6.1"` + derived `MARKER` move together (lines 1-2, 10-11); `import type` only; **`mise run typecheck` re-run 2026-09-17 → EXIT 0**.
 - **NF-002/NF-004:** double-init replay safe by construction (above); single-file revert restores v0.5.0.
 
 ## Conditions (must clear for OPEN)

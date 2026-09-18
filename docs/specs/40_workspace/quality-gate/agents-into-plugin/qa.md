@@ -3,7 +3,7 @@
 **Reviewer:** qa (runs the real suite)
 **Date:** 2026-09-17
 **Verdict:** pass ✅
-**Scope:** `.opencode/plugins/frame-ship.ts` v0.6.0 — impl commits `9f8328b-69de0f4-6eae5a8-a91a486`
+**Scope:** `.opencode/plugins/frame-ship.ts` v0.6.1 — impl commits `9f8328b-69de0f4-6eae5a8-a91a486`
 **Packet:** SPEC `docs/specs/40_workspace/engineering/SPEC-agents-into-plugin-engineering.md` / HARD multi-subagents+single-file-zero-deps-idempotent-tsc-clean / GATE security-Approved-0-findings+architecture-Approved-no-ADR / DOMAINS engineering
 **Role note:** qa ran the real system only; did not author or implement this work. Adversarial refuter runs before qa per `skills/quality-gate/SKILL.md` §3 — this verdict covers executed behavior, not static audit.
 
@@ -27,7 +27,7 @@
 | 4 | Live `config` hook replay, bun lane (REQ-003/NF-002) | ✅ PASS | `42/42` — agents==74, mirror==74, mirrors identical, defaults montilla/2, double-init byte-stable, pre-seed `my-custom` survives (75), custom skills path survives |
 | 5 | Live `config` hook replay, node lane — `Bun` undefined, `node:fs` fallback (REQ-002/003) | ✅ PASS | `10/10` — same assertions green; proves dynamic-import fallback is real, not dead code |
 | 6 | `system.transform` double-push idempotency | ✅ PASS | `n1=4 n2=4 stable=true` |
-| 7 | Version triple + single-file zero-deps (REQ-004/NF-001/AC-003) | ✅ PASS | header `v0.6.0` (L2) + `VERSION = "0.6.0"` (L10) + `MARKER` derived from VERSION (L11); `package.json` deps only `@opencode-ai/plugin@1.18.29` (type-only, unchanged); diff stat = plugin `+202/-6` + `AGENTS.md` ref `1` line |
+| 7 | Version triple + single-file zero-deps (REQ-004/NF-001/AC-003) | ✅ PASS | header `v0.6.1` (L2) + `VERSION = "0.6.1"` (L10) + `MARKER` derived from VERSION (L11); `package.json` deps only `@opencode-ai/plugin@1.18.29` (type-only, unchanged); diff stat = plugin `+202/-6` + `AGENTS.md` ref `1` line |
 | 8 | Secret/PII scan over impl diff `9f8328b^..HEAD` (REQ-NF-003/AC-005) | ✅ PASS | strict assignment-grade patterns (password=/api-key=/`ghp_`/`xox-`/BEGIN PRIVATE KEY/aws_secret/`sk-live-`) → `STRICT_HITS=0`; broad sweep → 1 hit, adjudicated FALSE POSITIVE (`risk-analyst` vs `sk-[A-Za-z0-9]` substring); agent sample (5 files) → 0 hits |
 
 ## Traceability

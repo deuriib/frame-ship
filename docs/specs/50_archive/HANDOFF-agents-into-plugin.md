@@ -10,13 +10,13 @@
 
 | Artifact | Location / Evidence | Status |
 |----------|---------------------|--------|
-| Runtime (roster port) | `.opencode/plugins/frame-ship.ts` v0.6.0 (403 lines; header+VERSION+MARKER triple + manifest quadruple) | done |
-| Plugin ref docs | `.opencode/plugins/AGENTS.md` (cells re-verified @ `2966f15`) + root `package.json` → 0.6.0 | done |
+| Runtime (roster port) | `.opencode/plugins/frame-ship.ts` v0.6.1 (403 lines; header+VERSION+MARKER triple + manifest quadruple) | done |
+| Plugin ref docs | `.opencode/plugins/AGENTS.md` (cells re-verified @ `2966f15`) + root `package.json` → 0.6.1 | done |
 | Proposal (untouched-impl boundary) | `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md` | done |
 | Tests / Evidence | `docs/specs/40_workspace/engineering/TEST_MATRIX-agents-into-plugin.md` (C-001..C-005 + T-001..T-007, bun+node lanes) | done |
 | Gate verdict | `docs/specs/40_workspace/quality-gate/agents-into-plugin/GATE_REPORT.md` — **OPEN**, 6/6 PASS, 0 open conditions, 0 waivers (@ `4098fd7`) | done |
 | Prior gates | security **Approved** (0 findings) + architecture **Approved** (no-ADR, additive within v1 contracts) | done |
-| Changelog / release notes | routed to ship-release (manifest already 0.6.0; notes + changelog + rollback record are ship scope) | pending → ship-release |
+| Changelog / release notes | routed to ship-release (manifest already 0.6.1; notes + changelog + rollback record are ship scope) | pending → ship-release |
 
 ## Definition of Done Checklist
 

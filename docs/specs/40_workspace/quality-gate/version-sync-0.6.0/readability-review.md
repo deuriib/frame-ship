@@ -1,4 +1,4 @@
-# Readability Review: version-sync-0.6.0
+# Readability Review: version-sync-0.6.1
 
 **Reviewer:** review-readability
 **Date:** 2026-09-17
@@ -6,7 +6,7 @@
 
 ## Packet
 
-SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.0.md` / HARD:single; text-edits only; archive/history excluded / GATE:none-yet → this verdict / DOMAINS:[engineering]
+SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.1.md` / HARD:single; text-edits only; archive/history excluded / GATE:none-yet → this verdict / DOMAINS:[engineering]
 
 ## Checklist
 
@@ -20,9 +20,9 @@ SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.0.md
 
 ## Findings
 
-| ID | Severity | Location | Finding |
-|----|----------|----------|---------|
-| — | — | — | None |
+| ID  | Severity | Location | Finding |
+| --- | -------- | -------- | ------- |
+| —   | —        | —        | None    |
 
 Note (not a finding): `AGENTS.md:3` `Generated:` stamp untouched per proposal — generator-owned history, converges on next regen.
 

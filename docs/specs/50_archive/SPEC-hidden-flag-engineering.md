@@ -45,25 +45,25 @@ Outcome: C-level chat roster decluttered (montilla only visible); subagent dispa
 
 - Changing modes, keys, files, aliases, or roster count (74 stays).
 - Hiding montilla or any subagent; unhiding any C-level.
-- Version bump (docs-only string change not required; triple stays v0.6.0 unless release policy demands — ship-release decides).
+- Version bump (docs-only string change not required; triple stays v0.6.1 unless release policy demands — ship-release decides).
 - Agent markdown bodies/frontmatter — untouched.
 - Key rotation, prod patch, perm widening (Guardrail 4).
 
 ## 6. Dependencies
 
-| Dependency | Status | Effect |
-|------------|--------|--------|
-| `frame-ship.ts:240-330` manifest + mirror | present | edit target |
-| `mise run typecheck` toolchain | present | verifier |
-| ARCHITECTURE.md contract | present | REQ-001..004 extend INV-004 roster-exact (hidden overlay, no key/mode change) |
+| Dependency                                | Status  | Effect                                                                        |
+| ----------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `frame-ship.ts:240-330` manifest + mirror | present | edit target                                                                   |
+| `mise run typecheck` toolchain            | present | verifier                                                                      |
+| ARCHITECTURE.md contract                  | present | REQ-001..004 extend INV-004 roster-exact (hidden overlay, no key/mode change) |
 
 ## 7. Traceability
 
-| Requirement | AC | Proposed Change | Evidence |
-|-------------|----|-----------------|----------|
-| REQ-001 | AC-001 | PROPOSED_CHANGES-hidden-flag.md | diff + typecheck |
-| REQ-002 | AC-002 | same | grep 8 + diff |
-| REQ-003 | AC-003 | same | grep 0 subagent hidden |
-| REQ-004 | AC-004 | same | diff + shape check |
-| REQ-NF-001 | AC-005 | same | typecheck + diff scope |
-| REQ-NF-002 | AC-006 | same | scan output |
+| Requirement | AC     | Proposed Change                 | Evidence               |
+| ----------- | ------ | ------------------------------- | ---------------------- |
+| REQ-001     | AC-001 | PROPOSED_CHANGES-hidden-flag.md | diff + typecheck       |
+| REQ-002     | AC-002 | same                            | grep 8 + diff          |
+| REQ-003     | AC-003 | same                            | grep 0 subagent hidden |
+| REQ-004     | AC-004 | same                            | diff + shape check     |
+| REQ-NF-001  | AC-005 | same                            | typecheck + diff scope |
+| REQ-NF-002  | AC-006 | same                            | scan output            |

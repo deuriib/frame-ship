@@ -1,4 +1,4 @@
-# QA Review: version-sync-0.6.0
+# QA Review: version-sync-0.6.1
 
 **Reviewer:** qa (runs the real suite)
 **Date:** 2026-09-17
@@ -6,7 +6,7 @@
 
 ## Packet
 
-SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.0.md` / HARD:single; text-edits only; commits `482dd91` (proposal) + `3c0d58d` (impl) / GATE:none-yet → this verdict / DOMAINS:[engineering]
+SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.1.md` / HARD:single; text-edits only; commits `482dd91` (proposal) + `3c0d58d` (impl) / GATE:none-yet → this verdict / DOMAINS:[engineering]
 
 ## Checklist
 
@@ -20,14 +20,14 @@ SPEC:`docs/specs/40_workspace/engineering/PROPOSED_CHANGES-version-sync-0.6.0.md
 
 ## Traceability
 
-| REQ-ID (proposal row) | Test ID | Type | Status |
-|--------|-------------|-------------|------|
-| hooks/context-inject.ts:24-25 → 0.6.0 | E-001 | Review (grep `0.6.0` hits `:24-26` + stale-grep clean) | pass |
-| README.md:62,209,227 → 0.6.0 | E-002 | Review (read-back 3 lines + diff exactly 3 lines) | pass |
-| .opencode/INSTALL.md:76 → 0.6.0 | E-003 | Review (edit confirm + stale-grep clean) | pass |
-| AGENTS.md:9,20,79 → 403 lines / 0.6.0 | E-004 | Review (read-back 3 cells) | pass |
-| rules/frame-ship.md lockstep note | E-005 | Review (grep lockstep `:47`) | pass |
-| Core quadruple verify-only (already 0.6.0) | E-006 | Review (`package.json:3` + plugin `:2,:10-11` + plugins/AGENTS.md:4 read-back) | pass |
+| REQ-ID (proposal row)                      | Test ID | Type                                                                           | Status |
+| ------------------------------------------ | ------- | ------------------------------------------------------------------------------ | ------ |
+| hooks/context-inject.ts:24-25 → 0.6.1      | E-001   | Review (grep `0.6.1` hits `:24-26` + stale-grep clean)                         | pass   |
+| README.md:62,209,227 → 0.6.1               | E-002   | Review (read-back 3 lines + diff exactly 3 lines)                              | pass   |
+| .opencode/INSTALL.md:76 → 0.6.1            | E-003   | Review (edit confirm + stale-grep clean)                                       | pass   |
+| AGENTS.md:9,20,79 → 403 lines / 0.6.1      | E-004   | Review (read-back 3 cells)                                                     | pass   |
+| rules/frame-ship.md lockstep note          | E-005   | Review (grep lockstep `:47`)                                                   | pass   |
+| Core quadruple verify-only (already 0.6.1) | E-006   | Review (`package.json:3` + plugin `:2,:10-11` + plugins/AGENTS.md:4 read-back) | pass   |
 
 ## Coverage
 

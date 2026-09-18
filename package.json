@@ -1,11 +1,11 @@
 {
   "name": "frame-ship",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Frame→Ship workflow plugin for opencode (chain: frame-intent to ship-release)",
   "type": "module",
-  "main": "./.opencode/plugins/frame-ship.ts",
+  "main": "./plugins/opencode/frame-ship.ts",
   "exports": {
-    ".": "./.opencode/plugins/frame-ship.ts"
+    ".": "./plugins/opencode/frame-ship.ts"
   },
   "license": "MIT",
   "dependencies": {

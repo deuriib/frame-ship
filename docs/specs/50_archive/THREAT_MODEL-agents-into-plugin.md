@@ -10,7 +10,7 @@
 |---------|-------------|----------------|
 | config hook extension (`config.agents` / `config.agent` mirror + `default_agent` + `subagent_depth`) | plugin `config` hook at init | internal (local-trusted-file → config surface); additive only, skills lane untouched |
 | file-read loader (`resolveAgentsDir` + `readTextFile` + `parseAgentFile`, static 74-entry MANIFEST) | plugin init file reads under `agents/` | internal (repo-owned `agents/**/*.md` read-only source → config); no network, no user-input paths |
-| version triple bump (header + `VERSION` + `MARKER`, v0.5.0 → v0.6.0) | build/typecheck | internal; single-file revert restores v0.5.0 |
+| version triple bump (header + `VERSION` + `MARKER`, v0.5.0 → v0.6.1) | build/typecheck | internal; single-file revert restores v0.5.0 |
 
 ## STRIDE Analysis
 

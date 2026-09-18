@@ -73,7 +73,7 @@ opencode plugin add file:///D:/GitHub/frame-ship
 ## Verify
 
 1. Quit + restart opencode (config is not hot-reloaded).
-2. Start any session — the system prompt contains `[frame-ship v0.6.0]`.
+2. Start any session — the system prompt contains `[frame-ship v0.6.1]`.
 3. The native `skill` tool discovers all 9 stages (`frame-intent` … `ship-release`).
 
 ```bash

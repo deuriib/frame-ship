@@ -5,7 +5,7 @@
 **Verdict:** ✅ PASS (delta 2026-09-17 — COND-RS-01 + COND-RS-02 both CLEARED, see DELTA; originally ⚠️ CONDITIONAL)
 
 **Packet:** `SPEC:docs/specs/40_workspace/engineering/SPEC-agents-into-plugin-engineering.md#REQ-001..004+NF-001..004 / HARD:multi-subagents+single-file-zero-deps-idempotent-tsc-clean / GATE:security-Approved-0-findings+architecture-Approved-no-ADR+impl-9f8328b-69de0f4-6eae5a8-a91a486 / DOMAINS:engineering`
-**Under review:** `.opencode/plugins/frame-ship.ts` (v0.6.0, 350 lines) init-time loader (74 file reads at plugin init, Bun.file-first + node fallback, per-path cache) · Proposal: `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
+**Under review:** `.opencode/plugins/frame-ship.ts` (v0.6.1, 350 lines) init-time loader (74 file reads at plugin init, Bun.file-first + node fallback, per-path cache) · Proposal: `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
 
 ## Checklist
 

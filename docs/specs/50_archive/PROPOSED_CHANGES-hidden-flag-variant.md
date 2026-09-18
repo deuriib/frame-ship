@@ -15,7 +15,7 @@
 | `.opencode/plugins/frame-ship.ts:341-347,372-373` | modify | Mirror types `Record<string, { description; prompt; mode; hidden?: boolean }>` (both `agents` and `agent`) + conditional spread in both `??=` inserts: `...(entry.hidden !== undefined ? { hidden: entry.hidden } : {})` |
 | `docs/specs/10_design/ARCHITECTURE.md` | modify | INV-004 line extended: roster-exact + hidden overlay (8× `hidden:true` on C-level all, montilla visible, subagents no flag) |
 
-No other files touched. Subagent manifest lines untouched. Agent markdown untouched. Version triple untouched (v0.6.0).
+No other files touched. Subagent manifest lines untouched. Agent markdown untouched. Version triple untouched (v0.6.1).
 
 ## Diff sketch
 
