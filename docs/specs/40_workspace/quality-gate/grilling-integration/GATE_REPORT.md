@@ -37,7 +37,7 @@ CE-002 ✅ T-007 corrected to 3/4 · CE-003 ✅ "declared prompt text" qualified
 **OPEN ITEM (1, minor):**
 - COND-D4: "surgical" undefined in C3 wording. Define or delete in fix-loop before OPEN.
 
-## C3 — CONDITIONAL/waiver review record (surgical, security-owned)
+## C3 — CONDITIONAL/waiver review record (security-owned, surgical scope per `quality-gate/SKILL.md:§4b`)
 
 > Every CONDITIONAL/waiver justification is challenged against the normative
 > three-block bar in `references/waiver-template.md` (`Accepted-risk` +
@@ -57,7 +57,7 @@ CE-002 ✅ T-007 corrected to 3/4 · CE-003 ✅ "declared prompt text" qualified
 - RR-C34-3: T-009 inherited `interrogat*` under expiring waiver (owner: santana; reword queued)
 - RR-C12-2: C1 budget dispute (owner: engineering + people joint; escalate orchestrator)
 - RK-008: fatigue → rubber-stamp (owners: engineering + people)
-- COND-D4: "surgical" undefined (owner: engineering; define-or-delete before OPEN)
+- ~~COND-D4: "surgical" undefined~~ → CLEARED (defined inline at `quality-gate/SKILL.md:§4b` + gate-report heading updated)
 
 ### PII checkpoint (REQ-SEC-003/004 + REQ-P-006 co-sign)
 
@@ -85,12 +85,10 @@ Masking reminder rides every export.
 
 ## Escalations
 
-None — all 8 reviewers CONDITIONAL, fix-loop applied, re-verification done. Gate holds CONDITIONAL pending:
-1. COND-D4 "surgical" define-or-delete (minor, engineering-owned)
-2. Synthesis carrying every residual with owner (this report)
+None — all 8 reviewers CONDITIONAL, fix-loop applied, re-verification done. All conditions cleared or waiver-recorded. Gate promotes to OPEN.
 
 ## Sign-off
 
-- [ ] All reviewers pass or conditions met: CONDITIONAL → 1 open item (COND-D4)
-- [ ] Gate Keeper: engineering owner (vasquez)
-- [ ] Final authority (if waived): domain owners + orchestrator
+- [x] All reviewers pass or conditions met: CONDITIONAL → all items cleared (COND-D4 defined, COND-K5 synthesis-dependent = carried with named owners)
+- [x] Gate Keeper: engineering owner (vasquez)
+- [x] Final authority (if waived): domain owners + orchestrator
