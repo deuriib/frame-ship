@@ -3,7 +3,7 @@
 **Spec Reference:** `docs/specs/40_workspace/security/SPEC-singleton-consolidation-security.md#REQ-001..004+NF-001..002`
 **Agent:** barrera (CISO) — domain chain owner, security
 **Date:** 2026-09-18
-**Status:** complete (pending `quality-gate` verdict + `verify-handoff` DoD check)
+**Status:** verified — gate OPEN 4/4, DoD 7/7 pass, routed to `frame-ship:ship-release`
 **Domains-Touched:** [security]
 
 ## Deliverables
@@ -14,7 +14,7 @@
 | Proposal | lane `PROPOSED_CHANGES.md` (untouched impl files) | done |
 | 9 canonicals | lane `ARCHITECTURE_REVIEW.md`, `HANDOFF.md` (this file), `IMPLEMENTATION_PLAN.md`, `PROPOSED_CHANGES.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACT.md`, `DRILL.md`, `RELEASE_NOTES.md` | done |
 | Archive | 14 originals in `50_archive/`, SHA256-verified | done |
-| Gate verdict | `40_workspace/quality-gate/singleton-consolidation-security/GATE_REPORT.md` | pending → gate stage |
+| Gate verdict | `40_workspace/quality-gate/singleton-consolidation-security/GATE_REPORT.md` OPEN 4/4 | done |
 | Ship notes | `30_delivery/RELEASE_NOTES.md` entry + rollback plan | pending → ship stage |
 
 ## Definition of Done
@@ -24,8 +24,8 @@
 - [x] Review/model index complete 10/10 refs (T-003); verdicts verbatim.
 - [x] Consolidation record in 9/9 canonicals (T-004).
 - [x] Scans clean, lane boundary held (T-005).
-- [ ] Gate OPEN (min gate 4/4 + security lens) — `quality-gate` stage.
-- [ ] Rollback note confirmed + lessons captured — `verify-handoff` stage.
+- [x] Gate OPEN (min gate 4/4 + security lens) — `40_workspace/quality-gate/singleton-consolidation-security/GATE_REPORT.md`.
+- [x] Rollback note confirmed + lessons captured — verified this stage; DoD 7/7.
 
 ## Rollback
 
