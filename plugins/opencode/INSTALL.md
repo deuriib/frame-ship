@@ -60,8 +60,6 @@ Notes:
 
 - The source of truth stays at `plugins/opencode/frame-ship.ts` in this repo —
   never edit the copy directly; re-copy after every edit.
-- `plugins/opencode/package.json` marks the explicit directory root
-  (`main: ./frame-ship.ts`); the `.ts` path itself is unchanged.
 - Never commit a `file:///` path to a shared project config.
 
 ## Verify

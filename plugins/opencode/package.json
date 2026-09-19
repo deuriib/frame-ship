@@ -1,9 +1,0 @@
-{
-  "name": "frame-ship",
-  "version": "0.7.0",
-  "type": "module",
-  "main": "./frame-ship.ts",
-  "exports": {
-    ".": "./frame-ship.ts"
-  }
-}
