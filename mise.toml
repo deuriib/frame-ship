@@ -6,12 +6,10 @@ node = "22"
 
 [tasks.typecheck]
 description = "Typecheck opencode plugin (zero-deps, single file)"
-dir = ".opencode"
-run = 'npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts'
+run = 'npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/opencode/frame-ship.ts'
 
 [tasks.install]
 description = "Install opencode plugin deps"
-dir = ".opencode"
 run = "npm install"
 
 [settings]

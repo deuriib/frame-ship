@@ -1,6 +1,6 @@
 {
-  "name": "frame-ship",
-  "version": "0.6.1",
+  "name": "opencode-frame-ship",
+  "version": "0.7.0",
   "description": "Frame→Ship methodology plugin for opencode — from strategic intent to shipped release",
   "type": "module",
   "main": "./plugins/opencode/frame-ship.ts",
@@ -9,6 +9,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@opencode-ai/plugin": "1.18.29"
+    "@opencode/plugin": "2.0.9"
   }
 }

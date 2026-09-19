@@ -5,6 +5,30 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.7.0] — 2026-09-19
+
+### Added
+
+- V2-only port (`plugins/opencode/frame-ship.ts`, `Plugin.define({ id: "frame-ship" })`, `@opencode/plugin@2.0.9`): skills lane via `ctx.skill.transform` (13 `frame-ship:<stage>` skills, never overwriting user skills), system injection via `ctx.session.hook("context")` as `{type:"text", text}` parts (workflow card + guardrails + pointers + live `using-frame-ship` bootstrap, idempotent), compaction reminder via `ctx.session.hook("compaction")`.
+- `plugins/opencode/package.json` directory manifest (`main: ./frame-ship.ts`) marking the explicit plugin root; `.ts` path unchanged.
+- `plugins/opencode/INSTALL.md` rewritten for V2 (package install via `opencode plugin add`, local file via `.opencode/plugins/`, V2 behavior deltas).
+
+### Changed
+
+- Path resolvers now match the kept layout (`<root>/plugins/opencode/frame-ship.ts` → `<root>/skills|agents`); `mise run typecheck` runs from repo root against the real path.
+- `hasMarker()` accepts V2 `{type:"text", text}` system parts (string parts still accepted).
+
+### Removed
+
+- V1 implementation: `@opencode-ai/plugin` dep, `config` hook, `experimental.chat.system.transform` / `experimental.session.compacting` hooks, `config.agents`/`config.agent` mirror writes, `default_agent`/`subagent_depth` writes (V2 has no `subagent_depth` equivalent).
+
+### Known issues
+
+- Agent roster degrades gracefully: V2 `AgentEditor` has no `add`, so the 74-key manifest updates existing agents in place only (verified: `general`/`explore` pick up roster body + mode) and skips missing keys; `montilla` default applies only when present. File-based `.opencode/agents/` discovery is the V2-native path for new agents (follow-up, needs layout change).
+- Live model-request hook firing not exercised against a model (insufficient account funds at verify time); hook logic + idempotency proven via mock harness (4 context parts + marker, 1 compaction part, rerun adds 0) and 13/13 skills + `active` status via server API.
+
+## [v0.6.1] — 2026-09-17
+
 ### Added
 
 - C-level chat roster declutter: optional `hidden` in `AGENTS_MANIFEST` + `config.agents`/`config.agent` mirror; 8 C-level `mode:all` `hidden:true` (`barrera`, `dauhajre`, `espinoza`, `montero`, `santana`, `subero`, `vasquez`, `vera`), `montilla` visible, 0 subagent flags; backward-compatible exact shape `hidden:true` ([engineering], SPEC-hidden-flag-engineering; gate OPEN 4/4, DoD PASS; restart opencode to take effect).

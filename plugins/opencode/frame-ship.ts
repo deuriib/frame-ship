@@ -1,13 +1,15 @@
 /**
- * frame-ship v0.6.1 — Frame→Ship plugin (single-file, zero deps).
+ * frame-ship v0.7.0 — Frame→Ship plugin (single-file, zero deps, V2-only).
  * Chain: see CHAIN const (single source of truth for order).
- * Skills: ./skills/<stage>/SKILL.md. Location: .opencode/plugins/frame-ship.ts.
+ * Skills: ./skills/<stage>/SKILL.md. Location: plugins/opencode/frame-ship.ts.
+ * Install: explicit `plugins: ["./plugins/opencode/frame-ship.ts"]` (a root-level
+ * `plugins/` dir is NOT auto-discovered — only `.opencode/plugins/` is).
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
-import type { Config, Plugin, PluginInput } from "@opencode-ai/plugin";
+import { Plugin, type Skill } from "@opencode/plugin";
 
-const VERSION = "0.6.1";
+const VERSION = "0.7.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =
@@ -30,9 +32,18 @@ const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-15) > skills/<
 
 const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
+// V2 system parts are {type:"text",text} objects (not strings). Accept both
+// so idempotency holds across context + compaction hooks and retries.
 function hasMarker(parts: unknown): boolean {
   if (!Array.isArray(parts)) return false;
-  return parts.some((p) => typeof p === "string" && p.includes(MARKER));
+  return parts.some((p) => {
+    if (typeof p === "string") return p.includes(MARKER);
+    if (p && typeof p === "object") {
+      const text = (p as { text?: unknown }).text;
+      if (typeof text === "string" && text.includes(MARKER)) return true;
+    }
+    return false;
+  });
 }
 
 function fileUrlToPath(url: string): string | undefined {
@@ -48,12 +59,12 @@ function fileUrlToPath(url: string): string | undefined {
 }
 
 // Skills live at <repo-root>/skills/ next to this file's
-// <repo-root>/.opencode/plugins/frame-ship.ts. Resolve relative to our own
-// location (import.meta.url) so global installs work from ANY cwd — never
-// assume cwd IS the frame-ship repo. Falls back to cwd only when our own URL
-// is unavailable (e.g. unit tests). No static node: imports keeps zero-dep +
-// no @types/node so `tsc` stays clean (runtime read uses Bun.file first,
-// then a function-scoped dynamic import of node:fs/promises).
+// <repo-root>/plugins/opencode/frame-ship.ts. Resolve relative to our own
+// location (import.meta.url) so installs work from ANY cwd — never assume cwd
+// IS the frame-ship repo. Falls back to the plugin location dir only when our
+// own URL is unavailable (e.g. unit tests). No static node: imports keeps
+// zero-dep + no @types/node so `tsc` stays clean (runtime read uses Bun.file
+// first, then a function-scoped dynamic import of node:fs/promises).
 function resolveSkillsDir(fallbackBase: string): string {
   try {
     const meta = import.meta as unknown as { url?: string };
@@ -62,7 +73,7 @@ function resolveSkillsDir(fallbackBase: string): string {
       const filePath = fileUrlToPath(url);
       if (filePath) {
         const parts = filePath.split("/");
-        // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
+        // [..., <root>, plugins, opencode, frame-ship.ts] → drop last 3.
         if (
           parts.length >= 4 &&
           parts[parts.length - 3] === "plugins" &&
@@ -74,14 +85,14 @@ function resolveSkillsDir(fallbackBase: string): string {
       }
     }
   } catch {
-    // fall through to cwd-based fallback
+    // fall through to fallback
   }
   return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
 }
 
 // Agents live at <repo-root>/agents/ next to this file — same trust root as
 // the skills lane. Mirrors resolveSkillsDir (own import.meta.url first,
-// directory || worktree fallback); plain string join, no static node: import.
+// ctx.location.directory fallback); plain string join, no static node: import.
 function resolveAgentsDir(fallbackBase: string): string {
   try {
     const meta = import.meta as unknown as { url?: string };
@@ -90,7 +101,7 @@ function resolveAgentsDir(fallbackBase: string): string {
       const filePath = fileUrlToPath(url);
       if (filePath) {
         const parts = filePath.split("/");
-        // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
+        // [..., <root>, plugins, opencode, frame-ship.ts] → drop last 3.
         if (
           parts.length >= 4 &&
           parts[parts.length - 3] === "plugins" &&
@@ -102,22 +113,22 @@ function resolveAgentsDir(fallbackBase: string): string {
       }
     }
   } catch {
-    // fall through to cwd-based fallback
+    // fall through to fallback
   }
   return `${fallbackBase.replace(/[/\\]+$/, "")}/agents`;
 }
 
-// Per-path cache (mirrors the bootstrapCache precedent): init reads 74 small
-// files once; double-init replays serve from memory. Misses are never cached.
+// Per-path cache: init reads many small files once; double-init replays serve
+// from memory. Misses are never cached.
 const agentFileCache = new Map<string, string>();
 
 // Bounded init I/O: a read that never settles (hung handle, wedged mount)
-// must not stall the `config` hook. Every read races a small timeout —
-// timeout wins → miss ("", entry skipped, uncached so retry self-heals).
-// Timer cleared on settle; the raced read never rejects (inner try/catch),
-// so the race loser cannot surface an unhandled rejection. Zero-dep
-// (Promise.race + setTimeout only). Local 2-6KB reads land in single-digit
-// ms; 2000ms is generous headroom against false skips on loaded disks.
+// must not stall setup. Every read races a small timeout — timeout wins →
+// miss ("", entry skipped, uncached so retry self-heals). Timer cleared on
+// settle; the raced read never rejects (inner try/catch), so the race loser
+// cannot surface an unhandled rejection. Zero-dep (Promise.race + setTimeout
+// only). Local 2-6KB reads land in single-digit ms; 2000ms is generous
+// headroom against false skips on loaded disks.
 const READ_TIMEOUT_MS = 2000;
 
 function withTimeout(
@@ -219,6 +230,40 @@ function parseAgentFile(raw: string): { description: string; prompt: string } {
   return { description: "", prompt: text.trim() };
 }
 
+// Skill frontmatter: name + description (same shape as agents; body kept whole
+// as Skill.Info.content — references stay file-based per scope).
+function parseSkillFile(raw: string): {
+  name: string;
+  description: string;
+  content: string;
+} {
+  const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
+  const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+  if (fence) {
+    const frontmatter = fence[1] || "";
+    const nameMatch = frontmatter.match(
+      /^\s*name\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+    );
+    const descMatch = frontmatter.match(
+      /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+    );
+    const name = (
+      nameMatch?.[1] ??
+      nameMatch?.[2] ??
+      nameMatch?.[3] ??
+      ""
+    ).trim();
+    const description = (
+      descMatch?.[1] ??
+      descMatch?.[2] ??
+      descMatch?.[3] ??
+      ""
+    ).trim();
+    return { name, description, content: (raw || "").trim() };
+  }
+  return { name: "", description: "", content: (raw || "").trim() };
+}
+
 // Live bootstrap: SKILL.md body only (references stay file-based per scope).
 // Runtime file read keeps a single source of truth — no hardcoded copy to drift.
 const BOOTSTRAP_LABEL = `${MARKER} frame-ship:using-frame-ship bootstrap:`;
@@ -233,21 +278,7 @@ async function loadBootstrapBody(skillsDir: string): Promise<string> {
   if (bootstrapCachePath === skillFile && bootstrapCacheText)
     return bootstrapCacheText;
   try {
-    let raw = "";
-    const bunFile = (
-      globalThis as unknown as {
-        Bun?: { file: (p: string) => { text: () => Promise<string> } };
-      }
-    )?.Bun?.file;
-    if (typeof bunFile === "function") {
-      raw = await bunFile(skillFile).text();
-    } else {
-      // @ts-ignore — node types intentionally not installed; dynamic import only.
-      const fs = (await import("node:fs/promises")) as unknown as {
-        readFile: (p: string, enc: string) => Promise<string>;
-      };
-      raw = await fs.readFile(skillFile, "utf8");
-    }
+    const raw = await readTextFile(skillFile);
     const body = (raw || "").trim();
     if (!body) return "";
     const labeled = `${BOOTSTRAP_LABEL}\n${BOOTSTRAP_ACK}\n${body}`;
@@ -268,15 +299,16 @@ interface AgentManifestEntry {
   hidden?: boolean;
 }
 
-// Static roster manifest — 74 keys, re-verified by fresh `agents/**/*.md`
-// disk re-scan at execute time (77 files minus AGENTS.md, README.md,
-// delegation-contract.md). Key = file stem; sole alias:
+// Static roster manifest — 74 keys. Key = file stem; sole alias:
 // `espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
 // keeps key `espinoza`). Modes: `montilla` primary, 8 C-levels `all`,
 // 65 specialists `subagent`. Optional `hidden`: 8 C-levels `all` carry
-// `hidden: true` (montilla stays visible; subagents carry no flag — hidden
-// by host default). Bodies/descriptions are read by path at init —
+// `hidden: true`. Bodies/descriptions are read by path at setup —
 // never pasted here (reference-only provenance).
+// V2 NOTE: AgentEditor has update/remove/default only (no add), so this lane
+// degrades gracefully: existing agents get updated in place, missing keys are
+// skipped. File-based `.opencode/agents/` discovery is the V2-native path for
+// new agents (follow-up, needs file layout change — not done here per decision).
 const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
   { key: "montilla", file: "montilla.md", mode: "primary" },
   { key: "barrera", file: "barrera.md", mode: "all", hidden: true },
@@ -414,112 +446,138 @@ const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
   { key: "writer", file: "writer.md", mode: "subagent" },
 ];
 
-export const FrameShipPlugin: Plugin = async ({
-  directory,
-  worktree,
-}: PluginInput) => {
-  const fallbackBase = (directory || worktree || "").replace(/[/\\]+$/, "");
-  const skillsDir = resolveSkillsDir(fallbackBase);
+// Skill dirs shipped at <repo-root>/skills/ (SKILL.md each). IDs are prefixed
+// `frame-ship:<dir>` to match the chain triggers; `name` stays the bare
+// frontmatter name (loader expects `name` == dir convention).
+const SKILL_DIRS = [
+  "using-frame-ship",
+  "frame-intent",
+  "translate-to-spec",
+  "propose-changes",
+  "review-security",
+  "review-architecture",
+  "execute-spec",
+  "quality-gate",
+  "verify-handoff",
+  "ship-release",
+  "debugging",
+  "git-worktree",
+  "pull-request",
+] as const;
 
-  return {
-    // Runs once on init with the merged config. Appends our skills dir to
-    // `skills.paths` (scanned recursively for **/SKILL.md). Idempotent:
-    // never duplicates, never clobbers user paths.
-    config: async (cfg: Config) => {
-      const c = cfg as Config & {
-        skills?: { paths?: string[] };
-        agents?: Record<
-          string,
-          {
-            description: string;
-            prompt: string;
-            mode: AgentMode;
-            hidden?: boolean;
-          }
-        >;
-        agent?: Record<
-          string,
-          {
-            description: string;
-            prompt: string;
-            mode: AgentMode;
-            hidden?: boolean;
-          }
-        >;
-        default_agent?: string;
-        subagent_depth?: number;
-      };
-      c.skills ??= {};
-      c.skills.paths ??= [];
-      if (skillsDir && skillsDir !== "/skills") {
-        if (!c.skills.paths.includes(skillsDir)) c.skills.paths.push(skillsDir);
-      }
-      // Roster lane (additive): fill `config.agents` + `config.agent` mirror
-      // per MANIFEST entry, plus `default_agent` + `subagent_depth` only when
-      // the roster actually populated (≥1 key). `??=` on every insert — never
-      // overwrites user keys; a loader miss skips the entry, never throws
-      // init; a totally-failed lane leaves config untouched (no dangling
-      // default pointer, no empty mirror objects).
-      const agentsDir = resolveAgentsDir(fallbackBase);
-      if (agentsDir && agentsDir !== "/agents") {
-        for (const entry of AGENTS_MANIFEST) {
-          const hasAgents = c.agents?.[entry.key] !== undefined;
-          const hasAgent = c.agent?.[entry.key] !== undefined;
-          if (hasAgents && hasAgent) continue;
-          const raw = await readTextFile(`${agentsDir}/${entry.file}`);
-          if (!raw) continue;
-          const parsed = parseAgentFile(raw);
-          if (!parsed.prompt) continue;
-          // Separate object per mirror — no shared identity across the alias
-          // boundary (a write via `config.agents[k]` stays invisible via
-          // `config.agent[k]`).
-          if (!hasAgents)
-            (c.agents ??= {})[entry.key] ??= {
-              description: parsed.description,
-              prompt: parsed.prompt,
-              mode: entry.mode,
-              ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}),
-            };
-          if (!hasAgent)
-            (c.agent ??= {})[entry.key] ??= {
-              description: parsed.description,
-              prompt: parsed.prompt,
-              mode: entry.mode,
-              ...(entry.hidden !== undefined ? { hidden: entry.hidden } : {}),
-            };
-        }
-        // Guard the defaults: a skipped/fully-missed lane must not leave a
-        // `default_agent` pointing at a key that was never registered.
-        if (Object.keys(c.agents ?? {}).length > 0) {
-          c.default_agent ??= "montilla";
-          c.subagent_depth ??= 2;
-        }
-      }
-    },
-    "experimental.chat.system.transform": async (
-      _input: unknown,
-      output: unknown,
-    ) => {
-      const out = output as { system?: unknown };
-      if (!Array.isArray(out.system)) return;
-      if (hasMarker(out.system)) return; // idempotent — no duplication on retries
-      out.system.push(WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS);
-      const bootstrap = await loadBootstrapBody(skillsDir);
-      if (bootstrap) out.system.push(bootstrap);
-    },
-    "experimental.session.compacting": async (
-      _input: unknown,
-      output: unknown,
-    ) => {
-      const out = output as { context?: unknown };
-      if (!Array.isArray(out.context)) return;
-      if (hasMarker(out.context)) return;
-      out.context.push(COMPACTION_REMINDER);
-    },
-  };
-};
+export default Plugin.define({
+  id: "frame-ship",
+  async setup(ctx) {
+    const fallbackBase = (ctx.location.directory || "").replace(/[/\\]+$/, "");
+    const skillsDir = resolveSkillsDir(fallbackBase);
+    const agentsDir = resolveAgentsDir(fallbackBase);
 
-// Default export mirrors the named export. The v1 loader calls every function
-// export (named or default) with dedupe, so either shape loads; shipping both
-// keeps direct-file and directory-package installs working.
-export default FrameShipPlugin;
+    // ---- Skills lane (additive, sync transform) ----
+    // Preload async BEFORE the sync transform callback — transforms must stay
+    // cheap/replayable with no side effects inside.
+    if (skillsDir && skillsDir !== "/skills") {
+      const pending: Array<{
+        id: string;
+        name: string;
+        description: string;
+        path: string;
+        content: string;
+      }> = [];
+      for (const dir of SKILL_DIRS) {
+        const skillFile = `${skillsDir}/${dir}/SKILL.md`;
+        const raw = await readTextFile(skillFile);
+        if (!raw) continue;
+        const parsed = parseSkillFile(raw);
+        const name = parsed.name || dir;
+        if (!parsed.content) continue;
+        pending.push({
+          id: `frame-ship:${dir}`,
+          name,
+          description: parsed.description || name,
+          path: skillFile,
+          content: parsed.content,
+        });
+      }
+      if (pending.length > 0) {
+        await ctx.skill.transform((editor) => {
+          for (const s of pending) {
+            // Never overwrite user skills with the same id.
+            if (editor.get(s.id) !== undefined) continue;
+            editor.add({
+              id: s.id as Skill.Info["id"],
+              name: s.name as Skill.Info["name"],
+              description: s.description,
+              path: s.path as Skill.Info["path"],
+              content: s.content,
+            });
+          }
+        });
+      }
+    }
+
+    // ---- Roster lane (graceful degrade — V2 has no agent add) ----
+    // Preload async, then sync transform that only updates agents that already
+    // exist. Missing keys are skipped (no throw, no dangling default).
+    if (agentsDir && agentsDir !== "/agents") {
+      const pending: Array<{
+        key: string;
+        description: string;
+        prompt: string;
+        mode: AgentMode;
+        hidden?: boolean;
+      }> = [];
+      for (const entry of AGENTS_MANIFEST) {
+        const raw = await readTextFile(`${agentsDir}/${entry.file}`);
+        if (!raw) continue;
+        const parsed = parseAgentFile(raw);
+        if (!parsed.prompt) continue;
+        pending.push({
+          key: entry.key,
+          description: parsed.description,
+          prompt: parsed.prompt,
+          mode: entry.mode,
+          hidden: entry.hidden,
+        });
+      }
+      if (pending.length > 0) {
+        await ctx.agent.transform((editor) => {
+          for (const p of pending) {
+            const existing = editor.get(p.key);
+            if (existing === undefined) continue; // V2 cannot add — skip
+            editor.update(p.key, (agent) => {
+              if (p.description) agent.description = p.description;
+              agent.system = p.prompt;
+              agent.mode = p.mode;
+              if (p.hidden !== undefined) agent.hidden = p.hidden;
+            });
+          }
+          // Guard the default: only point at montilla when it exists.
+          if (editor.get("montilla") !== undefined) {
+            editor.default("montilla");
+          }
+        });
+      }
+    }
+    // NOTE: V2 has no `subagent_depth` agent option (V1 field ignored with
+    // warning; native equivalent is `experimental.subagent_depth`). Dropped
+    // intentionally — no silent config.
+
+    // ---- System injection: agent loop ----
+    const bootstrap = await loadBootstrapBody(skillsDir);
+    await ctx.session.hook("context", (event) => {
+      if (hasMarker(event.system)) return; // idempotent — no duplication
+      event.system.push(
+        { type: "text", text: WORKFLOW_CARD },
+        { type: "text", text: GUARDRAILS_FULL },
+        { type: "text", text: POINTERS },
+      );
+      if (bootstrap) event.system.push({ type: "text", text: bootstrap });
+    });
+
+    // ---- Compaction reminder ----
+    await ctx.session.hook("compaction", (event) => {
+      if (hasMarker(event.system)) return;
+      event.system.push({ type: "text", text: COMPACTION_REMINDER });
+    });
+  },
+});

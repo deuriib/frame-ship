@@ -59,11 +59,11 @@ Or via CLI:
 opencode plugin add github:deuriib/frame-ship
 ```
 
-Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.6.1]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.7.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
 Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
 
-For development on frame-ship itself (live local changes), use a local path instead — see [`.opencode/INSTALL.md`](./.opencode/INSTALL.md). Never commit a `file:///` path to a shared config.
+For development on frame-ship itself (live local changes), use a local path instead — see [`plugins/opencode/INSTALL.md`](./plugins/opencode/INSTALL.md). Never commit a `file:///` path to a shared config.
 
 > Note: full per-harness guides (`docs/README.<harness>.md`) land as each adapter ships. Today: opencode + Antigravity CLI (agy).
 
@@ -160,7 +160,7 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 ### Plugin Runtime
 
-- **`.opencode/plugins/frame-ship.ts`** — Single-file, zero-deps. Registers `./skills/` via `config.skills.paths`, injects workflow card + guardrails + pointers, preserves chain across compaction. `hasMarker()` keeps injection idempotent.
+- **`plugins/opencode/frame-ship.ts`** — Single-file, zero-deps (V2 `Plugin.define`, id `frame-ship`). Registers 13 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
 
 ## Philosophy
 
@@ -206,7 +206,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.6.1"],
+  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.7.0"],
 }
 ```
 
@@ -224,12 +224,13 @@ Project structure:
 │   ├── format-note.ts            # PostToolUse observer → {} (bun)
 │   └── fixtures/                 # replay vectors (allow/deny/secret/{}/first/compact)
 ├── rules/
-│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.6.1
+│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.7.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
-├── .opencode/
-│   ├── INSTALL.md              # named-path install: git (use) + file:/// (dev)
-│   └── plugins/
-│       └── frame-ship.ts       # runtime: injects chain into context
+├── plugins/
+│   └── opencode/
+│       ├── INSTALL.md              # install: package (use) + local file (dev)
+│       ├── package.json            # explicit plugin root (main: ./frame-ship.ts)
+│       └── frame-ship.ts           # runtime: injects chain into context (V2)
 ├── skills/
 │   ├── using-frame-ship/       # → bootstrap + chain contract
 │   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
@@ -251,7 +252,7 @@ Commands:
 
 ```bash
 # from repo root (mise)
-mise run typecheck   # typecheck .opencode/plugins/frame-ship.ts
+mise run typecheck   # typecheck plugins/opencode/frame-ship.ts
 mise run install     # npm install in .opencode/
 
 # raw (from .opencode/)
