@@ -413,22 +413,22 @@ const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
   { key: "social-media", file: "social-media.md", mode: "subagent" },
   {
     key: "friction-mediator",
-    file: "people/friction-mediator.md",
+    file: "friction-mediator.md",
     mode: "subagent",
   },
   {
     key: "people-operations",
-    file: "people/people-operations.md",
+    file: "people-operations.md",
     mode: "subagent",
   },
   {
     key: "people-reviewer",
-    file: "people/people-reviewer.md",
+    file: "people-reviewer.md",
     mode: "subagent",
   },
   {
     key: "performance-analyst",
-    file: "people/performance-analyst.md",
+    file: "performance-analyst.md",
     mode: "subagent",
   },
   { key: "deal-closer", file: "deal-closer.md", mode: "subagent" },
