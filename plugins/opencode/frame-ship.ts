@@ -90,38 +90,6 @@ function resolveSkillsDir(fallbackBase: string): string {
   return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
 }
 
-// Agents live at <repo-root>/agents/ next to this file — same trust root as
-// the skills lane. Mirrors resolveSkillsDir (own import.meta.url first,
-// ctx.location.directory fallback); plain string join, no static node: import.
-function resolveAgentsDir(fallbackBase: string): string {
-  try {
-    const meta = import.meta as unknown as { url?: string };
-    const url = meta?.url;
-    if (typeof url === "string" && url.startsWith("file:")) {
-      const filePath = fileUrlToPath(url);
-      if (filePath) {
-        const parts = filePath.split("/");
-        // [..., <root>, plugins, opencode, frame-ship.ts] → drop last 3.
-        if (
-          parts.length >= 4 &&
-          parts[parts.length - 3] === "plugins" &&
-          parts[parts.length - 2] === "opencode"
-        ) {
-          const root = parts.slice(0, parts.length - 3).join("/") || "/";
-          return `${root.replace(/[/\\]+$/, "")}/agents`;
-        }
-      }
-    }
-  } catch {
-    // fall through to fallback
-  }
-  return `${fallbackBase.replace(/[/\\]+$/, "")}/agents`;
-}
-
-// Per-path cache: init reads many small files once; double-init replays serve
-// from memory. Misses are never cached.
-const agentFileCache = new Map<string, string>();
-
 // Bounded init I/O: a read that never settles (hung handle, wedged mount)
 // must not stall setup. Every read races a small timeout — timeout wins →
 // miss ("", entry skipped, uncached so retry self-heals). Timer cleared on
@@ -131,7 +99,7 @@ const agentFileCache = new Map<string, string>();
 // headroom against false skips on loaded disks.
 const READ_TIMEOUT_MS = 2000;
 
-function withTimeout(
+async function withTimeout(
   task: Promise<string>,
   ms: number,
 ): Promise<string | undefined> {
@@ -148,8 +116,6 @@ function withTimeout(
 // `tsc` stays clean without @types/node). Silent "" on miss — the caller
 // skips the entry, init never wedges. Never echoes contents into errors.
 async function readTextFile(path: string): Promise<string> {
-  const cached = agentFileCache.get(path);
-  if (cached !== undefined) return cached;
   try {
     // Eager read, never rejects (inner try/catch) so the timeout race below
     // stays rejection-free from both sides.
@@ -177,57 +143,10 @@ async function readTextFile(path: string): Promise<string> {
     const raw = await withTimeout(read, READ_TIMEOUT_MS);
     if (raw === undefined) return "";
     const text = raw || "";
-    agentFileCache.set(path, text);
     return text;
   } catch {
     return "";
   }
-}
-
-// First ---...--- fence → description (description: "..." or '...', verbatim,
-// never rewritten); remainder trimmed → prompt. No fence → empty description,
-// whole input trimmed as prompt. Hardened: leading BOM/whitespace stripped
-// before the fence match; a fence that opens-but-never-closes falls back to
-// description-or-empty + body with fence/metadata lines removed, so raw
-// frontmatter never leaks into the prompt. Pure string ops, no logging —
-// never throws, never echoes contents.
-function parseAgentFile(raw: string): { description: string; prompt: string } {
-  const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
-  const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
-  if (fence) {
-    const frontmatter = fence[1] || "";
-    const descMatch = frontmatter.match(
-      /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
-    );
-    const description = (
-      descMatch?.[1] ??
-      descMatch?.[2] ??
-      descMatch?.[3] ??
-      ""
-    ).trim();
-    const prompt = text.slice(fence[0].length).trim();
-    return { description, prompt };
-  }
-  const open = text.match(/^---\s*\r?\n([\s\S]*)$/);
-  if (open) {
-    const inner = open[1] || "";
-    const descMatch = inner.match(
-      /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
-    );
-    const description = (
-      descMatch?.[1] ??
-      descMatch?.[2] ??
-      descMatch?.[3] ??
-      ""
-    ).trim();
-    const prompt = inner
-      .split(/\r?\n/)
-      .filter((line) => !/^\s*(---\s*|name\s*:|description\s*:)/.test(line))
-      .join("\n")
-      .trim();
-    return { description, prompt };
-  }
-  return { description: "", prompt: text.trim() };
 }
 
 // Skill frontmatter: name + description (same shape as agents; body kept whole
@@ -290,162 +209,6 @@ async function loadBootstrapBody(skillsDir: string): Promise<string> {
   }
 }
 
-type AgentMode = "primary" | "all" | "subagent";
-
-interface AgentManifestEntry {
-  key: string;
-  file: string;
-  mode: AgentMode;
-  hidden?: boolean;
-}
-
-// Static roster manifest — 74 keys. Key = file stem; sole alias:
-// `espinoza.md` → key `espinoza-specialist` (c-level `espinoza`
-// keeps key `espinoza`). Modes: `montilla` primary, 8 C-levels `all`,
-// 65 specialists `subagent`. Optional `hidden`: 8 C-levels `all` carry
-// `hidden: true`. Bodies/descriptions are read by path at setup —
-// never pasted here (reference-only provenance).
-// V2 NOTE: AgentEditor has update/remove/default only (no add), so this lane
-// degrades gracefully: existing agents get updated in place, missing keys are
-// skipped. File-based `.opencode/agents/` discovery is the V2-native path for
-// new agents (follow-up, needs file layout change — not done here per decision).
-const AGENTS_MANIFEST: readonly AgentManifestEntry[] = [
-  { key: "montilla", file: "montilla.md", mode: "primary" },
-  { key: "barrera", file: "barrera.md", mode: "all", hidden: true },
-  { key: "dauhajre", file: "dauhajre.md", mode: "all", hidden: true },
-  { key: "espinoza", file: "espinoza.md", mode: "all", hidden: true },
-  { key: "montero", file: "montero.md", mode: "all", hidden: true },
-  { key: "santana", file: "santana.md", mode: "all", hidden: true },
-  { key: "subero", file: "subero.md", mode: "all", hidden: true },
-  { key: "vasquez", file: "vasquez.md", mode: "all", hidden: true },
-  { key: "vera", file: "vera.md", mode: "all", hidden: true },
-  { key: "architect", file: "architect.md", mode: "subagent" },
-  {
-    key: "automation-engineer",
-    file: "automation-engineer.md",
-    mode: "subagent",
-  },
-  {
-    key: "automation-reviewer",
-    file: "automation-reviewer.md",
-    mode: "subagent",
-  },
-  { key: "backend", file: "backend.md", mode: "subagent" },
-  { key: "data-engineer", file: "data-engineer.md", mode: "subagent" },
-  { key: "devops", file: "devops.md", mode: "subagent" },
-  { key: "espinoza-specialist", file: "espinoza.md", mode: "subagent" },
-  { key: "frontend", file: "frontend.md", mode: "subagent" },
-  { key: "qa", file: "qa.md", mode: "subagent" },
-  { key: "review-data", file: "review-data.md", mode: "subagent" },
-  {
-    key: "review-readability",
-    file: "review-readability.md",
-    mode: "subagent",
-  },
-  { key: "review-refuter", file: "review-refuter.md", mode: "subagent" },
-  {
-    key: "review-reliability",
-    file: "review-reliability.md",
-    mode: "subagent",
-  },
-  { key: "review-resilience", file: "review-resilience.md", mode: "subagent" },
-  { key: "review-risk", file: "review-risk.md", mode: "subagent" },
-  { key: "grc-analyst", file: "grc-analyst.md", mode: "subagent" },
-  { key: "iam-specialist", file: "iam-specialist.md", mode: "subagent" },
-  {
-    key: "incident-responder",
-    file: "incident-responder.md",
-    mode: "subagent",
-  },
-  { key: "privacy-engineer", file: "privacy-engineer.md", mode: "subagent" },
-  { key: "security", file: "security.md", mode: "subagent" },
-  { key: "security-reviewer", file: "security-reviewer.md", mode: "subagent" },
-  { key: "accountant", file: "accountant.md", mode: "subagent" },
-  { key: "cost-analyst", file: "cost-analyst.md", mode: "subagent" },
-  { key: "credit-analyst", file: "credit-analyst.md", mode: "subagent" },
-  { key: "finance-reviewer", file: "finance-reviewer.md", mode: "subagent" },
-  { key: "financial-analyst", file: "financial-analyst.md", mode: "subagent" },
-  { key: "fpna-analyst", file: "fpna-analyst.md", mode: "subagent" },
-  { key: "internal-auditor", file: "internal-auditor.md", mode: "subagent" },
-  {
-    key: "investment-analyst",
-    file: "investment-analyst.md",
-    mode: "subagent",
-  },
-  {
-    key: "payroll-specialist",
-    file: "payroll-specialist.md",
-    mode: "subagent",
-  },
-  { key: "personal-finance", file: "personal-finance.md", mode: "subagent" },
-  { key: "personal-investor", file: "personal-investor.md", mode: "subagent" },
-  { key: "risk-analyst", file: "risk-analyst.md", mode: "subagent" },
-  { key: "tax-specialist", file: "tax-specialist.md", mode: "subagent" },
-  { key: "treasurer", file: "treasurer.md", mode: "subagent" },
-  {
-    key: "compliance-officer",
-    file: "compliance-officer.md",
-    mode: "subagent",
-  },
-  { key: "contract-drafter", file: "contract-drafter.md", mode: "subagent" },
-  { key: "ip-counsel", file: "ip-counsel.md", mode: "subagent" },
-  { key: "labor-counsel", file: "labor-counsel.md", mode: "subagent" },
-  { key: "legal-researcher", file: "legal-researcher.md", mode: "subagent" },
-  { key: "legal-reviewer", file: "legal-reviewer.md", mode: "subagent" },
-  {
-    key: "litigation-counsel",
-    file: "litigation-counsel.md",
-    mode: "subagent",
-  },
-  { key: "privacy-counsel", file: "privacy-counsel.md", mode: "subagent" },
-  { key: "brand-reviewer", file: "brand-reviewer.md", mode: "subagent" },
-  { key: "brand-strategist", file: "brand-strategist.md", mode: "subagent" },
-  {
-    key: "content-strategist",
-    file: "content-strategist.md",
-    mode: "subagent",
-  },
-  { key: "copywriter", file: "copywriter.md", mode: "subagent" },
-  { key: "email-marketer", file: "email-marketer.md", mode: "subagent" },
-  { key: "marketing-analyst", file: "marketing-analyst.md", mode: "subagent" },
-  { key: "ppc-specialist", file: "ppc-specialist.md", mode: "subagent" },
-  { key: "seo", file: "seo.md", mode: "subagent" },
-  { key: "social-media", file: "social-media.md", mode: "subagent" },
-  {
-    key: "friction-mediator",
-    file: "friction-mediator.md",
-    mode: "subagent",
-  },
-  {
-    key: "people-operations",
-    file: "people-operations.md",
-    mode: "subagent",
-  },
-  {
-    key: "people-reviewer",
-    file: "people-reviewer.md",
-    mode: "subagent",
-  },
-  {
-    key: "performance-analyst",
-    file: "performance-analyst.md",
-    mode: "subagent",
-  },
-  { key: "deal-closer", file: "deal-closer.md", mode: "subagent" },
-  { key: "funnel-optimizer", file: "funnel-optimizer.md", mode: "subagent" },
-  {
-    key: "pricing-strategist",
-    file: "pricing-strategist.md",
-    mode: "subagent",
-  },
-  { key: "revenue-reviewer", file: "revenue-reviewer.md", mode: "subagent" },
-  { key: "revops-analyst", file: "revops-analyst.md", mode: "subagent" },
-  { key: "explore", file: "explore.md", mode: "subagent" },
-  { key: "general", file: "general.md", mode: "subagent" },
-  { key: "scout", file: "scout.md", mode: "subagent" },
-  { key: "writer", file: "writer.md", mode: "subagent" },
-];
-
 // Skill dirs shipped at <repo-root>/skills/ (SKILL.md each). IDs are prefixed
 // `frame-ship:<dir>` to match the chain triggers; `name` stays the bare
 // frontmatter name (loader expects `name` == dir convention).
@@ -470,7 +233,6 @@ export default Plugin.define({
   async setup(ctx) {
     const fallbackBase = (ctx.location.directory || "").replace(/[/\\]+$/, "");
     const skillsDir = resolveSkillsDir(fallbackBase);
-    const agentsDir = resolveAgentsDir(fallbackBase);
 
     // ---- Skills lane (additive, sync transform) ----
     // Preload async BEFORE the sync transform callback — transforms must stay
@@ -514,53 +276,6 @@ export default Plugin.define({
         });
       }
     }
-
-    // ---- Roster lane (graceful degrade — V2 has no agent add) ----
-    // Preload async, then sync transform that only updates agents that already
-    // exist. Missing keys are skipped (no throw, no dangling default).
-    if (agentsDir && agentsDir !== "/agents") {
-      const pending: Array<{
-        key: string;
-        description: string;
-        prompt: string;
-        mode: AgentMode;
-        hidden?: boolean;
-      }> = [];
-      for (const entry of AGENTS_MANIFEST) {
-        const raw = await readTextFile(`${agentsDir}/${entry.file}`);
-        if (!raw) continue;
-        const parsed = parseAgentFile(raw);
-        if (!parsed.prompt) continue;
-        pending.push({
-          key: entry.key,
-          description: parsed.description,
-          prompt: parsed.prompt,
-          mode: entry.mode,
-          hidden: entry.hidden,
-        });
-      }
-      if (pending.length > 0) {
-        await ctx.agent.transform((editor) => {
-          for (const p of pending) {
-            const existing = editor.get(p.key);
-            if (existing === undefined) continue; // V2 cannot add — skip
-            editor.update(p.key, (agent) => {
-              if (p.description) agent.description = p.description;
-              agent.system = p.prompt;
-              agent.mode = p.mode;
-              if (p.hidden !== undefined) agent.hidden = p.hidden;
-            });
-          }
-          // Guard the default: only point at montilla when it exists.
-          if (editor.get("montilla") !== undefined) {
-            editor.default("montilla");
-          }
-        });
-      }
-    }
-    // NOTE: V2 has no `subagent_depth` agent option (V1 field ignored with
-    // warning; native equivalent is `experimental.subagent_depth`). Dropped
-    // intentionally — no silent config.
 
     // ---- System injection: agent loop ----
     const bootstrap = await loadBootstrapBody(skillsDir);
