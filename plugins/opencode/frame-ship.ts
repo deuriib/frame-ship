@@ -65,8 +65,8 @@ function resolveSkillsDir(fallbackBase: string): string {
         // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
         if (
           parts.length >= 4 &&
-          parts[parts.length - 2] === "plugins" &&
-          parts[parts.length - 3] === ".opencode"
+          parts[parts.length - 3] === "plugins" &&
+          parts[parts.length - 2] === "opencode"
         ) {
           const root = parts.slice(0, parts.length - 3).join("/") || "/";
           return `${root.replace(/[/\\]+$/, "")}/skills`;
@@ -93,8 +93,8 @@ function resolveAgentsDir(fallbackBase: string): string {
         // [..., <root>, .opencode, plugins, frame-ship.ts] → drop last 3.
         if (
           parts.length >= 4 &&
-          parts[parts.length - 2] === "plugins" &&
-          parts[parts.length - 3] === ".opencode"
+          parts[parts.length - 3] === "plugins" &&
+          parts[parts.length - 2] === "opencode"
         ) {
           const root = parts.slice(0, parts.length - 3).join("/") || "/";
           return `${root.replace(/[/\\]+$/, "")}/agents`;
