@@ -3,12 +3,12 @@
 **ID:** BRIEF-multi-default
 **Initiator:** montilla (CEO)
 **Date:** 2026-09-20
-**Status:** draft
+**Status:** approved
 **Execution_Mode:** multi-subagents (frozen at frame-intent; all specs follow unless overridden per SPEC with CEO waiver)
 **Domains-Touched:** [engineering, people]
 **Classification:** architectural-initiative (full BRIEF file — restructures orchestration contract across skills)
 **Framings-Considered:** [1) remoción total — recomendada: borrar rama `single`, un solo camino multi; mata si aparece caso mínimo donde single gane sin cobertura fast-path — acordado: trivial <15 líneas va por fast-path CEO checkpoint-only, fuera de metodología. 2) default suave — multi default + single como waiver; descartada: deja doble-vía viva. 3) solo re-etiquetar — descartada: no cumple pedido. YAGNI cut: sin tocar runtime, catálogo 8 dominios, ni deps.]
-**Approval:** [gate type: file-approval — pending user approval 2026-09-20]
+**Approval:** [gate type: file-approval — approved by user 2026-09-20]
 **Grill:** completed 5/5 (architectural cap 4 core + 1 frontier); no exit; Ley 172-13 masked
 
 ## Problem Statement
