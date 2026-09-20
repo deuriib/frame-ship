@@ -30,7 +30,7 @@
 - Stage file counts: `quality-gate` 18 files (SKILL + AGENTS + 2 refs + 5 engineering + 9 domains); `git-worktree` 5 (SKILL + 4 refs); `translate-to-spec` 4 (SKILL + 3 refs); `debugging` 4 (SKILL + 3 refs); `using-frame-ship` 3 (SKILL + 2 refs); `pull-request` 3 (SKILL + 2 refs); all others 3 (SKILL + 2 refs).
 - Commit closings: every stage ends with a commit step + example; `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
-- Execution mode frozen at `frame-intent` (`single` | `multi-subagents`) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
+- Execution mode frozen at `frame-intent` (`multi-subagents` only) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
 
 ## DOMAIN CATALOGUE (canonical — 8 business domains, full chain for all)
 
