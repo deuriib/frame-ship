@@ -10,7 +10,7 @@ description: Review a proposal against the canonical architecture contract and r
 ## 1. Purpose
 
 Validate proposals against `docs/specs/10_design/ARCHITECTURE.md` and record
-significant decisions as ADRs. No invariant break without an explicit ADR.
+significant decisions as ADRs in `docs/specs/12_adr/`. No invariant break without an explicit ADR.
 
 ## 2. Chain Contract
 
@@ -28,10 +28,10 @@ significant decisions as ADRs. No invariant break without an explicit ADR.
 0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
 1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical — only `PROPOSED_CHANGES.md`, never `PROPOSED_CHANGES-*.md`).
 2. Compare against `ARCHITECTURE.md` + `API_CONTRACTS.md` (canonical singletons — update-in-place, never `ARCHITECTURE-*.md` / `API_CONTRACT-*.md`).
-3. Produce/update ADR via `references/adr-template.md`.
+3. Produce/update ADR `docs/specs/12_adr/ADR-###-<slug>.md` via `references/adr-template.md`.
 4. Issue review via `references/architecture-review.md` as the single `ARCHITECTURE_REVIEW.md` per lane (create-if-missing else update-in-place, never suffix).
 5. Hand off to `frame-ship:execute-spec` if approved.
-6. Close with a commit.
+6. Close with a commit. Example: `docs(adr-009): record architectural decision in 12_adr`.
 
 ## 4. What I won't do
 

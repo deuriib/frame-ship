@@ -7,14 +7,14 @@
 | Trigger | Skill | Out |
 |---------|-------|-----|
 | new initiative / OKRs | `frame-intent/` | `BRIEF-<slug>.md` |
-| brief approved | `translate-to-spec/` | REQ-IDs + `ARCHITECTURE.md` |
+| brief approved | `translate-to-spec/` | REQ-IDs + `SPEC-*.md` in `20_backlog/` + `ARCHITECTURE.md` |
 | ready to implement | `propose-changes/` | `PROPOSED_CHANGES.md`, impl files untouched |
 | auth/data/API | `review-security/` | STRIDE verdict |
-| public API/model | `review-architecture/` | ADR |
+| public API/model | `review-architecture/` | `ADR-*.md` in `12_adr/` |
 | approved spec | `execute-spec/` | impl + `test-matrix.md` |
 | impl done | `quality-gate/` | `GATE_REPORT.md` |
 | complete | `verify-handoff/` | `HANDOFF.md` |
-| verified | `ship-release/` | notes + changelog + rollback |
+| verified | `ship-release/` | notes + changelog + spec moved to `50_archive/` |
 
 ## SUPPORTING SKILLS (transversal / opt-in)
 | Trigger | Skill | Out | Coupling / Stage Handoff |

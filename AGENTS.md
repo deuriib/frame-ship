@@ -14,7 +14,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 
 ./
 ├── .opencode/plugins/frame-ship.ts  # runtime: injects chain into context (ver `.opencode/plugins/AGENTS.md`)
 ├── skills/<stage>/SKILL.md + references/*.md  # 13 dirs (bootstrap + 9 stages + 3 supporting), process source of truth (ver `skills/AGENTS.md`)
-├── docs/briefs/ + docs/specs/10_design|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
+├── docs/briefs/ + docs/specs/10_design|12_adr|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
 ├── tests/ harness TBD (see Roadmap)
 ├── mise.toml  # toolchain: node 22, tasks typecheck/install
 └── package.json  # v0.6.1 (matches plugin header)
@@ -43,7 +43,7 @@ Resolvers: `resolveSkillsDir()` from own `import.meta.url` (fallback `directory|
 
 - SKILL frontmatter exact: `name: <kebab==dir>`, 1-sentence `description` with `Use when/Triggered by`. No extra keys.
 - Every SKILL body: `# Title — Sub` + creed quote `> *"Haces las cosas..."* + `1.Purpose/2.Chain/2b.Role/3.Process/4.Won't do/5.References` (`quality-gate`inserta`3.Routing Table`, desplaza resto a `§5/§6`).
-- Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
+- Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `ADR-XXX`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
 - Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
 - Reference-only packets: `SPEC/HARD/GATE/DOMAINS` between stages; retry N=2 → escalate orchestrator, no 3rd loop.
 - Version bump triple: header comment + `VERSION` + `MARKER` juntos.

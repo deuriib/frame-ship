@@ -52,7 +52,7 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 
 - Scope: opt-in challenge round inside `frame-intent` only — never a new stage, never mandatory, never a reason to skip the HARD-GATE.
 - Glossary (single source for C1+C2 — C2 points here, never redefines): `challenge` = the budgeted round; `grill` = informal collective noun for C1–C4 rounds only; `ronda` = Spanish alias for `challenge` in openers.
-- Opener (exit alias `exit/salir`): "¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez — N = 1 spike / 3 bounded / 5 architectural)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." (canonical: `docs/specs/10_design/SPEC-grilling-integration-people.md` §4 inserts 1–2).
+- Opener (exit alias `exit/salir`): "¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez — N = 1 spike / 3 bounded / 5 architectural)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." (canonical: `docs/specs/20_backlog/SPEC-grilling-integration-people.md` §4 inserts 1–2).
 - Exit: immediate stop, no re-ask in same stage, no penalty, recorded `grill: declined/exited`.
 - Budgets, N per classification (default proposed, joint engineering + people sign-off at gate): spike 1 question hard cap; bounded typical 2–3 (hard cap 3); architectural full challenge hard cap 5 (4 core + 1 frontier-empty).
 - Bounded floor: 1 question = early close, NOT a violation; 0 questions = invalid (must ask ≥1 or record `grill: declined`).
