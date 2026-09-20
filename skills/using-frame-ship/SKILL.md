@@ -35,11 +35,11 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
 
 ## 3. Process
 
-0. MANDATORY LOAD ORDER — HARD STOP. Before ANY task, edit, bash, or dispatch (multi-subagents only — the natural process):
-   1. `skill(using-frame-ship)` — this bootstrap (already injected; do not skip).
-   2. `skill(<stage>)` via native `skill` tool — BEFORE acting for that stage. No skill = STOP.
-   3. Domain owner/specialist role understood — skill + role, every task, multi-subagents full-wave. Path cited in output.
-   4. Pre-flight: skill loaded? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load first. FAIL → retry N=2 differently → escalate to orchestrator. Never third loop, never sideways.
+0. MANDATORY LOAD ORDER — HARD STOP (multi-subagents only — the natural process):
+   1. `using-frame-ship` is already loaded in context (bootstrap) — NEVER re-load it via the skill tool.
+   2. Load the target `<stage>` skill via the native `skill` tool ONCE when entering that stage, BEFORE acting for that stage. (Do NOT re-load on every individual tool call, edit, or bash). No skill = STOP.
+   3. Domain owner/specialist role understood — skill + role per stage, multi-subagents full-wave. Path cited in output.
+   4. Pre-flight: stage skill loaded? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load stage skill first. FAIL → retry N=2 differently → escalate to orchestrator. Never third loop, never sideways.
 1. Check for relevant skills before any task — mandatory workflows, not
    suggestions. Load the named stage skill via the native `skill` tool before
    acting.

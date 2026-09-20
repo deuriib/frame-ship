@@ -8,9 +8,9 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 
 ## Load order (HARD STOP)
 
-1. `using-frame-ship` skill (bootstrap — already in context via `frame-ship-context` hook; do not skip).
-2. The `<stage>` skill before acting for that stage. No skill = STOP.
-3. Then act. Pre-flight: skill? `SPEC/HARD/GATE/DOMAINS`? Any NO → STOP, load first. FAIL → retry N=2 differently → escalate to orchestrator. No third loop, no sideways.
+1. `using-frame-ship` is ALREADY loaded in context (bootstrap via `context-inject` hook). NEVER re-read or re-load `using-frame-ship` via the skill tool.
+2. Load the `<stage>` skill via the skill tool ONCE at the start of that stage before performing work for that stage. NEVER re-load skills on every individual edit or command. No skill = STOP.
+3. Then act. Pre-flight: stage skill loaded? `SPEC/HARD/GATE/DOMAINS`? Any NO → STOP, load stage skill first. FAIL → retry N=2 differently → escalate to orchestrator. No third loop, no sideways.
 
 ## Trigger → skill
 

@@ -8,13 +8,13 @@
  *   opencode `loadBootstrapBody`                   → live read of skills/using-frame-ship/SKILL.md,
  *                                                   plugin root resolved from our own import.meta.url
  *                                                   (mirrors opencode resolveSkillsDir), silent fallback
- *   opencode `session.compacting` (reminder)      → reminder when initialNumSteps >= 40
- *                                                   (agy has no compaction event — documented delta)
+ *   opencode `session.compacting` (reminder)      → N/A in agy (no compaction lifecycle event;
+ *                                                   rules/frame-ship.md is always-on in context)
  *   opencode `hasMarker` dedupe                   → full bootstrap exactly once (invocationNum == 0,
  *                                                   0-indexed per official hooks docs)
  *
  * stdin:  PreInvocation JSON { invocationNum, initialNumSteps, workspacePaths?, ... }
- * stdout: `{ injectSteps: [{ ephemeralMessage }] }` on first invocation or compaction threshold,
+ * stdout: `{ injectSteps: [{ ephemeralMessage }] }` on first invocation (invocationNum == 0),
  *         otherwise `{}`. Single JSON object, exit 0.
  */
 
@@ -30,11 +30,6 @@ const CHAIN =
 
 const BOOTSTRAP_LABEL = `${MARKER} frame-ship:using-frame-ship bootstrap:`;
 const BOOTSTRAP_ACK = `NOTE: frame-ship:using-frame-ship is already loaded in this context — do not re-load it via the skill tool; follow the chain: ${CHAIN}.`;
-
-const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
-
-// agy has no compaction event — re-inject the reminder once the trajectory grows long.
-const COMPACTION_STEP_THRESHOLD = 40;
 
 function fileUrlToPath(url: string): string | undefined {
   try {
@@ -123,10 +118,6 @@ async function main(): Promise<void> {
     const pluginRoot = resolvePluginRoot(process.cwd());
     const bootstrap = loadBootstrapBody(pluginRoot, workspacePaths);
     console.log(JSON.stringify({ injectSteps: [{ ephemeralMessage: bootstrap }] }));
-    return;
-  }
-  if (initialNumSteps >= COMPACTION_STEP_THRESHOLD) {
-    console.log(JSON.stringify({ injectSteps: [{ ephemeralMessage: COMPACTION_REMINDER }] }));
     return;
   }
   console.log("{}");

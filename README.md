@@ -94,8 +94,7 @@ What maps to what (opencode → agy):
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `experimental.chat.system.transform` — WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS | `rules/frame-ship.md` — automatically injected into agent context                                            |
 | `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
-| `config` hook — appends skillsDir to `config.skills.paths`                      | Plugin `skills/` directory auto-discovered (same files, zero copies)                                         |
-| `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — the hook injects the reminder when `initialNumSteps >= 40`                      |
+| `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/frame-ship.md` is persistent & always-on in context             |
 | `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
 
 Local replay (no `agy` binary needed):
