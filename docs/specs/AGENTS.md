@@ -26,9 +26,11 @@ specs/
 - Scope by domains split: [engineering, automation/ops, security, people] — never mix domains in one dir.
 - Gate states `OPEN/CONDITIONAL/CLOSED` and `COND-00x` checklists live only under `40_workspace/quality-gate/` and only exception `single-demo/quality-gate/`.
 - Promotion direction only: workspace → numbered stage → archive. Archive never feeds back.
+- Clean up on archive: when `ship-release` archives a spec, all scratch drafts in `40_workspace/<domain>/` and gate evaluation records in `40_workspace/quality-gate/<spec-id>/` for that spec must be cleaned up.
 
 ## ANTI-PATTERNS
 - Treating `40_workspace/` as canonical — it is scratch; the numbered dir is truth.
+- Leaving scratch or quality gate records in `40_workspace/` after a spec is archived.
 - Cross-owner files (e.g. people spec inside `engineering/`) — keep dispatcher split.
 - New gate verdicts outside `quality-gate/<spec-id>/` — routing depends on that path.
 - Reusing an archived `SPEC-00x` number for new work — mint a new ID, link back.

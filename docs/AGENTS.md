@@ -18,7 +18,7 @@ Chain outputs only: `briefs/` (intent) → `specs/` (numbered lifecycle). No pro
 ## CONVENTIONS
 - Lifecycle order: `10_design → 15_requirements → 20_backlog → 30_delivery`, with `40_workspace/` as scratch and `50_archive/` as terminal. Numbers sort; never rename a number.
 - SCREAMING files only at store boundary: `BRIEF-*.md` in `briefs/`; `SPEC-*.md`, `REQ-*.md`, `ADR-*.md`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `RELEASE_NOTES.md` in `specs/`.
-- `40_workspace/<domain>/` holds per-domain drafts (`PROPOSED_CHANGES-*`, `IMPLEMENTATION_PLAN-*`, `TEST_MATRIX-*`, `HANDOFF-*`); promotion copies canonical files up the lifecycle, never moves scratch.
+- `40_workspace/<domain>/` holds per-domain drafts (`PROPOSED_CHANGES-*`, `IMPLEMENTATION_PLAN-*`, `TEST_MATRIX-*`, `HANDOFF-*`); promotion copies canonical files up the lifecycle, never moves scratch. `40_workspace/` scratch and gate records must be cleaned up on archive.
 - Trace rides filenames: `<spec-id>` suffix links proposal → plan → matrix → handoff → gate (e.g. `*-single-dispatcher.md`).
 - `OKR-*.md` pairs its `BRIEF-*.md` by slug suffix — never orphan an OKR.
 
