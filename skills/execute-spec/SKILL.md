@@ -31,7 +31,7 @@ test → artifact traceability. Scope expansion requires a new proposal.
 2. Create implementation plan via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations). Singleton: the single `IMPLEMENTATION_PLAN.md` per lane — create-if-missing else update-in-place, never `IMPLEMENTATION_PLAN-*.md`.
 3. Dispatch: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — each prompt orders the specialist to understand their domain role BEFORE acting; cross-domain need → formal Cross-domain request brief to orchestrator, who delegates or resolves; no sideways dispatch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 4. Execute only targets in the approved change list (files AND non-code targets — no external sends/filings/launches beyond approval).
-5. Produce test/evidence matrix via `references/test-matrix.md` (tests for code, reviews/sign-offs/attestations for non-code, REQ-ID trace mandatory for all). Singleton: the single `TEST_MATRIX.md` per lane — create-if-missing else update-in-place, never `TEST_MATRIX-*.md`.
+5. Produce test/evidence matrix via `references/test-matrix.md` aligned with `references/testing-template.md` (tests for code, reviews/sign-offs/attestations for non-code, REQ-ID trace mandatory for all). Singleton: the single `TEST_MATRIX.md` per lane — create-if-missing else update-in-place, never `TEST_MATRIX-*.md`.
 6. Run domain quality checks (engineering: lint, types, tests, security; other domains: peer review, owner sign-off, controls check per plan).
 7. Commit one commit per approved task/REQ-ID (never batch unrelated REQ-IDs). Body links `REQ-ID → test → artifact`. Examples: `feat(auth-001): add session store with REQ-001 test trace`, `fix(auth-002): enforce TTL per REQ-002`.
 8. Hand off to `frame-ship:quality-gate` with `SPEC/HARD/GATE/DOMAINS` packet intact.
@@ -46,3 +46,4 @@ test → artifact traceability. Scope expansion requires a new proposal.
 
 - `references/implementation-plan.md` — Steps + order + rollback points.
 - `references/test-matrix.md` — REQ-ID to test traceability.
+- `references/testing-template.md` — Test types, standard paths, coverage floors, and Frame→Ship stage fit.
