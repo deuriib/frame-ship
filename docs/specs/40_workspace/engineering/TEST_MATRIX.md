@@ -32,13 +32,13 @@
 
 | Commit | REQ group | Files |
 |--------|-----------|-------|
-| TBD at commit time | REQ-001 | translate-to-spec SKILL + spec-template |
-| TBD | REQ-002 | execute-spec SKILL |
-| TBD | REQ-003 | quality-gate SKILL + gate-report |
-| TBD | REQ-004 | proposal-template + dod-checklist |
-| TBD | REQ-005+006 | git-worktree SKILL + skills/AGENTS.md |
-| TBD | REQ-007 | ADR-008 create |
-| TBD | Trace | IMPLEMENTATION_PLAN + TEST_MATRIX (this file) |
+| `a282881` | REQ-001 | translate-to-spec SKILL + spec-template |
+| `35f83be` | REQ-002 | execute-spec SKILL |
+| `7beb7cd` | REQ-003 | quality-gate SKILL + gate-report |
+| `3484ce5` | REQ-004 | proposal-template + dod-checklist |
+| `5780887` | REQ-005+006 | git-worktree SKILL + skills/AGENTS.md |
+| `33717cd` | REQ-007 | ADR-008 create |
+| `2b54530` | Trace | IMPLEMENTATION_PLAN + TEST_MATRIX (this file) |
 
 ## Gate Handoff Packet
 
