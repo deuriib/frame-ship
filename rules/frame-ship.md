@@ -1,11 +1,4 @@
----
-description: Frame-Ship chain contract — enforce stage load order + guardrails on every session
-always_on: true
----
-
-# frame-ship — persistent rules for agy
-
-> _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
+# frame-ship — persistent rules
 
 ## Chain (do not skip)
 
