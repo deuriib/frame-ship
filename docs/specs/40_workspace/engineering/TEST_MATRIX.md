@@ -1,63 +1,45 @@
-# Test / Evidence Matrix: Grilling Integration C1+C2 — Engineering Lane
+# Test Matrix: Multi-default mechanics — Engineering Lane (vasquez)
 
-**Agent:** vasquez (Senior CTO / engineering owner) — engineering lane C1+C2
-**Date:** 2026-09-18
-**Proposal:** `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md` (C1+C2, approved change list)
-**Spec Reference:** `docs/specs/10_design/SPEC-grilling-integration-engineering.md#REQ-001..002` + `docs/specs/10_design/SPEC-grilling-integration-people.md#REQ-P-001..006` (by reference)
-**Execution_Mode:** multi-subagents (this lane first, security C3+C4 lane follows sequentially)
-**Domains-Touched:** [engineering, people, security] — owns: engineering (C1+C2 wiring)
-**Approvals:** arch Approved (`ARCHITECTURE_REVIEW.md`, ADR-007 proposed) · security Conditional (`SECURITY_REVIEW.md` C-1..C-6 binding — met as evidence, this is the clearance)
-**TTL:** 90 days or next release, whichever first (orchestrator-confirmed)
-**Skill:** `frame-ship:execute-spec` via skill tool — base `skills/execute-spec/SKILL.md` + `references/implementation-plan.md` + `references/test-matrix.md`
+**Spec:** `docs/specs/20_backlog/SPEC-multi-default-engineering.md` (REQ-001..007 + NF-001/002)
+**Proposal:** `docs/specs/40_workspace/engineering/PROPOSED_CHANGES.md`
+**Date:** 2026-09-20
+**Skill:** `frame-ship:execute-spec` (loaded per mandatory order after `frame-ship:using-frame-ship`; role: engineering owner per `skills/execute-spec/SKILL.md` §2b + `skills/AGENTS.md` domain catalogue #1)
 
-> **Singleton note:** canonical `docs/specs/40_workspace/engineering/TEST_MATRIX.md` slot per execute-spec discipline (create-if-missing else update-in-place, never suffix). Prior content (Antigravity discovery-path fix, 2026-09-18) is superseded by this unit and recoverable from git history (`git log -- docs/specs/40_workspace/engineering/TEST_MATRIX.md`).
+> **Singleton note:** canonical `docs/specs/40_workspace/engineering/TEST_MATRIX.md` slot (create-if-missing else update-in-place, never suffix). Prior content (Grilling lane) superseded, recoverable from git history.
 
-| REQ-ID | Evidence ID | Description | Type | Status | Commit |
-|--------|-------------|-------------|------|--------|--------|
-| REQ-001 | E-001 | C1 budgets verbatim-in-intent: spike 1 hard cap / bounded 2–3 cap 3 / architectural cap 5 (4 core + 1 frontier-empty), joint engineering + people sign-off noted | Review | pass | 48757e8 |
-| REQ-001 | E-002 | C1 one-way ratchet verbatim-in-intent: "Profundidad solo sube (spike→bounded→architectural), nunca baja mid-initiative" | Review | pass | 48757e8 |
-| REQ-001 | E-003 | C1 falsifiable-bet prompt over 2–3 framings, output recorded in `Framings-Considered` | Review | pass | 48757e8 |
-| REQ-001 | E-004 | C1 human contract verbatim-in-intent: opt-in + `exit/salir` exit hatch / one-at-a-time / disagreement invite "¿dónde puede estar mal?" / warmth / masking (Ley 172-13) / pause-exit offer | Review | pass | 48757e8 |
-| REQ-001 | E-005 | C1 sample round: synthetic bounded initiative, 2 questions within cap 3, 1:1 turn-taking, falsifiable-bet recorded, 0 PII/secrets | Review | pass | 48757e8 |
-| REQ-001 | E-006 | C1 diff is file-modify only on `skills/frame-intent/SKILL.md` (+22 lines, one `### C1` section); no new dir/stage/reviewer/dep | Review | pass | 48757e8 |
-| REQ-002 | E-007 | C2 trigger list verbatim-in-intent: auth/data/API/PII, multi-domain, blast radius mentioning customers/regulators/revenue, approver request | Review | pass | (this commit) |
-| REQ-002 | E-008 | C2 one-pass budget bound: exactly one budgeted pass where pass = ≤3 questions, Q4 (N+1) = FAIL blocked, terminal approve/reject, no second pass without approver request (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
-| REQ-002 | E-009 | C2 repo-untouched-during-grill rule + blast-radius/rollback challenge framing | Review | pass | (this commit) |
-| REQ-002 | E-010 | C2 human contract verbatim-in-intent (same five clauses as C1 + pause/exit before approve/reject) | Review | pass | (this commit) |
-| REQ-002 | E-011 | C2 sample round: synthetic API-surface proposal, trigger FIRES, one-pass Q1 on rollback, terminal approve, 0 PII/secrets, allowlisted export | Review | pass | (this commit) |
-| REQ-002 | E-012 | C2 diffs are file-modify only: `skills/propose-changes/SKILL.md` (+19, one `### C2` section) + proposal-template (+12 C2 hook, additive) + risk-assessment (+8 C2 note, additive) | Review | pass | (this commit) |
-| REQ-002 | E-013 | Proposal-template C2 hook: trigger checklist + one-pass budget + masking-reminder pointer (people SPEC §4.5 clause quoted verbatim); no new required section | Review | pass | (this commit) |
-| REQ-002 | E-014 | Risk-assessment C2 note: one-pass budget + blast-radius trigger pointer (customers/regulators/revenue) + terminal preserved | Review | pass | (this commit) |
-| REQ-001 | E-015a | Sample C1 artifact: `SAMPLE-grilling-C1.md` (34 lines, synthetic, scan-log 0 raw) | Review | pass | 48757e8 |
-| REQ-002 | E-015b | Sample C2 artifact: `SAMPLE-grilling-C2.md` (33 lines, synthetic, scan-log 0 raw) | Review | pass | (this commit) |
-| REQ-005 | E-016 | Plug-in invariants: no new `skills/*/` dir, no new stage, no new reviewer; `package.json`/plugin deps unchanged (tree clean for both); original wording only, LICENSE open question stays with orchestrator (C-5) | Review | pass | (this commit) |
-| REQ-006 | E-017 | Chain invariants intact: proposal-before-code held (skill text landed only at execute-spec under Conditional clearance); STRIDE/ADR cores untouched; N=2 → escalate + reference-only packets preserved | Review | pass | (this commit) |
-| REQ-NF-001 | E-018 | Banned-lexicon grep = 0 on all 6 touched files: `rg -i -n "relentless\|interrogat\|drill\|corner\|trap\|relentless-mode"` → exit 1, no hits | Review | pass | (this commit) |
-| REQ-NF-001 | E-019 | Secret/PII scan: hits are policy-word declarations only (masking clause + "0 PII/secrets" claims), 0 values/assignments/tokens — REFUTED-pattern per S-C12-005 | Review | pass | (this commit) |
-| REQ-P-001..006 | E-020 | People inserts 1–6 intent-match in C1+C2 touchpoints (wrap-safe grep: `exit/salir` alias 2 skills + 2 samples, `una sola pregunta` 1+1, `estar mal` 1+1, `cálido` 1+1, `privacidad` 1+1+1, `solo sube` ratchet, `hard cap` budgets, one-pass, pause/exit); C1 budget + ratchet co-signed per people-reviewer RULING 3, C2-cap mechanics landed (8d673b1 + N+1 demo) — people re-confirm at re-verification | Sign-off | conditional (impl done, co-sign pending at gate) | c5cde40 (alias/floor/default) |
-| REQ-002 | E-021 | C2 N+1 FAIL demo: `SAMPLE-grilling-C2.md` N+1 section — Q1–Q3 consume ≤3 budget, attempted Q4 BLOCKED with `grill: N+1 blocked` recorded, no answer taken (COND-R1/P3/Q3/S3) | Review | pass | (this commit) |
-| REQ-006 | E-022 | Round-level Retry N=2 → escalate in C1 + C2 text + C2 pre-decision exit-terminal (exit = pause + `grill: exited` + escalate, proposal unapproved) + stall rule (2 reminders → `grill: stalled` + escalate) (COND-R2/S1) | Review | pass | (this commit) |
-| REQ-002 | E-023 | Trigger synonym hardening (customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money) + independent blast-radius/API-surface scan rule + evasion negative demo (`SAMPLE-grilling-C2.md` evasion section: "users/internal only" → STILL FIRES) (COND-R3) | Review | pass | (this commit) |
-| REQ-001 | E-024 | Glossary (challenge/grill/ronda defined once in C1, C2 points to C1) + block breakup (one bullet per rule C1/C2) + all placeholders bound (C1 opener N = 1/3/5 per classification, C2 máx 3, no naked N) + single-source pointers to people SPEC §4 + untouched aligned (files + external sends) (COND-D1/D3/D4/D5) | Review | pass | (this commit) |
+## REQ → Test → Artifact Trace
 
-Types per `references/test-matrix.md`. Skill-text unit: review/sign-off with artifact path — REQ-ID trace mandatory, satisfied per row.
+| ID | Requirement | Test / Evidence | Artifact | Result |
+|----|-------------|-----------------|----------|--------|
+| E-001 | REQ-001 (translate-to-spec §3 + spec-template multi-only) | `grep -rn "single" skills/translate-to-spec/` → 0 hits post-change; read-through: pre-flight carries W-MULTI verbatim (1×), dispatch carries W-SEQ verbatim (1×); `spec-template.md:9` = multi-only CEO-waiver line | `skills/translate-to-spec/SKILL.md`, `skills/translate-to-spec/references/spec-template.md` | PASS |
+| E-002 | REQ-002 (execute-spec §3 multi-only) | `grep -rn "single" skills/execute-spec/` → 0 mode-branch hits (2 allowlisted `singleton`/`the single TEST_MATRIX` lines only); W-MULTI 1×, W-SEQ 1× exact-match; §2 support line multi-only; singleton lines byte-identical | `skills/execute-spec/SKILL.md` | PASS |
+| E-003 | REQ-003 (quality-gate §3 full-wave único + gate-report) | `grep -n "single" skills/quality-gate/SKILL.md skills/quality-gate/references/gate-report.md` → 0 hits; min-gate block removed; full-wave + refuter-before-qa + W-SEQ 1×; `gate-report.md:75` = multi-only | `skills/quality-gate/SKILL.md`, `skills/quality-gate/references/gate-report.md` | PASS |
+| E-004 | REQ-004 (proposal-template + dod-checklist mode lines) | `grep -n "single" skills/propose-changes/references/proposal-template.md skills/verify-handoff/references/dod-checklist.md` → 0 hits; both lines declare `multi-subagents`; non-mode content byte-identical | `skills/propose-changes/references/proposal-template.md`, `skills/verify-handoff/references/dod-checklist.md` | PASS |
+| E-005 | REQ-005 (git-worktree norm) | `grep -n "single" skills/git-worktree/SKILL.md` (lowercase) → 0 hits; `Single writer per file` (capital-S concurrency rule) kept per allowlist; line 34 = multi-only norm | `skills/git-worktree/SKILL.md` | PASS |
+| E-006 | REQ-006 (AGENTS contract lines) | `grep -n "single" skills/AGENTS.md` → 0 hits; line 33 = multi-only; `AGENTS.md` root + `docs/AGENTS.md` + `docs/specs/AGENTS.md` verify-only: hits are allowlisted (`single-file` ×2, `*-single-dispatcher.md` trace example, `single-demo/` exception) — no change | `skills/AGENTS.md` (+ verify-only layers) | PASS |
+| E-007 | REQ-007 (ADR-008 filed proposed) | Filing proof: `docs/specs/10_design/ADR-008-multi-default.md` exists, status proposed, carries decision + W-MULTI/W-SEQ verbatim + fast-path boundary + rollback; ADR-001..007 untouched | `docs/specs/10_design/ADR-008-multi-default.md` | PASS |
+| E-NF-001 | REQ-NF-001 (docs-only, reversible, masked, history intact) | `git status --porcelain` shows only lane files (no `50_archive/`, no old ADRs, no past BRIEFs, no runtime `*.ts`); secret/PII pattern scan over diff → 0 findings; per-commit `git revert` rollback | git status + scan log (below) | PASS |
+| E-NF-002 | REQ-NF-002 (zero live `single` as mode) | Lane-wide `grep -rn "single"` over the 10 touched surfaces → 0 mode-branch hits; remaining: 2 allowlisted `singleton`/`the single` lines (execute-spec) + capital-S `Single writer` (git-worktree) + historical/allowlisted AGENTS-layer hits — all logged in proposal §Allowlist | grep log (below) | PASS |
 
-## Coverage Summary
+## Scoped Evidence (execute-spec phase)
 
-- Unit coverage: N/A (skill-text-only, no code paths — justification: docs-only SPEC cycle, no runtime/plugin change; `mise run typecheck` env-blocked on this runner — missing `.opencode` task dir, os error 267, pre-existing harness issue; no `.ts`/`.json` touched so unaffected claim holds, re-verify at gate on healthy runner)
-- Integration coverage: N/A (same justification)
-- Evidence coverage: 20/21 rows pass + 1 conditional (E-020, co-sign pending — C1 co-signed per people-reviewer RULING 3, C2-cap mechanics landed, re-confirm at re-verification)
-- Acceptance criteria covered: AC-001 (C1/C2 present + samples) + AC-004 (invariants) + AC-005 (trace) for the C1+C2 scope; AC-002/AC-003 belong to the sibling security C3+C4 lane, untouched here
-
-## Scan log (C-2 proof, not attestation)
-
-- Banned lexicon: `rg -i -n "relentless|interrogat|drill|corner|trap|relentless-mode" skills/frame-intent/SKILL.md skills/propose-changes/SKILL.md skills/propose-changes/references/proposal-template.md skills/propose-changes/references/risk-assessment.md docs/specs/40_workspace/engineering/SAMPLE-grilling-C1.md docs/specs/40_workspace/engineering/SAMPLE-grilling-C2.md` → **0 hits (exit 1) = PASS**
-- Secret/PII: same file set, `rg -i -n "api_key|apikey|secret|passwd|password\s*[:=]|credential|session\s*[:=]|bearer|BEGIN [A-Z ]*PRIVATE KEY"` → hits are the masking-clause declarations + "0 PII/secrets" synthetic claims only, **0 values = PASS**
-- Clause presence (wrap-safe fragments): opt-in/`exit/salir`, `una sola pregunta`, `estar mal`, `cálido`, `privacidad`, `solo sube`, `hard cap`, one-pass, pause/exit — **present in all required touchpoints = PASS** (risk-assessment carries budget + trigger pointer only, by proposal design)
-- Scope: `git status` at commit time shows only the approved change list + plan/matrix singletons + 2 samples; sibling-lane files (`security/IMPLEMENTATION_PLAN.md`, `quality-gate/references/waiver-template.md`) left uncommitted in tree for their lane; **no new skill dir / stage / reviewer / dep = PASS**
+- Pre-change grep (lane targets): `spec-template.md:9` dual-mode line; `translate-to-spec/SKILL.md:27` `(single AND multi)` + `Single = direct` branch; `execute-spec/SKILL.md:30` `('single' or 'multi-subagents')` + `single:` dispatch branch; `quality-gate/SKILL.md:50` min-gate `single:` branch + `gate-report.md:75` dual-mode line; `proposal-template.md:6` dual-mode line; `skills/AGENTS.md:33` dual-track frozen line; `dod-checklist.md`/`git-worktree` no lowercase-`single` mode branch (retouched to name multi-only norm).
+- Post-change grep (lane targets): lowercase `single` → 2 hits, both allowlisted (`Singleton: the single IMPLEMENTATION_PLAN.md`, `Singleton: the single TEST_MATRIX.md` in `execute-spec/SKILL.md` — singleton discipline, not mode branch). Zero mode-branch hits. W-MULTI exact-match: 1× translate-to-spec, 1× execute-spec. W-SEQ exact-match: 1× translate-to-spec, 1× execute-spec, 1× quality-gate. Diff-0 vs people SPEC §4 confirmed via `grep -F` counts.
+- `git status --porcelain` (lane scope): 10 modified (3 SKILL §3 blocks + spec-template + gate-report + proposal-template + dod-checklist + git-worktree + skills/AGENTS.md) + 1 created (ADR-008) + plan/matrix singletons updated. `50_archive/` untouched; no runtime/plugin change; no new deps.
+- Commits: one per REQ group (see SHAs below), each body links REQ→test→artifact.
 
 ## Commits
 
-- REQ-001: `48757e8` — `skills/frame-intent/SKILL.md` + `SAMPLE-grilling-C1.md` + `IMPLEMENTATION_PLAN.md`
-- REQ-002: prior lane commits — `skills/propose-changes/SKILL.md` + `proposal-template.md` + `risk-assessment.md` + `SAMPLE-grilling-C2.md` + this matrix
-- Fix loop (this session): `8d673b1` C2 cap ≤3 + pass-def + N+1 demo (COND-P3) · `8ab7271` N=2 + exit-terminal (COND-R2/S1) · `1a16100` trigger synonym hardening + evasion demo (COND-R3) · `7690f57` glossary + breakup + bound placeholders (COND-D1/D3/D4/D5) · `c5cde40` exit/salir alias + bounded floor + unclassified default (COND-P5/RL-008) · this commit E-020 conditional relabel + honest counts (COND-P4/D5/Q2/K3)
+| Commit | REQ group | Files |
+|--------|-----------|-------|
+| TBD at commit time | REQ-001 | translate-to-spec SKILL + spec-template |
+| TBD | REQ-002 | execute-spec SKILL |
+| TBD | REQ-003 | quality-gate SKILL + gate-report |
+| TBD | REQ-004 | proposal-template + dod-checklist |
+| TBD | REQ-005+006 | git-worktree SKILL + skills/AGENTS.md |
+| TBD | REQ-007 | ADR-008 create |
+| TBD | Trace | IMPLEMENTATION_PLAN + TEST_MATRIX (this file) |
+
+## Gate Handoff Packet
+
+`SPEC:docs/specs/20_backlog/SPEC-multi-default-engineering.md#REQ-001..007+NF-001..002 / HARD:multi-subagents+docs-only,reversible,masked,history-intact,max-2 / GATE:security-APPROVE(barrera)+arch-CONDITIONAL(vasquez, 4 closable) / DOMAINS:[engineering]` — W-DEP-1 fidelity (diff-0) + barrera attestation close at gate.
