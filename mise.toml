@@ -12,5 +12,13 @@ run = 'npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --targ
 description = "Install opencode plugin deps"
 run = "npm install"
 
+[tasks.bump]
+description = "Synchronize or bump versions across all project files"
+run = "node scripts/bump-version.mjs"
+
+[tasks.version-check]
+description = "Check for version drift across all project files"
+run = "node scripts/bump-version.mjs --check"
+
 [settings]
 experimental = true

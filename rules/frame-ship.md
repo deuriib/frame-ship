@@ -43,4 +43,4 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 - **Conduct:** no sugarcoating; no busywork theater; respect attention (one point per paragraph; state assumptions on irreversible calls). FAIL → retry N=2 differently → escalate. No third loop, no sideways.
 - **Commit** always use work-unit commits.
 
-Version lockstep: [frame-ship v0.6.1] — bump with `.opencode/plugins/frame-ship.ts` + `hooks/context-inject.ts`.
+Version lockstep: [frame-ship v0.7.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.

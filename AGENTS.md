@@ -6,7 +6,7 @@
 
 ## OVERVIEW
 
-frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (403 lines, v0.6.1) + `skills/` templates + `docs/` artifact store.
+frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (299 lines, v0.7.0) + `skills/` templates + `docs/` artifact store.
 
 ## STRUCTURE
 
@@ -17,7 +17,7 @@ frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 
 ├── docs/briefs/ + docs/specs/10_design|12_adr|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
 ├── tests/ harness TBD (see Roadmap)
 ├── mise.toml  # toolchain: node 22, tasks typecheck/install
-└── package.json  # v0.6.1 (matches plugin header)
+└── package.json  # v0.7.0 (matches plugin header)
 ```
 
 ## WHERE TO LOOK
@@ -61,10 +61,15 @@ Resolvers: `resolveSkillsDir()` from own `import.meta.url` (fallback `directory|
 ## COMMANDS
 
 ```bash
-# typecheck plugin (mise wrapper, dir=.opencode)
+# typecheck plugin (mise wrapper, dir=root)
 mise run typecheck
-# npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts
-mise run install  # dir=.opencode, npm install
+
+# version management & lockstep synchronization
+node scripts/bump-version.mjs --check   # check for version drift
+node scripts/bump-version.mjs --sync    # sync all files to package.json version
+node scripts/bump-version.mjs patch     # semver bump (or minor/major/<version>)
+
+mise run install  # npm install
 # after any plugin/skill edit: quit + restart opencode (config not hot-reloaded)
 ```
 
@@ -76,5 +81,6 @@ No build/test scripts in repo. `tests/` empty.
 - Sub-AGENTS map: `skills/AGENTS.md` (chain + 8-domain catalogue) → `skills/quality-gate/AGENTS.md` (router split); `.opencode/plugins/AGENTS.md` (runtime); `docs/AGENTS.md` → `docs/specs/AGENTS.md` (artifact lifecycle).
 - Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
 - Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
-- Version aligned: root `package.json` v0.6.1 matches plugin header `v0.6.1` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
+- Version aligned: root `package.json` v0.7.0 matches plugin header `v0.7.0` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
+- Version sync automated: `scripts/bump-version.mjs` keeps `package.json`, `plugins/opencode/frame-ship.ts`, `plugins/antigravity/hooks/context-inject.ts`, `rules/frame-ship.md`, `README.md`, `INSTALL.md`, and `AGENTS.md` in exact lockstep.
 - Antigravity discovery path: chain contract lives at `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`); hooks at `.agents/hooks.json`.

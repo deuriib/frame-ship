@@ -8,6 +8,11 @@
     ".": "./plugins/opencode/frame-ship.ts"
   },
   "license": "MIT",
+  "scripts": {
+    "typecheck": "mise run typecheck",
+    "bump": "node scripts/bump-version.mjs",
+    "version:check": "node scripts/bump-version.mjs --check"
+  },
   "dependencies": {
     "@opencode/plugin": "2.0.9"
   }
