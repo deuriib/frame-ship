@@ -5,7 +5,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [v0.7.0] — 2026-09-19
+### Changed
+
+- Standardized execution mode to `multi-subagents` across the Frame→Ship chain (`skills/translate-to-spec/`, `skills/execute-spec/`, `skills/quality-gate/`, `skills/git-worktree/`, and canonical templates). Removed the dual-track `single` methodological mode everywhere in-chain.
+- Defined deterministic sequential degradation contract (W-SEQ) for single-thread or non-task harnesses, maintaining full-wave gate and review rigor without silent downgrade.
+- Unified quality gates to full-wave only with adversarial `review-refuter` prior to `qa` (min-gate removed).
+- Recorded architectural decision `ADR-008-multi-default.md` in `docs/specs/10_design/`.
+
 
 ### Added
 
