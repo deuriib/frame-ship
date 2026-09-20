@@ -3,7 +3,7 @@
 **Spec Reference:** SPEC-XXX
 **Agent:** [name]
 **Date:** YYYY-MM-DD
-**Execution_Mode:** single | multi-subagents (inherited from spec)
+**Execution_Mode:** multi-subagents (inherited from spec)
 **Domains-Touched:** [engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — delete as applicable, must match spec]
 
 ## Summary
