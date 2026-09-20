@@ -15,7 +15,7 @@ test → artifact traceability. Scope expansion requires a new proposal.
 ## 2. Chain Contract
 
 - Previous: frame-ship:propose-changes (+ frame-ship:review-security / frame-ship:review-architecture approvals)
-- Supporting: (optional / multi-subagents) frame-ship:git-worktree
+- Supporting: (multi-subagents) frame-ship:git-worktree
 - Next: frame-ship:quality-gate | (optional before review) frame-ship:pull-request
 
 ## 2b. Role Binding (Org)
@@ -26,12 +26,10 @@ test → artifact traceability. Scope expansion requires a new proposal.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches with reference-only packets.
-1. Confirm all required approvals are recorded and read `execution_mode` + `DOMAINS` from spec/proposal (`single` or `multi-subagents`).
+0. Pre-flight LOAD — HARD STOP: `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP. Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
+1. Confirm all required approvals are recorded and read `execution_mode` (`multi-subagents`, frozen at frame-intent; overridden per SPEC only with CEO waiver) + `DOMAINS` from spec/proposal.
 2. Create implementation plan via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations). Singleton: the single `IMPLEMENTATION_PLAN.md` per lane — create-if-missing else update-in-place, never `IMPLEMENTATION_PLAN-*.md`.
-3. Dispatch by mode:
-   - `single`: one specialist owns execution end-to-end (code or non-code) DIRECTLY, no `task`; still produces test/evidence matrix and runs domain checks. Output cites `skill(execute-spec)`.
-   - `multi-subagents` (default): orchestrator dispatches entire team; domain owners/specialists do the work or brief back — each prompt orders the specialist to understand their domain role BEFORE acting; cross-domain need → formal Cross-domain request brief to orchestrator, who delegates or resolves; no sideways dispatch.
+3. Dispatch: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — each prompt orders the specialist to understand their domain role BEFORE acting; cross-domain need → formal Cross-domain request brief to orchestrator, who delegates or resolves; no sideways dispatch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 4. Execute only targets in the approved change list (files AND non-code targets — no external sends/filings/launches beyond approval).
 5. Produce test/evidence matrix via `references/test-matrix.md` (tests for code, reviews/sign-offs/attestations for non-code, REQ-ID trace mandatory for all). Singleton: the single `TEST_MATRIX.md` per lane — create-if-missing else update-in-place, never `TEST_MATRIX-*.md`.
 6. Run domain quality checks (engineering: lint, types, tests, security; other domains: peer review, owner sign-off, controls check per plan).
