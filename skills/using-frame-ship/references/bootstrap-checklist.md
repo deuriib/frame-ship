@@ -7,8 +7,8 @@
 - [ ] Bootstrap loaded (`using-frame-ship`) before any domain work.
 - [ ] Chain order stated: `frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release`.
 - [ ] Current stage identified by trigger (see SKILL.md §3.2), stage skill loaded via `skill` tool BEFORE any read/edit/bash/task.
-- [ ] Domain owner/specialist role understood — skill + role, every task, single AND multi. Path cited in output.
-- [ ] Execution mode declared: `single` (direct, no task) or `multi-subagents` — orchestrator dispatches entire team; domain owners/specialists do the work or brief back (cross-domain need → formal Cross-domain request brief to the orchestrator).
+- [ ] Domain owner/specialist role understood — skill + role, every task, multi-subagents full-wave. Path cited in output.
+- [ ] Execution declared: Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 - [ ] Hard rules acknowledged:
   - [ ] NEVER code without approved `PROPOSED_CHANGES.md`.
   - [ ] NEVER skip `review-security` for auth/data/API.

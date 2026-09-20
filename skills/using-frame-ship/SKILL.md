@@ -35,10 +35,10 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
 
 ## 3. Process
 
-0. MANDATORY LOAD ORDER — HARD STOP. Before ANY task, edit, bash, or dispatch (single or multi-subagents):
+0. MANDATORY LOAD ORDER — HARD STOP. Before ANY task, edit, bash, or dispatch (multi-subagents only — the natural process):
    1. `skill(using-frame-ship)` — this bootstrap (already injected; do not skip).
    2. `skill(<stage>)` via native `skill` tool — BEFORE acting for that stage. No skill = STOP.
-   3. Domain owner/specialist role understood — skill + role, every task, single AND multi. Path cited in output.
+   3. Domain owner/specialist role understood — skill + role, every task, multi-subagents full-wave. Path cited in output.
    4. Pre-flight: skill loaded? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load first. FAIL → retry N=2 differently → escalate to orchestrator. Never third loop, never sideways.
 1. Check for relevant skills before any task — mandatory workflows, not
    suggestions. Load the named stage skill via the native `skill` tool before
@@ -62,9 +62,9 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    changes, no handoff on CLOSED gate without domain owners + orchestrator waiver,
    `REQ-ID → test/evidence → artifact → gate verdict` trace, `HANDOFF.md` before ship,
    `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
-   Execution modes (frozen at `frame-ship:frame-intent`):
-   - `single`: `skill(stage)` then execute DIRECTLY, no `task` dispatch. Still produces test/evidence matrix. Output cites skill.
-   - `multi-subagents` (default): `skill(stage)`, then orchestrator dispatches per domain — **orchestrator dispatches entire team; domain owners/specialists do the work or brief back.** Each prompt MUST order: understand domain role BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence. Cross-domain need → formal **Cross-domain request** brief to orchestrator, who delegates or resolves.
+   Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
+   Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
+   Orchestrator dispatches entire team; domain owners/specialists do the work or brief back. Each prompt MUST order: understand domain role BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence. Cross-domain need → formal **Cross-domain request** brief to orchestrator, who delegates or resolves.
 4. After compaction, re-load this skill first, then resume at the recorded
    stage with trace and gate verdicts intact.
 
