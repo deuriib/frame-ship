@@ -31,14 +31,17 @@ deployment order, and archival. Never ship without verification gates complete.
 1. Verify all DoD checklists + gate reports are OPEN (with `SPEC/HARD/GATE/DOMAINS` intact).
 2. Produce `docs/specs/30_delivery/RELEASE_NOTES.md` via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `RELEASE_NOTES.md`, never `RELEASE_NOTES-*.md`).
 3. Update changelog via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
-4. Coordinate ship mechanics with rollback/undo plan: devops for deploys; owning domain owner for filings/launches/closes/workflows.
-5. Archive by MOVE (never copy) completed spec from `docs/specs/20_backlog/` to `docs/specs/50_archive/` with domain artifacts linked: `git mv docs/specs/20_backlog/<spec-file>.md docs/specs/50_archive/` then verify source path gone (`git status --short` shows `R` rename, no duplicate). Clean up `docs/specs/40_workspace/`: remove all scratch drafts across domain lanes (`40_workspace/<domain>/`) and gate review records (`40_workspace/quality-gate/<spec-id>/`) associated with the archived spec so `40_workspace/` remains clean before commit.
-6. Close with a release commit (tag after commit). Example: `chore(release-0.4.0): ship SPEC-003 with notes and rollback plan`.
+4. Synchronize project documentation and version alignment: verify and update README via `references/readme-template.md`, INSTALL via `references/install-template.md`, and MIGRATION guide via `references/migration-guide-template.md` (if breaking changes); audit all documentation via `references/documentation-checklist.md`, and synchronize version lockstep across the repository via `node scripts/bump-version.mjs --sync` (or bump version).
+5. Coordinate ship mechanics with rollback/undo plan: devops for deploys; owning domain owner for filings/launches/closes/workflows.
+6. Archive by MOVE (never copy) completed spec from `docs/specs/20_backlog/` to `docs/specs/50_archive/` with domain artifacts linked: `git mv docs/specs/20_backlog/<spec-file>.md docs/specs/50_archive/` then verify source path gone (`git status --short` shows `R` rename, no duplicate). Clean up `docs/specs/40_workspace/`: remove all scratch drafts across domain lanes (`40_workspace/<domain>/`) and gate review records (`40_workspace/quality-gate/<spec-id>/`) associated with the archived spec so `40_workspace/` remains clean before commit.
+7. Close with a release commit (tag after commit). Example: `chore(release-0.4.0): ship SPEC-003 with notes and rollback plan`.
 
 ## 4. What I won't do
 
 - Ship without verification gates complete (OPEN or waived CONDITIONAL/CLOSED with record).
 - Skip changelog for user-facing changes (any domain — code or non-code).
+- Ship with out-of-sync documentation or unverified install instructions (README, INSTALL, or migration guides lagging behind released behavior).
+- Ship with version mismatch or drift between manifest, plugin runtime, rules, and context hooks.
 - Ship without a rollback/undo plan (revert + retract/void/reverse/disable with owner).
 - Leave scratch drafts or gate records lingering in `docs/specs/40_workspace/` after archival (`40_workspace/` must be cleaned up on archive).
 
@@ -46,3 +49,7 @@ deployment order, and archival. Never ship without verification gates complete.
 
 - `references/release-notes.md` — Highlights/features/fixes/breaking/rollback.
 - `references/changelog-template.md` — Keep-a-Changelog format.
+- `references/readme-template.md` — Project README structure, version badges, install pins, and usage.
+- `references/install-template.md` — Installation guide, platform support matrix, and verify commands.
+- `references/migration-guide-template.md` — Upgrade steps, breaking changes, and configuration migrations.
+- `references/documentation-checklist.md` — Pre-release documentation audit and synchronization checklist.
