@@ -6,7 +6,7 @@
 **Brief Reference:** BRIEF-XXX
 **Status:** draft | review | approved | implemented
 **Priority:** P0 | P1 | P2
-**Execution_Mode:** single | multi-subagents (inherited from brief, overridden per SPEC only with orchestrator waiver)
+**Execution_Mode:** multi-subagents (inherited from brief, frozen at frame-intent; overridden per SPEC only with CEO waiver)
 
 ## 1. Context
 
