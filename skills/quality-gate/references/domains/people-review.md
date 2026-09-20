@@ -12,6 +12,9 @@
 - [ ] Culture/values alignment
 - [ ] Hiring/training needs flagged
 - [ ] Change management plan (if needed)
+- [ ] Uniform multi-only wording verified (W-MULTI + W-SEQ grep evidence attached)
+- [ ] No min-gate path invoked; full-wave + refuter before qa
+- [ ] Rule-change impact communicated (all roles affected by single-process wording)
 
 ## Findings
 
@@ -22,3 +25,5 @@
 ## Verdict Rationale
 
 [Why this verdict]
+
+Attach W-MULTI/W-SEQ grep evidence + single-residue grep (NF-001 pattern); rationale cites diff=0.
