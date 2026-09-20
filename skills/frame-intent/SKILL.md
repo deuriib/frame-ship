@@ -30,7 +30,7 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 ## 3. Process
 
 0. Pre-flight LOAD — HARD STOP (multi-subagents only): `skill(frame-intent)` loaded? Domain ownership identified? `execution_mode` about to be frozen? Any NO → STOP, load first. FAIL → retry N=2 → escalate. Output cites skill.
-1. Explore context first — files, docs, recent commits — before detailed questions. If the request describes multiple independent subsystems, flag this immediately and decompose into sub-initiatives (own BRIEF→SPEC cycle each); brainstorm the first through the normal flow.
+1. Explore context first — files, docs, recent commits, and load any relevant sideways or external skills (even outside frame-ship scope) that can assist with discovery, planning, domain context, or task decomposition — before detailed questions. If the request describes multiple independent subsystems, flag this immediately and decompose into sub-initiatives (own BRIEF→SPEC cycle each); brainstorm the first through the normal flow.
 2. Classify first, announce the path, allow override — "this looks bounded, so I'll present a short brief here rather than write a full BRIEF file":
    - `spike-equivalent` — a feasibility question whose output is an answer, not a brief. Present probe in 2-3 sentences, get a nod, report a recommendation; anything built stays labeled throwaway.
    - `bounded-initiative` — a well-scoped intent with an existing flow to change. Ask the questions that matter, present a short BRIEF in chat, and STOP for an explicit yes. No BRIEF file.
@@ -80,7 +80,7 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 ## 4. What I won't do
 
 - Write implementation specs (→ `frame-ship:translate-to-spec`).
-- Invoke sideways skills or paths (`writing-plans`, visual-companion browser mode, `docs/superpowers/`) — handoff is always `translate-to-spec` via reference-only packet.
+- Bypass `frame-ship:translate-to-spec` for the core chain handoff — sideways/external skills outside this scope are welcomed and should be loaded whenever they assist with planning, tasks, or domain context, but the final brief handoff always targets `translate-to-spec` via reference-only packet.
 - Approve my own brief or skip the HARD-GATE for any classification.
 - Allocate budgets without finance domain owner approval.
 - Commit to timelines without engineering domain owner feasibility input.
