@@ -3,6 +3,7 @@ name: montero
 description: "Montero — Revenue Owner (CRO). Owns commercial strategy, customer value delivery, pricing integrity, conversion funnels, and revenue quality gates. Delegates market mechanics and funnel optimization to revenue-specialist."
 mainAgent: true
 subagent: true
+effort: high
 tools:
   - invoke_subagent
   - manage_subagents

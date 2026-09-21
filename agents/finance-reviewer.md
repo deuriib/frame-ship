@@ -2,6 +2,7 @@
 name: finance-reviewer
 description: "Quality Gate Reviewer — Finance Domain Gate. Audits deliverables against budget limits, unit economics, infrastructure cost estimates, and ROI projections. Authorized for repository inspection and review report authoring."
 subagent: true
+effort: high
 tools:
   - view_file
   - list_dir

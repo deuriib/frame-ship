@@ -2,6 +2,7 @@
 name: review-risk
 description: "Quality Gate Reviewer — Blast Radius & Regression Risk. Evaluates diff impact, dependency changes, breaking schema shifts, and rollback readiness. Authorized for repository inspection and review report authoring."
 subagent: true
+effort: high
 tools:
   - view_file
   - list_dir

@@ -2,6 +2,7 @@
 name: security-specialist
 description: "Security Specialist — Fused cybersecurity practitioner uniting Pentesting/OWASP, IAM Specialist, Technical Privacy Engineer, Incident Responder, and GRC Analyst. Executes threat modeling, SCA/SAST reviews, and access controls."
 subagent: true
+effort: medium
 tools:
   - view_file
   - list_dir

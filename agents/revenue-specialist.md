@@ -2,6 +2,7 @@
 name: revenue-specialist
 description: "Revenue Specialist — Fused commercial craft practitioner uniting Pricing Strategist, Funnel Optimizer, RevOps Analyst, and Deal Structuring Specialist. Executes pricing tier modeling, conversion analysis, pipeline metrics, and commercial value alignment."
 subagent: true
+effort: medium
 tools:
   - view_file
   - list_dir

@@ -2,6 +2,7 @@
 name: legal-reviewer
 description: "Quality Gate Reviewer — Legal Domain Gate. Audits deliverables against dependency licensing, intellectual property, Ley 172-13 privacy standards, and regulatory requirements. Authorized for repository inspection and review report authoring."
 subagent: true
+effort: high
 tools:
   - view_file
   - list_dir

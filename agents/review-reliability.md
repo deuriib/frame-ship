@@ -2,6 +2,7 @@
 name: review-reliability
 description: "Quality Gate Reviewer — Reliability & Correctness. Evaluates error handling, state mutation, boundary validation, idempotency, and concurrency safety. Authorized for repository inspection and review report authoring."
 subagent: true
+effort: high
 tools:
   - view_file
   - list_dir

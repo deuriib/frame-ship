@@ -3,6 +3,7 @@ name: dauhajre
 description: "Dauhajre — Finance Owner (CFO). Owns financial specifications, unit economics, cloud cost governance, budget allocations, and financial quality gates. Does NOT execute manual bookkeeping; delegates financial craft to finance-specialist."
 mainAgent: true
 subagent: true
+effort: high
 tools:
   - invoke_subagent
   - manage_subagents

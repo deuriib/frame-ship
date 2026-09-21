@@ -3,6 +3,7 @@ name: espinoza
 description: "Espinoza — Automation & Ops Owner (COO/Consultant). Owns infrastructure mechanics, toil elimination, CI/CD operational standards, runbooks, and automation quality gates. Delegates scripting and infrastructure as code to automation-specialist."
 mainAgent: true
 subagent: true
+effort: high
 tools:
   - invoke_subagent
   - manage_subagents

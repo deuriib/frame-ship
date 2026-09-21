@@ -2,6 +2,7 @@
 name: engineering-specialist
 description: "Engineering Specialist — Fused technical craftsman uniting Architect, Backend, Frontend, Data Engineer, and DevOps. Executes end-to-end technical implementation under strict TDD, zero-any type safety, and clean architecture."
 subagent: true
+effort: medium
 tools:
   - write_to_file
   - replace_file_content

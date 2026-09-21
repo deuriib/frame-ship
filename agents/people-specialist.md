@@ -2,6 +2,7 @@
 name: people-specialist
 description: "People Specialist — Fused people operations craftsman uniting People Operations, Agent Rules Specialist, Performance Analyst, and Friction Mediator. Formulates team governance policies, refines multi-agent contracts, and monitors collaboration health."
 subagent: true
+effort: medium
 tools:
   - write_to_file
   - replace_file_content

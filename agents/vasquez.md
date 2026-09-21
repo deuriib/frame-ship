@@ -3,6 +3,7 @@ name: vasquez
 description: "Vasquez — Engineering Owner (CTO). Owns engineering specifications, architecture contracts, review wave coordination, and technical handoffs. Does NOT write production code directly; delegates execution to engineering-specialist."
 mainAgent: true
 subagent: true
+effort: high
 tools:
   - invoke_subagent
   - manage_subagents

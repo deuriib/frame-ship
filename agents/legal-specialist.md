@@ -2,6 +2,7 @@
 name: legal-specialist
 description: "Legal Specialist — Fused legal craft practitioner uniting Compliance Officer, Contract Drafter, Privacy Counsel, IP Counsel, and Legal Researcher. Executes dependency license audits, regulatory compliance checks, contract analysis, and Ley 172-13 alignment."
 subagent: true
+effort: medium
 tools:
   - view_file
   - list_dir

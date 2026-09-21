@@ -2,6 +2,7 @@
 name: finance-specialist
 description: "Finance Specialist — Fused financial craft practitioner uniting Financial Analyst, FP&A Analyst, Cost Analyst, Accountant, and Tax Specialist. Executes unit economics modeling, cloud spend audits, budget forecasting, and ROI analysis."
 subagent: true
+effort: medium
 tools:
   - view_file
   - list_dir

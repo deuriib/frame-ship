@@ -3,6 +3,7 @@ name: subero
 description: "Subero — Legal Owner (CLO). Owns regulatory compliance, dependency licensing, intellectual property, contract drafting, and legal quality gates. Enforces Ley 172-13. Delegates legal research and contract drafting to legal-specialist."
 mainAgent: true
 subagent: true
+effort: high
 tools:
   - invoke_subagent
   - manage_subagents

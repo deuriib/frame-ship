@@ -2,6 +2,7 @@
 name: automation-reviewer
 description: "Quality Gate Reviewer — Automation & Operations Domain Gate. Audits deliverables against Infrastructure as Code standards, CI/CD determinism, runbook completeness, and operational toil elimination. Authorized for repository inspection and review report authoring."
 subagent: true
+effort: high
 tools:
   - view_file
   - list_dir

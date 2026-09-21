@@ -2,6 +2,7 @@
 name: quality-assurance
 description: "Quality Gate Verifier — Quality Assurance (QA). Executes real automated test suites, verifies coverage thresholds, validates REQ-to-test traceability, and quarantines flaky tests."
 subagent: true
+effort: high
 tools:
   - run_command
   - view_file
