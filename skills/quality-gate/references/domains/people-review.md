@@ -12,9 +12,9 @@
 - [ ] Culture/values alignment
 - [ ] Hiring/training needs flagged
 - [ ] Change management plan (if needed)
-- [ ] Uniform multi-only wording verified (W-MULTI + W-SEQ grep evidence attached)
+- [ ] Uniform subagents wording verified (W-SUBAGENTS + W-SEQ grep evidence attached)
 - [ ] No min-gate path invoked; full-wave + refuter before qa
-- [ ] Rule-change impact communicated (all roles affected by single-process wording)
+- [ ] Rule-change impact communicated (all roles aligned with subagents nomenclature and natural process)
 
 ## Findings
 
@@ -26,4 +26,4 @@
 
 [Why this verdict]
 
-Attach W-MULTI/W-SEQ grep evidence + single-residue grep (NF-001 pattern); rationale cites diff=0.
+Attach W-SUBAGENTS/W-SEQ grep evidence + multi-subagents residue grep (NF-001 pattern); rationale cites diff=0.

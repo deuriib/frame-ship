@@ -7,8 +7,8 @@
 - [ ] Bootstrap (`using-frame-ship`) active in context via hook — NEVER re-load via skill tool.
 - [ ] Chain order stated: `frame-intent → translate-to-spec → propose-changes → review-* → execute-spec → quality-gate → verify-handoff → ship-release`.
 - [ ] Current stage identified by trigger (see SKILL.md §3.2), stage skill loaded ONCE via `skill` tool at stage start (never re-loaded on every read/edit/bash).
-- [ ] Domain owner/specialist role understood — skill + role per stage, multi-subagents full-wave. Path cited in output.
-- [ ] Execution declared: Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
+- [ ] Domain owner/specialist role understood — skill + role per stage, subagents full-wave. Path cited in output.
+- [ ] Execution declared: Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 - [ ] Hard rules acknowledged:
   - [ ] NEVER code without approved `PROPOSED_CHANGES.md`.
   - [ ] NEVER skip `review-security` for auth/data/API.

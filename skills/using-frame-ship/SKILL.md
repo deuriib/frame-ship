@@ -35,10 +35,10 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
 
 ## 3. Process
 
-0. MANDATORY LOAD ORDER — HARD STOP (multi-subagents only — the natural process):
+0. MANDATORY LOAD ORDER — HARD STOP (subagents only — the natural process):
    1. `using-frame-ship` is already loaded in context (bootstrap) — NEVER re-load it via the skill tool.
    2. Load the target `<stage>` skill via the native `skill` tool ONCE when entering that stage, BEFORE acting for that stage. (Do NOT re-load on every individual tool call, edit, or bash). No skill = STOP.
-   3. Domain owner/specialist role understood — skill + role per stage, multi-subagents full-wave. Path cited in output.
+   3. Domain owner/specialist role understood — skill + role per stage, subagents full-wave. Path cited in output.
    4. Pre-flight: stage skill loaded? `SPEC/HARD/GATE/DOMAINS` packet ready? Any NO → STOP, load stage skill first. FAIL → retry N=2 differently → escalate to orchestrator. Never third loop, never sideways.
 1. Check for relevant skills before any task — mandatory workflows, not
    suggestions. Load the named stage skill via the native `skill` tool before
@@ -54,7 +54,7 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    - work complete, needs review before ship → `frame-ship:verify-handoff`
    - verified, ready to ship → `frame-ship:ship-release`
    - bug report / failed test / unexpected behavior (pre-proposal triage) → `frame-ship:debugging`
-   - parallel execution lanes setup (multi-subagents) → `frame-ship:git-worktree`
+   - parallel execution lanes setup (subagents) → `frame-ship:git-worktree`
    - branch / pull request / ready-for-review → `frame-ship:pull-request`
 3. Enforce the hard rules on every step (see `references/bootstrap-checklist.md`):
    proposal before code (or before external send/filing/launch for non-code),
@@ -62,7 +62,7 @@ frame-ship:using-frame-ship (bootstrap) → frame-ship:frame-intent → frame-sh
    changes, no handoff on CLOSED gate without domain owners + orchestrator waiver,
    `REQ-ID → test/evidence → artifact → gate verdict` trace, `HANDOFF.md` before ship,
    `SPEC/HARD/GATE/DOMAINS` reference-only packets between stages (DOMAINS from 8-domain catalogue in `../AGENTS.md`).
-   Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
+   Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
    Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
    Orchestrator dispatches entire team; domain owners/specialists do the work or brief back. Each prompt MUST order: understand domain role BEFORE acting; accept packet by reference; return deliverable + risks + assumptions + scoped evidence. Cross-domain need → formal **Cross-domain request** brief to orchestrator, who delegates or resolves.
 4. After compaction, re-load this skill first, then resume at the recorded

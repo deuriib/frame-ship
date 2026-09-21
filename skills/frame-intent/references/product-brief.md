@@ -4,7 +4,7 @@
 **Initiator:** orchestrator
 **Date:** YYYY-MM-DD
 **Status:** draft | approved
-**Execution_Mode:** multi-subagents (frozen at frame-intent; trivial <15 lines goes by CEO fast-path checkpoint-only, outside methodology)
+**Execution_Mode:** subagents (frozen at frame-intent; trivial <15 lines goes by CEO fast-path checkpoint-only, outside methodology)
 **Domains-Touched:** [subset of 8: engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — initial routing, refined at translate-to-spec]
 **Classification:** spike-equivalent (answer-only, no file) | bounded-initiative (short BRIEF in chat) | architectural-initiative (full BRIEF file) — announced + overrideable, one-way ratchet
 **Framings-Considered:** [2–3 framings with trade-offs + recommendation + YAGNI cut]
