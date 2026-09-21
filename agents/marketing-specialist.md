@@ -1,7 +1,7 @@
 ---
 name: marketing-specialist
 description: "Marketing Specialist — Fused marketing practitioner uniting Brand Strategist, Technical Content Strategist, Copywriter, SEO Specialist, and Marketing Analyst. Executes product messaging, release announcements, technical documentation voice, and channel positioning."
-mode: subagent
+subagent: true
 tools:
   - write_to_file
   - replace_file_content

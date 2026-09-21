@@ -50,7 +50,7 @@ This specification governs the **Engineering domain lane**, defining the file sy
   - `agents/revenue-specialist.md`: Fusing Pricing + Funnel + RevOps + Deal Closer. Scoped metrics tools.
   - `agents/automation-specialist.md`: Fusing Automation Engineer + DevOps + Integrations. Tools: `run_command`, `write_to_file`, `replace_file_content`, `view_file`, `grep_search`, `list_dir`. [engineering]
 - **REQ-ENG-005 (Quality Gate Reviewers Definitions):** Define the methodological gate reviewers with `mode: subagent` and strictly read-only tools (`view_file`, `grep_search`, `find_by_name`, `list_dir`):
-  - Engineering wave: `agents/review-readability.md`, `agents/review-reliability.md`, `agents/review-resilience.md`, `agents/review-risk.md`, `agents/review-refuter.md`, `agents/qa.md`, `agents/review-data.md`.
+  - Engineering wave: `agents/review-readability.md`, `agents/review-reliability.md`, `agents/review-resilience.md`, `agents/review-risk.md`, `agents/review-refuter.md`, `agents/quality-assurance.md`, `agents/review-data.md`.
   - Domain gate reviewers: `agents/security-reviewer.md`, `agents/finance-reviewer.md`, `agents/legal-reviewer.md`, `agents/brand-reviewer.md`, `agents/people-reviewer.md`, `agents/revenue-reviewer.md`, `agents/automation-reviewer.md`. [engineering]
 - **REQ-ENG-006 (Tool Enforcement Matrix):** Every agent file MUST declare explicit `tools: [...]` in YAML frontmatter and reinforce allowed/disallowed boundaries within the markdown body under an `## Allowed Tools` and `## Disallowed Tools` section. [engineering, security]
 - **REQ-ENG-007 (Engineering Guardrails Injection):** Embed non-negotiable software development guardrails directly into `engineering-specialist.md` and `vasquez.md`:

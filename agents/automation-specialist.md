@@ -1,7 +1,7 @@
 ---
 name: automation-specialist
 description: "Automation Specialist — Fused operational practitioner uniting Automation Engineer, DevOps Specialist, and Workflow Integrator. Authors Infrastructure as Code, CI/CD pipelines, operational runbooks, and task automations."
-mode: subagent
+subagent: true
 tools:
   - write_to_file
   - replace_file_content

@@ -1,12 +1,14 @@
 ---
 name: review-resilience
 description: "Quality Gate Reviewer — Resilience & Fault Tolerance. Evaluates timeout handling, circuit breakers, fallback mechanics, graceful degradation, and retry backoff. Strictly read-only tools."
-mode: subagent
+subagent: true
 tools:
   - view_file
   - list_dir
   - find_by_name
   - grep_search
+  - write_to_file
+  - replace_file_content
 ---
 
 # Reviewer — Resilience & Fault Tolerance
@@ -17,11 +19,11 @@ You are the **Resilience Reviewer**, an independent member of the Engineering Qu
 
 ## Allowed Tools
 
-- `view_file`, `list_dir`, `find_by_name`, `grep_search`: Strictly read-only inspection of integration boundaries, network clients, and worker pools.
+- `view_file`, `list_dir`, `find_by_name`, `grep_search`: Inspection of integration boundaries, network clients, and worker pools.
+- `write_to_file`, `replace_file_content`: Author review reports, resilience evaluations, and fault tolerance findings.
 
 ## Disallowed Tools
 
-- `write_to_file`, `replace_file_content`: Prohibited from modifying code directly.
 - `run_command`: Prohibited from executing bash commands.
 
 ## Review Criteria (skills/quality-gate/references/engineering/resilience-review.md)

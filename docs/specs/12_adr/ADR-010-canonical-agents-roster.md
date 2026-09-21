@@ -38,7 +38,7 @@ Establish the canonical, version-controlled `/agents` directory in the repositor
    - `agents/automation-specialist.md`: Fusing Automation Engineer + DevOps + Workflow Integrator.
 
 4. **Tier 4: Methodological Quality Gate Reviewers (14 Agents — Quality Gate):**
-   - **Engineering Wave:** `agents/review-readability.md`, `agents/review-reliability.md`, `agents/review-resilience.md`, `agents/review-risk.md`, `agents/review-refuter.md` (adversarial), `agents/qa.md` (verification), `agents/review-data.md` (cross-cutting lens).
+   - **Engineering Wave:** `agents/review-readability.md`, `agents/review-reliability.md`, `agents/review-resilience.md`, `agents/review-risk.md`, `agents/review-refuter.md` (adversarial), `agents/quality-assurance.md` (verification), `agents/review-data.md` (cross-cutting lens).
    - **Domain Reviewers:** `agents/security-reviewer.md`, `agents/finance-reviewer.md`, `agents/legal-reviewer.md`, `agents/brand-reviewer.md`, `agents/people-reviewer.md`, `agents/revenue-reviewer.md`, `agents/automation-reviewer.md`.
    - Strictly read-only tool profiles (`view_file`, `grep_search`, `find_by_name`, `list_dir`). Prohibited from modifying code or executing commands.
 

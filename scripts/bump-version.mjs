@@ -181,11 +181,17 @@ function getFileReplacements(targetVersion) {
       file: AGENTS_PATH,
       name: "AGENTS.md",
       check: (content) => {
+        const lockstepMatch = content.match(/Version lockstep:\s*\[frame-ship v([\d\w.-]+)\]/);
+        if (lockstepMatch) return lockstepMatch[1];
         const stackMatch = content.match(/Stack: 1 TS runtime \(\d+ lines, v([\d\w.-]+)\)/);
         return stackMatch ? stackMatch[1] : null;
       },
       transform: (content) => {
         let updated = content.replace(
+          /Version lockstep:\s*\[frame-ship v[\d\w.-]+\]\s*—\s*bump with `[^`]+` \+ `[^`]+`\./,
+          `Version lockstep: [frame-ship v${targetVersion}] — bump with \`plugins/opencode/frame-ship.ts\` + \`plugins/antigravity/hooks/context-inject.ts\`.`
+        );
+        updated = updated.replace(
           /Stack: 1 TS runtime \(\d+ lines, v[\d\w.-]+\)/,
           `Stack: 1 TS runtime (${runtimeLines} lines, v${targetVersion})`
         );
