@@ -59,7 +59,7 @@ Or via CLI:
 opencode plugin add github:deuriib/frame-ship
 ```
 
-Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.7.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.8.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
 Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
 
@@ -205,7 +205,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.7.0"],
+  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.8.0"],
 }
 ```
 
@@ -223,7 +223,7 @@ Project structure:
 │   ├── format-note.ts            # PostToolUse observer → {} (bun)
 │   └── fixtures/                 # replay vectors (allow/deny/secret/{}/first/compact)
 ├── rules/
-│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.7.0
+│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.8.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── plugins/
 │   └── opencode/

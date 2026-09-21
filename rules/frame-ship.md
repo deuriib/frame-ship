@@ -339,4 +339,4 @@ Signed commits. Signed artifacts. Provenance.
 
 No unmaintained libraries.
 
-Version lockstep: [frame-ship v0.7.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.
+Version lockstep: [frame-ship v0.8.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.

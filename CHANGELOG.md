@@ -5,14 +5,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.8.0] — 2026-09-21
+
 ### Added
 
 - Canonical repository-local agent subsystem in `/agents` containing 31 structured agent definitions across 4 architectural tiers:
-  - Tier 1: 1 Orchestrator (`orchestrator.md` / `montilla`) as primary chain entry and sole dispatcher.
-  - Tier 2: 8 Domain Owners (`vasquez.md`, `barrera.md`, `dauhajre.md`, `subero.md`, `vera.md`, `santana.md`, `montero.md`, `espinoza.md`) governing domain chain execution and gates without direct craft code editing.
-  - Tier 3: 8 Fused Domain Specialists (`engineering-specialist.md`, `security-specialist.md`, `finance-specialist.md`, `legal-specialist.md`, `marketing-specialist.md`, `people-specialist.md`, `revenue-specialist.md`, `automation-specialist.md`) consolidating previous 70+ fragmented micro-roles into 1 authoritative craftsman per domain.
-  - Tier 4: 14 Methodological Quality Gate Reviewers (7 engineering wave + 7 domain gate auditors) with strictly read-only tool profiles.
-- Mathematical least privilege enforced across all agents via YAML frontmatter `tools: [...]` and explicit body directives; leadership and reviewer tiers strictly isolated from code editing and command execution tools.
+  - Tier 1: 1 Orchestrator (`orchestrator.md` / `montilla`) as primary chain entry (`mainAgent: true`) and sole dispatcher.
+  - Tier 2: 8 Domain Owners (`vasquez.md`, `barrera.md`, `dauhajre.md`, `subero.md`, `vera.md`, `santana.md`, `montero.md`, `espinoza.md`) governing domain chain execution and gates (`mainAgent: true`, `subagent: true`).
+  - Tier 3: 8 Fused Domain Specialists (`engineering-specialist.md`, `security-specialist.md`, `finance-specialist.md`, `legal-specialist.md`, `marketing-specialist.md`, `people-specialist.md`, `revenue-specialist.md`, `automation-specialist.md`) consolidating previous 70+ fragmented micro-roles into 1 authoritative craftsman per domain (`subagent: true`).
+  - Tier 4: 14 Methodological Quality Gate Reviewers (7 engineering wave + 7 domain gate auditors) with independent verification roles (`subagent: true`).
+- Universal File Authoring: Enabled `write_to_file` and `replace_file_content` across all 31 agents in `agents/` ensuring all roles can author artifacts, specifications, audit findings, and reports, while command execution (`run_command`) remains strictly restricted to authorized execution specialists (`engineering-specialist`, `automation-specialist`, `quality-assurance`).
+- Comprehensive rename of QA to `quality-assurance`: Renamed `agents/qa.md` to `agents/quality-assurance.md`, renamed `skills/quality-gate/references/engineering/qa-review.md` to `quality-assurance-review.md`, and updated all routing tables, checklists, and gate report templates across `skills/` and `agents/`.
 - Formally recorded architectural decision `ADR-010-canonical-agents-roster.md` in `docs/specs/12_adr/` and updated `docs/specs/10_design/ARCHITECTURE.md` to v1.1 formalizing invariants INV-009 through INV-012.
 
 ### Changed

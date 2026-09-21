@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.7.0 — Frame→Ship plugin (single-file, zero deps, V2-only).
+ * frame-ship v0.8.0 — Frame→Ship plugin (single-file, zero deps, V2-only).
  * Chain: see CHAIN const (single source of truth for order).
  * Skills: ./skills/<stage>/SKILL.md. Location: plugins/opencode/frame-ship.ts.
  * Install: explicit `plugins: ["./plugins/opencode/frame-ship.ts"]` (a root-level
@@ -9,7 +9,7 @@
 
 import { Plugin, type Skill } from "@opencode/plugin";
 
-const VERSION = "0.7.0";
+const VERSION = "0.8.0";
 const MARKER = `[frame-ship v${VERSION}]`;
 
 const CHAIN =

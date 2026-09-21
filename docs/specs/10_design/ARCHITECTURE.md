@@ -88,6 +88,10 @@ The following invariants are inviolable and must be enforced by all stages, doma
 - **INV-006 (Parallel Worktree Bound):** Concurrent execution lanes under `git-worktree` must not exceed 2 live worktrees at any time (`max 2 parallel lanes`). Each worktree must have an isolated branch and must be cleaned up post-handoff.
 - **INV-007 (Historical Immutability):** Historical records (`docs/specs/50_archive/`, prior `BRIEF-*.md` files, past ADRs `ADR-001` through `ADR-008`, and historical gate evaluations) are immutable audit trails and must never be altered retroactively.
 - **INV-008 (Singleton Working File Discipline):** Working files per lane (`PROPOSED_CHANGES.md`, `IMPLEMENTATION_PLAN.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACTS.md`, `GATE_REPORT.md`, `HANDOFF.md`, `RELEASE_NOTES.md`) are strict singletons. Creating suffixed variants (e.g., `ARCHITECTURE-*.md`) is strictly forbidden.
+- **INV-009 (Universal File Authoring & Scoped Execution):** All agents in `/agents` possess file editing capabilities (`write_to_file`, `replace_file_content`) to author domain specifications, reports, and documentation. Terminal command execution (`run_command`) remains strictly restricted to designated execution specialists (`engineering-specialist`, `automation-specialist`, `quality-assurance`).
+- **INV-010 (Domain Specialist Fusion):** Each of the 8 canonical domains possesses exactly one unified Fused Domain Specialist consolidating the domain's craft roles into one authoritative practitioner.
+- **INV-011 (Universal Creed & Conduct Binding):** Every agent file in `/agents` must embed the foundational Creed (*"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*) and the non-negotiable conduct rules from `rules/frame-ship.md`.
+- **INV-012 (Single Dispatcher Discipline):** Only the Orchestrator dispatches tasks to the team; peer specialists never dispatch sideways.
 
 ---
 

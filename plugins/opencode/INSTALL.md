@@ -69,7 +69,7 @@ Notes:
    `frame-ship` with `status: active`.
 3. `opencode api get "/api/skill?location[directory]=<your-project>"` lists all
    13 `frame-ship:*` skills (`using-frame-ship`, 9 stages, 3 supporting).
-4. Start any session — the system prompt contains `[frame-ship v0.7.0]`
+4. Start any session — the system prompt contains `[frame-ship v0.8.0]`
    (workflow card + guardrails + pointers + `using-frame-ship` bootstrap).
 
 ```bash
