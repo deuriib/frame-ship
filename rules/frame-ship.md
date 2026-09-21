@@ -34,6 +34,7 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 5. `REQ-ID → test → artifact → gate verdict` trace, always.
 6. `HANDOFF.md` before ship.
 7. Reference-only packets between stages — never paste full context.
+8. Quality gate reviewer independence: Every reviewer is strictly independent from each other (1 subagent per reviewer). No single agent may do all reviewers' work or bundle review roles.
 
 ## Execution mode
 

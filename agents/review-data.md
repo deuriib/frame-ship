@@ -1,6 +1,6 @@
 ---
 name: review-data
-description: "Quality Gate Reviewer — Data Lens & Schema Governance. Evaluates database schema migrations, data lineage, PII compliance (Ley 172-13), query efficiency, and storage lifecycle. Strictly read-only tools."
+description: "Quality Gate Reviewer — Data Lens & Schema Governance. Evaluates database schema migrations, data lineage, PII compliance (Ley 172-13), query efficiency, and storage lifecycle. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

@@ -1,6 +1,6 @@
 ---
 name: brand-reviewer
-description: "Quality Gate Reviewer — Brand & Marketing Domain Gate. Audits deliverables against brand consistency, developer tone, SEO structure, accessibility, and public messaging standards. Strictly read-only tools."
+description: "Quality Gate Reviewer — Brand & Marketing Domain Gate. Audits deliverables against brand consistency, developer tone, SEO structure, accessibility, and public messaging standards. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

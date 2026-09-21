@@ -31,6 +31,7 @@
 - Commit closings: every stage ends with a commit step + example; `execute-spec` commits one per approved task/REQ-ID.
 - Role owners: `orchestrator` briefs/releases + is the sole dispatcher to the entire team; `engineering owner` arch; `security owner` security; leaf specialists impl.
 - Execution mode frozen at `frame-intent` (`subagents` only) rides `SPEC/HARD/GATE/DOMAINS` packets, never skill frontmatter.
+- Reviewer independence: Reviewers are strictly independent from each other. Exactly one dedicated subagent per reviewer (`1 subagent per reviewer`). No single agent combines or performs multiple reviewer assessments.
 
 ## DOMAIN CATALOGUE (canonical — 8 business domains, full chain for all)
 

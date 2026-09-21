@@ -1,6 +1,6 @@
 ---
 name: revenue-reviewer
-description: "Quality Gate Reviewer — Revenue Domain Gate. Audits deliverables against customer value delivery, transparent pricing, conversion funnel health, and sustainable commercial alignment. Strictly read-only tools."
+description: "Quality Gate Reviewer — Revenue Domain Gate. Audits deliverables against customer value delivery, transparent pricing, conversion funnel health, and sustainable commercial alignment. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

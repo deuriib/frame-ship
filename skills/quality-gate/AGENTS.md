@@ -19,6 +19,7 @@ Only stage with a waiver path; all other stages block without override.
 - Verdict row shape: `| Domain | Reviewer | Verdict | Findings | Artifact |` (`gate-report.md:9-18`).
 - Waiver requires domain owners + orchestrator sign-off block; `CONDITIONAL` needs `COND-00x` checklist cleared.
 - Engineering refs: `readability/reliability/refuter/resilience/quality-assurance-review.md`; domains: `finance/legal/marketing/people/security/data/revenue/automation-review.md` + `ops-review.md` lens.
+- Reviewer independence: Reviewers are strictly independent from each other. Exactly one subagent per reviewer (`1 subagent per reviewer`). No single agent may do all reviewers' work or combine review roles.
 
 ## NOTES
 - Largest skill dir (18 files: SKILL + AGENTS + gate-report + waiver + 5 engineering + 9 domains); only one with `engineering/` + `domains/` split — don't flatten.
@@ -28,3 +29,4 @@ Only stage with a waiver path; all other stages block without override.
 - Handoff with unverified `CONDITIONAL` conditions.
 - Overriding a verdict as gate keeper — escalate to `orchestrator` instead.
 - Flattening `engineering/` + `domains/` into one dir — routing table depends on split.
+- Bundling multiple reviewer roles into a single subagent — strictly prohibited; each reviewer must run as an independent, isolated subagent.

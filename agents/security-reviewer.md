@@ -1,6 +1,6 @@
 ---
 name: security-reviewer
-description: "Quality Gate Reviewer — Security Domain Gate. Audits deliverables against OWASP Top 10, STRIDE threat models, secret leak scans, and authentication/authorization invariants. Strictly read-only tools."
+description: "Quality Gate Reviewer — Security Domain Gate. Audits deliverables against OWASP Top 10, STRIDE threat models, secret leak scans, and authentication/authorization invariants. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

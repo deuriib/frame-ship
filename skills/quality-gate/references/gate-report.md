@@ -73,6 +73,7 @@ Masking reminder rides every export.
 - [ ] Stage skill loaded: `skill(<stage>)` cited (name + trigger match)
 - [ ] Domain owner/specialist role understood: domain role cited (dispatched role only)
 - [ ] Execution mode declared: `subagents` (max 2, read orders in prompt)
+- [ ] Reviewer independence verified: strictly 1 dedicated subagent per reviewer; zero bundled reviews across multiple domains or wave criteria
 - [ ] Packet intact: `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — no full-context paste
 - Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate orchestrator).
 

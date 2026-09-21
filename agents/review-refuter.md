@@ -1,6 +1,6 @@
 ---
 name: review-refuter
-description: "Quality Gate Reviewer — Adversarial Refuter. Acts as the devil's advocate before QA. Actively seeks boundary flaws, unstated assumptions, and edge cases to break the implementation. Strictly read-only tools."
+description: "Quality Gate Reviewer — Adversarial Refuter. Acts as the devil's advocate before QA. Actively seeks boundary flaws, unstated assumptions, and edge cases to break the implementation. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

@@ -92,6 +92,7 @@ The following invariants are inviolable and must be enforced by all stages, doma
 - **INV-010 (Domain Specialist Fusion):** Each of the 8 canonical domains possesses exactly one unified Fused Domain Specialist consolidating the domain's craft roles into one authoritative practitioner.
 - **INV-011 (Universal Creed & Conduct Binding):** Every agent file in `/agents` must embed the foundational Creed (*"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*) and the non-negotiable conduct rules from `rules/frame-ship.md`.
 - **INV-012 (Single Dispatcher Discipline):** Only the Orchestrator dispatches tasks to the team; peer specialists never dispatch sideways.
+- **INV-013 (Independent Reviewer Subagents):** Within `quality-gate`, reviewers are strictly independent from each other. The Orchestrator must dispatch exactly one dedicated subagent per reviewer role (`1 subagent per reviewer`). No single agent may perform the work of multiple reviewers or combine reviewer assessments into a bundled review session.
 
 ---
 

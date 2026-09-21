@@ -1,6 +1,6 @@
 ---
 name: review-readability
-description: "Quality Gate Reviewer — Readability & Simplicity. Evaluates code clarity, naming conventions, minimal complexity, docstrings, and adherence to clean coding standards. Strictly read-only tools."
+description: "Quality Gate Reviewer — Readability & Simplicity. Evaluates code clarity, naming conventions, minimal complexity, docstrings, and adherence to clean coding standards. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

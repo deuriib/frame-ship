@@ -28,6 +28,7 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 - **Bound to:** orchestrator dispatches all gate reviewers; owning domain owner acts as gate keeper (engineering owner for engineering, else
   the domain owner); orchestrator synthesizes multi-domain gates.
 - Reviewers are domain specialists who understand their domain's review criteria and never approve their own work.
+- **Reviewer Independence (1 Subagent per Reviewer):** Reviewers are strictly independent from each other. No single agent does the work of all or multiple reviewers. The orchestrator dispatches exactly one dedicated subagent per reviewer role (`1 subagent per reviewer`). Bundling reviewer roles into a single subagent is strictly prohibited.
 
 ## 3. Reviewer Routing Table
 
@@ -53,7 +54,7 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 
 0. Pre-flight LOAD — HARD STOP: `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
 1. Identify touched domains from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
-2. Dispatch each required reviewer via orchestrator (reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first).
+2. Dispatch each required reviewer via orchestrator as a separate, independent subagent (strictly 1 subagent per reviewer; reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first). No single agent may perform the work of multiple reviewers or combine reviewer audits.
 3. Each reviewer create-if-missing else update-in-place `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. Consolidate into `GATE_REPORT.md` via `references/gate-report.md` create-if-missing else update-in-place.
 5. Any ❌ → gate CLOSED. Any ⚠️ → CONDITIONAL (conditions must clear).
@@ -93,10 +94,11 @@ proof surfaces same session. Exit-terminal (COND-P5-shared): `exit/salir` at C3 
 - Open a gate with any ❌ verdict (only domain owners + orchestrator waive).
 - Allow handoff with unverified conditions.
 - Skip reviewers for a touched domain or override a verdict myself.
+- Allow a single agent to conduct multiple reviewers' work (strictly 1 subagent per reviewer; no bundled reviews).
 
 ## 6. References
 
 - `references/gate-report.md` — Consolidated verdicts + conditions.
 - `references/waiver-template.md` — Domain owners + orchestrator override record.
-- `references/engineering/` — readability, reliability, refuter, resilience, quality-assurance checklists.
+- `references/engineering/` — readability, reliability, refuter, resilience, risk, quality-assurance checklists.
 - `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.

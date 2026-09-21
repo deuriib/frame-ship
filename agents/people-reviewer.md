@@ -1,6 +1,6 @@
 ---
 name: people-reviewer
-description: "Quality Gate Reviewer — People & Culture Domain Gate. Audits deliverables and agent definitions against cultural guardrails, the foundational Creed, Active Mentorship, Dominican Warmth, and team collaboration rules. Strictly read-only tools."
+description: "Quality Gate Reviewer — People & Culture Domain Gate. Audits deliverables and agent definitions against cultural guardrails, the foundational Creed, Active Mentorship, Dominican Warmth, and team collaboration rules. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file

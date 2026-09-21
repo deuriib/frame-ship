@@ -1,6 +1,6 @@
 ---
 name: review-resilience
-description: "Quality Gate Reviewer — Resilience & Fault Tolerance. Evaluates timeout handling, circuit breakers, fallback mechanics, graceful degradation, and retry backoff. Strictly read-only tools."
+description: "Quality Gate Reviewer — Resilience & Fault Tolerance. Evaluates timeout handling, circuit breakers, fallback mechanics, graceful degradation, and retry backoff. Authorized for repository inspection and review report authoring."
 subagent: true
 tools:
   - view_file
