@@ -28,4 +28,4 @@ Chain outputs only: `briefs/` (intent) → `specs/` (numbered lifecycle). No pro
 - Landing finished work directly in `40_workspace/` without promoting to its lifecycle number.
 - Mixing `BRIEF-` (intent) into `specs/` or `SPEC-/REQ-` (contract) into `briefs/`.
 - Committing secrets/PII in any artifact — mask before writing (privacy rules ride every export).
-- Quoting full specs across stages — link by `SPEC/HARD/GATE/DOMAINS` reference, never paste.
+- Quoting full specs across stages — link by `SPEC/HARD/GATE/DOMAINS` reference (`HARD:subagents+...`), never paste.

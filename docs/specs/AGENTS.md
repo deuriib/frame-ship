@@ -15,7 +15,7 @@ specs/
 | Stage | Dir | Holds |
 |-------|-----|-------|
 | Design | `10_design/` | `ARCHITECTURE.md`, design contracts |
-| ADR | `12_adr/` | `ADR-001..008`; architectural decision records |
+| ADR | `12_adr/` | `ADR-001..009`; architectural decision records |
 | Requirements | `15_requirements/` | `REQ-single-dispatcher-{engineering,people}.md`; `REQ-F/NF-001` IDs |
 | Backlog | `20_backlog/` | `SPEC-###-*.md`; approved specs saved here before and during implementation |
 | Delivery | `30_delivery/` | `RELEASE_NOTES.md`; `ship-release` canonical output |

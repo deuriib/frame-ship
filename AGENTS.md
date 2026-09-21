@@ -45,7 +45,7 @@ Resolvers: `resolveSkillsDir()` from own `import.meta.url` (fallback `directory|
 - Every SKILL body: `# Title — Sub` + creed quote `> *"Haces las cosas..."* + `1.Purpose/2.Chain/2b.Role/3.Process/4.Won't do/5.References` (`quality-gate`inserta`3.Routing Table`, desplaza resto a `§5/§6`).
 - Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `ADR-XXX`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
 - Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
-- Reference-only packets: `SPEC/HARD/GATE/DOMAINS` between stages; retry N=2 → escalate orchestrator, no 3rd loop.
+- Reference-only packets: `SPEC/HARD/GATE/DOMAINS` (`HARD:subagents+<constraints>`) between stages; retry N=2 → escalate orchestrator, no 3rd loop.
 - Version bump triple: header comment + `VERSION` + `MARKER` juntos.
 - Skills reference naming convention: `frame-ship:<stage>` (no `frame-ship:` prefix in SKILL frontmatter `name`).
 
