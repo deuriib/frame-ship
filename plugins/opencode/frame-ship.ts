@@ -322,9 +322,9 @@ Signed commits. Signed artifacts. Provenance.
 No unmaintained libraries.
 `;
 
-const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-15) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
+const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-15) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}. Subagents: Always use subagents as much as possible proactively, this is no negotiable, based on session context and metions about it.`;
 
-const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
+const COMPACTION_REMINDER = `${MARKER} Compaction: re-load using-frame-ship, then stage skill BEFORE resume. Chain: ${CHAIN}. Subagents: Always use subagents as much as possible proactively, this is no negotiable, based on session context and metions about it. Keep REQ→test→artifact, verdicts, stage. No skill=STOP. No code w/o proposal. No handoff on CLOSED.`;
 
 // V2 system parts are {type:"text",text} objects (not strings). Accept both
 // so idempotency holds across context + compaction hooks and retries.
