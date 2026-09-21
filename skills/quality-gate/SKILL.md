@@ -45,7 +45,7 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 
 A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Domains-touched` comes from the spec packet; data lens attaches to any spec with schema/lineage/PII-store impact.
 
-Execution mode (from spec `execution_mode`): `multi-subagents` only — full wave per routing table below + adversarial `review-refuter` before `qa` (full-wave único, no min-gate). Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
+Execution mode (from spec `execution_mode`): `subagents` only — full wave per routing table below + adversarial `review-refuter` before `qa` (full-wave único, no min-gate). Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 
 Each reviewer understands their domain's review criteria. The orchestrator dispatches reviewers who understand their domain's practices.
 
