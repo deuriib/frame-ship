@@ -43,6 +43,6 @@ Execution is subagents only — the natural process: orchestrator dispatches the
 ## Guardrails for Software Development and Beyond
 
 These guardrails are non‑negotiable. Violations block progress, trigger escalation, and require remediation with evidence.
-Separated into [`rules/gaurdrails.md`](gaurdrails.md) (also accessible via [`rules/guardrails.md`](guardrails.md)).
+Separated into [`rules/guardrails.md`](guardrails.md).
 
 Version lockstep: [frame-ship v0.8.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.
