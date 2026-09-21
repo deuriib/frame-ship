@@ -15,7 +15,7 @@ test → artifact traceability. Scope expansion requires a new proposal.
 ## 2. Chain Contract
 
 - Previous: frame-ship:propose-changes (+ frame-ship:review-security / frame-ship:review-architecture approvals)
-- Supporting: (multi-subagents) frame-ship:git-worktree
+- Supporting: (subagents) frame-ship:git-worktree
 - Next: frame-ship:quality-gate | (optional before review) frame-ship:pull-request
 
 ## 2b. Role Binding (Org)
@@ -26,8 +26,8 @@ test → artifact traceability. Scope expansion requires a new proposal.
 
 ## 3. Process
 
-0. Pre-flight LOAD — HARD STOP: `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP. Execution is multi-subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
-1. Confirm all required approvals are recorded and read `execution_mode` (`multi-subagents`, frozen at frame-intent; overridden per SPEC only with CEO waiver) + `DOMAINS` from spec/proposal.
+0. Pre-flight LOAD — HARD STOP: `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP. Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
+1. Confirm all required approvals are recorded and read `execution_mode` (`subagents`, frozen at frame-intent; overridden per SPEC only with CEO waiver) + `DOMAINS` from spec/proposal.
 2. Create implementation plan via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations). Singleton: the single `IMPLEMENTATION_PLAN.md` per lane — create-if-missing else update-in-place, never `IMPLEMENTATION_PLAN-*.md`.
 3. Dispatch: orchestrator dispatches entire team; domain owners/specialists do the work or brief back — each prompt orders the specialist to understand their domain role BEFORE acting; cross-domain need → formal Cross-domain request brief to orchestrator, who delegates or resolves; no sideways dispatch. Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 4. Execute only targets in the approved change list (files AND non-code targets — no external sends/filings/launches beyond approval).
