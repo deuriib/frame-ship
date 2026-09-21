@@ -22,11 +22,200 @@ Triggers→skill: start/what-skills→frame-ship:using-frame-ship | initiative/O
 Hard rules: 1.no code w/o proposal 2.security review auth/data/API 3.ADR for contracts 4.no handoff on CLOSED w/o waiver 5.REQ→test→artifact→verdict 6.HANDOFF before ship 7.reference-only packets. Detail: skills/*/SKILL.md.`;
 
 // Short-form guardrails: every rule 1-14 present, greppable by number, same meaning. Full text: AGENTS.md.
-const GUARDRAILS_FULL = `${MARKER} Guardrails (BEFORE dispatch, AFTER verify; full text: AGENTS.md):
-Security: 1.Deny default; no secret/token/credential/session in code/config/logs/examples/events; finding w/o proof(diff/scan/log)=REFUTED. 2.OWASP: screen injection, broken authN/Z, data exposure, insecure deps, missing access; new endpoints/adapters/boundaries/payloads=trust boundaries. 3.Least privilege: minimum scope per interface/key/role/automation; wide/cross-tenant=findings. 4.No freelance fixes: never rotate keys/patch prod/widen perms; report severity+location, owner remediates.
-Privacy (Ley 172-13): 5.Minimization: minimum PII; map flow source→store→log→third party. 6.Boundary hygiene: every port/adapter/event/log/prompt=PII checkpoint; mask/tokenize, allowlists. 7.Retention: every PII store declares purpose+TTL+deletion; purge expired post-snapshot. 8.Scoped export: PASS exports allowlisted evidence only; never full dump/PII in shares/lessons/bridge.
-Severity: 9.Critical(exploitable/prod/loss),High(probable),Medium(conditional),Low(hygiene). 10.Critical/High surface same session+severity+evidence+owner; Med/Low ride gate. 11.Residual explicit: APPROVE+conditions lists risk+owner; no silent PASS.
-Conduct: 12.No sugarcoating. 13.No busywork theater—guards earn keep or die. 14.Respect attention—one point/paragraph; state assumptions on irreversible. FAIL→retry N=2 differently→escalate orchestrator. No 3rd loop, no sideways. 15.Use work-unit commits.`;
+const GUARDRAILS_FULL = `${MARKER} Guardrails for Software Development and Beyond (BEFORE dispatch, AFTER verify):
+These guardrails are non‑negotiable. Violations block progress, trigger escalation, and require remediation with evidence. They apply across all domains below.
+
+Software Development Core
+Work‑unit commits: Atomic, single‑purpose commits. Each commit references a ticket/issue. No mixing refactors with features. Commit messages: type(scope): subject (Conventional Commits).
+
+Branching: Short‑lived feature branches. Rebase before merge. No direct pushes to main.
+
+Code review: Every change requires at least one peer review. Reviewers check for security, privacy, performance, and tests. No self‑merge.
+
+CI/CD: All builds pass automated checks (lint, test, security scan, license scan). Fail on Critical/High findings. No manual overrides without written approval.
+
+Dependencies: Pin versions. Scan for CVEs daily. No unmaintained libraries. License compatibility verified.
+
+Secrets: Never in code, config, logs, examples, events, or commits. Use a vault or environment variables. Rotate regularly. Scan commits pre‑push.
+
+Security
+Deny by default: All access is denied unless explicitly allowed. Fail closed.
+
+No secrets/credentials/sessions in code, config, logs, examples, events, or prompts. Finding without proof (diff/scan/log) = REFUTED.
+
+OWASP Top 10 screen: Injection, broken authN/Z, data exposure, insecure deps, missing access control. Every new endpoint, adapter, boundary, or payload is a trust boundary—validate input, encode output.
+
+Least privilege: Per interface, key, role, automation. Short‑lived credentials. MFA for human access.
+
+Secure defaults: TLS everywhere. Strong cipher suites. HSTS. CSP. No debug in prod.
+
+No freelance fixes: Report severity + location + owner. Owner remediates. No unsolicited changes.
+
+SAST/DAST/SCA in CI. Pen test annually or on major changes.
+
+Privacy (Ley 172‑13)
+Minimization: Collect only what is necessary. Purpose limitation.
+
+PII checkpoints: Every port, adapter, event, log, prompt, export. Mask/tokenize. Allowlists only.
+
+Every PII store declares purpose, TTL, deletion procedure. Automated enforcement.
+
+PASS exports carry allowlisted evidence only. No raw PII.
+
+Data subject rights: Access, rectification, erasure, objection. Respond within legal timeframe.
+
+Cross‑border transfers: Only to approved jurisdictions with adequate protection.
+
+DPIA for high‑risk processing. Privacy by design and default.
+
+Breach notification: Within 72 hours to authorities and affected parties.
+
+Severity
+Critical: Exploitable, production impact, data loss. Fix immediately. Block release.
+
+High: Probable exploit or major impact. Fix before next release.
+
+Medium: Conditional impact. Schedule within sprint.
+
+Low: Hygiene. Backlog.
+
+Critical/High surface same session with severity + evidence + owner. Residual risk explicit. No silent PASS.
+
+Accepted risks documented with owner, justification, expiry.
+
+Conduct
+No sugarcoating. State facts. One point per paragraph. Respect attention.
+
+No busywork theater. Every action must have clear value.
+
+Assumptions on irreversible calls stated explicitly before action.
+
+FAIL → retry N=2 differently → escalate. No third loop, no sideways.
+
+Blameless post‑mortems. Own mistakes. Ask for help early. No heroics.
+
+Document decisions. ADRs for architecture. Comments for complex logic.
+
+Respect deadlines. No scope creep. Flag risks early.
+
+Architecture
+ADRs for every significant decision. Context, options, decision, consequences.
+
+Modular, loosely coupled, highly cohesive. Clear boundaries.
+
+Design for failure: Circuit breakers, retries with backoff, timeouts, bulkheads.
+
+No single points of failure. Redundancy where needed.
+
+API versioning. Contract‑first. OpenAPI/AsyncAPI specs.
+
+Scalability, maintainability, observability considered from day one.
+
+Testing
+Test pyramid: Unit > Integration > E2E. Fast, isolated, deterministic.
+
+Coverage: Minimum 80% for critical paths. Mutation testing for core logic.
+
+No flaky tests. Quarantine and fix within 24h.
+
+Security tests: SAST, DAST, dependency scan, secret scan. Pen test annually.
+
+Performance tests: Load, stress, soak before major releases.
+
+Accessibility tests: Automated + manual (WCAG 2.1 AA).
+
+Test data: No PII. Synthetic or anonymized only.
+
+Documentation
+README: Setup, usage, architecture, contribution.
+
+API docs: OpenAPI/Swagger, up‑to‑date.
+
+Runbooks: For operations, incidents, rollbacks.
+
+Changelog: Keep a Changelog format.
+
+Inline comments: For why, not what. Complex logic explained.
+
+Diagrams: C4 model or similar. Updated with architecture changes.
+
+Performance
+SLOs/SLIs defined for all user‑facing services.
+
+Load testing before release. Baseline and track regressions.
+
+Optimize critical paths. Caching, indexing, query optimization.
+
+Monitor latency, throughput, error rates. Alert on SLO breach.
+
+Reliability
+Error budgets. Balance innovation and stability.
+
+Chaos engineering in staging. Graceful degradation.
+
+Backups tested regularly. Disaster recovery plan documented and rehearsed.
+
+Monitoring/alerting for all services. On‑call rotation.
+
+Incident management: Severity levels, communication plan, post‑mortems.
+
+Accessibility
+WCAG 2.1 AA compliance. Keyboard navigable. Screen reader compatible.
+
+Color contrast ≥ 4.5:1. Alt text for images. ARIA labels where needed.
+
+No accessibility regressions. Automated checks in CI.
+
+Internationalization
+Externalize all strings. No hardcoded user‑facing text.
+
+Support RTL layouts. Locale‑aware formatting (dates, numbers, currency).
+
+Unicode support. Timezone handling in UTC, display in local.
+
+Translation workflow with version control.
+
+Data Management
+Data lifecycle: Ingestion, storage, processing, archival, deletion.
+
+Data quality checks at ingestion. Lineage tracked.
+
+Backup and recovery for all data stores. Test restores.
+
+Data governance: Ownership, classification, retention policies.
+
+AI/ML
+Ethical AI: Fairness, bias mitigation, transparency.
+
+Explainability for critical decisions. Human‑in‑the‑loop where needed.
+
+Model versioning. Reproducible training. Data privacy in training.
+
+Monitoring for drift. Retraining triggers. Fallback to safe default.
+
+No PII in prompts unless explicitly approved and masked.
+
+Incident Response
+Severity levels defined. On‑call rotation. Escalation paths.
+
+Runbooks for common incidents. Communication templates.
+
+Post‑mortems blameless, action items tracked.
+
+Breach notification per legal requirements.
+
+General
+Automate everything possible. Manual steps are error‑prone.
+
+Infrastructure as Code. Versioned, reviewed, tested.
+
+Environment parity. Dev, staging, prod as similar as possible.
+
+Feature flags for safe rollouts. Kill switches.
+
+Observability: Logs, metrics, traces. Correlated IDs.
+
+Cost awareness. Monitor cloud spend. Optimize regularly.`;
 
 const POINTERS = `${MARKER} Truth: AGENTS.md (creed, guardrails 1-15) > skills/<stage>/SKILL.md+references/. Entry frame-intent; close ship-release (lessons on PASS). Chain: ${CHAIN}.`;
 
