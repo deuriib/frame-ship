@@ -384,6 +384,69 @@ function resolveSkillsDir(fallbackBase: string): string {
   return `${fallbackBase.replace(/[/\\]+$/, "")}/skills`;
 }
 
+// Agents live at <repo-root>/agents/ next to <repo-root>/plugins/opencode/.
+// Same resolution contract as skills: relative to our own import.meta.url so
+// package installs work from ANY cwd; fallbackBase only when URL unavailable.
+function resolveAgentsDir(fallbackBase: string): string {
+  try {
+    const meta = import.meta as unknown as { url?: string };
+    const url = meta?.url;
+    if (typeof url === "string" && url.startsWith("file:")) {
+      const filePath = fileUrlToPath(url);
+      if (filePath) {
+        const parts = filePath.split("/");
+        if (
+          parts.length >= 4 &&
+          parts[parts.length - 3] === "plugins" &&
+          parts[parts.length - 2] === "opencode"
+        ) {
+          const root = parts.slice(0, parts.length - 3).join("/") || "/";
+          return `${root.replace(/[/\\]+$/, "")}/agents`;
+        }
+      }
+    }
+  } catch {
+    // fall through to fallback
+  }
+  return `${fallbackBase.replace(/[/\\]+$/, "")}/agents`;
+}
+
+// Canonical roster: <repo-root>/agents/<id>.md. Hardcoded (no readdir helper)
+// so init I/O stays bounded — one small read per id, miss skipped, never cached.
+const AGENT_FILES = [
+  "orchestrator",
+  "barrera",
+  "dauhajre",
+  "subero",
+  "vera",
+  "santana",
+  "montero",
+  "vasquez",
+  "espinoza",
+  "engineering-specialist",
+  "security-specialist",
+  "finance-specialist",
+  "legal-specialist",
+  "marketing-specialist",
+  "people-specialist",
+  "revenue-specialist",
+  "automation-specialist",
+  "security-reviewer",
+  "finance-reviewer",
+  "legal-reviewer",
+  "people-reviewer",
+  "revenue-reviewer",
+  "automation-reviewer",
+  "brand-reviewer",
+  "quality-assurance",
+  "review-data",
+  "review-readability",
+  "review-refuter",
+  "review-reliability",
+  "review-resilience",
+  "review-risk",
+] as const;
+
 // Bounded init I/O: a read that never settles (hung handle, wedged mount)
 // must not stall setup. Every read races a small timeout — timeout wins →
 // miss ("", entry skipped, uncached so retry self-heals). Timer cleared on
@@ -443,6 +506,83 @@ async function readTextFile(path: string): Promise<string> {
   }
 }
 
+// Bun.write first, dynamic node:fs/promises fallback (no static node: import so
+// `tsc` stays clean without @types/node). Resolves false on failure —
+// provisioning is best-effort; the update transform below still enriches
+// manually-copied agents when writes are unavailable (read-only project).
+async function fileExists(path: string): Promise<boolean> {
+  try {
+    const bunFile = (
+      globalThis as unknown as {
+        Bun?: { file: (p: string) => { exists: () => Promise<boolean> } };
+      }
+    )?.Bun?.file;
+    if (typeof bunFile === "function") {
+      return await bunFile(path).exists();
+    }
+    // @ts-ignore — node types intentionally not installed; dynamic import only.
+    const fs = (await import("node:fs/promises")) as unknown as {
+      stat: (p: string) => Promise<unknown>;
+    };
+    await fs.stat(path);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function ensureDir(dir: string): Promise<boolean> {
+  try {
+    // @ts-ignore — node types intentionally not installed; dynamic import only.
+    const fs = (await import("node:fs/promises")) as unknown as {
+      mkdir: (p: string, opts: { recursive: boolean }) => Promise<unknown>;
+    };
+    await fs.mkdir(dir, { recursive: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writeTextFile(path: string, content: string): Promise<boolean> {
+  try {
+    const bunWrite = (
+      globalThis as unknown as { Bun?: { write: unknown } }
+    )?.Bun?.write;
+    if (typeof bunWrite === "function") {
+      await (bunWrite as (p: string, c: string) => Promise<unknown>)(
+        path,
+        content,
+      );
+      return true;
+    }
+    // @ts-ignore — node types intentionally not installed; dynamic import only.
+    const fs = (await import("node:fs/promises")) as unknown as {
+      writeFile: (p: string, c: string, enc: string) => Promise<void>;
+    };
+    await fs.writeFile(path, content, "utf8");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// FNV-1a 32-bit hex — zero-dep content hash so the provision manifest can tell
+// our generated files apart from user-customized ones.
+function hashText(text: string): string {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16).padStart(8, "0");
+}
+
+// YAML double-quote escaping for single-line frontmatter scalars.
+function yamlQuote(value: string): string {
+  return `"${(value || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+}
+
 // Skill frontmatter: name + description (same shape as agents; body kept whole
 // as Skill.Info.content — references stay file-based per scope).
 function parseSkillFile(raw: string): {
@@ -475,6 +615,280 @@ function parseSkillFile(raw: string): {
     return { name, description, content: (raw || "").trim() };
   }
   return { name: "", description: "", content: (raw || "").trim() };
+}
+
+// ---- Agents lane: frame-ship frontmatter → OpenCode V2 --------------------
+// Source of truth stays at <repo-root>/agents/*.md with frame-ship frontmatter:
+//   name, description, mainAgent?, subagent?, effort?, tools:[custom names]
+// OpenCode V2 wants: description, mode (primary|subagent|all), system (body),
+// steps, permissions:[{action, resource, effect}]. V2 renamed bash→shell and
+// task→subagent; `tools` boolean map is deprecated. This wrapper is the only
+// place that knows the translation — agents/*.md never carry V2 syntax.
+// V2 `AgentEditor` has no `add`, so setup() provisions V2-native discovery
+// files first (<project>/.opencode/agents/<id>.md → id), reloads the domain,
+// then updates in place only (missing ids are skipped). File discovery owns
+// id creation; the transform owns enrichment (mode/steps/permissions) + the
+// orchestrator default.
+interface ParsedAgent {
+  name: string;
+  description: string;
+  mainAgent: boolean;
+  subagent: boolean;
+  effort: string;
+  tools: string[];
+  system: string;
+}
+
+function stripQuotes(value: string): string {
+  const text = (value || "").trim();
+  if (
+    text.length >= 2 &&
+    ((text.startsWith('"') && text.endsWith('"')) ||
+      (text.startsWith("'") && text.endsWith("'")))
+  ) {
+    return text.slice(1, -1).trim();
+  }
+  return text;
+}
+
+function parseAgentFile(raw: string): ParsedAgent {
+  const empty: ParsedAgent = {
+    name: "",
+    description: "",
+    mainAgent: false,
+    subagent: false,
+    effort: "",
+    tools: [],
+    system: (raw || "").trim(),
+  };
+  const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
+  const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+  if (!fence) return empty;
+  const frontmatter = fence[1] || "";
+  const nameMatch = frontmatter.match(
+    /^\s*name\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+  );
+  const descMatch = frontmatter.match(
+    /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
+  );
+  const effortMatch = frontmatter.match(/^\s*effort\s*:\s*(\S+)\s*$/m);
+  const toolsBlock = frontmatter.match(/^\s*tools\s*:\s*(?:\r?\n|$)((?:\s*-\s*.*(?:\r?\n|$))*)/m);
+  const tools: string[] = [];
+  if (toolsBlock) {
+    for (const line of (toolsBlock[1] || "").split(/\r?\n/)) {
+      const item = line.match(/^\s*-\s*(\S+)\s*$/);
+      if (item) tools.push(item[1].trim());
+    }
+  }
+  const body = text.slice(fence[0].length).trim();
+  return {
+    name: stripQuotes(nameMatch?.[1] ?? nameMatch?.[2] ?? nameMatch?.[3] ?? ""),
+    description: stripQuotes(
+      descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "",
+    ),
+    mainAgent: /^\s*mainAgent\s*:\s*true\s*$/m.test(frontmatter),
+    subagent: /^\s*subagent\s*:\s*true\s*$/m.test(frontmatter),
+    effort: (effortMatch?.[1] || "").trim().toLowerCase(),
+    tools,
+    system: body,
+  };
+}
+
+// mainAgent+subagent → all (owners); mainAgent only → primary (orchestrator);
+// anything else → subagent (specialists, reviewers). Never defaults to primary
+// except for the explicit orchestrator shape, so a malformed flag fails closed.
+function toOpenCodeMode(
+  mainAgent: boolean,
+  subagent: boolean,
+): "primary" | "subagent" | "all" {
+  if (mainAgent && subagent) return "all";
+  if (mainAgent) return "primary";
+  return "subagent";
+}
+
+// effort → steps (V2 positive max). Unknown/missing → 8 (OpenCode doc example).
+function toOpenCodeSteps(effort: string): number {
+  if (effort === "high") return 12;
+  if (effort === "medium") return 8;
+  if (effort === "low") return 5;
+  return 8;
+}
+
+// Custom frame-ship tools → V2 permission actions. Only actions we explicitly
+// own are emitted; websearch/external_directory inherit the base policy.
+//   view_file|list_dir → read | find_by_name → glob | grep_search → grep
+//   write_to_file|replace_file_content → edit | run_command → shell
+//   invoke_subagent|manage_subagents|send_message → subagent
+//   ask_question → question | read_url_content → webfetch | skill → always allow
+// Least privilege in practice: shell allow only for 3 executors
+// (engineering/automation-specialist, quality-assurance), subagent allow only
+// for orchestrator+8 owners, question allow only for orchestrator, webfetch
+// allow only for 3 research specialists.
+function toOpenCodePermissions(
+  frameTools: string[],
+): Array<{ action: string; resource: string; effect: "allow" | "deny" }> {
+  const has = (name: string): boolean => frameTools.includes(name);
+  const read = has("view_file") || has("list_dir");
+  const edit = has("write_to_file") || has("replace_file_content");
+  const delegation = has("invoke_subagent") || has("manage_subagents") || has("send_message");
+  return [
+    { action: "read", resource: "*", effect: read ? "allow" : "deny" },
+    { action: "glob", resource: "*", effect: has("find_by_name") ? "allow" : "deny" },
+    { action: "grep", resource: "*", effect: has("grep_search") ? "allow" : "deny" },
+    { action: "edit", resource: "*", effect: edit ? "allow" : "deny" },
+    { action: "shell", resource: "*", effect: has("run_command") ? "allow" : "deny" },
+    { action: "subagent", resource: "*", effect: delegation ? "allow" : "deny" },
+    { action: "question", resource: "*", effect: has("ask_question") ? "allow" : "deny" },
+    { action: "webfetch", resource: "*", effect: has("read_url_content") ? "allow" : "deny" },
+    { action: "skill", resource: "*", effect: "allow" },
+  ];
+}
+
+interface ProvisionedAgent {
+  id: string;
+  displayName: string;
+  description: string;
+  mode: "primary" | "subagent" | "all";
+  steps: number;
+  hidden: boolean;
+  frameTools: string[];
+  system: string;
+}
+
+// Frame-ship tools → V2 Markdown permission map. Each V2 permission key gates
+// a category of tools; "allow" grants, "deny" blocks. Only explicitly listed
+// keys are emitted — omitted keys inherit the global config policy (last match
+// wins per V2 permission model).
+//   view_file|list_dir → read | find_by_name → glob | grep_search → grep
+//   write_to_file|replace_file_content → edit | run_command → bash
+//   invoke_subagent|manage_subagents|send_message → task
+//   ask_question → question | read_url_content → webfetch | skill → allow
+function toPermissionMap(
+  frameTools: string[],
+): Record<string, "allow" | "deny"> {
+  const has = (name: string): boolean => frameTools.includes(name);
+  return {
+    read: has("view_file") || has("list_dir") ? "allow" : "deny",
+    glob: has("find_by_name") ? "allow" : "deny",
+    grep: has("grep_search") ? "allow" : "deny",
+    edit: has("write_to_file") || has("replace_file_content") ? "allow" : "deny",
+    bash: has("run_command") ? "allow" : "deny",
+    task: has("invoke_subagent") || has("manage_subagents") || has("send_message")
+      ? "allow"
+      : "deny",
+    question: has("ask_question") ? "allow" : "deny",
+    webfetch: has("read_url_content") ? "allow" : "deny",
+    skill: "allow" as const,
+  };
+}
+
+// Serialize one agent to OpenCode V2 native markdown. Only keys V2 file
+// discovery recognizes (description/mode/steps/hidden/permission + body =
+// system). Frame-ship frontmatter (mainAgent/subagent/effort/custom tools) is
+// translated, never copied verbatim. Permissions are embedded in the
+// frontmatter `permission:` block so they survive V2's config reconciliation
+// (runtime editor.update() mutations are overwritten by the host). C-level
+// owners (mode "all") are emitted with `hidden: true` so dispatch flows
+// through the visible orchestrator entry point.
+function toAgentFileContent(agent: ProvisionedAgent): string {
+  const perm = toPermissionMap(agent.frameTools);
+  const permLines = Object.entries(perm)
+    .map(([k, v]) => `  ${k}: ${v}`)
+    .join("\n");
+  return [
+    "---",
+    `description: ${yamlQuote(agent.description)}`,
+    `mode: ${agent.mode}`,
+    `steps: ${agent.steps}`,
+    `hidden: ${agent.hidden}`,
+    "permission:",
+    permLines,
+    "---",
+    "",
+    agent.system.trim(),
+    "",
+  ].join("\n");
+}
+
+const PROVISION_MANIFEST = ".frame-ship.json";
+
+interface ProvisionManifest {
+  version: string;
+  files: Record<string, string>;
+}
+
+function parseManifest(raw: string): ProvisionManifest {
+  try {
+    const data = JSON.parse(raw || "") as Partial<ProvisionManifest>;
+    const files =
+      data && typeof data === "object" && data.files &&
+        typeof data.files === "object"
+        ? (data.files as Record<string, string>)
+        : {};
+    return {
+      version: typeof data.version === "string" ? data.version : "",
+      files,
+    };
+  } catch {
+    return { version: "", files: {} };
+  }
+}
+
+// Provision V2-native agent files into <project>/.opencode/agents/ so V2
+// file discovery registers one id per file (<id>.md → id). V2 `AgentEditor`
+// has no `add`, so without these files the update transform below has nothing
+// to enrich and no frame-ship agent ever appears. Policy: write missing files;
+// rewrite only our own stale files (content hash still matches the manifest
+// record from a previous version — user-customized files are never touched);
+// then the caller reloads the agent domain. Returns true when at least one
+// file was written. Best-effort: false on any I/O failure.
+async function provisionAgents(
+  projectDir: string,
+  agents: ProvisionedAgent[],
+): Promise<boolean> {
+  const clean = (projectDir || "").replace(/[/\\]+$/, "");
+  if (!clean || agents.length === 0) return false;
+  const dir = `${clean}/.opencode/agents`;
+  if (!(await ensureDir(dir))) return false;
+  const manifestPath = `${dir}/${PROVISION_MANIFEST}`;
+  const manifest = parseManifest(await readTextFile(manifestPath));
+  let wrote = false;
+  for (const agent of agents) {
+    const target = `${dir}/${agent.id}.md`;
+    const content = toAgentFileContent(agent);
+    const hash = hashText(content);
+    if (!(await fileExists(target))) {
+      if (!(await writeTextFile(target, content))) return false;
+      manifest.files[agent.id] = hash;
+      wrote = true;
+      continue;
+    }
+    const recorded = manifest.files[agent.id];
+    if (
+      recorded !== undefined && recorded === hashText(await readTextFile(target)) &&
+      manifest.version !== VERSION
+    ) {
+      // Our file from a previous version, untouched by the user → upgrade.
+      if (!(await writeTextFile(target, content))) return false;
+      manifest.files[agent.id] = hash;
+      wrote = true;
+    }
+    // Hash mismatch (user customized) or up to date → never touch.
+    if (recorded === undefined) {
+      // Unknown pre-existing file (e.g. manual copy) — adopt without rewrite
+      // so future version upgrades can refresh it if still untouched.
+      const current = hashText(await readTextFile(target));
+      if (current === hash) {
+        manifest.files[agent.id] = hash;
+        wrote = true;
+      }
+    }
+  }
+  if (wrote) {
+    manifest.version = VERSION;
+    await writeTextFile(manifestPath, JSON.stringify(manifest, null, 2));
+  }
+  return wrote;
 }
 
 // Live bootstrap: SKILL.md body only (references stay file-based per scope).
@@ -570,6 +984,91 @@ export default Plugin.define({
         });
       }
     }
+
+    // ---- Agents lane (provision + update-in-place, sync transforms) ----
+    // V2 `AgentEditor` has no `add`: ids are born in file discovery
+    // (<project>/.opencode/agents/<id>.md → id), never in the transform. So
+    // setup() first provisions V2-native files (with permission blocks that
+    // survive V2's config reconciliation) from the canonical agents/*.md,
+    // reloads the agent domain when anything was written, and then the sync
+    // transform enriches every discovered id in place (name/description/mode/
+    // system/steps/hidden).
+    // Permissions live exclusively in the markdown frontmatter — runtime
+    // editor.update() mutations for permissions are overwritten by the host.
+    const agentsDir = resolveAgentsDir(fallbackBase);
+    const pendingAgents: Array<{
+      id: string;
+      displayName: string;
+      description: string;
+      mode: "primary" | "subagent" | "all";
+      steps: number;
+      hidden: boolean;
+      frameTools: string[];
+      system: string;
+    }> = [];
+    if (agentsDir && agentsDir !== "/agents") {
+      for (const id of AGENT_FILES) {
+        const raw = await readTextFile(`${agentsDir}/${id}.md`);
+        if (!raw) continue;
+        const parsed = parseAgentFile(raw);
+        const displayName = parsed.name || id;
+        if (!parsed.system) continue;
+        const mode = toOpenCodeMode(parsed.mainAgent, parsed.subagent);
+        pendingAgents.push({
+          id,
+          displayName,
+          description: parsed.description || displayName,
+          mode,
+          steps: toOpenCodeSteps(parsed.effort),
+          // C-levels (the 8 owners, mode "all") stay out of the @ autocomplete
+          // menu — dispatch flows through orchestrator (primary, visible).
+          hidden: mode === "all",
+          frameTools: parsed.tools,
+          system: parsed.system,
+        });
+      }
+    }
+    if (pendingAgents.length > 0 && fallbackBase) {
+      let provisioned = false;
+      try {
+        provisioned = await provisionAgents(fallbackBase, pendingAgents);
+      } catch {
+        provisioned = false;
+      }
+      if (provisioned) {
+        try {
+          await ctx.agent.reload();
+        } catch {
+          // Best-effort: the update transform below still applies to whatever
+          // discovery has already loaded (e.g. manually-copied files).
+        }
+      }
+      await ctx.agent.transform((editor) => {
+        for (const a of pendingAgents) {
+          // Update only what discovery already loaded. Missing ids are skipped
+          // by design (fresh files arrive via the reload above). Permissions
+          // are intentionally NOT mutated here — they live in the markdown
+          // frontmatter and survive V2's host reconciliation.
+          if (editor.get(a.id) === undefined) continue;
+          editor.update(a.id, (agent) => {
+            agent.name = a.displayName as unknown as typeof agent.name;
+            agent.description = a.description || agent.description;
+            agent.mode = a.mode;
+            agent.system = a.system;
+            agent.steps = a.steps;
+            agent.hidden = a.hidden;
+          });
+        }
+      });
+    }
+    // Default entry point. Always registered (never gated on parse/provision
+    // success) and presence-guarded: orchestrator becomes default only when
+    // discovery knows it. Config equivalent: "default_agent": "orchestrator".
+    await ctx.agent.transform((editor) => {
+      if (editor.get("orchestrator") !== undefined) {
+        editor.default("orchestrator");
+      }
+    });
 
     // ---- System injection: agent loop ----
     const bootstrap = await loadBootstrapBody(skillsDir);
