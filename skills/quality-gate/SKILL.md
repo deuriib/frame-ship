@@ -33,7 +33,7 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 
 | Domain                    | Owner             | Reviewers                                                                                                            |
 | ------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| engineering               | engineering owner | review-readability, review-reliability, review-refuter, review-resilience, review-risk, qa, review-data (data specs) |
+| engineering               | engineering owner | review-readability, review-reliability, review-refuter, review-resilience, review-risk, quality-assurance, review-data (data specs) |
 | security                  | security owner    | security-reviewer                                                                                                    |
 | finance                   | finance owner     | finance-reviewer                                                                                                     |
 | legal                     | legal owner       | legal-reviewer                                                                                                       |
@@ -45,7 +45,7 @@ frame-ship:execute-spec → frame-ship:quality-gate → frame-ship:verify-handof
 
 A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Domains-touched` comes from the spec packet; data lens attaches to any spec with schema/lineage/PII-store impact.
 
-Execution mode (from spec `execution_mode`): `subagents` only — full wave per routing table below + adversarial `review-refuter` before `qa` (full-wave único, no min-gate). Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
+Execution mode (from spec `execution_mode`): `subagents` only — full wave per routing table below + adversarial `review-refuter` before `quality-assurance` (full-wave único, no min-gate). Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 
 Each reviewer understands their domain's review criteria. The orchestrator dispatches reviewers who understand their domain's practices.
 
@@ -98,5 +98,5 @@ proof surfaces same session. Exit-terminal (COND-P5-shared): `exit/salir` at C3 
 
 - `references/gate-report.md` — Consolidated verdicts + conditions.
 - `references/waiver-template.md` — Domain owners + orchestrator override record.
-- `references/engineering/` — readability, reliability, refuter, resilience, qa checklists.
+- `references/engineering/` — readability, reliability, refuter, resilience, quality-assurance checklists.
 - `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.

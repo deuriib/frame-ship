@@ -119,15 +119,15 @@ tests/
 
 ## 4. Frame→Ship Methodology Fit: Stage-by-Stage Lifecycle
 
-Testing in Frame→Ship is not an afterthought relegated to QA; it is distributed systematically across every stage of the chain:
+Testing in Frame→Ship is not an afterthought relegated to Quality Assurance; it is distributed systematically across every stage of the chain:
 
 ```
 frame-intent ────────► translate-to-spec ──────► propose-changes
  (Objectives/KPIs)     (REQ-IDs & Acceptance)     (Test Plan & Blast Radius)
                                                              │
 quality-gate ◄───────── execute-spec ◄─────────── review-security/arch
- (Multi-Lens QA,         (TDD, Impl, Unit/Integ,    (STRIDE vectors,
-  Refuter, Gate Report)   Test Matrix)               Fitness Invariants)
+ (Multi-Lens Quality     (TDD, Impl, Unit/Integ,    (STRIDE vectors,
+  Assurance & Refuter)    Test Matrix)               Fitness Invariants)
        │
 verify-handoff ───────► ship-release
  (DoD Verification,     (Smoke/Canary Probes,
@@ -142,7 +142,7 @@ verify-handoff ───────► ship-release
 | **4. review-security** | Review STRIDE threat model, specify security test vectors (auth, PII, injection). | Security Owner | Proposal | `THREAT_MODEL.md` + Security Review Verdict | No open High/Critical security vulnerabilities. |
 | **5. review-architecture** | Validate architectural fitness, boundary rules, and public interface contracts. | Engineering Owner | Proposal | `ADR-*.md` in `docs/specs/12_adr/` | Architectural invariants and backwards compatibility upheld. |
 | **6. execute-spec** | Implement code against tests (Unit, Integration, E2E). Populate traceable test matrix. | Domain Specialist | Approved Proposal + Approvals | `TEST_MATRIX.md`, committed tests, passing test suites | 100% P0 REQ-ID trace; all tests pass; coverage floors met. |
-| **7. quality-gate** | Multi-lens independent verification: QA suite run, Refuter edge-case attack, Resilience audit. | QA Reviewer + Refuter Reviewer + Domain Reviewers | `SPEC/HARD/GATE/DOMAINS` packet | `qa-review.md`, `refuter-review.md`, `GATE_REPORT.md` | All gate reviews PASS; zero unhandled findings; gate OPEN. |
+| **7. quality-gate** | Multi-lens independent verification: Quality Assurance suite run, Refuter edge-case attack, Resilience audit. | Quality Assurance Reviewer + Refuter Reviewer + Domain Reviewers | `SPEC/HARD/GATE/DOMAINS` packet | `quality-assurance-review.md`, `refuter-review.md`, `GATE_REPORT.md` | All gate reviews PASS; zero unhandled findings; gate OPEN. |
 | **8. verify-handoff** | Verify Definition of Done (DoD), CI pass logs, test matrix completeness before release. | Owning Domain Owner + Orchestrator | `GATE_REPORT.md` (OPEN) | `docs/specs/30_delivery/HANDOFF.md` | DoD 100% verified; zero failing tests; zero undocumented waivers. |
 | **9. ship-release** | Smoke testing, synthetic probes, canary validation, post-deploy rollback drill. | Release Manager / DevOps / Ops | Verified `HANDOFF.md` | `RELEASE_NOTES.md` + archived spec | Live deployment passes smoke checks; rollback dry-run proven. |
 

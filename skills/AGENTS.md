@@ -36,7 +36,7 @@
 
 | # | Domain | Owner (domain owner) | Gate reviewer | Gate template |
 |---|--------|-----------------|---------------|---------------|
-| 1 | engineering | engineering owner | readability, reliability, refuter, resilience, risk, qa (+data) | `quality-gate/references/engineering/` |
+| 1 | engineering | engineering owner | readability, reliability, refuter, resilience, risk, quality-assurance (+data) | `quality-gate/references/engineering/` |
 | 2 | security | security owner | security-reviewer | `quality-gate/references/domains/security-review.md` |
 | 3 | finance | finance owner | finance-reviewer | `quality-gate/references/domains/finance-review.md` |
 | 4 | legal | legal owner | legal-reviewer | `quality-gate/references/domains/legal-review.md` |

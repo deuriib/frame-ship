@@ -13,7 +13,7 @@
 - [ ] Hiring/training needs flagged
 - [ ] Change management plan (if needed)
 - [ ] Uniform subagents wording verified (W-SUBAGENTS + W-SEQ grep evidence attached)
-- [ ] No min-gate path invoked; full-wave + refuter before qa
+- [ ] No min-gate path invoked; full-wave + refuter before quality-assurance
 - [ ] Rule-change impact communicated (all roles aligned with subagents nomenclature and natural process)
 
 ## Findings

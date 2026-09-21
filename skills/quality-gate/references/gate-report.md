@@ -13,7 +13,7 @@
 | engineering     | review-refuter          | pass        | 0        | `engineering/refuter-review.md`                                                    |
 | engineering     | review-resilience       | pass        | 0        | `engineering/resilience-review.md`                                                 |
 | engineering     | review-risk             | pass        | 0        | fast gate note                                                                     |
-| engineering     | qa                      | pass        | 0        | `engineering/qa-review.md`                                                         |
+| engineering     | quality-assurance       | pass        | 0        | `engineering/quality-assurance-review.md`                                          |
 | engineering     | review-data             | pass        | 0        | `domains/data-review.md`                                                           |
 | security        | security-reviewer       | pass        | 0        | `domains/security-review.md`                                                       |
 | finance         | finance-reviewer        | pass        | 0        | `domains/finance-review.md`                                                        |

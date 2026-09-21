@@ -1,6 +1,6 @@
-# QA Review: SPEC-XXX
+# Quality Assurance Review: SPEC-XXX
 
-**Reviewer:** qa (runs the real suite)
+**Reviewer:** quality-assurance (runs the real suite)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

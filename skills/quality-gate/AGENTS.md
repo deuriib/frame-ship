@@ -7,7 +7,7 @@ Only stage with a waiver path; all other stages block without override.
 ## WHERE TO LOOK
 | Domain | Reviewers | Template dir |
 |--------|-----------|--------------|
-| engineering | readability, reliability, refuter, resilience, risk, qa (+data lens) | `references/engineering/` (5) |
+| engineering | readability, reliability, refuter, resilience, risk, quality-assurance (+data lens) | `references/engineering/` (5) |
 | security/finance/legal/brand/people/revenue/automation | single reviewer each (+ ops lens for automation) | `references/domains/` (9: finance, legal, marketing, people, security, data, revenue, automation, ops) |
 | consolidated | gate keeper (owning domain owner) | `references/gate-report.md` |
 | override | domain owners + orchestrator only | `references/waiver-template.md` |
@@ -18,7 +18,7 @@ Only stage with a waiver path; all other stages block without override.
 - Multi-domain specs need ALL touched-domain sign-offs.
 - Verdict row shape: `| Domain | Reviewer | Verdict | Findings | Artifact |` (`gate-report.md:9-18`).
 - Waiver requires domain owners + orchestrator sign-off block; `CONDITIONAL` needs `COND-00x` checklist cleared.
-- Engineering refs: `readability/reliability/refuter/resilience/qa-review.md`; domains: `finance/legal/marketing/people/security/data/revenue/automation-review.md` + `ops-review.md` lens.
+- Engineering refs: `readability/reliability/refuter/resilience/quality-assurance-review.md`; domains: `finance/legal/marketing/people/security/data/revenue/automation-review.md` + `ops-review.md` lens.
 
 ## NOTES
 - Largest skill dir (18 files: SKILL + AGENTS + gate-report + waiver + 5 engineering + 9 domains); only one with `engineering/` + `domains/` split — don't flatten.
