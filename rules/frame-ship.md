@@ -231,4 +231,108 @@ Observability: Logs, metrics, traces. Correlated IDs.
 
 Cost awareness. Monitor cloud spend. Optimize regularly.
 
+Type Safety
+No ANY: TypeScript strict mode, noImplicitAny, ban any (@typescript-eslint/no-explicit-any: error). Use unknown + narrowing, generics, discriminated unions.
+
+Python: mypy/pyright strict, ban Any, no untyped defs. Use Protocol, TypedDict, Literal, TypeVar.
+
+Java/C#: no raw types, no dynamic unless interop. Enable nullable reference types.
+
+Go/Rust: no interface{} unless necessary; no unwrap()/expect() in production.
+
+No unsafe casts: no as without proof, no non-null assertion unless proven, no ts-ignore without ticket.
+
+Correct typing everywhere: annotations, generics, variance, exhaustive switches, readonly/immutable by default.
+
+Code Structure
+Pure functions where possible. Side effects isolated.
+
+Dependency injection. No global mutable state. No singletons unless justified.
+
+No circular dependencies. No dead code. No commented-out code. No TODOs without ticket.
+
+Single responsibility. Small functions. Limit cyclomatic complexity. Early returns over deep nesting.
+
+Composition over inheritance. Prefer interfaces/contracts.
+
+No premature optimization. Benchmark before optimizing.
+
+No magic numbers/strings. Use enums, union types, constants.
+
+Clear naming. No abbreviations unless universal.
+
+No stringly typed code. Use strong types.
+
+Error Handling
+No empty catch. No catch-all. Wrap with context. Use Result/Either where appropriate.
+
+Validate at boundaries. Trust nothing from outside.
+
+Fail fast, fail closed. No silent failures.
+
+No exceptions for control flow.
+
+Resource cleanup: using, try-with-resources, defer. No leaks.
+
+Concurrency
+Immutability first. Message passing over shared memory.
+
+Avoid locks if possible. If used, document ordering.
+
+No unbounded queues. Backpressure.
+
+Idempotency for retries.
+
+Timeouts everywhere. Retries with jitter. Circuit breakers.
+
+Graceful shutdown. Health checks.
+
+Security & Privacy in Code
+Parameterized queries only. No string concatenation for SQL.
+
+Encode output. No XSS. CSRF tokens. SSRF allowlists. No path traversal.
+
+No deserialization of untrusted data. No eval. No shell injection.
+
+Secure random. Hash passwords with argon2/bcrypt. No custom crypto.
+
+TLS verify. Certificate pinning where needed.
+
+No secrets in code/config/logs/examples/events. Scan, rotate, vault.
+
+No PII in logs/prompts/exports. Mask/tokenize. Allowlists only.
+
+Least privilege per interface/key/role/automation.
+
+Testing & Quality
+Unit > Integration > E2E. Fast, isolated, deterministic.
+
+No flaky tests. No sleep. Quarantine and fix within 24h.
+
+Coverage ≥80% for critical paths. Mutation testing for core logic.
+
+Security tests: SAST, DAST, SCA, secret scan in CI.
+
+No PII in test data. Synthetic or anonymized only.
+
+Accessibility tests: WCAG 2.1 AA. Automated + manual.
+
+Observability
+Structured logging. No console.log in prod. No PII.
+
+Metrics, traces, correlated IDs.
+
+SLOs/SLIs. Alerts on SLO breach.
+
+Audit logs for sensitive actions.
+
+Dependencies & Supply Chain
+Pin versions. Minimal dependencies. Scan daily for CVEs.
+
+License compatibility. SBOM. Reproducible builds.
+
+Signed commits. Signed artifacts. Provenance.
+
+No unmaintained libraries.
+
 Version lockstep: [frame-ship v0.7.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.
