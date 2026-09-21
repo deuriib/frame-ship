@@ -1,44 +1,45 @@
-# Release Notes: Multi-subagents por defecto — Engineering Lane Mechanics
+# Release Notes: Estandarización de Nomenclatura — "subagents"
 
 **Date:** 2026-09-20
-**Release Manager:** vasquez (engineering owner) / orchestrator
-**Specs Included:** SPEC-multi-default-engineering
-**Domains-Touched:** [engineering] (ratified by security & people)
-**Ship Type:** policy-enable (skill-text behavior change, process normalization, zero deploy)
+**Release Manager:** orchestrator / vasquez (engineering owner) & santana (people owner)
+**Specs Included:** SPEC-subagents-naming-engineering, SPEC-subagents-naming-people
+**Domains-Touched:** [engineering, people, security]
+**Ship Type:** policy-enable (operational nomenclature standardization, contract normalization, zero deploy)
 
 ## Highlights
 
-- **Single Natural Process:** Complete removal (remoción total) of the `single | multi-subagents` dual-track across the Frame→Ship chain skills, templates, and contracts. `multi-subagents` is now the single natural operational methodology.
-- **Sequential Degradation Contract:** Defined uniform degradation for harnesses lacking subagent dispatch (`task`). Lanes run sequentially in the same thread under the exact same contract, same packets, and same reviewers with no silent downgrade.
-- **Unified Full-Wave Quality Gate:** Eliminated min-gate paths; all specs execute a full-wave quality gate with adversarial `review-refuter` prior to `qa`.
-- **ADR-008 Recorded:** Formalized architectural decision in `docs/specs/10_design/ADR-008-multi-default.md`.
+- **Canonical "subagents" Terminology:** Standardized the execution mode nomenclature across the Frame→Ship framework from `multi-subagents` to `subagents`. Eliminates lexical redundancy and aligns with standard AI multi-agent orchestration conventions.
+- **Canonical Contract `W-SUBAGENTS`:**
+  > *"Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch."*
+- **Packet Discipline:** Estandarizada la firma en sobres inter-etapas a `HARD:subagents+<constraints>`.
+- **ADR-009 Registered:** Formalized architectural decision in `docs/specs/12_adr/ADR-009-subagents-naming.md`.
+- **Historical Immutability (Option A):** All 103 historical mentions across completed gate evaluations, past briefs, and archived ADRs remain preserved as immutable audit records.
 
 ## Changes
 
-### Features
+### Skills & Templates
 
-- `skills/translate-to-spec/SKILL.md §3`: Rewritten to multi-only with W-MULTI and W-SEQ verbatim; `references/spec-template.md` Execution_Mode updated to multi-only (REQ-001, commit `a282881`).
-- `skills/execute-spec/SKILL.md §3`: Mode-confirm and dispatch rewritten to multi-only with W-MULTI and W-SEQ; singleton lines unchanged (REQ-002, commit `35f83be`).
-- `skills/quality-gate/SKILL.md §3`: Min-gate path removed; full-wave routing table + adversarial `review-refuter` before `qa` instituted; `references/gate-report.md` load-evidence updated (REQ-003, commit `7beb7cd`).
-- `skills/propose-changes/references/proposal-template.md` & `skills/verify-handoff/references/dod-checklist.md`: Execution mode declarations aligned to multi-only (REQ-004, commit `3484ce5`).
-- `skills/git-worktree/SKILL.md §3` & `skills/AGENTS.md`: Parallel lanes established as standard norm; contract frozen-mode lines updated; non-mode concurrency rules preserved (REQ-005/006, commit `5780887`).
-- `docs/specs/10_design/ADR-008-multi-default.md`: Filed architectural decision record documenting total removal, degradation contract, CEO fast-path boundary, and git-revert rollback (REQ-007, commit `33717cd`).
+- `skills/using-frame-ship/SKILL.md` & `references/bootstrap-checklist.md`: Onboarding and load order standardized with `W-SUBAGENTS` and `W-SEQ`.
+- `skills/frame-intent/SKILL.md` & `references/product-brief.md`: Initiation pre-flight and mode freeze standardized to `subagents`.
+- `skills/translate-to-spec/SKILL.md` & `references/spec-template.md`: Updated to `subagents`.
+- `skills/execute-spec/SKILL.md`: Updated supporting references and pre-flight to `subagents`.
+- `skills/quality-gate/SKILL.md` & `references/gate-report.md`: Quality gate load-evidence checklist and routing table updated to `subagents`.
+- `skills/propose-changes/references/proposal-template.md`: `Execution_Mode: subagents`.
+- `skills/verify-handoff/references/dod-checklist.md`: Common DoD load-evidence updated to `subagents`.
+- `skills/git-worktree/SKILL.md`: Parallel lane discipline aligned with `subagents`.
+- `skills/AGENTS.md`, `docs/AGENTS.md`, `docs/specs/AGENTS.md`, `AGENTS.md`: Catalogs aligned with `subagents` and indexed `ADR-009`.
 
-### Domain Ships
+### Domain Verifications
 
-- **Engineering:** 10 skill/template files updated + ADR-008 filed + plan & trace matrix complete (5/5 ACs, 9/9 REQs verified).
-- **Security:** Text-only review verified clean; zero credentials, tokens, or PII (Ley 172-13 compliant).
-- **People:** Ratified W-MULTI and W-SEQ verbatim cross-lane consistency (diff 0).
-
-### Breaking Changes
-
-- Deprecation and removal of the `single` execution mode option. Trivial reversible changes (<15 lines) are handled outside methodology as CEO fast-path (checkpoint-only).
+- **Engineering:** 12 files updated + `ADR-009` registered + `ARCHITECTURE.md` contract established. `mise run typecheck` clean (0 compiler errors).
+- **People:** Rules and onboarding aligned; `diff = 0` between `W-SUBAGENTS` instances.
+- **Security:** STRIDE audit and Ley 172-13 privacy minimization verified clean (zero PII, zero tokens/secrets).
 
 ## Known Issues
 
-- None. 0 methodological-mode `single` hits remaining across all targeted surfaces (allowlisted idiomatic usages only).
+- None. 0 residual occurrences of `multi-subagents` across all active skills and templates.
 
 ## Rollback / Undo
 
-- **Code revert:** `git revert` commits `a282881`, `35f83be`, `7beb7cd`, `3484ce5`, `5780887`, `33717cd`. ETA: < 15 min.
-- **Owner:** vasquez (engineering owner).
+- **Code revert:** `git revert` of discrete commits in this chain.
+- **Owner:** vasquez (engineering owner) / santana (people owner).

@@ -7,6 +7,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 
+- Standardized operational execution nomenclature from `multi-subagents` to `subagents` across all active stage skills, reference templates, catalogs (`AGENTS.md`), and packet envelopes (`HARD:subagents+<constraints>`).
+- Formalized canonical contract string `W-SUBAGENTS` and indexed `ADR-009-subagents-naming.md` in `docs/specs/12_adr/`.
+- Preserved historical immutability under Option A (past releases, closed gate reports in `40_workspace/`, and completed briefs remain untouched).
 - Standardized execution mode to `multi-subagents` across the Frame→Ship chain (`skills/translate-to-spec/`, `skills/execute-spec/`, `skills/quality-gate/`, `skills/git-worktree/`, and canonical templates). Removed the dual-track `single` methodological mode everywhere in-chain.
 - Defined deterministic sequential degradation contract (W-SEQ) for single-thread or non-task harnesses, maintaining full-wave gate and review rigor without silent downgrade.
 - Unified quality gates to full-wave only with adversarial `review-refuter` prior to `qa` (min-gate removed).
