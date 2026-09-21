@@ -1,86 +1,342 @@
-# PROJECT KNOWLEDGE BASE
+# frame-ship — persistent rules
 
-**Generated:** 2026-09-16
-**Commit:** 42e566f (repo git verificado vía `git rev-parse --short HEAD`)
-**Branch:** main (verificada vía `git branch --show-current`)
+## Chain (do not skip)
 
-## OVERVIEW
-
-frame-ship: local opencode plugin + 9-skill Frame→Ship chain (+ bootstrap + 3 supporting skills). Stack: 1 TS runtime (299 lines, v0.7.0) + `skills/` templates + `docs/` artifact store.
-
-## STRUCTURE
-
-```
-./
-├── .opencode/plugins/frame-ship.ts  # runtime: injects chain into context (ver `.opencode/plugins/AGENTS.md`)
-├── skills/<stage>/SKILL.md + references/*.md  # 13 dirs (bootstrap + 9 stages + 3 supporting), process source of truth (ver `skills/AGENTS.md`)
-├── docs/briefs/ + docs/specs/10_design|12_adr|15_requirements|20_backlog|30_delivery|40_workspace|50_archive/  # artifact lifecycle (ver `docs/AGENTS.md`, `docs/specs/AGENTS.md`)
-├── tests/ harness TBD (see Roadmap)
-├── mise.toml  # toolchain: node 22, tasks typecheck/install
-└── package.json  # v0.7.0 (matches plugin header)
+```text
+frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release
 ```
 
-## WHERE TO LOOK
+## Load order (HARD STOP)
 
-| Task                                  | Location                                              | Notes                                                   |
-| ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------- |
-| Change session behavior               | `.opencode/plugins/frame-ship.ts`                     | single-file, zero deps                                  |
-| Change stage process                  | `skills/<stage>/SKILL.md`                             | 13 dirs (10 chain + 3 supporting), identical body shape |
-| Supporting skills (worktree/debug/pr) | `skills/git-worktree/`, `debugging/`, `pull-request/` | opt-in transversal tools                                |
-| Change output shape                   | `skills/<stage>/references/`                          | bracket placeholders                                    |
-| Gate routing/waivers                  | `skills/quality-gate/`                                | only multi-reviewer domain                              |
-| Find briefs/specs/releases            | `docs/briefs/`, `docs/specs/`                         | lifecycle 10→50, per-domain workspace                   |
-| Plugin deps                           | `.opencode/package.json`                              | only `@opencode-ai/plugin@1.18.29`, no scripts          |
-| Toolchain                             | `mise.toml`                                           | `mise run typecheck`, `mise run install`                |
+1. `using-frame-ship` is ALREADY loaded in context (bootstrap via `context-inject` hook). NEVER re-read or re-load `using-frame-ship` via the skill tool.
+2. Load the `<stage>` skill via the skill tool ONCE at the start of that stage before performing work for that stage. NEVER re-load skills on every individual edit or command. No skill = STOP.
+3. Then act. Pre-flight: stage skill loaded? `SPEC/HARD/GATE/DOMAINS`? Any NO → STOP, load stage skill first. FAIL → retry N=2 differently → escalate to orchestrator. No third loop, no sideways.
 
-## CODE MAP
+## Trigger → skill
 
-Single runtime export: `export const FrameShipPlugin: Plugin` (+ mirrored `default`) (`frame-ship.ts:119-154`).
-Hooks: `config` → append `<root>/skills` to `skills.paths` (idempotent); `experimental.chat.system.transform` → push 3 cards + live bootstrap body; `experimental.session.compacting` → push reminder. Guards: `hasMarker()` idempotency, early-return if system/context not array.
-Resolvers: `resolveSkillsDir()` from own `import.meta.url` (fallback `directory||worktree`); `loadBootstrapBody()` `Bun.file` → dynamic `node:fs/promises`, per-path cache; `fileUrlToPath()` win32 drive fix.
+- start / what-skills → `using-frame-ship`
+- initiative / OKRs → `frame-intent` (BRIEF + OKRs)
+- brief approved → `translate-to-spec` (REQ + ARCHITECTURE + CONTRACTS)
+- ready to implement → `propose-changes` (PROPOSED_CHANGES, repo untouched)
+- auth / data / external API → `review-security` (STRIDE)
+- public API / data model / cross-cutting → `review-architecture` (ADR)
+- approved spec → `execute-spec` (approved files, REQ → test)
+- implementation ready → `quality-gate` (CLOSED on fail)
+- work complete → `verify-handoff` (HANDOFF, DoD)
+- verified → `ship-release` (NOTES + changelog + rollback)
 
-## CONVENTIONS
+## Hard rules
 
-- SKILL frontmatter exact: `name: <kebab==dir>`, 1-sentence `description` with `Use when/Triggered by`. No extra keys.
-- Every SKILL body: `# Title — Sub` + creed quote `> *"Haces las cosas..."* + `1.Purpose/2.Chain/2b.Role/3.Process/4.Won't do/5.References` (`quality-gate`inserta`3.Routing Table`, desplaza resto a `§5/§6`).
-- Artifacts SCREAMING: `BRIEF-XXX`, `SPEC-XXX`, `REQ-001`, `ADR-XXX`, `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md`, `ARCHITECTURE.md`, `RELEASE_NOTES.md`.
-- Chain order fixed: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
-- Reference-only packets: `SPEC/HARD/GATE/DOMAINS` (`HARD:subagents+<constraints>`) between stages; retry N=2 → escalate orchestrator, no 3rd loop.
-- Version bump triple: header comment + `VERSION` + `MARKER` juntos.
-- Skills reference naming convention: `frame-ship:<stage>` (no `frame-ship:` prefix in SKILL frontmatter `name`).
+1. No code without an approved proposal.
+2. Security review for auth/data/API.
+3. ADR for contract changes.
+4. No handoff on CLOSED gate without waiver.
+5. `REQ-ID → test → artifact → gate verdict` trace, always.
+6. `HANDOFF.md` before ship.
+7. Reference-only packets between stages — never paste full context.
 
-## ANTI-PATTERNS (THIS PROJECT)
+## Execution mode
 
-- Code without approved `PROPOSED_CHANGES.md`.
-- Skipping `review-security` on auth/data/API; arch change without ADR.
-- Handoff on CLOSED gate without waiver record.
-- Pasting full context between stages — reference-only packets.
-- Adding deps to plugin — must stay single-file (`.opencode/.gitignore` hides package.json anyway).
-- Shadowing built-in `/init` or touching `~/.config/opencode/` — project scope only.
+Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
 
-## COMMANDS
+## Guardrails for Software Development and Beyond (BEFORE dispatch, AFTER verify; full text: AGENTS.md)
 
-```bash
-# typecheck plugin (mise wrapper, dir=root)
-mise run typecheck
+These guardrails are non‑negotiable. Violations block progress, trigger escalation, and require remediation with evidence. They apply across all domains below.
 
-# version management & lockstep synchronization
-node scripts/bump-version.mjs --check   # check for version drift
-node scripts/bump-version.mjs --sync    # sync all files to package.json version
-node scripts/bump-version.mjs patch     # semver bump (or minor/major/<version>)
+Software Development Core
+Work‑unit commits: Atomic, single‑purpose commits. Each commit references a ticket/issue. No mixing refactors with features. Commit messages: type(scope): subject (Conventional Commits).
 
-mise run install  # npm install
-# after any plugin/skill edit: quit + restart opencode (config not hot-reloaded)
-```
+Branching: Short‑lived feature branches. Rebase before merge. No direct pushes to main.
 
-No build/test scripts in repo. `tests/` empty.
+Code review: Every change requires at least one peer review. Reviewers check for security, privacy, performance, and tests. No self‑merge.
 
-## NOTES
+CI/CD: All builds pass automated checks (lint, test, security scan, license scan). Fail on Critical/High findings. No manual overrides without written approval.
 
-- `.opencode/.gitignore` ignores `node_modules/package.json/package-lock.json/bun.lock` — don't commit those.
-- Sub-AGENTS map: `skills/AGENTS.md` (chain + 8-domain catalogue) → `skills/quality-gate/AGENTS.md` (router split); `.opencode/plugins/AGENTS.md` (runtime); `docs/AGENTS.md` → `docs/specs/AGENTS.md` (artifact lifecycle).
-- Case gap: template `ship-release/references/release-notes.md` vs artifact `RELEASE_NOTES.md`. Regla: template minúsculas → artefacto MAYÚSCULAS; no renombrar sin actualizar SKILL `§5 References`.
-- Reference suffix inconsistent: `-template.md` (12) vs bare `*-review.md/gate-report.md/threat-model.md` (13+). Don't rename without updating SKILL `§5 References`.
-- Version aligned: root `package.json` v0.7.0 matches plugin header `v0.7.0` — bump header comment + `VERSION` + `MARKER` + manifest together on next release.
-- Version sync automated: `scripts/bump-version.mjs` keeps `package.json`, `plugins/opencode/frame-ship.ts`, `plugins/antigravity/hooks/context-inject.ts`, `rules/frame-ship.md`, `README.md`, `INSTALL.md`, and `AGENTS.md` in exact lockstep.
-- Antigravity discovery path: chain contract lives at `.agents/rules/frame-ship.md` (Always On mirror of `rules/frame-ship.md`); hooks at `.agents/hooks.json`.
+Dependencies: Pin versions. Scan for CVEs daily. No unmaintained libraries. License compatibility verified.
+
+Secrets: Never in code, config, logs, examples, events, or commits. Use a vault or environment variables. Rotate regularly. Scan commits pre‑push.
+
+Security
+Deny by default: All access is denied unless explicitly allowed. Fail closed.
+
+No secrets/credentials/sessions in code, config, logs, examples, events, or prompts. Finding without proof (diff/scan/log) = REFUTED.
+
+OWASP Top 10 screen: Injection, broken authN/Z, data exposure, insecure deps, missing access control. Every new endpoint, adapter, boundary, or payload is a trust boundary—validate input, encode output.
+
+Least privilege: Per interface, key, role, automation. Short‑lived credentials. MFA for human access.
+
+Secure defaults: TLS everywhere. Strong cipher suites. HSTS. CSP. No debug in prod.
+
+No freelance fixes: Report severity + location + owner. Owner remediates. No unsolicited changes.
+
+SAST/DAST/SCA in CI. Pen test annually or on major changes.
+
+Privacy (Ley 172‑13)
+Minimization: Collect only what is necessary. Purpose limitation.
+
+PII checkpoints: Every port, adapter, event, log, prompt, export. Mask/tokenize. Allowlists only.
+
+Every PII store declares purpose, TTL, deletion procedure. Automated enforcement.
+
+PASS exports carry allowlisted evidence only. No raw PII.
+
+Data subject rights: Access, rectification, erasure, objection. Respond within legal timeframe.
+
+Cross‑border transfers: Only to approved jurisdictions with adequate protection.
+
+DPIA for high‑risk processing. Privacy by design and default.
+
+Breach notification: Within 72 hours to authorities and affected parties.
+
+Severity
+Critical: Exploitable, production impact, data loss. Fix immediately. Block release.
+
+High: Probable exploit or major impact. Fix before next release.
+
+Medium: Conditional impact. Schedule within sprint.
+
+Low: Hygiene. Backlog.
+
+Critical/High surface same session with severity + evidence + owner. Residual risk explicit. No silent PASS.
+
+Accepted risks documented with owner, justification, expiry.
+
+Conduct
+No sugarcoating. State facts. One point per paragraph. Respect attention.
+
+No busywork theater. Every action must have clear value.
+
+Assumptions on irreversible calls stated explicitly before action.
+
+FAIL → retry N=2 differently → escalate. No third loop, no sideways.
+
+Blameless post‑mortems. Own mistakes. Ask for help early. No heroics.
+
+Document decisions. ADRs for architecture. Comments for complex logic.
+
+Respect deadlines. No scope creep. Flag risks early.
+
+Architecture
+ADRs for every significant decision. Context, options, decision, consequences.
+
+Modular, loosely coupled, highly cohesive. Clear boundaries.
+
+Design for failure: Circuit breakers, retries with backoff, timeouts, bulkheads.
+
+No single points of failure. Redundancy where needed.
+
+API versioning. Contract‑first. OpenAPI/AsyncAPI specs.
+
+Scalability, maintainability, observability considered from day one.
+
+Testing
+Test pyramid: Unit > Integration > E2E. Fast, isolated, deterministic.
+
+Coverage: Minimum 80% for critical paths. Mutation testing for core logic.
+
+No flaky tests. Quarantine and fix within 24h.
+
+Security tests: SAST, DAST, dependency scan, secret scan. Pen test annually.
+
+Performance tests: Load, stress, soak before major releases.
+
+Accessibility tests: Automated + manual (WCAG 2.1 AA).
+
+Test data: No PII. Synthetic or anonymized only.
+
+Documentation
+README: Setup, usage, architecture, contribution.
+
+API docs: OpenAPI/Swagger, up‑to‑date.
+
+Runbooks: For operations, incidents, rollbacks.
+
+Changelog: Keep a Changelog format.
+
+Inline comments: For why, not what. Complex logic explained.
+
+Diagrams: C4 model or similar. Updated with architecture changes.
+
+Performance
+SLOs/SLIs defined for all user‑facing services.
+
+Load testing before release. Baseline and track regressions.
+
+Optimize critical paths. Caching, indexing, query optimization.
+
+Monitor latency, throughput, error rates. Alert on SLO breach.
+
+Reliability
+Error budgets. Balance innovation and stability.
+
+Chaos engineering in staging. Graceful degradation.
+
+Backups tested regularly. Disaster recovery plan documented and rehearsed.
+
+Monitoring/alerting for all services. On‑call rotation.
+
+Incident management: Severity levels, communication plan, post‑mortems.
+
+Accessibility
+WCAG 2.1 AA compliance. Keyboard navigable. Screen reader compatible.
+
+Color contrast ≥ 4.5:1. Alt text for images. ARIA labels where needed.
+
+No accessibility regressions. Automated checks in CI.
+
+Internationalization
+Externalize all strings. No hardcoded user‑facing text.
+
+Support RTL layouts. Locale‑aware formatting (dates, numbers, currency).
+
+Unicode support. Timezone handling in UTC, display in local.
+
+Translation workflow with version control.
+
+Data Management
+Data lifecycle: Ingestion, storage, processing, archival, deletion.
+
+Data quality checks at ingestion. Lineage tracked.
+
+Backup and recovery for all data stores. Test restores.
+
+Data governance: Ownership, classification, retention policies.
+
+AI/ML
+Ethical AI: Fairness, bias mitigation, transparency.
+
+Explainability for critical decisions. Human‑in‑the‑loop where needed.
+
+Model versioning. Reproducible training. Data privacy in training.
+
+Monitoring for drift. Retraining triggers. Fallback to safe default.
+
+No PII in prompts unless explicitly approved and masked.
+
+Incident Response
+Severity levels defined. On‑call rotation. Escalation paths.
+
+Runbooks for common incidents. Communication templates.
+
+Post‑mortems blameless, action items tracked.
+
+Breach notification per legal requirements.
+
+General
+Automate everything possible. Manual steps are error‑prone.
+
+Infrastructure as Code. Versioned, reviewed, tested.
+
+Environment parity. Dev, staging, prod as similar as possible.
+
+Feature flags for safe rollouts. Kill switches.
+
+Observability: Logs, metrics, traces. Correlated IDs.
+
+Cost awareness. Monitor cloud spend. Optimize regularly.
+
+Type Safety
+No ANY: TypeScript strict mode, noImplicitAny, ban any (@typescript-eslint/no-explicit-any: error). Use unknown + narrowing, generics, discriminated unions.
+
+Python: mypy/pyright strict, ban Any, no untyped defs. Use Protocol, TypedDict, Literal, TypeVar.
+
+Java/C#: no raw types, no dynamic unless interop. Enable nullable reference types.
+
+Go/Rust: no interface{} unless necessary; no unwrap()/expect() in production.
+
+No unsafe casts: no as without proof, no non-null assertion unless proven, no ts-ignore without ticket.
+
+Correct typing everywhere: annotations, generics, variance, exhaustive switches, readonly/immutable by default.
+
+Code Structure
+Pure functions where possible. Side effects isolated.
+
+Dependency injection. No global mutable state. No singletons unless justified.
+
+No circular dependencies. No dead code. No commented-out code. No TODOs without ticket.
+
+Single responsibility. Small functions. Limit cyclomatic complexity. Early returns over deep nesting.
+
+Composition over inheritance. Prefer interfaces/contracts.
+
+No premature optimization. Benchmark before optimizing.
+
+No magic numbers/strings. Use enums, union types, constants.
+
+Clear naming. No abbreviations unless universal.
+
+No stringly typed code. Use strong types.
+
+Error Handling
+No empty catch. No catch-all. Wrap with context. Use Result/Either where appropriate.
+
+Validate at boundaries. Trust nothing from outside.
+
+Fail fast, fail closed. No silent failures.
+
+No exceptions for control flow.
+
+Resource cleanup: using, try-with-resources, defer. No leaks.
+
+Concurrency
+Immutability first. Message passing over shared memory.
+
+Avoid locks if possible. If used, document ordering.
+
+No unbounded queues. Backpressure.
+
+Idempotency for retries.
+
+Timeouts everywhere. Retries with jitter. Circuit breakers.
+
+Graceful shutdown. Health checks.
+
+Security & Privacy in Code
+Parameterized queries only. No string concatenation for SQL.
+
+Encode output. No XSS. CSRF tokens. SSRF allowlists. No path traversal.
+
+No deserialization of untrusted data. No eval. No shell injection.
+
+Secure random. Hash passwords with argon2/bcrypt. No custom crypto.
+
+TLS verify. Certificate pinning where needed.
+
+No secrets in code/config/logs/examples/events. Scan, rotate, vault.
+
+No PII in logs/prompts/exports. Mask/tokenize. Allowlists only.
+
+Least privilege per interface/key/role/automation.
+
+Testing & Quality
+Unit > Integration > E2E. Fast, isolated, deterministic.
+
+No flaky tests. No sleep. Quarantine and fix within 24h.
+
+Coverage ≥80% for critical paths. Mutation testing for core logic.
+
+Security tests: SAST, DAST, SCA, secret scan in CI.
+
+No PII in test data. Synthetic or anonymized only.
+
+Accessibility tests: WCAG 2.1 AA. Automated + manual.
+
+Observability
+Structured logging. No console.log in prod. No PII.
+
+Metrics, traces, correlated IDs.
+
+SLOs/SLIs. Alerts on SLO breach.
+
+Audit logs for sensitive actions.
+
+Dependencies & Supply Chain
+Pin versions. Minimal dependencies. Scan daily for CVEs.
+
+License compatibility. SBOM. Reproducible builds.
+
+Signed commits. Signed artifacts. Provenance.
+
+No unmaintained libraries.
+
+Version lockstep: [frame-ship v0.7.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.
