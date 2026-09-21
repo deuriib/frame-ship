@@ -11,7 +11,7 @@
 - [ ] C4 FAIL lists `residual-risk + owner` (security lane; silent PASS = FAIL)
 - [ ] Edge cases / failure modes handled
 - [ ] Gate OPEN (or CONDITIONAL conditions cleared + waiver recorded if applicable)
-- [ ] Load evidence: stage skill + dispatched agent template cited (paths), execution_mode declared: `multi-subagents`, packet intact — missing = FAIL, no handoff
+- [ ] Load evidence: stage skill + dispatched agent template cited (paths), execution_mode declared: `subagents`, packet intact — missing = FAIL, no handoff
 - [ ] Docs/changelog updated for user-facing impact
 
 ## Engineering (engineering owner — only if engineering-touched)
