@@ -5,6 +5,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+
+- Canonical repository-local agent subsystem in `/agents` containing 31 structured agent definitions across 4 architectural tiers:
+  - Tier 1: 1 Orchestrator (`orchestrator.md` / `montilla`) as primary chain entry and sole dispatcher.
+  - Tier 2: 8 Domain Owners (`vasquez.md`, `barrera.md`, `dauhajre.md`, `subero.md`, `vera.md`, `santana.md`, `montero.md`, `espinoza.md`) governing domain chain execution and gates without direct craft code editing.
+  - Tier 3: 8 Fused Domain Specialists (`engineering-specialist.md`, `security-specialist.md`, `finance-specialist.md`, `legal-specialist.md`, `marketing-specialist.md`, `people-specialist.md`, `revenue-specialist.md`, `automation-specialist.md`) consolidating previous 70+ fragmented micro-roles into 1 authoritative craftsman per domain.
+  - Tier 4: 14 Methodological Quality Gate Reviewers (7 engineering wave + 7 domain gate auditors) with strictly read-only tool profiles.
+- Mathematical least privilege enforced across all agents via YAML frontmatter `tools: [...]` and explicit body directives; leadership and reviewer tiers strictly isolated from code editing and command execution tools.
+- Formally recorded architectural decision `ADR-010-canonical-agents-roster.md` in `docs/specs/12_adr/` and updated `docs/specs/10_design/ARCHITECTURE.md` to v1.1 formalizing invariants INV-009 through INV-012.
+
 ### Changed
 
 - Standardized operational execution nomenclature from `multi-subagents` to `subagents` across all active stage skills, reference templates, catalogs (`AGENTS.md`), and packet envelopes (`HARD:subagents+<constraints>`).
