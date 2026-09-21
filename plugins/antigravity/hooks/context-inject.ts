@@ -399,7 +399,7 @@ function loadBootstrapBody(pluginRoot: string, workspacePaths: string[]): string
     if (body) return `${BOOTSTRAP_LABEL}\n${BOOTSTRAP_ACK}\n${body}`;
   }
   return `${BOOTSTRAP_LABEL}\n${BOOTSTRAP_ACK}\nSkill file not readable from hook — load skills/using-frame-ship/SKILL.md from the plugin root. Chain: ${CHAIN}.
-Subagents: Always use subagents as much as possible proactively, this is no negotiable, based on session context and metions about it, like multi-subagents mode. Guardrails: ${GUARD_RAILS}`;
+Subagents: Always use subagents as much as possible proactively, this is no negotiable, based on session context and metions about it. Guardrails: ${GUARD_RAILS}`;
 }
 
 async function main(): Promise<void> {
