@@ -37,7 +37,10 @@ Equivalent manual entry (`opencode.jsonc`):
 ```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugins": ["frame-ship@github:deuriib/frame-ship"]
+  "plugins": ["frame-ship@github:deuriib/frame-ship"],
+  // frame-ship entry point: new sessions start on the Orchestrator.
+  // (The plugin also sets this at runtime via editor.default("orchestrator").)
+  "default_agent": "orchestrator"
 }
 ```
 
@@ -71,6 +74,13 @@ Notes:
    13 `frame-ship:*` skills (`using-frame-ship`, 9 stages, 3 supporting).
 4. Start any session — the system prompt contains `[frame-ship v0.8.0]`
    (workflow card + guardrails + pointers + `using-frame-ship` bootstrap).
+5. Agents (automatic): on setup the plugin provisions V2-native files from the
+   canonical `agents/*.md` into `<your-project>/.opencode/agents/` (missing
+   only — your customized files are never rewritten; a `.frame-ship.json`
+   manifest tracks what it generated), reloads the agent domain, then enriches
+   each id in place. `opencode api get "/api/agent?location[directory]=<your-project>"`
+   shows `orchestrator` (`primary`, the default), 8 owners (`all`),
+   22 specialists/reviewers (`subagent`) with wrapper `permissions` appended.
 
 ```bash
 # in this repo: toolchain + typecheck still pass
@@ -92,16 +102,37 @@ mise exec -- node --version   # expect v22.x
 | `tsc` fails | run from repo root: `mise run typecheck` — plugin must stay single-file, zero runtime deps |
 | `Cannot find package '@opencode/plugin'` | install `@opencode/plugin@2.0.9` where the plugin file resolves (repo root has it) |
 | Old `{"name": "frame-ship@..."}` entry ignored | V2 wants bare `"frame-ship@..."` string or `{"package": ..., "options": ...}` — rewrite the entry |
+| Agents not listed after restart | check `<project>/.opencode/agents/` was provisioned (31 `<id>.md` + `.frame-ship.json`); if the project is read-only, copy `agents/*.md` manually (see V2 notes) and restart |
 
 ## V2 notes (behavior deltas vs v0.6.1)
 
 - System injection moved to `ctx.session.hook("context")` as
   `{type:"text", text}` parts; compaction reminder to `ctx.session.hook("compaction")`.
 - Skills are registered via `ctx.skill.transform` as `frame-ship:<stage>` (13 total).
-- Agents: V2 `AgentEditor` has no `add`, so the 74-key roster **updates
-  in place only** (existing `general`/`explore`/etc. get roster body + mode;
-  missing keys are skipped, `montilla` default applies only when present).
-  File-based `.opencode/agents/` discovery is the V2-native path for new agents.
+- Agents: frontmatter wrapper inside `frame-ship.ts` (`parseAgentFile` →
+  `toOpenCodeMode` / `toOpenCodeSteps` / `toPermissionMap`) translates the
+  canonical `agents/*.md` (frame-ship keys: `mainAgent`, `subagent`, `effort`,
+  custom `tools`) to OpenCode V2 (`mode`, `steps`, `system`,
+  `permission:{action:"allow"|"deny"}`). V2 renamed `bash→shell` and
+  `task→subagent`; the wrapper owns that mapping so `agents/*.md` never carry
+  V2 syntax. V2 `AgentEditor` has no `add` (ids are born in file discovery, so
+  the filename is the canonical id), therefore `setup()` **provisions**
+  V2-native `<project>/.opencode/agents/<id>.md` files with permission blocks
+  (missing only, never overwriting your edits), calls `ctx.agent.reload()`,
+  and then **updates in place** (missing ids skipped; runtime transform
+  enriches name/description/mode/system/steps only — permissions live in the
+  markdown frontmatter and survive V2's host reconciliation). `orchestrator`
+  becomes the default via `editor.default("orchestrator")`; config equivalent:
+  `"default_agent": "orchestrator"` (must be set in `opencode.json`).
+  Mapping (least privilege): `view_file|list_dir→read`,
+  `find_by_name→glob`, `grep_search→grep`,
+  `write_to_file|replace_file_content→edit`, `run_command→bash`,
+  `invoke_subagent|manage_subagents|send_message→task`,
+  `ask_question→question`, `read_url_content→webfetch`, `skill→allow` always.
+  Mode: `mainAgent+subagent→all`, `mainAgent→primary`, else `subagent`.
+  Hidden: mode `all` (the 8 C-level owners) → `hidden:true`, out of the `@`
+  autocomplete menu; dispatch flows through the visible `orchestrator`.
+  Effort: `high→12`, `medium→8`, `low→5`, missing→8.
 - `subagent_depth` is dropped (V1 field has no V2 equivalent; native counterpart
   is `experimental.subagent_depth`).
 
