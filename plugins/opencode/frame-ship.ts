@@ -411,6 +411,29 @@ function resolveAgentsDir(fallbackBase: string): string {
   return `${fallbackBase.replace(/[/\\]+$/, "")}/agents`;
 }
 
+// V2's DEFAULT global discovery route (docs: locations): $XDG_CONFIG_HOME else
+// $HOME/.config/opencode/agents — the one place V2 scans for every project.
+// Env-based and zero-dep: reads process.env off globalThis (no node import, so
+// tsc stays clean without @types/node) and never derives the path from
+// ctx.location.directory — for the globally-symlinked install
+// (~/.config/opencode/plugins/frame-ship.ts) that directory is the config dir,
+// not the project, which is exactly why targeting it made discovery skip all
+// 31 ids. XDG wins when set; HOME (POSIX) then USERPROFILE (win32) otherwise.
+// Unresolvable (neither set) → "" and the caller skips provisioning: fail
+// closed, never write to a guessed path discovery would not scan.
+function resolveDefaultAgentsDir(): string {
+  const env = (
+    globalThis as unknown as {
+      process?: { env?: Record<string, string | undefined> };
+    }
+  ).process?.env;
+  const xdg = (env?.XDG_CONFIG_HOME || "").replace(/[/\\]+$/, "");
+  if (xdg) return `${xdg}/opencode/agents`;
+  const home = (env?.HOME || env?.USERPROFILE || "").replace(/[/\\]+$/, "");
+  if (home) return `${home}/.config/opencode/agents`;
+  return "";
+}
+
 // Canonical roster: <repo-root>/agents/<id>.md. Hardcoded (no readdir helper)
 // so init I/O stays bounded — one small read per id, miss skipped, never cached.
 const AGENT_FILES = [
@@ -506,10 +529,11 @@ async function readTextFile(path: string): Promise<string> {
   }
 }
 
-// Bun.write first, dynamic node:fs/promises fallback (no static node: import so
-// `tsc` stays clean without @types/node). Resolves false on failure —
-// provisioning is best-effort; the update transform below still enriches
-// manually-copied agents when writes are unavailable (read-only project).
+// Bun.file().exists() first, dynamic node:fs/promises fallback (no static
+// node: import so `tsc` stays clean without @types/node). Resolves false on
+// failure — provisioning is best-effort; the update transform below still
+// enriches manually-copied agents when writes are unavailable (read-only
+// config dir).
 async function fileExists(path: string): Promise<boolean> {
   try {
     const bunFile = (
@@ -620,15 +644,17 @@ function parseSkillFile(raw: string): {
 // ---- Agents lane: frame-ship frontmatter → OpenCode V2 --------------------
 // Source of truth stays at <repo-root>/agents/*.md with frame-ship frontmatter:
 //   name, description, mainAgent?, subagent?, effort?, tools:[custom names]
-// OpenCode V2 wants: description, mode (primary|subagent|all), system (body),
-// steps, permissions:[{action, resource, effect}]. V2 renamed bash→shell and
+// OpenCode V2 wants: description, mode (primary|subagent|all), hidden, system
+// (body), permissions:[{action, resource, effect}]. V2 renamed bash→shell and
 // task→subagent; `tools` boolean map is deprecated. This wrapper is the only
 // place that knows the translation — agents/*.md never carry V2 syntax.
+// `effort` is parsed but deliberately NOT mapped (no `steps:` in V2 output —
+// WIP decision; V2 default applies).
 // V2 `AgentEditor` has no `add`, so setup() provisions V2-native discovery
-// files first (<project>/.opencode/agents/<id>.md → id), reloads the domain,
-// then updates in place only (missing ids are skipped). File discovery owns
-// id creation; the transform owns enrichment (mode/steps/permissions) + the
-// orchestrator default.
+// files first (~/.config/opencode/agents/<id>.md → id — the default global
+// route, env-resolved), reloads the domain, then updates in place only
+// (missing ids are skipped). File discovery owns id creation; the transform
+// owns enrichment (description/mode/system/hidden) + the orchestrator default.
 interface ParsedAgent {
   name: string;
   description: string;
@@ -706,14 +732,6 @@ function toOpenCodeMode(
   return "subagent";
 }
 
-// effort → steps (V2 positive max). Unknown/missing → 8 (OpenCode doc example).
-function toOpenCodeSteps(effort: string): number {
-  if (effort === "high") return 12;
-  if (effort === "medium") return 8;
-  if (effort === "low") return 5;
-  return 8;
-}
-
 // Custom frame-ship tools → V2 permission actions. Only actions we explicitly
 // own are emitted; websearch/external_directory inherit the base policy.
 //   view_file|list_dir → read | find_by_name → glob | grep_search → grep
@@ -749,59 +767,35 @@ interface ProvisionedAgent {
   displayName: string;
   description: string;
   mode: "primary" | "subagent" | "all";
-  steps: number;
   hidden: boolean;
   frameTools: string[];
   system: string;
 }
 
-// Frame-ship tools → V2 Markdown permission map. Each V2 permission key gates
-// a category of tools; "allow" grants, "deny" blocks. Only explicitly listed
-// keys are emitted — omitted keys inherit the global config policy (last match
-// wins per V2 permission model).
-//   view_file|list_dir → read | find_by_name → glob | grep_search → grep
-//   write_to_file|replace_file_content → edit | run_command → bash
-//   invoke_subagent|manage_subagents|send_message → task
-//   ask_question → question | read_url_content → webfetch | skill → allow
-function toPermissionMap(
-  frameTools: string[],
-): Record<string, "allow" | "deny"> {
-  const has = (name: string): boolean => frameTools.includes(name);
-  return {
-    read: has("view_file") || has("list_dir") ? "allow" : "deny",
-    glob: has("find_by_name") ? "allow" : "deny",
-    grep: has("grep_search") ? "allow" : "deny",
-    edit: has("write_to_file") || has("replace_file_content") ? "allow" : "deny",
-    bash: has("run_command") ? "allow" : "deny",
-    task: has("invoke_subagent") || has("manage_subagents") || has("send_message")
-      ? "allow"
-      : "deny",
-    question: has("ask_question") ? "allow" : "deny",
-    webfetch: has("read_url_content") ? "allow" : "deny",
-    skill: "allow" as const,
-  };
-}
-
 // Serialize one agent to OpenCode V2 native markdown. Only keys V2 file
-// discovery recognizes (description/mode/steps/hidden/permission + body =
-// system). Frame-ship frontmatter (mainAgent/subagent/effort/custom tools) is
-// translated, never copied verbatim. Permissions are embedded in the
-// frontmatter `permission:` block so they survive V2's config reconciliation
-// (runtime editor.update() mutations are overwritten by the host). C-level
-// owners (mode "all") are emitted with `hidden: true` so dispatch flows
-// through the visible orchestrator entry point.
+// discovery recognizes (description/mode/hidden/permissions + body = system).
+// Frame-ship frontmatter (mainAgent/subagent/effort/custom tools) is
+// translated, never copied verbatim. Permissions are emitted as the V2
+// ordered `permissions:` rule list (action/resource/effect, last match wins)
+// so they survive V2's config reconciliation — runtime editor.update()
+// mutations for permissions are overwritten by the host, frontmatter sticks.
+// Legacy `permission:` map and `steps:` are not V2 fields and stay out.
+// `hidden` follows the WIP visibility intent (non-primary agents hidden):
+// hidden keeps them out of listings and the `@` menu; dispatch behavior is
+// verified by the runtime gate (Gate C) rather than assumed here.
 function toAgentFileContent(agent: ProvisionedAgent): string {
-  const perm = toPermissionMap(agent.frameTools);
-  const permLines = Object.entries(perm)
-    .map(([k, v]) => `  ${k}: ${v}`)
+  const permLines = toOpenCodePermissions(agent.frameTools)
+    .map(
+      (p) =>
+        `  - action: ${p.action}\n    resource: ${yamlQuote(p.resource)}\n    effect: ${p.effect}`,
+    )
     .join("\n");
   return [
     "---",
     `description: ${yamlQuote(agent.description)}`,
     `mode: ${agent.mode}`,
-    `steps: ${agent.steps}`,
     `hidden: ${agent.hidden}`,
-    "permission:",
+    "permissions:",
     permLines,
     "---",
     "",
@@ -834,21 +828,22 @@ function parseManifest(raw: string): ProvisionManifest {
   }
 }
 
-// Provision V2-native agent files into <project>/.opencode/agents/ so V2
+// Provision V2-native agent files into the DEFAULT global discovery route
+// (~/.config/opencode/agents/, env-resolved by resolveDefaultAgentsDir) so V2
 // file discovery registers one id per file (<id>.md → id). V2 `AgentEditor`
 // has no `add`, so without these files the update transform below has nothing
 // to enrich and no frame-ship agent ever appears. Policy: write missing files;
 // rewrite only our own stale files (content hash still matches the manifest
 // record from a previous version — user-customized files are never touched);
 // then the caller reloads the agent domain. Returns true when at least one
-// file was written. Best-effort: false on any I/O failure.
+// file was written. Best-effort: false on any I/O failure. Idempotent: a
+// relaunch with unchanged VERSION and intact files performs zero writes.
 async function provisionAgents(
-  projectDir: string,
+  agentsDir: string,
   agents: ProvisionedAgent[],
 ): Promise<boolean> {
-  const clean = (projectDir || "").replace(/[/\\]+$/, "");
-  if (!clean || agents.length === 0) return false;
-  const dir = `${clean}/.opencode/agents`;
+  const dir = (agentsDir || "").replace(/[/\\]+$/, "");
+  if (!dir || dir === "/opencode/agents" || agents.length === 0) return false;
   if (!(await ensureDir(dir))) return false;
   const manifestPath = `${dir}/${PROVISION_MANIFEST}`;
   const manifest = parseManifest(await readTextFile(manifestPath));
@@ -987,12 +982,14 @@ export default Plugin.define({
 
     // ---- Agents lane (provision + update-in-place, sync transforms) ----
     // V2 `AgentEditor` has no `add`: ids are born in file discovery
-    // (<project>/.opencode/agents/<id>.md → id), never in the transform. So
-    // setup() first provisions V2-native files (with permission blocks that
-    // survive V2's config reconciliation) from the canonical agents/*.md,
-    // reloads the agent domain when anything was written, and then the sync
-    // transform enriches every discovered id in place (name/description/mode/
-    // system/steps/hidden).
+    // (~/.config/opencode/agents/<id>.md → id — the default global route,
+    // env-resolved; never ctx.location.directory, which for the globally
+    // symlinked install IS the config dir), never in the transform. So
+    // setup() first provisions V2-native files (with `permissions:` rule
+    // lists that survive V2's config reconciliation) from the canonical
+    // agents/*.md, reloads the agent domain when anything was written, and
+    // then the sync transform enriches every discovered id in place
+    // (name/description/mode/system/hidden).
     // Permissions live exclusively in the markdown frontmatter — runtime
     // editor.update() mutations for permissions are overwritten by the host.
     const agentsDir = resolveAgentsDir(fallbackBase);
@@ -1001,7 +998,6 @@ export default Plugin.define({
       displayName: string;
       description: string;
       mode: "primary" | "subagent" | "all";
-      steps: number;
       hidden: boolean;
       frameTools: string[];
       system: string;
@@ -1019,53 +1015,53 @@ export default Plugin.define({
           displayName,
           description: parsed.description || displayName,
           mode,
-          steps: toOpenCodeSteps(parsed.effort),
-          // C-levels (the 8 owners, mode "all") stay out of the @ autocomplete
-          // menu — dispatch flows through orchestrator (primary, visible).
-          hidden: mode === "all",
+          // WIP visibility: every non-primary agent (owners, specialists,
+          // reviewers) stays out of listings and the @ menu — dispatch flows
+          // through the visible orchestrator (primary).
+          hidden: mode !== "primary",
           frameTools: parsed.tools,
           system: parsed.system,
         });
       }
     }
-    if (pendingAgents.length > 0 && fallbackBase) {
-      let provisioned = false;
-      try {
-        provisioned = await provisionAgents(fallbackBase, pendingAgents);
-      } catch {
-        provisioned = false;
-      }
-      if (provisioned) {
-        try {
-          await ctx.agent.reload();
-        } catch {
-          // Best-effort: the update transform below still applies to whatever
-          // discovery has already loaded (e.g. manually-copied files).
-        }
-      }
+    if (pendingAgents.length > 0) {
+      // Provision into the default global discovery route FIRST: without files
+      // on disk discovery has zero frame-ship ids and the transform below has
+      // nothing to enrich. Manifest-guarded + missing-only → relaunch after a
+      // successful provision performs zero writes.
+      const provisioned = await provisionAgents(
+        resolveDefaultAgentsDir(),
+        pendingAgents,
+      );
+      if (provisioned) await ctx.agent.reload();
+
       await ctx.agent.transform((editor) => {
+        // V2 built-ins frame-ship replaces — removed once per rebuild, before
+        // the loop (id-safe regardless of remove() semantics on missing ids).
         for (const a of pendingAgents) {
           // Update only what discovery already loaded. Missing ids are skipped
           // by design (fresh files arrive via the reload above). Permissions
           // are intentionally NOT mutated here — they live in the markdown
           // frontmatter and survive V2's host reconciliation.
           if (editor.get(a.id) === undefined) continue;
+
           editor.update(a.id, (agent) => {
             agent.name = a.displayName as unknown as typeof agent.name;
             agent.description = a.description || agent.description;
             agent.mode = a.mode;
             agent.system = a.system;
-            agent.steps = a.steps;
             agent.hidden = a.hidden;
           });
         }
       });
     }
+
     // Default entry point. Always registered (never gated on parse/provision
     // success) and presence-guarded: orchestrator becomes default only when
     // discovery knows it. Config equivalent: "default_agent": "orchestrator".
     await ctx.agent.transform((editor) => {
-      if (editor.get("orchestrator") !== undefined) {
+      const orch = editor.get("orchestrator")
+      if (orch) {
         editor.default("orchestrator");
       }
     });
