@@ -2,67 +2,7 @@
 
 ## Guardrails for Software Development and Beyond (BEFORE dispatch, AFTER verify; full text: AGENTS.md)
 
-These guardrails are non‑negotiable. Violations block progress, trigger escalation, and require remediation with evidence. They apply across all domains below.
-
-Software Development Core
-Work‑unit commits: Atomic, single‑purpose commits. Each commit references a ticket/issue. No mixing refactors with features. Commit messages: type(scope): subject (Conventional Commits).
-
-Branching: Short‑lived feature branches. Rebase before merge. No direct pushes to main.
-
-Code review: Every change requires at least one peer review. Reviewers check for security, privacy, performance, and tests. No self‑merge.
-
-CI/CD: All builds pass automated checks (lint, test, security scan, license scan). Fail on Critical/High findings. No manual overrides without written approval.
-
-Dependencies: Pin versions. Scan for CVEs daily. No unmaintained libraries. License compatibility verified.
-
-Secrets: Never in code, config, logs, examples, events, or commits. Use a vault or environment variables. Rotate regularly. Scan commits pre‑push.
-
-Security
-Deny by default: All access is denied unless explicitly allowed. Fail closed.
-
-No secrets/credentials/sessions in code, config, logs, examples, events, or prompts. Finding without proof (diff/scan/log) = REFUTED.
-
-OWASP Top 10 screen: Injection, broken authN/Z, data exposure, insecure deps, missing access control. Every new endpoint, adapter, boundary, or payload is a trust boundary—validate input, encode output.
-
-Least privilege: Per interface, key, role, automation. Short‑lived credentials. MFA for human access.
-
-Secure defaults: TLS everywhere. Strong cipher suites. HSTS. CSP. No debug in prod.
-
-No freelance fixes: Report severity + location + owner. Owner remediates. No unsolicited changes.
-
-SAST/DAST/SCA in CI. Pen test annually or on major changes.
-
-Privacy (Ley 172‑13)
-Minimization: Collect only what is necessary. Purpose limitation.
-
-PII checkpoints: Every port, adapter, event, log, prompt, export. Mask/tokenize. Allowlists only.
-
-Every PII store declares purpose, TTL, deletion procedure. Automated enforcement.
-
-PASS exports carry allowlisted evidence only. No raw PII.
-
-Data subject rights: Access, rectification, erasure, objection. Respond within legal timeframe.
-
-Cross‑border transfers: Only to approved jurisdictions with adequate protection.
-
-DPIA for high‑risk processing. Privacy by design and default.
-
-Breach notification: Within 72 hours to authorities and affected parties.
-
-Severity
-Critical: Exploitable, production impact, data loss. Fix immediately. Block release.
-
-High: Probable exploit or major impact. Fix before next release.
-
-Medium: Conditional impact. Schedule within sprint.
-
-Low: Hygiene. Backlog.
-
-Critical/High surface same session with severity + evidence + owner. Residual risk explicit. No silent PASS.
-
-Accepted risks documented with owner, justification, expiry.
-
-Conduct
+1. Conduct & Process
 No sugarcoating. State facts. One point per paragraph. Respect attention.
 
 No busywork theater. Every action must have clear value.
@@ -71,171 +11,112 @@ Assumptions on irreversible calls stated explicitly before action.
 
 FAIL → retry N=2 differently → escalate. No third loop, no sideways.
 
-Blameless post‑mortems. Own mistakes. Ask for help early. No heroics.
+No freelance fixes. Report severity + location + owner. Owner remediates.
 
-Document decisions. ADRs for architecture. Comments for complex logic.
+Blameless post-mortems. Own mistakes. Ask for help early. No heroics.
 
-Respect deadlines. No scope creep. Flag risks early.
+Document decisions (ADRs for architecture, tickets for TODOs).
 
-Architecture
-ADRs for every significant decision. Context, options, decision, consequences.
+1. Severity
+Critical: exploitable / prod impact / data loss. Block release. Fix immediately.
 
-Modular, loosely coupled, highly cohesive. Clear boundaries.
+High: probable exploit or major impact. Fix before next release.
 
-Design for failure: Circuit breakers, retries with backoff, timeouts, bulkheads.
+Medium: conditional impact. Fix within sprint.
 
-No single points of failure. Redundancy where needed.
+Low: hygiene. Backlog.
 
-API versioning. Contract‑first. OpenAPI/AsyncAPI specs.
+Critical/High surface same session with severity + evidence + owner. Residual risk explicit. No silent PASS.
 
-Scalability, maintainability, observability considered from day one.
+Accepted risks documented with owner, justification, expiry.
 
-Testing
-Test pyramid: Unit > Integration > E2E. Fast, isolated, deterministic.
+1. Security
+Deny by default. Fail closed.
 
-Coverage: Minimum 80% for critical paths. Mutation testing for core logic.
+No secrets/tokens/credentials/sessions in code, config, logs, examples, events, prompts, or commits. Finding without proof (diff/scan/log) = REFUTED. Use vault/env. Rotate. Scan pre-push.
 
-No flaky tests. Quarantine and fix within 24h.
+OWASP Top 10 screen on every new endpoint, adapter, boundary, payload — each is a trust boundary. Validate input, encode output. Cover injection, broken authN/Z, data exposure, insecure deps, missing access control, SSRF, deserialization, XXE.
 
-Security tests: SAST, DAST, dependency scan, secret scan. Pen test annually.
+Parameterized queries only. No string concatenation for SQL. No eval. No shell injection. No path traversal.
 
-Performance tests: Load, stress, soak before major releases.
+Secure random. Hash passwords with argon2/bcrypt. No custom crypto. TLS everywhere, cert pinning where needed.
 
-Accessibility tests: Automated + manual (WCAG 2.1 AA).
+CSRF tokens. CSP with nonces. HSTS. SRI for external scripts. No tokens in localStorage — use httpOnly Secure SameSite cookies.
 
-Test data: No PII. Synthetic or anonymized only.
+Least privilege per interface, key, role, automation. Short-lived credentials. MFA for human access.
 
-Documentation
-README: Setup, usage, architecture, contribution.
+Rate limiting, quotas, WAF per interface.
 
-API docs: OpenAPI/Swagger, up‑to‑date.
+Idempotency keys for mutating endpoints. Idempotent consumers.
 
-Runbooks: For operations, incidents, rollbacks.
+Validate at boundaries. Trust nothing inbound. No deserialization of untrusted data.
 
-Changelog: Keep a Changelog format.
+SAST, DAST, SCA, secret scan in CI. Pen test annually or on major changes.
 
-Inline comments: For why, not what. Complex logic explained.
+Signed commits. Signed artifacts. Provenance.
 
-Diagrams: C4 model or similar. Updated with architecture changes.
+1. Privacy (Ley 172-13)
+Minimization. Purpose limitation. Collect only what is necessary.
 
-Performance
-SLOs/SLIs defined for all user‑facing services.
+Every port, adapter, event, log, prompt, export is a PII checkpoint — mask/tokenize, allowlists only.
 
-Load testing before release. Baseline and track regressions.
+Every PII store declares purpose + TTL + deletion procedure. Automated enforcement.
 
-Optimize critical paths. Caching, indexing, query optimization.
+PASS exports carry allowlisted evidence only. No raw PII.
 
-Monitor latency, throughput, error rates. Alert on SLO breach.
+No PII in test data — synthetic or anonymized only.
 
-Reliability
-Error budgets. Balance innovation and stability.
+Data subject rights: access, rectification, erasure, objection. Respond within legal timeframe.
 
-Chaos engineering in staging. Graceful degradation.
+Cross-border transfers only to approved jurisdictions with adequate protection.
 
-Backups tested regularly. Disaster recovery plan documented and rehearsed.
+DPIA for high-risk processing. Privacy by design and default.
 
-Monitoring/alerting for all services. On‑call rotation.
+Breach notification within 72 hours to authorities and affected parties.
 
-Incident management: Severity levels, communication plan, post‑mortems.
-
-Accessibility
-WCAG 2.1 AA compliance. Keyboard navigable. Screen reader compatible.
-
-Color contrast ≥ 4.5:1. Alt text for images. ARIA labels where needed.
-
-No accessibility regressions. Automated checks in CI.
-
-Internationalization
-Externalize all strings. No hardcoded user‑facing text.
-
-Support RTL layouts. Locale‑aware formatting (dates, numbers, currency).
-
-Unicode support. Timezone handling in UTC, display in local.
-
-Translation workflow with version control.
-
-Data Management
-Data lifecycle: Ingestion, storage, processing, archival, deletion.
-
-Data quality checks at ingestion. Lineage tracked.
-
-Backup and recovery for all data stores. Test restores.
-
-Data governance: Ownership, classification, retention policies.
-
-AI/ML
-Ethical AI: Fairness, bias mitigation, transparency.
-
-Explainability for critical decisions. Human‑in‑the‑loop where needed.
-
-Model versioning. Reproducible training. Data privacy in training.
-
-Monitoring for drift. Retraining triggers. Fallback to safe default.
-
-No PII in prompts unless explicitly approved and masked.
-
-Incident Response
-Severity levels defined. On‑call rotation. Escalation paths.
-
-Runbooks for common incidents. Communication templates.
-
-Post‑mortems blameless, action items tracked.
-
-Breach notification per legal requirements.
-
-General
-Automate everything possible. Manual steps are error‑prone.
-
-Infrastructure as Code. Versioned, reviewed, tested.
-
-Environment parity. Dev, staging, prod as similar as possible.
-
-Feature flags for safe rollouts. Kill switches.
-
-Observability: Logs, metrics, traces. Correlated IDs.
-
-Cost awareness. Monitor cloud spend. Optimize regularly.
-
+1. Coding Standards
 Type Safety
-No ANY: TypeScript strict mode, noImplicitAny, ban any (@typescript-eslint/no-explicit-any: error). Use unknown + narrowing, generics, discriminated unions.
+No ANY. TypeScript strict mode, noImplicitAny, ban any. Use unknown + narrowing, generics, discriminated unions.
 
 Python: mypy/pyright strict, ban Any, no untyped defs. Use Protocol, TypedDict, Literal, TypeVar.
 
-Java/C#: no raw types, no dynamic unless interop. Enable nullable reference types.
+Java/C#: no raw types, no dynamic unless interop. Nullable reference types enabled.
 
 Go/Rust: no interface{} unless necessary; no unwrap()/expect() in production.
 
-No unsafe casts: no as without proof, no non-null assertion unless proven, no ts-ignore without ticket.
+No unsafe casts (as without proof, non-null assertion without proof, ts-ignore without ticket).
 
-Correct typing everywhere: annotations, generics, variance, exhaustive switches, readonly/immutable by default.
+Annotations, generics, variance, exhaustive switches, readonly/immutable by default.
 
-Code Structure
-Pure functions where possible. Side effects isolated.
+No stringly-typed code. Strong types, enums, union types, constants.
 
-Dependency injection. No global mutable state. No singletons unless justified.
+Structure & Quality
+Pure functions preferred. Side effects isolated at edges.
+
+Dependency injection. No global mutable state. No service locator. Singletons only with justification + DI.
 
 No circular dependencies. No dead code. No commented-out code. No TODOs without ticket.
 
-Single responsibility. Small functions. Limit cyclomatic complexity. Early returns over deep nesting.
+Single responsibility. Small functions. Early returns over deep nesting.
 
-Composition over inheritance. Prefer interfaces/contracts.
+Cyclomatic complexity ≤ 10. Nesting ≤ 3. Function length ≤ 40 lines (soft).
+
+Composition over inheritance. Interfaces/contracts over concretes.
 
 No premature optimization. Benchmark before optimizing.
 
-No magic numbers/strings. Use enums, union types, constants.
+No magic numbers/strings. Design tokens, enums, constants.
 
 Clear naming. No abbreviations unless universal.
 
-No stringly typed code. Use strong types.
+Immutability by default: readonly, const, final, frozen.
 
 Error Handling
 No empty catch. No catch-all. Wrap with context. Use Result/Either where appropriate.
 
-Validate at boundaries. Trust nothing from outside.
+No exceptions for control flow.
 
 Fail fast, fail closed. No silent failures.
-
-No exceptions for control flow.
 
 Resource cleanup: using, try-with-resources, defer. No leaks.
 
@@ -252,50 +133,217 @@ Timeouts everywhere. Retries with jitter. Circuit breakers.
 
 Graceful shutdown. Health checks.
 
-Security & Privacy in Code
-Parameterized queries only. No string concatenation for SQL.
+1. SOLID
+S: One reason to change per module/class/function. Separate orchestration, business logic, I/O.
 
-Encode output. No XSS. CSRF tokens. SSRF allowlists. No path traversal.
+O: Extend via composition, strategy, plugins. Polymorphism over conditionals.
 
-No deserialization of untrusted data. No eval. No shell injection.
+L: Subtypes substitutable. No strengthened preconditions, weakened postconditions, unexpected exceptions. No NotImplementedError in overrides.
 
-Secure random. Hash passwords with argon2/bcrypt. No custom crypto.
+I: Many small role interfaces > one fat interface.
 
-TLS verify. Certificate pinning where needed.
+D: Depend on abstractions. High-level modules own interfaces. I/O at edges. Ports & adapters.
 
-No secrets in code/config/logs/examples/events. Scan, rotate, vault.
+1. Design Patterns
+Patterns solve problems — no pattern without a concrete pain point. Document non-obvious ones in ADR. Name the pattern in code. No cargo cult.
 
-No PII in logs/prompts/exports. Mask/tokenize. Allowlists only.
+Creational: Factory, Abstract Factory, Builder, Prototype, Singleton (justified only).
 
-Least privilege per interface/key/role/automation.
+Structural: Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.
 
-Testing & Quality
-Unit > Integration > E2E. Fast, isolated, deterministic.
+Behavioral: Strategy, Observer, Command, State, Chain of Responsibility, Mediator, Iterator, Template Method, Visitor.
+
+Architectural: Repository, Unit of Work, CQRS, Event Sourcing, Saga, Circuit Breaker, Bulkhead, Strangler Fig, Sidecar, Ambassador.
+
+Banned anti-patterns: God Object, Spaghetti Code, Golden Hammer, Lava Flow, Big Ball of Mud, Copy-Paste, Magic Numbers, Anemic Domain Model (unless intentional), Singleton abuse, Service Locator, God Base Class.
+
+1. Architecture
+ADRs mandatory for every significant decision: context, options, decision, consequences, status.
+
+Layered / Hexagonal / Clean / Onion: domain core has zero dependencies on frameworks, DB, HTTP. Ports define contracts. Adapters implement.
+
+Bounded contexts (DDD): explicit boundaries, ubiquitous language, context mapping. No shared mutable models across contexts.
+
+Modular monolith first. Microservices only when justified by scaling, team topology, or deployment independence — documented in ADR.
+
+Event-driven: idempotent consumers, at-least-once with dedup, dead-letter queues, schema registry, versioned events.
+
+CQRS / Event Sourcing only when read/write asymmetry or audit trail demands it. Never by default.
+
+API contracts: contract-first, versioned, backward compatible. Deprecation window for breaking changes.
+
+Backpressure, timeouts, retries with jitter, circuit breakers, bulkheads at every boundary.
+
+No distributed monolith. No shared database across services. No chatty synchronous chains.
+
+No single point of failure. Redundancy and failover tested.
+
+Observability by design: logs, metrics, traces, correlation IDs from day one.
+
+Cost, scalability, maintainability, operability evaluated per decision.
+
+Strangler Fig for legacy migration. No big-bang rewrites.
+
+Infrastructure as Code. Versioned, reviewed, tested.
+
+Environment parity: dev, staging, prod as similar as possible.
+
+Feature flags for safe rollouts. Kill switches.
+
+1. Frontend
+Components: small, focused, presentational vs container separation. Props down, events up. No prop drilling beyond 2 levels — use context/store.
+
+State: local > lifted > context > global store. Server state separate (React Query / SWR / TanStack). No duplicating server state in client store.
+
+Immutability: no direct state mutation. Immutable updates or Immer.
+
+Rendering: avoid unnecessary re-renders (memo/useMemo/useCallback only with proof). Virtualize long lists. Code-split routes. Lazy load below-the-fold.
+
+SSR/SSG/CSR/ISR: chosen per route, documented. No hydration mismatches. No window/document in SSR paths.
+
+Effects: no side effects in render. Cleanup subscriptions. Correct dependency arrays.
+
+Data fetching: abort on unmount. Handle loading/error/empty/partial states explicitly. Optimistic updates with rollback.
+
+Forms: controlled or uncontrolled — consistent. Validate client and server. Never trust client. Accessible labels, errors tied via aria-describedby.
+
+Routing: declarative, typed routes, code-split per route. 404 and error boundaries at route and feature level with graceful fallback and observability reporting.
+
+Security: no dangerouslySetInnerHTML without sanitization (DOMPurify). CSP with nonces. No secrets in bundle. No eval. No tokens in localStorage.
+
+Styling: design tokens, no magic values. Scoped/atomic CSS. No inline styles except dynamic values. Dark mode, RTL, responsive breakpoints from tokens.
+
+i18n: no hardcoded strings. Locale-aware formatting. Lazy-load translations. ICU pluralization.
+
+Performance budgets: LCP < 2.5s, INP < 200ms, CLS < 0.1. Bundle size budget in CI. Lighthouse CI gate.
+
+Browser support: documented matrix. Polyfills only where required. No vendor hacks without comment.
+
+Progressive enhancement: core functionality without JS where feasible.
+
+Assets: optimized images (WebP/AVIF), responsive srcset, lazy loading, preload critical, width/height to prevent CLS. Font subsetting, font-display: swap.
+
+Testing: unit (components), integration (user flows), E2E (Playwright/Cypress). Visual regression. a11y automated (axe) + manual.
+
+TypeScript strict. No any. Discriminated unions for state. Exhaustive switches.
+
+ 1. Testing
+Test pyramid: unit > integration > E2E. Fast, isolated, deterministic.
+
+Coverage ≥ 80% for critical paths. Mutation testing for core logic.
 
 No flaky tests. No sleep. Quarantine and fix within 24h.
 
-Coverage ≥80% for critical paths. Mutation testing for core logic.
-
 Security tests: SAST, DAST, SCA, secret scan in CI.
+
+Performance tests: load, stress, soak before major releases.
+
+Accessibility tests: WCAG 2.1 AA, automated + manual.
 
 No PII in test data. Synthetic or anonymized only.
 
-Accessibility tests: WCAG 2.1 AA. Automated + manual.
+ 1. Observability
+Structured logging. No console.log in prod. No PII in logs.
 
-Observability
-Structured logging. No console.log in prod. No PII.
+Metrics, traces, correlated IDs across services.
 
-Metrics, traces, correlated IDs.
-
-SLOs/SLIs. Alerts on SLO breach.
+SLOs/SLIs for all user-facing services. Alert on SLO breach. Error budgets.
 
 Audit logs for sensitive actions.
 
-Dependencies & Supply Chain
+Monitor latency, throughput, error rates, drift.
+
+ 1. Performance & Reliability
+SLOs/SLIs defined. Load test before release. Baseline and track regressions.
+
+Optimize critical paths: caching, indexing, query optimization.
+
+Backups tested regularly. Disaster recovery plan documented and rehearsed.
+
+Chaos engineering in staging. Graceful degradation.
+
+Monitoring/alerting for all services. On-call rotation.
+
+ 1. Accessibility
+WCAG 2.1 AA. Semantic HTML first, ARIA only when needed.
+
+Keyboard navigable. Focus management. Screen reader tested.
+
+Color contrast ≥ 4.5:1. Alt text for images. aria-describedby for errors.
+
+No accessibility regressions. Automated checks in CI.
+
+ 1. Internationalization
+Externalize all strings. No hardcoded user-facing text.
+
+RTL layouts supported. Locale-aware formatting (dates, numbers, currency).
+
+Unicode support. Timezone handling in UTC, display in local.
+
+Translation workflow with version control. ICU pluralization.
+
+ 1. Data Management
+Data lifecycle: ingestion, storage, processing, archival, deletion.
+
+Data quality checks at ingestion. Lineage tracked.
+
+Backup and recovery for all data stores. Test restores.
+
+Data governance: ownership, classification, retention policies.
+
+Parameterized queries only. No string SQL.
+
+ 1. AI/ML
+Ethical AI: fairness, bias mitigation, transparency.
+
+Explainability for critical decisions. Human-in-the-loop where needed.
+
+Model versioning. Reproducible training. Data privacy in training.
+
+Monitoring for drift. Retraining triggers. Fallback to safe default.
+
+No PII in prompts unless explicitly approved and masked.
+
+ 1. Dependencies & Supply Chain
 Pin versions. Minimal dependencies. Scan daily for CVEs.
 
-License compatibility. SBOM. Reproducible builds.
-
-Signed commits. Signed artifacts. Provenance.
+License compatibility verified. SBOM maintained. Reproducible builds.
 
 No unmaintained libraries.
+
+Signed commits, signed artifacts, provenance.
+
+ 1. Documentation
+README: setup, usage, architecture, contribution.
+
+API docs (OpenAPI/AsyncAPI) up-to-date. Contract-first.
+
+Runbooks for operations, incidents, rollbacks.
+
+Changelog (Keep a Changelog). Semantic versioning.
+
+Migration guides for breaking changes.
+
+ADRs for significant decisions. Diagrams (C4 or similar) updated with architecture changes.
+
+Inline comments for why, not what. Complex logic explained.
+
+ 1. Commit, Branching & Review
+Work-unit commits. Atomic, single purpose. Reference ticket/issue. Conventional Commits format type(scope): subject.
+
+Short-lived feature branches. Rebase before merge. No direct pushes to main.
+
+Every change peer-reviewed (security, privacy, performance, tests). No self-merge.
+
+CI must pass: lint, type-check, test, security scan, license scan, bundle budget, a11y, Lighthouse.
+
+Critical/High findings block release. No manual overrides without written approval.
+
+ 1. Incident Response
+Severity levels defined. On-call rotation. Escalation paths.
+
+Runbooks for common incidents. Communication templates.
+
+Blameless post-mortems with tracked action items.
+
+Breach notification per legal requirements (72h).
