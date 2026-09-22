@@ -26,7 +26,7 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 1. Run Version Sync Tool
    └── node scripts/bump-version.mjs vX.Y.Z (or --sync)
        ├── package.json
-       ├── plugins/opencode/frame-ship.ts
+       ├── plugins/opencode/shared.ts
        ├── plugins/antigravity/hooks/context-inject.ts
        ├── rules/frame-ship.md
        ├── README.md

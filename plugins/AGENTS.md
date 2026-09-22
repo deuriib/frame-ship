@@ -6,7 +6,11 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 ## WHERE TO LOOK
 | Harness | Path | Description |
 |---|---|---|
-| OpenCode | `opencode/frame-ship.ts` | Zero-dep plugin; registers 13 skills, hooks session context & compaction |
+| OpenCode (skills) | `opencode/skills.ts` | Zero-dep plugin (id `frame-ship`); registers 13 skills, hooks session context & compaction |
+| OpenCode (agents) | `opencode/agents.ts` | Zero-dep plugin (id `frame-ship-agents`); provisions 31 agents, sets orchestrator default |
+| OpenCode (guardrails) | `opencode/guardrails.ts` | Zero-dep plugin (id `frame-ship-guardrails`); injects full `rules/guardrails.md` on context + minimal one-liner set on compaction |
+| OpenCode (shared) | `opencode/shared.ts` | Version lockstep target + bounded fs helpers (module, not a plugin) |
+| OpenCode (composed) | `opencode/frame-ship.ts` | Composed entry (`package.json` `main`): all three lanes under id `frame-ship` |
 | OpenCode Setup | `opencode/INSTALL.md` | Installation and local link instructions for OpenCode |
 | Antigravity Hook | `antigravity/hooks/context-inject.ts` | PreInvocation hook; injects prompt rules & live bootstrap on invocation 0 |
 | Antigravity Gate | `antigravity/hooks/safety-gate.ts` | PreToolUse hook; blocks destructive commands and leaks on `run_command` |
@@ -19,7 +23,8 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 - **Bounded I/O**: File reading in hooks and plugin setup uses a 2000ms deadline (`withTimeout`) to prevent hanging on disk or mount stalls.
 - **Hook Stdin Draining**: CLI hooks drain `process.stdin` safely via buffer chunks and fail closed on corrupt JSON without uncaught exceptions.
 - **Windows Path Handling**: Strips leading slash from file URLs before drive letters (`/D:/...` -> `D:/...`).
-- **Version Lockstep**: Plugin header comments and `const VERSION = "0.8.0"` must stay synchronized with repository root.
+- **Split lanes**: `skills.ts` (id `frame-ship`), `agents.ts` (id `frame-ship-agents`), and `guardrails.ts` (id `frame-ship-guardrails`) are the three independent plugins; `frame-ship.ts` composes all three for package installs. Never list the composed entry together with `skills.ts` (duplicate id `frame-ship`). `shared.ts` carries no default export and must never be listed as a plugin entry.
+- **Version Lockstep**: The plugin header comment and `const VERSION = "0.8.0"` live in `opencode/shared.ts` (single source imported by all lanes) and must stay synchronized with repository root.
 
 ## COMMANDS
 ```bash

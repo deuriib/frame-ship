@@ -4,7 +4,7 @@
  *
  * Enforces version lockstep across:
  * 1. package.json ("version": "X.Y.Z")
- * 2. plugins/opencode/frame-ship.ts (header comment + const VERSION = "X.Y.Z")
+ * 2. plugins/opencode/shared.ts (header comment + const VERSION = "X.Y.Z" — single source imported by skills.ts, agents.ts, guardrails.ts, frame-ship.ts)
  * 3. plugins/antigravity/hooks/context-inject.ts (const VERSION = "X.Y.Z" + parity comment)
  * 4. rules/frame-ship.md (Version lockstep note)
  * 5. README.md (prompt banner verification + git install URL #vX.Y.Z + version-locked note)
@@ -32,7 +32,16 @@ const ROOT_DIR = resolve(__dirname, "..");
 
 // Paths
 const PKG_PATH = resolve(ROOT_DIR, "package.json");
-const OPENCODE_PLUGIN_PATH = resolve(ROOT_DIR, "plugins/opencode/frame-ship.ts");
+const OPENCODE_PLUGIN_PATH = resolve(ROOT_DIR, "plugins/opencode/shared.ts");
+// Runtime line count spans every plugin source (composed entry + three lanes +
+// shared) so AGENTS.md "Stack: 1 TS runtime (N lines)" tracks the whole lane.
+const OPENCODE_RUNTIME_FILES = [
+  "plugins/opencode/frame-ship.ts",
+  "plugins/opencode/skills.ts",
+  "plugins/opencode/agents.ts",
+  "plugins/opencode/guardrails.ts",
+  "plugins/opencode/shared.ts",
+].map((f) => resolve(ROOT_DIR, f));
 const AGY_HOOK_PATH = resolve(ROOT_DIR, "plugins/antigravity/hooks/context-inject.ts");
 const RULES_PATH = resolve(ROOT_DIR, "rules/frame-ship.md");
 const README_PATH = resolve(ROOT_DIR, "README.md");
@@ -73,7 +82,10 @@ function bumpSemver(current, type) {
 }
 
 function getFileReplacements(targetVersion) {
-  const runtimeLines = countLines(OPENCODE_PLUGIN_PATH);
+  const runtimeLines = OPENCODE_RUNTIME_FILES.reduce(
+    (total, file) => total + countLines(file),
+    0,
+  );
 
   return [
     {
@@ -88,7 +100,7 @@ function getFileReplacements(targetVersion) {
     },
     {
       file: OPENCODE_PLUGIN_PATH,
-      name: "plugins/opencode/frame-ship.ts",
+      name: "plugins/opencode/shared.ts",
       check: (content) => {
         const headerMatch = content.match(/\*\s*frame-ship v([\d\w.-]+)\s*—/);
         const constMatch = content.match(/const VERSION = "([^"]+)";/);
@@ -138,7 +150,7 @@ function getFileReplacements(targetVersion) {
       transform: (content) =>
         content.replace(
           /Version lockstep:\s*\[frame-ship v[\d\w.-]+\]\s*—\s*bump with `[^`]+` \+ `[^`]+`\./,
-          `Version lockstep: [frame-ship v${targetVersion}] — bump with \`plugins/opencode/frame-ship.ts\` + \`plugins/antigravity/hooks/context-inject.ts\`.`
+          `Version lockstep: [frame-ship v${targetVersion}] — bump with \`plugins/opencode/shared.ts\` + \`plugins/antigravity/hooks/context-inject.ts\`.`
         ),
     },
     {
@@ -171,11 +183,19 @@ function getFileReplacements(targetVersion) {
         const promptMatch = content.match(/contains `\[frame-ship v([\d\w.-]+)\]`/);
         return promptMatch ? promptMatch[1] : null;
       },
-      transform: (content) =>
-        content.replace(
+      transform: (content) => {
+        let updated = content.replace(
           /(contains `\[frame-ship v)[\d\w.-]+(\]`)/g,
           `$1${targetVersion}$2`
-        ),
+        );
+        // Guardrails lane marker (plugins/opencode/guardrails.ts) rides the
+        // same lockstep — same version, own bracket form.
+        updated = updated.replace(
+          /(\[frame-ship-guardrails v)[\d\w.-]+(\])/g,
+          `$1${targetVersion}$2`
+        );
+        return updated;
+      },
     },
     {
       file: AGENTS_PATH,
@@ -189,7 +209,7 @@ function getFileReplacements(targetVersion) {
       transform: (content) => {
         let updated = content.replace(
           /Version lockstep:\s*\[frame-ship v[\d\w.-]+\]\s*—\s*bump with `[^`]+` \+ `[^`]+`\./,
-          `Version lockstep: [frame-ship v${targetVersion}] — bump with \`plugins/opencode/frame-ship.ts\` + \`plugins/antigravity/hooks/context-inject.ts\`.`
+          `Version lockstep: [frame-ship v${targetVersion}] — bump with \`plugins/opencode/shared.ts\` + \`plugins/antigravity/hooks/context-inject.ts\`.`
         );
         updated = updated.replace(
           /Stack: 1 TS runtime \(\d+ lines, v[\d\w.-]+\)/,

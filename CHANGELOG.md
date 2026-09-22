@@ -5,6 +5,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.9.0] — 2026-09-22
+
+### Changed
+
+- Split the single-file OpenCode plugin into two independent plugins plus a shared module:
+  - `plugins/opencode/skills.ts` (id `frame-ship`): skills lane, system injection (workflow card + pointers + bootstrap), compaction reminder.
+  - `plugins/opencode/agents.ts` (id `frame-ship-agents`): agents lane (parse, provision, transform, orchestrator default).
+  - `plugins/opencode/guardrails.ts` (id `frame-ship-guardrails`): guardrails lane — full `rules/guardrails.md` injected on session context, minimal one-line-per-domain set injected on compaction so the guardrails survive context compression behind the `[frame-ship-guardrails v…]` marker; falls back to the minimal set when the rules file is unreadable.
+  - `plugins/opencode/shared.ts`: version lockstep target (header + `const VERSION`) + bounded filesystem helpers; no default export, never listed as a plugin entry.
+  - `plugins/opencode/frame-ship.ts` becomes the composed entry point (still `package.json` `main`) that runs all three lanes under the original id — package installs and existing `plugins: ["./plugins/opencode/frame-ship.ts"]` entries keep full behavior with zero changes. Never list it together with `skills.ts`.
+- Version lockstep bump target moved from `plugins/opencode/frame-ship.ts` to `plugins/opencode/shared.ts` (7-file lockstep count unchanged).
+- `mise run typecheck` now checks all five plugin sources with `--moduleResolution bundler`, mirroring how the loader resolves the extensionless relative imports between the split files.
+
 ## [v0.8.0] — 2026-09-21
 
 ### Added
