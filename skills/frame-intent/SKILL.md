@@ -48,24 +48,11 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 12. Hand off the brief reference to `frame-ship:translate-to-spec` as `SPEC:<brief-path>#OKRs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 13. Close with a commit. Example: `docs(brief-auth): add BRIEF-auth with OKRs and domains-touched`.
 
-### C1 — Classification-scaled challenger (opt-in plug-in, REQ-001)
+### C1 — Classification-scaled challenger (opt-in, REQ-001)
 
-- Scope: opt-in challenge round inside `frame-intent` only — never a new stage, never mandatory, never a reason to skip the HARD-GATE.
-- Glossary (single source for C1+C2 — C2 points here, never redefines): `challenge` = the budgeted round; `grill` = informal collective noun for C1–C4 rounds only; `ronda` = Spanish alias for `challenge` in openers.
-- Opener (exit alias `exit/salir`): "¿Quieres una ronda de desafío opt-in (máx N preguntas, una a la vez — N = 1 spike / 3 bounded / 5 architectural)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." (canonical: `docs/specs/20_backlog/SPEC-grilling-integration-people.md` §4 inserts 1–2).
-- Exit: immediate stop, no re-ask in same stage, no penalty, recorded `grill: declined/exited`.
-- Budgets, N per classification (default proposed, joint engineering + people sign-off at gate): spike 1 question hard cap; bounded typical 2–3 (hard cap 3); architectural full challenge hard cap 5 (4 core + 1 frontier-empty).
-- Bounded floor: 1 question = early close, NOT a violation; 0 questions = invalid (must ask ≥1 or record `grill: declined`).
-- Unclassified default: no `Classification:` → default heaviest path (architectural, cap 5); "when in doubt, take the heavier path" (§3 step 2) applies inside C1.
-- N+1 enforcement: question N+1 = FAIL (blocked, must stop); declared prompt text, enforced by agent discipline + gate review.
-- One-way ratchet: "Profundidad solo sube (spike→bounded→architectural), nunca baja mid-initiative." (canonical: people SPEC §4 insert 6).
-- Turn-taking: "Hago una sola pregunta, espero tu respuesta, luego sigo." (canonical: people SPEC §4 insert 2).
-- Disagreement invite on every recommended answer: "Mi respuesta recomendada es X — ¿dónde puede estar mal?" (where could this be wrong?) (canonical: people SPEC §4 insert 3).
-- Warmth on every round: "Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos." (intent-match paraphrase per T-010 of people SPEC §4 insert 4; single source §4).
-- Masking on every round: "Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)." (canonical: people SPEC §4 insert 5).
-- Falsifiable-bet prompt: challenger runs a falsifiable-bet prompt over the 2–3 framings (what evidence would kill each framing?) and records the output in `Framings-Considered`.
-- Pause/exit: after the round, offer pause/exit before continuing to the BRIEF.
-- Stall breaker: Retry N=2 → escalate orchestrator. No-answer after 2 reminders → recorded `grill: stalled` + escalate, initiative pauses (no silent hang).
+- Mechanics (glossary, opener/exit, one-at-a-time, warmth, masking, N+1, stall breaker): `../using-frame-ship/references/challenge-round.md` §1–§2 — never redefined here.
+- Stage budget: spike 1 question / bounded cap 3 (typical 2–3) / architectural cap 5 (4 core + 1 frontier-empty). Opt-in at classification, never skips the HARD-GATE; unclassified → heaviest path (cap 5).
+- Falsifiable-bet: challenger runs "what evidence would kill each framing?" over the 2–3 framings and records it in `Framings-Considered`. Record outcome `grill: accepted|declined|exited|stalled`.
 
 ### Red Flags (adapted — approval scales, never skipped)
 

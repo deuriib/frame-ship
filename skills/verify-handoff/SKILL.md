@@ -34,22 +34,9 @@ produce HANDOFF.md routing to the next agent. No gate OPEN, no handoff.
 
 ## 3a. C4 — REQ→evidence-link presence check (surgical, security-owned)
 
-Every REQ links evidence (test/scan/log/review-link), not a tick; missing link
-= FAIL, no handoff. Attestation-alone = FAIL. Every C4 FAIL lists
-`residual-risk + owner`. Re-litigation of settled gate verdicts banned —
-findings return to `frame-ship:execute-spec` instead. Retry N=2 → escalate
-orchestrator. `SPEC/HARD/GATE/DOMAINS` packets preserved. PII checkpoint
-(REQ-SEC-003/004 + REQ-P-006 co-sign): zero
-PII/secrets/tokens/credentials/sessions in handoff text, grill
-questions/answers/prompts/logs/examples/exports; every
-prompt/adapter/event/log/export is a declared PII checkpoint (mask/tokenize +
-allowlist); allowlisted evidence only; Ley 172-13 minimization. Wide/cross-tenant
-disclosure = finding. No-freelance-fix: findings report `severity + location +
-evidence`, owner remediates — never rotate keys/patch prod/widen perms.
-Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
-proof surfaces same session. Tone (REQ-P-003/006 co-sign, people owner verifies
-at gate): warm and direct — one item at a time; say `exit/salir` / pause anytime, no
-penalty; masking reminder rides every export. Exit-terminal (COND-P5-shared): `exit/salir` at C4 = pause + recorded `grill: exited` + escalate orchestrator; proposal stays unapproved on pre-decision exit, no silent promote.
+- Mechanics + human contract: `../using-frame-ship/references/challenge-round.md` §1–§2. Trigger/budget (C4 row): every REQ must link evidence (test/scan/log/review-link) — link present AND resolves AND relevant; missing/dead/irrelevant = FAIL with recorded reviewer-judgment reason; attestation-alone = FAIL. No handoff on FAIL.
+- Every C4 FAIL lists `residual-risk + owner`. Re-litigating settled gate verdicts banned — findings return to `frame-ship:execute-spec`. Packets preserved; Retry N=2 → escalate orchestrator.
+- Evidence safety: PII checkpoint per `challenge-round.md` §3 (zero PII/secrets/tokens in handoff text/exports; allowlisted evidence only; Ley 172-13). Proof-or-refuted + no-freelance-fix apply. Tone (people owner verifies at gate): warm and direct — one item at a time, `exit/salir`/pause anytime, no penalty, masking rides every export. Exit = pause + `grill: exited` + escalate; proposal stays unapproved on pre-decision exit, no silent promote.
 
 ## 4. What I won't do
 

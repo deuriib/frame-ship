@@ -14,13 +14,13 @@ Chain outputs only: `briefs/` (intent) → `specs/` (numbered lifecycle). No pro
 | Shipped notes | `specs/30_delivery/RELEASE_NOTES.md` | `ship-release` output |
 | Work in flight | `specs/40_workspace/<domain>/` | [engineering, automation/ops, security, people]; see `specs/AGENTS.md` |
 | Gate verdicts | `specs/40_workspace/quality-gate/<spec-id>/` | per-reviewer verdicts + `GATE_REPORT.md`; `CLOSED` blocks handoff without waiver |
-| Closed history | `specs/50_archive/SPEC-*.md` | terminal, moved from `20_backlog/` on release; read-only, never edit in place |
+| Closed history | `specs/50_archive/<spec-id>/` | terminal, read-only: `SPEC-*.md` + promoted `GATE_REPORT.md` + `HANDOFF.md` + `ARCHIVE-RECORD.md`; moved from `20_backlog/` on release; never edit in place (pre-existing flat `SPEC-*.md` files in `50_archive/` are legacy, leave as-is) |
 
 ## CONVENTIONS
 - Lifecycle order: `10_design → 12_adr → 15_requirements → 20_backlog → 30_delivery`, with `40_workspace/` as scratch and `50_archive/` as terminal. Numbers sort; never rename a number.
 - SCREAMING files only at store boundary: `BRIEF-*.md` in `briefs/`; `SPEC-*.md` in `20_backlog/` (moved to `50_archive/` on release); `ADR-*.md` in `12_adr/`; `REQ-*.md` in `15_requirements/`; `PROPOSED_CHANGES.md`, `HANDOFF.md`, `GATE_REPORT.md` in `40_workspace/`; `RELEASE_NOTES.md` in `30_delivery/`.
-- `40_workspace/<domain>/` holds per-domain drafts (`PROPOSED_CHANGES-*`, `IMPLEMENTATION_PLAN-*`, `TEST_MATRIX-*`, `HANDOFF-*`); promotion copies canonical files up the lifecycle, never moves scratch. `40_workspace/` scratch and gate records must be cleaned up on archive.
-- Trace rides filenames: `<spec-id>` suffix links proposal → plan → matrix → handoff → gate (e.g. `*-single-dispatcher.md`).
+- Singleton-per-lane naming: `40_workspace/<domain>/` holds exactly one UPPER_SNAKE file per type — `PROPOSED_CHANGES.md`, `IMPLEMENTATION_PLAN.md`, `TEST_MATRIX.md`, `HANDOFF.md` (never `-*` suffixed variants); scope comes from the directory (`<domain>/`, `quality-gate/<spec-id>/`), never from the filename. Gate verdicts are the one kebab-case exception: `quality-gate/<spec-id>/<reviewer>.md`. `40_workspace/` scratch and gate records are purged on archive (allowlist in `skills/ship-release/`), but `GATE_REPORT.md` + `HANDOFF.md` are promoted to `50_archive/<spec-id>/` FIRST.
+- Trace rides directories: a spec's proposal → plan → matrix → handoff → gate all live under paths containing the `<domain>`/`<spec-id>` directory — never encode the spec in the filename.
 - `OKR-*.md` pairs its `BRIEF-*.md` by slug suffix — never orphan an OKR.
 
 ## ANTI-PATTERNS

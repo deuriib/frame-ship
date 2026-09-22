@@ -16,7 +16,7 @@ Creed: *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedic
 ├── plugins/            # Runtime adapters: OpenCode plugins (split lanes) and Antigravity CLI hooks
 ├── rules/              # Context rules: frame-ship.md and guardrails.md
 ├── scripts/            # Repository automation (bump-version.mjs)
-└── skills/             # 13 process skills (9 core chain stages + 3 supporting)
+└── skills/             # 12 process skills (9 core chain stages + 2 supporting)
 ```
 
 ## WHERE TO LOOK

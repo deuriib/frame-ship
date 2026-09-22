@@ -64,30 +64,9 @@ Each reviewer understands their domain's review criteria. The orchestrator dispa
 
 ## 4b. C3 — CONDITIONAL/waiver interrogation lane (security-owned)
 
-> **Surgical scope:** C3 interrogates every CONDITIONAL/waiver justification
-> against the three-block bar only (see below). It does NOT re-run the routing
-> table, re-dispatch all reviewers, or re-review the full spec.
-
-Amplifies the existing `review-refuter` output: every CONDITIONAL/waiver
-justification is interrogated against the normative three-block bar in
-`references/waiver-template.md` (`Accepted-risk` + `Compensating-controls +
-owner` + `Expiry/Re-review date-or-condition + owner`) and recorded per-block
-pass/fail in the C3 row of `references/gate-report.md`. Missing block = FAIL,
-no promotion. Every C3-interrogated CONDITIONAL lists `residual-risk + owner`
-(or explicit `none + owner`) — silent APPROVE+conditions = FAIL. Expiry default:
-90 days or next release, whichever first (orchestrator-confirmed; re-review
-owner mandatory). Authority limits (verbatim): CLOSED stays CLOSED without
-recorded `domain-owners + orchestrator` sign-off. Full re-review banned — C3
-interrogates every waiver against this bar only (every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies), never re-runs the routing
-table. Retry N=2 → escalate orchestrator. PII checkpoint (REQ-SEC-003/004 +
-REQ-P-006 co-sign): zero PII/secrets/tokens/credentials/sessions in grill
-questions/answers/prompts/logs/examples/exports; every
-prompt/adapter/event/log/export is a declared PII checkpoint (mask/tokenize +
-allowlist); allowlisted evidence only; Ley 172-13 minimization. Wide/cross-tenant
-disclosure = finding. No-freelance-fix: findings report `severity + location +
-evidence`, owner remediates — never rotate keys/patch prod/widen perms.
-Proof-or-refuted: finding without `diff/scan/log` = REFUTED; Critical/High with
-proof surfaces same session. Exit-terminal (COND-P5-shared): `exit/salir` at C3 = pause + recorded `grill: exited` + escalate orchestrator; uncleared waivers stay CONDITIONAL, no silent promote. No routing-table change.
+- Mechanics + human contract: `../using-frame-ship/references/challenge-round.md` §1–§2. Trigger/budget (C3 row): every CONDITIONAL/waiver, interrogated against the three-block bar in `references/waiver-template.md` only — per-block pass/fail recorded in the C3 row of `references/gate-report.md`; missing block = FAIL, no promotion.
+- Surgical scope: C3 does NOT re-run the routing table, re-dispatch reviewers, or re-review the spec. Rows = CONDITIONALs — sample-of-one never satisfies. Every C3-interrogated CONDITIONAL lists `residual-risk + owner` (or explicit `none + owner`); silent APPROVE+conditions = FAIL. Expiry default: 90 days or next release, whichever first (orchestrator-confirmed, re-review owner mandatory). CLOSED stays CLOSED without recorded `domain-owners + orchestrator` sign-off.
+- Evidence + safety: PII checkpoint per `challenge-round.md` §3 (zero PII/secrets/tokens in rounds/logs/exports; allowlisted evidence only; Ley 172-13). Proof-or-refuted (`diff/scan/log`) and no-freelance-fix rules apply. Exit = pause + `grill: exited` + escalate; uncleared waivers stay CONDITIONAL, no silent promote. No routing-table change.
 
 ## 5. What I won't do
 

@@ -118,7 +118,6 @@ const SKILL_DIRS = [
   "verify-handoff",
   "ship-release",
   "debugging",
-  "git-worktree",
   "pull-request",
 ] as const;
 

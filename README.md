@@ -160,7 +160,7 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 ### Plugin Runtime
 
 - **`plugins/opencode/`** — Split zero-deps V2 runtime (two plugins + shared module + composed entry):
-  - **`skills.ts`** (id `frame-ship`) — registers 13 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
+  - **`skills.ts`** (id `frame-ship`) — registers 12 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
   - **`agents.ts`** (id `frame-ship-agents`) — provisions the 31-agent roster from `agents/*.md` into the global discovery route, enriches every discovered id in place, sets the orchestrator default.
   - **`shared.ts`** — version lockstep target (`header + const VERSION`) + bounded filesystem helpers. Not a plugin (no default export).
   - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs both lanes under the original id `frame-ship`, preserving single-file installs. Never list it together with `skills.ts`.

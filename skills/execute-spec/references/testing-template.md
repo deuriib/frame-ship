@@ -149,7 +149,7 @@ verify-handoff ───────► ship-release
 ### Supporting Skills Fit
 - **`debugging`**: Triggered upon test failure or defect. Follows 4-phase RCA to write a failing reproduction test *before* proposing any code fix.
 - **`pull-request`**: Validates CI test automation, runs linting/typechecks, and enforces test-to-code review budget ratio.
-- **`git-worktree`**: Executes isolated parallel test suites in segregated workspace trees without cross-lane pollution.
+- **Isolated worktree lanes** (`references/worktree-annex.md`): execute isolated parallel test suites in segregated workspace trees (`.worktrees/<spec-id>`, max 2) without cross-lane pollution.
 
 ---
 

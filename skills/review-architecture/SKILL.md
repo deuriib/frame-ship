@@ -27,9 +27,9 @@ significant decisions as ADRs in `docs/specs/12_adr/`. No invariant break withou
 
 0. Pre-flight LOAD — HARD STOP: `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
 1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical — only `PROPOSED_CHANGES.md`, never `PROPOSED_CHANGES-*.md`).
-2. Compare against `ARCHITECTURE.md` + `API_CONTRACTS.md` (canonical singletons — update-in-place, never `ARCHITECTURE-*.md` / `API_CONTRACT-*.md`).
-3. Produce/update ADR `docs/specs/12_adr/ADR-###-<slug>.md` via `references/adr-template.md`.
-4. Issue review via `references/architecture-review.md` as the single `ARCHITECTURE_REVIEW.md` per lane (create-if-missing else update-in-place, never suffix).
+2. Compare against `docs/specs/10_design/ARCHITECTURE.md` (canonical singleton — update-in-place, never `ARCHITECTURE-*.md`; interfaces/API shapes live in its Components/Data Flow table — no separate `API_CONTRACTS.md`).
+3. ADR only if the change breaks/creates an invariant, adds a component, or changes a cross-domain contract: produce `docs/specs/12_adr/ADR-###-<slug>.md` via `references/adr-template.md`. Within existing contracts → NO ADR, record the verdict only (step 4). One number = one file, never reuse a number. `Status: proposed` with code already merged = gate FAIL.
+4. Issue review via `references/architecture-review.md` as the single `ARCHITECTURE_REVIEW.md` per lane (create-if-missing else update-in-place, never suffix). The review is ephemeral — on ship it is promoted to `50_archive/<spec-id>/` by `ship-release`, not left in `40_workspace/`.
 5. Hand off to `frame-ship:execute-spec` if approved.
 6. Close with a commit. Example: `docs(adr-009): record architectural decision in 12_adr`.
 
@@ -41,5 +41,6 @@ significant decisions as ADRs in `docs/specs/12_adr/`. No invariant break withou
 
 ## 5. References
 
-- `references/adr-template.md` — Architecture Decision Record.
+- `references/adr-template.md` — Architecture Decision Record (only when step 3's condition holds).
 - `references/architecture-review.md` — Contract compliance + verdict.
+- `references/architecture-template.md` — Canonical architecture contract format (owner: this skill; `translate-to-spec` produces `ARCHITECTURE.md` from it).

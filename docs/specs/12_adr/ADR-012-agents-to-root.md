@@ -1,8 +1,9 @@
-# ADR-002: Agent Templates to Repo-Root `agents/`
+# ADR-012: Agent Templates to Repo-Root `agents/`
 
 **Date:** 2026-09-16
 **Deciders:** vasquez (CTO), montilla (CEO)
 **Status:** accepted
+**Renumber note:** was minted as a duplicate `ADR-002` on 2026-09-16 (two files, one number); renumbered to ADR-012 on 2026-09-22 — one number = one file, numbers never reused (`docs/specs/AGENTS.md`).
 
 ## Context
 

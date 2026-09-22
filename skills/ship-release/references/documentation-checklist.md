@@ -16,7 +16,7 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 | **Code & Header Markers** | `scripts/bump-version.mjs` | Automated script | `node scripts/bump-version.mjs --check` | Plugin header, `VERSION` constant, and parity comments identical. |
 | **Context & Rules** | `rules/frame-ship.md` | Automated script / Dev | Marker grep | Version lockstep note and persistent cards updated. |
 | **Knowledge Base** | `AGENTS.md` (root & subdirs) | Engineering Owner | Read-back & line count | Runtime line counts, package version, and toolchain commands aligned. |
-| **Spec Lifecycle** | `docs/specs/` | Release Manager | Git status check | Spec moved to `50_archive/`, scratch files in `40_workspace/` purged. |
+| **Spec Lifecycle** | `docs/specs/` | Release Manager | Git status check | Spec `git mv` to `50_archive/<spec-id>/` (R rename, source gone); `ARCHIVE-RECORD.md` written; allowlisted scratch in `40_workspace/` purged (nothing outside the allowlist). |
 
 ---
 
@@ -44,9 +44,12 @@ Use this checklist during `ship-release` to guarantee that all project documenta
    ├── Run automated tests / evidence collection
    └── node scripts/bump-version.mjs --check (must report 0 drift)
 
-4. Spec Archival & Workspace Hygiene
-   ├── git mv docs/specs/20_backlog/<spec>.md docs/specs/50_archive/
-   └── Clean docs/specs/40_workspace/<domain>/ and quality-gate/<spec>/
+4. Spec Archival & Workspace Hygiene (promote before purge — see SKILL §3 step 6)
+   ├── mkdir docs/specs/50_archive/<spec-id>/ && git mv docs/specs/20_backlog/<spec>.md docs/specs/50_archive/<spec-id>/
+   ├── Copy GATE_REPORT.md + HANDOFF.md into 50_archive/<spec-id>/ (evidence survives)
+   ├── Write 50_archive/<spec-id>/ARCHIVE-RECORD.md (references/archive-record.md)
+   ├── Purge allowlist ONLY: 40_workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md + 40_workspace/quality-gate/<spec-id>/
+   └── Verify: purged paths absent, OTHER SPEC lanes untouched, git status clean
 ```
 
 ---
@@ -56,4 +59,4 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 - **Never ship with version drift:** Leaving any plugin header, context hook, or manifest on an older version is a gate violation.
 - **Never ship with dead documentation links:** Every link in `README.md`, `INSTALL.md`, and `RELEASE_NOTES.md` must resolve.
 - **Never skip changelog for user-facing changes:** Even non-code ships must document operational, legal, or financial changes.
-- **Never leave scratch drafts lingering in `40_workspace/`:** All transient artifacts must be purged before the release commit.
+- **Never leave the allowlisted drafts lingering in `40_workspace/` after archive:** The 4 lane singletons for THIS spec + `quality-gate/<spec-id>/` are purged before the release commit — but ONLY after `GATE_REPORT.md` + `HANDOFF.md` are promoted to `50_archive/<spec-id>/`, and NEVER across other SPECs' lanes.

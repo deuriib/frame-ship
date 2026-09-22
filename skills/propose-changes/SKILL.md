@@ -35,16 +35,10 @@ Force design-before-code. The proposal is reviewable; the repo is untouched.
 
 ### C2 — Pre-approval challenge trigger + one-pass budget (REQ-002)
 
-- Scope: pre-approval challenge round inside `propose-changes` only — never a new stage, never a new reviewer. Glossary: see C1 (`skills/frame-intent/SKILL.md` §C1) — `challenge` = the round, `grill`/`ronda` aliases only; not redefined here.
-- Trigger — fires on ANY of: auth/data/API/PII surface; multi-domain scope; blast radius mentioning customers/regulators/revenue (synonyms fire: customers/users/clients/members/consumers; regulators/GDPR/Ley 172-13/authorities; revenue/pipeline/quota/money — independent blast-radius + API-surface scan fires even when prose self-reports "internal only"); approver request.
-- Opener (exit alias `exit/salir`, cap bound): "¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la vez)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." (canonical: people SPEC §4 inserts 1–2).
-- One-pass budget: exactly one budgeted pass per trigger, where pass = ≤3 questions; question 4 (N+1) = FAIL (blocked, must stop); then terminal approve/reject — no second pass without approver request.
-- Approver-requested re-grill: ≤1 extra pass (total ≤2 passes), then Retry N=2 → escalate orchestrator.
-- Exit terminal (pre-decision): exit before approve/reject = pause + recorded `grill: exited` + escalate; proposal stays unapproved (no silent promote).
-- Stall breaker: Retry N=2 → escalate orchestrator. No-answer after 2 reminders → recorded `grill: stalled` + escalate, proposal pauses.
-- Untouched rule: repo files stay untouched during the round AND no external sends/filings/launches (proposal-phase rule holds inside the grill); the round challenges blast radius and rollback before code is allowed.
-- Human contract (same as C1, single source people SPEC §4 inserts 2–5): one question at a time ("Hago una sola pregunta, espero tu respuesta, luego sigo."); disagreement invite on every recommended answer ("Mi respuesta recomendada es X — ¿dónde puede estar mal?"); warmth ("Reto cálido y directo: desafío firme, nunca dureza. Si el tono aprieta, dilo y pausamos." — intent-match paraphrase per T-010); masking ("Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13).").
-- Pause/exit: after the round, offer pause/exit before the approve/reject decision.
+- Mechanics (glossary, opener/exit, one-at-a-time, warmth, masking, N+1, stall breaker): `../using-frame-ship/references/challenge-round.md` §1–§2 — never redefined here.
+- Trigger (any): auth/data/API/PII surface; multi-domain scope; blast radius mentioning customers/regulators/revenue (synonym scan fires even when prose says "internal only"); approver request.
+- Budget: exactly one pass of ≤3 questions (question 4 = FAIL); approver-requested re-grill ≤1 extra pass (≤2 total). Untouched rule: repo files AND external sends/filings/launches stay untouched during the round.
+- Exit terminal (pre-decision): exit before approve/reject = pause + recorded `grill: exited` + escalate; proposal stays unapproved (no silent promote). Then terminal approve/reject.
 
 ## 4. What I won't do
 

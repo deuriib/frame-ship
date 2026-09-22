@@ -20,7 +20,7 @@ canonical architecture contract. The brief is read-only here.
 ## 2b. Role Binding (Org)
 
 - **Bound to:** owning domain owners — engineering, security, finance, legal, marketing, people, revenue, automation (8-domain catalogue).
-- Engineering owner consolidates `ARCHITECTURE.md` + `API_CONTRACTS.md`.
+- Engineering owner consolidates `ARCHITECTURE.md` (interfaces/API shapes in its Components table; no separate `API_CONTRACTS.md` — format owned by `review-architecture/references/architecture-template.md`).
 
 ## 3. Process
 
@@ -28,7 +28,7 @@ canonical architecture contract. The brief is read-only here.
 1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
 2. The orchestrator dispatches the owning domain owners by domains touched (8-domain catalogue in `../AGENTS.md`). Each dispatched domain owner understands their domain's practices and returns its spec to the orchestrator.
 3. Each dispatched domain owner produces a spec saved into `docs/specs/20_backlog/SPEC-###-<slug>.md` using `references/spec-template.md` carrying `execution_mode` + `DOMAINS` forward; every spec declares `Domains-touched` + owning domain owner. Orchestrator dispatches entire team; domain owners do the work or brief back — the domain owner returns its deliverable to the orchestrator (max 2 parallel). Sequential degradation, same contract: harnesses without task run lanes sequentially in the same thread — same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
-4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` and `API_CONTRACTS.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `ARCHITECTURE.md`, never `ARCHITECTURE-*.md`; only `API_CONTRACT.md`, never `API_CONTRACT-*.md`).
+4. Engineering owner consolidates `docs/specs/10_design/ARCHITECTURE.md` (engineering contracts; non-engineering specs link domain contracts instead of forcing API shapes). Format per `../review-architecture/references/architecture-template.md` (template owner = review-architecture; producer = this stage). Singleton: create-if-missing else update-in-place, never suffix — one UPPER_SNAKE canonical per lane (only `ARCHITECTURE.md`, never `ARCHITECTURE-*.md`).
 5. Index requirements in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
 6. Hand off to `frame-ship:propose-changes` as `SPEC:docs/specs/20_backlog/SPEC-###-<slug>.md#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 7. Close with a commit. Example: `feat(spec-003): add spec to 20_backlog with REQ-IDs and ARCHITECTURE contract`.
@@ -42,5 +42,5 @@ canonical architecture contract. The brief is read-only here.
 ## 5. References
 
 - `references/spec-template.md` — Spec with Context/REQ/AC/Contracts/Out-of-scope (includes `execution_mode` + packet).
-- `references/architecture-template.md` — Architecture contract.
 - `references/requirements-template.md` — Requirements index.
+- `../review-architecture/references/architecture-template.md` — Architecture contract format (owned by `review-architecture`, cited here as producer).

@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-18
 **Deciders:** engineering owner (vasquez, with architect input), people owner, security owner
-**Status:** proposed
+**Status:** accepted
 
 ## Context
 
