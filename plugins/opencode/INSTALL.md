@@ -122,9 +122,9 @@ ln -s <this-repo>/plugins/opencode/guardrails.ts ~/.config/opencode/plugins/
    the composed entry bundles all three lanes under `frame-ship` alone.
 3. `opencode api get "/api/skill?location[directory]=<your-project>"` lists all
    13 `frame-ship:*` skills (`using-frame-ship`, 9 stages, 3 supporting).
-4. Start any session — the system prompt contains `[frame-ship v0.9.0]`
+4. Start any session — the system prompt contains `[frame-ship v0.10.0]`
    (workflow card + pointers + `using-frame-ship` bootstrap) and
-   `[frame-ship-guardrails v0.9.0]` (full guardrails on context, minimal set
+   `[frame-ship-guardrails v0.10.0]` (full guardrails on context, minimal set
    on compaction).
 5. Agents (automatic): on setup the `frame-ship-agents` lane (or the composed
    entry) provisions V2-native files from the

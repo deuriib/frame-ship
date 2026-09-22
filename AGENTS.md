@@ -74,7 +74,7 @@ node scripts/bump-version.mjs <patch|minor|major> --changelog # Bump version and
 ```
 
 ## NOTES
-- Version lockstep: [frame-ship v0.9.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
+- Version lockstep: [frame-ship v0.10.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
 - Zero runtime dependencies: `@opencode/plugin` is compile-time only. Filesystem operations use `Bun.file` with dynamic `node:fs` fallback.
 - Windows file URLs in `fileUrlToPath` require stripping leading slashes before drive letters (`/D:/...` -> `D:/...`).
 

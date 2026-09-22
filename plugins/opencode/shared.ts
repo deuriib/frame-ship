@@ -1,5 +1,5 @@
 /**
- * frame-ship v0.9.0 — Frame→Ship shared runtime module (zero deps, V2-only).
+ * frame-ship v0.10.0 — Frame→Ship shared runtime module (zero deps, V2-only).
  * NOT a plugin (no default export): imported by ./skills.ts (id "frame-ship"),
  * ./agents.ts (id "frame-ship-agents"), ./guardrails.ts (id
  * "frame-ship-guardrails"), and by ./frame-ship.ts (the composed entry point
@@ -11,7 +11,7 @@
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
-export const VERSION = "0.9.0";
+export const VERSION = "0.10.0";
 
 function fileUrlToPath(url: string): string | undefined {
   try {
