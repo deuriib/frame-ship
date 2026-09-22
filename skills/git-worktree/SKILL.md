@@ -37,7 +37,7 @@ This skill is supporting, not a stage — chain order never changes.
 
 ## 4. What I won't do
 
-- Change chain order, add a stage, edit `.opencode/plugins/frame-ship.ts`, or change the 8-domain catalogue.
+- Change chain order, add a stage, edit `plugins/opencode/*.ts` (skills/agents/shared lanes), or change the 8-domain catalogue.
 - Create a worktree on a dirty baseline without a session-recorded override, or pass the ignore gate on nonzero exit.
 - Exceed 2 live worktrees, run parallel installers, or hand a red baseline to `execute-spec`.
 - Paste file bodies across worktrees or carry secrets, tokens, credentials, sessions, or PII in paths, examples, logs, or gate shares.

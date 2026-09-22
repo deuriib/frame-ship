@@ -5,8 +5,8 @@
 node = "22"
 
 [tasks.typecheck]
-description = "Typecheck opencode plugin (zero-deps, single file)"
-run = 'npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/opencode/frame-ship.ts'
+description = "Typecheck opencode plugins (zero-deps; skills + agents + shared + composed entry)"
+run = 'npx -y -p typescript tsc --noEmit --skipLibCheck --module esnext --target es2022 --moduleResolution bundler plugins/opencode/frame-ship.ts plugins/opencode/skills.ts plugins/opencode/agents.ts plugins/opencode/guardrails.ts plugins/opencode/shared.ts'
 
 [tasks.install]
 description = "Install opencode plugin deps"

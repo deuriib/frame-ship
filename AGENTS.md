@@ -13,7 +13,7 @@ Creed: *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedic
 .
 ├── agents/             # 31 agent personas (Montilla CEO, 8 domain owners, specialists, reviewers)
 ├── docs/               # Artifact store: briefs/ (intent) and specs/ (lifecycle 10->50)
-├── plugins/            # Runtime adapters: OpenCode plugin and Antigravity CLI hooks
+├── plugins/            # Runtime adapters: OpenCode plugins (split lanes) and Antigravity CLI hooks
 ├── rules/              # Context rules: frame-ship.md and guardrails.md
 ├── scripts/            # Repository automation (bump-version.mjs)
 └── skills/             # 13 process skills (9 core chain stages + 3 supporting)
@@ -28,10 +28,14 @@ Creed: *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedic
 | Proposals & implementation | `docs/specs/40_workspace/`, `skills/propose-changes/` | PROPOSED_CHANGES.md before any code edit |
 | Multi-domain quality gate | `skills/quality-gate/`, `agents/` | 1 subagent per reviewer, independent evaluations |
 | Version sync & release | `scripts/bump-version.mjs`, `skills/ship-release/` | Lockstep across 7 files; moves spec to 50_archive/ |
-| Harness adapters | `plugins/opencode/`, `plugins/antigravity/` | Zero-dep single-file runtime + PreInvocation hooks |
+| Harness adapters | `plugins/opencode/`, `plugins/antigravity/` | Zero-dep split runtime (skills/agents/shared + composed entry) + PreInvocation hooks |
 
 ## CODE MAP
-- `plugins/opencode/frame-ship.ts`: OpenCode plugin entry point; registers skills, injects prompt card and live bootstrap.
+- `plugins/opencode/skills.ts`: OpenCode skills plugin (id `frame-ship`); registers skills, injects prompt card and live bootstrap.
+- `plugins/opencode/guardrails.ts`: OpenCode guardrails plugin (id `frame-ship-guardrails`); injects full `rules/guardrails.md` on context + minimal one-liner-per-domain set on compaction (marker `[frame-ship-guardrails v…]`).
+- `plugins/opencode/agents.ts`: OpenCode agents plugin (id `frame-ship-agents`); provisions the 31-agent roster, sets orchestrator default.
+- `plugins/opencode/frame-ship.ts`: composed entry (`package.json` `main`); runs all three lanes under id `frame-ship`.
+- `plugins/opencode/shared.ts`: version lockstep target + bounded filesystem helpers (not a plugin).
 - `plugins/antigravity/hooks/context-inject.ts`: Antigravity PreInvocation hook; injects rules and bootstrap on invocation 0.
 - `plugins/antigravity/hooks/safety-gate.ts`: PreToolUse hook intercepting `run_command` against dangerous commands and secrets.
 - `plugins/antigravity/hooks/format-note.ts`: PostToolUse hook draining file modification notifications.
@@ -70,7 +74,7 @@ node scripts/bump-version.mjs <patch|minor|major> --changelog # Bump version and
 ```
 
 ## NOTES
-- Version lockstep: [frame-ship v0.8.0] — bump with `plugins/opencode/frame-ship.ts` + `plugins/antigravity/hooks/context-inject.ts`.
+- Version lockstep: [frame-ship v0.9.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
 - Zero runtime dependencies: `@opencode/plugin` is compile-time only. Filesystem operations use `Bun.file` with dynamic `node:fs` fallback.
 - Windows file URLs in `fileUrlToPath` require stripping leading slashes before drive letters (`/D:/...` -> `D:/...`).
 

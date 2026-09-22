@@ -59,7 +59,7 @@ Or via CLI:
 opencode plugin add github:deuriib/frame-ship
 ```
 
-Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.8.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.9.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
 Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
 
@@ -92,7 +92,7 @@ What maps to what (opencode → agy):
 
 | OpenCode plugin                                                                 | Antigravity CLI equivalent                                                                                   |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `experimental.chat.system.transform` — WORKFLOW_CARD, GUARDRAILS_FULL, POINTERS | `rules/frame-ship.md` — automatically injected into agent context                                            |
+| `experimental.chat.system.transform` — WORKFLOW_CARD, POINTERS (+ guardrails lane: full `rules/guardrails.md` on context, minimal set on compaction) | `rules/frame-ship.md` — automatically injected into agent context                                            |
 | `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
 | `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/frame-ship.md` is persistent & always-on in context             |
 | `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
@@ -159,7 +159,11 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 ### Plugin Runtime
 
-- **`plugins/opencode/frame-ship.ts`** — Single-file, zero-deps (V2 `Plugin.define`, id `frame-ship`). Registers 13 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
+- **`plugins/opencode/`** — Split zero-deps V2 runtime (two plugins + shared module + composed entry):
+  - **`skills.ts`** (id `frame-ship`) — registers 13 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
+  - **`agents.ts`** (id `frame-ship-agents`) — provisions the 31-agent roster from `agents/*.md` into the global discovery route, enriches every discovered id in place, sets the orchestrator default.
+  - **`shared.ts`** — version lockstep target (`header + const VERSION`) + bounded filesystem helpers. Not a plugin (no default export).
+  - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs both lanes under the original id `frame-ship`, preserving single-file installs. Never list it together with `skills.ts`.
 
 ## Philosophy
 
@@ -205,7 +209,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.8.0"],
+  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.9.0"],
 }
 ```
 
@@ -223,13 +227,15 @@ Project structure:
 │   ├── format-note.ts            # PostToolUse observer → {} (bun)
 │   └── fixtures/                 # replay vectors (allow/deny/secret/{}/first/compact)
 ├── rules/
-│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.8.0
+│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.9.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── plugins/
 │   └── opencode/
 │       ├── INSTALL.md              # install: package (use) + local file (dev)
-│       ├── package.json            # explicit plugin root (main: ./frame-ship.ts)
-│       └── frame-ship.ts           # runtime: injects chain into context (V2)
+│       ├── frame-ship.ts           # composed entry (main): both lanes, id frame-ship
+│       ├── skills.ts               # plugin: skills lane + session hooks (id frame-ship)
+│       ├── agents.ts               # plugin: agents lane (id frame-ship-agents)
+│       └── shared.ts               # version lockstep + fs helpers (not a plugin)
 ├── skills/
 │   ├── using-frame-ship/       # → bootstrap + chain contract
 │   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
@@ -251,11 +257,11 @@ Commands:
 
 ```bash
 # from repo root (mise)
-mise run typecheck   # typecheck plugins/opencode/frame-ship.ts
+mise run typecheck   # typecheck plugins/opencode/{frame-ship,skills,agents,shared}.ts
 mise run install     # npm install in .opencode/
 
-# raw (from .opencode/)
-npx -y -p typescript tsc --noEmit --skipLibCheck --module nodenext --target es2022 --moduleResolution nodenext plugins/frame-ship.ts
+# raw (from repo root)
+npx -y -p typescript tsc --noEmit --skipLibCheck --module esnext --target es2022 --moduleResolution bundler plugins/opencode/frame-ship.ts plugins/opencode/skills.ts plugins/opencode/agents.ts plugins/opencode/shared.ts
 ```
 
 Conventions:
@@ -272,7 +278,7 @@ Anti-patterns:
 - Skipping `review-security` on auth/data/API; arch change without ADR.
 - Handoff on CLOSED gate without c-levels+CEO waiver record.
 - Pasting full context between stages — reference-only packets.
-- Adding deps to plugin — must stay single-file.
+- Adding runtime deps to the plugins — all four `plugins/opencode/*.ts` files stay zero-dep (loading the composed entry together with `skills.ts` duplicates id `frame-ship`).
 - Editing `references/` without updating parent SKILL `§5`.
 - Adding `version/author` to SKILL frontmatter — loader expects `name/description` only.
 
