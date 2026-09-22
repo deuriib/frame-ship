@@ -7,6 +7,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [v0.10.0] — 2026-09-22
 
+### Removed
+
+- Standalone `skills/git-worktree/` skill (SKILL + 4 refs): merged into `skills/execute-spec/references/worktree-annex.md` as a supporting annex. Plugin now registers 12 `frame-ship:<stage>` skills (was 13); `frame-ship:git-worktree` trigger retired — parallel lanes are invoked via `execute-spec` + the annex. Security guards, pwsh flow, and people announce wording preserved by reference inside the annex.
+
+### Added
+
+- `skills/ship-release/references/archive-record.md`: `50_archive/<spec-id>/ARCHIVE-RECORD.md` template (spec, gate verdict, commits, tag, promoted/purged lists, ADR link, rollback plan).
+- `skills/using-frame-ship/references/challenge-round.md`: single source for shared C1–C4 opt-in challenge mechanics (glossary, opener/exit, one-at-a-time, warmth, masking Ley 172-13, N+1, stall breaker).
+
+### Changed
+
+- `ship-release` archive is now promote-then-purge in 5 ordered substeps: `git mv` to `50_archive/<spec-id>/`, promote `GATE_REPORT.md` + `HANDOFF.md` BEFORE purging, write `ARCHIVE-RECORD.md`, purge allowlist only (`PROPOSED_CHANGES`/`IMPLEMENTATION_PLAN`/`TEST_MATRIX`/`HANDOFF` of that spec + `quality-gate/<spec-id>/`), verify other lanes untouched. Purging evidence without promoting it is now an explicit violation.
+- `ship-release` refs 6 → 3 core (`release-notes`, `changelog`, `documentation-checklist` + `archive-record`); `readme`/`install`/`migration-guide` templates conditional on `ship-type=deploy` with breaking changes.
+- Singleton-per-lane naming fixed as the single convention: scope comes from the directory (`<domain>/`, `quality-gate/<spec-id>/`), never from `-*` filename suffixes; kebab-case only for per-reviewer gate verdicts. `docs/AGENTS.md` + `docs/specs/AGENTS.md` corrected (they previously mandated `<spec-id>` suffixes).
+- ADRs are now conditional: only when a change breaks/creates an invariant, adds a component, or changes a cross-domain contract — within-contract changes get an architecture review only, no ADR. `Status: proposed` with code already merged = gate FAIL.
+- Duplicate `ADR-002` renumbered to `ADR-012-agents-to-root.md` (one number = one file, numbers never reused); `ADR-007-grilling-integration` `proposed` → `accepted`.
+- Ghost `API_CONTRACTS.md` reference removed from `translate-to-spec` + `review-architecture` (file never existed; interfaces live in `ARCHITECTURE.md` Components table); `architecture-template.md` moved to `review-architecture/` as template owner.
+- C1 (`frame-intent`), C2 (`propose-changes`), C3 (`quality-gate`), C4 (`verify-handoff`) reduced to trigger + budget lines citing the shared `challenge-round.md`.
+
 ## [v0.9.0] — 2026-09-22
 
 ### Changed
