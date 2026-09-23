@@ -161,15 +161,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Concise plugin prompt injections: `.opencode/plugins/frame-ship.ts` 223→156 lines (−31.3%, 11,098→7,620 chars), string literals + header only, zero behavior change (INTENT-2026-09-16-concise-plugin-prompts, REQ-001..REQ-006; gate OPEN, DoD PASS; restart required).
 - Single `CHAIN` const replaces 4x chain-order literals; guardrails as greppable 1:1 numbered checklist (14/14).
 
-## [v0.3.0] — 2026-09-16
-
-### Added
-
-- MANDATORY LOAD ORDER enforced in plugin + all 9 stage skills: `skill(stage)` + `read(agents/<domain>/<agent>.md)` BEFORE any task/edit/bash, single AND multi-subagents. HARD STOP + retry N=2 → escalate montilla.
-- Execution modes frozen: `single` = direct (no task) + skill/template cite; `multi-subagents` = `task(general)` max 2 parallel with read orders in prompt (general-purpose default until agents natively registered).
-- 68 agent templates: adapter `when run` → `REQUIRED inside frame-ship` + portable note fixed; dispatched ONE template read fully, rest path-cites.
-- Gate + handoff verification: `Load Evidence` section in `gate-report.md`, DoD + `HANDOFF.md` fail without skill/template/mode/packet cites.
-
 ## [v0.3.1] — 2026-09-16
 
 ### Changed
@@ -190,3 +181,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 
 - 68 opencode agents vendored as reference-only templates + `execution_mode: single | multi-subagents` (SPEC-001-agent-templates; see `docs/specs/30_delivery/RELEASE_NOTES.md` v0.3.0-templates entry — old-path strings preserved as history).
+- MANDATORY LOAD ORDER enforced in plugin + all 9 stage skills: `skill(stage)` + `read(agents/<domain>/<agent>.md)` BEFORE any task/edit/bash, single AND multi-subagents. HARD STOP + retry N=2 → escalate montilla.
+- Execution modes frozen: `single` = direct (no task) + skill/template cite; `multi-subagents` = `task(general)` max 2 parallel with read orders in prompt (general-purpose default until agents natively registered).
+- 68 agent templates: adapter `when run` → `REQUIRED inside frame-ship` + portable note fixed; dispatched ONE template read fully, rest path-cites.
+- Gate + handoff verification: `Load Evidence` section in `gate-report.md`, DoD + `HANDOFF.md` fail without skill/template/mode/packet cites.
