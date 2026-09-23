@@ -59,7 +59,7 @@ Or via CLI:
 opencode plugin add github:deuriib/frame-ship
 ```
 
-Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.11.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
+Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.12.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
 Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
 
@@ -211,7 +211,7 @@ If updates don't appear (pinned git dep / cache), reinstall the plugin entry. To
 
 ```jsonc
 {
-  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.11.0"],
+  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v0.12.0"],
 }
 ```
 
@@ -224,7 +224,7 @@ Project structure:
 ├── plugin.json                   # agy marker: name frame-ship (agy plugin install .)
 ├── hooks.json                    # frame-ship-context + safety-gate + format-note
 ├── rules/
-│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.11.0
+│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.12.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── plugins/
 │   ├── antigravity/

@@ -5,6 +5,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.12.0] — 2026-09-23
+
+### Added
+
+- `.github/workflows/ci.yml`: first CI pipeline — 2 jobs (typecheck + tests + version lockstep) on `push:main` + `pull_request`, `permissions: contents: read`, action refs API-verified, no secrets (SPEC-repo-hygiene).
+- `tests/smoke.test.mjs`: zero-dep `node:test` suite (9 tests): registry sync (12 entries + bidirectional negative), hook marker guards, 5 Antigravity fixture replays; wired as `npm test` glob form.
+- `package-lock.json`: committed lockfile for `npm ci` reproducibility — registry-default (npm 10 + 11 both dry-run clean, platform optionals present, no explicit mirror URLs).
+
+### Changed
+
+- Doc-truth sweep across `README.md`, `AGENTS.md`, `plugins/AGENTS.md`, hook headers: three-plugin split-lane reality (guardrails lane + composed entry `frame-ship.ts`), `Registers 12` skills, bun-runtime claims removed, `withTimeout` claim scoped to `shared.ts` setup helpers (SPEC-repo-hygiene).
+- `plugins/opencode/agents.ts`: plan/build enrichment comment reconciled with REQ-007 design (description overrides intentionally commented; permission persistence host-reconciled) — comment-only, zero logic (SPEC-repo-hygiene).
+
+### Fixed
+
+- CI action pin `jdx/action-mise@v3` (API 404) → `jdx/mise-action@v3` (verified + `v3` ref exists).
+- CHANGELOG repairs: restored `v0.6.1`, `v0.7.0` sections; `v0.3.0` heading order normalized.
+- False attestations corrected: CI rollback path now the verified two-SHA revert (`a83347b` + `feb9014`); lockfile mirror provenance corrected.
+
 ## [v0.11.0] — 2026-09-23
 
 ### Added
