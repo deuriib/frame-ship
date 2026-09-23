@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: jdx/action-mise@v3
+      - uses: jdx/mise-action@v3
       - run: npm ci
       - run: mise run typecheck
       - run: node scripts/bump-version.mjs --check
