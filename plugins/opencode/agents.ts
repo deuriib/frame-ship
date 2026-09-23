@@ -482,43 +482,43 @@ export default Plugin.define({
     // lane suffix; build gets the Ship-lane description, skill allow ensured
     // (existing permissions preserved), and lane suffix. Suffix appends are
     // idempotent (tag check) so transform replays never duplicate.
-    await ctx.agent.transform((editor) => {
-      if (editor.get("plan") !== undefined) {
-        editor.update("plan", (agent) => {
-          agent.description = PLAN_DESCRIPTION;
-          agent.permissions = planPermissions() as unknown as typeof agent.permissions;
-          const current = agent.system || "";
-          if (!current.includes(PLAN_TAG)) {
-            agent.system = current ? `${current}\n\n${PLAN_SUFFIX}` : PLAN_SUFFIX;
-          }
-        });
-      }
-      if (editor.get("build") !== undefined) {
-        editor.update("build", (agent) => {
-          agent.description = BUILD_DESCRIPTION;
-          const perms = agent.permissions as unknown as Array<{
-            action: string;
-            resource: string;
-            effect: string;
-          }> | undefined;
-          if (Array.isArray(perms)) {
-            const hasSkill = perms.some(
-              (p) => p.action === "skill" && p.effect === "allow",
-            );
-            if (!hasSkill) {
-              perms.push({ action: "skill", resource: "*", effect: "allow" });
-            }
-          } else {
-            agent.permissions = [
-              { action: "skill", resource: "*", effect: "allow" },
-            ] as unknown as typeof agent.permissions;
-          }
-          const current = agent.system || "";
-          if (!current.includes(BUILD_TAG)) {
-            agent.system = current ? `${current}\n\n${BUILD_SUFFIX}` : BUILD_SUFFIX;
-          }
-        });
-      }
-    });
+    // await ctx.agent.transform((editor) => {
+    //   if (editor.get("plan") !== undefined) {
+    //     editor.update("plan", (agent) => {
+    //       agent.description = PLAN_DESCRIPTION;
+    //       agent.permissions = planPermissions() as unknown as typeof agent.permissions;
+    //       const current = agent.system || "";
+    //       if (!current.includes(PLAN_TAG)) {
+    //         agent.system = current ? `${current}\n\n${PLAN_SUFFIX}` : PLAN_SUFFIX;
+    //       }
+    //     });
+    //   }
+    //   if (editor.get("build") !== undefined) {
+    //     editor.update("build", (agent) => {
+    //       agent.description = BUILD_DESCRIPTION;
+    //       const perms = agent.permissions as unknown as Array<{
+    //         action: string;
+    //         resource: string;
+    //         effect: string;
+    //       }> | undefined;
+    //       if (Array.isArray(perms)) {
+    //         const hasSkill = perms.some(
+    //           (p) => p.action === "skill" && p.effect === "allow",
+    //         );
+    //         if (!hasSkill) {
+    //           perms.push({ action: "skill", resource: "*", effect: "allow" });
+    //         }
+    //       } else {
+    //         agent.permissions = [
+    //           { action: "skill", resource: "*", effect: "allow" },
+    //         ] as unknown as typeof agent.permissions;
+    //       }
+    //       const current = agent.system || "";
+    //       if (!current.includes(BUILD_TAG)) {
+    //         agent.system = current ? `${current}\n\n${BUILD_SUFFIX}` : BUILD_SUFFIX;
+    //       }
+    //     });
+    //   }
+    // });
   },
 });
