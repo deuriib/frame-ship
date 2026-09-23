@@ -9,7 +9,7 @@
  *       runtime type-strips .ts natively): safety-gate allow→pass / deny→blocked,
  *       context-inject first→injects / later→no-op, format-note→{}.
  *
- * Run: node --test tests/
+ * Run: npm test   (= node --test "tests/*.test.mjs"; the bare `tests/` dir form exits 1 on node 22)
  */
 
 import test from "node:test";

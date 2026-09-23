@@ -159,11 +159,12 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 ### Plugin Runtime
 
-- **`plugins/opencode/`** — Split zero-deps V2 runtime (two plugins + shared module + composed entry):
+- **`plugins/opencode/`** — Split zero-deps V2 runtime (three plugins + shared module + composed entry):
   - **`skills.ts`** (id `frame-ship`) — registers 12 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + guardrails + pointers via `ctx.session.hook("context")`, preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
   - **`agents.ts`** (id `frame-ship-agents`) — provisions the 31-agent roster from `agents/*.md` into the global discovery route, enriches every discovered id in place, sets the orchestrator default.
+  - **`guardrails.ts`** (id `frame-ship-guardrails`) — injects the full `rules/guardrails.md` on context + the minimal one-liner set on compaction.
   - **`shared.ts`** — version lockstep target (`header + const VERSION`) + bounded filesystem helpers. Not a plugin (no default export).
-  - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs both lanes under the original id `frame-ship`, preserving single-file installs. Never list it together with `skills.ts`.
+  - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs all three lanes under the original id `frame-ship`, preserving single-file installs. Never list it together with `skills.ts`.
 
 ## Philosophy
 
@@ -234,9 +235,10 @@ Project structure:
 │   │       └── fixtures/             # replay vectors (allow/deny/secret/{}/first/compact)
 │   └── opencode/
 │       ├── INSTALL.md              # install: package (use) + local file (dev)
-│       ├── frame-ship.ts           # composed entry (main): both lanes, id frame-ship
+│       ├── frame-ship.ts           # composed entry (main): all three lanes, id frame-ship
 │       ├── skills.ts               # plugin: skills lane + session hooks (id frame-ship)
 │       ├── agents.ts               # plugin: agents lane (id frame-ship-agents)
+│       ├── guardrails.ts           # plugin: guardrails lane (id frame-ship-guardrails)
 │       └── shared.ts               # version lockstep + fs helpers (not a plugin)
 ├── skills/
 │   ├── using-frame-ship/       # → bootstrap + chain contract
@@ -280,7 +282,7 @@ Anti-patterns:
 - Skipping `review-security` on auth/data/API; arch change without ADR.
 - Handoff on CLOSED gate without c-levels+CEO waiver record.
 - Pasting full context between stages — reference-only packets.
-- Adding runtime deps to the plugins — all four `plugins/opencode/*.ts` files stay zero-dep (loading the composed entry together with `skills.ts` duplicates id `frame-ship`).
+- Adding runtime deps to the plugins — all five `plugins/opencode/*.ts` files stay zero-dep (loading the composed entry together with `skills.ts` duplicates id `frame-ship`).
 - Editing `references/` without updating parent SKILL `§5`.
 - Adding `version/author` to SKILL frontmatter — loader expects `name/description` only.
 

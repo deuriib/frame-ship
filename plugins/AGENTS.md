@@ -20,7 +20,7 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 ## CONVENTIONS
 - **Zero Runtime Dependencies**: The plugin layer relies exclusively on `@opencode/plugin` as a compile-time type dependency.
 - **Dynamic File System Access**: Code checks `globalThis.Bun.file` first, falling back to function-scoped dynamic import `await import("node:fs/promises")` to pass `tsc` typechecks without `@types/node`.
-- **Bounded I/O**: File reading in hooks and plugin setup uses a 2000ms deadline (`withTimeout`) to prevent hanging on disk or mount stalls.
+- **Bounded I/O**: File reads in plugin setup (the `shared.ts` helpers) use a 2000ms deadline (`withTimeout`) to prevent hanging on disk or mount stalls; hook stdin reads are unbounded by design — the harness owns the pipe and closes it after the payload, so no timeout is applied there.
 - **Hook Stdin Draining**: CLI hooks drain `process.stdin` safely via buffer chunks and fail closed on corrupt JSON without uncaught exceptions.
 - **Windows Path Handling**: Strips leading slash from file URLs before drive letters (`/D:/...` -> `D:/...`).
 - **Split lanes**: `skills.ts` (id `frame-ship`), `agents.ts` (id `frame-ship-agents`), and `guardrails.ts` (id `frame-ship-guardrails`) are the three independent plugins; `frame-ship.ts` composes all three for package installs. Never list the composed entry together with `skills.ts` (duplicate id `frame-ship`). `shared.ts` carries no default export and must never be listed as a plugin entry.
