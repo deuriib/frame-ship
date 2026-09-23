@@ -5,7 +5,7 @@
 **Date:** 2026-09-23
 **Execution_Mode:** subagents (inherited from spec; orchestrator dispatches, specialists do the work)
 **Domains-Touched:** [engineering, automation/ops]
-**Packets:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..007 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]
+**Packets:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..007+REQ-NF-001..003 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]
 
 > *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
 
@@ -65,7 +65,7 @@ Change types per `references/proposal-template.md:23`.
 
 **Blast Radius:** Engineering (repo tooling + docs only — no services, no runtime plugin behavior beyond one comment, no data/schema) and automation/ops (one new workflow — disable = delete file; no runbooks, no capacity). No customers/users affected (repo is private, single maintainer); no regulators; no revenue surfaces. Multi-domain fires C2 — opener offered once with this proposal.
 
-**Rollback Plan:** Per-unit `git revert`, ETA < 5 min, owner engineering owner. CI removal = `git revert` the workflow commit (or `gh workflow disable` pre-revert); tag removal = `git tag -d v0.12.0` (+ remote delete if pushed); lockfile removal = revert commit, `npm install` unaffected. No data migration, no external comms.
+**Rollback Plan:** Per-unit `git revert`, ETA < 5 min, owner engineering owner. CI removal = revert `a83347b` then `feb9014` in that order (a lone `git revert feb9014` conflicts — line 16 was modified by `a83347b`; the two-SHA path merge-tree-verified clean) or `gh workflow disable` pre-revert / delete the workflow file; tag removal = `git tag -d v0.12.0` (+ remote delete if pushed); lockfile removal = revert commit, `npm install` unaffected. No data migration, no external comms.
 
 **Security Considerations:** No auth/data/external-API/PII surface — workflow references no secrets, uses default `GITHUB_TOKEN` with repo-scoped permissions (`permissions: contents: read` declared); test fixtures are committed replay vectors already in-repo. Prohibition-clause pattern scan (no secrets/tokens) over all new files at execute-spec. **Security owner sign-off not required — stated, not assumed.** Residual = R-006 (major-tag pins) accepted with owner + expiry condition. **REQ-007 addendum:** the reactivated transform grants harness-internal `skill:*:allow` + system-suffix injection to the built-in `plan`/`build` agents — sponsor-designed original code, idempotent, no external trust boundary; security owner review optional, **stated not assumed**.
 
@@ -80,6 +80,7 @@ Change types per `references/proposal-template.md:23`.
 - [x] REQ-007 fold-in (`agents.ts`): **approved** by sponsor 2026-09-23 — "i added that change in plugins/opencode/agents.ts, dont revert it. add it to these changes aswell"
 - [x] Residual sweep (F-001..F-006): **approved** by sponsor 2026-09-23 ("approved") — extends REQ-004/REQ-005 fixes (bun→node unification, hook headers, stale install comment, duplicate `v0.3.0` merge) + aligns REQ-003 script text; targets amended in this file, the spec, the REQ index, and the plan BEFORE the fix commits (proposal-before-code).
 - [x] Gate-finding remediation (refuter CE-001..CE-004): owner-remediated within approved targets per quality-gate process — CE-001 `ci.yml` pin → `jdx/mise-action@v3` (API-verified 200 + `v3` ref exists; old `jdx/action-mise` → 404), CE-002 `npm ci` evidence scoped by reproduction (npm 10.9.8 default → exit 0), CE-003 spec AC-004 grep reworded, CE-004 packet anchors `REQ-001..006` → `REQ-001..007` in spec/plan/proposal. Findings → owner fixes → refuter re-verifies its own conditions (no freelance fixes).
+- [x] Gate wave-2 remediation (readability/reliability/risk/automation conditionals — RD-001..004, RL-001..005, risk-1..5, AUT-001..003): fix-class = text/comment/lockfile-URL corrections within approved targets (README three-plugin+guardrails truth, test header glob form, proposal packet NF tail, `agents.ts` comment reconciliation — zero logic change, `withTimeout` claim scoped to setup helpers, revert attestation + npmmirror provenance corrected, 5 explicit mirror URLs stripped → registry-default restored, provenance `32210cf`); backlog-class Lows recorded non-blocking at reviewer severity; checkpoint-conditions (first-CI-green at push; live-host permission confirmation) carried as C3 waiver records with expiry at ship-release v0.12.0. **Amendment commit precedes the S9 fix commits (proposal-before-code).**
 
 > **Rule:** No repository file modifications during proposal phase. Implementation files stay untouched until approval; spec + REQ index (translate-to-spec close) and this proposal doc are the only new files.
 
