@@ -70,8 +70,8 @@ Change types per `references/proposal-template.md:23`.
 
 ## Approval Required From
 
-- [ ] Owning domain owner: engineering owner (mandatory — Domains-Touched [engineering])
-- [ ] automation owner: CI mechanics + toolchain parity (Domains-Touched [automation/ops])
+- [x] Owning domain owner: engineering owner (mandatory — Domains-Touched [engineering]) — **approved** by sponsor 2026-09-23 ("aprobado")
+- [x] automation owner: CI mechanics + toolchain parity (Domains-Touched [automation/ops]) — **approved** by sponsor 2026-09-23 ("aprobado")
 - [x] engineering owner arch review: **not required** — no API/model/cross-cutting change; no ADR per rule (stated, not assumed)
 - [x] security owner: **not required** — no auth/data/external-API/PII (stated in Security Considerations)
 
@@ -83,5 +83,5 @@ Change types per `references/proposal-template.md:23`.
 - **Budget:** exactly 1 pass of ≤3 questions if opted-in (question 4 = FAIL); re-grill only on approver request (≤2 total).
 - **Opt-in opener (once):** "¿Quieres una ronda de desafío opt-in (máx 3 preguntas, una a la vez)? Di sí para empezar o `exit/salir` en cualquier momento para parar sin penalidad." — declining or `exit` never skips the approval gate itself.
 - **Masking:** "Por tu privacidad: no compartas PII/secretos/tokens en esta ronda; enmascaramos todo export (Ley 172-13)."
-- **Record:** `grill: declined` if no round requested at approval time.
+- **Record:** `grill: declined` (opener offered once 2026-09-23, no round requested; approval terminal: "aprobado").
 - **Single source:** mechanics live in `../using-frame-ship/references/challenge-round.md` §1–§2 — never redefined here.
