@@ -478,10 +478,15 @@ export default Plugin.define({
 
     // Built-in plan/build enrichment. Always registered (never gated on
     // parse/provision success) and presence-guarded: missing ids are skipped.
-    // plan gets the Frame-lane description, docs-only edit permissions, and
-    // lane suffix; build gets the Ship-lane description, skill allow ensured
-    // (existing permissions preserved), and lane suffix. Suffix appends are
-    // idempotent (tag check) so transform replays never duplicate.
+    // plan gets docs-only edit permissions (planPermissions()) + lane suffix;
+    // build gets skill allow ensured (existing permissions preserved) + lane
+    // suffix. Suffix appends are idempotent (tag check) so transform replays
+    // never duplicate. PLAN_DESCRIPTION/BUILD_DESCRIPTION overrides stay
+    // commented by REQ-007 design — built-in descriptions untouched. NOTE:
+    // permission persistence through this transform is host-reconciled (see
+    // the setup()/serializer notes above): effective enforcement must be
+    // confirmed in a live host session — gate-tracked residual, engineering
+    // owner, expiry at first use.
     await ctx.agent.transform((editor) => {
       if (editor.get("plan") !== undefined) {
         editor.update("plan", (agent) => {
