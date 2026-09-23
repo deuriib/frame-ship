@@ -8,7 +8,7 @@ and ships as three independent plugins plus a shared module:
 | File | Plugin id | Role |
 |------|-----------|------|
 | `plugins/opencode/skills.ts` | `frame-ship` | 13 `frame-ship:<stage>` skills + session context/compaction injection |
-| `plugins/opencode/agents.ts` | `frame-ship-agents` | 31-agent provisioning + orchestrator default |
+| `plugins/opencode/agents.ts` | `frame-ship-agents` | 31-agent provisioning + in-place enrichment (no default; orchestrator is `primary` visible entry) |
 | `plugins/opencode/guardrails.ts` | `frame-ship-guardrails` | Full `rules/guardrails.md` on context + minimal one-liner set on compaction |
 | `plugins/opencode/shared.ts` | — (module) | version lockstep + fs helpers; **never** list as a plugin entry |
 | `plugins/opencode/frame-ship.ts` | `frame-ship` | composed entry (`package.json` `main`): runs all three lanes under one id |
@@ -50,10 +50,7 @@ Equivalent manual entry (`opencode.jsonc`):
 ```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugins": ["frame-ship@github:deuriib/frame-ship"],
-  // frame-ship entry point: new sessions start on the Orchestrator.
-  // (The plugin also sets this at runtime via editor.default("orchestrator").)
-  "default_agent": "orchestrator"
+  "plugins": ["frame-ship@github:deuriib/frame-ship"]
 }
 ```
 
@@ -132,7 +129,7 @@ ln -s <this-repo>/plugins/opencode/guardrails.ts ~/.config/opencode/plugins/
    `~/.config/opencode/agents/` (missing only — your customized files are never
    rewritten; a `.frame-ship.json` manifest tracks what it generated), reloads
    the agent domain, then enriches each id in place. `opencode api get "/api/agent?location[directory]=<your-project>"`
-   shows `orchestrator` (`primary`, the default, the only visible entry), 8
+   shows `orchestrator` (`primary`, the only visible entry), 8
    owners (`all`) and 22 specialists/reviewers (`subagent`) — the latter 30
    `hidden:true`, each with its V2 `permissions:` rule list in frontmatter.
 
@@ -183,9 +180,7 @@ mise exec -- node --version   # expect v22.x
   `ctx.agent.reload()`, and then **updates in place** (missing ids skipped;
   runtime transform enriches name/description/mode/system/hidden only —
   permissions live in the markdown frontmatter and survive V2's host
-  reconciliation). `orchestrator`
-  becomes the default via `editor.default("orchestrator")`; config equivalent:
-  `"default_agent": "orchestrator"` (must be set in `opencode.json`).
+  reconciliation). No default is set — select `orchestrator` via `@orchestrator` / agent picker.
   Mapping (least privilege): `view_file|list_dir→read`,
   `find_by_name→glob`, `grep_search→grep`,
   `write_to_file|replace_file_content→edit`, `run_command→shell`,
