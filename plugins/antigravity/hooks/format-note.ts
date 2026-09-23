@@ -1,6 +1,6 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
- * format-note.ts — PostToolUse observer on write events, run via `bun ./hooks/format-note.ts`.
+ * format-note.ts — PostToolUse observer on write events, run via `node plugins/antigravity/hooks/format-note.ts`.
  *
  * stdin:  PostToolUse JSON { toolCall, stepIdx, error?, ... } (drained, never logged)
  * stdout: always `{}` — this hook never blocks, never gates, never injects.

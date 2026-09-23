@@ -1,6 +1,6 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
- * context-inject.ts — PreInvocation context injection, run via `bun ./hooks/context-inject.ts`.
+ * context-inject.ts — PreInvocation context injection, run via `node plugins/antigravity/hooks/context-inject.ts`.
  *
  * 1:1 parity with `plugins/opencode/skills.ts`:
  *   opencode `config` (skills.paths)              → agy `skills/` dir (same files, reused verbatim)

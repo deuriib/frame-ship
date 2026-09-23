@@ -29,9 +29,9 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 ## COMMANDS
 ```bash
 # Replay fixture test payloads against Antigravity hooks
-bun plugins/antigravity/hooks/safety-gate.ts < plugins/antigravity/hooks/fixtures/pretool-deny.json
-bun plugins/antigravity/hooks/context-inject.ts < plugins/antigravity/hooks/fixtures/preinvocation-first.json
-bun plugins/antigravity/hooks/format-note.ts < plugins/antigravity/hooks/fixtures/posttool-ok.json
+node plugins/antigravity/hooks/safety-gate.ts < plugins/antigravity/hooks/fixtures/pretool-deny.json
+node plugins/antigravity/hooks/context-inject.ts < plugins/antigravity/hooks/fixtures/preinvocation-first.json
+node plugins/antigravity/hooks/format-note.ts < plugins/antigravity/hooks/fixtures/posttool-ok.json
 ```
 
 ## ANTI-PATTERNS

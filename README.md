@@ -69,7 +69,7 @@ For development on frame-ship itself (live local changes), use a local path inst
 
 ### Antigravity CLI (agy)
 
-This repo root **is** the agy plugin source (root-drop layout — `agy plugin install .`). Handlers are TypeScript executed via `bun`, and context injection is 1:1 with the opencode plugin (same cards, same bootstrap, same `skills/`).
+This repo root **is** the agy plugin source (root-drop layout — `agy plugin install .`). Handlers are TypeScript executed via `node` (the `hooks.json` contract), and context injection is 1:1 with the opencode plugin (same cards, same bootstrap, same `skills/`).
 
 Install globally:
 
@@ -86,7 +86,7 @@ agy plugin enable frame-ship
 agy plugin uninstall frame-ship   # purge + rollback (ETA < 10 min with git revert)
 ```
 
-Prerequisites: [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (`agy` v1.2.0), [`bun`](https://bun.sh/) ≥ 1.x on PATH.
+Prerequisites: [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (`agy` v1.2.0), Node 22 on PATH (hooks run via `node`, matching `hooks.json`).
 
 What maps to what (opencode → agy):
 
@@ -260,7 +260,7 @@ Commands:
 ```bash
 # from repo root (mise)
 mise run typecheck   # typecheck plugins/opencode/{frame-ship,skills,agents,guardrails,shared}.ts
-mise run install     # npm install in .opencode/
+mise run install     # npm install at repo root
 
 # raw (from repo root)
 npx -y -p typescript tsc --noEmit --skipLibCheck --module esnext --target es2022 --moduleResolution bundler plugins/opencode/frame-ship.ts plugins/opencode/skills.ts plugins/opencode/agents.ts plugins/opencode/guardrails.ts plugins/opencode/shared.ts
@@ -287,7 +287,7 @@ Anti-patterns:
 ## Roadmap
 
 - [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
-- [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via bun, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
+- [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via node, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
 - [x] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
 - [x] `docs/briefs` + `docs/specs` scaffolding (referenced by skills)

@@ -1,6 +1,6 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
- * safety-gate.ts — PreToolUse gate on `run_command`, run via `bun ./hooks/safety-gate.ts`.
+ * safety-gate.ts — PreToolUse gate on `run_command`, run via `node plugins/antigravity/hooks/safety-gate.ts`.
  *
  * stdin:  PreToolUse JSON { toolCall: { name, args: { CommandLine } }, stepIdx, ... }
  * stdout: single JSON { decision: "allow"|"deny"|"ask"|"force_ask"|"deny_unless_prior_grant", reason? }
