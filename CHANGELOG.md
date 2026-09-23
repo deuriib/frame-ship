@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Removed
+
+- `plugins/opencode/agents.ts`: removed builtin `plan`/`build` lane enrichment — deleted `PLAN_TAG`/`BUILD_TAG`, `PLAN_DESCRIPTION`/`BUILD_DESCRIPTION`, `PLAN_SUFFIX`/`BUILD_SUFFIX`, `planPermissions()` and the `plan`/`build` `ctx.agent.transform` block; builtins now ship untouched (was REQ-007 sponsor fold-in).
+
 ## [v0.12.0] — 2026-09-23
 
 ### Added

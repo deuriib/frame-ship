@@ -7,7 +7,7 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 | Harness | Path | Description |
 |---|---|---|
 | OpenCode (skills) | `opencode/skills.ts` | Zero-dep plugin (id `frame-ship`); registers 12 skills, hooks session context & compaction |
-| OpenCode (agents) | `opencode/agents.ts` | Zero-dep plugin (id `frame-ship-agents`); provisions 31 agents, in-place enrichment (no default) |
+| OpenCode (agents) | `opencode/agents.ts` | Zero-dep plugin (id `frame-ship-agents`); provisions 31 agents, in-place enrichment only — never touches built-in `plan`/`build` agents |
 | OpenCode (guardrails) | `opencode/guardrails.ts` | Zero-dep plugin (id `frame-ship-guardrails`); injects full `rules/guardrails.md` on context + minimal one-liner set on compaction |
 | OpenCode (shared) | `opencode/shared.ts` | Version lockstep target + bounded fs helpers (module, not a plugin) |
 | OpenCode (composed) | `opencode/frame-ship.ts` | Composed entry (`package.json` `main`): all three lanes under id `frame-ship` |

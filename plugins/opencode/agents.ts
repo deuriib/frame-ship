@@ -4,9 +4,8 @@
  * with frame-ship frontmatter, translated to OpenCode V2 agent files.
  * Version lockstep lives in ./shared.ts (header + const VERSION).
  * Provisions V2-native discovery files into the global route, reloads the
- * agent domain, enriches every discovered id in place, and enriches the
- * built-in plan/build agents with Frame→Ship lane descriptions (plan:
- * docs-only Frame lane, build: Ship lane executor, both with skill allow).
+ * agent domain, and enriches every discovered id in place. Never touches
+ * built-in `plan`/`build` agents — they ship exactly as the host defines them.
  * Location: plugins/opencode/agents.ts. Load it directly, or load
  * ./frame-ship.ts (composed entry: skills + agents under one id).
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
@@ -342,60 +341,6 @@ async function provisionAgents(
   return wrote;
 }
 
-// ---- Built-in plan/build enrichment (Frame→Ship lanes, V2-only) ----------
-// plan = Frame lane investigator (frame-intent → translate-to-spec →
-// propose-changes → review-security/review-architecture): read-only discovery
-// + proposals, writes scoped to docs/** only (briefs, specs,
-// PROPOSED_CHANGES.md). build = Ship lane executor (execute-spec →
-// quality-gate → verify-handoff → ship-release): implements approved
-// proposals with REQ-ID → test → artifact traceability. Both keep skill use
-// allowed. Applied via transform (no files provisioned, so the built-in base
-// system prompt is preserved and only the lane suffix is appended).
-// plan permissions are replaced whole (docs-only edit must deny * first,
-// then allow docs/** last — last match wins); build permissions are
-// preserved as-is with skill allow ensured, so default executor behavior
-// never narrows.
-const PLAN_TAG = "[frame-ship plan]";
-const BUILD_TAG = "[frame-ship build]";
-
-const PLAN_DESCRIPTION =
-  "Plan — Frame lane investigator (Frame→Ship). Read-only discovery, requirements, and proposals: frame-intent → translate-to-spec → propose-changes → review-security/review-architecture. Writes limited to docs/** (briefs, specs, PROPOSED_CHANGES.md). Never implements; emits reference-only SPEC/HARD/GATE/DOMAINS packets.";
-
-const BUILD_DESCRIPTION =
-  "Build — Ship lane executor (Frame→Ship). Implements approved PROPOSED_CHANGES.md with REQ-ID → test → artifact traceability: execute-spec → quality-gate → verify-handoff → ship-release. Requires approved proposal; no shortcuts, no silent PASS on Critical/High.";
-
-const PLAN_SUFFIX =
-  `${PLAN_TAG} [v${VERSION}] Frame lane: frame-intent → translate-to-spec → propose-changes → review-security/review-architecture. ` +
-  `Read-only except docs/** writes (briefs, specs, PROPOSED_CHANGES.md). No implementation edits, no shell. May spawn subagents for parallel discovery. ` +
-  `Proposal before code. Reference-only SPEC/HARD/GATE/DOMAINS packets. Skill use allowed.`;
-
-const BUILD_SUFFIX =
-  `${BUILD_TAG} [v${VERSION}] Ship lane: execute-spec → quality-gate → verify-handoff → ship-release. ` +
-  `Implement only approved PROPOSED_CHANGES.md with REQ-ID → test → artifact trace and gate-ready evidence. ` +
-  `No architecture shortcuts. Skill use allowed.`;
-
-interface BuiltinPerm {
-  action: string;
-  resource: string;
-  effect: "allow" | "deny";
-}
-
-function planPermissions(): BuiltinPerm[] {
-  return [
-    { action: "read", resource: "*", effect: "allow" },
-    { action: "glob", resource: "*", effect: "allow" },
-    { action: "grep", resource: "*", effect: "allow" },
-    // Ordered: deny * first, allow docs/** last (last match wins).
-    { action: "edit", resource: "*", effect: "deny" },
-    { action: "edit", resource: "docs/**", effect: "allow" },
-    { action: "shell", resource: "*", effect: "deny" },
-    { action: "subagent", resource: "*", effect: "allow" },
-    { action: "question", resource: "*", effect: "allow" },
-    { action: "webfetch", resource: "*", effect: "allow" },
-    { action: "skill", resource: "*", effect: "allow" },
-  ];
-}
-
 export default Plugin.define({
   id: "frame-ship-agent",
   async setup(ctx) {
@@ -475,55 +420,5 @@ export default Plugin.define({
         }
       });
     }
-
-    // Built-in plan/build enrichment. Always registered (never gated on
-    // parse/provision success) and presence-guarded: missing ids are skipped.
-    // plan gets docs-only edit permissions (planPermissions()) + lane suffix;
-    // build gets skill allow ensured (existing permissions preserved) + lane
-    // suffix. Suffix appends are idempotent (tag check) so transform replays
-    // never duplicate. PLAN_DESCRIPTION/BUILD_DESCRIPTION overrides stay
-    // commented by REQ-007 design — built-in descriptions untouched. NOTE:
-    // permission persistence through this transform is host-reconciled (see
-    // the setup()/serializer notes above): effective enforcement must be
-    // confirmed in a live host session — gate-tracked residual, engineering
-    // owner, expiry at first use.
-    await ctx.agent.transform((editor) => {
-      if (editor.get("plan") !== undefined) {
-        editor.update("plan", (agent) => {
-          // agent.description = PLAN_DESCRIPTION;
-          agent.permissions = planPermissions() as unknown as typeof agent.permissions;
-          const current = agent.system || "";
-          if (!current.includes(PLAN_TAG)) {
-            agent.system = current ? `${current}\n\n${PLAN_SUFFIX}` : PLAN_SUFFIX;
-          }
-        });
-      }
-      if (editor.get("build") !== undefined) {
-        editor.update("build", (agent) => {
-          // agent.description = BUILD_DESCRIPTION;
-          const perms = agent.permissions as unknown as Array<{
-            action: string;
-            resource: string;
-            effect: string;
-          }> | undefined;
-          if (Array.isArray(perms)) {
-            const hasSkill = perms.some(
-              (p) => p.action === "skill" && p.effect === "allow",
-            );
-            if (!hasSkill) {
-              perms.push({ action: "skill", resource: "*", effect: "allow" });
-            }
-          } else {
-            agent.permissions = [
-              { action: "skill", resource: "*", effect: "allow" },
-            ] as unknown as typeof agent.permissions;
-          }
-          const current = agent.system || "";
-          if (!current.includes(BUILD_TAG)) {
-            agent.system = current ? `${current}\n\n${BUILD_SUFFIX}` : BUILD_SUFFIX;
-          }
-        });
-      }
-    });
   },
 });
