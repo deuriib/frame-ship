@@ -4,7 +4,7 @@
 **Date:** 2026-09-23
 **Approved By:** engineering owner + automation owner — sponsor "aprobado" 2026-09-23 (recorded in `PROPOSED_CHANGES.md`); arch/security reviews formally not required (stated in proposal)
 **Domains-Touched:** [engineering, automation/ops]
-**Packet:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..006+REQ-NF-001..003 / HARD:subagents+zero-dep+no-runtime-behavior-change+sequential-lane / GATE:none-yet / DOMAINS:[engineering,automation/ops]
+**Packet:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..007+REQ-NF-001..003 / HARD:subagents+zero-dep+no-runtime-behavior-change+sequential-lane / GATE:none-yet / DOMAINS:[engineering,automation/ops]
 
 ## Steps
 
@@ -19,8 +19,9 @@
 | 5 | Changelog structure: merge duplicate `## [v0.6.1]` sections; restore `## [v0.7.0] — 2026-09-19` header over orphaned block — verbatim provenance `git show e496c25:CHANGELOG.md` | `CHANGELOG.md` | heading grep counts + diff vs `e496c25` (REQ-005 / AC-005) | ~15m |
 | 6 | Domain checks + evidence matrix: typecheck, version:check, npm test, prohibition-clause scan (no secrets/tokens in new files), revert notes per unit | `TEST_MATRIX.md` (singleton) | command outputs → matrix rows (REQ-NF-001..003 / AC-007) | ~20m |
 | 7 | Ship-release stage (deferred by chain): `bump-version.mjs minor --changelog` → v0.12.0, release notes, `git tag v0.12.0`, spec → `50_archive/` with promote-then-purge | 7 lockstep files, `CHANGELOG.md`, `30_delivery/`, `50_archive/` | ship-release stage artifacts (REQ-006 / AC-006) | ~30m |
+| 8 | Gate-finding remediation (refuter conditional → conditions clear): CE-001 pin `jdx/action-mise@v3` → `jdx/mise-action@v3`; CE-002 `npm ci` claim scoped by reproduction per npm version; CE-003 AC-004 reword (text, amendment); CE-004 packet anchors `REQ-001..007` (text, amendment) | `.github/workflows/ci.yml`, `TEST_MATRIX.md` (+ `package-lock.json` only if CE-002 regen proves necessary) | GitHub API ref verification + `npm ci --dry-run` per npm version + refuter re-verification of its own conditions | ~20m |
 
-Each step maps to exactly one commit (steps grouped only where same REQ): S1→`test(repo-hygiene): … (REQ-002)`, S2→`chore(repo-hygiene): … (REQ-003)`, S3→`ci(repo-hygiene): … (REQ-001)`, S4→`docs(repo-hygiene): … (REQ-004)`, S4b→`refactor(agents): … (REQ-007)` (only after the REQ-007 amendment commit), S4c→`docs(repo-hygiene): … (REQ-004 residual)` + `docs(repo-hygiene): … (REQ-005 residual)`, S5→`docs(repo-hygiene): … (REQ-005)`; S6 commits the matrix; S7 commits at ship-release. Text-only amendment commits (spec/proposal/plan/index) precede their fix commits — proposal-before-code.
+Each step maps to exactly one commit (steps grouped only where same REQ): S1→`test(repo-hygiene): … (REQ-002)`, S2→`chore(repo-hygiene): … (REQ-003)`, S3→`ci(repo-hygiene): … (REQ-001)`, S4→`docs(repo-hygiene): … (REQ-004)`, S4b→`refactor(agents): … (REQ-007)` (only after the REQ-007 amendment commit), S4c→`docs(repo-hygiene): … (REQ-004 residual)` + `docs(repo-hygiene): … (REQ-005 residual)`, S5→`docs(repo-hygiene): … (REQ-005)`; S6 commits the matrix; S8→`fix(ci): … (CE-001)` (+ CE-002 unit if lockfile/matrix changes); S7 commits at ship-release. Text-only amendment commits (spec/proposal/plan/index) precede their fix commits — proposal-before-code.
 
 ## Order of Operations
 

@@ -5,7 +5,7 @@
 **Date:** 2026-09-23
 **Execution_Mode:** subagents (inherited from spec; orchestrator dispatches, specialists do the work)
 **Domains-Touched:** [engineering, automation/ops]
-**Packets:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..006 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]
+**Packets:** SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..007 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]
 
 > *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*
 
@@ -17,7 +17,7 @@ Give the repo the verification layer its own methodology demands: a minimal GitH
 
 | Target | Change Type | Description |
 |--------|-------------|-------------|
-| `.github/workflows/ci.yml` | file-create | Two jobs on `push:main` + `pull_request`: `typecheck` (Node 22, `mise` setup → `mise run typecheck` + `node scripts/bump-version.mjs --check`) and `test` (Node 22, `npm ci` + `npm test`). Third-party actions pinned to major tags (`actions/checkout@v4`, `jdx/action-mise@v3`, `actions/setup-node@v4`). No secrets referenced; default `GITHUB_TOKEN` only (REQ-001). |
+| `.github/workflows/ci.yml` | file-create | Two jobs on `push:main` + `pull_request`: `typecheck` (Node 22, `mise` setup → `mise run typecheck` + `node scripts/bump-version.mjs --check`) and `test` (Node 22, `npm ci` + `npm test`). Third-party actions pinned to major tags (`actions/checkout@v4`, `jdx/mise-action@v3`, `actions/setup-node@v4` — mise pin corrected at gate, CE-001: `jdx/action-mise` 404, canonical repo API-verified + `v3` tag present). No secrets referenced; default `GITHUB_TOKEN` only (REQ-001). |
 | `tests/smoke.test.mjs` | file-create | `node:test` + `node:assert` only. (a) parse `SKILL_DIRS` from `plugins/opencode/skills.ts`, assert count 12, every `skills/<dir>/SKILL.md` exists with `name:` == dir and non-empty `description:` — missing dir must fail; (b) assert `hasMarker(event.system)` guard precedes every `event.system.push` in both `context` and `compaction` hooks (regex over source); (c) spawn `node plugins/antigravity/hooks/*.ts` with `hooks/fixtures/*` stdin and assert outputs: safety-gate deny→blocked / allow→pass, context-inject first→injects / later→no-op, format-note→`{}` (REQ-002). |
 | `package.json` | file-modify | Add `"test": "node --test \"tests/*.test.mjs\""` (quoted glob — bare `tests/` dir form exits 1 on node v22.23.2, reproduced; REQ-003 text aligned in residual sweep). `dependencies` untouched (`@opencode/plugin@2.0.9` only) (REQ-003). |
 | `package-lock.json` | file-create | Generated lockfile (`npm install --package-lock-only`) so `npm ci` pins the single dep; committed, no `package.json` change (REQ-003). |
@@ -79,6 +79,7 @@ Change types per `references/proposal-template.md:23`.
 - [x] security owner: **not required** — no auth/data/external-API/PII (stated in Security Considerations)
 - [x] REQ-007 fold-in (`agents.ts`): **approved** by sponsor 2026-09-23 — "i added that change in plugins/opencode/agents.ts, dont revert it. add it to these changes aswell"
 - [x] Residual sweep (F-001..F-006): **approved** by sponsor 2026-09-23 ("approved") — extends REQ-004/REQ-005 fixes (bun→node unification, hook headers, stale install comment, duplicate `v0.3.0` merge) + aligns REQ-003 script text; targets amended in this file, the spec, the REQ index, and the plan BEFORE the fix commits (proposal-before-code).
+- [x] Gate-finding remediation (refuter CE-001..CE-004): owner-remediated within approved targets per quality-gate process — CE-001 `ci.yml` pin → `jdx/mise-action@v3` (API-verified 200 + `v3` ref exists; old `jdx/action-mise` → 404), CE-002 `npm ci` evidence scoped by reproduction (npm 10.9.8 default → exit 0), CE-003 spec AC-004 grep reworded, CE-004 packet anchors `REQ-001..006` → `REQ-001..007` in spec/plan/proposal. Findings → owner fixes → refuter re-verifies its own conditions (no freelance fixes).
 
 > **Rule:** No repository file modifications during proposal phase. Implementation files stay untouched until approval; spec + REQ index (translate-to-spec close) and this proposal doc are the only new files.
 

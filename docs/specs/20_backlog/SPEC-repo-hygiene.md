@@ -33,7 +33,7 @@ frame-ship ships a rigorous methodology (REQ→test→artifact→verdict) but it
 - [ ] AC-001: CI workflow file present, triggers on push+PR, both jobs defined; evidence `.github/workflows/ci.yml`.
 - [ ] AC-002: `npm test` passes locally with 0 failures; evidence test run output.
 - [ ] AC-003: Frontmatter/sync test fails if a `SKILL_DIRS` entry lacks its dir (negative check by inspection); evidence test code.
-- [ ] AC-004: `grep -rn "hooks/context-inject" README.md` → 0 hits; raw tsc command matches `mise.toml` file list; roadmap claims match repo state; `grep -rn bun README.md plugins/AGENTS.md plugins/antigravity/hooks/*.ts` → 0 runtime-claim hits; evidence grep output in `TEST_MATRIX.md`.
+- [ ] AC-004: `grep -rn "hooks/context-inject" README.md` matches only `plugins/antigravity/`-prefixed paths (bare root `hooks/` claims = 0); raw tsc command matches `mise.toml` file list; roadmap claims match repo state; `grep -rn bun README.md plugins/AGENTS.md plugins/antigravity/hooks/*.ts` → 0 bun runtime-claim hits (every residual hit must classify as a non-claim: `bundler` substring, `Bun.file` API, `maybeBun` stdin code); evidence grep output in `TEST_MATRIX.md`.
 - [ ] AC-005: Exactly one `## [v0.6.1]` heading; exactly one `## [v0.3.0]` heading; exactly one `### Added` per version section; evidence grep counts.
 - [ ] AC-006: `git tag` contains `v0.12.0` pointing at the release commit; tag rule line present in README; evidence tag list.
 - [ ] AC-007: `npm run typecheck` + `npm run version:check` green after all edits; evidence command output.
@@ -43,7 +43,7 @@ frame-ship ships a rigorous methodology (REQ→test→artifact→verdict) but it
 
 - No public API, data model, or cross-domain contract changes → **no ADR** (rule: ADR only on invariant/component/cross-domain change; CI + tests are repo tooling, not runtime components of `ARCHITECTURE.md` Components table). No `ARCHITECTURE.md` edit.
 - Security surface: none new — no auth/data/PII/external API in workflow (repo-scoped default token, no secrets referenced) → `review-security` not triggered; accepted residual: third-party actions pinned to mutable major tags (owner: engineering owner; re-evaluate at public flip → SHA pinning + Dependabot).
-- Handoff packet to `propose-changes`: `SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..006+REQ-NF-001..003 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]`.
+- Handoff packet to `propose-changes`: `SPEC:docs/specs/20_backlog/SPEC-repo-hygiene.md#REQ-001..007+REQ-NF-001..003 / HARD:subagents+zero-dep+no-runtime-behavior-change / GATE:none-yet / DOMAINS:[engineering,automation/ops]`.
 
 ## 5. Out of Scope
 
