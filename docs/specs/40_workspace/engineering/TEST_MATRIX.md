@@ -6,9 +6,9 @@
 
 | REQ-ID | Evidence ID | Description | Type | Status | Commit |
 |--------|-------------|-------------|------|--------|--------|
-| REQ-001 | T-001 | `.github/workflows/ci.yml`: 2 jobs on push:main + pull_request, `permissions: contents: read`, major-tag pins, no secrets; both job command sequences replayed locally (R-001 mitigation) | Review | pass | `feb9014` |
+| REQ-001 | T-001 | `.github/workflows/ci.yml`: 2 jobs on push:main + pull_request, `permissions: contents: read`, major-tag pins, no secrets; both job command sequences replayed locally (R-001 mitigation); pin validity API-verified at gate — `jdx/action-mise` → 404, corrected to `jdx/mise-action@v3` (`v3` ref exists) per refuter CE-001 | Review | pass | `feb9014`, `a4c1c8f`, `a83347b` |
 | REQ-002 | T-002 | `tests/smoke.test.mjs` — 9/9: registry sync (12 entries, frontmatter `name`==dir + non-empty description, bidirectional new-dir negative), marker guard precedes every `event.system.push` in both hooks (brace-matched hook bodies), 5 agy fixture replays (allow→`decision:allow`, deny→`decision:deny` + `Blocked:` without echoing matched value, first→injects bootstrap, later→`{}`, format-note→`{}`) | Unit | pass | `8548efe` |
-| REQ-003 | T-003 | `npm test` entry + committed `package-lock.json`; `npm ci --dry-run` exit 0; `dependencies` untouched; spec/proposal script text aligned to the shipped glob form with the exit-1 rationale (F-006) | Unit | pass | `7efa7f7`, `89d9d9b` |
+| REQ-003 | T-003 | `npm test` entry + committed `package-lock.json`; `npm ci --dry-run` exit 0 — gate-scoped per refuter CE-002: npm 10.9.8 (repo/CI default) exit 0; npm 11.20.0 EUSAGE reproduced (5 platform optionals missing) → lockfile +65 optional-only lines → BOTH majors exit 0 post-fix; `git diff package.json` empty; `dependencies` untouched; spec/proposal script text aligned to the shipped glob form with the exit-1 rationale (F-006) | Unit | pass | `7efa7f7`, `89d9d9b`, `32210cf` |
 | REQ-004 | T-004 | Greps: `bun ./hooks/` = 0, root `hooks/context-inject` = 0 (remaining hits antigravity/-prefixed only), raw tsc + typecheck comments contain `guardrails.ts`, Roadmap items `[x]` + "(not yet in repo)" trimmed, tag-truth rule present, `AGENTS.md` count = 12-with-arithmetic, `plugins/AGENTS.md` `0.8.0` = 0, `skills.ts` `Registers 12` = 1 / `Registers 13` = 0 (diff = comment line only, +1/-1); residual sweep: bun runtime claims in README / `plugins/AGENTS.md` / hook headers = 0 (residual hits classified legit: `bundler` substring, `globalThis.Bun.file` API, `maybeBun` stdin code — logic untouched), hook shebang + run-via comment → `node` real path, install comment → repo root | Review | pass | `ae97e42`, `89d9d9b`, `98d8182` |
 | REQ-005 | T-005 | `grep -c "^## \[v0.6.1\]"` = 1; `grep -c "^## \[v0.7.0\]"` = 1; restored section byte-verified against `git show e496c25:CHANGELOG.md`; v0.8.0 keeps only original Added/Changed; residual sweep: `grep -c "^## \[v0.3.0\]"` = 1 (provenance `19532cd`; merged verbatim, heading order 0.3.3→0.3.2→0.3.1→0.3.0; all 4 load-order bullets present) | Review | pass | `0e556a1`, `89d9d9b`, `45f3995` |
 | REQ-006 | E-001 | Tag rule stated in README Contributing (`CHANGELOG.md` section → matching `git tag vX.Y.Z`); `v0.12.0` bump + tag lands at ship-release (step 7) | Review | partial — README line pass, tag pending ship-release | `ae97e42` (line) / pending (tag) |
@@ -22,6 +22,7 @@
 - `npm test` → 9 pass / 0 fail. `mise run typecheck` → 0. `node scripts/bump-version.mjs --check` → all 7 files synchronized at v0.11.0.
 - `git status --porcelain` = clean after final commit; file set matched approved change list exactly.
 - Prohibition-clause scan over `.github/`, `tests/`, `package-lock.json` → no credential-shaped content (fixture names `deny`/`secret` are replay vectors, allowlisted).
+- Gate-finding remediations (refuter CE-001..004) re-verified orchestrator-side: `jdx/action-mise` API 404 vs `jdx/mise-action` 200 + `v3` ref exists; npm 11.20.0 EUSAGE reproduced then cleared (lockfile platform optionals +65), npm 10.9.8 exit 0 preserved, `package.json` diff empty; packet anchors `REQ-001..006` → `REQ-001..007` in spec/plan/proposal; AC-004 grep now runnable. Lockfile note: all `resolved` URLs use the configured `registry.npmmirror.com` (pre-existing since `7efa7f7`, integrity-pinned) — gate residual, owner automation owner (CI reachability of that mirror from GH runners; swap registry in workflow if ever unreachable).
 
 ## Deviations (recorded, not silent)
 
@@ -40,6 +41,17 @@
 | F-006 | REQ-003/plan literal `node --test tests/` ≠ shipped working form | Low | spec + plan text | engineering owner | remediated `89d9d9b` |
 
 Remediation = residual sweep approved by sponsor 2026-09-23 ("approved"); text amended first (`89d9d9b` — proposal-before-code), then one fix commit per REQ class (`98d8182` REQ-004, `45f3995` REQ-005). **0 open findings entering the quality gate.**
+
+## Gate findings (refuter wave — all remediated, re-verified pass)
+
+| # | Severity | Finding | Status |
+|---|----------|---------|--------|
+| CE-001 | High | `ci.yml` pinned nonexistent `jdx/action-mise@v3` (API 404) — typecheck job would die at step 2 on first push | CLEARED — `a83347b` (`jdx/mise-action@v3`, refs verified), record `a4c1c8f` |
+| CE-002 | Medium | `npm ci` evidence over-scoped: npm 11 EUSAGE (5 platform optionals missing from lockfile) | CLEARED — `32210cf` (+65 optional-only lines; npm 10.9.8 + 11.19.1 + 11.20.0 all exit 0; `package.json` diff empty) |
+| CE-003 | Low | AC-004 grep literal un-runnable (correct `plugins/antigravity/` paths matched the substring) | CLEARED — `a4c1c8f` (AC-004 reworded; grep passes: 2 prefixed hits, 0 bare-root) |
+| CE-004 | Low | Packet anchors `REQ-001..006` stale in spec:46 / proposal:8 / plan:7 | CLEARED — `a4c1c8f` (all → `REQ-001..007`; sole remaining literal = remediation-record prose, a before→after trail) |
+
+Refuter re-verification: `quality-gate/SPEC-repo-hygiene/refuter.md` → **pass**, 0 new findings. Carried-forward residuals for gate keeper: first-CI-run observable only post-push (ship-release checkpoint, engineering owner); `registry.npmmirror.com` lockfile URLs (see orchestrator verification note, automation owner).
 
 ## Coverage Summary
 
