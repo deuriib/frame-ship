@@ -20,10 +20,11 @@ frame-ship ships a rigorous methodology (REQ→test→artifact→verdict) but it
 - REQ-004 (doc-drift fixes): README structure block + local-replay commands use real paths (`plugins/antigravity/hooks/…`); raw `tsc` command includes `guardrails.ts` (parity with `mise.toml`); Roadmap checks off "docs/briefs+specs scaffolding" and "test harness + CI"; `AGENTS.md` skills count reads 12 = bootstrap + 9 stages + 2 supporting; `plugins/AGENTS.md` lockstep example carries no stale hardcoded version; `skills.ts` header "Registers 13" → 12.
 - REQ-005 (changelog structure): merge the duplicate `## [v0.6.1]` sections into one; resolve the doubled `### Added` under v0.8.0 (restore a lost version header only if git history proves one — otherwise merge; no content invention).
 - REQ-006 (tag rule): this release ships tagged `v0.12.0` matching `package.json` + CHANGELOG; the forward rule "every CHANGELOG release section gets a matching git tag" is stated in README Contributing.
+- REQ-007 (plan/build lane transform — sponsor fold-in): `plugins/opencode/agents.ts` transform block active — when `plan`/`build` agents exist they receive `planPermissions()` / skill `allow` permission + idempotent `PLAN_TAG`/`BUILD_TAG` system suffixes; `PLAN_DESCRIPTION`/`BUILD_DESCRIPTION` overrides stay commented (built-in descriptions untouched). Sponsor-authored, sponsor-directed inclusion 2026-09-23 ("add it to these changes aswell") — reverts the disable of `d043f85` while keeping desc overrides off.
 
 ### Non-Functional
 
-- REQ-NF-001 (zero-dep preserved): no new runtime or dev dependencies — tests use `node:test` + `node:assert`, typecheck keeps `npx -y -p typescript`; plugin sources stay untouched except the REQ-004 comment fix (no behavior change).
+- REQ-NF-001 (zero-dep preserved): no new runtime or dev dependencies — tests use `node:test` + `node:assert`, typecheck keeps `npx -y -p typescript`; plugin sources change only via the REQ-004 comment fix and the REQ-007 sponsor-directed transform reactivation (the single behavior change, sponsor-owned).
 - REQ-NF-002 (reversibility): every change revertible via `git revert`; disabling CI cannot affect plugin runtime (harness-agnostic split).
 - REQ-NF-003 (traceability): full `REQ-ID → test → artifact → gate verdict` chain recorded in `TEST_MATRIX.md` and enforced by the quality gate.
 
@@ -36,6 +37,7 @@ frame-ship ships a rigorous methodology (REQ→test→artifact→verdict) but it
 - [ ] AC-005: Exactly one `## [v0.6.1]` heading; exactly one `### Added` per version section; evidence grep counts.
 - [ ] AC-006: `git tag` contains `v0.12.0` pointing at the release commit; tag rule line present in README; evidence tag list.
 - [ ] AC-007: `npm run typecheck` + `npm run version:check` green after all edits; evidence command output.
+- [ ] AC-008: `agents.ts` transform block uncommented and active, description-override lines still commented; `mise run typecheck` + `npm test` green after inclusion; evidence diff + command output.
 
 ## 4. Contracts & Interfaces
 
@@ -67,6 +69,7 @@ frame-ship ships a rigorous methodology (REQ→test→artifact→verdict) but it
 | REQ-004 | AC-004 | PROPOSED_CHANGES.md | grep counts in TEST_MATRIX.md |
 | REQ-005 | AC-005 | PROPOSED_CHANGES.md | heading grep counts |
 | REQ-006 | AC-006 | PROPOSED_CHANGES.md | `git tag -l v0.12.0` + README line |
-| REQ-NF-001 | AC-007 | PROPOSED_CHANGES.md | `dependencies` diff empty; typecheck green |
+| REQ-007 | AC-008 | PROPOSED_CHANGES.md | agents.ts diff (block active, desc overrides commented) + typecheck/test output + sponsor directive |
+| REQ-NF-001 | AC-007 | PROPOSED_CHANGES.md | `dependencies` diff empty; typecheck green (behavior change limited to REQ-007) |
 | REQ-NF-002 | AC-001..006 | PROPOSED_CHANGES.md | per-file revert notes in TEST_MATRIX.md |
 | REQ-NF-003 | all | TEST_MATRIX.md + GATE_REPORT.md | gate verdict per REQ |

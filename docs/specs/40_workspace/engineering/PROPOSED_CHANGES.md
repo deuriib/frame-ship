@@ -11,7 +11,7 @@
 
 ## Summary
 
-Give the repo the verification layer its own methodology demands: a minimal GitHub Actions workflow (typecheck + version-lockstep job, smoke-test job), a zero-dependency `node:test` smoke suite covering skill-registry sync, marker idempotency, and Antigravity hook fixture replays, plus the doc-drift fixes found in today's audit (stale README paths/commands/roadmap, wrong skill counts, duplicate/broken CHANGELOG section headers — the lost `v0.7.0` header proven by commit `e496c25`). Release closes at `v0.12.0` with a matching tag and a forward tag rule. No runtime behavior changes, no new dependencies, fully revertible per work unit.
+Give the repo the verification layer its own methodology demands: a minimal GitHub Actions workflow (typecheck + version-lockstep job, smoke-test job), a zero-dependency `node:test` smoke suite covering skill-registry sync, marker idempotency, and Antigravity hook fixture replays, plus the doc-drift fixes found in today's audit (stale README paths/commands/roadmap, wrong skill counts, duplicate/broken CHANGELOG section headers — the lost `v0.7.0` header proven by commit `e496c25`). Release closes at `v0.12.0` with a matching tag and a forward tag rule. Plus the sponsor-authored `agents.ts` plan/build transform reactivation folded in by sponsor directive (REQ-007) — the single behavior change in this spec; no new dependencies, everything else revertible per work unit.
 
 ## Changes
 
@@ -27,7 +27,8 @@ Give the repo the verification layer its own methodology demands: a minimal GitH
 | `plugins/opencode/skills.ts` | file-modify | Header comment "Registers 13 `frame-ship:<stage>` skills" → 12. Comment-only; zero executable-token change (REQ-004, REQ-NF-001). |
 | `CHANGELOG.md` | file-modify | Merge duplicate `## [v0.6.1]` sections into one; restore `## [v0.7.0] — 2026-09-19` header over the orphaned `### Added/Changed/Removed/Known issues` block — verbatim provenance `git show e496c25:CHANGELOG.md`, no content invention (REQ-005). |
 | `package.json` + 7 lockstep files + `CHANGELOG.md` + git tag | workflow-update | At `ship-release` stage (deferred by chain): `node scripts/bump-version.mjs minor --changelog` → `v0.12.0`, release notes, `git tag v0.12.0`, spec archived to `50_archive/` (REQ-006). |
-| `docs/specs/50_archive/`, `docs/specs/10_design/ARCHITECTURE.md`, `docs/specs/40_workspace/quality-gate/*`, skill bodies, plugin logic | explicitly-untouched | Audit trail frozen; no ADR (no invariant/component/cross-domain contract change — CI/tests are repo tooling, not `ARCHITECTURE.md` components); no skill-content or runtime behavior edits. |
+| `plugins/opencode/agents.ts` | file-modify | Reactivate plan/build lane transform block (permissions + idempotent `PLAN_TAG`/`BUILD_TAG` suffixes); `PLAN_DESCRIPTION`/`BUILD_DESCRIPTION` overrides stay commented. Sponsor-authored + sponsor-directed fold-in 2026-09-23 ("add it to these changes aswell") (REQ-007). |
+| `docs/specs/50_archive/`, `docs/specs/10_design/ARCHITECTURE.md`, `docs/specs/40_workspace/quality-gate/*`, skill bodies, plugin logic (sole exception = the `agents.ts` row above) | explicitly-untouched | Audit trail frozen; no ADR (no invariant/component/cross-domain contract change — CI/tests are repo tooling, not `ARCHITECTURE.md` components; agents-lane reactivation is within its existing contract); no other skill-content or runtime behavior edits. |
 
 Change types per `references/proposal-template.md:23`.
 
@@ -59,12 +60,13 @@ Change types per `references/proposal-template.md:23`.
 | R-004 | Doc path "fixes" introduce new inaccuracies | Low | Low | Every fix carries grep evidence in `TEST_MATRIX.md` (REQ-004/AC-004). |
 | R-005 | Version bump touches wrong file set | Low | Med | `version:check` before + after; 7-file lockstep enumerated in `AGENTS.md`; bump runs only at ship-release with gate green. |
 | R-006 | Mutable major-tag actions (supply chain) | Low | High-at-public-flip | Accepted now: private repo, repo-scoped default token, no secrets; **owner:** engineering owner; **re-evaluate:** public flip → SHA pins + Dependabot. |
+| R-007 | Reactivated transform injects permissions + suffixes into built-in plan/build agents (skill `allow` grant) | Low | Med | Sponsor-authored original code, sponsor-directed inclusion; description overrides stay off; idempotent tag check prevents duplicate suffixes; `mise run typecheck` + `npm test` green post-inclusion; single `git revert` restores the disabled state. |
 
 **Blast Radius:** Engineering (repo tooling + docs only — no services, no runtime plugin behavior beyond one comment, no data/schema) and automation/ops (one new workflow — disable = delete file; no runbooks, no capacity). No customers/users affected (repo is private, single maintainer); no regulators; no revenue surfaces. Multi-domain fires C2 — opener offered once with this proposal.
 
 **Rollback Plan:** Per-unit `git revert`, ETA < 5 min, owner engineering owner. CI removal = `git revert` the workflow commit (or `gh workflow disable` pre-revert); tag removal = `git tag -d v0.12.0` (+ remote delete if pushed); lockfile removal = revert commit, `npm install` unaffected. No data migration, no external comms.
 
-**Security Considerations:** No auth/data/external-API/PII surface — workflow references no secrets, uses default `GITHUB_TOKEN` with repo-scoped permissions (`permissions: contents: read` declared); test fixtures are committed replay vectors already in-repo. Prohibition-clause pattern scan (no secrets/tokens) over all new files at execute-spec. **Security owner sign-off not required — stated, not assumed.** Residual = R-006 (major-tag pins) accepted with owner + expiry condition.
+**Security Considerations:** No auth/data/external-API/PII surface — workflow references no secrets, uses default `GITHUB_TOKEN` with repo-scoped permissions (`permissions: contents: read` declared); test fixtures are committed replay vectors already in-repo. Prohibition-clause pattern scan (no secrets/tokens) over all new files at execute-spec. **Security owner sign-off not required — stated, not assumed.** Residual = R-006 (major-tag pins) accepted with owner + expiry condition. **REQ-007 addendum:** the reactivated transform grants harness-internal `skill:*:allow` + system-suffix injection to the built-in `plan`/`build` agents — sponsor-designed original code, idempotent, no external trust boundary; security owner review optional, **stated not assumed**.
 
 **Domain Considerations:** engineering — zero-dep + behavior-neutral invariants held (REQ-NF-001); automation/ops — workflow pins mirror `mise.toml` toolchain, clean disable path (owner: automation owner + engineering owner). Finance/legal/marketing/people/revenue: not touched.
 
@@ -74,6 +76,7 @@ Change types per `references/proposal-template.md:23`.
 - [x] automation owner: CI mechanics + toolchain parity (Domains-Touched [automation/ops]) — **approved** by sponsor 2026-09-23 ("aprobado")
 - [x] engineering owner arch review: **not required** — no API/model/cross-cutting change; no ADR per rule (stated, not assumed)
 - [x] security owner: **not required** — no auth/data/external-API/PII (stated in Security Considerations)
+- [x] REQ-007 fold-in (`agents.ts`): **approved** by sponsor 2026-09-23 — "i added that change in plugins/opencode/agents.ts, dont revert it. add it to these changes aswell"
 
 > **Rule:** No repository file modifications during proposal phase. Implementation files stay untouched until approval; spec + REQ index (translate-to-spec close) and this proposal doc are the only new files.
 

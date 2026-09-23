@@ -14,12 +14,13 @@
 | REQ-004 | Doc-drift fixes: README paths (`plugins/antigravity/hooks/`), raw tsc parity with `mise.toml`, roadmap truth, skill-count wording (12), no stale hardcoded version in `plugins/AGENTS.md`, `skills.ts` header 13→12 | P1 | repo audit 2026-09-23 | SPEC-repo-hygiene | engineering | review |
 | REQ-005 | CHANGELOG structure: single `## [v0.6.1]`, one `### Added` per version (history-proven header restore only, no invention) | P2 | repo audit 2026-09-23 | SPEC-repo-hygiene | engineering | review |
 | REQ-006 | Release tagged `v0.12.0` (package.json + CHANGELOG parity) + forward tag rule stated in README Contributing | P1 | repo audit 2026-09-23 | SPEC-repo-hygiene | automation/ops | review |
+| REQ-007 | Reactivate plan/build lane transform (permissions + idempotent suffixes); description overrides stay commented — sponsor-authored fold-in | P1 | sponsor directive 2026-09-23 | SPEC-repo-hygiene | engineering | test |
 
 ## Non-Functional Requirements
 
 | ID | Requirement | Category | Target |
 |----|-------------|----------|--------|
-| REQ-NF-001 | Zero new dependencies; plugin sources behavior-unchanged | Reliability | `dependencies` diff = empty; typecheck green |
+| REQ-NF-001 | Zero new dependencies; plugin behavior change limited to REQ-007 (sponsor-owned), everything else behavior-neutral | Reliability | `dependencies` diff = empty; typecheck green |
 | REQ-NF-002 | Full reversibility; CI decoupled from plugin runtime | Reliability | single `git revert` per work unit |
 | REQ-NF-003 | REQ→test→artifact→verdict traceability | Process | complete chain in TEST_MATRIX + GATE_REPORT |
 
