@@ -14,7 +14,7 @@ Creed: *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedic
 ├── agents/             # 31 agent personas (Montilla CEO, 8 domain owners, specialists, reviewers)
 ├── docs/               # Artifact store: briefs/ (intent) and specs/ (lifecycle 10->50)
 ├── plugins/            # Runtime adapters: OpenCode plugins (split lanes) and Antigravity CLI hooks
-├── rules/              # Context rules: frame-ship.md and guardrails.md
+├── rules/              # Context rules: frame-ship.md, guardrails.md, skills.md, subagents.md
 ├── scripts/            # Repository automation (bump-version.mjs)
 └── skills/             # 12 process skills (9 core chain stages + 2 supporting)
 ```
@@ -44,7 +44,7 @@ Creed: *"Haces las cosas como para Dios, por eso trabajas con excelencia y dedic
 
 ## CONVENTIONS
 - **Chain order**: `frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release`.
-- **Load order**: `using-frame-ship` pre-loaded. Load `<stage>` skill ONCE at start of stage. No skill = STOP.
+- **Load order**: `using-frame-ship` pre-loaded. Load `<stage>` skill ONCE at start of stage. No skill = STOP. External skills: after the stage skill, at most 1-2 on trigger match; chain wins on conflict (see `rules/skills.md`).
 - **Execution mode**: `subagents` is the sole execution mode. Orchestrator dispatches all roles; specialists never self-dispatch.
 - **Inter-stage communication**: Reference-only 4-tuple envelopes (`SPEC:<path>#<anchors> / HARD:subagents+<constraints> / GATE:<verdict> / DOMAINS:<list>`). Never paste full context.
 - **Traceability**: Strict `REQ-ID → test → artifact → gate verdict` chain.
@@ -74,7 +74,7 @@ node scripts/bump-version.mjs <patch|minor|major> --changelog # Bump version and
 ```
 
 ## NOTES
-- Version lockstep: [frame-ship v0.10.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
+- Version lockstep: [frame-ship v0.11.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
 - Zero runtime dependencies: `@opencode/plugin` is compile-time only. Filesystem operations use `Bun.file` with dynamic `node:fs` fallback.
 - Windows file URLs in `fileUrlToPath` require stripping leading slashes before drive letters (`/D:/...` -> `D:/...`).
 

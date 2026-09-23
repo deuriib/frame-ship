@@ -25,6 +25,12 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 - work complete → `verify-handoff` (HANDOFF, DoD)
 - verified → `ship-release` (NOTES + changelog + rollback)
 
+## External skills (complement the chain)
+
+1. Load the `<stage>` skill FIRST (rules above), then — only if a task trigger matches (language, platform, tool) — load at most 1-2 external skills.
+2. Chain wins on conflict: no external skill may waive a hard rule, gate, or the load order above.
+3. Cite external skills by path + anchor (reference-only). Never paste full external bodies into stage packets or subagent briefs.
+
 ## Hard rules
 
 1. No code without an approved proposal.
@@ -40,4 +46,4 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 
 Execution is subagents only — the natural process: orchestrator dispatches the entire team; domain owners/specialists do the work or brief back. Reference-only SPEC/HARD/GATE/DOMAINS packets, full-wave always. Trivial reversible work (<15 lines) lives outside methodology as CEO fast-path (checkpoint-only), never as a chain branch.
 
-Version lockstep: [frame-ship v0.10.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.
+Version lockstep: [frame-ship v0.11.0] — bump with `plugins/opencode/shared.ts` + `plugins/antigravity/hooks/context-inject.ts`.

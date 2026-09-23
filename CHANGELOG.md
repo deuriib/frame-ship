@@ -5,6 +5,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.11.0] — 2026-09-23
+
+### Added
+
+- `rules/skills.md`: skill-loading policy — chain skills first (`using-frame-ship` pre-loaded, stage skill ONCE, no skill = STOP), then at most 1-2 external skills on trigger match; chain wins on conflict; external skills never waive hard rules, gates, or load order; cite by path + anchor (reference-only). Loaded natively from `rules/` on agy; distilled into `POINTERS` on OpenCode.
+- `rules/frame-ship.md`: `## External skills (complement the chain)` section mirroring the policy above.
+
+### Changed
+
+- `skills/using-frame-ship` MANDATORY LOAD ORDER step 2 now states the external-skills complement (after stage skill, budget of 1-2, precedence, reference-only).
+- `POINTERS` skills line replaces the vague "always load skills proactively" wording with the chain-first + external budget rule; `COMPACTION_REMINDER` typo (`metions`) fixed.
+- `AGENTS.md` + `skills/AGENTS.md` document the internal-vs-external loading convention and list all four `rules/` files.
+- `rules/subagents.md` wording simplified (dropped retired `multi-subagents` mode mention).
+
 ## [v0.10.0] — 2026-09-22
 
 ### Removed

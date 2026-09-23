@@ -26,6 +26,7 @@
 
 ## CONVENTIONS
 - Body shape fixed: Purpose / Chain Contract (Prev/Next) / 2b Role Binding / Process / Won't do / References.
+- Skill loading order (chain + external): stage skill ONCE first (no skill = STOP), then at most 1-2 external skills on trigger match; chain wins on conflict; cite external guidance by path + anchor (reference-only). Source: `rules/skills.md`.
 - Chain ascii only in `frame-intent` + `quality-gate`; others declare Prev/Next in text.
 - References use bracket placeholders: `[description]`, `XXX`, `YYYY-MM-DD`.
 - Shared challenge mechanics (C1–C4 glossary/opener/human contract) live ONLY in `using-frame-ship/references/challenge-round.md`; the four stage SKILLs cite it and keep only trigger + budget.
