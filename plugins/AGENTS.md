@@ -24,7 +24,7 @@ Runtime adapters connecting Frame→Ship methodology to coding agent platforms: 
 - **Hook Stdin Draining**: CLI hooks drain `process.stdin` safely via buffer chunks and fail closed on corrupt JSON without uncaught exceptions.
 - **Windows Path Handling**: Strips leading slash from file URLs before drive letters (`/D:/...` -> `D:/...`).
 - **Split lanes**: `skills.ts` (id `frame-ship`), `agents.ts` (id `frame-ship-agents`), and `guardrails.ts` (id `frame-ship-guardrails`) are the three independent plugins; `frame-ship.ts` composes all three for package installs. Never list the composed entry together with `skills.ts` (duplicate id `frame-ship`). `shared.ts` carries no default export and must never be listed as a plugin entry.
-- **Version Lockstep**: The plugin header comment and `const VERSION = "0.8.0"` live in `opencode/shared.ts` (single source imported by all lanes) and must stay synchronized with repository root.
+- **Version Lockstep**: `const VERSION` in `opencode/shared.ts` (single source imported by all lanes) must match the repository root `package.json`; verify with `npm run version:check`.
 
 ## COMMANDS
 ```bash

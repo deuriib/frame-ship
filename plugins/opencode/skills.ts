@@ -3,7 +3,7 @@
  * (zero deps, V2-only). Chain: see CHAIN const (single source of truth for
  * order). Skills: ./skills/<stage>/SKILL.md. Version lockstep lives in
  * ./shared.ts (header + const VERSION).
- * Registers 13 `frame-ship:<stage>` skills, injects workflow card + pointers
+ * Registers 12 `frame-ship:<stage>` skills, injects workflow card + pointers
  * + live bootstrap (guardrails live in ./guardrails.ts), and preserves the
  * chain across compaction.
  * Location: plugins/opencode/skills.ts. Load it directly, or load

@@ -93,15 +93,15 @@ What maps to what (opencode → agy):
 | OpenCode plugin                                                                 | Antigravity CLI equivalent                                                                                   |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `experimental.chat.system.transform` — WORKFLOW_CARD, POINTERS (+ guardrails lane: full `rules/guardrails.md` on context, minimal set on compaction) | `rules/frame-ship.md` — automatically injected into agent context                                            |
-| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
+| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`plugins/antigravity/hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
 | `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/frame-ship.md` is persistent & always-on in context             |
 | `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
 
 Local replay (no `agy` binary needed):
 
 ```bash
-bun ./hooks/safety-gate.ts < hooks/fixtures/pretool-allow.json
-bun ./hooks/context-inject.ts < hooks/fixtures/preinvocation-first.json
+node plugins/antigravity/hooks/safety-gate.ts < plugins/antigravity/hooks/fixtures/pretool-allow.json
+node plugins/antigravity/hooks/context-inject.ts < plugins/antigravity/hooks/fixtures/preinvocation-first.json
 ```
 
 ## The Basic Workflow
@@ -192,6 +192,7 @@ Hard rules (non-negotiable):
 3. Run `mise run typecheck` before pushing.
 4. After any plugin/skill edit: quit + restart opencode (config not hot-reloaded).
 5. One problem per change; never approve your own proposal.
+6. Every release section in `CHANGELOG.md` gets a matching `git tag vX.Y.Z` — the tag is the release truth.
 
 Skill frontmatter stays exact: `name: <kebab==dir>`, one-sentence `description` with `Use when/Triggered by`. No extra keys. Body shape: Purpose / Chain / Role / Process / Won't do / References. Creed lives in `SKILL.md` only.
 
@@ -221,15 +222,16 @@ Project structure:
 ./
 ├── plugin.json                   # agy marker: name frame-ship (agy plugin install .)
 ├── hooks.json                    # frame-ship-context + safety-gate + format-note
-├── hooks/
-│   ├── context-inject.ts         # PreInvocation → injectSteps (1:1 context parity, bun)
-│   ├── safety-gate.ts            # PreToolUse gate on run_command (bun)
-│   ├── format-note.ts            # PostToolUse observer → {} (bun)
-│   └── fixtures/                 # replay vectors (allow/deny/secret/{}/first/compact)
 ├── rules/
 │   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.11.0
 ├── mise.toml                    # Node 22 + tasks (mise install)
 ├── plugins/
+│   ├── antigravity/
+│   │   └── hooks/
+│   │       ├── context-inject.ts     # PreInvocation → injectSteps (1:1 context parity, node)
+│   │       ├── safety-gate.ts        # PreToolUse gate on run_command (node)
+│   │       ├── format-note.ts        # PostToolUse observer → {} (node)
+│   │       └── fixtures/             # replay vectors (allow/deny/secret/{}/first/compact)
 │   └── opencode/
 │       ├── INSTALL.md              # install: package (use) + local file (dev)
 │       ├── frame-ship.ts           # composed entry (main): both lanes, id frame-ship
@@ -247,7 +249,7 @@ Project structure:
 │   ├── quality-gate/           # → GATE_REPORT.md (multi-reviewer)
 │   ├── verify-handoff/         # → HANDOFF.md via DoD
 │   └── ship-release/           # → RELEASE_NOTES.md + changelog + rollback
-├── tests/                      # harness TBD (see Roadmap)
+├── tests/                      # smoke suite (npm test → node --test)
 ├── AGENTS.md                   # project knowledge base (source of truth)
 ├── LICENSE.md                  # MIT
 └── README.md
@@ -257,11 +259,11 @@ Commands:
 
 ```bash
 # from repo root (mise)
-mise run typecheck   # typecheck plugins/opencode/{frame-ship,skills,agents,shared}.ts
+mise run typecheck   # typecheck plugins/opencode/{frame-ship,skills,agents,guardrails,shared}.ts
 mise run install     # npm install in .opencode/
 
 # raw (from repo root)
-npx -y -p typescript tsc --noEmit --skipLibCheck --module esnext --target es2022 --moduleResolution bundler plugins/opencode/frame-ship.ts plugins/opencode/skills.ts plugins/opencode/agents.ts plugins/opencode/shared.ts
+npx -y -p typescript tsc --noEmit --skipLibCheck --module esnext --target es2022 --moduleResolution bundler plugins/opencode/frame-ship.ts plugins/opencode/skills.ts plugins/opencode/agents.ts plugins/opencode/guardrails.ts plugins/opencode/shared.ts
 ```
 
 Conventions:
@@ -287,8 +289,8 @@ Anti-patterns:
 - [x] Bootstrap skill `using-frame-ship` (session-start + post-compaction contract)
 - [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via bun, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
-- [ ] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
-- [ ] `docs/briefs` + `docs/specs` scaffolding (referenced by skills, not yet in repo)
+- [x] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
+- [x] `docs/briefs` + `docs/specs` scaffolding (referenced by skills)
 - [ ] Release automation via `ship-release` skill + tagged versions
 - [ ] Public flip (explicit): license detection, code of conduct, topics, homepage — repo stays private until then
 
