@@ -15,7 +15,7 @@
 | REQ-007 | T-006 | `agents.ts` transform block active (38/38 diff), `PLAN_DESCRIPTION`/`BUILD_DESCRIPTION` overrides stay commented; `mise run typecheck` exit 0 + `npm test` exit 0 post-inclusion; sponsor directive recorded in `PROPOSED_CHANGES.md` | Unit | pass | `1640510` |
 | REQ-NF-001 | E-002 | `git diff package.json` = script line only, `dependencies` block untouched; zero new deps in tests (node:test/assert only) + CI (mise/checkout/setup-node only); behavior change limited to REQ-007 | Attestation | pass | `7efa7f7`, `1640510` |
 | REQ-NF-002 | E-003 | Per-REQ units revert in reverse commit order (later same-file fixes first) — rollback <15 min, substance verified; CI disable = revert `a83347b` then `feb9014` (merge-tree verified clean — a lone `feb9014` revert conflicts post-`a83347b`) or delete the workflow file; no data/external comms. (Wave-2 correction: original "single-revertible / revert `feb9014`" attestation refuted by QA-002/AUT-002/risk-5.) | Attestation | pass | all listed; corrected at gate wave-2 |
-| REQ-NF-003 | E-004 | This matrix + `quality-gate/<spec-id>/GATE_REPORT.md` (verdict pending gate) | Attestation | in-progress — gate next | pending |
+| REQ-NF-003 | E-004 | This matrix + `quality-gate/SPEC-repo-hygiene/GATE_REPORT.md` (7/7 reviewers pass, gate OPEN, COND-001..004 cleared, 2 C3 waivers W1/W2 with expiry at ship-release) | Attestation | pass | `GATE_REPORT.md` (2026-09-23) |
 
 ## Orchestrator verification (independent re-run, 2026-09-23)
 
