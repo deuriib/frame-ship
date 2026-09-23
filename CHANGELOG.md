@@ -76,6 +76,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Unified quality gates to full-wave only with adversarial `review-refuter` prior to `qa` (min-gate removed).
 - Recorded architectural decision `ADR-008-multi-default.md` in `docs/specs/10_design/`.
 
+## [v0.7.0] — 2026-09-19
 
 ### Added
 
@@ -102,11 +103,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 
 - C-level chat roster declutter: optional `hidden` in `AGENTS_MANIFEST` + `config.agents`/`config.agent` mirror; 8 C-level `mode:all` `hidden:true` (`barrera`, `dauhajre`, `espinoza`, `montero`, `santana`, `subero`, `vasquez`, `vera`), `montilla` visible, 0 subagent flags; backward-compatible exact shape `hidden:true` ([engineering], SPEC-hidden-flag-engineering; gate OPEN 4/4, DoD PASS; restart opencode to take effect).
-
-## [v0.6.1] — 2026-09-17
-
-### Added
-
 - Agent roster in the single-file plugin: static 74-key `AGENTS_MANIFEST` (`montilla` primary + 8 C-levels + 65 specialists, `espinoza-specialist` alias) + loader (`resolveAgentsDir`, `readTextFile`, `parseAgentFile`) + `config.agents`/`config.agent` mirror with `default_agent="montilla"` + `subagent_depth=2`, never clobbering user overrides ([engineering], SPEC-agents-into-plugin-engineering; gate OPEN 6/6, DoD PASS; `.opencode/plugins/frame-ship.ts` v0.6.1, 403 lines, zero deps, restart opencode to take effect).
 - Loader hardening: BOM/whitespace strip + unclosed-fence fallback, guarded defaults on miss lanes, `READ_TIMEOUT_MS=2000` race-as-miss, independent mirror records ([engineering], same spec; remediation `253c94e`, `92a4941`, `ab64ca1`, `14eaa4e`, evidence matrix C-001..C-005).
 
