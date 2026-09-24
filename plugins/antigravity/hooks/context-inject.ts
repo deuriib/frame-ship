@@ -89,7 +89,8 @@ function readFileIfExists(path: string): string {
 /** Live bootstrap body (opencode `loadBootstrapBody` parity): SKILL.md body only, silent fallback. */
 function loadBootstrapBody(pluginRoot: string, workspacePaths: string[]): string {
   const rel = join("skills", "using-frame-ship", "SKILL.md");
-  const candidates: string[] = [join(pluginRoot, rel), join(process.cwd(), rel)];
+  const guardrails = join("rules", "guardrails.md")
+  const candidates: string[] = [join(pluginRoot, rel), join(process.cwd(), rel), join(pluginRoot, guardrails), join(process.cwd(), guardrails)];
   for (const w of workspacePaths) {
     if (typeof w === "string" && w) candidates.push(join(w, rel));
   }
