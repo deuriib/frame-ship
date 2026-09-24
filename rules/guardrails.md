@@ -64,16 +64,16 @@ Structure: **Shared Foundation** applies to every domain and is not repeated. Ea
 
 ### Cross-Domain Interfaces
 
-- Engineering ↔ Security: new boundary, dependency, or secret handling → security review before merge.
+- **Engineering ↔ Security**: new boundary, dependency, or secret handling → security review before merge.
 
-- Engineering ↔ Automation: pipeline change → security + platform review. Gates cannot be weakened without approval.
+- **Engineering ↔ Automation**: pipeline change → security + platform review. Gates cannot be weakened without approval.
 
-- Engineering ↔ Legal/Privacy: new PII store, export, or cross-border flow → privacy review + DPIA if high risk.
+- **Engineering ↔ Legal/Privacy**: new PII store, export, or cross-border flow → privacy review + DPIA if high risk.
 
-- Marketing ↔ Legal/Privacy: new channel, claim, or audience → legal + privacy review before launch.
+- **Marketing ↔ Legal/Privacy**: new channel, claim, or audience → legal + privacy review before launch.
 
-- Finance ↔ Legal/Security: new vendor or payment path → legal + security + finance review.
+- **Finance ↔ Legal/Security**: new vendor or payment path → legal + security + finance review.
 
-- Any domain ↔ Incident: Critical/High → same-session notification, owner assigned, evidence attached, residual risk explicit.
+- **Any domain ↔ Incident**: Critical/High → same-session notification, owner assigned, evidence attached, residual risk explicit.
 
 **Enforcement**: each domain's gates are checked in its own tooling. Violations block the corresponding action. Exceptions require written approval from the domain owner plus a remediation plan with deadline. Residual risk is always explicit — **no silent PASS**.
