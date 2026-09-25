@@ -31,7 +31,7 @@ Inter-stage communication in Frame→Ship is strictly decoupled and stateless: s
 ## Components
 
 | Component | Responsibility | Interface |
-|-----------|---------------|-----------|
+| ----------- | --------------- | ----------- |
 | **Packet Envelope (`SPEC/HARD/GATE/DOMAINS`)** | Encapsulates inter-stage execution state strictly by reference. Conveys spec anchors, hard execution constraints, gate verdicts, and touched domain scope without carrying file content. | Canonical 4-tuple string: `SPEC:<path>#<anchors> / HARD:<mode+constraints> / GATE:<verdict> / DOMAINS:<list>` |
 | **Orchestrator Dispatcher** | Central coordinator that dispatches domain owners and specialists based on `Domains-Touched`. Enforces role clarity, load orders, and full-wave gate orchestration. Specialists never self-dispatch; they execute or brief back. | Subagent invocation / Task dispatch order with explicit role definition and packet envelope |
 | **Domain Specialist Lane (`git-worktree`)** | Isolated working environment created repo-locally under `.worktrees/<spec-id>` with branch-per-SPEC for up to 2 concurrent parallel lanes. Guarantees zero cross-contamination of working tree and dependencies. | Git worktree lifecycle: `git worktree add`, clean baseline check, `Join-Path` discipline, removal + prune |
@@ -85,13 +85,13 @@ The following invariants are inviolable and must be enforced by all stages, doma
 - **INV-003 (HARD Prefix Discipline):** The `HARD` token within any packet envelope must begin with `subagents` (e.g., `HARD:subagents+<constraints>`). Any override requires explicit CEO waiver documentation recorded in the gate report.
 - **INV-004 (Sequential Equivalence):** In execution environments where parallel task dispatch is unavailable, execution must degrade sequentially in the same thread under the exact same packet, same reviewers, and same full-wave gate. No "min-gate" or silent downgrade is permitted.
 - **INV-005 (Fast-Path Containment):** Trivial reversible work (<15 lines) executed via CEO fast-path is strictly out-of-methodology. It must never create pseudo-stages, bypasses, or hybrid branches within the Frame→Ship chain.
-- **INV-006 (Parallel Worktree Bound):** Concurrent execution lanes under `git-worktree` must not exceed 2 live worktrees at any time (`max 2 parallel lanes`). Each worktree must have an isolated branch and must be cleaned up post-handoff.
+- **INV-006 (Parallel Worktree Bound):** Concurrent execution lanes under `git-worktree` must not exceed 2 live worktrees at any time (`max 3 parallel lanes`). Each worktree must have an isolated branch and must be cleaned up post-handoff.
 - **INV-007 (Historical Immutability):** Historical records (`docs/specs/50_archive/`, prior `BRIEF-*.md` files, past ADRs `ADR-001` through `ADR-008`, and historical gate evaluations) are immutable audit trails and must never be altered retroactively.
 - **INV-008 (Singleton Working File Discipline):** Working files per lane (`PROPOSED_CHANGES.md`, `IMPLEMENTATION_PLAN.md`, `TEST_MATRIX.md`, `ARCHITECTURE.md`, `API_CONTRACTS.md`, `GATE_REPORT.md`, `HANDOFF.md`, `RELEASE_NOTES.md`) are strict singletons. Creating suffixed variants (e.g., `ARCHITECTURE-*.md`) is strictly forbidden.
 - **INV-009 (Universal File Authoring & Scoped Execution):** All agents in `/agents` possess file editing capabilities (`write_to_file`, `replace_file_content`) to author domain specifications, reports, and documentation. Terminal command execution (`run_command`) remains strictly restricted to designated execution specialists (`engineering-specialist`, `automation-specialist`, `quality-assurance`).
 - **INV-010 (Domain Specialist Fusion):** Each of the 8 canonical domains possesses exactly one unified Fused Domain Specialist consolidating the domain's craft roles into one authoritative practitioner.
 - **INV-011 (Universal Creed & Conduct Binding):** Every agent file in `/agents` must embed the foundational Creed (*"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."*) and the non-negotiable conduct rules from `rules/frame-ship.md`.
-- **INV-012 (Single Dispatcher Discipline):** Only the Orchestrator dispatches tasks to the team; peer specialists never dispatch sideways.
+- **INV-012 (Single Dispatcher Discipline):** Only the Orchestrator dispatches tasks to the team; peer owners/specialists never dispatch sideways or downwards.
 - **INV-013 (Independent Reviewer Subagents):** Within `quality-gate`, reviewers are strictly independent from each other. The Orchestrator must dispatch exactly one dedicated subagent per reviewer role (`1 subagent per reviewer`). No single agent may perform the work of multiple reviewers or combine reviewer assessments into a bundled review session.
 
 ---
