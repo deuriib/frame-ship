@@ -36,11 +36,11 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
    - `bounded-initiative` — a well-scoped intent with an existing flow to change. Ask the questions that matter, present a short BRIEF in chat, and STOP for an explicit yes. No BRIEF file.
    - `architectural-initiative` — new direction, new subsystem, restructure of how parts fit together. Follow the full flow below and write the BRIEF file.
      Ratchet is one-way: hidden complexity upgrades the path — stop, say so, step up. Nothing downgrades mid-initiative. When in doubt, take the heavier path.
-3. Freeze execution as subagents only (no mode question): orchestrator dispatches, owners do the work or brief back; sequential same-thread degradation where the harness lacks task. Trivial <15-line reversible work is CEO fast-path, outside methodology. Freeze as execution_mode in brief; all specs follow it unless overridden per SPEC with orchestrator waiver.
+3. Freeze execution as subagents only (no mode question): orchestrator dispatches, owners/specialists do the work or brief back; sequential same-thread degradation where the harness lacks task. Trivial <15-line reversible work is CEO fast-path, outside methodology. Freeze as execution_mode in brief; all specs follow it unless overridden per SPEC with orchestrator waiver.
 4. Elicit one question at a time — multiple-choice preferred, open-ended fine. Focus on purpose, constraints, success criteria. One question per message; break deeper topics into follow-ups.
 5. Propose 2–3 framings with trade-offs, lead with the recommendation and why. YAGNI ruthlessly — cut every non-essential scope from each framing before presenting.
 6. Present the BRIEF in sections scaled to complexity; ask after each section whether it looks right. Cover problem, outcome, scope, stakeholders, constraints.
-7. Produce `docs/briefs/BRIEF-<slug>.md` using `references/product-brief.md` (with `Classification:`, `Framings-considered:`, `Approval:`) with `Domains-touched` declared from the 8-domain catalogue.
+7. Produce `docs/briefs/BRIEF-<slug>.md` and `docs/briefs/OKR-<slug>.md` using `references/product-brief.md` (with `Classification:`, `Framings-considered:`, `Approval:`) with `Domains-touched` declared from the 8-domain catalogue.
 8. Define 2–4 OKRs using `references/okr-template.md`.
 9. Self-review the written BRIEF with fresh eyes — placeholder scan (no TBD/TODO/vague lines), internal consistency, scope check (one SPEC cycle or decompose?), ambiguity check (one reading only) — fix inline, no re-review loop.
 10. User reviews the BRIEF file before handoff: "BRIEF written at `<path>`. Please review and approve before we move to specs." Wait for explicit yes. HARD-GATE: ceremony scales with size — a spike's nod, a bounded yes, an architectural file approval — the approval itself never does.
@@ -50,8 +50,8 @@ frame-ship:frame-intent → frame-ship:translate-to-spec → frame-ship:propose-
 
 ### C1 — Classification-scaled challenger (opt-in, REQ-001)
 
-- Mechanics (glossary, opener/exit, one-at-a-time, warmth, masking, N+1, stall breaker): `../using-frame-ship/references/challenge-round.md` §1–§2 — never redefined here.
-- Stage budget: spike 1 question / bounded cap 3 (typical 2–3) / architectural cap 5 (4 core + 1 frontier-empty). Opt-in at classification, never skips the HARD-GATE; unclassified → heaviest path (cap 5).
+- Mechanics (glossary, opener/exit, one-at-a-time, warmth, masking, N+1, stall breaker): `../using-frame-ship/references/challenge-round.md` — never redefined here.
+- Stage budget: spike 1-3 question / bounded cap 3-5 / architectural cap 5 (4 core + 3 frontier-empty). Opt-in at classification, never skips the HARD-GATE; unclassified → heaviest path (cap 5).
 - Falsifiable-bet: challenger runs "what evidence would kill each framing?" over the 2–3 framings and records it in `Framings-Considered`. Record outcome `grill: accepted|declined|exited|stalled`.
 
 ### Red Flags (adapted — approval scales, never skipped)
