@@ -22,6 +22,14 @@ Work one lever per month. Finish it, measure it, then move on:
 3. **Referrals — borrow trust.** Ask at the win ("who else has this pain?"), not at the end. Script: "Who's one person you'd feel good introducing me to — I'd treat them like I treated you?" One name beats "let me know if you hear of anyone."
 4. **Metrics — see the machine.** One scorecard, reviewed monthly (30 min): pipeline (touches → replies → calls), sales (calls → closes → cash collected), delivery (outcomes hit, days to outcome), compounding (upsell %, renewal %, referrals per client). Fix the worst number first.
 
+## Guardrails
+
+- **Upsell only at the win.** No expanding a struggling engagement. First outcome lands, then the next problem gets priced on its own ROI.
+- **Renewal on calendar from day one.** Every engagement names its renewal date + metric upfront. No silent expiry, no surprise invoice.
+- **Churn gets a code, not a story.** Every lost client logs why (fit, price, timing, delivery, ghosted) and feeds one fix back to offer or targeting. Reclassifying churn as "pause" to hide it restarts trust at zero.
+- **Referral money in writing.** Any finder fee or rev-share is agreed before the intro, not after the close. Undisclosed money on a referral kills the source.
+- **PII minimum in the tracker.** Names, deal facts, next steps — nothing more. No IDs, no private docs, no client internals in notes or prompts.
+
 ## Monthly Review
 
 30 minutes, same day each month:

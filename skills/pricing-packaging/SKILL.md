@@ -26,6 +26,13 @@ Produce this artifact and get approval:
 4. **Payment terms.** Upfront vs milestones vs recurring, stated plainly. Default: 50% upfront, 50% on delivery for projects; monthly for retainers. State the default and the condition that breaks it.
 5. **Raise trigger.** What happens that raises prices (3 wins at this price, waitlist >2 weeks, close rate >40%). Prices ratchet one way until evidence says otherwise.
 
+## Guardrails
+
+- **Frozen tiers, one floor.** The approved card is the only quotable price. Starter is the floor — nothing quotes below it.
+- **No discount without a trade.** Every concession takes scope, speed, or terms back. Concession without trade is logged as a policy break, not a tactic.
+- **No ad-hoc per-buyer pricing.** Custom numbers need a written reason + expiry date, reviewed monthly. Two custom deals in a row means the card is wrong — fix the card.
+- **No quoting before the card exists.** A price said on a call before approval is a verbal commitment you now own. Card first, calls second.
+
 ## Questions That Matter
 
 Ask at most 3, one round, then draft:

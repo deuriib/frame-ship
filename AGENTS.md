@@ -108,6 +108,16 @@ Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh`
 
 Before proposing changes to skill design, workflow philosophy, or architecture, read all 7 skills and understand this fork's design decisions. Revenue Powers keeps the upstream philosophy that skills are behavior-shaping code (not prose) and keeps the "human partner" voice. Changes that rewrite that voice or restructure the flywheel without evidence will be rejected.
 
+## Revenue Rules (always on)
+
+These bind every session, skill, and PR — no override without written partner approval:
+
+1. **One tracker is truth.** Every opportunity and deal lives in the same list with owner, stage, amount, next step, and date. A deal discussed only in chat does not exist for forecast. No shadow pipelines.
+2. **Price only from the card.** The approved pricing-packaging card is the only quotable price. Custom numbers need a written reason + expiry, reviewed monthly. An override without a log entry never happened.
+3. **Revenue counts when collected or delivered.** No celebrating signed-but-unpaid as income; no pull-forward without a written reason. Every won/lost file carries a reason code.
+4. **Only the demonstrable is promised.** No borrowed proof, no roadmap that doesn't exist, no capabilities beyond approved collateral. A claim without evidence is a policy break.
+5. **PII minimum, money disclosed.** Tracker holds names and deal facts — nothing more. Any referral fee, finder payment, or gift over token value goes in writing before the proposal.
+
 ## General
 
 - Read `.github/PULL_REQUEST_TEMPLATE.md` before submitting

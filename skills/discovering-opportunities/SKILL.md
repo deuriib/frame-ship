@@ -39,6 +39,13 @@ For architectural work, produce this artifact and get approval:
 4. **Reachability.** Where you contact 50 of them this week: one channel, named (LinkedIn, cold email list, one community, referrals).
 5. **Kill criteria.** What you will see in 2 weeks that proves this niche is dead (e.g. "<5% reply rate after 100 touches" or "nobody names this pain on 5 calls").
 
+## Guardrails
+
+- **No niche without 3 pay signals.** Fewer than 3 = the brief stays draft. Hope is not evidence.
+- **Kill criteria have a date.** A niche without a dated kill line gets 2 weeks max, then dies automatically.
+- **One tracker is truth.** Every opportunity lives in the same list with owner, next step, and date. A niche discussed only in chat does not exist for decisions.
+- **No reclassification to hide a kill.** A dead niche is marked dead with its reason. Renaming it to dodge the kill criteria restarts the clock at zero.
+
 ## Questions That Matter
 
 Ask at most 3, one round, then draft:

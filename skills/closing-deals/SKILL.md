@@ -33,6 +33,13 @@ Follow this sequence on every sales call:
 | "Not now" | "When should we talk — and what changes by then?" Calendar it or kill it. "Someday" is a no with extra steps. |
 | "Talk to my partner" | "Let's bring them in now or book all three of us. I don't want you reselling my offer for me." |
 
+## Guardrails
+
+- **Nothing verbal outside the proposal.** If it isn't on the one-pager, it wasn't promised. Side agreements and call-only commitments don't exist.
+- **No stage advance without exit criteria.** A deal moves to proposal only after discovery priced their pain; moves to signed only with upfront collected and a start date. "Feels close" is not a stage.
+- **Won/lost gets a reason code.** Every closed file logs why (price, timing, fit, ghosted, lost-to-X). No reason = the file stays open and counts against you.
+- **Conflicts and gifts disclosed.** Any referral fee, finder payment, or gift over token value goes in writing before the proposal. Undisclosed money on a deal kills trust permanently.
+
 ## Proposal Rules
 
 One page: their pain in their words, the recommended tier, ROI math, guarantee, start date, payment terms. Expires in 7 days. Follow up twice, then close the file. Dead proposals get a breakup line that invites referrals.

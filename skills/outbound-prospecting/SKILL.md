@@ -27,6 +27,14 @@ Produce this artifact and get approval, then execute one channel at a time:
 
 After 100 touches on one sequence: <5% reply rate = rewrite the opener. <10% of replies positive = the pain is wrong, return to discovering-opportunities. Show rate <50% = fix the confirmation, not the opener.
 
+## Guardrails
+
+- **Personalization must be verifiable.** Every hook cites something real (their post, hire, launch). Fabricated familiarity burns the domain and the name.
+- **No means no, opt-out means out.** "No", "not interested", or opt-out ends the sequence immediately. Arguing or re-adding them poisons the channel for every future campaign.
+- **One channel until 100 touches.** No second channel before the first hits 100 touches and a Friday review. Parallel sequences teach nothing.
+- **No pressure tactics or dark patterns.** No fake scarcity ("only 1 spot" when there are 10), no fake familiarity ("great chatting yesterday" when it never happened), nothing the platform would ban.
+- **PII minimum.** Collect only what the sequence needs (name, role, public signal). No scraping private data, no buying shady lists.
+
 ## Questions That Matter
 
 Ask at most 3, one round, then draft:

@@ -23,6 +23,13 @@ Produce this artifact and get approval:
 4. **Risk reversal.** Guarantee, trial, or kill clause with teeth: "If X isn't true by day Y, you pay nothing / I work free until it is." A guarantee you can keep is a close rate multiplier.
 5. **Scope fence.** What's in, what's out, what costs extra. Fences kill scope creep before it invoices.
 
+## Guardrails
+
+- **No borrowed proof. Ever.** Only results you delivered, with numbers you can show. Others' screenshots presented as yours kill the deal on the first hard question — and the reputation after it.
+- **No promising capabilities or roadmap you don't have.** Approved collateral only: if it isn't delivered or demoable today, it doesn't go in the sheet.
+- **Guarantee you can afford to keep.** If delivery gets hard and the guarantee bankrupts you, it wasn't a guarantee — it was a lie with a date.
+- **Scope fence is binding.** Work outside the fence needs a new price before it starts. Free extras train buyers to expect free work.
+
 ## Questions That Matter
 
 Ask at most 3, one round, then draft:
