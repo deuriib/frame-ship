@@ -34,3 +34,4 @@ La plantilla correcta multiplica el valor por visita: TSR convierte tráfico car
 - [ ] Plantilla TSA/TSG/TSR elegida con motivo explícito.
 - [ ] Respuesta directa en el primer bloque.
 - [ ] Interlink al cluster (mínimo 2 enlaces internos relevantes).
+- [ ] Gate §1+§3 guardrails: claims con evidencia, disclosure afiliado visible, assets con licencia, IA revisada.

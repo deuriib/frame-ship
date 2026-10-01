@@ -28,3 +28,4 @@ El intent clasificado decide la monetización: transaccional vende hoy, informac
 - [ ] Mapa 1 URL = 1 intent, sin huérfanos ni duplicados.
 - [ ] Canibalizaciones marcadas con URL ganadora propuesta.
 - [ ] Prioridad por ROI (transaccionales de alto margen primero).
+- [ ] Gate §2 guardrails: segmentación con datos consentidos, cero PII en URLs/UTMs.

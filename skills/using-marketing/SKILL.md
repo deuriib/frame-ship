@@ -50,9 +50,14 @@ Nicho → keywords → contenidos → copy → enlaces → monetizar → escalar
 | "El diseño primero" | Web pesada mata conversión. Ligera y que venda, luego bonita. |
 | "Compramos enlaces y listo" | Enlaces sin flota ni intent son humo. Mapa de flota primero. |
 
+## Guardrails
+
+Lee `references/guardrails.md` antes de actuar. Si un gate falla, la tarea se pausa y se escala. Sin excepciones.
+
 ## Checklist
 
 - [ ] ROI esperado declarado (qué retorno, en qué plazo).
 - [ ] Search intent clasificado (transaccional / informacional / inbound).
 - [ ] Rango asignado (C / B / A / S) antes de invertir esfuerzo.
 - [ ] Métrica de éxito definida (CTR, conversión, RPM, posición — una, no cinco).
+- [ ] Guardrails verificados (`references/guardrails.md`) o bloqueo escalado.

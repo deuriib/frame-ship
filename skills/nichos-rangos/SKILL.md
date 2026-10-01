@@ -28,3 +28,4 @@ Cada paso filtra gasto: sin demanda comercial quemas meses en tráfico que no co
 - [ ] Competencia top 10 evaluada (ganable o no, y por qué).
 - [ ] Rango C/B/A/S asignado con criterio explícito.
 - [ ] Métrica de salida definida (cuándo matas el experimento).
+- [ ] Gate §1+§5 guardrails: prueba de dinero real, sin métrica vanidosa.

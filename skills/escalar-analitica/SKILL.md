@@ -28,3 +28,4 @@ Escalar lo que ya convierte multiplica ROI sin adivinar; fusionar canibalizacion
 - [ ] Fusión/redirección ejecutada, una URL por intent.
 - [ ] Decisión de escala por rango con números que la respalden.
 - [ ] En YouTube: CTR miniatura + retención medidos por video.
+- [ ] Gate §5+§6 guardrails: auditoría completa (consents, licencias, claims, supresión, A/B) + escalada ante incidente.

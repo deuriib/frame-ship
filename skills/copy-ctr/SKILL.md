@@ -28,3 +28,4 @@ El CTR es tráfico gratis: misma posición, más visitas, sin más enlaces ni m�
 - [ ] Título reescrito con un gatillo, cumpliendo lo prometido.
 - [ ] CTA único y concreto por bloque + comparativa si aplica.
 - [ ] Medición antes/después registrada.
+- [ ] Gate §1 guardrails: título cumple lo prometido, CTA sin dark patterns, comparativa con datos reales.

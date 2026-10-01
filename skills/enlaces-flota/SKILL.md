@@ -28,3 +28,4 @@ El enlazado en cadena concentra el presupuesto donde el ROI vive: cada enlace cu
 - [ ] Flujo C → B → A → S respetado.
 - [ ] Anchors variados, alineados al intent destino.
 - [ ] Métrica por URL receptora con fecha de revisión.
+- [ ] Gate §4 guardrails: enlaces sin spam ni ToS-violating scraping, ritmo creíble, cuentas con MFA.

@@ -28,3 +28,4 @@ La monetización por intent evita dejar dinero en la mesa: afiliación donde hay
 - [ ] Método de monetización por URL según su intent.
 - [ ] CTAs y comparativas donde hay decisión de compra.
 - [ ] €/1k visitas medido por URL que monetiza.
+- [ ] Gate §1+§2+§4 guardrails: precios/stock verificados, opt-in + supresión operativos, AdSense sin tráfico inválido.
