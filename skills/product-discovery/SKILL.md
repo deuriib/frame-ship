@@ -151,6 +151,16 @@ digraph discovery {
 
 **Terminal states are path-bound.** Strategic: the ONLY skill you invoke after discovery is writing-prds — never pricing-packaging, go-to-market, or any other lifecycle skill. Bounded: after approval, work proceeds directly; no brief document. Spike: the terminal state is a reported recommendation.
 
+## Guardrails (§1, §2, §6 — binding, see docs/product/guardrails.md)
+
+Enforced at every path; the brief self-review rejects violations instead of working around them:
+
+1. **Problem statement present.** One written statement — user + moment + cost of status quo. In the user's words with source attached; unattributed framing labelled hypothesis. Missing statement = no brief, no PRD. Non-goals live in the statement.
+2. **Discovery fields on every artefact.** Brief and every killed hypothesis carry `qué aprendimos` + `a quién hay que avisar`. Missing either = returned, not filed.
+3. **Sources tokenised.** No names, emails, or account IDs anywhere — `SEG-042` style tokens only. Notes declare purpose, TTL, deletion and DSR route.
+4. **Disagreement check.** A probe returning only agreement is a broken instrument — fix the method, don't report the result.
+5. **North-star exists.** One outcome metric per product, written before the first PRD. If none exists, writing it is step zero of this discovery — not a follow-up.
+
 ## After the Bet (strategic path)
 
 **Documentation:**
@@ -158,8 +168,9 @@ digraph discovery {
 - Write the validated bet (brief) to `docs/product/specs/YYYY-MM-DD-<topic>-brief.md`
 - Commit the brief to git
 
-**Brief Self-Review:**
+**Brief Self-Review (guardrails first):**
 
+0. **Guardrail gate (§1, §2):** problem statement with user + moment + cost present? `qué aprendimos` + `a quién hay que avisar` filled? Sources tokenised? Any NO = brief returned, not filed — fix before continuing to items 1-4 below.
 1. **Placeholder scan:** Any "TBD", "TODO", incomplete sections, or vague outcomes? Fix them.
 2. **Internal consistency:** Do any sections contradict each other? Does the JTBD match the success behavior?
 3. **Scope check:** Is this focused enough for a single PRD, or does it need decomposition?

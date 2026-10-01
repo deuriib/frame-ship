@@ -26,6 +26,12 @@ Before ANY success claim, run and paste:
 - **One blocker = stop.** A failed check blocks the launch claim. Fix, re-verify, then claim.
 - **Stale evidence doesn't count.** Checks older than the last change to that surface must be re-run.
 
+## Guardrails (§5, §6 — binding, see docs/product/guardrails.md)
+
+- **Falsifiable re-run:** every claimed PASS quotes the criterion's FAIL shape and shows why this run isn't it. Criteria without FAIL shapes fail the gate.
+- **North-star on the dashboard:** success metric + anti-metric pasted against the pre-PRD north-star. Metric-vs-work conflict resolves for the metric.
+- **No CONDITIONAL launches:** one blocker = `CLOSED` until fixed and re-verified.
+
 ## Checklist
 
 - [ ] All milestone acceptance checks re-run against live, outputs pasted

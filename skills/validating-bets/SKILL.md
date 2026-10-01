@@ -46,7 +46,8 @@ Log every probe to `docs/product/evidence/YYYY-MM-DD-<bet>-<probe>.md`:
 **Probe:** [what you did, n=]
 **Result:** [numbers, quotes (verbatim, attributed by segment not name)]
 **Decision:** KILL / PIVOT / PERSEVERE + one-line why
-```
+**Qué aprendimos:** [one durable learning even on KILL]
+**A quién hay que avisar:** [named owner notified same session, or `nadie — sin stakeholders`]```
 
 Commit it. Evidence that isn't written down didn't happen.
 
@@ -65,6 +66,13 @@ Commit it. Evidence that isn't written down didn't happen.
 | "The landing page converts, so they'll pay" | Clicks ≠ payment. Priced pilot or it didn't happen. |
 | "Let's lower the threshold, we learned a lot" | Learning is not validation. Hold the line or name a new hypothesis. |
 | "Kill feels like failure" | A kill in 3 days saves a quarter. Celebrate it. |
+
+## Guardrails (§2 — binding, see docs/product/guardrails.md)
+
+- **Evidence log fields:** every probe file carries `qué aprendimos` + `a quién hay que avisar`. Missing either = returned, not filed.
+- **Kill postmortem is an artefact too:** same two fields required.
+- **Tokenised sources:** verbatim quotes attributed by segment (`SEG-042`), never name/email/account. Notes declare purpose, TTL, deletion + DSR route.
+- **Broken instrument rule:** agreement-only results fix the method, never ship as validation.
 
 ## Checklist
 

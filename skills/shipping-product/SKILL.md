@@ -21,6 +21,11 @@ Execute a PRD milestone-by-milestone in this session. One milestone at a time: c
 4. **Measure or it didn't ship.** Every milestone ends with the PRD's measure step run and pasted. No metric, no done.
 5. **Publish every milestone.** Commit docs + changelog entry per milestone. A milestone that isn't published blocks the next one.
 
+## Guardrails (§3, §5 — binding, see docs/product/guardrails.md)
+
+- **Falsifiable gate check:** each milestone's acceptance states its FAIL shape. A milestone with no way to come back false is `CLOSED`, never shipped as `CONDITIONAL`.
+- **Missed metric = stop:** do NOT proceed to N+1. Ordering changes get reason in the same sentence, one owner, one record — and the affected party is told by a person same session.
+
 ## Loop (per milestone)
 
 - [ ] **Confirm** — quote the milestone's acceptance check; verify dependencies from earlier milestones are live
