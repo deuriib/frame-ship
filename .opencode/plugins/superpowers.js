@@ -117,8 +117,8 @@ const getBootstrapContent = (toolMapping) => {
   // Return cached result on subsequent calls
   if (_bootstrapCache.has(toolMapping)) return _bootstrapCache.get(toolMapping);
 
-  // Try to load using-superpowers skill
-  const skillPath = path.join(superpowersSkillsDir, 'using-superpowers', 'SKILL.md');
+  // Try to load using-legal skill
+  const skillPath = path.join(superpowersSkillsDir, 'using-legal', 'SKILL.md');
   if (!fs.existsSync(skillPath)) {
     _bootstrapCache.set(toolMapping, null);
     return null;
@@ -130,7 +130,7 @@ const getBootstrapContent = (toolMapping) => {
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
 You have superpowers.
 
-**IMPORTANT: The using-superpowers skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers" again - that would be redundant.**
+**IMPORTANT: The using-legal skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-legal" again - that would be redundant.**
 
 ${content}
 

@@ -4,16 +4,16 @@ import { fileURLToPath } from "node:url";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const EXTREMELY_IMPORTANT_MARKER = "<EXTREMELY_IMPORTANT>";
-const BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for pi";
+const BOOTSTRAP_MARKER = "superpowers-legal:using-legal bootstrap for pi";
 
 const extensionDir = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(extensionDir, "../..");
 const skillsDir = resolve(packageRoot, "skills");
-const bootstrapSkillPath = resolve(skillsDir, "using-superpowers", "SKILL.md");
+const bootstrapSkillPath = resolve(skillsDir, "using-legal", "SKILL.md");
 
 let cachedBootstrap: string | null | undefined;
 
-export default function superpowersPiExtension(pi: ExtensionAPI) {
+export default function superpowersLegalPiExtension(pi: ExtensionAPI) {
 	let injectBootstrap = true;
 
 	pi.on("resources_discover", async () => ({
@@ -67,7 +67,7 @@ ${BOOTSTRAP_MARKER}
 
 You have superpowers.
 
-The using-superpowers skill content is included below and is already loaded for this Pi session. Follow it now. Do not try to load using-superpowers again.
+The using-legal skill content is included below and is already loaded for this Pi session. Follow it now. Do not try to load using-legal again.
 
 ${body}
 

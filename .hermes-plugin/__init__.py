@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for hermes"
+BOOTSTRAP_MARKER = "superpowers-legal:using-legal bootstrap for hermes"
 
 
 def _skills_dir() -> str:
@@ -23,7 +23,7 @@ def _skills_dir() -> str:
         os.path.realpath(os.path.join(here, "skills")),
     )
     for cand in candidates:
-        if os.path.isfile(os.path.join(cand, "using-superpowers", "SKILL.md")):
+        if os.path.isfile(os.path.join(cand, "using-legal", "SKILL.md")):
             return cand
     raise RuntimeError(
         "superpowers plugin: cannot find the skills/ tree "
@@ -39,29 +39,25 @@ def _strip_frontmatter(content: str) -> str:
 
 def _build_bootstrap(skills_dir: str) -> str:
     with open(
-        os.path.join(skills_dir, "using-superpowers", "SKILL.md"),
+        os.path.join(skills_dir, "using-legal", "SKILL.md"),
         encoding="utf-8",
     ) as f:
         body = _strip_frontmatter(f.read())
 
-    tools_path = os.path.join(
-        skills_dir, "using-superpowers", "references", "hermes-tools.md"
-    )
-    with open(tools_path, encoding="utf-8") as f:
-        tool_mapping = f.read().strip()
+    tool_mapping = "Tool mapping: use native read/write/edit/bash tools to load SKILL.md files on demand."
 
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
         f"You have superpowers.\n\n"
-        f"The using-superpowers skill content is included below and is already "
+        f"The using-legal skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
-        f"Do not try to load using-superpowers again.\n\n"
+        f"Do not try to load using-legal again.\n\n"
         f"{body}\n\n"
         f"## Loading Superpowers Skills on Hermes\n\n"
         f"Superpowers skills are registered with Hermes' native skill loader: "
         f'invoke one with `skill_view("superpowers:skill-name")` '
-        f'(for example `skill_view("superpowers:brainstorming")`). '
+        f'(for example `skill_view("superpowers-legal:intake-caso")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
