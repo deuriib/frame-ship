@@ -1,6 +1,6 @@
-# Superpowers
+# Superpowers Security
 
-Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
+Superpowers Security is a complete secure-development methodology for your coding agents: threat modeling, secure planning, secure implementation, review, and incident response — built on composable `security:*` skills with bootstrap instructions that make sure your agent uses them.
 
 ## Table of Contents
 
@@ -39,11 +39,11 @@ It starts from the moment you fire up your coding agent. As soon as it sees that
 
 Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
 
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY. 
+After you've signed off on the threat-modeled design, your agent puts together a secure implementation plan gated on abuse cases — every boundary task carries validation, authorization, and a negative test. It emphasizes security-test-first, least privilege, and evidence over claims.
 
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
+Next up, once you say "go", it implements plan tasks with secure-implementation discipline, reviews every diff like an attacker, and verifies with real command output before release. If something blows up in production, incident-response takes over: contain, recover, learn.
 
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has security superpowers.
 
 ## Commercial Services
 
@@ -62,7 +62,7 @@ Superpowers is available via the [official Claude plugin marketplace](https://cl
 - Install the plugin from Anthropic's official marketplace:
 
   ```bash
-  /plugin install superpowers@claude-plugins-official
+  /plugin install superpowers-security@claude-plugins-official
   ```
 
 #### Superpowers Marketplace
@@ -72,13 +72,13 @@ The Superpowers marketplace provides Superpowers and some other related plugins 
 - Register the marketplace:
 
   ```bash
-  /plugin marketplace add obra/superpowers-marketplace
+  /plugin marketplace add deuriib/superpowers-security-marketplace
   ```
 
 - Install the plugin from this marketplace:
 
   ```bash
-  /plugin install superpowers@superpowers-marketplace
+  /plugin install superpowers-security@superpowers-security-marketplace
   ```
 
 ### Antigravity
@@ -86,7 +86,7 @@ The Superpowers marketplace provides Superpowers and some other related plugins 
 Install Superpowers as a plugin from this repository:
 
 ```bash
-agy plugin install https://github.com/obra/superpowers
+agy plugin install https://github.com/deuriib/superpowers-security
 ```
 
 Antigravity runs the plugin's session-start hook, so Superpowers is active from
@@ -133,13 +133,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Install the plugin from this repository:
 
   ```bash
-  devin plugins install obra/superpowers
+  devin plugins install deuriib/superpowers-security
   ```
 
 - Update to the latest version with:
 
   ```bash
-  devin plugins update superpowers
+  devin plugins update superpowers-security
   ```
 
 ### Factory Droid
@@ -147,13 +147,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Register the marketplace:
 
   ```bash
-  droid plugin marketplace add https://github.com/obra/superpowers
+  droid plugin marketplace add https://github.com/deuriib/superpowers-security
   ```
 
 - Install the plugin:
 
   ```bash
-  droid plugin install superpowers@superpowers
+  droid plugin install superpowers-security@superpowers
   ```
 
 ### Gemini CLI
@@ -161,13 +161,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Install the extension:
 
   ```bash
-  gemini extensions install https://github.com/obra/superpowers
+  gemini extensions install https://github.com/deuriib/superpowers-security
   ```
 
 - Update later:
 
   ```bash
-  gemini extensions update superpowers
+  gemini extensions update superpowers-security
   ```
 
 ### GitHub Copilot CLI
@@ -175,13 +175,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Register the marketplace:
 
   ```bash
-  copilot plugin marketplace add obra/superpowers-marketplace
+  copilot plugin marketplace add deuriib/superpowers-security-marketplace
   ```
 
 - Install the plugin:
 
   ```bash
-  copilot plugin install superpowers@superpowers-marketplace
+  copilot plugin install superpowers-security@superpowers-security-marketplace
   ```
 
 ### Grok Build CLI
@@ -191,7 +191,7 @@ Superpowers is available via the [official Grok plugin marketplace](https://gith
 - Install the plugin from xAI's official marketplace:
 
   ```bash
-  grok plugin install superpowers@xai-official --trust
+  grok plugin install superpowers-security@xai-official --trust
   ```
 
 - Or open the marketplace in the TUI, search for Superpowers, and install it:
@@ -215,7 +215,7 @@ Superpowers is available in Kimi Code's plugin marketplace.
 - Or install directly from this repository:
 
   ```text
-  /plugins install https://github.com/obra/superpowers
+  /plugins install https://github.com/deuriib/superpowers-security
   ```
 
 - Detailed docs: [docs/README.kimi.md](docs/README.kimi.md)
@@ -228,7 +228,7 @@ already use it in another harness.
 - Tell OpenCode:
 
   ```
-  Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+  Fetch and follow instructions from https://raw.githubusercontent.com/deuriib/superpowers-security/refs/heads/main/.opencode/INSTALL.md
   ```
 
 - Detailed docs: [docs/README.opencode.md](docs/README.opencode.md)
@@ -238,7 +238,7 @@ already use it in another harness.
 Install Superpowers as a Pi package from this repository:
 
 ```bash
-pi install git:github.com/obra/superpowers
+pi install git:github.com/deuriib/superpowers-security
 ```
 
 For local development, run Pi with this checkout loaded as a temporary package:
@@ -256,7 +256,7 @@ Qwen Code installs plugins from Claude Code marketplaces directly.
 - Install the plugin from this repository, and pick `superpowers` when prompted:
 
   ```bash
-  qwen extensions install obra/superpowers
+  qwen extensions install deuriib/superpowers-security
   ```
 
 - Update later:
@@ -270,7 +270,7 @@ Qwen Code installs plugins from Claude Code marketplaces directly.
 Install Superpowers as a Hermes plugin from this repository:
 
 ```bash
-hermes plugins install obra/superpowers --enable
+hermes plugins install deuriib/superpowers-security --enable
 ```
 
 Restart any active Hermes sessions after installing. Note: Hermes has no
@@ -291,7 +291,7 @@ Superpowers is available as a native Muse plugin — same repo, same skills, all
   Or clone and install:
 
   ```bash
-  git clone https://github.com/obra/superpowers.git
+  git clone https://github.com/deuriib/superpowers-security.git
   muse plugins install ./superpowers
   muse plugins approve superpowers
   ```
@@ -333,42 +333,37 @@ The skill reads the session transcript, reports what happened with line-level ev
 Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
 
 - **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with Superpowers
-- **Issues**: https://github.com/obra/superpowers/issues
+- **Issues**: https://github.com/deuriib/superpowers-security/issues
 - **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions
 
 ## What's Inside
 
-### Skills Library
+### Skills Library (`security:*`)
 
-**Testing**
-- **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
+**Design & Planning**
+- **threat-modeling** - Attack-surface mapping, abuse cases, STRIDE-lite, approved design docs
+- **writing-secure-plans** - Implementation plans with per-task security gates and negative tests
 
-**Debugging**
-- **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
-- **verification-before-completion** - Ensure it's actually fixed
-- **diagnosing-superpowers** - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue
+**Build & Fix**
+- **secure-implementation** - Security-test-first coding: validate, authorize, no secrets in code/logs
+- **vulnerability-debugging** - Root-cause vuln investigation: reproduce safely, fix the class, regression-test
 
-**Collaboration** 
-- **brainstorming** - Socratic design refinement
-- **writing-plans** - Detailed implementation plans
-- **executing-plans** - Inline plan execution: one context, one final review
-- **dispatching-parallel-agents** - Concurrent subagent workflows
-- **requesting-code-review** - Pre-review checklist
-- **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
-- **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
+**Review & Release**
+- **secure-code-review** - Four-pass review (auth, input, secrets, logic) with severity + exploit sketch
+- **verification-before-release** - Evidence before assertions: suite, diff audit, secrets scan, PoC proof
 
-**Meta**
-- **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+**Respond**
+- **incident-response** - Contain, assess exposure, eradicate, notify, blameless postmortem
+
+**Bootstrap**
+- **using-security** - Introduction to the security skills system (auto-loaded every session)
 
 ## Philosophy
 
-- **Test-Driven Development** - Write tests first, always
-- **Systematic over ad-hoc** - Process over guessing
-- **Complexity reduction** - Simplicity as primary goal
-- **Evidence over claims** - Verify before declaring success
+- **Security-test-first** - Write the abuse-case test before the code, always
+- **Threat-model before build** - No design ships without named abuse cases and mitigations
+- **Least privilege by default** - Object-level auth on every read/write
+- **Evidence over claims** - Verify with command output before declaring secure
 
 Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
 

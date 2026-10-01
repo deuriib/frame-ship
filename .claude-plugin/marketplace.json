@@ -7,8 +7,8 @@
   },
   "plugins": [
     {
-      "name": "superpowers",
-      "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
+      "name": "superpowers-security",
+      "description": "Security skills library for Claude Code: threat modeling, secure code, review, and incident response",
       "version": "6.4.2",
       "source": "./",
       "author": {

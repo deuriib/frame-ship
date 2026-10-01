@@ -1,2 +1,2 @@
-@./skills/using-superpowers/SKILL.md
-@./skills/using-superpowers/references/gemini-tools.md
+@./skills/using-security/SKILL.md
+@./skills/using-security/references/gemini-tools.md

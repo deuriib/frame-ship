@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Test: Plugin Loading
-# Verifies that the superpowers plugin loads correctly in OpenCode
+# Verifies that the security plugin loads correctly in OpenCode
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -42,12 +42,12 @@ else
     exit 1
 fi
 
-# Test 3: Check using-superpowers skill exists (critical for bootstrap)
-echo "Test 3: Checking using-superpowers skill (required for bootstrap)..."
-if [ -f "$SUPERPOWERS_SKILLS_DIR/using-superpowers/SKILL.md" ]; then
-    echo "  [PASS] using-superpowers skill exists"
+# Test 3: Check using-security skill exists (critical for bootstrap)
+echo "Test 3: Checking using-security skill (required for bootstrap)..."
+if [ -f "$SUPERPOWERS_SKILLS_DIR/using-security/SKILL.md" ]; then
+    echo "  [PASS] using-security skill exists"
 else
-    echo "  [FAIL] using-superpowers skill not found (required for bootstrap)"
+    echo "  [FAIL] using-security skill not found (required for bootstrap)"
     exit 1
 fi
 

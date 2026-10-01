@@ -1,5 +1,5 @@
 /**
- * Superpowers plugin for OpenCode.ai
+ * Security plugin for OpenCode.ai
  *
  * Dual-compatible with OpenCode V1 and V2.
  *
@@ -22,7 +22,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Skills directory shared by V1 (config hook) and V2 (setup/ctx.skill.transform)
-const superpowersSkillsDir = path.resolve(__dirname, '../../skills');
+const securitySkillsDir = path.resolve(__dirname, '../../skills');
 
 // Simple frontmatter extraction (avoid dependency on skills-core for
 // bootstrap). Handles plain `key: value` lines, quoted values (including
@@ -117,8 +117,8 @@ const getBootstrapContent = (toolMapping) => {
   // Return cached result on subsequent calls
   if (_bootstrapCache.has(toolMapping)) return _bootstrapCache.get(toolMapping);
 
-  // Try to load using-superpowers skill
-  const skillPath = path.join(superpowersSkillsDir, 'using-superpowers', 'SKILL.md');
+  // Try to load using-security skill
+  const skillPath = path.join(securitySkillsDir, 'using-security', 'SKILL.md');
   if (!fs.existsSync(skillPath)) {
     _bootstrapCache.set(toolMapping, null);
     return null;
@@ -128,9 +128,9 @@ const getBootstrapContent = (toolMapping) => {
   const { content } = extractAndStripFrontmatter(fullContent);
 
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
-You have superpowers.
+You have security superpowers.
 
-**IMPORTANT: The using-superpowers skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers" again - that would be redundant.**
+**IMPORTANT: The using-security skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-security" again - that would be redundant.**
 
 ${content}
 
@@ -202,7 +202,7 @@ const isChildSession = async (fetchSession, sessionID) => {
   } catch (err) {
     // Fail open: on lookup errors keep injecting (previous behavior) and do
     // not cache, so a transient failure can recover on the next step.
-    console.error('[superpowers] session lookup failed, treating session as top-level:', err);
+    console.error('[security] session lookup failed, treating session as top-level:', err);
     return false;
   }
   _cacheChildSession(sessionID, isChild);
@@ -218,7 +218,7 @@ const isChildSession = async (fetchSession, sessionID) => {
  */
 export const SuperpowersPlugin = async ({ client, directory }) => {
   return {
-    // Inject skills path into live config so OpenCode discovers superpowers skills
+    // Inject skills path into live config so OpenCode discovers security skills
     // without requiring manual symlinks or config file edits.
     config: async (config) => {
       // V2: skills is a flat array — skip, setup() handles V2 skill registration
@@ -227,8 +227,8 @@ export const SuperpowersPlugin = async ({ client, directory }) => {
       // V1: skills is { paths: [...] }
       config.skills = config.skills || {};
       config.skills.paths = config.skills.paths || [];
-      if (!config.skills.paths.includes(superpowersSkillsDir)) {
-        config.skills.paths.push(superpowersSkillsDir);
+      if (!config.skills.paths.includes(securitySkillsDir)) {
+        config.skills.paths.push(securitySkillsDir);
       }
     },
 
@@ -294,10 +294,10 @@ async function setup(ctx) {
   // 1. Register skills (one transform; one draft.add per skill)
   try {
     const skills = [];
-    if (fs.existsSync(superpowersSkillsDir)) {
-      for (const entry of fs.readdirSync(superpowersSkillsDir, { withFileTypes: true })) {
+    if (fs.existsSync(securitySkillsDir)) {
+      for (const entry of fs.readdirSync(securitySkillsDir, { withFileTypes: true })) {
         if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
-        const skillPath = path.join(superpowersSkillsDir, entry.name, 'SKILL.md');
+        const skillPath = path.join(securitySkillsDir, entry.name, 'SKILL.md');
         if (!fs.existsSync(skillPath)) continue;
         const { frontmatter, content } = extractAndStripFrontmatter(fs.readFileSync(skillPath, 'utf8'));
         skills.push({
@@ -324,14 +324,14 @@ async function setup(ctx) {
         try {
           draft.add(skill);
         } catch (err) {
-          console.error(`[superpowers] skill "${skill.id}" rejected by host, skipping:`, err);
+          console.error(`[security] skill "${skill.id}" rejected by host, skipping:`, err);
         }
       }
     });
   } catch (err) {
     // Never break plugin activation: one failing plugin takes down the whole
     // V2 generation (including provider/catalog plugins => no models in TUI).
-    console.error('[superpowers] skill registration failed:', err);
+    console.error('[security] skill registration failed:', err);
   }
 
   // 2. Inject bootstrap into first user message via V2 session context hook
@@ -361,11 +361,11 @@ async function setup(ctx) {
         }
       } catch (err) {
         // Never let hook callback errors break the request pipeline.
-        console.error('[superpowers] context hook failed:', err);
+        console.error('[security] context hook failed:', err);
       }
     });
   } catch (err) {
-    console.error('[superpowers] session hook registration failed:', err);
+    console.error('[security] session hook registration failed:', err);
   }
 }
 
@@ -377,7 +377,7 @@ async function setup(ctx) {
  * server() is exported for V1 compatibility.
  */
 export default {
-  id: 'superpowers',
+  id: 'security',
   server: SuperpowersPlugin,
   setup,
 };

@@ -166,23 +166,23 @@ archive_paths="$(list_archive "$archive" | normalize_archive_paths)"
 unexpected_pattern='(^superpowers/|^\.agents/|^hooks/|package\.json$|^\.git|^\.pytest_cache|^\.ruff_cache|^scripts/|^tests/|^docs/|^evals/|^lib/|^\.claude|^\.cursor|^\.kimi|^\.opencode|^\.pi|^AGENTS\.md$|^CLAUDE\.md$|^GEMINI\.md$|^RELEASE-NOTES\.md$|^CHANGELOG\.md$)'
 assert_not_matches "$archive_paths" "$unexpected_pattern" "archive excludes source-only paths"
 assert_contains "$archive_paths" ".codex-plugin/plugin.json" "archive includes Codex manifest"
-assert_contains "$archive_paths" "skills/brainstorming/SKILL.md" "archive includes skills"
-assert_contains "$archive_paths" "skills/brainstorming/agents/openai.yaml" "archive includes OpenAI skill metadata"
+assert_contains "$archive_paths" "skills/threat-modeling/SKILL.md" "archive includes skills"
+assert_contains "$archive_paths" "skills/threat-modeling/agents/openai.yaml" "archive includes OpenAI skill metadata"
 assert_contains "$archive_paths" "assets/app-icon.png" "archive includes app icon"
 assert_contains "$archive_paths" "assets/superpowers-small.svg" "archive includes composer icon"
 
 manifest_summary="$(read_archive_file "$archive" .codex-plugin/plugin.json | python3 -c 'import json,sys; data=json.load(sys.stdin); print("\t".join([data["name"], data["version"], data["skills"], str(data.get("hooks"))]))')"
 expected_version="$(python3 -c 'import json; print(json.load(open("'"$REPO_ROOT"'/.codex-plugin/plugin.json"))["version"])')"
-assert_equals "$manifest_summary" "superpowers	$expected_version	./skills/	$source_hooks" "archive manifest preserves source hooks"
+assert_equals "$manifest_summary" "superpowers-security	$expected_version	./skills/	$source_hooks" "archive manifest preserves source hooks"
 
 skill_count="$(find "$extracted/skills" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')"
 metadata_count="$(find "$extracted/skills" -path '*/agents/openai.yaml' -type f | wc -l | tr -d ' ')"
 assert_equals "$metadata_count" "$skill_count" "every packaged skill has OpenAI metadata"
 
-if [[ -x "$extracted/skills/subagent-driven-development/scripts/task-brief" ]]; then
-  pass "archive preserves executable script mode"
+if [[ -d "$extracted/skills/threat-modeling" ]]; then
+  pass "archive includes security skills"
 else
-  fail "archive preserves executable script mode"
+  fail "archive includes security skills"
 fi
 
 zip_times="$(python3 - "$archive" <<'PY'
@@ -207,8 +207,7 @@ extract_archive "$tar_archive" "$tar_extracted"
 tar_archive_paths="$(list_archive "$tar_archive" | normalize_archive_paths)"
 assert_equals "$tar_archive_paths" "$archive_paths" "zip and tar.gz archives contain the same paths"
 
-tar_task_brief_mode="$(tar -tzvf "$tar_archive" skills/subagent-driven-development/scripts/task-brief | awk '{print $1}')"
-assert_equals "$tar_task_brief_mode" "-rwxr-xr-x" "tar.gz archive preserves executable script mode"
+assert_contains "$tar_archive_paths" "skills/threat-modeling/SKILL.md" "tar.gz archive includes security skills"
 
 tar_metadata_times="$(python3 - "$tar_archive" <<'PY'
 import sys, tarfile

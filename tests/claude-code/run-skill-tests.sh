@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Test runner for Claude Code skills
+# Test runner for Claude Code security skills
 # Tests skills by invoking Claude Code CLI and verifying behavior
 set -euo pipefail
 
@@ -7,7 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "========================================"
-echo " Claude Code Skills Test Suite"
+echo " Claude Code Security Skills Test Suite"
 echo "========================================"
 echo ""
 echo "Repository: $(cd ../.. && pwd)"
@@ -73,17 +73,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 # List of skill tests to run (fast unit tests)
-tests=(
-    "test-worktree-path-policy.sh"
-    "test-sdd-workspace.sh"
-    "test-executing-plans-scripts.sh"
-    "test-subagent-driven-development.sh"
-)
+# NOTE: dev skill tests were removed in the security migration (no SDD/worktree
+# skills ship anymore). Live-CLI checks run only when explicitly added here.
+tests=()
 
 # Integration tests (slow, full execution)
-integration_tests=(
-    "test-subagent-driven-development-integration.sh"
-)
+integration_tests=()
 
 # Add integration tests if requested
 if [ "$RUN_INTEGRATION" = true ]; then

@@ -1,6 +1,6 @@
-name: superpowers
+name: superpowers-security
 version: 6.4.2
-description: Superpowers skills and workflow bootstrap for Hermes Agent
-author: obra
+description: Security skills and workflow bootstrap for Hermes Agent
+author: superpowers-security
 provides_hooks:
   - pre_llm_call

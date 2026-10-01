@@ -1,7 +1,7 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-security",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "An agentic security framework that works: threat modeling, secure planning, secure implementation, review, and incident response.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com"
@@ -10,13 +10,13 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
+    "threat-modeling",
+    "secure-implementation",
     "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
+    "secure-planning",
+    "secure-code",
+    "vuln-debugging",
+    "secure-review",
     "workflow"
   ]
 }
