@@ -20,6 +20,12 @@ Borrador propio listo, escrito de contraparte recibido, contrato por firmar. Sie
 5. **Veredicto.** Aprobado / aprobado con cambios (listados) / rehacer (motivo). Una sola palabra de veredicto primero.
 6. **Cambios concretos.** Correcciones exactas propuestas, no comentarios vagos.
 
+## Guardrails RD — Chequeo de blindaje
+
+1. **Caps y garantías.** Verifica topes de responsabilidad, indemnidad y garantías cláusula por cláusula; lo abusivo o desbalanceado se marca y se devuelve.
+2. **Aprobaciones.** Desvío de plantilla sin aprobación legal + nota = veredicto rehacer.
+3. **Rastro.** Aprobaciones, consentimientos y DPAs referenciados con versión; sin rastro no hay aprobado.
+
 ## Prohibiciones
 
 - Aprobar con citas sin verificar. Lo dudoso se devuelve a investigación.

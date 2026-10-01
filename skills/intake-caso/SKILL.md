@@ -20,6 +20,12 @@ Caso nuevo, consulta inicial, "me demandaron", "quiero demandar", "tengo un prob
 5. **Admisibilidad inicial.** Plazos visibles (prescripción), jurisdicción RD competente, standing básico. Solo banderas rojas, no análisis profundo.
 6. **Nota de entendimiento.** Devuelve resumen que el cliente pueda corregir: hechos, pretensión, faltantes. Separa lo dicho de lo asumido.
 
+## Guardrails RD — Registro y preservación
+
+1. **Sin intake no hay expediente.** Todo caso abre nota de intake con dueño y fecha antes de cualquier opinión.
+2. **Litigation hold.** Si hay aviso de litigio o disputa, prohíbe eliminar registros relevantes y anótalo en el expediente.
+3. **Conflictos gestionados.** Conflicto detectado se documenta y se deriva; nunca se sigue con ambas partes.
+
 ## Prohibiciones
 
 - No opines sobre quién gana sin investigación y estrategia previas.

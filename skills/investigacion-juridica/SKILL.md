@@ -20,6 +20,13 @@ Toda afirmación normativa cita fuente dominicana verificable. Lo no verificado 
 5. **Plazos aplicables.** Prescripción, caducidad, plazos procesales relevantes al caso.
 6. **Memo breve.** Norma aplicable + interpretación + lagunas + lo que falta verificar.
 
+## Guardrails RD — Compliance (Ley 172-13)
+
+1. **Registro de cumplimiento.** Toda actividad con datos personales se mapea a su base legal; DPA con cada encargado; ROPA mantenido.
+2. **Transferencias.** Transferencia transfronteriza documentada y aprobada antes de ejecutarse.
+3. **Brechas.** Posible brecha → notifica a autoridad y afectados en 72h según ley; escala a abogado de inmediato.
+4. **Derechos del titular.** Procedimiento ARCO con SLA y rastro de evidencia; consentimiento de marketing/cookies + opt-out respetado.
+
 ## Prohibiciones
 
 - Inventar artículos, numerales o sentencias. Falta grave.

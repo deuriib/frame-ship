@@ -20,6 +20,12 @@ Si el trabajo legal se repitió, se ignoró el plan o el resultado fue pobre, es
 5. **Prevención.** Qué regla de using-legal falló y cómo se refuerza (red flag que debió saltar).
 6. **Reporte breve.** Síntoma + causa + corrección + prevención. Sin culpas, con hechos.
 
+## Guardrails RD — Brecha real y quiebre de guardrail
+
+1. **Brecha confirmada.** Si el fallo es brecha de datos o quiebre de guardrail, aplica el protocolo de investigacion-juridica (72h, autoridad, afectados) y escala a abogado ya.
+2. **Guardrail roto.** Identifica qué guardrail falló (escalamiento, registro, compliance, contratos, evidencia) y en qué skill debió frenar.
+3. **Refuerzo.** Propone el ajuste exacto al checklist del guardrail para que no se repita.
+
 ## Prohibiciones
 
 - Culpar al cliente o al abogado. Se corrige forward, se enseña después.

@@ -20,6 +20,12 @@ Sin intake no hay estrategia. Sin investigación no hay vía. Esta skill convier
 5. **Riesgos y plazos críticos.** Qué puede salir mal, plazos fatales (prescripción, recursos), qué prueba falta.
 6. **Plan de próximos pasos.** Acciones numeradas con responsable y fecha. La más urgente primero.
 
+## Guardrails RD — Riesgo y responsabilidad
+
+1. **Topes e indemnidad.** Cada vía declara caps de responsabilidad, indemnidad y garantías aplicables; lo no revisado se marca.
+2. **Seguros.** Verifica cobertura vigente (ciber, E&O, D&O) para la actividad/vía propuesta; sin cobertura no se recomienda la vía riesgosa.
+3. **Riesgo documentado.** Riesgo principal por vía queda escrito con dueño; el riesgo legal lo valida el abogado.
+
 ## Prohibiciones
 
 - Prometer resultados ("ganamos seguro"). Habla de probabilidades y escenarios.

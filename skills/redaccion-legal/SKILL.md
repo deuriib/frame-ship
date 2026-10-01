@@ -20,6 +20,13 @@ Demandas, instancias, recursos, contratos, actos de alguacil, opiniones jurídic
 5. **Formato de citas.** Toda norma/jurisprudencia con referencia exacta RD. Sin fuente = frase "no verificado" o se omite.
 6. **Borrador + faltantes.** Entrega el borrador y lista lo que el abogado debe completar (firmas, sellos, anexos físicos, notificación).
 
+## Guardrails RD — Contratos y obligaciones
+
+1. **Revisión legal previa.** Ningún contrato se firma sin revisión de abogado; sin compromisos verbales ni side letters.
+2. **Plantillas estándar.** Solo plantillas aprobadas; todo desvío exige aprobación legal + nota de decisión.
+3. **Cláusulas blindadas.** Obligaciones/entregables/SLA/penalidades/terminación/renovación con dueño en registro; sin auto-renovación sin revisión a 60 días; sin cambios unilaterales.
+4. **PI y licencias.** PI/licencias/cesión verificadas; OSS liberado solo con scan de licencias.
+
 ## Prohibiciones
 
 - Inventar citas para "completar" el escrito. Mejor un hueco marcado que una cita falsa.

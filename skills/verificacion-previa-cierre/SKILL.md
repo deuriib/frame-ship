@@ -20,6 +20,12 @@ Antes de afirmar "está listo", "está verificado", "puedes firmar/presentar", a
 5. **Prohibidos.** Cero citas inventadas, cero hechos supuestos sin marca, cero promesas de resultado.
 6. **Veredicto de cierre.** Listo para entrega / listo con advertencias (listadas) / no cerrar (motivo + faltante).
 
+## Guardrails RD — Evidencia y retención
+
+1. **Paquete de evidencia.** Cierre exige: contrato firmado + aprobación legal + ROPA/DPIA + consentimientos + referencia de retención + asiento en registro.
+2. **Retención.** Contratos, aprobaciones, consentimientos, DPAs, ROPA, DPIAs y registros de brecha se conservan según calendario legal, versionados, con trail inmutable y borrado automático tras TTL.
+3. **Sin paquete no hay cierre.** Falta una pieza = veredicto no cerrar con dueño y fecha.
+
 ## Prohibiciones
 
 - Declarar éxito con checks en rojo. Se corrige primero, se afirma después.

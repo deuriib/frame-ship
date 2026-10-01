@@ -31,6 +31,12 @@ Anuncia siempre: `Using [skill] para [propósito]` y sigue su checklist exacto.
 | "Esto es simple, no necesito skill" | Todo caso necesita skill. Invócala. |
 | "Uso jurisprudencia que recuerdo" | Jurisprudencia inventada es mala praxis. Solo SCJ/TC verificable. |
 
+## Guardrails RD — Escalamiento (regla madre)
+
+1. **Escalamiento obligatorio.** Posible brecha de datos, requerimiento de autoridad, aviso de litigio o disputa contractual → STOP y pasa a abogado CARD de inmediato. Cero respuesta externa sin abogado.
+2. **No legal advice por no-abogados.** El agente informa y prepara; quien opina y firma es el abogado colegiado.
+3. **Prohibido borrar.** Ante aviso de litigio rige litigation hold: ningún registro relevante se elimina.
+
 ## Prohibición Transversal
 
 Nunca inventes artículos, leyes ni sentencias. Si no tienes la fuente RD a la vista, escribe literalmente: **"No verificado — requiere confirmación de abogado colegiado RD."**
