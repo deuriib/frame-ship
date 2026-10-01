@@ -117,8 +117,8 @@ const getBootstrapContent = (toolMapping) => {
   // Return cached result on subsequent calls
   if (_bootstrapCache.has(toolMapping)) return _bootstrapCache.get(toolMapping);
 
-  // Try to load using-superpowers skill
-  const skillPath = path.join(superpowersSkillsDir, 'using-superpowers', 'SKILL.md');
+  // Try to load using-marketing skill
+  const skillPath = path.join(superpowersSkillsDir, 'using-marketing', 'SKILL.md');
   if (!fs.existsSync(skillPath)) {
     _bootstrapCache.set(toolMapping, null);
     return null;
@@ -128,9 +128,9 @@ const getBootstrapContent = (toolMapping) => {
   const { content } = extractAndStripFrontmatter(fullContent);
 
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
-You have superpowers.
+You have superpowers-marketing: ROI, search intent, rangos C/B/A/S.
 
-**IMPORTANT: The using-superpowers skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers" again - that would be redundant.**
+**IMPORTANT: The using-marketing skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-marketing" again - that would be redundant.**
 
 ${content}
 
@@ -142,8 +142,7 @@ ${toolMapping}
 
 // --- Task-subagent (child session) detection --------------------------------
 //
-// #2160: the bootstrap drives controller workflows (brainstorming, planning,
-// approval cycles). Injecting it into task subagent sessions makes workers
+// the bootstrap drives marketing workflows (nicho, keywords, contenidos, escala). Injecting it into task subagent sessions makes workers
 // restart design/approval cycles for work the parent already authorised; the
 // <SUBAGENT-STOP> note inside the bootstrap relies on model compliance, which
 // is not reliable. Detect child sessions structurally instead: a parentID on

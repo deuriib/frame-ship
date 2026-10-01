@@ -1,7 +1,7 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-marketing",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "Marketing, SEO y monetizacion web con metodologia Flota para agentes.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com",
@@ -11,20 +11,20 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
-    "workflow"
+    "seo",
+    "nichos",
+    "keywords",
+    "contenidos",
+    "ctr",
+    "linkbuilding",
+    "monetizacion",
+    "flota"
   ],
   "skills": "./skills/",
   "hooks": {},
   "interface": {
-    "displayName": "Superpowers",
-    "shortDescription": "Planning, TDD, debugging, and delivery workflows for coding agents",
+    "displayName": "Superpowers Marketing",
+    "shortDescription": "SEO, nichos, contenidos y monetizacion con metodologia Flota",
     "longDescription": "Use Superpowers to guide agent work through brainstorming, implementation planning, test-driven development, systematic debugging, parallel execution, code review, and finish-the-branch workflows.",
     "developerName": "Jesse Vincent",
     "category": "Developer Tools",
@@ -34,8 +34,8 @@
       "Write"
     ],
     "defaultPrompt": [
-      "I've got an idea for something I'd like to build.",
-      "Let's add a feature to this project."
+      "Quiero montar una web de afiliacion rentable.",
+      "Audita mi contenido para posicionar mejor."
     ],
     "websiteURL": "https://github.com/obra/superpowers",
     "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",

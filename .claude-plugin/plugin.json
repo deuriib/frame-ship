@@ -1,6 +1,6 @@
 {
-  "name": "superpowers",
-  "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
+  "name": "superpowers-marketing",
+  "description": "Marketing, SEO y monetización web con metodología Flota: nichos, keywords por intent, contenidos TSA/TSG/TSR, CTR, enlaces y escala",
   "version": "6.4.2",
   "author": {
     "name": "Jesse Vincent",
@@ -10,11 +10,15 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
+    "seo",
+    "nichos",
+    "keywords",
+    "contenidos",
+    "ctr",
+    "linkbuilding",
+    "monetizacion",
+    "flota",
     "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "best-practices",
-    "workflows"
+    "workflow"
   ]
 }

@@ -1,15 +1,15 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-marketing",
   "version": "6.4.2",
-  "description": "Superpowers skills and runtime bootstrap for coding agents",
+  "description": "Marketing, SEO y monetizacion web con metodologia Flota para agentes",
   "type": "module",
   "main": ".opencode/plugins/superpowers.js",
   "keywords": [
     "pi-package",
     "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
+    "seo",
+    "marketing",
+    "flota",
     "workflow"
   ],
   "pi": {

@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-dev",
+  "name": "superpowers-marketing-dev",
   "interface": {
-    "displayName": "Superpowers Dev"
+    "displayName": "Superpowers Marketing"
   },
   "plugins": [
     {
-      "name": "superpowers",
+      "name": "superpowers-marketing",
       "source": {
         "source": "url",
         "url": "./"

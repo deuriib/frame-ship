@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers",
-  "displayName": "Superpowers",
+  "name": "superpowers-marketing",
+  "displayName": "Superpowers Marketing",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Marketing, SEO y monetización web con metodología Flota: nichos, keywords por intent, contenidos TSA/TSG/TSR, CTR, enlaces y escala",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"
@@ -11,64 +11,36 @@
   "capabilities": {
     "skills": [
       {
-        "id": "brainstorming",
-        "path": "skills/brainstorming/SKILL.md"
+        "id": "using-marketing",
+        "path": "skills/using-marketing/SKILL.md"
       },
       {
-        "id": "diagnosing-superpowers",
-        "path": "skills/diagnosing-superpowers/SKILL.md"
+        "id": "nichos-rangos",
+        "path": "skills/nichos-rangos/SKILL.md"
       },
       {
-        "id": "dispatching-parallel-agents",
-        "path": "skills/dispatching-parallel-agents/SKILL.md"
+        "id": "keywords-intent",
+        "path": "skills/keywords-intent/SKILL.md"
       },
       {
-        "id": "executing-plans",
-        "path": "skills/executing-plans/SKILL.md"
+        "id": "contenidos-turbo",
+        "path": "skills/contenidos-turbo/SKILL.md"
       },
       {
-        "id": "finishing-a-development-branch",
-        "path": "skills/finishing-a-development-branch/SKILL.md"
+        "id": "copy-ctr",
+        "path": "skills/copy-ctr/SKILL.md"
       },
       {
-        "id": "receiving-code-review",
-        "path": "skills/receiving-code-review/SKILL.md"
+        "id": "enlaces-flota",
+        "path": "skills/enlaces-flota/SKILL.md"
       },
       {
-        "id": "requesting-code-review",
-        "path": "skills/requesting-code-review/SKILL.md"
+        "id": "monetizar-web",
+        "path": "skills/monetizar-web/SKILL.md"
       },
       {
-        "id": "subagent-driven-development",
-        "path": "skills/subagent-driven-development/SKILL.md"
-      },
-      {
-        "id": "systematic-debugging",
-        "path": "skills/systematic-debugging/SKILL.md"
-      },
-      {
-        "id": "test-driven-development",
-        "path": "skills/test-driven-development/SKILL.md"
-      },
-      {
-        "id": "using-git-worktrees",
-        "path": "skills/using-git-worktrees/SKILL.md"
-      },
-      {
-        "id": "using-superpowers",
-        "path": "skills/using-superpowers/SKILL.md"
-      },
-      {
-        "id": "verification-before-completion",
-        "path": "skills/verification-before-completion/SKILL.md"
-      },
-      {
-        "id": "writing-plans",
-        "path": "skills/writing-plans/SKILL.md"
-      },
-      {
-        "id": "writing-skills",
-        "path": "skills/writing-skills/SKILL.md"
+        "id": "escalar-analitica",
+        "path": "skills/escalar-analitica/SKILL.md"
       }
     ],
     "commands": [],

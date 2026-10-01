@@ -1,14 +1,14 @@
 {
-  "name": "superpowers-dev",
-  "description": "Development marketplace for Superpowers core skills library",
+  "name": "superpowers-marketing-dev",
+  "description": "Marketing marketplace for superpowers-marketing skills library",
   "owner": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com"
   },
   "plugins": [
     {
-      "name": "superpowers",
-      "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+      "name": "superpowers-marketing",
+      "description": "Marketing, SEO y monetización web con metodología Flota para Muse",
       "version": "6.4.2",
       "source": "./",
       "author": {
