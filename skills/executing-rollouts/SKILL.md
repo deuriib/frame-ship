@@ -13,7 +13,7 @@ Approved `planning-rollouts` plan in hand with execution method = inline. Fleet 
 
 ## The Process
 
-1. Load the plan file. Confirm env order, gates, rollback per task.
+1. Load the plan file. Confirm env order, gates, rollback per task. Prod writes run only from the pipeline or this approved plan — never by hand on the side.
 2. Setup: clean tree, locked state backend reachable, vault auth working, `plan` tool versions pinned.
 3. Task loop (one task at a time, in order).
 4. Final review across envs.

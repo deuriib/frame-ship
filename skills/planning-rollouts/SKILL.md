@@ -5,7 +5,7 @@ description: Use when you have an approved infra spec and need a promotion-safe 
 
 # Writing Rollout Plans
 
-Turn an approved infra spec into a promotion-safe rollout plan a junior operator can execute without improvising. Guardrails contract: `docs/guardrails.md` §§1, 3–4, 6, 8.
+Turn an approved infra spec into a promotion-safe rollout plan a junior operator can execute without improvising.
 
 ## Overview
 
@@ -28,7 +28,7 @@ Environments: dev → stg → prd
 ## Gates
 ## Tasks
 ## Rollback per task
-## Observability (dashboard/alert + change event per env — guardrails §4)
+## Observability (dashboard/alert + change event per env)
 ## Execution: inline | subagent-driven-operations
 ```
 
@@ -53,10 +53,13 @@ No "deploy the service"-level vagueness. State working dir, env file, and expect
 - State is remote and locked (S3+Dynamo / Azure Storage / GitLab-managed). `apply` without lock fails closed.
 - Secrets come from the vault (AWS Secrets Manager / Key Vault / GitLab masked vars / GH OIDC). No plaintext secrets in plan or repo.
 - Prod promotion always requires explicit human approval in-chat or via environment protection rule. CI auto-promotes dev→stg only.
-- Progressive delivery for risky changes: canary/blue-green with auto-rollback on SLO breach; flags carry kill switches and are removed after rollout (guardrails §3).
-- Migrations backward-compatible (expand/contract) with tested rollback; freeze windows respected (guardrails §3).
+- Progressive delivery for risky changes: canary/blue-green (Argo Rollouts / CodeDeploy / Flagger) with automatic rollback on SLO breach (error/latency/saturation per the plan's SLO).
+- Feature flags carry a kill switch each and are removed after rollout — no permanent flags.
+- Data migrations are backward-compatible (expand/contract) with tested rollback; no destructive schema change without backup + rehearsal.
+- Env parity: config as code, no snowflakes. Freeze windows respected; emergency path allowed only with post-hoc review filed within 24h.
 - Every task has a rollback: `terraform apply` previous tag, Argo rollback to prior git SHA, Helm `rollback <release> <rev>`.
-- Toil rule: a manual step the plan repeats ≥3× must be automated or ticketed (guardrails §6).
+- Alerts route to on-call with a linked runbook — no alert without an action. Paging, status page and comms templates ready before prod promotion.
+- Toil rule: a manual step the plan repeats ≥3× must be automated or ticketed with an owner. Automation is tested, idempotent, observable, with documented rollback. No cron/schedule without owner + monitoring + failure alerts.
 
 ## Review Focus
 

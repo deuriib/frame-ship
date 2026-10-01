@@ -17,14 +17,17 @@ Verification is a function: evidence in, done out. Run it before every env promo
 
 ## The Gate Function
 
-Full contract: `docs/guardrails.md` §§2, 4–5, 7–8. For the env being claimed, all must pass:
+For the env being claimed, all must pass:
 
 1. **Plan/diff clean or expected:** `terraform plan` (no unexpected diff), `kubectl diff` / `helm diff` / Argo `app diff` clean. Artifact attached.
 2. **Pipeline green on this commit:** workflow/MR/pipeline run URL, all required checks passing. A green run on another commit does not count.
 3. **Workload healthy:** `kubectl rollout status`, pods Ready, Helm release deployed, Argo app Healthy+Synced. Paste output.
-4. **Policy pass:** `conftest test -p policy/` + checkov green on this commit. Exceptions linked with written approval + expiry (guardrails §2), not hand-waved.
-5. **Observability quiet:** target dashboard healthy + no firing alert for this service over the last gate window (e.g. 15–30 min). Link both. Change event emitted (version/SHA, actor, timestamp — guardrails §4).
-6. **Escalation check:** none of the §8 triggers present (bypass, secret leak, unsigned artifact, failed rollback). Any one halts the claim and opens an incident.
+4. **Policy pass:** `conftest test -p skills/test-driven-infrastructure/policy/` + checkov green on this commit. Exceptions linked with written approval + expiry, not hand-waved.
+5. **Observability quiet:** target dashboard healthy + no firing alert for this service over the last gate window (e.g. 15–30 min). Link both.
+6. **Change event emitted:** version/SHA, actor, timestamp, env — recorded where on-call can find it.
+7. **Escalation check:** none of these present — any one halts the claim, notifies security + owner, and opens an incident (no silent retries): gate bypassed or forced green; secret exposure (log, artifact, state); unsigned artifact promoted; failed or untested rollback.
+
+Retain per release: pipeline logs, gate results, SBOM, signatures/provenance, deploy/rollback events, approval records.
 
 One failure → claim rejected, back to debugging-incidents or the failing task. No partial "done".
 

@@ -11,6 +11,13 @@ Make review easy: the reviewer should approve in one pass or reject with a point
 
 A release review request is a package, not a ping. Send everything the reviewer needs to judge blast radius: what changes, what it affects, how it rolls back.
 
+## Pipeline Integrity (enforced at review)
+
+- Pipeline as code, versioned, reviewed, tested. No manual prod writes outside it — the reviewer rejects any plan that `apply`s to prod by hand.
+- Branch protection: no direct-to-main, required reviews + status checks on every release path.
+- Least-privilege runners: OIDC / workload identity / short-lived tokens. Secrets from the vault (AWS Secrets Manager / Key Vault / GitLab masked vars / GH encrypted secrets), masked in logs, rotated, scanned pre-push and in-pipeline. No `echo $SECRET`, no `--debug` env dumps, no secret in committed `plan` output.
+- **Adapters:** GH Actions → environments + required reviewers + OIDC to AWS. GitLab → protected branches + masked vars, Argo syncs only what git holds. Azure DevOps → environment approvals + variable groups linked to Key Vault.
+
 ## When to Request Review
 
 TDI chain green on the exact commit, verifying-releases gate passed for non-prod envs, plan/diff artifact attached. Never request review on red.

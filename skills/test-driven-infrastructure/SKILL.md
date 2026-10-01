@@ -17,12 +17,14 @@ Any change to `*.tf`, `*.bicep`, `Chart.yaml`, `values*.yaml`, `manifests/`, `Do
 
 ## The Iron Law
 
-**No `apply`/`sync`/`push-to-prod` without a green validation chain on the exact commit being promoted.** Full contract: `docs/guardrails.md` §§1–2, 5, 7–8. The chain:
+**No `apply`/`sync`/`push-to-prod` without a green validation chain on the exact commit being promoted.** The chain:
 
 1. Format + lint: `terraform fmt -check`, `tflint`, `kubeconform`/`kube-linter`, `helm lint`, `actionlint` / `gitlab-ci-lint`
 2. Plan/diff: `terraform plan -out=tfplan` (save artifact), `kubectl diff`, `helm diff`
-3. Policy: `conftest test -p policy/` (repo rules: no `:latest`, no open ingress, required labels, encrypted state — guardrails §7) plus `checkov` for Terraform depth
+3. Policy: `conftest test -p skills/test-driven-infrastructure/policy/` plus `checkov` for Terraform depth. Critical/High blocks merge and promotion — override only with written approval + expiry recorded in the PR/MR.
 4. At least one assertion your change flips from red to green (new check or updated expectation)
+
+Builds reproducible: pinned providers, actions and images (digest, never `:latest`); SBOM stored per release; artifacts signed with provenance attested where the platform supports it.
 
 ## Red-Green for Infra
 
@@ -46,6 +48,23 @@ Smallest HCL/YAML edit that turns the chain green. One resource or one step at a
 ### REFACTOR — Clean up
 
 Dedupe with modules/charts/templates. Re-run chain after every refactor. No behavior drift between refactor commits.
+
+## Policy as Code (`policy/` in this skill)
+
+Rego rules enforced by conftest in the chain above. Add a rule only with: failing fixture, passing fixture, and skill text referencing it. Fixtures: `policy/fixtures.md`.
+
+| Rule | What it blocks |
+|------|----------------|
+| `deny_latest_tag` | container images using `:latest` or untagged — pin to digest or immutable tag |
+| `deny_open_ingress` | SG / firewall ingress open to `0.0.0.0/0` on sensitive ports — restrict CIDR |
+| `deny_missing_labels` | K8s objects without `app.kubernetes.io/{name,version,managed-by}` |
+| `deny_unencrypted_state` | Terraform backends without encryption at rest; no `local` backend in shared envs |
+
+## Supply Chain
+
+- Third-party actions/images pinned to digest, verified publishers only. Never `:latest` in prod paths.
+- Per-build dependency and image scans; no unmaintained or critical-vuln deps promoted.
+- Registry access controlled; no public push of internal artifacts.
 
 ## Stack Adapters
 
@@ -72,7 +91,7 @@ Dedupe with modules/charts/templates. Re-run chain after every refactor. No beha
 
 - [ ] Red captured before the change
 - [ ] Full chain green on the promoted commit (paste output)
-- [ ] `conftest test -p policy/` clean (guardrails §7)
+- [ ] `conftest test -p skills/test-driven-infrastructure/policy/` clean
 - [ ] `plan`/diff artifact attached to PR/MR
 - [ ] Rollback resource identified (prior state tag / git SHA)
-- [ ] No escalation trigger present (guardrails §8: bypass, secret leak, unsigned artifact, untested rollback)
+- [ ] No escalation trigger present (see verifying-releases: bypass, secret leak, unsigned artifact, untested rollback)

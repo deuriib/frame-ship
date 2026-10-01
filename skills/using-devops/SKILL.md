@@ -47,7 +47,7 @@ Apply the matching adapter inside each skill. Never mix adapters in one change (
 
 | Request | Skill |
 |---------|-------|
-| Which guardrails apply / can I skip a gate | `docs/guardrails.md` (contract; TDI/verifying-releases enforce it) |
+| Which guardrails apply / can I skip a gate | test-driven-infrastructure (validation+supply chain+policy) · verifying-releases (evidence+escalation) · planning-rollouts (progressive+toil) · requesting-release-review (pipeline integrity) — no skipping without written approval + expiry |
 | New pipeline, new infra, new environment, new deploy target | designing-infrastructure |
 | Rollout/promotion plan dev→stg→prd, rollback strategy | planning-rollouts |
 | Terraform/Helm/manifest change with validation | test-driven-infrastructure |

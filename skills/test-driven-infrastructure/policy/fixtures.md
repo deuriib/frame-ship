@@ -37,7 +37,7 @@ Fail (`fixtures/backend_local.json`): `{"terraform": {"backend": {"local": {}}}}
 
 Pass (`fixtures/backend_s3.json`): `{"terraform": {"backend": {"s3": {"encrypt": true}}}}`.
 
-Run: `conftest test -p policy/ <file>` — expect FAIL on the fail fixture, clean on the pass fixture.
+Run from repo root: `conftest test -p skills/test-driven-infrastructure/policy/ <file>` — expect FAIL on the fail fixture, clean on the pass fixture.
 
 > Tooling note: `conftest`/`opa` is not vendored in this repo (zero-dependency rule).
 > Install per environment (`brew install conftest`, `choco install conftest`, or the
