@@ -51,6 +51,7 @@ Invoke this skill first. Then announce "Using using-automation to [purpose]" and
 1. **Client wants Excel.** No complex UI without spreadsheet input/output. Prove it or add it.
 2. **Pragmatism over dogma.** Low-code wins for mundane steps — document the call, save architecture magic for what matters.
 3. **Production quality.** Student code (no error handling, no venv, no modern typing) is rejected. Fix forward: `uv` env, handling, `ty`-clean types, `ruff`-clean lint/format, tests, Docker + Actions.
+4. **Guardrails.** `references/guardrails.md` is binding: data integrity, gates, safe delivery, observability, supply chain, toil, evidence. No gate skipped without written approval + deadline.
 </HARD-GATE>
 
 ## Red Flags

@@ -16,6 +16,7 @@ description: Use when the automation works and you must deliver it - Excel round
 3. **CI green.** `uv run pytest` + `uv run ruff check .` + `uv run ruff format --check .` + `uv run ty check` pass, Actions workflow passes on the branch. Link or paste the run.
 4. **Handoff.** README: install (`uv sync`), run (script + Docker), Excel contract (sheets/columns), error guide (sheet/column/row messages), how to re-run monthly.
 5. **ROI close.** Restate bottleneck removed, hours freed/month, errors killed, price anchored to value. Feed repeatable niches to `pricing-micro-saas`.
+6. **Guardrails green.** `references/guardrails.md`: dated output (never overwrite input), run-log emitted, `--dry-run` available, `uv.lock` pinned, freeze window respected, evidence bundled. Red anywhere = not shipped.
 
 ## Output — Ship Note (in chat)
 
@@ -26,10 +27,11 @@ description: Use when the automation works and you must deliver it - Excel round
 - Tests/CI: [pytest count] green, `ruff` + `ty` clean, Actions [link/run id]
 - Handoff: README updated ([run], [contract], [errors])
 - ROI: [hours freed/mo] → [value]; priced at [amount + basis]
+- Guardrails: [run-log ref], [output dated, input intact], [dry-run ok], [freeze window clear], [evidence bundled]
 ```
 
 <HARD-GATE>
-Missing Excel demo, red tests, dirty `ruff`/`ty`, no Dockerfile/CI, or README without re-run steps = not shipped. Say what's missing and fix forward.
+Missing Excel demo, red tests, dirty `ruff`/`ty`, no Dockerfile/CI, README without re-run steps, or any guardrail red = not shipped. Say what's missing and fix forward.
 </HARD-GATE>
 
 ## Red Flags
