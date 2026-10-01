@@ -42,6 +42,8 @@ description: Use when writing or changing product code, dependencies, or configu
 | SSRF: allowlist egress, no raw user URLs server-side | Cloud metadata theft |
 | Crypto: platform primitives only, never custom | Custom crypto always breaks |
 
+Full rulebook: `security:using-security` → `references/guardrails.md` (G2, G3). Block > warn; accepted-risk needs owner + expiry.
+
 ## Dependency Discipline
 
 - New dependency = attack surface. Justify it in the task: why not stdlib?

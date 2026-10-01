@@ -36,7 +36,7 @@ When NOT to use: pure refactor with zero behavior or data-flow change.
    - Entry points (params, headers, files, webhooks, IDs)
 4. **Abuse cases** — minimum 3 per architectural design, written as "An attacker can...". Cover: auth bypass, IDOR/BOLA, injection, SSRF, secret leak, privilege escalation. Pick what fits the surface.
 5. **Propose 2-3 approaches** — with security trade-offs and your recommendation.
-6. **Present design in sections** — get approval per section. Each section carries its mitigations (validate, authorize, log).
+6. **Present design in sections** — get approval per section. Each section carries its mitigations (validate, authorize, log) and cites guardrails G1 (deny by default) + G2 (AppSec per boundary). Every privileged path gets its own abuse case.
 7. **Write design doc** — save to `docs/security/specs/YYYY-MM-DD-<topic>-design.md` and commit. Must contain: assets, boundaries, abuse cases, mitigations, logging/alerting, rollback.
 8. **Spec self-review** — no placeholders, no contradictions, every abuse case has a mitigation or an accepted-risk sign-off.
 9. **User reviews written spec** — ask them to review the file before proceeding.

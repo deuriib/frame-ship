@@ -21,6 +21,7 @@ description: Use when reviewing code before merging - hunts authorization, injec
 2. **Input pass:** all entry points validated allowlist-style. Queries parameterized. Output encoded. Uploads constrained. URLs not fetched raw.
 3. **Secret pass:** no keys/tokens/passwords in diff, no PII in logs/errors, no stack traces to clients, no secrets in tests/fixtures.
 4. **Logic pass:** TOCTOU, race conditions, mass assignment, open redirects, CORS/CSRF, webhook signature verification.
+5. **Supply-chain + evidence pass (G5):** new deps pinned/justified/advisory-checked; SBOM or dep list updated; exception tickets exist for anything waived.
 
 ## How to Deliver Findings
 
@@ -43,7 +44,7 @@ description: Use when reviewing code before merging - hunts authorization, injec
 
 ## Verification
 
-- [ ] All 4 passes completed on the actual diff
+- [ ] All 5 passes completed on the actual diff
 - [ ] Every Critical/High has a fix or signed accepted-risk
 - [ ] Negative tests exist for boundary changes
 - [ ] Reviewer would sign the breach report — then approve

@@ -24,6 +24,7 @@ Run these and paste real output. No output = not done.
 3. **Secrets scan:** no keys/tokens in diff, history, fixtures, or logs. If your repo has a scanner, run it; if not, grep for `BEGIN .*PRIVATE KEY`, `sk-`, `ghp_`, `AKIA`, `password\s*=\s*["'][^"']`.
 4. **Dependency check:** no new unpinned/unreviewed deps; advisories checked for touched packages.
 5. **Behavior proof:** for vuln fixes, show the PoC failing before / passing after.
+6. **Evidence pack (G5):** scan outputs + threat model link + fix/SLA log. Auto-Critical items (exploitable/breach/suspected compromise) must show notify + contain + remediate — never silently closed.
 
 ## Forbidden Phrases (without attached evidence)
 

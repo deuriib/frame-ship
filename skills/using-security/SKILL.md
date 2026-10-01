@@ -47,6 +47,10 @@ These thoughts mean STOP—you're rationalizing:
 | "I remember this skill" | Skills evolve. Read current version. |
 | "I'll just do this one thing first" | Check BEFORE doing anything. |
 
+## Guardrails
+
+The 5 enforceable security guardrails live in `references/guardrails.md` — read it before threat-modeling, implementing, reviewing, or releasing. Default: **block > warn**; downgrade only with a signed accepted-risk (risk + owner + expiry + compensating control). Human-owned evidence (MFA/SSO, KMS, DPAs, pentest) is demanded, never invented.
+
 ## Skill Index
 
 | Skill | Trigger |
