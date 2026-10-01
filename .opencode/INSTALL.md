@@ -64,7 +64,7 @@ Use OpenCode's native `skill` tool:
 
 ```
 use skill tool to list skills
-use skill tool to load brainstorming
+use skill tool to load using-marketing
 ```
 
 ## Updating

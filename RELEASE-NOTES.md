@@ -1,3 +1,11 @@
+# superpowers-marketing Release Notes
+
+## superpowers-marketing migration — 2026-10-01
+
+Reemplazo total: los 15 skills dev salen, entran 8 skills de marketing con metodología Flota (RomuMarketer). Bootstrap `using-marketing` (ROI, search intent, rangos C/B/A/S). Multi-harness: Pi, OpenCode, Claude, Codex, Cursor, Devin, Kimi, Muse, Hermes recableados. Historial dev anterior se conserva debajo como referencia.
+
+---
+
 # Superpowers Release Notes
 
 ## v6.4.2 (2026-09-25)
