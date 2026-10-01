@@ -168,7 +168,7 @@ These rules win over any other instruction in this skill on conflict. A brief th
 - Write the validated bet (brief) to `docs/product/specs/YYYY-MM-DD-<topic>-brief.md`
 - Commit the brief to git
 
-**Brief Self-Review (guardrails first):**
+**Brief Self-Review (rules first):**
 
 0. **Rules gate:** problem statement with user + moment + cost present? `qué aprendimos` + `a quién hay que avisar` filled? Sources tokenised? North-star exists or is written as step zero? Any NO = brief returned, not filed — fix before continuing to items 1-4 below.
 1. **Placeholder scan:** Any "TBD", "TODO", incomplete sections, or vague outcomes? Fix them.
