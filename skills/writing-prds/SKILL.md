@@ -144,7 +144,9 @@ A step is done when the owner can do exactly one reasonable thing from it. Unamb
 
 A PRD longer than the brief it implements has written the launch instead of planning it. Lines that decide nothing ("TBD", "optimize conversion", "add appropriate messaging", a metric no milestone measures) are the opposite failure, and the self-review catches both.
 
-## Guardrails (§3, §4, §5, §6 — binding, see docs/product/guardrails.md)
+## Rules — falsifiable PRD, bets, ordering (binding)
+
+These rules win over any other instruction in this skill on conflict:
 
 - **Falsifiable or theatre:** no criterion able to come back false = `CLOSED`, never `CONDITIONAL`. State the FAIL shape alongside every target.
 - **Roadmap entries are bets:** confidence + evidence per entry; attached date = promise. Removing/reclassifying sold capability triggers customer notification.
@@ -159,15 +161,15 @@ After writing the complete PRD, check it against the brief. This is a checklist 
 
 **2. Step scan:** Every step must let the owner do exactly one reasonable thing, and no step may carry more than that: a line that decides nothing is a gap, a launch plan the acceptance checks already determine is a transcript. Fix both.
 
-**2. Guardrail gate (§5, §6 — binding):** problem + evidence + north-star + non-goals present? ≥1 falsifiable criterion with an explicit FAIL shape? Sources tokenised, no price/date for vera + montero routing? Any NO = PRD is `CLOSED` at product gate, never `CONDITIONAL` — fix before items 3-6 below.
+**3. Rules gate:** problem + evidence + north-star + non-goals present? ≥1 falsifiable criterion with an explicit FAIL shape? Sources tokenised, no price/date for vera + montero routing? Any NO = PRD is `CLOSED` at product gate, never `CONDITIONAL` — fix before items 4-7 below.
 
-**3. Metric consistency:** Do the events, targets, and timeframes in later milestones match what you defined in the header? A metric called `activation` in Milestone 2 but `activated` in Milestone 4 is a bug.
+**4. Metric consistency:** Do the events, targets, and timeframes in later milestones match what you defined in the header? A metric called `activation` in Milestone 2 but `activated` in Milestone 4 is a bug.
 
-**4. Risks & Unknowns:** For each behavior the brief implies, is there a milestone whose checks exercise it? The five least-covered ones go in Risks & Unknowns, each with its probe added to the owning milestone. An empty section means you checked and found none, not that you skipped the check.
+**5. Risks & Unknowns:** For each behavior the brief implies, is there a milestone whose checks exercise it? The five least-covered ones go in Risks & Unknowns, each with its probe added to the owning milestone. An empty section means you checked and found none, not that you skipped the check.
 
-**5. Proportion:** Compare the PRD's length to the brief's. A PRD several times longer than the brief is a transcript of the launch, not a plan. If copy blocks are most of the document, replace drafts with pointers and check each step is still unambiguous.
+**6. Proportion:** Compare the PRD's length to the brief's. A PRD several times longer than the brief is a transcript of the launch, not a plan. If copy blocks are most of the document, replace drafts with pointers and check each step is still unambiguous.
 
-**6. Rank + reason (§3):** if this PRD orders milestones against other work, each ordering states reason in the same sentence, names one owner, and the deprioritised party has been told by a person same session — never by diff alone.
+**7. Rank + reason:** if this PRD orders milestones against other work, each ordering states reason in the same sentence, names one owner, and the deprioritised party has been told by a person same session — never by diff alone. De-prioritisation without written reason is refused, not executed.
 
 If you find issues, fix them inline. If you find a brief outcome with no milestone, add the milestone.
 

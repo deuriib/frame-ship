@@ -24,7 +24,7 @@ A metric moved and nobody knows why. Don't propose fixes — reproduce the probl
 Walk the funnel stage by stage. At each stage ask: entry rate vs prior baseline, exit rate, time-in-stage.
 
 - The stage where behavior diverges most is your suspect. Name it.
-- Pull 5 session replays / tickets / transcripts AT that stage. Read them before hypothesizing.
+- Pull 5 session replays / tickets / transcripts AT that stage. Read them before hypothesizing. Tokenise sources (`SEG-042`) — no names, emails, or account IDs in the diagnosis.
 - Write the causal claim in one sentence: "Users who reach ___ fail to ___ because ___."
 
 ### 3. Rank (one suspect, two backups)
@@ -38,6 +38,13 @@ List max 3 candidate causes, ordered by evidence weight. For each: evidence for,
 - Ship the smallest intervention aimed at the top suspect.
 - Pre-register the expected effect (metric + size + window) BEFORE shipping.
 - Measure in-window. Effect confirmed → harden it. No effect → suspect #2 enters the loop, not a bigger fix for suspect #1.
+
+## Rules — source handling (binding)
+
+These rules win over any other instruction in this skill on conflict:
+
+- **Tokenise at capture.** No names, emails, or account IDs in the diagnosis — segment tokens only (`SEG-042`).
+- **Notes are personal-data stores.** Any interview/ticket sample used declares purpose, TTL, deletion route, and DSR route — or it isn't cited.
 
 ## Red Flags
 

@@ -20,13 +20,15 @@ Before ANY success claim, run and paste:
 3. **Anti-metric** — the guardrail query. Paste numbers proving nothing regressed.
 4. **Broken-promise scan** — open the brief + PRD; every "we promise / users can / within X" gets a live check. List any gap as a blocker, not a footnote.
 
-## Rules
+## Rules — evidence gate + falsifiable re-run, north-star (binding)
+
+The evidence rules below plus the product rules after them all bind; product rules win on conflict:
 
 - **No claim without output.** "It works" without pasted evidence is a draft, not a report.
 - **One blocker = stop.** A failed check blocks the launch claim. Fix, re-verify, then claim.
 - **Stale evidence doesn't count.** Checks older than the last change to that surface must be re-run.
 
-## Guardrails (§5, §6 — binding, see docs/product/guardrails.md)
+## Rules — falsifiable re-run, north-star (binding, continued)
 
 - **Falsifiable re-run:** every claimed PASS quotes the criterion's FAIL shape and shows why this run isn't it. Criteria without FAIL shapes fail the gate.
 - **North-star on the dashboard:** success metric + anti-metric pasted against the pre-PRD north-star. Metric-vs-work conflict resolves for the metric.

@@ -11,6 +11,14 @@ Fresh eyes before launch. Request review when milestones ship, PRDs complete, or
 
 **Announce at start:** "I'm using the requesting-product-review skill to get review on this work."
 
+## Rules — gate verdicts (binding)
+
+These rules win over any other instruction in this skill on conflict:
+
+- **No falsifiable criterion = `CLOSED`, never `CONDITIONAL`.** A PRD, milestone, or launch with no way to come back false fails review outright. The fix is a stated FAIL shape, not a softer verdict.
+- **Rank + reason, same sentence.** Any ordering recommendation states its reason inline, names one owner, and confirms the deprioritised party was told by a person same session. Reason-free ordering is refused.
+- **Evidence over summary.** Review the artefact + evidence files, never a chat summary of them.
+
 ## When to Request
 
 - PRD complete, before validation starts.

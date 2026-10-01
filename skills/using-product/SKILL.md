@@ -25,7 +25,7 @@ Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it h
 
 ## Skill Priority
 
-**Binding guardrails:** `docs/product/guardrails.md` applies to every skill in this workflow. When a skill's stage has a guardrail section, the guardrail wins over the skill on conflict. A deliverable that violates its guardrail is returned, not filed.
+Rules live inside each skill — there is no central rules doc. Each skill's Rules section is binding at its stage: a deliverable that violates it is returned, not filed.
 
 When multiple skills apply, process skills come first — they set the approach, then lifecycle skills carry it out. product-discovery and diagnosing-funnel are this workflow's most common process skills, but the rule holds for any of them.
 

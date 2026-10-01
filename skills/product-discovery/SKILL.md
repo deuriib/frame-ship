@@ -151,9 +151,9 @@ digraph discovery {
 
 **Terminal states are path-bound.** Strategic: the ONLY skill you invoke after discovery is writing-prds — never pricing-packaging, go-to-market, or any other lifecycle skill. Bounded: after approval, work proceeds directly; no brief document. Spike: the terminal state is a reported recommendation.
 
-## Guardrails (§1, §2, §6 — binding, see docs/product/guardrails.md)
+## Rules — problem, evidence, sources (binding)
 
-Enforced at every path; the brief self-review rejects violations instead of working around them:
+These rules win over any other instruction in this skill on conflict. A brief that violates them is returned, not filed:
 
 1. **Problem statement present.** One written statement — user + moment + cost of status quo. In the user's words with source attached; unattributed framing labelled hypothesis. Missing statement = no brief, no PRD. Non-goals live in the statement.
 2. **Discovery fields on every artefact.** Brief and every killed hypothesis carry `qué aprendimos` + `a quién hay que avisar`. Missing either = returned, not filed.
@@ -170,7 +170,7 @@ Enforced at every path; the brief self-review rejects violations instead of work
 
 **Brief Self-Review (guardrails first):**
 
-0. **Guardrail gate (§1, §2):** problem statement with user + moment + cost present? `qué aprendimos` + `a quién hay que avisar` filled? Sources tokenised? Any NO = brief returned, not filed — fix before continuing to items 1-4 below.
+0. **Rules gate:** problem statement with user + moment + cost present? `qué aprendimos` + `a quién hay que avisar` filled? Sources tokenised? North-star exists or is written as step zero? Any NO = brief returned, not filed — fix before continuing to items 1-4 below.
 1. **Placeholder scan:** Any "TBD", "TODO", incomplete sections, or vague outcomes? Fix them.
 2. **Internal consistency:** Do any sections contradict each other? Does the JTBD match the success behavior?
 3. **Scope check:** Is this focused enough for a single PRD, or does it need decomposition?

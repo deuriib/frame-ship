@@ -28,7 +28,7 @@ Cheapest probe that can kill the price, in order: Van Westendorp slice (4 questi
 - Each tier: who it's for (segment + job), value metric + included quota, ONE differentiator above it, price with charm removed (round numbers signal confidence for B2B; .99 signals deal for self-serve — pick deliberately).
 - **Explicit non-goals:** what each tier does NOT include, and where that buyer goes instead.
 
-### 4. Launch + guardrails
+### 4. Launch + safety metrics
 
 - Grandfathering rule stated before launch. Anti-metrics: conversion rate by tier, expansion revenue, support load per tier.
 - Review window: 30 days, one owner, kill/pivot thresholds pre-registered.

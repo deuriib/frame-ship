@@ -67,7 +67,7 @@ Commit it. Evidence that isn't written down didn't happen.
 | "Let's lower the threshold, we learned a lot" | Learning is not validation. Hold the line or name a new hypothesis. |
 | "Kill feels like failure" | A kill in 3 days saves a quarter. Celebrate it. |
 
-## Guardrails (§2 — binding, see docs/product/guardrails.md)
+## Rules — discovery evidence (binding)
 
 - **Evidence log fields:** every probe file carries `qué aprendimos` + `a quién hay que avisar`. Missing either = returned, not filed.
 - **Kill postmortem is an artefact too:** same two fields required.

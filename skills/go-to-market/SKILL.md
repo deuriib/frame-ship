@@ -47,3 +47,4 @@ Per channel (max 3 for launch week): owner, asset, send date, expected outcome (
 - [ ] Anti-metrics dashboard linked (signup quality, support load, churn)
 - [ ] Day-7 retro scheduled with owner named
 - [ ] verification-before-launch gate passed before "launched" is claimed
+- [ ] Sold-capability check — nothing already sold was removed or reclassified without the same customer notification as any other customer-facing change

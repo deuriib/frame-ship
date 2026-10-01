@@ -13,7 +13,9 @@ Execute a PRD milestone-by-milestone in this session. One milestone at a time: c
 
 **Context:** The PRD (from writing-prds) travels with you. Read it plus the brief before touching anything.
 
-## Rules
+## Rules — sequencing + falsifiable acceptance, ordering (binding)
+
+The sequencing rules below plus the product rules after them all bind; product rules win on conflict:
 
 1. **One milestone at a time.** Finish milestone N (shipped + measured + published) before starting N+1. Dependencies in the PRD are load-bearing.
 2. **Acceptance first.** Restate the milestone's Given/When/Then before acting. If it's ambiguous, stop and clarify with your human partner — don't reinterpret silently.
@@ -21,7 +23,7 @@ Execute a PRD milestone-by-milestone in this session. One milestone at a time: c
 4. **Measure or it didn't ship.** Every milestone ends with the PRD's measure step run and pasted. No metric, no done.
 5. **Publish every milestone.** Commit docs + changelog entry per milestone. A milestone that isn't published blocks the next one.
 
-## Guardrails (§3, §5 — binding, see docs/product/guardrails.md)
+## Rules — falsifiable acceptance, ordering (binding, continued)
 
 - **Falsifiable gate check:** each milestone's acceptance states its FAIL shape. A milestone with no way to come back false is `CLOSED`, never shipped as `CONDITIONAL`.
 - **Missed metric = stop:** do NOT proceed to N+1. Ordering changes get reason in the same sentence, one owner, one record — and the affected party is told by a person same session.

@@ -11,6 +11,14 @@ Measure behavior, not vanity. One goal metric, one guardrail, loops over funnels
 
 **Announce at start:** "I'm using the analytics-growth skill to set up measurement for this bet."
 
+## Rules — north-star first (binding)
+
+These rules win over any other instruction in this skill on conflict:
+
+- **One metric per product, written before the first PRD.** It measures user outcome — not shipped volume. Vanity metrics and usage-of-unneeded-feature never count as value.
+- **Goal inherits, never invents.** The bet's goal metric comes from the PRD header, which traces to the north-star. If no north-star exists, writing it is step zero — not a follow-up.
+- **Metric beats roadmap.** When the metric and the quarter's work disagree, the metric wins and the roadmap changes.
+
 ## Metric Tree (per bet)
 
 1. **Goal metric** — one observable behavior + target + date. Inherited from the PRD header; never invented here.
