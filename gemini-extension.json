@@ -1,6 +1,6 @@
 {
-  "name": "superpowers",
-  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+  "name": "superpowers-finance",
+  "description": "Core finance skills library: discovery, planning, budgeting, modeling, accounting, compliance, investment",
   "version": "6.4.2",
   "contextFileName": "GEMINI.md"
 }

@@ -1,16 +1,19 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-finance",
   "version": "6.4.2",
-  "description": "Superpowers skills and runtime bootstrap for coding agents",
+  "description": "Finance skills and runtime bootstrap for finance agents",
   "type": "module",
   "main": ".opencode/plugins/superpowers.js",
   "keywords": [
-    "pi-package",
-    "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "workflow"
+    "finance",
+    "fpa",
+    "budgeting",
+    "modeling",
+    "accounting",
+    "compliance",
+    "investment",
+    "workflow",
+    "pi-package"
   ],
   "pi": {
     "extensions": [

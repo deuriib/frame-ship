@@ -88,7 +88,8 @@ write_manifest_field() {
 # Read the list of declared files from config.
 # Outputs lines of "path<TAB>field"
 declared_files() {
-  jq -r '.files[] | "\(.path)\t\(.field)"' "$CONFIG"
+  # Strip CR so Windows jq builds (CRLF output) don't poison field names.
+  jq -r '.files[] | "\(.path)\t\(.field)"' "$CONFIG" | tr -d '\r'
 }
 
 preflight_manifests() {

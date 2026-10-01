@@ -117,8 +117,8 @@ const getBootstrapContent = (toolMapping) => {
   // Return cached result on subsequent calls
   if (_bootstrapCache.has(toolMapping)) return _bootstrapCache.get(toolMapping);
 
-  // Try to load using-superpowers skill
-  const skillPath = path.join(superpowersSkillsDir, 'using-superpowers', 'SKILL.md');
+  // Try to load using-finance skill
+  const skillPath = path.join(superpowersSkillsDir, 'using-finance', 'SKILL.md');
   if (!fs.existsSync(skillPath)) {
     _bootstrapCache.set(toolMapping, null);
     return null;
@@ -128,9 +128,9 @@ const getBootstrapContent = (toolMapping) => {
   const { content } = extractAndStripFrontmatter(fullContent);
 
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
-You have superpowers.
+You have finance superpowers.
 
-**IMPORTANT: The using-superpowers skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers" again - that would be redundant.**
+**IMPORTANT: The using-finance skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-finance" again - that would be redundant.**
 
 ${content}
 
@@ -142,7 +142,7 @@ ${toolMapping}
 
 // --- Task-subagent (child session) detection --------------------------------
 //
-// #2160: the bootstrap drives controller workflows (brainstorming, planning,
+// The bootstrap drives controller workflows (financial-shaping, planning,
 // approval cycles). Injecting it into task subagent sessions makes workers
 // restart design/approval cycles for work the parent already authorised; the
 // <SUBAGENT-STOP> note inside the bootstrap relies on model compliance, which

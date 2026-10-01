@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers",
-  "displayName": "Superpowers",
+  "name": "superpowers-finance",
+  "displayName": "Finance Superpowers",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Core skills library for Muse: FP&A, accounting close, compliance, personal finance, and investment analysis",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"
@@ -11,70 +11,64 @@
   "capabilities": {
     "skills": [
       {
-        "id": "brainstorming",
-        "path": "skills/brainstorming/SKILL.md"
+        "id": "using-finance",
+        "path": "skills/using-finance/SKILL.md"
       },
       {
-        "id": "diagnosing-superpowers",
-        "path": "skills/diagnosing-superpowers/SKILL.md"
+        "id": "financial-discovery",
+        "path": "skills/financial-discovery/SKILL.md"
       },
       {
-        "id": "dispatching-parallel-agents",
-        "path": "skills/dispatching-parallel-agents/SKILL.md"
+        "id": "financial-shaping",
+        "path": "skills/financial-shaping/SKILL.md"
       },
       {
-        "id": "executing-plans",
-        "path": "skills/executing-plans/SKILL.md"
+        "id": "financial-planning",
+        "path": "skills/financial-planning/SKILL.md"
       },
       {
-        "id": "finishing-a-development-branch",
-        "path": "skills/finishing-a-development-branch/SKILL.md"
+        "id": "financial-delivery",
+        "path": "skills/financial-delivery/SKILL.md"
       },
       {
-        "id": "receiving-code-review",
-        "path": "skills/receiving-code-review/SKILL.md"
+        "id": "financial-verification",
+        "path": "skills/financial-verification/SKILL.md"
       },
       {
-        "id": "requesting-code-review",
-        "path": "skills/requesting-code-review/SKILL.md"
+        "id": "diagnosing-finance",
+        "path": "skills/diagnosing-finance/SKILL.md"
       },
       {
-        "id": "subagent-driven-development",
-        "path": "skills/subagent-driven-development/SKILL.md"
+        "id": "budgeting-forecasting",
+        "path": "skills/budgeting-forecasting/SKILL.md"
       },
       {
-        "id": "systematic-debugging",
-        "path": "skills/systematic-debugging/SKILL.md"
+        "id": "financial-analysis",
+        "path": "skills/financial-analysis/SKILL.md"
       },
       {
-        "id": "test-driven-development",
-        "path": "skills/test-driven-development/SKILL.md"
+        "id": "financial-modeling",
+        "path": "skills/financial-modeling/SKILL.md"
       },
       {
-        "id": "using-git-worktrees",
-        "path": "skills/using-git-worktrees/SKILL.md"
+        "id": "personal-finance",
+        "path": "skills/personal-finance/SKILL.md"
       },
       {
-        "id": "using-superpowers",
-        "path": "skills/using-superpowers/SKILL.md"
+        "id": "accounting-close",
+        "path": "skills/accounting-close/SKILL.md"
       },
       {
-        "id": "verification-before-completion",
-        "path": "skills/verification-before-completion/SKILL.md"
+        "id": "compliance-tax",
+        "path": "skills/compliance-tax/SKILL.md"
       },
       {
-        "id": "writing-plans",
-        "path": "skills/writing-plans/SKILL.md"
-      },
-      {
-        "id": "writing-skills",
-        "path": "skills/writing-skills/SKILL.md"
+        "id": "investment-research",
+        "path": "skills/investment-research/SKILL.md"
       }
     ],
-    "commands": [],
     "hooks": [
       {
-        "id": "session-start",
         "event": "SessionStart",
         "command": [
           "sh",

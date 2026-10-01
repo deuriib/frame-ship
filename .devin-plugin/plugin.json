@@ -1,22 +1,22 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-finance",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "Finance skills framework: discovery, planning, budgeting, modeling, accounting close, compliance, and investment analysis.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/deuriib/superpowers",
+  "repository": "https://github.com/deuriib/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
-    "workflow"
+    "financial-discovery",
+    "financial-planning",
+    "budgeting",
+    "modeling",
+    "accounting",
+    "compliance",
+    "investment",
+    "personal-finance"
   ]
 }

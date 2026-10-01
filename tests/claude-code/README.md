@@ -25,7 +25,7 @@ This test suite verifies that skills are loaded correctly and Claude follows the
 
 ### Run specific test:
 ```bash
-./run-skill-tests.sh --test test-subagent-driven-development.sh
+./run-skill-tests.sh --test test-financial-delivery.sh
 ```
 
 ### Run with verbose output:
@@ -82,7 +82,7 @@ echo "=== All tests passed ==="
 
 ### Fast Tests (run by default)
 
-#### test-subagent-driven-development.sh
+#### test-financial-delivery.sh
 Tests skill content and requirements (~2 minutes):
 - Skill loading and accessibility
 - Workflow ordering (spec compliance before code quality)
@@ -94,11 +94,11 @@ Tests skill content and requirements (~2 minutes):
 
 ### Integration Tests (use --integration flag)
 
-#### test-subagent-driven-development-integration.sh
+#### test-financial-delivery-integration.sh
 Full workflow execution test (~10-30 minutes):
 - Creates real test project with Node.js setup
 - Creates implementation plan with 2 tasks
-- Executes plan using subagent-driven-development
+- Executes plan using financial-delivery
 - Verifies actual behaviors:
   - Plan read once at start (not per task)
   - Full task text provided in subagent prompts
@@ -116,7 +116,7 @@ Full workflow execution test (~10-30 minutes):
 - Final code is functional and tested
 
 #### test-worktree-native-preference.sh
-RED-GREEN-REFACTOR validation for the using-git-worktrees skill (~5 minutes):
+Check-first validation for the financial-delivery skill (~5 minutes):
 - RED: skill without Step 1a — agent should use `git worktree add`
 - GREEN: skill with Step 1a — agent should use the native EnterWorktree tool
 - PRESSURE: same as GREEN under urgency framing with pre-existing `.worktrees/`
@@ -141,7 +141,7 @@ RED-GREEN-REFACTOR validation for the using-git-worktrees skill (~5 minutes):
 
 With `--verbose`, you'll see full Claude output:
 ```bash
-./run-skill-tests.sh --verbose --test test-subagent-driven-development.sh
+./run-skill-tests.sh --verbose --test test-financial-delivery.sh
 ```
 
 Without verbose, only failures show output.
