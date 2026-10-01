@@ -10,13 +10,13 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
-    "workflow"
+    "automation",
+    "excel",
+    "micro-saas",
+    "roi",
+    "python-glue",
+    "uv",
+    "fastapi",
+    "flet"
   ]
 }

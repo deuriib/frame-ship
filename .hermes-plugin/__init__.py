@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for hermes"
+BOOTSTRAP_MARKER = "automation:using-automation bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install obra/superpowers`): the plugin
+    - git-clone install (`hermes plugins install automation plugin`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -23,12 +23,12 @@ def _skills_dir() -> str:
         os.path.realpath(os.path.join(here, "skills")),
     )
     for cand in candidates:
-        if os.path.isfile(os.path.join(cand, "using-superpowers", "SKILL.md")):
+        if os.path.isfile(os.path.join(cand, "using-automation", "SKILL.md")):
             return cand
     raise RuntimeError(
         "superpowers plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install obra/superpowers`."
+        "`hermes plugins install automation plugin`."
     )
 
 
@@ -39,13 +39,13 @@ def _strip_frontmatter(content: str) -> str:
 
 def _build_bootstrap(skills_dir: str) -> str:
     with open(
-        os.path.join(skills_dir, "using-superpowers", "SKILL.md"),
+        os.path.join(skills_dir, "using-automation", "SKILL.md"),
         encoding="utf-8",
     ) as f:
         body = _strip_frontmatter(f.read())
 
     tools_path = os.path.join(
-        skills_dir, "using-superpowers", "references", "hermes-tools.md"
+        skills_dir, "using-automation", "references", "hermes-tools.md"
     )
     with open(tools_path, encoding="utf-8") as f:
         tool_mapping = f.read().strip()
@@ -53,15 +53,15 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have superpowers.\n\n"
-        f"The using-superpowers skill content is included below and is already "
+        f"You have automation superpowers. Act as Samin Espinoza: Excel-first, ROI-driven automation.\n\n"
+        f"The using-automation skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
-        f"Do not try to load using-superpowers again.\n\n"
+        f"Do not try to load using-automation again.\n\n"
         f"{body}\n\n"
         f"## Loading Superpowers Skills on Hermes\n\n"
         f"Superpowers skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("superpowers:skill-name")` '
-        f'(for example `skill_view("superpowers:brainstorming")`). '
+        f'invoke one with `skill_view("automation:skill-name")` '
+        f'(for example `skill_view("automation:discovering-opportunities")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'

@@ -1,7 +1,7 @@
 {
   "name": "superpowers",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "An agentic skills framework for Excel-first business automation: discovery, design, TDD builds, debugging, shipping, and Micro-SaaS pricing.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com",
@@ -11,21 +11,21 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
-    "workflow"
+    "automation",
+    "excel",
+    "micro-saas",
+    "roi",
+    "python-glue",
+    "uv",
+    "fastapi",
+    "flet"
   ],
   "skills": "./skills/",
   "hooks": {},
   "interface": {
     "displayName": "Superpowers",
-    "shortDescription": "Planning, TDD, debugging, and delivery workflows for coding agents",
-    "longDescription": "Use Superpowers to guide agent work through brainstorming, implementation planning, test-driven development, systematic debugging, parallel execution, code review, and finish-the-branch workflows.",
+    "shortDescription": "Excel-first automation: discovery, design, builds, shipping, Micro-SaaS pricing",
+    "longDescription": "Use Automation skills to guide agent work through opportunity discovery, Excel-first design, TDD builds, debugging, shipping, and Micro-SaaS pricing — Samin Espinoza lens.",
     "developerName": "Jesse Vincent",
     "category": "Developer Tools",
     "capabilities": [
