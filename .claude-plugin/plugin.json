@@ -1,6 +1,6 @@
 {
   "name": "superpowers",
-  "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Product workflow skills: discovery, PRDs, validation, pricing, launch, and growth.",
   "version": "6.4.2",
   "author": {
     "name": "Jesse Vincent",
@@ -10,11 +10,12 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "best-practices",
-    "workflows"
+    "product-discovery",
+    "writing-prds",
+    "validating-bets",
+    "pricing-packaging",
+    "go-to-market",
+    "analytics-growth",
+    "workflow"
   ]
 }

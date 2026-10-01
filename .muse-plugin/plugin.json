@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "name": "superpowers",
-  "displayName": "Superpowers",
+  "displayName": "Product",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Core skills library for Muse: product discovery, PRDs, validation, launch, and growth workflows",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"
@@ -11,60 +11,52 @@
   "capabilities": {
     "skills": [
       {
-        "id": "brainstorming",
-        "path": "skills/brainstorming/SKILL.md"
+        "id": "using-product",
+        "path": "skills/using-product/SKILL.md"
       },
       {
-        "id": "diagnosing-superpowers",
-        "path": "skills/diagnosing-superpowers/SKILL.md"
+        "id": "product-discovery",
+        "path": "skills/product-discovery/SKILL.md"
       },
       {
-        "id": "dispatching-parallel-agents",
-        "path": "skills/dispatching-parallel-agents/SKILL.md"
+        "id": "writing-prds",
+        "path": "skills/writing-prds/SKILL.md"
       },
       {
-        "id": "executing-plans",
-        "path": "skills/executing-plans/SKILL.md"
+        "id": "validating-bets",
+        "path": "skills/validating-bets/SKILL.md"
       },
       {
-        "id": "finishing-a-development-branch",
-        "path": "skills/finishing-a-development-branch/SKILL.md"
+        "id": "shipping-product",
+        "path": "skills/shipping-product/SKILL.md"
       },
       {
-        "id": "receiving-code-review",
-        "path": "skills/receiving-code-review/SKILL.md"
+        "id": "diagnosing-funnel",
+        "path": "skills/diagnosing-funnel/SKILL.md"
       },
       {
-        "id": "requesting-code-review",
-        "path": "skills/requesting-code-review/SKILL.md"
+        "id": "diagnosing-product",
+        "path": "skills/diagnosing-product/SKILL.md"
       },
       {
-        "id": "subagent-driven-development",
-        "path": "skills/subagent-driven-development/SKILL.md"
+        "id": "pricing-packaging",
+        "path": "skills/pricing-packaging/SKILL.md"
       },
       {
-        "id": "systematic-debugging",
-        "path": "skills/systematic-debugging/SKILL.md"
+        "id": "go-to-market",
+        "path": "skills/go-to-market/SKILL.md"
       },
       {
-        "id": "test-driven-development",
-        "path": "skills/test-driven-development/SKILL.md"
+        "id": "analytics-growth",
+        "path": "skills/analytics-growth/SKILL.md"
       },
       {
-        "id": "using-git-worktrees",
-        "path": "skills/using-git-worktrees/SKILL.md"
+        "id": "verification-before-launch",
+        "path": "skills/verification-before-launch/SKILL.md"
       },
       {
-        "id": "using-superpowers",
-        "path": "skills/using-superpowers/SKILL.md"
-      },
-      {
-        "id": "verification-before-completion",
-        "path": "skills/verification-before-completion/SKILL.md"
-      },
-      {
-        "id": "writing-plans",
-        "path": "skills/writing-plans/SKILL.md"
+        "id": "requesting-product-review",
+        "path": "skills/requesting-product-review/SKILL.md"
       },
       {
         "id": "writing-skills",

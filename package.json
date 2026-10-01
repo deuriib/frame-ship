@@ -1,16 +1,18 @@
 {
   "name": "superpowers",
   "version": "6.4.2",
-  "description": "Superpowers skills and runtime bootstrap for coding agents",
+  "description": "Product workflow skills and runtime bootstrap for agents",
   "type": "module",
   "main": ".opencode/plugins/superpowers.js",
   "keywords": [
-    "pi-package",
-    "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "workflow"
+    "product",
+    "discovery",
+    "prds",
+    "validation",
+    "pricing",
+    "launch",
+    "growth",
+    "pi-package"
   ],
   "pi": {
     "extensions": [

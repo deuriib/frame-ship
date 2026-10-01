@@ -25,7 +25,7 @@ assert_equal(manifest.get("name"), "superpowers", "plugin name")
 assert_equal(manifest.get("skills"), "./skills/", "skills path")
 assert_equal(
     manifest.get("sessionStart", {}).get("skill"),
-    "using-superpowers",
+    "using-product",
     "sessionStart.skill",
 )
 

@@ -35,15 +35,15 @@ Superpowers is a complete software development methodology for your coding agent
 
 ## How it works
 
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. 
+It starts from the moment you fire up your agent. As soon as it sees that you're shaping a product bet, it *doesn't* just jump into writing a PRD. Instead, it steps back and asks what job the user is hiring you to do.
 
-Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
+Once it's teased a validated bet out of the conversation, it shows it to you in chunks short enough to actually read and digest.
 
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY. 
+After you've signed off on the bet, your agent writes a PRD that's clear enough for a product team with no repo context to execute: who the user is, what success looks like in observable behavior, what is explicitly out of scope, and which evidence proves each milestone. It emphasizes riskiest-assumption-first validation, kill/pivot/persevere decisions, and measurement before claims.
 
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
+Next up, once you say "go", it validates each milestone with the cheapest probe that can kill it, ships slices, measures behavior, and retros. It's not uncommon for your agent to run discovery-to-launch autonomously without drifting from the bet you approved.
 
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your agent just has product superpowers.
 
 ## Commercial Services
 
@@ -340,41 +340,41 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 
 ### Skills Library
 
-**Testing**
-- **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
+**Discovery & Shaping**
+- **product-discovery** - JTBD, riskiest assumption, validated bet (spike / bounded / strategic paths)
+- **writing-prds** - Testable PRDs: user, job, success metric, anti-metric, milestones
+- **validating-bets** - Hypothesis → cheapest probe → kill/pivot/persevere
 
-**Debugging**
-- **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
-- **verification-before-completion** - Ensure it's actually fixed
-- **diagnosing-superpowers** - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue
+**Build & Launch**
+- **shipping-product** - Milestone-by-milestone shipping with measurement gates
+- **verification-before-launch** - Evidence before launch claims
+- **diagnosing-funnel** - Metric-drop diagnosis before fixes
+- **diagnosing-product** - Work out what went wrong in a session, with evidence
 
-**Collaboration** 
-- **brainstorming** - Socratic design refinement
-- **writing-plans** - Detailed implementation plans
-- **executing-plans** - Inline plan execution: one context, one final review
-- **dispatching-parallel-agents** - Concurrent subagent workflows
-- **requesting-code-review** - Pre-review checklist
-- **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
-- **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
+**Monetization & Growth**
+- **pricing-packaging** - Willingness-to-pay, tiers, value metric
+- **go-to-market** - Positioning, messaging, channels, launch checklist
+- **analytics-growth** - Goal metric, inputs, loops, experiment cadence
+
+**Collaboration**
+- **requesting-product-review** - Pre-launch review checklist
 
 **Meta**
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+- **using-product** - Introduction to the product skills system
 
 ## Philosophy
 
-- **Test-Driven Development** - Write tests first, always
-- **Systematic over ad-hoc** - Process over guessing
-- **Complexity reduction** - Simplicity as primary goal
-- **Evidence over claims** - Verify before declaring success
+- **Riskiest assumption first** - Validate before building, always
+- **Evidence over opinions** - Probes and metrics before claims
+- **Kill fast, ship small** - Small bets, fast decisions, measured launches
+- **Behavior over vanity** - Observable user behavior, not vanity metrics
 
 Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
 
 ## Contributing
 
-The general contribution process for Superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
+This fork is a product-workflow migration: dev skills were replaced by product skills (see Skills Library above). Upstream contribution rules below apply to product skills in this repo.
 
 1. Fork the repository
 2. Switch to the 'dev' branch
@@ -396,4 +396,4 @@ MIT License - see LICENSE file for details
 
 ## Visual companion telemetry
 
-Because skills and plugins don't provide any feedback to creators, we have no idea how many of you are using Superpowers. By default, the Prime Radiant logo on brainstorming's optional visual companion feature is loaded from our website. It includes the version of Superpowers in use. It does not include any details about your project, prompt, or coding agent. We don't see your clicks or anything about what you're building. This helps us have a rough idea of how many folks are using Superpowers and which version of Superpowers they're using. It's 100% optional. To disable this, set the environment variable `SUPERPOWERS_DISABLE_TELEMETRY` to any true value. Superpowers also honors Claude Code's `DISABLE_TELEMETRY` and `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` opt-outs.
+Because skills and plugins don't provide any feedback to creators, we have no idea how many of you are using this workflow. No telemetry ships with the product skills (the visual companion from upstream brainstorming was removed in this migration).

@@ -166,8 +166,8 @@ archive_paths="$(list_archive "$archive" | normalize_archive_paths)"
 unexpected_pattern='(^superpowers/|^\.agents/|^hooks/|package\.json$|^\.git|^\.pytest_cache|^\.ruff_cache|^scripts/|^tests/|^docs/|^evals/|^lib/|^\.claude|^\.cursor|^\.kimi|^\.opencode|^\.pi|^AGENTS\.md$|^CLAUDE\.md$|^GEMINI\.md$|^RELEASE-NOTES\.md$|^CHANGELOG\.md$)'
 assert_not_matches "$archive_paths" "$unexpected_pattern" "archive excludes source-only paths"
 assert_contains "$archive_paths" ".codex-plugin/plugin.json" "archive includes Codex manifest"
-assert_contains "$archive_paths" "skills/brainstorming/SKILL.md" "archive includes skills"
-assert_contains "$archive_paths" "skills/brainstorming/agents/openai.yaml" "archive includes OpenAI skill metadata"
+assert_contains "$archive_paths" "skills/product-discovery/SKILL.md" "archive includes skills"
+assert_contains "$archive_paths" "skills/product-discovery/agents/openai.yaml" "archive includes OpenAI skill metadata"
 assert_contains "$archive_paths" "assets/app-icon.png" "archive includes app icon"
 assert_contains "$archive_paths" "assets/superpowers-small.svg" "archive includes composer icon"
 
@@ -179,10 +179,11 @@ skill_count="$(find "$extracted/skills" -mindepth 1 -maxdepth 1 -type d | wc -l 
 metadata_count="$(find "$extracted/skills" -path '*/agents/openai.yaml' -type f | wc -l | tr -d ' ')"
 assert_equals "$metadata_count" "$skill_count" "every packaged skill has OpenAI metadata"
 
-if [[ -x "$extracted/skills/subagent-driven-development/scripts/task-brief" ]]; then
-  pass "archive preserves executable script mode"
+skill_files="$(find "$extracted/skills" -name "SKILL.md" | wc -l | tr -d ' ')"
+if [[ "$skill_files" -gt 0 ]]; then
+  pass "archive preserves skill files ($skill_files SKILL.md)"
 else
-  fail "archive preserves executable script mode"
+  fail "archive preserves skill files"
 fi
 
 zip_times="$(python3 - "$archive" <<'PY'
@@ -207,8 +208,8 @@ extract_archive "$tar_archive" "$tar_extracted"
 tar_archive_paths="$(list_archive "$tar_archive" | normalize_archive_paths)"
 assert_equals "$tar_archive_paths" "$archive_paths" "zip and tar.gz archives contain the same paths"
 
-tar_task_brief_mode="$(tar -tzvf "$tar_archive" skills/subagent-driven-development/scripts/task-brief | awk '{print $1}')"
-assert_equals "$tar_task_brief_mode" "-rwxr-xr-x" "tar.gz archive preserves executable script mode"
+tar_skill_mode="$(tar -tzvf "$tar_archive" skills/product-discovery/SKILL.md | awk '{print $1}')"
+assert_contains "$tar_skill_mode" "-rw" "tar.gz archive preserves skill file mode"
 
 tar_metadata_times="$(python3 - "$tar_archive" <<'PY'
 import sys, tarfile
@@ -255,9 +256,9 @@ else
 fi
 
 incomplete_metadata="$TEST_ROOT/incomplete-metadata"
-mkdir -p "$incomplete_metadata/skills/brainstorming/agents"
-cp "$metadata_source/skills/brainstorming/agents/openai.yaml" \
-  "$incomplete_metadata/skills/brainstorming/agents/openai.yaml"
+mkdir -p "$incomplete_metadata/skills/product-discovery/agents"
+cp "$metadata_source/skills/product-discovery/agents/openai.yaml" \
+  "$incomplete_metadata/skills/product-discovery/agents/openai.yaml"
 
 set +e
 missing_output="$("$SCRIPT_UNDER_TEST" --allow-dirty --metadata-source "$incomplete_metadata" --output "$TEST_ROOT/missing.tar.gz" 2>&1)"

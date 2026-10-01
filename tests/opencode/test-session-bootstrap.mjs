@@ -74,7 +74,7 @@ for (const flavor of ['v1', 'v2']) {
     assert.equal(bootstrapCount(fresh), expected, `${id}: fresh request`);
     assert.deepEqual(h.lookups, [id], `${id}: cache successful classification`);
     if (flavor === 'v2' && kind === 'child') {
-      assert.ok(h.registered.some((skill) => skill.id === 'brainstorming'));
+      assert.ok(h.registered.some((skill) => skill.id === 'product-discovery'));
     }
   }
 
