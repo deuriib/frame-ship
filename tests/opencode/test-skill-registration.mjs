@@ -113,7 +113,7 @@ if (typeof survivingContextHook !== 'function') {
   };
   await survivingContextHook(event);
   const count = event.messages.flatMap((message) => message.content).filter(
-    (part) => part.type === 'text' && part.text.startsWith('<EXTREMELY_IMPORTANT>\nYou have superpowers.')
+    (part) => part.type === 'text' && part.text.startsWith('<EXTREMELY_IMPORTANT>\nYou have revenue powers.')
   ).length;
   if (count !== 1) failures.push(`expected surviving bootstrap once, got ${count}`);
 }

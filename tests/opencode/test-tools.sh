@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Test: Native Skill Tool Functionality
 # Verifies that OpenCode's native skill tool can load personal, project,
-# and bundled superpowers skills.
+# and bundled revenue skills.
 # NOTE: These tests require OpenCode to be installed and configured
 set -euo pipefail
 
@@ -84,12 +84,12 @@ assert_contains "$output" "PROJECT_SKILL_MARKER_67890" "native skill tool loaded
 
 # Test 3: Test bundled superpowers skill loading
 echo ""
-echo "Test 3: Testing native skill tool with a superpowers skill..."
-echo "  Running opencode with brainstorming skill..."
+echo "Test 3: Testing native skill tool with a revenue skill..."
+echo "  Running opencode with discovering-opportunities skill..."
 
-run_opencode output "$TEST_HOME/test-project" "Call the skill tool with name \"brainstorming\". Then tell me the loaded skill title."
-assert_contains "$output" '"name":"brainstorming"' "native skill tool loaded bundled brainstorming skill"
-assert_contains "$output" "Brainstorming Ideas Into Designs" "brainstorming skill content was returned"
+run_opencode output "$TEST_HOME/test-project" "Call the skill tool with name \"discovering-opportunities\". Then tell me the loaded skill title."
+assert_contains "$output" '"name":"discovering-opportunities"' "native skill tool loaded bundled discovering-opportunities skill"
+assert_contains "$output" "Who Pays and What Hurts" "discovering-opportunities skill content was returned"
 
 echo ""
 echo "=== All native skill tool tests passed ==="

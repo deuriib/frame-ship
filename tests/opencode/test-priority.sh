@@ -180,7 +180,7 @@ describe_priority_result \
     "PRIORITY_MARKER_PERSONAL_VERSION" \
     "PRIORITY_MARKER_SUPERPOWERS_VERSION" \
     "Personal version loaded for duplicate native skill name" \
-    "Current OpenCode behavior loaded bundled superpowers version instead of personal version"
+    "Current OpenCode behavior loaded bundled revenue version instead of personal version"
 
 # Test 3: Document project vs bundled superpowers priority
 echo ""
@@ -193,7 +193,7 @@ describe_priority_result \
     "PRIORITY_MARKER_PROJECT_VERSION" \
     "PRIORITY_MARKER_SUPERPOWERS_VERSION" \
     "Project version loaded for duplicate native skill name" \
-    "Current OpenCode behavior loaded bundled superpowers version instead of project version"
+    "Current OpenCode behavior loaded bundled revenue version instead of project version"
 
 # Test 4: Test a non-colliding bundled superpowers skill is still available
 echo ""
@@ -211,7 +211,7 @@ PRIORITY_MARKER_SUPERPOWERS_ONLY_VERSION
 EOF
 
 run_opencode output "$TEST_HOME/test-project" "Call the skill tool with name \"superpowers-only-test\". Show the exact content including any PRIORITY_MARKER text."
-assert_contains "$output" "PRIORITY_MARKER_SUPERPOWERS_ONLY_VERSION" "Non-colliding superpowers skill is still registered"
+assert_contains "$output" "PRIORITY_MARKER_SUPERPOWERS_ONLY_VERSION" "Non-colliding revenue skill is still registered"
 
 echo ""
 echo "=== All priority tests passed ==="

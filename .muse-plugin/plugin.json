@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers",
-  "displayName": "Superpowers",
+  "name": "superpowers-revenue",
+  "displayName": "Revenue Powers",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Revenue skills library for Muse: discover, offer, price, outbound, close, scale",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"
@@ -11,64 +11,32 @@
   "capabilities": {
     "skills": [
       {
-        "id": "brainstorming",
-        "path": "skills/brainstorming/SKILL.md"
+        "id": "using-revenue",
+        "path": "skills/using-revenue/SKILL.md"
       },
       {
-        "id": "diagnosing-superpowers",
-        "path": "skills/diagnosing-superpowers/SKILL.md"
+        "id": "discovering-opportunities",
+        "path": "skills/discovering-opportunities/SKILL.md"
       },
       {
-        "id": "dispatching-parallel-agents",
-        "path": "skills/dispatching-parallel-agents/SKILL.md"
+        "id": "designing-offer",
+        "path": "skills/designing-offer/SKILL.md"
       },
       {
-        "id": "executing-plans",
-        "path": "skills/executing-plans/SKILL.md"
+        "id": "pricing-packaging",
+        "path": "skills/pricing-packaging/SKILL.md"
       },
       {
-        "id": "finishing-a-development-branch",
-        "path": "skills/finishing-a-development-branch/SKILL.md"
+        "id": "outbound-prospecting",
+        "path": "skills/outbound-prospecting/SKILL.md"
       },
       {
-        "id": "receiving-code-review",
-        "path": "skills/receiving-code-review/SKILL.md"
+        "id": "closing-deals",
+        "path": "skills/closing-deals/SKILL.md"
       },
       {
-        "id": "requesting-code-review",
-        "path": "skills/requesting-code-review/SKILL.md"
-      },
-      {
-        "id": "subagent-driven-development",
-        "path": "skills/subagent-driven-development/SKILL.md"
-      },
-      {
-        "id": "systematic-debugging",
-        "path": "skills/systematic-debugging/SKILL.md"
-      },
-      {
-        "id": "test-driven-development",
-        "path": "skills/test-driven-development/SKILL.md"
-      },
-      {
-        "id": "using-git-worktrees",
-        "path": "skills/using-git-worktrees/SKILL.md"
-      },
-      {
-        "id": "using-superpowers",
-        "path": "skills/using-superpowers/SKILL.md"
-      },
-      {
-        "id": "verification-before-completion",
-        "path": "skills/verification-before-completion/SKILL.md"
-      },
-      {
-        "id": "writing-plans",
-        "path": "skills/writing-plans/SKILL.md"
-      },
-      {
-        "id": "writing-skills",
-        "path": "skills/writing-skills/SKILL.md"
+        "id": "scaling-revenue",
+        "path": "skills/scaling-revenue/SKILL.md"
       }
     ],
     "commands": [],

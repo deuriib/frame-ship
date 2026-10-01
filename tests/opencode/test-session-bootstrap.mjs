@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 const [, , inputPath] = process.argv;
 assert.ok(inputPath, 'pass the plugin module path');
 const pluginURL = pathToFileURL(fs.realpathSync(inputPath));
-const marker = '<EXTREMELY_IMPORTANT>\nYou have superpowers.';
+const marker = '<EXTREMELY_IMPORTANT>\nYou have revenue powers.';
 let generation = 0;
 
 function reply(flavor, session) {
@@ -38,7 +38,7 @@ async function makeHarness(flavor, fetchSession) {
   };
   let invoke;
   if (flavor === 'v1') {
-    const hooks = await mod.SuperpowersPlugin({
+    const hooks = await (mod.RevenuePlugin ?? mod.SuperpowersPlugin)({
       client: { session: { get: ({ path: { id } }) => get(id) } },
       directory: '.',
     });
@@ -74,7 +74,7 @@ for (const flavor of ['v1', 'v2']) {
     assert.equal(bootstrapCount(fresh), expected, `${id}: fresh request`);
     assert.deepEqual(h.lookups, [id], `${id}: cache successful classification`);
     if (flavor === 'v2' && kind === 'child') {
-      assert.ok(h.registered.some((skill) => skill.id === 'brainstorming'));
+      assert.ok(h.registered.some((skill) => skill.id === 'discovering-opportunities'));
     }
   }
 

@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-dev",
+  "name": "superpowers-revenue-dev",
   "interface": {
-    "displayName": "Superpowers Dev"
+    "displayName": "Revenue Powers Dev"
   },
   "plugins": [
     {
-      "name": "superpowers",
+      "name": "superpowers-revenue",
       "source": {
         "source": "url",
         "url": "./"

@@ -1,7 +1,7 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-revenue",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "A revenue methodology for agents: discover, offer, price, outbound, close, and scale.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com"
@@ -10,13 +10,12 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
+    "revenue",
+    "offer",
+    "pricing",
+    "outbound",
+    "closing",
+    "flywheel",
     "workflow"
   ]
 }

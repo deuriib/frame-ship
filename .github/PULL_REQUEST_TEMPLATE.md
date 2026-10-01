@@ -73,7 +73,7 @@ of human involvement will be closed without review.
      runner), you MUST include a session transcript proving the
      integration actually works.
 
-     A real integration loads the `using-superpowers` bootstrap at session
+     A real integration loads the `using-revenue` bootstrap at session
      start. The bootstrap is what causes skills to auto-trigger. Without
      it, the skills are dead weight — present on disk but never invoked
      at the right moments.
@@ -81,24 +81,24 @@ of human involvement will be closed without review.
      ACCEPTANCE TEST: Open a clean session in the new harness and send
      exactly this user message:
 
-         Let's make a react todo list
+         I want more clients for my bookkeeping service
 
-     A working integration auto-triggers the `brainstorming` skill before
-     any code is written. Paste the complete transcript below.
+     A working integration auto-triggers the `discovering-opportunities` skill before
+     any offer or outreach is drafted. Paste the complete transcript below.
 
      These are NOT real integrations and PRs that ship them will be closed:
 
      - Manually copying skill files into the harness
      - Wrapping with `npx skills` or similar at-runtime shims
      - Anything that requires the user to opt in to skills per-session
-     - Anything where brainstorming does not auto-trigger on the test above
+     - Anything where discovering-opportunities does not auto-trigger on the test above
 
      If you are not sure whether your integration loads the bootstrap at
      session start, it does not.
 -->
 
 <details>
-<summary>Clean-session transcript for "Let's make a react todo list"</summary>
+<summary>Clean-session transcript for "I want more clients"</summary>
 
 ```
 paste the complete transcript here
@@ -117,8 +117,8 @@ paste the complete transcript here
 
 ## Rigor
 
-- [ ] If this is a skills change: I used `superpowers:writing-skills` and
-      completed adversarial pressure testing (paste results below)
+- [ ] If this is a skills change: I pressure-tested it across multiple sessions
+      (happy path + adversarial) and pasted results below
 - [ ] This change was tested adversarially, not just on the happy path
 - [ ] I did not modify carefully-tuned content (Red Flags table,
       rationalizations, "human partner" language) without extensive evals
@@ -137,7 +137,7 @@ PRs will be closed without review if they:
 - Show no evidence of human involvement
 - Contain multiple unrelated changes
 - Promote or integrate third-party services or tools
-- Submit project-specific or personal configuration as core changes
+- Submit niche-specific plays as core changes
 - Leave required sections blank or use placeholder text
 - Modify behavior-shaping content without eval evidence
 -->

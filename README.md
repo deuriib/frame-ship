@@ -1,6 +1,8 @@
-# Superpowers
+# Revenue Powers
 
-Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
+Revenue Powers is a complete revenue methodology for your agents, built on top of composable skills and bootstrap instructions that make sure your agent uses them.
+
+Forked from [Superpowers](https://github.com/obra/superpowers) (dev workflow) and rebuilt for a revenue domain: every skill moves money - attract, convert, price, outbound, close, scale.
 
 ## Table of Contents
 
@@ -31,19 +33,19 @@ Superpowers is a complete software development methodology for your coding agent
 - [Contributing](#contributing)
 - [Updating](#updating)
 - [License](#license)
-- [Visual companion telemetry](#visual-companion-telemetry)
+- [Attribution](#attribution)
 
 ## How it works
 
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. 
+It starts from the moment you fire up your coding agent. As soon as it sees that you want more revenue, it *doesn't* just jump into drafting messages or quoting prices. Instead, it steps back and asks who pays and what pain hurts enough. 
 
 Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
 
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY. 
+After finding the buyer, it shapes the opportunity into an offer with a named outcome, a believable mechanism, and a guarantee - then prices it on ROI, never on hours. 
 
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
+After you've signed off on the offer and pricing, your agent runs outbound that books calls, helps you run those calls to a yes, and compounds signed clients into upsells, renewals, and referrals - measured on one scorecard, one lever per month.
 
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your agent just has revenue powers.
 
 ## Commercial Services
 
@@ -51,7 +53,7 @@ If you're using Superpowers in enterprise and could benefit from commercial supp
 
 ## Installation
 
-Installation differs by harness. If you use more than one, install Superpowers separately for each one.
+Installation differs by harness. If you use more than one, install Revenue Powers separately for each one.
 
 ### Claude Code
 
@@ -247,7 +249,7 @@ For local development, run Pi with this checkout loaded as a temporary package:
 pi -e /path/to/superpowers
 ```
 
-The Pi package loads the Superpowers skills and a small extension that injects the `using-superpowers` bootstrap at session startup and again after compaction. Pi has native skills, so no compatibility `Skill` tool is required. Subagent and task-list tools remain optional Pi companion packages.
+The Pi package loads the revenue skills and a small extension that injects the `using-revenue` bootstrap at session startup and again after compaction. Pi has native skills, so no compatibility `Skill` tool is required. Subagent and task-list tools remain optional Pi companion packages.
 
 ### Qwen Code
 
@@ -279,7 +281,7 @@ turn loses the bootstrap — start a fresh session if skills stop triggering.
 
 ### Muse
 
-Superpowers is available as a native Muse plugin — same repo, same skills, all harnesses. The `using-superpowers` bootstrap is injected via the native `SessionStart` hook alongside Claude Code, Codex, Cursor, Gemini, Pi, and the rest — no per-session opt-in.
+Revenue Powers is available as a native Muse plugin — same repo, same skills, all harnesses. The `using-revenue` bootstrap is injected via the native `SessionStart` hook alongside Claude Code, Codex, Cursor, Gemini, Pi, and the rest — no per-session opt-in.
 
 - Install from a local checkout:
 
@@ -302,31 +304,27 @@ Superpowers is available as a native Muse plugin — same repo, same skills, all
   muse plugins update superpowers
   ```
 
-Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `Let's make a react todo list` — a working install auto-triggers `brainstorming` before any code is written. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
+Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `I want more clients` — a working install auto-triggers `discovering-opportunities` before any offer is drafted. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
+1. **discovering-opportunities** - Activates before any money-making work. Names the buyer, prices their pain, gathers 3+ willingness-to-pay signals, picks one channel to reach 50 buyers, sets kill criteria. Saves opportunity brief.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **designing-offer** - Activates with approved brief. Writes one-sentence outcome, 3-5 step mechanism, proof stack, guarantee with teeth, scope fence. Saves offer sheet.
 
-3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
+3. **pricing-packaging** - Activates with approved offer. Shows ROI math, builds three tiers (Core = 10-20% of first-year ROI), sets payment terms and a raise trigger. Saves pricing card.
 
-4. **subagent-driven-development** or **executing-plans** - Activates with plan. Either dispatches a fresh subagent per task with a review after each (most thorough), or implements every task inline in the current session with one fresh review of the whole branch at the end (cheapest).
+4. **outbound-prospecting** - Activates with offer + pricing. Builds a 50-name list, opener under 50 words, 3 follow-ups, booking flow. Tracks sent / replies / calls weekly; kills dead sequences after 100 touches.
 
-5. **test-driven-development** - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Deletes code written before tests.
+5. **closing-deals** - Activates with a booked call. Discovery first, diagnosis second, prescription last. One recommended tier anchored to buyer ROI math, one ask, then silence. Objection playbook included.
 
-6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
-
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+6. **scaling-revenue** - Activates with signed clients. One lever per month: upsell at the win, renewals on calendar, one referral ask per win, one monthly scorecard. Fixes the worst number first.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
 ## When Something Goes Wrong
 
-Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its plan, repeats work, or burns more tokens than you'd expect. Ask your coding agent to "figure out what went wrong with superpowers in this session" and it will invoke the **diagnosing-superpowers** skill. To examine an earlier session, name it: "figure out what went wrong with superpowers in session `<id>`".
-
-The skill reads the session transcript, reports what happened with line-level evidence, and, if you want, packages a scrubbed bundle for a bug report.
+Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent quotes prices before discovery, pitches before pain, or chases maybes. Re-read the `using-revenue` bootstrap and name the stage you're in - most failures trace to skipping discovering-opportunities or quoting without a pricing card.
 
 ## Community
 
@@ -340,60 +338,47 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 
 ### Skills Library
 
-**Testing**
-- **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
-
-**Debugging**
-- **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
-- **verification-before-completion** - Ensure it's actually fixed
-- **diagnosing-superpowers** - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue
-
-**Collaboration** 
-- **brainstorming** - Socratic design refinement
-- **writing-plans** - Detailed implementation plans
-- **executing-plans** - Inline plan execution: one context, one final review
-- **dispatching-parallel-agents** - Concurrent subagent workflows
-- **requesting-code-review** - Pre-review checklist
-- **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
-- **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
-
-**Meta**
-- **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+**Flywheel**
+- **using-revenue** - Bootstrap: skill routing, flywheel stages, red flags
+- **discovering-opportunities** - Attract: named buyer, priced pain, pay signals, channel, kill criteria
+- **designing-offer** - Convert: outcome, mechanism, proof stack, guarantee, scope fence
+- **pricing-packaging** - Price: ROI anchor, three tiers, payment terms, raise trigger
+- **outbound-prospecting** - Outbound: 50-name list, opener, 3 follow-ups, weekly scorecard
+- **closing-deals** - Close: call flow, objection playbook, proposal rules
+- **scaling-revenue** - Scale: upsell, retention, referrals, monthly scorecard
 
 ## Philosophy
 
-- **Test-Driven Development** - Write tests first, always
-- **Systematic over ad-hoc** - Process over guessing
-- **Complexity reduction** - Simplicity as primary goal
-- **Evidence over claims** - Verify before declaring success
+- **Discovery before offer** - Never price or pitch an unnamed buyer
+- **Price on ROI, never on hours** - Hours punish speed and cap income
+- **One channel, 100 touches, then judge** - Focus beats multichannel chaos
+- **Ask at the win** - Upsells and referrals happen when the outcome lands
+- **Evidence over claims** - Scorecards before opinions
 
-Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
+Forked from [Superpowers](https://github.com/obra/superpowers) by Jesse Vincent / Prime Radiant. Revenue domain, structure, and all 7 skills are this fork's own work.
 
 ## Contributing
 
-The general contribution process for Superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
+The general contribution process for Revenue Powers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
 
 1. Fork the repository
 2. Switch to the 'dev' branch
 3. Create a branch for your work
-4. Follow the `writing-skills` skill for creating and testing new and modified skills
+4. Test new or modified skills end-to-end on at least one harness and report results
 5. Submit a PR, being sure to fill in the pull request template.
 
-Skill-behavior tests use the drill eval harness from [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/), cloned into `evals/` — see `evals/README.md` for setup. Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh` or `npm test`.
+Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh`. Skill changes are validated end-to-end on at least one harness with a clean-session transcript.
 
-See `skills/writing-skills/SKILL.md` for the complete guide.
+See `AGENTS.md` for contributor guidelines.
 
 ## Updating
 
-Superpowers updates are somewhat coding-agent dependent, but are often automatic.
+Revenue Powers updates are somewhat agent dependent, but are often automatic.
 
 ## License
 
 MIT License - see LICENSE file for details
 
-## Visual companion telemetry
+## Attribution
 
-Because skills and plugins don't provide any feedback to creators, we have no idea how many of you are using Superpowers. By default, the Prime Radiant logo on brainstorming's optional visual companion feature is loaded from our website. It includes the version of Superpowers in use. It does not include any details about your project, prompt, or coding agent. We don't see your clicks or anything about what you're building. This helps us have a rough idea of how many folks are using Superpowers and which version of Superpowers they're using. It's 100% optional. To disable this, set the environment variable `SUPERPOWERS_DISABLE_TELEMETRY` to any true value. Superpowers also honors Claude Code's `DISABLE_TELEMETRY` and `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` opt-outs.
+Forked from [Superpowers](https://github.com/obra/superpowers) (MIT) by Jesse Vincent / Prime Radiant. All dev skills were removed; the 7 revenue skills and methodology are original to this fork.

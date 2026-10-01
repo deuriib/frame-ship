@@ -1,7 +1,7 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-revenue",
   "version": "6.4.2",
-  "description": "An agentic skills framework & software development methodology that works: planning, TDD, debugging, and collaboration workflows.",
+  "description": "A revenue methodology for agents: discover opportunities, design offers, price on ROI, outbound, close, and scale.",
   "author": {
     "name": "Jesse Vincent",
     "email": "jesse@fsck.com",
@@ -11,21 +11,20 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
-    "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
-    "tdd",
-    "debugging",
-    "code-review",
+    "revenue",
+    "offer",
+    "pricing",
+    "outbound",
+    "closing",
+    "flywheel",
     "workflow"
   ],
   "skills": "./skills/",
   "hooks": {},
   "interface": {
-    "displayName": "Superpowers",
-    "shortDescription": "Planning, TDD, debugging, and delivery workflows for coding agents",
-    "longDescription": "Use Superpowers to guide agent work through brainstorming, implementation planning, test-driven development, systematic debugging, parallel execution, code review, and finish-the-branch workflows.",
+    "displayName": "Revenue Powers",
+    "shortDescription": "Discover, offer, price, outbound, close, and scale revenue",
+    "longDescription": "Use revenue skills to find who pays, design offers buyers believe, price on ROI, run outbound that books calls, close deals, and compound with upsells, renewals, and referrals.",
     "developerName": "Jesse Vincent",
     "category": "Developer Tools",
     "capabilities": [
@@ -34,8 +33,8 @@
       "Write"
     ],
     "defaultPrompt": [
-      "I've got an idea for something I'd like to build.",
-      "Let's add a feature to this project."
+      "I want more clients.",
+      "Help me price my offer."
     ],
     "websiteURL": "https://github.com/obra/superpowers",
     "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",

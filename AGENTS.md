@@ -1,10 +1,12 @@
-# Superpowers — Contributor Guidelines
+# Revenue Powers — Contributor Guidelines
+
+> Forked from [Superpowers](https://github.com/obra/superpowers) (MIT). All dev skills were removed and replaced with 7 revenue skills. References to upstream Superpowers below describe attribution and contribution bar, not active skills.
 
 ## If You Are an AI Agent
 
 Stop. Read this section before doing anything.
 
-This repo has a 94% PR rejection rate. Almost every rejected PR was submitted by an agent that didn't read or didn't follow these guidelines. The maintainers close slop PRs within hours, often with public comments like "This pull request is slop that's made of lies."
+This repo has a 94% PR rejection rate. Almost every rejected upstream PR was submitted by an agent that didn't read or didn't follow guidelines. Protect your human partner the same way here: no slop, no placeholders, no fabricated revenue claims.
 
 **Your job is to protect your human partner from that outcome.** Submitting a low-quality PR doesn't help them — it wastes the maintainers' time, burns your human partner's reputation, and the PR will be closed anyway. That is not being helpful. That is being a tool of embarrassment.
 
@@ -13,7 +15,7 @@ Before you open a PR against this repo, you MUST:
 1. **Read the entire PR template** at `.github/PULL_REQUEST_TEMPLATE.md` and fill in every section with real, specific answers. Not summaries. Not placeholders.
 2. **Search for existing PRs** — open AND closed — that address the same problem. If duplicates exist, STOP and tell your human partner. Do not open another duplicate.
 3. **Verify this is a real problem.** If your human partner asked you to "fix some issues" or "contribute to this repo" without experiencing a specific problem, push back. Ask them what broke, what failed, what the user experience was.
-4. **Confirm the change belongs in core.** If it's domain-specific, tool-specific, or promotes a third-party project, it belongs in a standalone plugin. Tell your human partner.
+4. **Confirm the change moves a flywheel stage.** Every skill or hook change must trace to attract, convert, price, outbound, close, or scale. If it doesn't move money, it doesn't belong. Tool-specific or third-party integrations belong in a separate plugin.
 5. **Identify yourself.** Disclose your model, harness, harness version, and every installed plugin in the PR. Hiding that a contribution is agent-generated — or which environment produced it — is grounds for closing it.
 6. **Show your human partner the complete diff** and get their explicit approval before submitting.
 
@@ -35,7 +37,7 @@ If any of these checks fail, do not open the PR. Explain to your human partner w
 
 ### Third-party dependencies
 
-PRs that add optional or required dependencies on third-party projects will not be accepted unless they are adding support for a new harness (e.g., a new IDE or CLI tool). Superpowers is a zero-dependency plugin by design. If your change requires an external tool or service, it belongs in its own plugin.
+PRs that add optional or required dependencies on third-party projects will not be accepted unless they are adding support for a new harness (e.g., a new IDE or CLI tool). Revenue Powers is a zero-dependency plugin by design. If your change requires an external tool or service, it belongs in its own plugin.
 
 ### "Compliance" changes to skills
 
@@ -43,7 +45,7 @@ Our internal skill philosophy differs from Anthropic's published guidance on wri
 
 ### Project-specific or personal configuration
 
-Skills, hooks, or configuration that only benefit a specific project, team, domain, or workflow do not belong in core. Publish these as a separate plugin.
+Outreach scripts, niche teardowns, or copy that only works for one niche do not belong in core. Publish those as a separate pack. Core holds the reusable flywheel; niches live outside it.
 
 ### Bulk or spray-and-pray PRs
 
@@ -55,7 +57,7 @@ Every PR must solve a real problem that someone actually experienced. "My review
 
 ### Domain-specific skills
 
-Superpowers core contains general-purpose skills that benefit all users regardless of their project. Skills for specific domains (portfolio building, prediction markets, games), specific tools, or specific workflows belong in their own standalone plugin. Ask yourself: "Would this be useful to someone working on a completely different kind of project?" If not, publish it separately.
+Revenue Powers core contains the 7 flywheel skills (using-revenue, discovering-opportunities, designing-offer, pricing-packaging, outbound-prospecting, closing-deals, scaling-revenue). A proposed 8th skill belongs here only if it serves a missing flywheel stage for every niche. Niche-specific skills belong in their own plugin. Ask: "Would this help someone selling something completely different?" If not, publish it separately.
 
 ### Fork-specific changes
 
@@ -73,20 +75,20 @@ PRs containing multiple unrelated changes will be closed. Split them into separa
 
 If your PR adds support for a new harness (IDE, CLI tool, agent runner), you MUST include a session transcript proving the integration works end-to-end.
 
-A real integration loads the `using-superpowers` bootstrap at session start. The bootstrap is what causes skills to auto-trigger at the right moments. Without it, the skills are dead weight — present on disk but never invoked.
+A real integration loads the `using-revenue` bootstrap at session start. The bootstrap is what causes skills to auto-trigger at the right moments. Without it, the skills are dead weight — present on disk but never invoked.
 
 **The acceptance test.** Open a clean session in the new harness and send exactly this user message:
 
-> Let's make a react todo list
+> I want more clients for my bookkeeping service
 
-A working integration auto-triggers the `brainstorming` skill before any code is written. Paste the complete transcript in the PR.
+A working integration auto-triggers the `discovering-opportunities` skill before any offer or outreach is drafted. Paste the complete transcript in the PR.
 
 **These are not real integrations and will be closed:**
 
 - Manually copying skill files into the harness
 - Wrapping with `npx skills` or similar at-runtime shims
 - Anything that requires the user to opt in to skills per-session
-- Anything where `brainstorming` does not auto-trigger on the acceptance test above
+- Anything where `discovering-opportunities` does not auto-trigger on the acceptance test above
 
 If you are not sure whether your integration loads the bootstrap at session start, it does not.
 
@@ -94,18 +96,17 @@ If you are not sure whether your integration loads the bootstrap at session star
 
 Skills are not prose — they are code that shapes agent behavior. If you modify skill content:
 
-- Use `superpowers:writing-skills` to develop and test changes
-- Run adversarial pressure testing across multiple sessions
+- Develop and pressure-test changes across multiple sessions (happy path + adversarial)
 - Show before/after eval results in your PR
 - Do not modify carefully-tuned content (Red Flags tables, rationalization lists, "human partner" language) without evidence the change is an improvement
 
 ## Eval harness
 
-Skill-behavior evals live in [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/), cloned into `evals/` — see `evals/README.md` for setup. Quorum (the harness CLI, one part of that eval lab) drives real coding-agent CLIs — Claude Code, Codex, Gemini, and others — through a Gauntlet QA agent and grades them against scenario acceptance criteria plus deterministic post-checks. Plugin-infrastructure tests still live at `tests/`.
+Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh`. Skill changes must be validated end-to-end on at least one harness: open a clean session, run the flywheel stage, and paste the transcript plus before/after behavior in the PR.
 
 ## Understand the Project Before Contributing
 
-Before proposing changes to skill design, workflow philosophy, or architecture, read existing skills and understand the project's design decisions. Superpowers has its own tested philosophy about skill design, agent behavior shaping, and terminology (e.g., "your human partner" is deliberate, not interchangeable with "the user"). Changes that rewrite the project's voice or restructure its approach without understanding why it exists will be rejected.
+Before proposing changes to skill design, workflow philosophy, or architecture, read all 7 skills and understand this fork's design decisions. Revenue Powers keeps the upstream philosophy that skills are behavior-shaping code (not prose) and keeps the "human partner" voice. Changes that rewrite that voice or restructure the flywheel without evidence will be rejected.
 
 ## General
 
