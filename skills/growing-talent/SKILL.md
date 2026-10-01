@@ -33,6 +33,28 @@ Create a todo per item. Complete in order.
 6. **Succession slate** — per critical role: ready-now (evidence), ready-1yr (gap + plan), emergency cover. Reviewed twice a year, not in a crisis.
 7. **Promotion case** — sustained next-level evidence + business need + calibration sign-off. Then communicate with the evidence story.
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Pay bands benchmarked and reviewed annually. Documented criteria + calibration behind every promotion and comp change.
+2. Mandatory training completed and logged: security, privacy (Ley 172-13), anti-harassment, conduct, role compliance.
+3. Policies versioned, published, acknowledged. Reviewed annually.
+4. Pay equity reviewed. Disparities remediated with timeline. Retaliation for raising equity concerns banned.
+5. Payroll dual-approved + reconciled. Tax on time. No off-cycle payments without written approval.
+6. Benefits per policy and law only. No undocumented promises in growth conversations.
+
+NEVER:
+1. Favoritism hires, promotions, or HiPo picks without published criteria.
+2. Off-band moves without written justification.
+3. Secret HiPo lists or unpublished promotion bars.
+4. Sensitive data (medical, biometric, beliefs) in development plans or succession slates.
+5. Promotion to retain without sustained next-level evidence.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Discrimination, harassment, or retaliation signals in growth decisions.
+- Legal claims, DSR requests, or cross-border data moves tied to a person.
+- No silent remediation. Log the escalation, freeze affected decisions.
+
 ## 9-Box Done Right
 
 - 9-box sorts conversations, never people. It's a placement of evidence, not a label on a forehead.

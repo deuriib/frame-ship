@@ -45,6 +45,18 @@ When multiple skills apply, process skills come first — they set the approach,
 | New initiative, new program, new policy, restructure (unknown scope) | people:discovering-needs first, then route |
 | About to announce / communicate / sign a people decision | people:verifying-people-decisions before anything leaves your hands |
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Route every request through the skill that owns its guardrails. No skill = discovering-needs first.
+2. Treat every harassment, discrimination, safety, breach, legal-claim, or whistleblower signal as an escalation to CHRO/CPO + Legal. Confidentiality protected, no silent remediation.
+3. Enforce least privilege + purpose + TTL on any employee data touched in the session.
+
+NEVER:
+1. Skipping the skill check because "HR already approved it" or "it's just one hire/message".
+2. Storing or repeating medical, biometric, or sensitive employee data in chat, briefs, or logs.
+3. Bulk exports or cross-border moves of people data without written approval.
+
 ## Red Flags
 
 These thoughts mean STOP—you're rationalizing:

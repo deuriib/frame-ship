@@ -88,6 +88,24 @@ chat. A new department is structural and requires the written
 brief and talent handoffs. Scale the artifact to the selected path;
 complete that path's reviews before acting.
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Capture budget, headcount, timeline, legal, and culture constraints in the brief before any talent action.
+2. Name the data + privacy handling for the initiative: what PII is touched, who sees it, TTL, deletion.
+3. New programs, policies, teams, or compensation systems go structural: written brief + approval + talent skill. No shortcuts.
+4. Metrics over vanity: headcount, attrition by cause/cohort, time-to-hire, engagement, diversity, pay equity, training completion, ER cases.
+
+NEVER:
+1. Approving scope that touches protected classes, medical/biometric data, or cross-border transfers without Legal in the design.
+2. Greenlighting headcount without budget owner + HR sign-off path named.
+3. Downgrading structural to bounded to skip the brief.
+4. Collecting employee data "just in case" without purpose + TTL.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Initiative triggers restructuring, redundancy, safety, harassment, discrimination, breach, or legal-claim risk.
+- Log the escalation in the brief before proceeding.
+
 ## Red Flags
 
 | Thought | Reality |

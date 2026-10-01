@@ -73,6 +73,31 @@ Skip any step = announcing, not verifying
 | "Partial check is enough" | Partial proves nothing |
 | "Different words so rule doesn't apply" | Spirit over letter |
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Employee PII treated as a PII store: purpose stated, TTL set, deletion enforced. Least privilege always.
+2. Medical, biometric, sensitive data: explicit consent + need-to-know + legal review. Never in general files, chats, or shared drives.
+3. Role-based audited access to people files. Quarterly access reviews. DSR honored within legal timeframe.
+4. Evidence bundle per decision type before release:
+   - Hire: req + scorecard + approvals + offer + contract + onboarding checklist.
+   - Review/PIP/promotion: goals + evidence log + calibration + decision + comp approval.
+   - Reorg/exit: diagnosis + design + comms + logistics + offboarding checklist + access revocation proof.
+   - ER: intake + evidence + decision + follow-up + retention reference.
+5. Same-day access revocation on every exit. Assets returned. Final pay per law.
+
+NEVER:
+1. Sending or announcing with missing approvals, missing evidence, or wrong recipients.
+2. Bulk exports or cross-border transfers without approval (approved jurisdiction + DPA only).
+3. Verbal-only comp, offer, or exit terms. Written, signed, filed.
+4. Deletion under litigation hold or retention schedule.
+5. Off-cycle or off-band moves without written justification + dual approval.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Any send touching harassment, discrimination, safety, breach, legal claim, whistleblower.
+- Litigation hold, regulator contact, DSR, or cross-border request. Freeze and escalate before releasing.
+- No silent remediation. Log the escalation with date and recipients.
+
 ## Key Patterns
 
 **Offers:**

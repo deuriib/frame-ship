@@ -41,6 +41,25 @@ Create a todo per item. Complete in order.
 - Compensation changes reference the band and the evidence. "Market adjustment" without band data is a guess — get the data.
 - Document the calibration delta: draft rating → final rating → reason. Memory lies; the log doesn't.
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Goals documented + reviewed on cadence. No surprise terminations without a performance trail.
+2. PIPs written, time-bound, supported (manager + resources named). Weekly check-ins logged.
+3. Promotions and comp changes on documented criteria with calibration sign-off.
+4. Payroll-affecting decisions dual-approved + reconciled. Off-cycle payments need written approval.
+
+NEVER:
+1. PIPs as pretext for discrimination or retaliation.
+2. Ratings, raises, or promotions on memory, tenure, or retention panic.
+3. Medical, biometric, or sensitive data in review docs or calibration notes.
+4. Communicating ratings without calibrated evidence + written decision package.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Performance action touching a protected status, leave, complaint, or whistleblower.
+- Any termination signal without HR trail. Stop and get review before communicating.
+- No silent remediation. Log the escalation, freeze the communication.
+
 ## Feedback Rules
 
 - SBI always: Situation → Behavior → Impact. "You did great" is not feedback.

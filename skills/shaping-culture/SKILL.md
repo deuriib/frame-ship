@@ -42,6 +42,28 @@ Create a todo per item. Complete in order.
 6. **Offboarding** — exit interview, knowledge transfer checklist, alumni treatment, access revocation. Exits are culture broadcasts — handle them with excellence.
 7. **Measure again** — 90 days later, same instrument. Report delta honestly, including what didn't move.
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Code of conduct signed by all. Violations investigated promptly, fairly, documented.
+2. Confidential reporting channels published + monitored. Whistleblower protection enforced.
+3. Anti-harassment / anti-discrimination enforced in every ritual, hire, review, and promotion.
+4. Remote/hybrid policy documented: equipment, security, privacy enforced.
+5. Workplace safety per law. Incidents remediated with owner + date.
+6. Policies versioned, published, acknowledged. Reviewed annually.
+
+NEVER:
+1. Retaliation against reporters. Ever. Monitor after every investigation.
+2. Silent remediation of harassment, discrimination, or safety issues.
+3. Reorg or restructure without legal path: consultation, notice, severance, docs.
+4. Deletion of records under litigation hold or retention schedule.
+5. Exits without same-day access revocation, asset return, final pay per law, exit interview + knowledge transfer.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Harassment, discrimination, safety, breach, or legal claim signals.
+- Litigation hold or regulator contact. Freeze deletions, preserve evidence.
+- Log the escalation, restrict to need-to-know.
+
 ## Org Design Rules
 
 - Design from decisions backward: who decides what, with what input, by when. Boxes follow decisions, not the reverse.

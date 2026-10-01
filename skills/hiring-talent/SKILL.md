@@ -44,6 +44,22 @@ Create a todo per item. Complete in order.
 6. **Decision + offer** — hire only when every knockout passes and no competency scores below bar. Offer letter states outcomes for first 90 days.
 7. **Onboarding 30-60-90** — written plan with owner per milestone, week-1 access checklist, 30/60/90 check-ins scheduled before day one.
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Req approved by budget owner + HR before posting. No phantom reqs.
+2. JD reviewed for bias, clarity, legality before sourcing.
+3. Structured interviews only: trained interviewers, same questions, scorecard per candidate.
+4. Background/reference checks only where lawful + role-relevant, with consent. Adverse action documented.
+5. Offer approved in writing by HR + Finance + hiring manager. Onboarding checklist enforced: contract, ID, tax, benefits, equipment, access, training. Least-privilege access from day one.
+
+NEVER:
+1. Gut-feel hires or discriminatory criteria. Accommodations provided, refusals documented with reason.
+2. Verbal or off-band offers without written approval.
+3. Medical, biometric, or sensitive data in hiring logs, briefs, or shared drives.
+4. Bulk candidate exports without approval. Candidate PII minimized with TTL.
+5. Day-one start without 30-60-90 + access checklist signed.
+
 ## Interview Rules
 
 - Same questions per candidate for the same competency. Different questions = different bars = bias.

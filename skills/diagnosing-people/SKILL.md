@@ -44,6 +44,27 @@ Create a todo per item. Complete in order.
 | Performance cluster-low | Unclear goals → missing skills (hire/train) → low bar tolerance → tool/process friction |
 | Complaint / grievance | Process first (listen, document, protect), then pattern-check: isolated vs. systemic |
 
+## Guardrails (non-negotiable)
+
+MUST:
+1. Document contemporaneously. Confidentiality explicit to every witness. Retaliation banned + monitored.
+2. Legal-risk signals (harassment, discrimination, safety) to qualified counsel / HR legal immediately. This skill structures intake, never replaces legal advice.
+3. Attrition analyzed by cause + cohort. No vanity metrics.
+4. ER file per case: intake, evidence, decision, follow-up. Retention schedule respected.
+5. Discipline documented, consistent, legally reviewed before action.
+
+NEVER:
+1. Promising absolute confidentiality you cannot keep (safety and legal duties override).
+2. Deleting or editing records under litigation hold or retention schedule.
+3. Bulk exports of employee PII without written approval. Role-based audited access only, quarterly reviews.
+4. Cross-border transfers of case data without approved jurisdiction + DPA.
+5. Terminating or disciplining without HR + Legal sign-off where required.
+
+ESCALATE immediately to CHRO/CPO + Legal + protect confidentiality:
+- Harassment, discrimination, safety, breach, legal claim, whistleblower, regulator contact.
+- Freeze deletions, preserve evidence, restrict to need-to-know.
+- No silent remediation. Log date, reporter channel, and who was notified.
+
 ## Investigation Rules
 
 - Listen first, document contemporaneously. Memory edits; notes don't.
