@@ -11,7 +11,7 @@ No proposal goes out without a discovery call. No discount without a trade.
 
 ## Prerequisites
 
-An approved designing-offer sheet and pricing-packaging card. If either is missing, invoke those skills first. Quoting without tiers turns every call into custom haggling.
+An approved designing-offer sheet and pricing-offers card. If either is missing, invoke those skills first. Quoting without tiers turns every call into custom haggling.
 
 ## The Call Flow
 

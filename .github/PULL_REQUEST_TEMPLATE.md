@@ -83,7 +83,7 @@ of human involvement will be closed without review.
 
          I want more clients for my bookkeeping service
 
-     A working integration auto-triggers the `discovering-opportunities` skill before
+     A working integration auto-triggers the `discovering-clients` skill before
      any offer or outreach is drafted. Paste the complete transcript below.
 
      These are NOT real integrations and PRs that ship them will be closed:
@@ -91,7 +91,7 @@ of human involvement will be closed without review.
      - Manually copying skill files into the harness
      - Wrapping with `npx skills` or similar at-runtime shims
      - Anything that requires the user to opt in to skills per-session
-     - Anything where discovering-opportunities does not auto-trigger on the test above
+     - Anything where discovering-clients does not auto-trigger on the test above
 
      If you are not sure whether your integration loads the bootstrap at
      session start, it does not.

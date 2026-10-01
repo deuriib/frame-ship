@@ -7,11 +7,11 @@ description: Use when shaping what you sell - new offer, rewriting a proposal, a
 
 Turn an approved opportunity brief into an offer with a named outcome, a believable mechanism, and a risk reversal — before pricing or outbound.
 
-No pricing-packaging, no outbound-prospecting until the offer is approved.
+No pricing-offers, no outbound-prospecting until the offer is approved.
 
 ## Prerequisites
 
-An approved discovering-opportunities brief. If none exists, invoke that skill first. Never design an offer for an unnamed buyer.
+An approved discovering-clients brief. If none exists, invoke that skill first. Never design an offer for an unnamed buyer.
 
 ## The Offer Sheet
 
@@ -47,4 +47,4 @@ Ask at most 3, one round, then draft:
 
 ## Done Looks Like
 
-An approved offer sheet: one-sentence outcome, 3-5 step mechanism, 3+ proof elements (or a proof-generation plan), a guarantee with teeth, and a scope fence. Next skill: pricing-packaging.
+An approved offer sheet: one-sentence outcome, 3-5 step mechanism, 3+ proof elements (or a proof-generation plan), a guarantee with teeth, and a scope fence. Next skill: pricing-offers.

@@ -11,7 +11,7 @@ No booked call happens without touches. No touches without this skill's sequence
 
 ## Prerequisites
 
-An approved designing-offer sheet and pricing-packaging card. If either is missing, invoke those skills first. Outbound for a vague promise burns the list and your reputation.
+An approved designing-offer sheet and pricing-offers card. If either is missing, invoke those skills first. Outbound for a vague promise burns the list and your reputation.
 
 ## The Sequence
 
@@ -25,7 +25,7 @@ Produce this artifact and get approval, then execute one channel at a time:
 
 ## Kill Criteria
 
-After 100 touches on one sequence: <5% reply rate = rewrite the opener. <10% of replies positive = the pain is wrong, return to discovering-opportunities. Show rate <50% = fix the confirmation, not the opener.
+After 100 touches on one sequence: <5% reply rate = rewrite the opener. <10% of replies positive = the pain is wrong, return to discovering-clients. Show rate <50% = fix the confirmation, not the opener.
 
 ## Guardrails
 

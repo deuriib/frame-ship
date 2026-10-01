@@ -28,7 +28,7 @@ Hermes Agent has a `skills` toolset with `skill_view` and `skills_list` tools.
 To invoke a revenue skill, use:
 
 ```
-skill_view("discovering-opportunities")
+skill_view("discovering-clients")
 skill_view("closing-deals")
 ```
 

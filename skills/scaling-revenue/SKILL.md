@@ -47,4 +47,4 @@ Work one lever per month. Finish it, measure it, then move on:
 
 ## Done Looks Like
 
-A monthly scorecard habit with one lever improving per cycle: upsell attach rate rising, renewals on calendar, one referral ask per win. When a lever needs its own craft, return to its skill: outbound-prospecting for pipeline, closing-deals for win rate, pricing-packaging for raises.
+A monthly scorecard habit with one lever improving per cycle: upsell attach rate rising, renewals on calendar, one referral ask per win. When a lever needs its own craft, return to its skill: outbound-prospecting for pipeline, closing-deals for win rate, pricing-offers for raises.

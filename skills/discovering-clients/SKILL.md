@@ -1,9 +1,9 @@
 ---
-name: discovering-opportunities
+name: discovering-clients
 description: Use when finding who pays - new niche, new service idea, validating demand before building anything. First skill in the revenue flywheel.
 ---
 
-# Discovering Opportunities — Who Pays and What Hurts
+# Discovering Clients — Who Pays and What Hurts
 
 Turn a vague idea ("I want more clients") into a named buyer with a priced pain, before designing any offer.
 
@@ -16,7 +16,7 @@ No offer, no pricing, no outbound until the opportunity is sharp.
 3. **Carry intent into the bet.** The opportunity brief below must trace back to that note.
 
 <HARD-GATE>
-Before designing any offer, pricing, or outbound, complete this skill's output: a written opportunity brief approved by your human partner. No designing-offer, no pricing-packaging, no outbound-prospecting until the brief is approved. Read-only research (market browsing, competitor reads) is allowed while it remains incomplete.
+Before designing any offer, pricing, or outbound, complete this skill's output: a written opportunity brief approved by your human partner. No designing-offer, no pricing-offers, no outbound-prospecting until the brief is approved. Read-only research (market browsing, competitor reads) is allowed while it remains incomplete.
 </HARD-GATE>
 
 ## Three Paths

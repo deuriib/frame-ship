@@ -1,9 +1,9 @@
 ---
-name: pricing-packaging
+name: pricing-offers
 description: Use when setting or changing prices - new offer pricing, raising rates, building tiers. Prices on ROI, never on hours.
 ---
 
-# Pricing Packaging — Charge for the Outcome
+# Pricing Offers — Charge for the Outcome
 
 Turn an approved offer into tiers anchored to buyer ROI — before any outbound or sales call quotes a number.
 

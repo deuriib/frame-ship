@@ -19,16 +19,16 @@ This is not negotiable. You cannot rationalize your way out of this.
 
 **Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring prior context, or checking files. If it turns out wrong for the situation, you don't have to use it.
 
-**Before shaping any money-making work:** if you haven't already run discovery, invoke the discovering-opportunities skill first.
+**Before shaping any money-making work:** if you haven't already run discovery, invoke the discovering-clients skill first.
 
 Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
 
 ## Skill Priority
 
-When multiple skills apply, discovery comes first — it sets the bet, then execution skills carry it out. discovering-opportunities and closing-deals are this repo's most common process skills, but the rule holds for any of them.
+When multiple skills apply, discovery comes first — it sets the bet, then execution skills carry it out. discovering-clients and closing-deals are this repo's most common process skills, but the rule holds for any of them.
 
-- "Let's find clients" → revenue:discovering-opportunities first, then outbound-prospecting.
-- "Help me price this" → revenue:pricing-packaging first, then designing-offer.
+- "Let's find clients" → revenue:discovering-clients first, then outbound-prospecting.
+- "Help me price this" → revenue:pricing-offers first, then designing-offer.
 - "I have a call tomorrow" → revenue:closing-deals first, then scaling-revenue.
 - "Grow my income" → revenue:scaling-revenue first, then the skill it points to.
 
@@ -38,9 +38,9 @@ Every task maps to one stage. Pick the skill for the stage you're in:
 
 | Stage | Skill | Question it answers |
 |-------|-------|---------------------|
-| Attract | discovering-opportunities | Who pays, and what pain hurts enough? |
+| Attract | discovering-clients | Who pays, and what pain hurts enough? |
 | Convert | designing-offer | What do I promise, and why believe me? |
-| Price | pricing-packaging | What do I charge, anchored to ROI? |
+| Price | pricing-offers | What do I charge, anchored to ROI? |
 | Outbound | outbound-prospecting | How do I open conversations that book calls? |
 | Close | closing-deals | How do I run the call and win the yes? |
 | Scale | scaling-revenue | How do I upsell, retain, and get referrals? |

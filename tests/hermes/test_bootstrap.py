@@ -87,7 +87,7 @@ class TestBootstrapContent:
 
     def test_skill_view_guidance_present(self):
         content = _bootstrap()
-        assert 'skill_view("revenue:discovering-opportunities")' in content
+        assert 'skill_view("revenue:discovering-clients")' in content
 
     def test_under_hermes_context_spill_limit(self):
         content = _bootstrap()

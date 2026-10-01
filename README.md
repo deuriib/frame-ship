@@ -304,15 +304,15 @@ Revenue Powers is available as a native Muse plugin — same repo, same skills, 
   muse plugins update superpowers
   ```
 
-Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `I want more clients` — a working install auto-triggers `discovering-opportunities` before any offer is drafted. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
+Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `I want more clients` — a working install auto-triggers `discovering-clients` before any offer is drafted. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
 
 ## The Basic Workflow
 
-1. **discovering-opportunities** - Activates before any money-making work. Names the buyer, prices their pain, gathers 3+ willingness-to-pay signals, picks one channel to reach 50 buyers, sets kill criteria. Saves opportunity brief.
+1. **discovering-clients** - Activates before any money-making work. Names the buyer, prices their pain, gathers 3+ willingness-to-pay signals, picks one channel to reach 50 buyers, sets kill criteria. Saves opportunity brief.
 
 2. **designing-offer** - Activates with approved brief. Writes one-sentence outcome, 3-5 step mechanism, proof stack, guarantee with teeth, scope fence. Saves offer sheet.
 
-3. **pricing-packaging** - Activates with approved offer. Shows ROI math, builds three tiers (Core = 10-20% of first-year ROI), sets payment terms and a raise trigger. Saves pricing card.
+3. **pricing-offers** - Activates with approved offer. Shows ROI math, builds three tiers (Core = 10-20% of first-year ROI), sets payment terms and a raise trigger. Saves pricing card.
 
 4. **outbound-prospecting** - Activates with offer + pricing. Builds a 50-name list, opener under 50 words, 3 follow-ups, booking flow. Tracks sent / replies / calls weekly; kills dead sequences after 100 touches.
 
@@ -324,7 +324,7 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 ## When Something Goes Wrong
 
-Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent quotes prices before discovery, pitches before pain, or chases maybes. Re-read the `using-revenue` bootstrap and name the stage you're in - most failures trace to skipping discovering-opportunities or quoting without a pricing card.
+Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent quotes prices before discovery, pitches before pain, or chases maybes. Re-read the `using-revenue` bootstrap and name the stage you're in - most failures trace to skipping discovering-clients or quoting without a pricing card.
 
 ## Community
 
@@ -340,9 +340,9 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 
 **Flywheel**
 - **using-revenue** - Bootstrap: skill routing, flywheel stages, red flags
-- **discovering-opportunities** - Attract: named buyer, priced pain, pay signals, channel, kill criteria
+- **discovering-clients** - Attract: named buyer, priced pain, pay signals, channel, kill criteria
 - **designing-offer** - Convert: outcome, mechanism, proof stack, guarantee, scope fence
-- **pricing-packaging** - Price: ROI anchor, three tiers, payment terms, raise trigger
+- **pricing-offers** - Price: ROI anchor, three tiers, payment terms, raise trigger
 - **outbound-prospecting** - Outbound: 50-name list, opener, 3 follow-ups, weekly scorecard
 - **closing-deals** - Close: call flow, objection playbook, proposal rules
 - **scaling-revenue** - Scale: upsell, retention, referrals, monthly scorecard
