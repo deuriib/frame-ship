@@ -1,16 +1,17 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-devops",
   "version": "6.4.2",
-  "description": "Superpowers skills and runtime bootstrap for coding agents",
+  "description": "Superpowers DevOps skills and runtime bootstrap for coding agents",
   "type": "module",
   "main": ".opencode/plugins/superpowers.js",
   "keywords": [
     "pi-package",
     "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "workflow"
+    "ci-cd",
+    "iac",
+    "kubernetes",
+    "observability",
+    "incidents"
   ],
   "pi": {
     "extensions": [

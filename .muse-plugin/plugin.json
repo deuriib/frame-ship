@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers",
-  "displayName": "Superpowers",
+  "name": "superpowers-devops",
+  "displayName": "Superpowers DevOps",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "DevOps skills library for Muse: CI/CD, IaC, Kubernetes, observability and incident workflows",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"
@@ -11,64 +11,64 @@
   "capabilities": {
     "skills": [
       {
-        "id": "brainstorming",
-        "path": "skills/brainstorming/SKILL.md"
+        "id": "using-devops",
+        "path": "skills/using-devops/SKILL.md"
       },
       {
-        "id": "diagnosing-superpowers",
-        "path": "skills/diagnosing-superpowers/SKILL.md"
+        "id": "designing-infrastructure",
+        "path": "skills/designing-infrastructure/SKILL.md"
       },
       {
-        "id": "dispatching-parallel-agents",
-        "path": "skills/dispatching-parallel-agents/SKILL.md"
+        "id": "planning-rollouts",
+        "path": "skills/planning-rollouts/SKILL.md"
       },
       {
-        "id": "executing-plans",
-        "path": "skills/executing-plans/SKILL.md"
+        "id": "test-driven-infrastructure",
+        "path": "skills/test-driven-infrastructure/SKILL.md"
       },
       {
-        "id": "finishing-a-development-branch",
-        "path": "skills/finishing-a-development-branch/SKILL.md"
+        "id": "debugging-incidents",
+        "path": "skills/debugging-incidents/SKILL.md"
       },
       {
-        "id": "receiving-code-review",
-        "path": "skills/receiving-code-review/SKILL.md"
+        "id": "executing-rollouts",
+        "path": "skills/executing-rollouts/SKILL.md"
       },
       {
-        "id": "requesting-code-review",
-        "path": "skills/requesting-code-review/SKILL.md"
+        "id": "verifying-releases",
+        "path": "skills/verifying-releases/SKILL.md"
       },
       {
-        "id": "subagent-driven-development",
-        "path": "skills/subagent-driven-development/SKILL.md"
+        "id": "requesting-release-review",
+        "path": "skills/requesting-release-review/SKILL.md"
       },
       {
-        "id": "systematic-debugging",
-        "path": "skills/systematic-debugging/SKILL.md"
+        "id": "receiving-release-review",
+        "path": "skills/receiving-release-review/SKILL.md"
       },
       {
-        "id": "test-driven-development",
-        "path": "skills/test-driven-development/SKILL.md"
+        "id": "finishing-a-release",
+        "path": "skills/finishing-a-release/SKILL.md"
       },
       {
-        "id": "using-git-worktrees",
-        "path": "skills/using-git-worktrees/SKILL.md"
+        "id": "dispatching-parallel-runners",
+        "path": "skills/dispatching-parallel-runners/SKILL.md"
       },
       {
-        "id": "using-superpowers",
-        "path": "skills/using-superpowers/SKILL.md"
+        "id": "subagent-driven-operations",
+        "path": "skills/subagent-driven-operations/SKILL.md"
       },
       {
-        "id": "verification-before-completion",
-        "path": "skills/verification-before-completion/SKILL.md"
+        "id": "using-ephemeral-environments",
+        "path": "skills/using-ephemeral-environments/SKILL.md"
       },
       {
-        "id": "writing-plans",
-        "path": "skills/writing-plans/SKILL.md"
+        "id": "diagnosing-pipelines",
+        "path": "skills/diagnosing-pipelines/SKILL.md"
       },
       {
-        "id": "writing-skills",
-        "path": "skills/writing-skills/SKILL.md"
+        "id": "authoring-runbooks",
+        "path": "skills/authoring-runbooks/SKILL.md"
       }
     ],
     "commands": [],

@@ -1,6 +1,6 @@
-# Superpowers for Kimi Code
+# Superpowers DevOps for Kimi Code
 
-Complete guide for using Superpowers with [Kimi Code](https://github.com/MoonshotAI/kimi-code).
+Complete guide for using Superpowers DevOps with [Kimi Code](https://github.com/MoonshotAI/kimi-code).
 
 ## Installation
 
@@ -35,10 +35,10 @@ The Kimi plugin manifest lives at `.kimi-plugin/plugin.json`.
 The manifest does three things:
 
 1. Points Kimi Code at the existing `skills/` directory.
-2. Loads `using-superpowers` at session start through `sessionStart.skill`.
+2. Loads `using-devops` at session start through `sessionStart.skill`.
 3. Provides Kimi-specific tool mapping through `skillInstructions`.
 
-Kimi Code reads Superpowers skills from this repository. There are no copied skills, symlinks, hooks, or extra runtime dependencies.
+Kimi Code reads Superpowers DevOps skills from this repository. There are no copied skills, symlinks, hooks, or extra runtime dependencies.
 
 ## Tool Mapping
 
@@ -75,7 +75,7 @@ Select Superpowers and update it from there. Start a fresh session with `/new` a
 
 ### Direct GitHub install used an old release
 
-Kimi Code installs the latest GitHub release for a bare repository URL when one exists. To test unreleased changes before the next Superpowers release, install the branch explicitly:
+Kimi Code installs the latest GitHub release for a bare repository URL when one exists. To test unreleased changes before the next Superpowers DevOps release, install the branch explicitly:
 
 ```text
 /plugins install https://github.com/obra/superpowers/tree/dev

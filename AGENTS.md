@@ -35,7 +35,7 @@ If any of these checks fail, do not open the PR. Explain to your human partner w
 
 ### Third-party dependencies
 
-PRs that add optional or required dependencies on third-party projects will not be accepted unless they are adding support for a new harness (e.g., a new IDE or CLI tool). Superpowers is a zero-dependency plugin by design. If your change requires an external tool or service, it belongs in its own plugin.
+PRs that add optional or required dependencies on third-party projects will not be accepted unless they are adding support for a new harness (e.g., a new IDE or CLI tool). Superpowers DevOps is a zero-dependency plugin by design. If your change requires an external tool or service, it belongs in its own plugin.
 
 ### "Compliance" changes to skills
 
@@ -73,20 +73,20 @@ PRs containing multiple unrelated changes will be closed. Split them into separa
 
 If your PR adds support for a new harness (IDE, CLI tool, agent runner), you MUST include a session transcript proving the integration works end-to-end.
 
-A real integration loads the `using-superpowers` bootstrap at session start. The bootstrap is what causes skills to auto-trigger at the right moments. Without it, the skills are dead weight — present on disk but never invoked.
+A real integration loads the `using-devops` bootstrap at session start. The bootstrap is what causes skills to auto-trigger at the right moments. Without it, the skills are dead weight — present on disk but never invoked.
 
 **The acceptance test.** Open a clean session in the new harness and send exactly this user message:
 
-> Let's make a react todo list
+> Let's add a staging environment for the API
 
-A working integration auto-triggers the `brainstorming` skill before any code is written. Paste the complete transcript in the PR.
+A working integration auto-triggers the `designing-infrastructure` skill before any YAML is written. Paste the complete transcript in the PR.
 
 **These are not real integrations and will be closed:**
 
 - Manually copying skill files into the harness
 - Wrapping with `npx skills` or similar at-runtime shims
 - Anything that requires the user to opt in to skills per-session
-- Anything where `brainstorming` does not auto-trigger on the acceptance test above
+- Anything where `designing-infrastructure` does not auto-trigger on the acceptance test above
 
 If you are not sure whether your integration loads the bootstrap at session start, it does not.
 
@@ -94,7 +94,7 @@ If you are not sure whether your integration loads the bootstrap at session star
 
 Skills are not prose — they are code that shapes agent behavior. If you modify skill content:
 
-- Use `superpowers:writing-skills` to develop and test changes
+- Use `devops:authoring-runbooks` to develop and test changes
 - Run adversarial pressure testing across multiple sessions
 - Show before/after eval results in your PR
 - Do not modify carefully-tuned content (Red Flags tables, rationalization lists, "human partner" language) without evidence the change is an improvement
@@ -105,7 +105,7 @@ Skill-behavior evals live in [superpowers-evals](https://github.com/prime-radian
 
 ## Understand the Project Before Contributing
 
-Before proposing changes to skill design, workflow philosophy, or architecture, read existing skills and understand the project's design decisions. Superpowers has its own tested philosophy about skill design, agent behavior shaping, and terminology (e.g., "your human partner" is deliberate, not interchangeable with "the user"). Changes that rewrite the project's voice or restructure its approach without understanding why it exists will be rejected.
+Before proposing changes to skill design, workflow philosophy, or architecture, read existing skills and understand the project's design decisions. Superpowers DevOps keeps the tested philosophy about skill design, agent behavior shaping, and terminology (e.g., "your human partner" is deliberate, not interchangeable with "the user"). Changes that rewrite the project's voice or restructure its approach without understanding why it exists will be rejected.
 
 ## General
 

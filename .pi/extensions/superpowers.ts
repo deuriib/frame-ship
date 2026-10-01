@@ -4,12 +4,12 @@ import { fileURLToPath } from "node:url";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const EXTREMELY_IMPORTANT_MARKER = "<EXTREMELY_IMPORTANT>";
-const BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for pi";
+const BOOTSTRAP_MARKER = "devops:using-devops bootstrap for pi";
 
 const extensionDir = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(extensionDir, "../..");
 const skillsDir = resolve(packageRoot, "skills");
-const bootstrapSkillPath = resolve(skillsDir, "using-superpowers", "SKILL.md");
+const bootstrapSkillPath = resolve(skillsDir, "using-devops", "SKILL.md");
 
 let cachedBootstrap: string | null | undefined;
 
@@ -65,9 +65,9 @@ function getBootstrapContent(): string | null {
 		cachedBootstrap = `${EXTREMELY_IMPORTANT_MARKER}
 ${BOOTSTRAP_MARKER}
 
-You have superpowers.
+You have DevOps superpowers.
 
-The using-superpowers skill content is included below and is already loaded for this Pi session. Follow it now. Do not try to load using-superpowers again.
+The using-devops skill content is included below and is already loaded for this Pi session. Follow it now. Do not try to load using-devops again.
 
 ${body}
 
@@ -88,11 +88,11 @@ function stripFrontmatter(content: string): string {
 function piToolMapping(): string {
 	return `## Pi tool mapping
 
-Pi has native skills but does not expose Claude Code's \`Skill\` tool. When a Superpowers instruction says to invoke a skill, use Pi's native skill system instead: load the relevant \`SKILL.md\` with \`read\` when the skill applies, or let a human invoke \`/skill:name\` explicitly.
+Pi has native skills but does not expose Claude Code's \`Skill\` tool. When a DevOps skill instruction says to invoke a skill, use Pi's native skill system instead: load the relevant \`SKILL.md\` with \`read\` when the skill applies, or let a human invoke \`/skill:name\` explicitly.
 
 Pi's built-in coding tools are lowercase: \`read\`, \`write\`, \`edit\`, \`bash\`, plus optional \`grep\`, \`find\`, and \`ls\`. Use those for the corresponding actions: read a file, create or edit files, run shell commands, search file contents, find files by name, and list directories.
 
-Pi does not ship a standard subagent tool. If a subagent tool such as \`subagent\` from \`pi-subagents\` is available, use it for Superpowers subagent workflows. If no subagent tool is available, do the work in this session or explain the missing capability instead of inventing \`Task\` calls.
+Pi does not ship a standard subagent tool. If a subagent tool such as \`subagent\` from \`pi-subagents\` is available, use it for DevOps subagent workflows. If no subagent tool is available, do the work in this session or explain the missing capability instead of inventing \`Task\` calls.
 
 Pi does not ship a standard task-list tool. If an installed todo/task tool is available, use it. Otherwise track work in plan files or a repo-local \`TODO.md\` when task tracking is needed. Treat older \`TodoWrite\` references as this task-tracking action.`;
 }

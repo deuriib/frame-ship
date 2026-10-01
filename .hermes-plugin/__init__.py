@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for hermes"
+BOOTSTRAP_MARKER = "devops:using-devops bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install obra/superpowers`): the plugin
+    - git-clone install (`hermes plugins install deuriib/superpowers-devops`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -23,12 +23,12 @@ def _skills_dir() -> str:
         os.path.realpath(os.path.join(here, "skills")),
     )
     for cand in candidates:
-        if os.path.isfile(os.path.join(cand, "using-superpowers", "SKILL.md")):
+        if os.path.isfile(os.path.join(cand, "using-devops", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers plugin: cannot find the skills/ tree "
+        "superpowers-devops plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install obra/superpowers`."
+        "`hermes plugins install deuriib/superpowers-devops`."
     )
 
 
@@ -39,13 +39,13 @@ def _strip_frontmatter(content: str) -> str:
 
 def _build_bootstrap(skills_dir: str) -> str:
     with open(
-        os.path.join(skills_dir, "using-superpowers", "SKILL.md"),
+        os.path.join(skills_dir, "using-devops", "SKILL.md"),
         encoding="utf-8",
     ) as f:
         body = _strip_frontmatter(f.read())
 
     tools_path = os.path.join(
-        skills_dir, "using-superpowers", "references", "hermes-tools.md"
+        skills_dir, "using-devops", "references", "hermes-tools.md"
     )
     with open(tools_path, encoding="utf-8") as f:
         tool_mapping = f.read().strip()
@@ -53,19 +53,19 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have superpowers.\n\n"
-        f"The using-superpowers skill content is included below and is already "
+        f"You have DevOps superpowers.\n\n"
+        f"The using-devops skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
-        f"Do not try to load using-superpowers again.\n\n"
+        f"Do not try to load using-devops again.\n\n"
         f"{body}\n\n"
-        f"## Loading Superpowers Skills on Hermes\n\n"
-        f"Superpowers skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("superpowers:skill-name")` '
-        f'(for example `skill_view("superpowers:brainstorming")`). '
+        f"## Loading DevOps Skills on Hermes\n\n"
+        f"DevOps skills are registered with Hermes' native skill loader: "
+        f'invoke one with `skill_view("devops:skill-name")` '
+        f'(for example `skill_view("devops:designing-infrastructure")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
-        f"The superpowers skills directory is: `{skills_dir}`\n\n"
+        f"The devops skills directory is: `{skills_dir}`\n\n"
         f"{tool_mapping}\n"
         f"</EXTREMELY_IMPORTANT>"
     )

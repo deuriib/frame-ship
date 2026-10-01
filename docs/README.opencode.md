@@ -1,6 +1,6 @@
-# Superpowers for OpenCode
+# Superpowers DevOps for OpenCode
 
-Complete guide for using Superpowers with [OpenCode.ai](https://opencode.ai).
+Complete guide for using Superpowers DevOps with [OpenCode.ai](https://opencode.ai).
 
 ## Installation
 
@@ -66,7 +66,7 @@ use skill tool to list skills
 ### Loading a Skill
 
 ```
-use skill tool to load brainstorming
+use skill tool to load designing-infrastructure
 ```
 
 ### Personal Skills
@@ -128,7 +128,7 @@ The plugin does two things, using host-flavor-specific APIs:
     - **V1:** via `experimental.chat.messages.transform` hook
     - **V2:** via `ctx.session.hook("context")` — the V2 equivalent (confirmed active at runtime)
 
-Controller sessions receive the using-superpowers bootstrap in transient model
+Controller sessions receive the using-devops bootstrap in transient model
 context. Delegated child sessions keep access to native skills but do not receive
 the controller bootstrap. A manual fork without a parent session keeps controller
 behavior. When V2 native compaction retains earlier user messages (the default

@@ -1,4 +1,4 @@
-# Installing Superpowers for OpenCode
+# Installing Superpowers DevOps for OpenCode
 
 ## Prerequisites
 
@@ -36,10 +36,10 @@ Restart OpenCode. V2 uses the `opencode` command; `opencode2` may be available
 as an alias. The plugin installs through OpenCode's plugin manager and
 registers all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify by asking: "What DevOps skills do you have?"
 
 OpenCode uses its own plugin install. If you also use Claude Code, Codex, or
-another harness, install Superpowers separately for each one.
+another harness, install Superpowers DevOps separately for each one.
 
 ## Migrating from the old symlink-based install
 
@@ -64,7 +64,7 @@ Use OpenCode's native `skill` tool:
 
 ```
 use skill tool to list skills
-use skill tool to load brainstorming
+use skill tool to load designing-infrastructure
 ```
 
 ## Updating

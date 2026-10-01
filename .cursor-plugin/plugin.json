@@ -1,7 +1,7 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-devops",
   "displayName": "Superpowers",
-  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "DevOps skills library: CI/CD, IaC, Kubernetes, observability and incident workflows",
   "version": "6.4.2",
   "author": {
     "name": "Jesse Vincent",
@@ -11,12 +11,14 @@
   "repository": "https://github.com/obra/superpowers",
   "license": "MIT",
   "keywords": [
+    "ci-cd",
+    "iac",
+    "kubernetes",
+    "observability",
+    "incidents",
     "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "best-practices",
-    "workflows"
+    "devops",
+    "workflow"
   ],
   "skills": "./skills/",
   "hooks": "./hooks/hooks-cursor.json"
