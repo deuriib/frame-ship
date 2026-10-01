@@ -3,7 +3,7 @@
   "name": "superpowers",
   "displayName": "Superpowers",
   "version": "6.4.2",
-  "description": "Core skills library for Muse: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "People skills library for CHRO/CPO: hiring, performance, culture, growth, diagnosis, and proven people workflows.",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"

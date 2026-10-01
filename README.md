@@ -1,6 +1,6 @@
-# Superpowers
+# Superpowers People
 
-Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
+Superpowers People is a complete people methodology for CHRO/CPO agents, built on top of a set of composable skills and bootstrap instructions that make sure your agent uses them. Same Superpowers structure (bootstrap, HARD-GATE approvals, checklists, verification), 100% people domain: hiring, performance, culture, growth, diagnosis.
 
 ## Table of Contents
 
@@ -35,13 +35,13 @@ Superpowers is a complete software development methodology for your coding agent
 
 ## How it works
 
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. 
+It starts from the moment you fire up your coding agent. As soon as it sees that you're making a people decision, it *doesn't* just jump into announcing. Instead, it steps back and asks you what outcome your people really need. 
 
-Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
+Once it's teased a people brief out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
 
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY. 
+After you've signed off on the design, your agent puts together a talent action plan that's clear enough for a busy manager with no people-ops context to follow. It emphasizes scorecard-first selection, calibration before communication, and evidence before announcements. 
 
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
+Next up, once you say "go", it runs the matching talent skill (hiring, performance, culture, growth), verifying evidence at every gate before anything is communicated. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
 
 There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
 
@@ -302,29 +302,29 @@ Superpowers is available as a native Muse plugin — same repo, same skills, all
   muse plugins update superpowers
   ```
 
-Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `Let's make a react todo list` — a working install auto-triggers `brainstorming` before any code is written. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
+Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `We need to hire a sales lead` — a working install auto-triggers `discovering-needs` before any job description is written. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
+1. **discovering-needs** - Activates before any people action. Refines rough needs through questions, explores alternatives, presents design in sections for validation. Saves people brief.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **hiring-talent** - Activates with approved brief for roles. Scorecard first, structured interviews, debrief, offer, 30-60-90 onboarding.
 
-3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
+3. **reviewing-performance** - Activates for reviews, PIPs, comp, promotions. Evidence first, calibration before communication, no surprises.
 
-4. **subagent-driven-development** or **executing-plans** - Activates with plan. Either dispatches a fresh subagent per task with a review after each (most thorough), or implements every task inline in the current session with one fresh review of the whole branch at the end (cheapest).
+4. **shaping-culture** - Activates for engagement, rituals, onboarding programs, org design, offboarding. Measure first, rituals second, reorg last.
 
-5. **test-driven-development** - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Deletes code written before tests.
+5. **growing-talent** - Activates for succession, career paths, HiPo, mentoring. One growth bet per quarter, promotion on sustained evidence.
 
-6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+6. **diagnosing-people** - Activates when something is off (attrition, conflict, drops). Names the root cause with data before prescribing.
 
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+7. **verifying-people-decisions** - Activates before anything leaves your hands. Re-reads the package, checks wording and recipients, then releases.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
 ## When Something Goes Wrong
 
-Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its plan, repeats work, or burns more tokens than you'd expect. Ask your coding agent to "figure out what went wrong with superpowers in this session" and it will invoke the **diagnosing-superpowers** skill. To examine an earlier session, name it: "figure out what went wrong with superpowers in session `<id>`".
+Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its brief, repeats work, or burns more tokens than you'd expect. Ask your agent to "figure out what went wrong with people powers in this session" and it will invoke the **diagnosing-people** skill on the session pattern. To examine an earlier session, name it: "figure out what went wrong with people powers in session `<id>`".
 
 The skill reads the session transcript, reports what happened with line-level evidence, and, if you want, packages a scrubbed bundle for a bug report.
 
@@ -340,35 +340,26 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 
 ### Skills Library
 
-**Testing**
-- **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
+**Bootstrap**
+- **using-people** - Introduction to the people skills system, routing CHRO/CPO
 
-**Debugging**
-- **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
-- **verification-before-completion** - Ensure it's actually fixed
-- **diagnosing-superpowers** - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue
+**Discovery**
+- **discovering-needs** - Socratic need refinement: spike / bounded / structural paths with HARD-GATE approvals
+- **diagnosing-people** - Root-cause process for attrition, conflict, complaints, engagement drops
+- **verifying-people-decisions** - Evidence before announcements: offers, ratings, PIPs, reorgs, exits
 
-**Collaboration** 
-- **brainstorming** - Socratic design refinement
-- **writing-plans** - Detailed implementation plans
-- **executing-plans** - Inline plan execution: one context, one final review
-- **dispatching-parallel-agents** - Concurrent subagent workflows
-- **requesting-code-review** - Pre-review checklist
-- **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
-- **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
-
-**Meta**
-- **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+**Talent**
+- **hiring-talent** - Scorecard-first selection: sourcing, structured interviews, debrief, offer, 30-60-90
+- **reviewing-performance** - Evidence-first reviews: calibration before communication, PIPs, comp, promotions
+- **shaping-culture** - Measure first, rituals second, reorg last: values, onboarding, org design, offboarding
+- **growing-talent** - Succession, career paths, HiPo, mentoring, development plans with one growth bet
 
 ## Philosophy
 
-- **Test-Driven Development** - Write tests first, always
+- **Scorecard first** - Define success before selecting, always
 - **Systematic over ad-hoc** - Process over guessing
-- **Complexity reduction** - Simplicity as primary goal
-- **Evidence over claims** - Verify before declaring success
+- **People before structure** - Rituals and incentives before reorgs
+- **Evidence over claims** - Verify before announcing anything
 
 Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
 
@@ -379,12 +370,12 @@ The general contribution process for Superpowers is below. Keep in mind that we 
 1. Fork the repository
 2. Switch to the 'dev' branch
 3. Create a branch for your work
-4. Follow the `writing-skills` skill for creating and testing new and modified skills
+4. Follow people skill conventions (HARD-GATE approvals, checklists, red flags, verification) for creating and testing new and modified skills
 5. Submit a PR, being sure to fill in the pull request template.
 
 Skill-behavior tests use the drill eval harness from [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/), cloned into `evals/` — see `evals/README.md` for setup. Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh` or `npm test`.
 
-See `skills/writing-skills/SKILL.md` for the complete guide.
+See `skills/using-people/SKILL.md` for routing and `skills/discovering-needs/SKILL.md` for the design process.
 
 ## Updating
 

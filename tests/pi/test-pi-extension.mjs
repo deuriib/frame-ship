@@ -9,7 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '../..');
 const packageJsonPath = resolve(repoRoot, 'package.json');
 const extensionPath = resolve(repoRoot, '.pi/extensions/superpowers.ts');
-const piToolsPath = resolve(repoRoot, 'skills/using-superpowers/references/pi-tools.md');
+const piToolsPath = resolve(repoRoot, 'skills/using-people/references/pi-tools.md');
 
 async function readPackageJson() {
   return JSON.parse(await readFile(packageJsonPath, 'utf8'));
@@ -78,19 +78,19 @@ test('startup context injects the bootstrap as one user message until agent_end'
   await sessionStart({ type: 'session_start', reason: 'startup' }, {});
 
   const originalMessages = [
-    { role: 'user', content: [{ type: 'text', text: 'Let us make a react todo list' }], timestamp: 1 },
+    { role: 'user', content: [{ type: 'text', text: 'We need to hire a sales lead' }], timestamp: 1 },
   ];
   const result = await context({ type: 'context', messages: originalMessages }, {});
 
   assert.equal(result.messages.length, 2);
   assert.equal(result.messages[0].role, 'user');
-  assert.match(textOf(result.messages[0]), /You have superpowers/);
+  assert.match(textOf(result.messages[0]), /You have people powers/);
   assert.match(textOf(result.messages[0]), /Pi tool mapping/);
   assert.equal(result.messages[1], originalMessages[0]);
 
   const repeatedProviderRequest = await context({ type: 'context', messages: originalMessages }, {});
   assert.equal(repeatedProviderRequest.messages.length, 2);
-  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have superpowers/);
+  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have people powers/);
 
   const alreadyInjected = await context({ type: 'context', messages: result.messages }, {});
   assert.equal(alreadyInjected, undefined, 'bootstrap should not duplicate when already present');
@@ -114,7 +114,7 @@ test('session_compact injects bootstrap after compaction summaries, not before c
   assert.equal(result.messages.length, 3);
   assert.equal(result.messages[0], summary);
   assert.equal(result.messages[1].role, 'user');
-  assert.match(textOf(result.messages[1]), /You have superpowers/);
+  assert.match(textOf(result.messages[1]), /You have people powers/);
   assert.equal(result.messages[2], user);
 });
 
