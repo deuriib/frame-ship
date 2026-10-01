@@ -74,6 +74,23 @@ naming and copy rules, platform requirements — one line each, with exact
 values copied verbatim from the spec. Every task's requirements implicitly
 include this section.]
 
+## Workflow Guardrails G1-G5 (blocking, every task, stack-agnostic)
+
+[Copy verbatim. Defaults travel with the plan — target repo may raise floors
+or add stack rows, never lower without written justification + deadline.]
+
+- **G1 Test-with-change:** each behavior/fix task ships new/updated test; docs typo-only exempt.
+- **G2 Layout + type by risk:** unit + integration + e2e + regression + acceptance/BDD
+  in `tests/unit|integration|e2e|fixtures|helpers`; extras (contract, security/STRIDE,
+  architecture/fitness, perf/bench, mutation/property, chaos, smoke, attestation)
+  only when boundary demands.
+- **G3 Coverage floors (defaults):** line ≥80% / branch ≥75% / function ≥85%;
+  critical ≥95% / ≥90% / ≥95%; P0 100% trace. Unit suite <30s, zero flaky tolerance.
+- **G4 Blocking verify:** no step done on red/unrun; skipped/flaky named with owner + reason.
+- **G5 Engineering standards:** strict types, no unsafe escapes w/o proof; pure core/edges;
+  Result, timeouts/retries/breakers/idempotency; ADR mandatory; atomic Conventional
+  Commits with type-check + tests + coverage + security evidence.
+
 ## Review Focus
 
 [The five input classes or failure modes the spec implies but no task's

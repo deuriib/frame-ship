@@ -60,37 +60,62 @@ Subagent (general-purpose):
     verdict counts for nothing. If the diff feels too large for one
     pass, review it in passes yourself and say so in your report.
 
-    ## What to Check
+    ## What to Check (workflow guardrails G1-G5 — blocking, stack-agnostic)
+
+    **G1 Test-with-change (blocking):**
+    - Every behavior/fix ships new/updated test? Docs typo-only exempt.
+    - Missing test = REQUEST_CHANGES.
+
+    **G2 Layout + type by risk (blocking):**
+    - Default: unit (isolated, mocked) + integration (ephemeral DB/HTTP/queue)
+      + e2e (assembled runtime) + regression (every PR) + acceptance/BDD
+      (Given-When-Then ↔ REQ-XXX) in `tests/unit|integration|e2e|fixtures|helpers`?
+    - Extras only when boundary demands: contract, security/STRIDE, architecture/fitness,
+      perf/bench, mutation/property, chaos, smoke, non-code attestation.
+
+    **G3 Coverage + assertion quality (blocking, numeric defaults):**
+    - Floors: line ≥80% / branch ≥75% / function ≥85%; critical (auth, data,
+      finance, PII) ≥95% / ≥90% / ≥95%; P0 100% trace (non-code: attestation + justification).
+    - Count-only assertions fail — must verify invariants, transitions, side-effects.
+    - Unit suite <30s. Zero flaky tolerance: quarantine + root-cause, never hidden.
+
+    **G4 Blocking verify (blocking):**
+    - No step done on red or unrun suite; relevant suite green before done?
+    - Skipped/flaky named with owner + reason, never hidden to force green?
+
+    **G5 Engineering standards (blocking, generic — apply rows the stack triggers):**
+    - Type safety: strict mode on, no unsafe escape hatches without proof/ticket,
+      exhaustive handling, readonly/immutable default, no stringly-typed code?
+    - Structure: pure core / side-effects at edges, DI, no circular/dead/ticketless-TODO,
+      complexity ≤10, nesting ≤3, fn ≤40 (soft)?
+    - Errors/concurrency: no empty/catch-all, Result where apt, timeouts + jittered
+      retries + breakers + idempotency, graceful shutdown?
+    - Arch: SOLID, ADR mandatory (context/options/decision/consequences/status),
+      modular-monolith-first, no pattern without concrete pain?
+    - Stack-conditional only: frontend/a11y/perf budgets, observability/SLO/DR,
+      data/AI governance, pinned deps + SBOM + signed commits?
+    - Docs/commits/evidence: atomic Conventional Commits, green CI + type-check +
+      tests + coverage + security evidence; Critical/High blocks merge, exceptions
+      need written approval + deadline?
 
     **Plan alignment:**
     - Does the implementation match the plan / requirements?
     - Are deviations justified improvements, or problematic departures?
     - Is all planned functionality present?
 
-    **Code quality:**
+    **Code quality (beyond G3):**
     - Clean separation of concerns?
     - Proper error handling?
-    - Type safety where applicable?
     - DRY without premature abstraction?
     - Edge cases handled?
 
-    **Architecture:**
-    - Sound design decisions?
-    - Reasonable scalability and performance?
-    - Security concerns?
-    - Integrates cleanly with surrounding code?
+    **Architecture (beyond G1):**
+    - Adapters thin, core harness-agnostic? No big-bang rewrite?
+    - ADR in `docs/superpowers/specs/` if harness decision changed?
 
-    **Testing:**
-    - Tests verify real behavior, not mocks?
-    - Edge cases covered?
-    - Integration tests where they matter?
-    - All tests passing?
-
-    **Production readiness:**
-    - Migration strategy if schema changed?
-    - Backward compatibility considered?
-    - Documentation complete?
-    - No obvious bugs?
+    **Production readiness (beyond G5):**
+    - Backward compatibility across harnesses considered?
+    - Documentation complete? No obvious bugs?
 
     ## Calibration
 

@@ -46,6 +46,9 @@ Skip any step = lying, not verifying
 | Regression test works | Red-green cycle verified | Test passes once |
 | Agent completed | VCS diff shows changes | Agent reports "success" |
 | Requirements met | Line-by-line checklist | Tests passing |
+| Test-with-change (G1) | New/updated test shipped + fails correctly before fix | "Obvious", docs-exemption claimed on code |
+| Floors met (G3) | Coverage report ≥ floors; critical paths ≥95/90/95; unit suite <30s | Count-only asserts, suite "should be fast" |
+| Flaky excused (G4) | Quarantine entry with owner + reason + ticket, suite green without it | Re-run until green, skipped silently |
 
 ## Red Flags - STOP
 
