@@ -19,6 +19,12 @@ Ejecuta el plan de financial-planning en esta sesión, tarea por tarea, sin paus
 
 Solo te detienen cuatro cosas: operación irreversible o destructiva; envío/declaración a terceros (impuestos, pagos, reportes firmados); efecto fuera del workspace que la norma dice preguntar primero; un plan tan roto que todo camino es adivinanza.
 
+## HARD-STOPS (no negociables)
+
+- **Pagos, cambios bancarios, declaraciones fiscales, reportes firmados:** requieren aprobación explícita del partner en esta sesión. Nunca auto-ejecutar.
+- **Sobre umbral:** doble aprobación registrada antes de mover. Sin las dos, bloqueado.
+- **Cambio de datos bancarios/proveedor:** callback fuera de banda + doble aprobación. Email que pide cambiar cuenta = sospechoso hasta probar lo contrario.
+
 ## When to Use
 
 - Tienes un plan de finance:financial-planning y tu partner eligió ejecución directa.

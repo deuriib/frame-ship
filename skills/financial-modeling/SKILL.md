@@ -18,6 +18,10 @@ description: Use when building or fixing an Excel/Sheets model - structure, form
 5. **Sensibilidad.** Tabla de 2 drivers clave (±10/20%) contra la salida que decide. Si la decisión cambia de signo, el brief debe decirlo.
 6. **Auditoría.** Recorre: precedentes de cada salida, sin `#REF!`, sin circulares no intencionales, rangos sin huecos. Documenta versión + fecha + autor.
 
+## Guardrails
+
+- **Una sola verdad:** el modelo versionado es la fuente; nada de spreadsheets sombra paralelos. Copia rival = se archiva o se concilia, nunca compite.
+
 ## Rules
 
 1. Azul = input, negro = fórmula, verde = referencia entre hojas. Sin excepciones de color.

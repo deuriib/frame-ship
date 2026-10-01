@@ -41,6 +41,7 @@ Saltar un paso = mentir, no verificar
 | Caja cierra | Flujo reconciliado contra bancos | Utilidad positiva |
 | Desvío corregido | Caso congelado hoy cuadra | Celda cambiada, asumido |
 | Regresión cubierta | Check nuevo en verde que lo atraparía | Pasa una vez |
+| Anomalía revisada | Duplicados, redondos, vendors raros, off-hours chequeados | "Se ve normal" |
 | Requisitos cumplidos | Checklist del brief línea por línea | Checks pasando |
 
 ## Red Flags - STOP

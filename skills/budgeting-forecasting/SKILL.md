@@ -18,6 +18,17 @@ description: Use when building a business budget, forecast, P&L, or cash flow - 
 5. **Cash flow.** Convierte P&L en caja: cobranzas, pagos, CAPEX, deuda. El P&L miente, la caja no.
 6. **Varianza.** Real vs presupuesto: qué desvió, cuánto, por qué, qué acción. Sin acción, el reporte es decoración.
 
+## Guardrails
+
+- **Dueño por centro de costo;** sin línea de presupuesto + aprobación del dueño, no hay gasto.
+- **POs sobre umbral** — nada verbal, nada de partir compras para esquivar el umbral.
+- **Vendors:** onboarding con revisión legal + seguridad + finanzas; sin duplicados/fantasma.
+- **Gastos con recibo;** nada personal, nada de reembolsos sin documento.
+- **SaaS/suscripciones inventariadas;** auto-renovaciones revisadas pre-renovación, cero huérfanos.
+- **Tesorería:** forecast de caja vivo + buffer de liquidez per política; nada de borrowing/hedging no autorizado. FX per política, cero especulación.
+- **Crédito a clientes:** límites enforced, dunning documentado, incobrables provisionados per política.
+- **Tax:** filings on time, nada de arreglos informales; transfer-pricing docs vivos; VAT/sales tax correcto per jurisdicción, nexus monitoreado.
+
 ## Rules
 
 1. Ninguna celda dura sin supuesto declarado.
@@ -31,4 +42,5 @@ description: Use when building a business budget, forecast, P&L, or cash flow - 
 - [ ] Cada número traza a un supuesto o dato fuente
 - [ ] Los 3 escenarios recalculan sin error
 - [ ] Caja nunca negativa sin alerta explícita
+- [ ] Gasto con dueño + línea de presupuesto; POs/gastos con soporte
 - [ ] Varianza con acción asignada, no solo observada
