@@ -1,5 +1,5 @@
 {
-  "name": "superpowers",
+  "name": "superpowers-automation",
   "version": "6.4.2",
   "description": "Automation skills and runtime bootstrap for coding agents (Samin Espinoza lens)",
   "type": "module",
