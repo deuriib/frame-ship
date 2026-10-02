@@ -13,7 +13,7 @@ const bootstrapSkillPath = resolve(skillsDir, "using-legal", "SKILL.md");
 
 let cachedBootstrap: string | null | undefined;
 
-export default function superpowersLegalPiExtension(pi: ExtensionAPI) {
+export default function legalPiExtension(pi: ExtensionAPI) {
 	let injectBootstrap = true;
 
 	pi.on("resources_discover", async () => ({
