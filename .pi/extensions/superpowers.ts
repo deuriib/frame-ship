@@ -13,7 +13,7 @@ const bootstrapSkillPath = resolve(skillsDir, "using-marketing", "SKILL.md");
 
 let cachedBootstrap: string | null | undefined;
 
-export default function superpowersPiExtension(pi: ExtensionAPI) {
+export default function marketingPiExtension(pi: ExtensionAPI) {
 	let injectBootstrap = true;
 
 	pi.on("resources_discover", async () => ({
