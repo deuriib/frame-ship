@@ -29,46 +29,52 @@ BASE_SHA=$(git rev-parse HEAD~1)  # or: git merge-base origin/main HEAD
 HEAD_SHA=$(git rev-parse HEAD)
 ```
 
-**2. Dispatch code reviewer subagent:**
+**2. Dispatch 5 independent reviewers in parallel:**
 
-Dispatch a `general-purpose` subagent, filling the template at [code-reviewer.md](code-reviewer.md)
+Issue all five dispatches in the same response — they run concurrently with
+isolated context (see `dispatching-parallel-agents`). Same DESCRIPTION +
+PLAN + BASE/HEAD to each, never session history.
 
-**Placeholders:**
+- Readability → template at [readability-reviewer.md](readability-reviewer.md)
+- Reliability → template at [reliability-reviewer.md](reliability-reviewer.md)
+- Refuter → template at [refuter-reviewer.md](refuter-reviewer.md)
+- Risk → template at [risk-reviewer.md](risk-reviewer.md)
+- Resilience → template at [resilience-reviewer.md](resilience-reviewer.md)
+
+Single reviewer at [code-reviewer.md](code-reviewer.md) remains the fallback
+when the change is trivial (docs typo-only) or only one seat is affordable.
+
+**Placeholders (same for all five):**
 - `{DESCRIPTION}` - Brief summary of what you built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
 - `{BASE_SHA}` - Starting commit
 - `{HEAD_SHA}` - Ending commit
 
-**3. Act on feedback:**
-- Fix Critical issues immediately
-- Fix Important issues before proceeding
-- Note Minor issues for later
-- Push back if reviewer is wrong (with reasoning)
+**3. Merge verdicts with AND-gate:**
+- Any Critical from any reviewer = No merge. Fix first.
+- Refuter "No / Conditionally" = treat as Critical until disproven with code/tests.
+- Conflicting feedback → `receiving-code-review`: verify each item against the codebase, push back with reasoning if wrong.
+- Fix Criticals immediately, Importants before proceeding, Minors later.
 
-## Example
+## Example (5 reviewers, parallel)
 
 ```
 [Just completed Task 2: Add verification function]
 
-You: Let me request code review before proceeding.
+You: Requesting 5-way review before proceeding.
 
 BASE_SHA=$(git log --oneline | grep "Task 1" | head -1 | awk '{print $1}')
 HEAD_SHA=$(git rev-parse HEAD)
 
-[Dispatch code reviewer subagent]
-  DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types
-  PLAN_OR_REQUIREMENTS: Task 2 from docs/superpowers/plans/deployment-plan.md
-  BASE_SHA: a7981ec
-  HEAD_SHA: 3df7661
+[Dispatch 5 reviewers in ONE response — same context to each]
+  Readability: DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types / PLAN: Task 2 ... / BASE: a7981ec / HEAD: 3df7661
+  Reliability: (same DESCRIPTION / PLAN / BASE / HEAD)
+  Refuter: (same DESCRIPTION / PLAN / BASE / HEAD)
+  Risk: (same DESCRIPTION / PLAN / BASE / HEAD)
+  Resilience: (same DESCRIPTION / PLAN / BASE / HEAD)
 
-[Subagent returns]:
-  Strengths: Clean architecture, real tests
-  Issues:
-    Important: Missing progress indicators
-    Minor: Magic number (100) for reporting interval
-  Assessment: Ready to proceed
-
-You: [Fix progress indicators]
+[Verdicts]: readability With fixes, reliability Yes, refuter Conditionally, risk With fixes, resilience Yes
+You: [Refuter condition unproven → treat as Critical. Fix + re-verify.]
 [Continue to Task 3]
 ```
 
@@ -92,4 +98,9 @@ You: [Fix progress indicators]
 - Show code/tests that prove it works
 - Request clarification
 
-See template at: [code-reviewer.md](code-reviewer.md)
+See templates at: [code-reviewer.md](code-reviewer.md) (single-reviewer fallback),
+[readability-reviewer.md](readability-reviewer.md),
+[reliability-reviewer.md](reliability-reviewer.md),
+[refuter-reviewer.md](refuter-reviewer.md),
+[risk-reviewer.md](risk-reviewer.md),
+[resilience-reviewer.md](resilience-reviewer.md).
