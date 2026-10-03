@@ -1,5 +1,5 @@
 /**
- * Tests for the visual companion's Superpowers/Prime Radiant branding.
+ * Tests for the visual companion's Frame-ship/Prime Radiant branding.
  */
 
 const { spawn } = require('child_process');
@@ -75,13 +75,13 @@ function writeFragment(dir) {
 }
 
 function createPackagedServerFixture(version) {
-  const root = fs.mkdtempSync(path.join('/tmp', 'superpowers-packaged-server-'));
+  const root = fs.mkdtempSync(path.join('/tmp', 'frame-ship-packaged-server-'));
   const scriptDir = path.join(root, 'skills/brainstorming/scripts');
   fs.cpSync(path.join(REPO_ROOT, 'skills/brainstorming/scripts'), scriptDir, { recursive: true });
   fs.mkdirSync(path.join(root, '.codex-plugin'), { recursive: true });
   fs.writeFileSync(
     path.join(root, '.codex-plugin/plugin.json'),
-    JSON.stringify({ name: 'superpowers', version }, null, 2)
+    JSON.stringify({ name: 'frame-ship', version }, null, 2)
   );
   return {
     root,
@@ -121,16 +121,16 @@ async function test(name, fn) {
 
 function assertBrandedWithLogo(html, version = PACKAGE_VERSION) {
   assert(
-    html.includes(`Superpowers v${version}`),
+    html.includes(`Frame-ship v${version}`),
     'branding text should include dynamic package version'
   );
   assert(
-    !html.includes(`Superpowers v${version} by`),
+    !html.includes(`Frame-ship v${version} by`),
     'branding text should not include "by" when the logo is visible'
   );
   assert(
-    /<img class="brand-logo"[^>]*>\s*<span class="brand-copy">Superpowers v/.test(html),
-    'visible logo should appear before the Superpowers version text'
+    /<img class="brand-logo"[^>]*>\s*<span class="brand-copy">Frame-ship v/.test(html),
+    'visible logo should appear before the Frame-ship version text'
   );
   assert(
     /\.brand a\s*\{[^}]*line-height:\s*1/i.test(html),
@@ -156,7 +156,7 @@ function assertBrandedWithLogo(html, version = PACKAGE_VERSION) {
 
 function assertBrandedFallbackText(html, version = PACKAGE_VERSION) {
   assert(
-    html.includes(`Prime Radiant Superpowers v${version}`),
+    html.includes(`Prime Radiant Frame-ship v${version}`),
     'disabled telemetry should keep plain text Prime Radiant/Superpowers branding'
   );
 }
@@ -283,7 +283,7 @@ async function main() {
         const html = await fetchHtml(port);
         assertBrandedWithLogo(html, packagedVersion);
         assertTelemetryImage(html, packagedVersion);
-        assert(!html.includes('Superpowers vunknown'), 'packaged plugin should not fall back to unknown version');
+        assert(!html.includes('Frame-ship vunknown'), 'packaged plugin should not fall back to unknown version');
       });
     } finally {
       cleanup(fixture.root);

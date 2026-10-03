@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-people",
-  "description": "Marketplace for Superpowers People skills library",
+  "name": "frame-ship-people",
+  "description": "Marketplace for Frame-ship People skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-people",
+      "name": "frame-ship-people",
       "description": "People skills library for CHRO/CPO: hiring, performance, culture, growth, diagnosis, and proven people workflows.",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

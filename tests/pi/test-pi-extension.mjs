@@ -8,7 +8,7 @@ import test from 'node:test';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '../..');
 const packageJsonPath = resolve(repoRoot, 'package.json');
-const extensionPath = resolve(repoRoot, '.pi/extensions/superpowers.ts');
+const extensionPath = resolve(repoRoot, '.pi/extensions/frame-ship.ts');
 const piToolsPath = resolve(repoRoot, 'skills/using-people/references/pi-tools.md');
 
 async function readPackageJson() {
@@ -45,10 +45,10 @@ function textOf(message) {
 test('package.json declares a pi package with skills and extension resources', async () => {
   const pkg = await readPackageJson();
 
-  assert.equal(pkg.name, 'superpowers');
+  assert.equal(pkg.name, 'frame-ship-people');
   assert.ok(pkg.keywords.includes('pi-package'));
   assert.deepEqual(pkg.pi.skills, ['./skills']);
-  assert.deepEqual(pkg.pi.extensions, ['./.pi/extensions/superpowers.ts']);
+  assert.deepEqual(pkg.pi.extensions, ['./.pi/extensions/frame-ship.ts']);
 });
 
 test('extension registers lifecycle hooks without pre-compaction injection', async () => {
@@ -84,13 +84,13 @@ test('startup context injects the bootstrap as one user message until agent_end'
 
   assert.equal(result.messages.length, 2);
   assert.equal(result.messages[0].role, 'user');
-  assert.match(textOf(result.messages[0]), /You have people powers/);
+  assert.match(textOf(result.messages[0]), /You have frame-ship \(people\)/);
   assert.match(textOf(result.messages[0]), /Pi tool mapping/);
   assert.equal(result.messages[1], originalMessages[0]);
 
   const repeatedProviderRequest = await context({ type: 'context', messages: originalMessages }, {});
   assert.equal(repeatedProviderRequest.messages.length, 2);
-  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have people powers/);
+  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have frame-ship \(people\)/);
 
   const alreadyInjected = await context({ type: 'context', messages: result.messages }, {});
   assert.equal(alreadyInjected, undefined, 'bootstrap should not duplicate when already present');
@@ -114,7 +114,7 @@ test('session_compact injects bootstrap after compaction summaries, not before c
   assert.equal(result.messages.length, 3);
   assert.equal(result.messages[0], summary);
   assert.equal(result.messages[1].role, 'user');
-  assert.match(textOf(result.messages[1]), /You have people powers/);
+  assert.match(textOf(result.messages[1]), /You have frame-ship \(people\)/);
   assert.equal(result.messages[2], user);
 });
 

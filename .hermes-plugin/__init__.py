@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "people:using-people bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:people:using-people bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install deuriib/superpowers-people`): the plugin
+    - git-clone install (`hermes plugins install deuriib/frame-ship-people`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -26,9 +26,9 @@ def _skills_dir() -> str:
         if os.path.isfile(os.path.join(cand, "using-people", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers-people plugin: cannot find the skills/ tree "
+        "frame-ship-people plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install deuriib/superpowers-people`."
+        "`hermes plugins install deuriib/frame-ship-people`."
     )
 
 
@@ -44,24 +44,21 @@ def _build_bootstrap(skills_dir: str) -> str:
     ) as f:
         body = _strip_frontmatter(f.read())
 
-    tools_path = os.path.join(
-        skills_dir, "using-people", "references", "pi-tools.md"
-    )
-    with open(tools_path, encoding="utf-8") as f:
-        tool_mapping = f.read().strip()
+    tool_mapping = "Tool mapping: use native read/write/edit/bash tools to load SKILL.md files on demand."
+
 
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have People superpowers.\n\n"
+        f"You have frame-ship (people).\n\n"
         f"The using-people skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-people again.\n\n"
         f"{body}\n\n"
         f"## Loading People Skills on Hermes\n\n"
         f"People skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("people:skill-name")` '
-        f'(for example `skill_view("people:hiring-talent")`). '
+        f'invoke one with `skill_view("frame-ship:people:skill-name")` '
+        f'(for example `skill_view("frame-ship:people:hiring-talent")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
