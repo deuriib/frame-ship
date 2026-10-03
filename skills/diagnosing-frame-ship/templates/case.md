@@ -1,6 +1,6 @@
 # Case: <session-id>
 
-Workspace: ~/.superpowers/diagnosing-frame-ship/<session-id>/
+Workspace: ~/.frame-ship/diagnosing-frame-ship/<session-id>/
 Created: <ISO timestamp>
 
 ## Problem statement (agreed with your human partner)

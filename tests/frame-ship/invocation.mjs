@@ -19,7 +19,7 @@ export const VALID_DOMAINS = [
 export const brandGuardAllowlist = [
   '.git/',
   '.worktrees/',
-  '.superpowers/',
+  '.frame-ship/',
   'docs/frame-ship/',
   'RELEASE-NOTES.md',
   'docs/plans/',

@@ -1,6 +1,6 @@
 # Session diagnosis: <session-id>
 
-Report path: ~/.superpowers/diagnosing-frame-ship/<session-id>/report.md
+Report path: ~/.frame-ship/diagnosing-frame-ship/<session-id>/report.md
 Written: <ISO timestamp>
 
 ## 1. Problem statement (REQUIRED)
