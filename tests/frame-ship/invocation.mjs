@@ -19,18 +19,19 @@ export const VALID_DOMAINS = [
 export const brandGuardAllowlist = [
   '.git/',
   '.worktrees/',
+  '.superpowers/',
   '.frame-ship/',
   'docs/frame-ship/',
   'RELEASE-NOTES.md',
   'docs/plans/',
-  'docs/superpowers/plans/',
+  'docs/superpowers/',
   'MIGRATION.md',
   'tests/frame-ship/',
   'skills/writing-skills/SKILL.md:107',
 ];
 
 export function isValidInvocation(ref, existingSkills) {
-  if (typeof ref === 'string' && (ref.startsWith('superpowers:') || ref.startsWith('oldbrand:'))) {
+  if (typeof ref === 'string' && (ref.startsWith('retired:') || ref.startsWith('oldbrand:'))) {
     const skill = ref.split(':').pop();
     throw new Error(
       `Marca retirada '${ref}': soy frame-ship, actualiza tu bootstrap. ` +

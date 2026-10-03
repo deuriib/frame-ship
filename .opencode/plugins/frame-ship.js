@@ -43,7 +43,7 @@ const VALID_DOMAINS = [
  * equivalence — never resolves silently.
  */
 export function parseFrameShipRef(ref) {
-  if (typeof ref === 'string' && (ref.startsWith('superpowers:') || ref.startsWith('oldbrand:'))) {
+  if (typeof ref === 'string' && (ref.startsWith('retired:') || ref.startsWith('oldbrand:'))) {
     const skill = ref.split(':').pop();
     throw new Error(
       `Marca retirada '${ref}': soy frame-ship, actualiza tu bootstrap. ` +

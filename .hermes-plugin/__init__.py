@@ -91,7 +91,7 @@ def parse_frame_ship_ref(ref):
     Returns {"brand", "domain", "skill"}. Raises RuntimeError with the
     correct equivalence — never resolves silently.
     """
-    if isinstance(ref, str) and (ref.startswith("superpowers:") or ref.startswith("oldbrand:")):
+    if isinstance(ref, str) and (ref.startswith("retired:") or ref.startswith("oldbrand:")):
         skill = ref.split(":")[-1]
         raise RuntimeError(
             f"Marca retirada '{ref}': soy frame-ship, actualiza tu bootstrap. "

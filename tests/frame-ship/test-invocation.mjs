@@ -17,7 +17,7 @@ test('rechaza dos segmentos frame-ship:brainstorming', () => {
   assert.throws(() => isValidInvocation('frame-ship:brainstorming'), /tres segmentos/);
 });
 test('rechaza marca vieja con equivalencia', () => {
-  assert.throws(() => isValidInvocation('superpowers:brainstorming'), /frame-ship:dev:brainstorming/);
+  assert.throws(() => isValidInvocation('retired:brainstorming'), /frame-ship:dev:brainstorming/);
 });
 test('rechaza dominio inválido con lista de 10', () => {
   assert.throws(() => isValidInvocation('frame-ship:nope:algo'), /dev.*product.*security/);

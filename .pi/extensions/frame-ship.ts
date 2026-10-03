@@ -120,7 +120,7 @@ export function parseFrameShipRef(ref: string): {
 	domain: string;
 	skill: string;
 } {
-	if (typeof ref === "string" && (ref.startsWith("superpowers:") || ref.startsWith("oldbrand:"))) {
+	if (typeof ref === "string" && (ref.startsWith("retired:") || ref.startsWith("oldbrand:"))) {
 		const skill = ref.split(":").pop();
 		throw new Error(
 			`Marca retirada '${ref}': soy frame-ship, actualiza tu bootstrap. ` +
