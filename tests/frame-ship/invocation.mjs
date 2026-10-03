@@ -25,7 +25,7 @@ export const brandGuardAllowlist = [
   'RELEASE-NOTES.md',
   'docs/plans/',
   'docs/superpowers/',
-  'MIGRATION.md',
+  'README.md (atribución con link a obra/superpowers)',
   'tests/frame-ship/',
   'skills/writing-skills/SKILL.md:107',
 ];

@@ -2,7 +2,7 @@
 
 Frame-ship is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
 
-> Based on an upstream MIT-licensed skills project. Rebranded and maintained by [Deuri Vasquez](https://github.com/deuriib) as `frame-ship` with per-domain invocation (`frame-ship:{domain}:{skill}`). See [MIGRATION.md](MIGRATION.md).
+> Based on [obra/superpowers](https://github.com/obra/superpowers) (MIT). Rebranded and maintained by [Deuri Vasquez](https://github.com/deuriib) as `frame-ship` with per-domain invocation (`frame-ship:{domain}:{skill}`). See [MIGRATION.md](MIGRATION.md).
 
 ## Table of Contents
 

@@ -1,6 +1,6 @@
 # Migración `superpowers` → `frame-ship`
 
-> Based on an upstream MIT-licensed skills project.
+> Based on [obra/superpowers](https://github.com/obra/superpowers) (MIT).
 
 El 2026-10-03 la marca `superpowers` se retiró de este repo (corte limpio).
 Nada de `superpowers:` sobrevive como alias funcional: las invocaciones

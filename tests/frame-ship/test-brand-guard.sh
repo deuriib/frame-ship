@@ -9,7 +9,7 @@
 #   .frame-ship/ (workspace de herramienta, no se shippea),
 #   docs/frame-ship/ (spec + plan mencionan la marca vieja por necesidad),
 #   RELEASE-NOTES.md, docs/plans/, docs/superpowers/ (historia intacta),
-#   MIGRATION.md (menciona el corte),
+#   README.md + MIGRATION.md (atribución con link a obra/superpowers, intencional),
 #   tests/frame-ship/ (fixtures con marca retirada intencionales),
 #   skills/writing-skills/SKILL.md:107 (placeholder Skill-Name-With-Hyphens),
 set -uo pipefail
@@ -32,6 +32,7 @@ FILTERED="$(printf '%s\n' "$RAW" \
   | grep -v -E '^\./docs/plans/' \
   | grep -v -E '^\./docs/superpowers/' \
   | grep -v -E '^\./MIGRATION\.md' \
+  | grep -v -E '^\./README\.md:5:' \
   | grep -v -E '^\./tests/frame-ship/' \
   | grep -v -E '^\./skills/writing-skills/SKILL\.md:107:' \
   | grep -v -E 'branding\.test\.js:[0-9]+:.*primeradiant\.com' \
