@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "superpowers-legal:using-legal bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:legal:using-legal bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install obra/superpowers`): the plugin
+    - git-clone install (`hermes plugins install deuriib/frame-ship`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -26,9 +26,9 @@ def _skills_dir() -> str:
         if os.path.isfile(os.path.join(cand, "using-legal", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers plugin: cannot find the skills/ tree "
+        "frame-ship plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install obra/superpowers`."
+        "`hermes plugins install deuriib/frame-ship`."
     )
 
 
@@ -49,19 +49,19 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have superpowers.\n\n"
+        f"You have frame-ship (legal).\n\n"
         f"The using-legal skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-legal again.\n\n"
         f"{body}\n\n"
-        f"## Loading Superpowers Skills on Hermes\n\n"
-        f"Superpowers skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("superpowers:skill-name")` '
-        f'(for example `skill_view("superpowers-legal:intake-caso")`). '
+        f"## Loading Frame-ship Skills on Hermes\n\n"
+        f"Frame-ship skills are registered with Hermes' native skill loader: "
+        f'invoke one with `skill_view("frame-ship:legal:skill-name")` '
+        f'(for example `skill_view("frame-ship:legal:intake-caso")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
-        f"The superpowers skills directory is: `{skills_dir}`\n\n"
+        f"The frame-ship skills directory is: `{skills_dir}`\n\n"
         f"{tool_mapping}\n"
         f"</EXTREMELY_IMPORTANT>"
     )

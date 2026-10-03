@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-legal",
-  "description": "Marketplace for Superpowers Legal skills library",
+  "name": "frame-ship-legal",
+  "description": "Marketplace for Frame-ship Legal skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-legal",
-      "description": "Legal skills library (RD): intake, estrategia, redacción, revisión y verificación previa al cierre.",
+      "name": "frame-ship-legal",
+      "description": "Legal skills library (RD): intake, estrategia, redacci\u00f3n, revisi\u00f3n y verificaci\u00f3n previa al cierre.",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

@@ -1,9 +1,9 @@
 {
-  "name": "superpowers-legal",
+  "name": "frame-ship-legal",
   "version": "6.4.2",
-  "description": "Superpowers-legal: workflow de skills para trabajo juridico dominicano con agentes",
+  "description": "Frame-ship-legal: workflow de skills para trabajo juridico dominicano con agentes",
   "type": "module",
-  "main": ".opencode/plugins/superpowers.js",
+  "main": ".opencode/plugins/frame-ship.js",
   "keywords": [
     "pi-package",
     "skills",
@@ -14,7 +14,7 @@
   ],
   "pi": {
     "extensions": [
-      "./.pi/extensions/superpowers.ts"
+      "./.pi/extensions/frame-ship.ts"
     ],
     "skills": [
       "./skills"
