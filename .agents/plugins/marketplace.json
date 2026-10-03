@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-dev",
+  "name": "frame-ship-dev",
   "interface": {
-    "displayName": "Superpowers Dev"
+    "displayName": "Frame-ship Dev"
   },
   "plugins": [
     {
-      "name": "superpowers-devops",
+      "name": "frame-ship-devops",
       "source": {
         "source": "url",
         "url": "./"

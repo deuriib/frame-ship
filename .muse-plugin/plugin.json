@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers-devops",
-  "displayName": "Superpowers DevOps",
+  "name": "frame-ship-devops",
+  "displayName": "Frame-ship DevOps",
   "version": "6.4.2",
   "description": "DevOps skills library for Muse: CI/CD, IaC, Kubernetes, observability and incident workflows",
   "compat": {

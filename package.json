@@ -1,9 +1,9 @@
 {
-  "name": "superpowers-devops",
+  "name": "frame-ship-devops",
   "version": "6.4.2",
-  "description": "Superpowers DevOps skills and runtime bootstrap for coding agents",
+  "description": "Frame-ship DevOps skills and runtime bootstrap for coding agents",
   "type": "module",
-  "main": ".opencode/plugins/superpowers.js",
+  "main": ".opencode/plugins/frame-ship.js",
   "keywords": [
     "pi-package",
     "skills",
@@ -15,7 +15,7 @@
   ],
   "pi": {
     "extensions": [
-      "./.pi/extensions/superpowers.ts"
+      "./.pi/extensions/frame-ship.ts"
     ],
     "skills": [
       "./skills"
