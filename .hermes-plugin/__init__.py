@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "superpowers-marketing:using-marketing bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:frame-ship:marketing:using-marketing bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install obra/superpowers`): the plugin
+    - git-clone install (`hermes plugins install deuriib/frame-ship`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -26,9 +26,9 @@ def _skills_dir() -> str:
         if os.path.isfile(os.path.join(cand, "using-marketing", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers-marketing plugin: cannot find the skills/ tree "
+        "frame-ship-marketing plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install obra/superpowers`."
+        "`hermes plugins install deuriib/frame-ship`."
     )
 
 
@@ -44,28 +44,25 @@ def _build_bootstrap(skills_dir: str) -> str:
     ) as f:
         body = _strip_frontmatter(f.read())
 
-    tools_path = os.path.join(
-        skills_dir, "using-marketing", "references", "hermes-tools.md"
-    )
-    with open(tools_path, encoding="utf-8") as f:
-        tool_mapping = f.read().strip()
+    tool_mapping = "Tool mapping: use native read/write/edit/bash tools to load SKILL.md files on demand."
+
 
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have superpowers-marketing: ROI, search intent, rangos C/B/A/S.\n\n"
+        f"You have frame-ship (marketing): ROI, search intent, rangos C/B/A/S.\n\n"
         f"The using-marketing skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-marketing again.\n\n"
         f"{body}\n\n"
         f"## Loading Marketing Skills on Hermes\n\n"
         f"Marketing skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("superpowers-marketing:skill-name")` '
-        f'(for example `skill_view("superpowers-marketing:using-marketing")`). '
+        f'invoke one with `skill_view("frame-ship:marketing:skill-name")` '
+        f'(for example `skill_view("frame-ship:marketing:using-marketing")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
-        f"The superpowers skills directory is: `{skills_dir}`\n\n"
+        f"The frame-ship skills directory is: `{skills_dir}`\n\n"
         f"{tool_mapping}\n"
         f"</EXTREMELY_IMPORTANT>"
     )

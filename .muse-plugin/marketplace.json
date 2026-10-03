@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-marketing-dev",
-  "description": "Marketing marketplace for superpowers-marketing skills library",
+  "name": "frame-ship-marketing-dev",
+  "description": "Marketing marketplace for frame-ship-marketing skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-marketing",
-      "description": "Marketing, SEO y monetización web con metodología Flota para Muse",
+      "name": "frame-ship-marketing",
+      "description": "Marketing, SEO y monetizaci\u00f3n web con metodolog\u00eda Flota para Muse",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

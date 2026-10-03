@@ -1,6 +1,6 @@
-name: superpowers-marketing
+name: frame-ship-marketing
 version: 6.4.2
-description: Marketing, SEO y monetizacion web con metodologia Flota para Hermes
-author: obra
+description: Frame-ship Marketing, SEO y monetizacion web con metodologia Flota para Hermes
+author: deuriib
 provides_hooks:
   - pre_llm_call

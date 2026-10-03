@@ -1,4 +1,4 @@
-# Guardrails de Marketing — superpowers-marketing
+# Guardrails de Marketing — frame-ship-marketing
 
 Fuente única de límites. Los 8 skills no duplican este texto: lo referencian
 con un gate de una línea. La dueña de la auditoría es `escalar-analitica`.

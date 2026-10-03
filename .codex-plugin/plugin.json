@@ -1,14 +1,13 @@
 {
-  "name": "superpowers-marketing",
+  "name": "frame-ship-marketing",
   "version": "6.4.2",
   "description": "Marketing, SEO y monetizacion web con metodologia Flota para agentes.",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com",
-    "url": "https://github.com/obra"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/deuriib/frame-ship",
+  "repository": "https://github.com/deuriib/frame-ship",
   "license": "MIT",
   "keywords": [
     "seo",
@@ -23,10 +22,10 @@
   "skills": "./skills/",
   "hooks": {},
   "interface": {
-    "displayName": "Superpowers Marketing",
+    "displayName": "Frame-ship Marketing",
     "shortDescription": "SEO, nichos, contenidos y monetizacion con metodologia Flota",
-    "longDescription": "Use Superpowers to guide agent work through brainstorming, implementation planning, test-driven development, systematic debugging, parallel execution, code review, and finish-the-branch workflows.",
-    "developerName": "Jesse Vincent",
+    "longDescription": "Use Frame-ship to guide agent work through brainstorming, implementation planning, test-driven development, systematic debugging, parallel execution, code review, and finish-the-branch workflows.",
+    "developerName": "Deuri Vasquez",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
@@ -37,11 +36,11 @@
       "Quiero montar una web de afiliacion rentable.",
       "Audita mi contenido para posicionar mejor."
     ],
-    "websiteURL": "https://github.com/obra/superpowers",
+    "websiteURL": "https://github.com/deuriib/frame-ship",
     "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
     "termsOfServiceURL": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
     "brandColor": "#F59E0B",
-    "composerIcon": "./assets/superpowers-small.svg",
+    "composerIcon": "./assets/frame-ship-small.svg",
     "logo": "./assets/app-icon.png",
     "screenshots": []
   }

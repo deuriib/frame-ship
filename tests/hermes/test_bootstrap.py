@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../.hermes-plugin")
 ))
 
-BOOTSTRAP_MARKER = "superpowers:using-superpowers bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:marketing:using-marketing bootstrap for hermes"
 
 # Hermes spills injected context over 10,000 chars to a file, which breaks
 # inline injection semantics. The bootstrap must stay under it with margin.
@@ -50,7 +50,7 @@ class TestSkillsDirResolution:
         m = _load()
         skills = m._skills_dir()
         assert os.path.isfile(
-            os.path.join(skills, "using-superpowers", "SKILL.md")
+            os.path.join(skills, "using-marketing", "SKILL.md")
         )
 
 
@@ -65,29 +65,21 @@ class TestBootstrapContent:
         content = _bootstrap()
         # A distinctive line from the skill body proves the real SKILL.md was
         # embedded, not a stub.
-        assert "You have superpowers" in content
+        assert "You have frame-ship (marketing)" in content
         assert "## The Rule" in content
 
     def test_frontmatter_stripped(self):
         content = _bootstrap()
         assert "---\nname:" not in content
 
-    def test_tool_mapping_sourced_from_reference_file(self):
-        m = _load()
+    def test_tool_mapping_inline(self):
         content = _bootstrap()
-        ref = os.path.join(
-            m._skills_dir(), "using-superpowers", "references", "hermes-tools.md"
-        )
-        with open(ref, encoding="utf-8") as f:
-            ref_text = f.read().strip()
-        # The mapping is included verbatim from the reference file — the
-        # single source, not a drift-prone inline copy.
-        assert ref_text in content
-        assert "read_file" in content
+        # using-marketing ships no hermes-tools.md: the tool mapping is inline.
+        assert "Tool mapping:" in content
 
     def test_skill_view_guidance_present(self):
         content = _bootstrap()
-        assert 'skill_view("superpowers:brainstorming")' in content
+        assert 'skill_view("frame-ship:marketing:using-marketing")' in content
 
     def test_under_hermes_context_spill_limit(self):
         content = _bootstrap()

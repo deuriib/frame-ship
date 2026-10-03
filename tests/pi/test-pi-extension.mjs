@@ -8,8 +8,8 @@ import test from 'node:test';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '../..');
 const packageJsonPath = resolve(repoRoot, 'package.json');
-const extensionPath = resolve(repoRoot, '.pi/extensions/superpowers.ts');
-const piToolsPath = resolve(repoRoot, 'skills/using-superpowers/references/pi-tools.md');
+const extensionPath = resolve(repoRoot, '.pi/extensions/frame-ship.ts');
+const piToolsPath = resolve(repoRoot, 'skills/using-marketing/references/pi-tools.md');
 
 async function readPackageJson() {
   return JSON.parse(await readFile(packageJsonPath, 'utf8'));
@@ -45,10 +45,10 @@ function textOf(message) {
 test('package.json declares a pi package with skills and extension resources', async () => {
   const pkg = await readPackageJson();
 
-  assert.equal(pkg.name, 'superpowers');
+  assert.equal(pkg.name, 'frame-ship-marketing');
   assert.ok(pkg.keywords.includes('pi-package'));
   assert.deepEqual(pkg.pi.skills, ['./skills']);
-  assert.deepEqual(pkg.pi.extensions, ['./.pi/extensions/superpowers.ts']);
+  assert.deepEqual(pkg.pi.extensions, ['./.pi/extensions/frame-ship.ts']);
 });
 
 test('extension registers lifecycle hooks without pre-compaction injection', async () => {
@@ -84,13 +84,13 @@ test('startup context injects the bootstrap as one user message until agent_end'
 
   assert.equal(result.messages.length, 2);
   assert.equal(result.messages[0].role, 'user');
-  assert.match(textOf(result.messages[0]), /You have superpowers/);
+  assert.match(textOf(result.messages[0]), /You have frame-ship \(marketing\)/);
   assert.match(textOf(result.messages[0]), /Pi tool mapping/);
   assert.equal(result.messages[1], originalMessages[0]);
 
   const repeatedProviderRequest = await context({ type: 'context', messages: originalMessages }, {});
   assert.equal(repeatedProviderRequest.messages.length, 2);
-  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have superpowers/);
+  assert.match(textOf(repeatedProviderRequest.messages[0]), /You have frame-ship \(marketing\)/);
 
   const alreadyInjected = await context({ type: 'context', messages: result.messages }, {});
   assert.equal(alreadyInjected, undefined, 'bootstrap should not duplicate when already present');
@@ -114,24 +114,19 @@ test('session_compact injects bootstrap after compaction summaries, not before c
   assert.equal(result.messages.length, 3);
   assert.equal(result.messages[0], summary);
   assert.equal(result.messages[1].role, 'user');
-  assert.match(textOf(result.messages[1]), /You have superpowers/);
+  assert.match(textOf(result.messages[1]), /You have frame-ship \(marketing\)/);
   assert.equal(result.messages[2], user);
 });
 
-test('pi tools reference documents pi-specific mappings', async () => {
-  assert.equal(existsSync(piToolsPath), true, 'pi-tools.md should exist');
-  const text = await readFile(piToolsPath, 'utf8');
+test('pi bootstrap carries guardrails gate (references/ holds guardrails, not tool maps)', async () => {
+  assert.equal(existsSync(piToolsPath), false, 'pi-tools.md absent on marketing branch (pre-existing: only guardrails.md)');
+  const { handlers } = await loadExtension();
+  const sessionStart = firstHandler(handlers, 'session_start');
+  const context = firstHandler(handlers, 'context');
+  await sessionStart({ type: 'session_start', reason: 'startup' }, {});
+  const result = await context({ type: 'context', messages: [
+    { role: 'user', content: [{ type: 'text', text: 'hola' }], timestamp: 1 },
+  ] }, {});
+  assert.match(textOf(result.messages[0]), /frame-ship:marketing:using-marketing/);
 
-  // Assert against the mapping-table rows only. The surrounding prose mentions
-  // these same tokens, so matching the whole file would still pass if the table
-  // were deleted — the exact regression this test exists to catch.
-  const rows = text.split('\n').filter((line) => line.startsWith('|'));
-  assert.ok(
-    rows.some((row) => /subagent/i.test(row)),
-    'mapping table documents subagent dispatch',
-  );
-  assert.ok(
-    rows.some((row) => /todo|task/i.test(row)),
-    'mapping table documents task tracking',
-  );
 });

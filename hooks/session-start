@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart hook for superpowers plugin
+# SessionStart hook for frame-ship plugin
 
 set -euo pipefail
 
@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Read using-marketing content
-using_marketing_content=$(cat "${PLUGIN_ROOT}/skills/using-marketing/SKILL.md" 2>&1 || echo "Error reading using-marketing skill")
+using_skill_content=$(cat "${PLUGIN_ROOT}/skills/using-marketing/SKILL.md" 2>&1 || echo "Error reading using-marketing skill")
 
 # Escape string for JSON embedding using bash parameter substitution.
 # Each ${s//old/new} is a single C-level pass - orders of magnitude
@@ -23,8 +23,8 @@ escape_for_json() {
     printf '%s' "$s"
 }
 
-using_marketing_escaped=$(escape_for_json "$using_marketing_content")
-session_context="<EXTREMELY_IMPORTANT>\nYou have superpowers-marketing: ROI, search intent, rangos C/B/A/S.\n\n**Below is the full content of your 'superpowers-marketing:using-marketing' skill - your introduction to marketing skills. For all other skills, use the 'Skill' tool:**\n\n${using_marketing_escaped}\n</EXTREMELY_IMPORTANT>"
+using_skill_escaped=$(escape_for_json "$using_skill_content")
+session_context="<EXTREMELY_IMPORTANT>\nYou have frame-ship (marketing): ROI, search intent, rangos C/B/A/S.\n\n**Below is the full content of your 'frame-ship:marketing:using-marketing' skill - your introduction to marketing skills. For all other skills, use the 'Skill' tool:**\n\n${using_skill_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context (snake_case).
@@ -35,7 +35,7 @@ session_context="<EXTREMELY_IMPORTANT>\nYou have superpowers-marketing: ROI, sea
 # Muse sets MUSE_PLUGIN_ROOT and expects additionalContext (SDK standard).
 #
 # Uses printf instead of heredoc to work around bash 5.3+ heredoc hang.
-# See: https://github.com/obra/superpowers/issues/571
+# See: https://github.com/deuriib/frame-ship/issues/571
 if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
   # Cursor sets CURSOR_PLUGIN_ROOT (may also set CLAUDE_PLUGIN_ROOT)
   printf '{\n  "additional_context": "%s"\n}\n' "$session_context" | cat

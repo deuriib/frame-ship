@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers-marketing",
-  "displayName": "Superpowers Marketing",
+  "name": "frame-ship-marketing",
+  "displayName": "Frame-ship Marketing",
   "version": "6.4.2",
-  "description": "Marketing, SEO y monetización web con metodología Flota: nichos, keywords por intent, contenidos TSA/TSG/TSR, CTR, enlaces y escala",
+  "description": "Marketing, SEO y monetizaci\u00f3n web con metodolog\u00eda Flota: nichos, keywords por intent, contenidos TSA/TSG/TSR, CTR, enlaces y escala",
   "compat": {
     "source": "native",
     "manifestDir": ".muse-plugin"

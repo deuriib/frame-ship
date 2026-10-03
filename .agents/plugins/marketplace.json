@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-marketing-dev",
+  "name": "frame-ship-marketing-dev",
   "interface": {
-    "displayName": "Superpowers Marketing"
+    "displayName": "Frame-ship Marketing"
   },
   "plugins": [
     {
-      "name": "superpowers-marketing",
+      "name": "frame-ship-marketing",
       "source": {
         "source": "url",
         "url": "./"
