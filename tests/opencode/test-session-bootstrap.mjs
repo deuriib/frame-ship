@@ -38,7 +38,7 @@ async function makeHarness(flavor, fetchSession) {
   };
   let invoke;
   if (flavor === 'v1') {
-    const hooks = await (mod.RevenuePlugin ?? mod.SuperpowersPlugin)({
+    const hooks = await (mod.RevenuePlugin ?? mod.FrameShipPlugin)({
       client: { session: { get: ({ path: { id } }) => get(id) } },
       directory: '.',
     });

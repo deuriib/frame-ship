@@ -82,7 +82,7 @@ echo "  Running opencode with project-test request..."
 run_opencode output "$TEST_HOME/test-project" "Call the skill tool with name \"project-test\". Then print the PROJECT_SKILL_MARKER_67890 marker."
 assert_contains "$output" "PROJECT_SKILL_MARKER_67890" "native skill tool loaded project-test skill content"
 
-# Test 3: Test bundled superpowers skill loading
+# Test 3: Test bundled frame-ship skill loading
 echo ""
 echo "Test 3: Testing native skill tool with a revenue skill..."
 echo "  Running opencode with discovering-clients skill..."

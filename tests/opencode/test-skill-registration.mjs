@@ -141,9 +141,9 @@ const frontmatterFixtures = {
     expected: 'Folded line one line two',
   },
 };
-const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'superpowers-frontmatter-'));
+const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'frame-ship-frontmatter-'));
 try {
-  const fixturePlugin = path.join(fixtureRoot, '.opencode', 'plugins', 'superpowers.js');
+  const fixturePlugin = path.join(fixtureRoot, '.opencode', 'plugins', 'frame-ship.js');
   fs.mkdirSync(path.dirname(fixturePlugin), { recursive: true });
   fs.copyFileSync(pluginPath, fixturePlugin);
   for (const [id, { frontmatter }] of Object.entries(frontmatterFixtures)) {

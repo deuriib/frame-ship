@@ -1,6 +1,6 @@
-name: superpowers-revenue
+name: frame-ship-revenue
 version: 6.4.2
-description: Revenue skills and workflow bootstrap for Hermes Agent
-author: obra
+description: Frame-ship Revenue skills and workflow bootstrap for Hermes Agent
+author: deuriib
 provides_hooks:
   - pre_llm_call

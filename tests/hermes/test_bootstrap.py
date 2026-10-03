@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../.hermes-plugin")
 ))
 
-BOOTSTRAP_MARKER = "revenue:using-revenue bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:revenue:using-revenue bootstrap for hermes"
 
 # Hermes spills injected context over 10,000 chars to a file, which breaks
 # inline injection semantics. The bootstrap must stay under it with margin.
@@ -61,11 +61,11 @@ class TestBootstrapContent:
         assert content.startswith("<EXTREMELY_IMPORTANT>")
         assert content.rstrip().endswith("</EXTREMELY_IMPORTANT>")
 
-    def test_contains_using_superpowers_body(self):
+    def test_contains_using_revenue_body(self):
         content = _bootstrap()
         # A distinctive line from the skill body proves the real SKILL.md was
         # embedded, not a stub.
-        assert "You have revenue powers" in content
+        assert "You have frame-ship (revenue)" in content
         assert "## The Rule" in content
 
     def test_frontmatter_stripped(self):
@@ -87,7 +87,7 @@ class TestBootstrapContent:
 
     def test_skill_view_guidance_present(self):
         content = _bootstrap()
-        assert 'skill_view("revenue:discovering-clients")' in content
+        assert 'skill_view("frame-ship:revenue:discovering-clients")' in content
 
     def test_under_hermes_context_spill_limit(self):
         content = _bootstrap()

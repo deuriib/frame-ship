@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-revenue-dev",
+  "name": "frame-ship-revenue-dev",
   "interface": {
     "displayName": "Revenue Powers Dev"
   },
   "plugins": [
     {
-      "name": "superpowers-revenue",
+      "name": "frame-ship-revenue",
       "source": {
         "source": "url",
         "url": "./"

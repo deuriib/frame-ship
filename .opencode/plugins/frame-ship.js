@@ -128,7 +128,7 @@ const getBootstrapContent = (toolMapping) => {
   const { content } = extractAndStripFrontmatter(fullContent);
 
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
-You have revenue powers.
+You have frame-ship (revenue).
 
 **IMPORTANT: The using-revenue skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-revenue" again - that would be redundant.**
 

@@ -35,7 +35,7 @@ session_context="<EXTREMELY_IMPORTANT>\nYou have revenue powers.\n\n**Below is t
 # Muse sets MUSE_PLUGIN_ROOT and expects additionalContext (SDK standard).
 #
 # Uses printf instead of heredoc to work around bash 5.3+ heredoc hang.
-# See: https://github.com/obra/superpowers/issues/571
+# See: https://github.com/deuriib/frame-ship/issues/571
 if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
   # Cursor sets CURSOR_PLUGIN_ROOT (may also set CLAUDE_PLUGIN_ROOT)
   printf '{\n  "additional_context": "%s"\n}\n' "$session_context" | cat

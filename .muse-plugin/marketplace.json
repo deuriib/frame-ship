@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-revenue-dev",
+  "name": "frame-ship-revenue-dev",
   "description": "Development marketplace for revenue skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-revenue",
+      "name": "frame-ship-revenue",
       "description": "Revenue skills library for Muse: discover, offer, price, outbound, close, scale",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

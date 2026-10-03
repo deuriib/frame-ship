@@ -1,14 +1,13 @@
 {
-  "name": "superpowers-revenue",
+  "name": "frame-ship-revenue",
   "version": "6.4.2",
   "description": "A revenue methodology for agents: discover opportunities, design offers, price on ROI, outbound, close, and scale.",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com",
-    "url": "https://github.com/obra"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/deuriib/frame-ship",
+  "repository": "https://github.com/deuriib/frame-ship",
   "license": "MIT",
   "keywords": [
     "revenue",
@@ -25,7 +24,7 @@
     "displayName": "Revenue Powers",
     "shortDescription": "Discover, offer, price, outbound, close, and scale revenue",
     "longDescription": "Use revenue skills to find who pays, design offers buyers believe, price on ROI, run outbound that books calls, close deals, and compound with upsells, renewals, and referrals.",
-    "developerName": "Jesse Vincent",
+    "developerName": "Deuri Vasquez",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
@@ -36,11 +35,11 @@
       "I want more clients.",
       "Help me price my offer."
     ],
-    "websiteURL": "https://github.com/obra/superpowers",
+    "websiteURL": "https://github.com/deuriib/frame-ship",
     "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
     "termsOfServiceURL": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
     "brandColor": "#F59E0B",
-    "composerIcon": "./assets/superpowers-small.svg",
+    "composerIcon": "./assets/frame-ship-small.svg",
     "logo": "./assets/app-icon.png",
     "screenshots": []
   }
