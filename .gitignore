@@ -1,8 +1,8 @@
 .worktrees/
 .private-journal/
 .claude/
+.frame-ship/
 .superpowers/
-.frameship/
 .DS_Store
 node_modules/
 inspo
