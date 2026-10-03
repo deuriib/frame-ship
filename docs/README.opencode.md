@@ -1,6 +1,6 @@
-# Superpowers for OpenCode
+# Frame-ship for OpenCode
 
-Complete guide for using Superpowers with [OpenCode.ai](https://opencode.ai).
+Complete guide for using Frame-ship with [OpenCode.ai](https://opencode.ai).
 
 ## Installation
 
@@ -12,7 +12,7 @@ Use the existing V1 plugin configuration:
 
 ```json
 {
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
+  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git"]
 }
 ```
 
@@ -22,7 +22,7 @@ Use the V2 plugin configuration:
 
 ```json
 {
-  "plugins": ["superpowers@git+https://github.com/obra/superpowers.git"]
+  "plugins": ["frame-ship@git+https://github.com/deuriib/frame-ship.git"]
 }
 ```
 
@@ -34,11 +34,11 @@ Restart OpenCode. V2 uses the `opencode` command; `opencode2` may be available
 as an alias. The plugin installs through OpenCode's plugin manager and
 registers all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify by asking: "Tell me about your frame-ship"
 
 ### Migrating from the old symlink-based install (V1)
 
-If you previously installed superpowers using `git clone` and symlinks, remove the old setup:
+If you previously installed frame-ship using `git clone` and symlinks, remove the old setup:
 
 ```bash
 # Remove old symlinks
@@ -48,7 +48,7 @@ rm -rf ~/.config/opencode/skills/superpowers
 # Optionally remove the cloned repo
 rm -rf ~/.config/opencode/superpowers
 
-# Remove skills.paths from opencode.json if you added one for superpowers
+# Remove skills.paths from opencode.json if you added one for frame-ship
 ```
 
 Then follow the installation steps above.
@@ -94,16 +94,16 @@ description: Use when [condition] - [what it does]
 
 Create project-specific skills in `.opencode/skills/` within your project.
 
-**V2 Skill Priority:** Project skills > Personal skills > Superpowers skills. On
-tested V1 1.18.31, bundled Superpowers skills take precedence when a personal
+**V2 Skill Priority:** Project skills > Personal skills > Frame-ship skills. On
+tested V1 1.18.31, bundled Frame-ship skills take precedence when a personal
 or project skill has the same name; use distinct names for personal and project
 skills. This behavior is unchanged by the migration.
 
 ## Updating
 
-OpenCode installs Superpowers through a git-backed package spec. Some OpenCode
+OpenCode installs Frame-ship through a git-backed package spec. Some OpenCode
 and Bun versions pin that resolved git dependency in a lockfile or cache, so a
-restart may not pick up the newest Superpowers commit. If updates do not appear,
+restart may not pick up the newest Frame-ship commit. If updates do not appear,
 clear OpenCode's package cache or reinstall the plugin.
 
 To pin a specific version, add a tag or commit to the spec (same form for the
@@ -111,7 +111,7 @@ V1 `plugin` key and the V2 `plugins` key):
 
 ```json
 {
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v6.4.2"]
+  "plugin": ["frame-ship@git+https://github.com/deuriib/frame-ship.git#v6.4.2"]
 }
 ```
 
@@ -121,14 +121,14 @@ On V2, pin `v6.4.1` or later; `v6.3.0` and earlier releases load only on V1.
 
 The plugin does two things, using host-flavor-specific APIs:
 
-1. **Registers the skills directory** so OpenCode discovers all superpowers skills without symlinks or manual config.
+1. **Registers the skills directory** so OpenCode discovers all frame-ship skills without symlinks or manual config.
     - **V1:** via the `config` hook, injecting into `config.skills.paths`
     - **V2:** via the `setup()` function using `ctx.skill.transform()` (V2 native API, confirmed active at runtime)
 2. **Injects bootstrap context** with a flavor-specific tool mapping: V1 sessions get the V1 tool names below, and V2 sessions get the V2 names.
     - **V1:** via `experimental.chat.messages.transform` hook
     - **V2:** via `ctx.session.hook("context")` — the V2 equivalent (confirmed active at runtime)
 
-Controller sessions receive the using-superpowers bootstrap in transient model
+Controller sessions receive the using-product bootstrap in transient model
 context. Delegated child sessions keep access to native skills but do not receive
 the controller bootstrap. A manual fork without a parent session keeps controller
 behavior. When V2 native compaction retains earlier user messages (the default
@@ -178,14 +178,14 @@ In short, V2 renamed `task` → `subagent` (the agent name moved from `subagent_
 **V1:** Check OpenCode logs:
 
 ```
-opencode run --print-logs "hello" 2>&1 | grep -i superpowers
+opencode run --print-logs "hello" 2>&1 | grep -i frame-ship
 ```
 
 **V2:** Plugins load in the background server, whose logs `--print-logs` only
 shows with `--standalone`:
 
 ```
-opencode run --standalone --print-logs "hello" 2>&1 | grep -i superpowers
+opencode run --standalone --print-logs "hello" 2>&1 | grep -i frame-ship
 ```
 
 Or inspect `~/.local/share/opencode/log/opencode.log`, filtering for `role=server`.
@@ -202,7 +202,7 @@ the plugin, try installing with system npm and pointing OpenCode at the local
 package:
 
 ```powershell
-npm install superpowers@git+https://github.com/obra/superpowers.git --prefix "$HOME\.config\opencode"
+npm install frame-ship@git+https://github.com/deuriib/frame-ship.git --prefix "$HOME\.config\opencode"
 ```
 
 Then use the absolute path of the installed package in `opencode.json` for your
@@ -213,7 +213,7 @@ package name, not a local directory.
 
 ```json
 {
-  "plugin": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\superpowers"]
+  "plugin": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\frame-ship"]
 }
 ```
 
@@ -221,7 +221,7 @@ package name, not a local directory.
 
 ```json
 {
-  "plugins": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\superpowers"]
+  "plugins": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\frame-ship"]
 }
 ```
 
@@ -238,7 +238,7 @@ package name, not a local directory.
 
 ## Getting Help
 
-- Report issues: https://github.com/obra/superpowers/issues
-- Main documentation: https://github.com/obra/superpowers
+- Report issues: https://github.com/deuriib/frame-ship/issues
+- Main documentation: https://github.com/deuriib/frame-ship
 - OpenCode V2 docs: https://opencode.ai/v2/docs/
 - OpenCode V1 docs: https://opencode.ai/docs/

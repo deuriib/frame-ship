@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const EXTREMELY_IMPORTANT_MARKER = "<EXTREMELY_IMPORTANT>";
-const BOOTSTRAP_MARKER = "product:using-product bootstrap for pi";
+const BOOTSTRAP_MARKER = "frame-ship:product:using-product bootstrap for pi";
 
 const extensionDir = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(extensionDir, "../..");
@@ -65,7 +65,7 @@ function getBootstrapContent(): string | null {
 		cachedBootstrap = `${EXTREMELY_IMPORTANT_MARKER}
 ${BOOTSTRAP_MARKER}
 
-You have product superpowers.
+You have frame-ship (product).
 
 The using-product skill content is included below and is already loaded for this Pi session. Follow it now. Do not try to load using-product again.
 

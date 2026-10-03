@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-product",
-  "description": "Marketplace for Superpowers Product skills library",
+  "name": "frame-ship-product",
+  "description": "Marketplace for Frame-ship Product skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-product",
+      "name": "frame-ship-product",
       "description": "Product workflow skills: discovery, PRDs, validation, pricing, launch, and growth.",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

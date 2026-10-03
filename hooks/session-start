@@ -24,7 +24,7 @@ escape_for_json() {
 }
 
 using_product_escaped=$(escape_for_json "$using_product_content")
-session_context="<EXTREMELY_IMPORTANT>\nYou have product superpowers.\n\n**Below is the full content of your 'product:using-product' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_product_escaped}\n</EXTREMELY_IMPORTANT>"
+session_context="<EXTREMELY_IMPORTANT>\nYou have product frame-ship.\n\n**Below is the full content of your 'product:using-product' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_product_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context (snake_case).
@@ -35,7 +35,7 @@ session_context="<EXTREMELY_IMPORTANT>\nYou have product superpowers.\n\n**Below
 # Muse sets MUSE_PLUGIN_ROOT and expects additionalContext (SDK standard).
 #
 # Uses printf instead of heredoc to work around bash 5.3+ heredoc hang.
-# See: https://github.com/obra/superpowers/issues/571
+# See: https://github.com/deuriib/frame-ship/issues/571
 if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
   # Cursor sets CURSOR_PLUGIN_ROOT (may also set CLAUDE_PLUGIN_ROOT)
   printf '{\n  "additional_context": "%s"\n}\n' "$session_context" | cat

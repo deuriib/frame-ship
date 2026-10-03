@@ -1,6 +1,6 @@
-# Superpowers
+# Frame-ship
 
-Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
+Frame-ship is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
 
 ## Table of Contents
 
@@ -43,66 +43,66 @@ After you've signed off on the bet, your agent writes a PRD that's clear enough 
 
 Next up, once you say "go", it validates each milestone with the cheapest probe that can kill it, ships slices, measures behavior, and retros. It's not uncommon for your agent to run discovery-to-launch autonomously without drifting from the bet you approved.
 
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your agent just has product superpowers.
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your agent just has product frame-ship.
 
 ## Commercial Services
 
-If you're using Superpowers in enterprise and could benefit from commercial support, additional tooling, or managed spending, please don't hesitate to drop us a line at sales@primeradiant.com.
+If you're using Frame-ship in enterprise and could benefit from commercial support, additional tooling, or managed spending, please don't hesitate to drop us a line at sales@primeradiant.com.
 
 ## Installation
 
-Installation differs by harness. If you use more than one, install Superpowers separately for each one.
+Installation differs by harness. If you use more than one, install Frame-ship separately for each one.
 
 ### Claude Code
 
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
+Frame-ship is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
 
 #### Official Marketplace
 
 - Install the plugin from Anthropic's official marketplace:
 
   ```bash
-  /plugin install superpowers@claude-plugins-official
+  /plugin install frame-ship@claude-plugins-official
   ```
 
-#### Superpowers Marketplace
+#### Frame-ship Marketplace
 
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
+The Frame-ship marketplace provides Frame-ship and some other related plugins for Claude Code.
 
 - Register the marketplace:
 
   ```bash
-  /plugin marketplace add obra/superpowers-marketplace
+  /plugin marketplace add deuriib/frame-ship-marketplace
   ```
 
 - Install the plugin from this marketplace:
 
   ```bash
-  /plugin install superpowers@superpowers-marketplace
+  /plugin install frame-ship@superpowers-marketplace
   ```
 
 ### Antigravity
 
-Install Superpowers as a plugin from this repository:
+Install Frame-ship as a plugin from this repository:
 
 ```bash
-agy plugin install https://github.com/obra/superpowers
+agy plugin install https://github.com/deuriib/frame-ship
 ```
 
-Antigravity runs the plugin's session-start hook, so Superpowers is active from
+Antigravity runs the plugin's session-start hook, so Frame-ship is active from
 the first message. Reinstall with the same command to update.
 
 ### Codex App
 
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
+Frame-ship is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
 
 - In the Codex app, click on Plugins in the sidebar.
-- You should see `Superpowers` in the Coding section.
-- Click the `+` next to Superpowers and follow the prompts.
+- You should see `Frame-ship` in the Coding section.
+- Click the `+` next to Frame-ship and follow the prompts.
 
 ### Codex CLI
 
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
+Frame-ship is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
 
 - Open the plugin search interface:
 
@@ -110,10 +110,10 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
   /plugins
   ```
 
-- Search for Superpowers:
+- Search for Frame-ship:
 
   ```bash
-  superpowers
+  frame-ship
   ```
 
 - Select `Install Plugin`.
@@ -123,23 +123,23 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - In Cursor Agent chat, install from marketplace:
 
   ```text
-  /add-plugin superpowers
+  /add-plugin frame-ship
   ```
 
-- Or search for "superpowers" in the plugin marketplace.
+- Or search for "frame-ship" in the plugin marketplace.
 
 ### Devin CLI
 
 - Install the plugin from this repository:
 
   ```bash
-  devin plugins install obra/superpowers
+  devin plugins install deuriib/frame-ship
   ```
 
 - Update to the latest version with:
 
   ```bash
-  devin plugins update superpowers
+  devin plugins update frame-ship
   ```
 
 ### Factory Droid
@@ -147,13 +147,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Register the marketplace:
 
   ```bash
-  droid plugin marketplace add https://github.com/obra/superpowers
+  droid plugin marketplace add https://github.com/deuriib/frame-ship
   ```
 
 - Install the plugin:
 
   ```bash
-  droid plugin install superpowers@superpowers
+  droid plugin install frame-ship@frame-ship
   ```
 
 ### Gemini CLI
@@ -161,13 +161,13 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Install the extension:
 
   ```bash
-  gemini extensions install https://github.com/obra/superpowers
+  gemini extensions install https://github.com/deuriib/frame-ship
   ```
 
 - Update later:
 
   ```bash
-  gemini extensions update superpowers
+  gemini extensions update frame-ship
   ```
 
 ### GitHub Copilot CLI
@@ -175,26 +175,26 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Register the marketplace:
 
   ```bash
-  copilot plugin marketplace add obra/superpowers-marketplace
+  copilot plugin marketplace add deuriib/frame-ship-marketplace
   ```
 
 - Install the plugin:
 
   ```bash
-  copilot plugin install superpowers@superpowers-marketplace
+  copilot plugin install frame-ship@superpowers-marketplace
   ```
 
 ### Grok Build CLI
 
-Superpowers is available via the [official Grok plugin marketplace](https://github.com/xai-org/plugin-marketplace).
+Frame-ship is available via the [official Grok plugin marketplace](https://github.com/xai-org/plugin-marketplace).
 
 - Install the plugin from xAI's official marketplace:
 
   ```bash
-  grok plugin install superpowers@xai-official --trust
+  grok plugin install frame-ship@xai-official --trust
   ```
 
-- Or open the marketplace in the TUI, search for Superpowers, and install it:
+- Or open the marketplace in the TUI, search for Frame-ship, and install it:
 
   ```text
   /marketplace
@@ -202,7 +202,7 @@ Superpowers is available via the [official Grok plugin marketplace](https://gith
 
 ### Kimi Code
 
-Superpowers is available in Kimi Code's plugin marketplace.
+Frame-ship is available in Kimi Code's plugin marketplace.
 
 - Open Kimi Code's plugin manager:
 
@@ -210,35 +210,35 @@ Superpowers is available in Kimi Code's plugin marketplace.
   /plugins
   ```
 
-- Go to `Marketplace` > `Superpowers` and install it.
+- Go to `Marketplace` > `Frame-ship` and install it.
 
 - Or install directly from this repository:
 
   ```text
-  /plugins install https://github.com/obra/superpowers
+  /plugins install https://github.com/deuriib/frame-ship
   ```
 
 - Detailed docs: [docs/README.kimi.md](docs/README.kimi.md)
 
 ### OpenCode
 
-OpenCode uses its own plugin install; install Superpowers separately even if you
+OpenCode uses its own plugin install; install Frame-ship separately even if you
 already use it in another harness.
 
 - Tell OpenCode:
 
   ```
-  Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+  Fetch and follow instructions from https://raw.githubusercontent.com/deuriib/frame-ship/refs/heads/main/.opencode/INSTALL.md
   ```
 
 - Detailed docs: [docs/README.opencode.md](docs/README.opencode.md)
 
 ### Pi
 
-Install Superpowers as a Pi package from this repository:
+Install Frame-ship as a Pi package from this repository:
 
 ```bash
-pi install git:github.com/obra/superpowers
+pi install git:github.com/deuriib/frame-ship
 ```
 
 For local development, run Pi with this checkout loaded as a temporary package:
@@ -247,30 +247,30 @@ For local development, run Pi with this checkout loaded as a temporary package:
 pi -e /path/to/superpowers
 ```
 
-The Pi package loads the Superpowers skills and a small extension that injects the `using-superpowers` bootstrap at session startup and again after compaction. Pi has native skills, so no compatibility `Skill` tool is required. Subagent and task-list tools remain optional Pi companion packages.
+The Pi package loads the Frame-ship skills and a small extension that injects the `using-product` bootstrap at session startup and again after compaction. Pi has native skills, so no compatibility `Skill` tool is required. Subagent and task-list tools remain optional Pi companion packages.
 
 ### Qwen Code
 
 Qwen Code installs plugins from Claude Code marketplaces directly.
 
-- Install the plugin from this repository, and pick `superpowers` when prompted:
+- Install the plugin from this repository, and pick `frame-ship` when prompted:
 
   ```bash
-  qwen extensions install obra/superpowers
+  qwen extensions install deuriib/frame-ship
   ```
 
 - Update later:
 
   ```bash
-  qwen extensions update superpowers
+  qwen extensions update frame-ship
   ```
 
 ### Hermes Agent
 
-Install Superpowers as a Hermes plugin from this repository:
+Install Frame-ship as a Hermes plugin from this repository:
 
 ```bash
-hermes plugins install obra/superpowers --enable
+hermes plugins install deuriib/frame-ship --enable
 ```
 
 Restart any active Hermes sessions after installing. Note: Hermes has no
@@ -279,27 +279,27 @@ turn loses the bootstrap — start a fresh session if skills stop triggering.
 
 ### Muse
 
-Superpowers is available as a native Muse plugin — same repo, same skills, all harnesses. The `using-superpowers` bootstrap is injected via the native `SessionStart` hook alongside Claude Code, Codex, Cursor, Gemini, Pi, and the rest — no per-session opt-in.
+Frame-ship is available as a native Muse plugin — same repo, same skills, all harnesses. The `using-product` bootstrap is injected via the native `SessionStart` hook alongside Claude Code, Codex, Cursor, Gemini, Pi, and the rest — no per-session opt-in.
 
 - Install from a local checkout:
 
   ```bash
   muse plugins install ./
-  muse plugins approve superpowers
+  muse plugins approve frame-ship
   ```
 
   Or clone and install:
 
   ```bash
-  git clone https://github.com/obra/superpowers.git
+  git clone https://github.com/deuriib/frame-ship.git
   muse plugins install ./superpowers
-  muse plugins approve superpowers
+  muse plugins approve frame-ship
   ```
 
 - Update later:
 
   ```bash
-  muse plugins update superpowers
+  muse plugins update frame-ship
   ```
 
 Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `Let's make a react todo list` — a working install auto-triggers `brainstorming` before any code is written. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
@@ -324,16 +324,16 @@ Restart any active Muse sessions after installing so the `SessionStart` hook tak
 
 ## When Something Goes Wrong
 
-Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its plan, repeats work, or burns more tokens than you'd expect. Ask your coding agent to "figure out what went wrong with superpowers in this session" and it will invoke the **diagnosing-superpowers** skill. To examine an earlier session, name it: "figure out what went wrong with superpowers in session `<id>`".
+Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its plan, repeats work, or burns more tokens than you'd expect. Ask your coding agent to "figure out what went wrong with frame-ship in this session" and it will invoke the **diagnosing-product** skill. To examine an earlier session, name it: "figure out what went wrong with frame-ship in session `<id>`".
 
 The skill reads the session transcript, reports what happened with line-level evidence, and, if you want, packages a scrubbed bundle for a bug report.
 
 ## Community
 
-Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
+Frame-ship is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
 
-- **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with Superpowers
-- **Issues**: https://github.com/obra/superpowers/issues
+- **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with Frame-ship
+- **Issues**: https://github.com/deuriib/frame-ship/issues
 - **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions
 
 ## What's Inside
@@ -388,7 +388,7 @@ See `skills/writing-skills/SKILL.md` for the complete guide.
 
 ## Updating
 
-Superpowers updates are somewhat coding-agent dependent, but are often automatic.
+Frame-ship updates are somewhat coding-agent dependent, but are often automatic.
 
 ## License
 

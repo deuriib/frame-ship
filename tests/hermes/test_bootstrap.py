@@ -65,7 +65,7 @@ class TestBootstrapContent:
         content = _bootstrap()
         # A distinctive line from the skill body proves the real SKILL.md was
         # embedded, not a stub.
-        assert "You have product superpowers" in content
+        assert "You have frame-ship (product)" in content
         assert "## The Rule" in content
 
     def test_frontmatter_stripped(self):
@@ -87,7 +87,7 @@ class TestBootstrapContent:
 
     def test_skill_view_guidance_present(self):
         content = _bootstrap()
-        assert 'skill_view("product:product-discovery")' in content
+        assert 'skill_view("frame-ship:product:product-discovery")' in content
 
     def test_under_hermes_context_spill_limit(self):
         content = _bootstrap()

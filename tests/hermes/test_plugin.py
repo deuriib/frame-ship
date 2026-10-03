@@ -100,10 +100,10 @@ class TestLayoutResolution:
         """Copy the plugin module + a minimal skills tree in the given layout."""
         src_skills = Path(_PLUGIN_DIR).parent / "skills"
         if layout == "clone":
-            plugdir = tmp_path / "superpowers" / ".hermes-plugin"
+            plugdir = tmp_path / "frame-ship" / ".hermes-plugin"
         else:  # flat: module at the plugin dir root, skills nested inside it
-            plugdir = tmp_path / "superpowers"
-        skills = tmp_path / "superpowers" / "skills"
+            plugdir = tmp_path / "frame-ship"
+        skills = tmp_path / "frame-ship" / "skills"
         plugdir.mkdir(parents=True, exist_ok=True)
         shutil.copy(Path(_PLUGIN_DIR) / "__init__.py", plugdir / "__init__.py")
         for skill in ("using-product", "product-discovery"):
@@ -134,7 +134,7 @@ class TestLayoutResolution:
         assert "using-product" in mock_ctx._skills
 
     def test_missing_skills_raises_loudly(self, tmp_path, mock_ctx):
-        plugdir = tmp_path / "superpowers"
+        plugdir = tmp_path / "frame-ship"
         plugdir.mkdir(parents=True)
         shutil.copy(Path(_PLUGIN_DIR) / "__init__.py", plugdir / "__init__.py")
         mod = self._load_from(plugdir)
