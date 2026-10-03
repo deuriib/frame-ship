@@ -1,11 +1,13 @@
 .worktrees/
 .private-journal/
 .claude/
-.frame-ship/
+.superpowers/
+.frameship/
 .DS_Store
 node_modules/
 inspo
 triage/
+
 
 # Eval harness lives in its own repository, cloned into evals/ for local
 # development (see CLAUDE.md / README.md). It is not part of the published
