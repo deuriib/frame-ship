@@ -9,10 +9,8 @@
 #   docs/frame-ship/ (spec + plan mencionan la marca vieja por necesidad),
 #   RELEASE-NOTES.md, docs/plans/, docs/superpowers/plans/ (historia intacta),
 #   MIGRATION.md (menciona el corte),
-#   tests/frame-ship/ (fixtures con 'superpowers:brainstorming' intencionales),
+#   tests/frame-ship/ (fixtures con marca retirada intencionales),
 #   skills/writing-skills/SKILL.md:107 (placeholder Skill-Name-With-Hyphens),
-#   tests/brainstorm-server/branding.test.js linea ASSET_URL (primeradiant.com,
-#   out-of-scope: marca ajena del visual companion, no del rebrand).
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

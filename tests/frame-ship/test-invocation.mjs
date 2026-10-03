@@ -16,7 +16,7 @@ test('acepta frame-ship:product:product-discovery (tercer segmento exacto)', () 
 test('rechaza dos segmentos frame-ship:brainstorming', () => {
   assert.throws(() => isValidInvocation('frame-ship:brainstorming'), /tres segmentos/);
 });
-test('rechaza superpowers:brainstorming con equivalencia', () => {
+test('rechaza marca vieja con equivalencia', () => {
   assert.throws(() => isValidInvocation('superpowers:brainstorming'), /frame-ship:dev:brainstorming/);
 });
 test('rechaza dominio inválido con lista de 10', () => {

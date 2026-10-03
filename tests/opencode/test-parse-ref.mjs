@@ -13,8 +13,8 @@ test('opencode acepta frame-ship:dev:brainstorming', () => {
 test('opencode rechaza dos segmentos', () => {
   assert.throws(() => mod.parseFrameShipRef('frame-ship:brainstorming'), /tres segmentos/);
 });
-test('opencode rechaza superpowers: con equivalencia', () => {
-  assert.throws(() => mod.parseFrameShipRef('superpowers:brainstorming'), /frame-ship:dev:brainstorming/);
+test('opencode rechaza marca vieja con equivalencia', () => {
+  assert.throws(() => mod.parseFrameShipRef('oldbrand:brainstorming'), /frame-ship:dev:brainstorming/);
 });
 test('opencode rechaza dominio inválido con lista', () => {
   assert.throws(() => mod.parseFrameShipRef('frame-ship:nope:algo'), /dev.*product.*security/);

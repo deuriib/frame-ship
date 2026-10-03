@@ -160,10 +160,10 @@ class TestParseFrameShipRef:
         with pytest.raises(RuntimeError, match="tres segmentos"):
             mod.parse_frame_ship_ref("frame-ship:brainstorming")
 
-    def test_rejects_old_brand_with_equivalence(self):
+    def test_rejects_retired_brand_with_equivalence(self):
         mod = _load_plugin()
         with pytest.raises(RuntimeError, match="frame-ship:dev:brainstorming"):
-            mod.parse_frame_ship_ref("superpowers:brainstorming")
+            mod.parse_frame_ship_ref("oldbrand:brainstorming")
 
     def test_rejects_unknown_domain_listing_ten(self):
         mod = _load_plugin()

@@ -37,8 +37,8 @@ test('pi ext acepta frame-ship:dev:brainstorming', () => {
 test('pi ext rechaza dos segmentos', () => {
   assert.throws(() => parseFrameShipRef('frame-ship:brainstorming'), /tres segmentos/);
 });
-test('pi ext rechaza superpowers: con equivalencia', () => {
-  assert.throws(() => parseFrameShipRef('superpowers:brainstorming'), /frame-ship:dev:brainstorming/);
+test('pi ext rechaza marca vieja con equivalencia', () => {
+  assert.throws(() => parseFrameShipRef('oldbrand:brainstorming'), /frame-ship:dev:brainstorming/);
 });
 test('pi ext rechaza dominio inválido con lista', () => {
   assert.throws(() => parseFrameShipRef('frame-ship:nope:algo'), /dev.*product.*security/);
