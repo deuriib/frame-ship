@@ -1,11 +1,11 @@
 {
-  "name": "superpowers-finance-dev",
+  "name": "frame-ship-finance-dev",
   "interface": {
-    "displayName": "Finance Superpowers Dev"
+    "displayName": "Finance Frame-ship Dev"
   },
   "plugins": [
     {
-      "name": "superpowers-finance",
+      "name": "frame-ship-finance",
       "source": {
         "source": "url",
         "url": "./"

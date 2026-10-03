@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers-finance",
-  "displayName": "Finance Superpowers",
+  "name": "frame-ship-finance",
+  "displayName": "Frame-ship Finance",
   "version": "6.4.2",
   "description": "Core skills library for Muse: FP&A, accounting close, compliance, personal finance, and investment analysis",
   "compat": {

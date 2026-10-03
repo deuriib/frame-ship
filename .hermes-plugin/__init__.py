@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "finance:using-finance bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:finance:using-finance bootstrap for hermes"
 
 
 def _skills_dir() -> str:
@@ -53,15 +53,15 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have finance superpowers.\n\n"
+        f"You have frame-ship (finance).\n\n"
         f"The using-finance skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-finance again.\n\n"
         f"{body}\n\n"
         f"## Loading Finance Skills on Hermes\n\n"
         f"Finance skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("finance:skill-name")` '
-        f'(for example `skill_view("finance:financial-discovery")`). '
+        f'invoke one with `skill_view("frame-ship:finance:skill-name")` '
+        f'(for example `skill_view("frame-ship:finance:financial-discovery")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'

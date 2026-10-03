@@ -1,4 +1,4 @@
-# Installing Finance Superpowers for OpenCode
+# Installing Finance Frame-ship for OpenCode
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Use the existing V1 plugin configuration:
 
 ```json
 {
-  "plugin": ["superpowers-finance@git+<repo-url>"]
+  "plugin": ["frame-ship-finance@git+<repo-url>"]
 }
 ```
 
@@ -24,7 +24,7 @@ Use the V2 plugin configuration:
 
 ```json
 {
-  "plugins": ["superpowers-finance@git+<repo-url>"]
+  "plugins": ["frame-ship-finance@git+<repo-url>"]
 }
 ```
 
@@ -39,21 +39,21 @@ registers all skills.
 Verify by asking: "Quiero armar mi presupuesto mensual" — a working install triggers `financial-discovery` before calculating
 
 OpenCode uses its own plugin install. If you also use Claude Code, Codex, or
-another harness, install Finance Superpowers separately for each one.
+another harness, install Finance Frame-ship separately for each one.
 
 ## Migrating from the old symlink-based install
 
-If you previously installed the original superpowers using `git clone` and symlinks, remove the old setup:
+If you previously installed the original frame-ship using `git clone` and symlinks, remove the old setup:
 
 ```bash
 # Remove old symlinks
-rm -f ~/.config/opencode/plugins/superpowers.js
-rm -rf ~/.config/opencode/skills/superpowers
+rm -f ~/.config/opencode/plugins/frame-ship.js
+rm -rf ~/.config/opencode/skills/frame-ship
 
 # Optionally remove the cloned repo
-rm -rf ~/.config/opencode/superpowers
+rm -rf ~/.config/opencode/frame-ship
 
-# Remove skills.paths from opencode.json if you added one for superpowers
+# Remove skills.paths from opencode.json if you added one for frame-ship
 ```
 
 Then follow the installation steps above with this repository.
@@ -69,7 +69,7 @@ use skill tool to load financial-discovery
 
 ## Updating
 
-OpenCode installs Finance Superpowers through a git-backed package spec. Some OpenCode
+OpenCode installs Finance Frame-ship through a git-backed package spec. Some OpenCode
 and Bun versions pin that resolved git dependency in a lockfile or cache, so a
 restart may not pick up the newest commit. If updates do not appear,
 clear OpenCode's package cache or reinstall the plugin.
@@ -79,7 +79,7 @@ V1 `plugin` key and the V2 `plugins` key):
 
 ```json
 {
-  "plugin": ["superpowers-finance@git+<repo-url>"]
+  "plugin": ["frame-ship-finance@git+<repo-url>"]
 }
 ```
 
@@ -89,11 +89,11 @@ On V2, pin `v6.4.1` or later; `v6.3.0` and earlier releases load only on V1.
 
 ### Plugin not loading
 
-1. Check logs. V1: `opencode run --print-logs "hello" 2>&1 | grep -i superpowers`.
+1. Check logs. V1: `opencode run --print-logs "hello" 2>&1 | grep -i frame-ship`.
    V2 loads plugins in the background server, so add `--standalone`:
-   `opencode run --standalone --print-logs "hello" 2>&1 | grep -i superpowers`,
+   `opencode run --standalone --print-logs "hello" 2>&1 | grep -i frame-ship`,
    or inspect `~/.local/share/opencode/log/opencode.log` filtering for `role=server`.
-   (Log lines still say `superpowers` — that's the plugin file name, kept for harness compat.)
+   (Log lines still say `frame-ship` — that's the plugin file name, kept for harness compat.)
 2. Verify the plugin line in your `opencode.json`
 3. Make sure you're running a recent version of OpenCode
 
@@ -106,7 +106,7 @@ the plugin, try installing with system npm and pointing OpenCode at the local
 package:
 
 ```powershell
-npm install superpowers-finance@git+<repo-url> --prefix "$HOME\.config\opencode"
+npm install frame-ship-finance@git+<repo-url> --prefix "$HOME\.config\opencode"
 ```
 
 Then use the absolute path of the installed package in `opencode.json` for your
@@ -117,7 +117,7 @@ package name, not a local directory.
 
 ```json
 {
-  "plugin": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\superpowers"]
+  "plugin": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\frame-ship"]
 }
 ```
 
@@ -125,7 +125,7 @@ package name, not a local directory.
 
 ```json
 {
-  "plugins": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\superpowers"]
+  "plugins": ["C:\\Users\\<you>\\.config\\opencode\\node_modules\\frame-ship"]
 }
 ```
 

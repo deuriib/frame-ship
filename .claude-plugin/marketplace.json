@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-finance-dev",
-  "description": "Development marketplace for Finance Superpowers skills library",
+  "name": "frame-ship-finance-dev",
+  "description": "Development marketplace for Finance Frame-ship skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers-finance",
+      "name": "frame-ship-finance",
       "description": "Core finance skills library: FP&A, accounting close, compliance, personal finance, investment analysis",
       "version": "6.4.2",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
       }
     }
   ]

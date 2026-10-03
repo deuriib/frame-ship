@@ -1,6 +1,6 @@
-name: superpowers-finance
+name: frame-ship-finance
 version: 6.4.2
-description: Finance skills and workflow bootstrap for Hermes Agent
-author: obra
+description: Frame-ship Finance skills and workflow bootstrap for Hermes Agent
+author: deuriib
 provides_hooks:
   - pre_llm_call

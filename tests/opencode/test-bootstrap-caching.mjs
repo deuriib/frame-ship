@@ -29,7 +29,7 @@ fs.readFileSync = function (...args) {
 };
 
 const mod = await import(pathToFileURL(pluginPath).href);
-const plugin = await mod.SuperpowersPlugin({ client: {}, directory: '.' });
+const plugin = await mod.FrameShipPlugin({ client: {}, directory: '.' });
 const transform = plugin['experimental.chat.messages.transform'];
 
 // Mapping constants are flavor-specific (#opencode-v2): V1 keeps the 1.18.x

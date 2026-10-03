@@ -36,7 +36,7 @@ If `skill_view` cannot find a finance skill (it may not appear in the catalog
 until the plugin fully registers it), fall back to reading the SKILL.md directly:
 
 ```
-read_file(path="~/.hermes/plugins/superpowers/skills/<skill-name>/SKILL.md")
+read_file(path="~/.hermes/plugins/frame-ship-finance/skills/<skill-name>/SKILL.md")
 ```
 
 This fallback is the same mechanism used by other harnesses without native skill loading.

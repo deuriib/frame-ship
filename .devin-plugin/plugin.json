@@ -1,13 +1,13 @@
 {
-  "name": "superpowers-finance",
+  "name": "frame-ship-finance",
   "version": "6.4.2",
   "description": "Finance skills framework: discovery, planning, budgeting, modeling, accounting close, compliance, and investment analysis.",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
-  "homepage": "https://github.com/deuriib/superpowers",
-  "repository": "https://github.com/deuriib/superpowers",
+  "homepage": "https://github.com/deuriib/frame-ship",
+  "repository": "https://github.com/deuriib/frame-ship",
   "license": "MIT",
   "keywords": [
     "financial-discovery",

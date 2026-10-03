@@ -11,13 +11,13 @@ source "$SCRIPT_DIR/setup.sh"
 trap cleanup_test_env EXIT
 
 run_present_file_check() {
-    node "$SCRIPT_DIR/test-bootstrap-caching.mjs" "$SUPERPOWERS_PLUGIN_FILE" present
+    node "$SCRIPT_DIR/test-bootstrap-caching.mjs" "$FRAMESHIP_PLUGIN_FILE" present
 }
 
 run_missing_file_check() {
-    mv "$SUPERPOWERS_SKILLS_DIR/using-finance/SKILL.md" "$TEST_HOME/using-finance.SKILL.md.bak"
+    mv "$FRAMESHIP_SKILLS_DIR/using-finance/SKILL.md" "$TEST_HOME/using-finance.SKILL.md.bak"
 
-    node "$SCRIPT_DIR/test-bootstrap-caching.mjs" "$SUPERPOWERS_PLUGIN_FILE" missing
+    node "$SCRIPT_DIR/test-bootstrap-caching.mjs" "$FRAMESHIP_PLUGIN_FILE" missing
 }
 
 echo "Test 1: Caches bootstrap after the first successful transform..."
