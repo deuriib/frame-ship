@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../.hermes-plugin")
 ))
 
-BOOTSTRAP_MARKER = "automation:using-automation bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:automation-roi:using-automation bootstrap for hermes"
 
 # Hermes spills injected context over 10,000 chars to a file, which breaks
 # inline injection semantics. The bootstrap must stay under it with margin.
@@ -65,7 +65,7 @@ class TestBootstrapContent:
         content = _bootstrap()
         # A distinctive line from the skill body proves the real SKILL.md was
         # embedded, not a stub.
-        assert "You have automation superpowers" in content
+        assert "You have frame-ship (automation-roi)" in content
         assert "## The Rule" in content
 
     def test_frontmatter_stripped(self):

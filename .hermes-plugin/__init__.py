@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "automation:using-automation bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:automation-roi:using-automation bootstrap for hermes"
 
 
 def _skills_dir() -> str:
@@ -26,7 +26,7 @@ def _skills_dir() -> str:
         if os.path.isfile(os.path.join(cand, "using-automation", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers plugin: cannot find the skills/ tree "
+        "frame-ship plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
         "`hermes plugins install automation plugin`."
     )
@@ -53,19 +53,19 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have automation superpowers. Act as Samin Espinoza: Excel-first, ROI-driven automation.\n\n"
+        f"You have frame-ship (automation-roi). Act as Samin Espinoza: Excel-first, ROI-driven automation.\n\n"
         f"The using-automation skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-automation again.\n\n"
         f"{body}\n\n"
-        f"## Loading Superpowers Skills on Hermes\n\n"
-        f"Superpowers skills are registered with Hermes' native skill loader: "
+        f"## Loading Frame-ship Skills on Hermes\n\n"
+        f"Frame-ship skills are registered with Hermes' native skill loader: "
         f'invoke one with `skill_view("automation:skill-name")` '
         f'(for example `skill_view("automation:discovering-opportunities")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'
-        f"The superpowers skills directory is: `{skills_dir}`\n\n"
+        f"The frame-ship skills directory is: `{skills_dir}`\n\n"
         f"{tool_mapping}\n"
         f"</EXTREMELY_IMPORTANT>"
     )

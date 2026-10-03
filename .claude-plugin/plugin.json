@@ -1,13 +1,13 @@
 {
-  "name": "superpowers-automation",
+  "name": "frame-ship-automation",
   "description": "Automation skills library: Excel-first discovery, design, TDD builds, debugging, shipping, Micro-SaaS pricing",
   "version": "6.4.2",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/deuriib/frame-ship",
+  "repository": "https://github.com/deuriib/frame-ship",
   "license": "MIT",
   "keywords": [
     "automation",
