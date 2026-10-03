@@ -2,13 +2,13 @@ import os
 import re
 from pathlib import Path
 
-BOOTSTRAP_MARKER = "security:using-security bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:security:using-security bootstrap for hermes"
 
 
 def _skills_dir() -> str:
     """Locate the stock skills/ tree for either supported install layout.
 
-    - git-clone install (`hermes plugins install <org>/superpowers-security`): the plugin
+    - git-clone install (`hermes plugins install deuriib/frame-ship-security`): the plugin
       dir is the repo root, so `.hermes-plugin/` and `skills/` are siblings and
       this module resolves `../skills`.
     - flattened install (plugin files copied to the plugin dir root): `skills/`
@@ -26,9 +26,9 @@ def _skills_dir() -> str:
         if os.path.isfile(os.path.join(cand, "using-security", "SKILL.md")):
             return cand
     raise RuntimeError(
-        "superpowers-security plugin: cannot find the skills/ tree "
+        "frame-ship-security plugin: cannot find the skills/ tree "
         f"(looked at {candidates}). Reinstall with "
-        "`hermes plugins install <org>/superpowers-security`."
+        "`hermes plugins install deuriib/frame-ship-security`."
     )
 
 
@@ -53,15 +53,15 @@ def _build_bootstrap(skills_dir: str) -> str:
     return (
         f"<EXTREMELY_IMPORTANT>\n"
         f"{BOOTSTRAP_MARKER}\n\n"
-        f"You have security superpowers.\n\n"
+        f"You have frame-ship (security).\n\n"
         f"The using-security skill content is included below and is already "
         f"loaded for this Hermes session. Follow it now. "
         f"Do not try to load using-security again.\n\n"
         f"{body}\n\n"
         f"## Loading Security Skills on Hermes\n\n"
         f"Security skills are registered with Hermes' native skill loader: "
-        f'invoke one with `skill_view("security:skill-name")` '
-        f'(for example `skill_view("security:threat-modeling")`). '
+        f'invoke one with `skill_view("frame-ship:security:skill-name")` '
+        f'(for example `skill_view("frame-ship:security:threat-modeling")`). '
         f"If a namespaced lookup returns 'not found', read the skill file "
         f"directly instead:\n"
         f'`read_file("{skills_dir}/skill-name/SKILL.md")`\n\n'

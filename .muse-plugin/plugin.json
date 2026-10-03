@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "name": "superpowers-security",
+  "name": "frame-ship-security",
   "displayName": "Security",
   "version": "6.4.2",
   "description": "Security skills library for Muse: threat modeling, secure code, review, incident response",

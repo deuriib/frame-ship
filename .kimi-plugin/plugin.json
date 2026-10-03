@@ -1,12 +1,12 @@
 {
-  "name": "superpowers-security",
+  "name": "frame-ship-security",
   "version": "6.4.2",
   "description": "An agentic security framework: threat modeling, secure delivery, incident response.",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Deuri Vasquez",
+    "email": "deuriib@gmail.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/deuriib/frame-ship",
   "license": "MIT",
   "keywords": [
     "threat-modeling",
@@ -27,12 +27,12 @@
     "displayName": "Security",
     "shortDescription": "Threat modeling, secure delivery, and incident response for coding agents",
     "longDescription": "Use Security to guide agent work through threat modeling, secure planning, secure implementation, vulnerability debugging, secure code review, verification before release, and incident response.",
-    "developerName": "Jesse Vincent",
+    "developerName": "Deuri Vasquez",
     "capabilities": [
       "Interactive",
       "Read",
       "Write"
     ],
-    "websiteURL": "https://github.com/obra/superpowers"
+    "websiteURL": "https://github.com/deuriib/frame-ship"
   }
 }

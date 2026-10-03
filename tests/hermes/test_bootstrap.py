@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../.hermes-plugin")
 ))
 
-BOOTSTRAP_MARKER = "security:using-security bootstrap for hermes"
+BOOTSTRAP_MARKER = "frame-ship:security:using-security bootstrap for hermes"
 
 # Hermes spills injected context over 10,000 chars to a file, which breaks
 # inline injection semantics. The bootstrap must stay under it with margin.
@@ -65,7 +65,7 @@ class TestBootstrapContent:
         content = _bootstrap()
         # A distinctive line from the skill body proves the real SKILL.md was
         # embedded, not a stub.
-        assert "You have security superpowers" in content
+        assert "You have frame-ship (security)" in content
         assert "## The Rule" in content
 
     def test_frontmatter_stripped(self):
@@ -87,7 +87,7 @@ class TestBootstrapContent:
 
     def test_skill_view_guidance_present(self):
         content = _bootstrap()
-        assert 'skill_view("security:threat-modeling")' in content
+        assert 'skill_view("frame-ship:security:threat-modeling")' in content
 
     def test_under_hermes_context_spill_limit(self):
         content = _bootstrap()

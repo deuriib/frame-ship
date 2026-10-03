@@ -3,7 +3,7 @@
  *
  * Dual-compatible with OpenCode V1 and V2.
  *
- * V1 (opencode): loaded via named export SuperpowersPlugin — provides config
+ * V1 (opencode): loaded via named export FrameShipPlugin — provides config
  * hook for skills registration and experimental.chat.messages.transform for
  * bootstrap injection.
  *
@@ -128,7 +128,7 @@ const getBootstrapContent = (toolMapping) => {
   const { content } = extractAndStripFrontmatter(fullContent);
 
   _bootstrapCache.set(toolMapping, `<EXTREMELY_IMPORTANT>
-You have security superpowers.
+You have frame-ship (security).
 
 **IMPORTANT: The using-security skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-security" again - that would be redundant.**
 
@@ -216,7 +216,7 @@ const isChildSession = async (fetchSession, sessionID) => {
  * Provides: config hook (V1 skills registration) + bootstrap injection
  * (experimental.chat.messages.transform).
  */
-export const SuperpowersPlugin = async ({ client, directory }) => {
+export const FrameShipPlugin = async ({ client, directory }) => {
   return {
     // Inject skills path into live config so OpenCode discovers security skills
     // without requiring manual symlinks or config file edits.
@@ -286,7 +286,7 @@ export const SuperpowersPlugin = async ({ client, directory }) => {
 async function setup(ctx) {
   // V1 (observed on opencode 1.18.18) also invokes default.setup, but with a
   // V1-shaped ctx that lacks the skill/session domains. Detect it and return
-  // quietly — V1 is served entirely by the SuperpowersPlugin named export.
+  // quietly — V1 is served entirely by the FrameShipPlugin named export.
   if (!ctx || !ctx.skill || typeof ctx.skill.transform !== 'function' || !ctx.session || typeof ctx.session.hook !== 'function') {
     return;
   }
@@ -373,11 +373,11 @@ async function setup(ctx) {
  * Default Export: { id, server, setup }
  *
  * V2 PluginSupervisor reads { id, setup }.
- * V1 reads named export SuperpowersPlugin.
+ * V1 reads named export FrameShipPlugin.
  * server() is exported for V1 compatibility.
  */
 export default {
   id: 'security',
-  server: SuperpowersPlugin,
+  server: FrameShipPlugin,
   setup,
 };

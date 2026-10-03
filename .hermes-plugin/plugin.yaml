@@ -1,6 +1,6 @@
-name: superpowers-security
+name: frame-ship-security
 version: 6.4.2
-description: Security skills and workflow bootstrap for Hermes Agent
-author: superpowers-security
+description: Frame-ship security skills and workflow bootstrap for Hermes Agent
+author: deuriib
 provides_hooks:
   - pre_llm_call
