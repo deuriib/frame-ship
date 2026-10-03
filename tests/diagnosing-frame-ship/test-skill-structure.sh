@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Structural checks for skills/diagnosing-superpowers. Behavior is tested by
+# Structural checks for skills/diagnosing-frame-ship. Behavior is tested by
 # scenario evals kept by the maintainer; this script only checks the things a
 # shell can check: frontmatter, referenced files exist, no local paths or
 # names leaked into shipped files, SKILL.md word budget.
@@ -7,7 +7,7 @@ set -u
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-SKILL_DIR="$REPO_ROOT/skills/diagnosing-superpowers"
+SKILL_DIR="$REPO_ROOT/skills/diagnosing-frame-ship"
 SKILL_MD="$SKILL_DIR/SKILL.md"
 WORD_BUDGET=1000
 
@@ -17,16 +17,16 @@ FAILURES=0
 pass() { echo "  [PASS] $1"; PASSES=$((PASSES + 1)); }
 fail() { echo "  [FAIL] $1"; FAILURES=$((FAILURES + 1)); }
 
-echo "diagnosing-superpowers structure"
+echo "diagnosing-frame-ship structure"
 
 # --- SKILL.md frontmatter -------------------------------------------------
 if [ -f "$SKILL_MD" ]; then
   pass "SKILL.md exists"
   frontmatter="$(awk 'NR==1 && $0!="---"{exit} NR>1 && $0=="---"{exit} NR>1{print}' "$SKILL_MD")"
-  if printf '%s\n' "$frontmatter" | grep -q '^name: diagnosing-superpowers$'; then
-    pass "frontmatter name is diagnosing-superpowers"
+  if printf '%s\n' "$frontmatter" | grep -q '^name: diagnosing-frame-ship$'; then
+    pass "frontmatter name is diagnosing-frame-ship"
   else
-    fail "frontmatter name is diagnosing-superpowers"
+    fail "frontmatter name is diagnosing-frame-ship"
   fi
   description="$(printf '%s\n' "$frontmatter" | awk '/^description:/{sub(/^description:[ ]*/,""); print; found=1; next} found && /^[ ]/{print} found && !/^[ ]/{exit}' | tr '\n' ' ')"
   if printf '%s' "$description" | grep -q '^Use when'; then

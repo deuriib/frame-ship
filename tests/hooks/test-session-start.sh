@@ -207,13 +207,23 @@ assert_command_output \
     bash "$HOOK_UNDER_TEST"
 
 legacy_home="$(make_home legacy-warning-removed)"
-mkdir -p "$legacy_home/.config/superpowers/skills"
+mkdir -p "$legacy_home/.config/frame-ship/skills"
 assert_command_output \
     "SessionStart omits obsolete legacy custom-skill warning" \
     "nested" \
     "" \
-    "Superpowers now uses"$'\037'"~/.config/superpowers/skills"$'\037'"~/.claude/skills"$'\037'"legacy" \
+    "Frame-ship now uses"$'\037'"~/.config/frame-ship/skills"$'\037'"~/.claude/skills"$'\037'"legacy" \
     "$legacy_home" \
+    CLAUDE_PLUGIN_ROOT="$REPO_ROOT" \
+    bash "$HOOK_UNDER_TEST"
+
+frame_ship_home="$(make_home frame-ship-invocation)"
+assert_command_output \
+    "SessionStart injects frame-ship:dev:using-frame-ship bootstrap" \
+    "nested" \
+    "frame-ship:dev:using-frame-ship" \
+    "" \
+    "$frame_ship_home" \
     CLAUDE_PLUGIN_ROOT="$REPO_ROOT" \
     bash "$HOOK_UNDER_TEST"
 
