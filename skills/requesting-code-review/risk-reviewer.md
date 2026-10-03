@@ -54,7 +54,7 @@ Subagent (general-purpose):
       across harnesses/versions considered? Migration path documented?
     - Rollout: atomic Conventional Commits? Green CI + type-check +
       security evidence? Rollback plan for Critical paths? ADR in
-      `docs/superpowers/specs/` if architecture changed?
+      `docs/frame-ship/specs/` if architecture changed?
 
     Out of scope (do NOT flag): naming, test style, perf tuning. One
     line under "Out of scope" and move on.

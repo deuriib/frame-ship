@@ -1,5 +1,5 @@
 ---
-name: using-superpowers
+name: using-frame-ship
 description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
 ---
 
@@ -25,10 +25,38 @@ Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it h
 
 ## Skill Priority
 
-When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Frame-ship's most common process skills, but the rule holds for any of them.
 
-- "Let's build X" → superpowers:brainstorming first, then implementation skills.
-- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+- "Let's build X" → frame-ship:dev:brainstorming first, then implementation skills.
+- "Fix this bug" → frame-ship:dev:systematic-debugging first, then domain skills.
+
+## Domain Routing
+
+This skill is the session router. It does no domain work — it classifies, delegates, and disappears.
+
+**Classify the request BEFORE any response or action** — including clarifying questions, exploring the repo, or checking files:
+
+1. Scan the request for domain signals (table below).
+2. Exactly one domain matches → announce "Routing to `[domain]` → invoking `frame-ship:[domain]:using-[x]`" and invoke that domain's bootstrap. From there, the domain bootstrap owns the session.
+3. No domain matches → this is core dev work. Proceed as `frame-ship:dev:*`: brainstorming / systematic-debugging / etc. Announce "No domain signals — staying in core dev" so your human partner can correct you.
+4. Two or more domains match → ask your human partner ONE question with the candidate domains as options. Then route.
+
+The router never diagnoses, estimates, designs, or codes. It routes.
+
+| Signals in the request | Domain | Delegate to |
+|---|---|---|
+| build, bug, refactor, test, PR, code review, feature | dev (core) | `frame-ship:dev:*` (this repo's skills) |
+| pipeline, deploy, infra, k8s, terraform, prod incident | devops | `frame-ship:devops:using-devops` |
+| budget, forecast, model, costs, P&L | finance | `frame-ship:finance:using-finance` |
+| contract, lawsuit, compliance, regulation | legal | `frame-ship:legal:using-legal` |
+| campaign, SEO, copy, content, traffic | marketing | `frame-ship:marketing:using-marketing` |
+| hiring, culture, performance, team | people | `frame-ship:people:using-people` |
+| roadmap, PRD, funnel, pricing, discovery | product | `frame-ship:product:using-product` |
+| prospecting, offer, closing, sales | revenue | `frame-ship:revenue:using-revenue` |
+| threat, vulnerability, security incident | security | `frame-ship:security:using-security` |
+| automation, micro-saas, workflow | automation-roi | `frame-ship:automation-roi:using-automation` |
+
+Default: if nothing matches, it is dev. The router confirms the default out loud.
 
 ## Red Flags
 

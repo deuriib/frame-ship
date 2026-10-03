@@ -25,18 +25,18 @@ When a skill mentions "your instructions file," on Hermes Agent this is **`AGENT
 ## Invoking a skill
 
 Hermes Agent has a `skills` toolset with `skill_view` and `skills_list` tools.
-To invoke a superpowers skill, use:
+To invoke a frame-ship skill, use:
 
 ```
 skill_view("brainstorming")
 skill_view("test-driven-development")
 ```
 
-If `skill_view` cannot find a superpowers skill (it may not appear in the catalog
+If `skill_view` cannot find a frame-ship skill (it may not appear in the catalog
 until the plugin fully registers it), fall back to reading the SKILL.md directly:
 
 ```
-read_file(path="~/.hermes/plugins/superpowers/skills/<skill-name>/SKILL.md")
+read_file(path="~/.hermes/plugins/frame-ship/skills/<skill-name>/SKILL.md")
 ```
 
 This fallback is the same mechanism used by other harnesses without native skill loading.

@@ -1,7 +1,7 @@
-# Superpowers session diagnosis bundle
+# Frame-ship session diagnosis bundle
 
 Session: <session-id>
-Harness: <name> <version> (<provenance label>)    Superpowers: <version> (<sha or "not a checkout">; <provenance label>)
+Harness: <name> <version> (<provenance label>)    Frame-ship: <version> (<sha or "not a checkout">; <provenance label>)
 Redaction level: skeleton | evidence | full
 Built: <ISO timestamp>
 
@@ -12,11 +12,11 @@ location.
 
 ## What this is
 
-A scrubbed record of a coding-agent session that had superpowers installed
+A scrubbed record of a coding-agent session that had frame-ship installed
 and went wrong. It lets an agent or person who was not present decide
-whether superpowers contributed and, if so, what to change. The report
+whether frame-ship contributed and, if so, what to change. The report
 inside states what happened with `path:line` evidence. By design it
-contains no diagnosis of superpowers and no proposed fix; that is the
+contains no diagnosis of frame-ship and no proposed fix; that is the
 reader's job.
 
 ## Files

@@ -6,18 +6,18 @@ Title: <skill or symptom>: <one-line observable> (<harness>)
 
 | Field | Value | Provenance / supporting evidence |
 |-------|-------|-------------------------------|
-| Superpowers version | <version> (<sha or "not a checkout">) | <historical evidence / unverified snapshot / current observation / unknown>; <location> |
+| Frame-ship version | <version> (<sha or "not a checkout">) | <historical evidence / unverified snapshot / current observation / unknown>; <location> |
 | Harness (Claude Code, Cursor, etc.) | <harness> | <label>; <location> |
 | Harness version | <version> | <label>; <location> |
 | Your model + version | <model ids seen> | <label>; <location> |
 | All plugins installed | <list> | <label>; <location> |
 | OS + shell | <os version>, <shell> | <label>; <location> |
 
-## Is this a Superpowers issue or a platform issue?
+## Is this a Frame-ship issue or a platform issue?
 
-- [ ] I confirmed this issue does not occur without Superpowers installed
+- [ ] I confirmed this issue does not occur without Frame-ship installed
 
-The reporter has not tried reproducing without superpowers. Evidence for
+The reporter has not tried reproducing without frame-ship. Evidence for
 involvement is below; it does not establish cause.
 
 ## What happened?
@@ -43,9 +43,9 @@ rewritten as `transcript line <n>`.>
 
 Session id(s): <ids>. Delivered local archive: <path, redaction level <level>
 | none built>. Attached bundle: <no claim; attach only after approval>.
-Superpowers involvement per the diagnosis report: <possible | likely>, with
+Frame-ship involvement per the diagnosis report: <possible | likely>, with
 evidence at <transcript lines>. This report does not propose a fix.
 
 ---
-Filed with the `diagnosing-superpowers` skill. Model, harness, harness
+Filed with the `diagnosing-frame-ship` skill. Model, harness, harness
 version, and installed plugins are listed above.

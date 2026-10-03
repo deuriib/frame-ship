@@ -111,7 +111,7 @@ Subagent (general-purpose):
 
     **Architecture (beyond G1):**
     - Adapters thin, core harness-agnostic? No big-bang rewrite?
-    - ADR in `docs/superpowers/specs/` if harness decision changed?
+    - ADR in `docs/frame-ship/specs/` if harness decision changed?
 
     **Production readiness (beyond G5):**
     - Backward compatibility across harnesses considered?
