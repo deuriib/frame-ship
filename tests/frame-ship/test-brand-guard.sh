@@ -31,6 +31,7 @@ FILTERED="$(printf '%s\n' "$RAW" \
   | grep -v -E '^\./RELEASE-NOTES\.md' \
   | grep -v -E '^\./docs/plans/' \
   | grep -v -E '^\./docs/superpowers/' \
+  | grep -v -E '^\./\.gitignore' \
   | grep -v -E '^\./MIGRATION\.md' \
   | grep -v -E '^\./README\.md:5:' \
   | grep -v -E '^\./tests/frame-ship/' \
