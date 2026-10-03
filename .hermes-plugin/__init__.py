@@ -71,6 +71,47 @@ def _build_bootstrap(skills_dir: str) -> str:
     )
 
 
+VALID_DOMAINS = (
+    "dev",
+    "product",
+    "security",
+    "devops",
+    "finance",
+    "legal",
+    "marketing",
+    "people",
+    "revenue",
+    "automation-roi",
+)
+
+
+def parse_frame_ship_ref(ref):
+    """Parse frame-ship:{domain}:{skill}; noisy rejection otherwise.
+
+    Returns {"brand", "domain", "skill"}. Raises RuntimeError with the
+    correct equivalence — never resolves silently.
+    """
+    if isinstance(ref, str) and ref.startswith("superpowers:"):
+        skill = ref.split(":")[-1]
+        raise RuntimeError(
+            f"Marca retirada '{ref}': soy frame-ship, actualiza tu bootstrap. "
+            f"Equivalencia: frame-ship:dev:{skill}. Ver MIGRATION.md"
+        )
+    m = re.match(r"^frame-ship:([a-z-]+):([a-z-]+)$", ref or "")
+    if not m:
+        raise RuntimeError(
+            f"Invocacion invalida '{ref}': se requieren tres segmentos: "
+            f"usa frame-ship:{{domain}}:{{skill}}. Ver MIGRATION.md"
+        )
+    domain, skill = m.group(1), m.group(2)
+    if domain not in VALID_DOMAINS:
+        raise RuntimeError(
+            f"Dominio desconocido '{domain}' en '{ref}'. "
+            f"Dominios validos: {', '.join(VALID_DOMAINS)}. Ver MIGRATION.md"
+        )
+    return {"brand": "frame-ship", "domain": domain, "skill": skill}
+
+
 def register(ctx):
     skills_dir = _skills_dir()
     bootstrap = _build_bootstrap(skills_dir)

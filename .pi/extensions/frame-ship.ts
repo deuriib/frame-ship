@@ -97,6 +97,54 @@ Pi does not ship a standard subagent tool. If a subagent tool such as \`subagent
 Pi does not ship a standard task-list tool. If an installed todo/task tool is available, use it. Otherwise track work in plan files or a repo-local \`TODO.md\` when task tracking is needed. Treat older \`TodoWrite\` references as this task-tracking action.`;
 }
 
+const VALID_DOMAINS = [
+	"dev",
+	"product",
+	"security",
+	"devops",
+	"finance",
+	"legal",
+	"marketing",
+	"people",
+	"revenue",
+	"automation-roi",
+] as const;
+
+/**
+ * Parse frame-ship:{domain}:{skill}; noisy rejection otherwise.
+ * Returns { brand, domain, skill }. Throws Error with the correct
+ * equivalence — never resolves silently.
+ */
+export function parseFrameShipRef(ref: string): {
+	brand: "frame-ship";
+	domain: string;
+	skill: string;
+} {
+	if (typeof ref === "string" && ref.startsWith("superpowers:")) {
+		const skill = ref.slice("superpowers:".length).split(":").pop();
+		throw new Error(
+			`Marca retirada '${ref}': soy frame-ship, actualiza tu bootstrap. ` +
+				`Equivalencia: frame-ship:dev:${skill}. Ver MIGRATION.md`,
+		);
+	}
+	const m =
+		typeof ref === "string" && /^frame-ship:([a-z-]+):([a-z-]+)$/.exec(ref);
+	if (!m) {
+		throw new Error(
+			`Invocacion invalida '${ref}': se requieren tres segmentos: ` +
+				`usa frame-ship:{domain}:{skill}. Ver MIGRATION.md`,
+		);
+	}
+	const [, domain, skill] = m;
+	if (!(VALID_DOMAINS as readonly string[]).includes(domain)) {
+		throw new Error(
+			`Dominio desconocido '${domain}' en '${ref}'. ` +
+				`Dominios validos: ${VALID_DOMAINS.join(", ")}. Ver MIGRATION.md`,
+		);
+	}
+	return { brand: "frame-ship", domain, skill };
+}
+
 function messageContainsBootstrap(message: unknown): boolean {
 	const content = (message as { content?: unknown }).content;
 	if (typeof content === "string") return content.includes(BOOTSTRAP_MARKER);

@@ -1,6 +1,6 @@
 // Contrato de invocacion frame-ship:{domain}:{skill} (Task 1).
-// Tasks 4-13 implementan este contrato por runtime; este stub es la referencia
-// compartida que usan los tests y los tasks 2-11.
+// Task 4 implementa este contrato por runtime; este stub es la referencia
+// compartida que usan los tests.
 export const VALID_DOMAINS = [
   'dev',
   'product',
@@ -30,7 +30,7 @@ export const brandGuardAllowlist = [
   'tests/brainstorm-server/branding.test.js (linea ASSET_URL primeradiant.com)',
 ];
 
-export function isValidInvocation(ref) {
+export function isValidInvocation(ref, existingSkills) {
   if (typeof ref === 'string' && ref.startsWith('superpowers:')) {
     const skill = ref.slice('superpowers:'.length).split(':').pop();
     throw new Error(
@@ -50,6 +50,11 @@ export function isValidInvocation(ref) {
     throw new Error(
       `Dominio desconocido '${domain}' en '${ref}'. ` +
       `Dominios validos: ${VALID_DOMAINS.join(', ')}. Ver MIGRATION.md`
+    );
+  }
+  if (typeof existingSkills === 'object' && existingSkills !== null && !(skill in existingSkills)) {
+    throw new Error(
+      `skill desconocido '${skill}' en '${ref}': no existe skills/${skill}/SKILL.md. Ver MIGRATION.md`
     );
   }
   return { brand: 'frame-ship', domain, skill };

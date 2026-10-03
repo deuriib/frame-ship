@@ -22,3 +22,9 @@ test('rechaza superpowers:brainstorming con equivalencia', () => {
 test('rechaza dominio inválido con lista de 10', () => {
   assert.throws(() => isValidInvocation('frame-ship:nope:algo'), /dev.*product.*security/);
 });
+test('rechaza skill inexistente sin inyección parcial', () => {
+  assert.throws(
+    () => isValidInvocation('frame-ship:dev:nope', { brainstorming: true }),
+    /skill desconocido.*SKILL\.md/
+  );
+});

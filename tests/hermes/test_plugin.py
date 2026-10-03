@@ -140,3 +140,32 @@ class TestLayoutResolution:
         mod = self._load_from(plugdir)
         with pytest.raises(RuntimeError, match="cannot find the skills"):
             mod.register(mock_ctx)
+
+class TestParseFrameShipRef:
+    def test_accepts_three_segments(self):
+        mod = _load_plugin()
+        assert mod.parse_frame_ship_ref("frame-ship:dev:brainstorming") == {
+            "brand": "frame-ship", "domain": "dev", "skill": "brainstorming",
+        }
+
+    def test_accepts_exact_third_segment(self):
+        mod = _load_plugin()
+        parsed = mod.parse_frame_ship_ref("frame-ship:product:product-discovery")
+        assert parsed == {
+            "brand": "frame-ship", "domain": "product", "skill": "product-discovery",
+        }
+
+    def test_rejects_two_segments(self):
+        mod = _load_plugin()
+        with pytest.raises(RuntimeError, match="tres segmentos"):
+            mod.parse_frame_ship_ref("frame-ship:brainstorming")
+
+    def test_rejects_old_brand_with_equivalence(self):
+        mod = _load_plugin()
+        with pytest.raises(RuntimeError, match="frame-ship:dev:brainstorming"):
+            mod.parse_frame_ship_ref("superpowers:brainstorming")
+
+    def test_rejects_unknown_domain_listing_ten(self):
+        mod = _load_plugin()
+        with pytest.raises(RuntimeError, match="dev.*product.*security"):
+            mod.parse_frame_ship_ref("frame-ship:nope:algo")

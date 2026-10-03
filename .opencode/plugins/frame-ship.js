@@ -24,6 +24,49 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Skills directory shared by V1 (config hook) and V2 (setup/ctx.skill.transform)
 const frameshipSkillsDir = path.resolve(__dirname, '../../skills');
 
+const VALID_DOMAINS = [
+  'dev',
+  'product',
+  'security',
+  'devops',
+  'finance',
+  'legal',
+  'marketing',
+  'people',
+  'revenue',
+  'automation-roi',
+];
+
+/**
+ * Parse frame-ship:{domain}:{skill}; noisy rejection otherwise.
+ * Returns { brand, domain, skill }. Throws Error with the correct
+ * equivalence — never resolves silently.
+ */
+export function parseFrameShipRef(ref) {
+  if (typeof ref === 'string' && ref.startsWith('superpowers:')) {
+    const skill = ref.slice('superpowers:'.length).split(':').pop();
+    throw new Error(
+      `Marca retirada '${ref}': soy frame-ship, actualiza tu bootstrap. ` +
+      `Equivalencia: frame-ship:dev:${skill}. Ver MIGRATION.md`
+    );
+  }
+  const m = typeof ref === 'string' && /^frame-ship:([a-z-]+):([a-z-]+)$/.exec(ref);
+  if (!m) {
+    throw new Error(
+      `Invocacion invalida '${ref}': se requieren tres segmentos: ` +
+      `usa frame-ship:{domain}:{skill}. Ver MIGRATION.md`
+    );
+  }
+  const [, domain, skill] = m;
+  if (!VALID_DOMAINS.includes(domain)) {
+    throw new Error(
+      `Dominio desconocido '${domain}' en '${ref}'. ` +
+      `Dominios validos: ${VALID_DOMAINS.join(', ')}. Ver MIGRATION.md`
+    );
+  }
+  return { brand: 'frame-ship', domain, skill };
+}
+
 // Simple frontmatter extraction (avoid dependency on skills-core for
 // bootstrap). Handles plain `key: value` lines, quoted values (including
 // quotes that close on an indented continuation line), YAML block scalar
