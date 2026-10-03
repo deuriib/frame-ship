@@ -27,7 +27,7 @@ of human involvement will be closed without review.
 <!-- 1-3 sentences. What, not why — the "why" belongs above. -->
 
 ## Is this change appropriate for this repo?
-<!-- Finance Superpowers contains finance skills (FP&A, accounting close,
+<!-- Frame-ship Finance contains finance skills (FP&A, accounting close,
      compliance, personal finance, investment analysis) plus the process
      skills that route them. Ask yourself:
 
