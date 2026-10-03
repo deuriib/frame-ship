@@ -17,16 +17,16 @@ scrubbed bundle if you built one. For anything else, use Bug Report.
 
 | Field | Value |
 |-------|-------|
-| Superpowers version | |
+| Frame-ship version | |
 | Harness (Claude Code, Cursor, etc.) | |
 | Harness version | |
 | Your model + version | |
 | All plugins installed | |
 | OS + shell | |
 
-## Is this a Superpowers DevOps issue or a platform issue?
+## Is this a Frame-ship DevOps issue or a platform issue?
 
-- [ ] I confirmed this issue does not occur without Superpowers DevOps installed
+- [ ] I confirmed this issue does not occur without Frame-ship DevOps installed
 
 ## What happened?
 

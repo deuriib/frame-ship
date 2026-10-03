@@ -18,22 +18,22 @@ add a comment or reaction to the existing one instead.
 
 | Field | Value |
 |-------|-------|
-| Superpowers version | |
+| Frame-ship version | |
 | Harness (Claude Code, Cursor, etc.) | |
 | Harness version | |
 | Your model + version | |
 | All plugins installed | |
 | OS + shell | |
 
-## Is this a Superpowers DevOps issue or a platform issue?
-<!-- Superpowers is a plugin. Some reported "bugs" are actually issues
+## Is this a Frame-ship DevOps issue or a platform issue?
+<!-- Frame-ship is a plugin. Some reported "bugs" are actually issues
      in the underlying platform or model. If you're not sure, try
-     reproducing without Superpowers DevOps installed.
+     reproducing without Frame-ship DevOps installed.
 
-     If the problem persists without Superpowers, file the issue with
+     If the problem persists without Frame-ship, file the issue with
      your platform instead. -->
 
-- [ ] I confirmed this issue does not occur without Superpowers DevOps installed
+- [ ] I confirmed this issue does not occur without Frame-ship DevOps installed
 
 ## What happened?
 <!-- Be specific. "It doesn't work" is not a bug report. -->
