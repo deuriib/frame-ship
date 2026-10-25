@@ -242,7 +242,7 @@ Project structure:
 │       └── shared.ts               # version lockstep + fs helpers (not a plugin)
 ├── skills/
 │   ├── using-frame-ship/       # → bootstrap + chain contract
-│   ├── frame-intent/           # → docs/briefs/BRIEF-<slug>.md + OKRs
+│   ├── frame-intent/           # → docs/frame-ship/briefs/BRIEF-<slug>.md + OKRs
 │   ├── translate-to-spec/      # → REQ-IDs + ARCHITECTURE.md
 │   ├── propose-changes/        # → PROPOSED_CHANGES.md, repo untouched
 │   ├── review-security/        # → SECURITY_REVIEW.md + STRIDE verdict
@@ -292,7 +292,7 @@ Anti-patterns:
 - [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via node, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
 - [x] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
-- [x] `docs/briefs` + `docs/specs` scaffolding (referenced by skills)
+- [x] `docs/frame-ship/briefs` + `docs/frame-ship/specs` scaffolding (referenced by skills)
 - [ ] Release automation via `ship-release` skill + tagged versions
 
 ## License
