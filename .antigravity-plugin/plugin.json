@@ -1,0 +1,20 @@
+{
+    "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+    "name": "frame-ship",
+    "displayName": "Frame→Ship",
+    "description": "Frame-Ship methodology - from strategic intent to shipped release",
+    "version": "1.0.0",
+    "keywords": [
+        "workflows",
+        "collaboration",
+        "best-practices",
+        "skills"
+    ],
+    "author": {
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
+    },
+    "repository": "https://github.com/deuriib/frame-ship",
+    "homepage": "https://github.com/deuriib/frame-ship",
+    "license": "Apache-2.0"
+}
