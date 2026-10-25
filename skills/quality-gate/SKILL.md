@@ -13,7 +13,7 @@ Route a completed spec to the correct reviewers per touched domain, collect verd
 
 ## Chain Contract
 
-- **Previous:** `frame-ship:execute-spec` | (optional branch PR) `frame-ship:pull-request`
+- **Previous:** `frame-ship:execute-spec`
 - **Next:** `frame-ship:verify-handoff` (only on OPEN gate) | (on failure/bug) `frame-ship:debugging` → `frame-ship:propose-changes`
 
 ```text
