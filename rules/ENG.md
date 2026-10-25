@@ -36,7 +36,7 @@ description: "Hard Engineering rules"
 - **ENG-30** i18n: no hardcoded user-facing strings; locale-aware formatting; ICU pluralization; lazy-loaded translations; translation workflow versioned.
 - **ENG-31** perf budgets: LCP <2.5s, INP <200ms, CLS <0.1; bundle-size budget; Lighthouse CI gate; documented browser matrix; polyfills only where required.
 - **ENG-32** assets: WebP/AVIF, `srcset`, lazy load, preload critical, `width`/`height` to prevent CLS, font subsetting, `font-display: swap`.
-- **ENG-33** tests: pyramid unit > integration > E2E; deterministic, no `sleep`; coverage ≥80% critical paths; mutation testing on core logic; flaky tests quarantined and fixed ≤24h.
+- **ENG-33** tests: pyramid integration > unit > E2E; deterministic, no `sleep`; coverage ≥80% critical paths; mutation testing on core logic; flaky tests quarantined and fixed ≤24h.
 - **ENG-34** no PII in test data; synthetic or anonymized only.
 - **ENG-35** deps pinned and minimal; daily CVE scan; license compatibility; SBOM; reproducible builds; no unmaintained libraries; signed commits and artifacts.
 - **ENG-36** data lifecycle defined; quality checks at ingestion; lineage tracked; governance with ownership, classification, retention; parameterized queries only.
