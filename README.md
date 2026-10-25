@@ -158,12 +158,12 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 
 ### Plugin Runtime
 
-- **`plugins/opencode/`** — Split zero-deps V2 runtime (three plugins + shared module + composed entry):
-  - **`skills.ts`** (id `frame-ship`) — registers 12 `frame-ship:<stage>` skills via `ctx.skill.transform`, injects workflow card + pointers + live bootstrap via `ctx.session.hook("context")` (guardrails injection lives in `guardrails.ts`), preserves chain across compaction via `ctx.session.hook("compaction")`. `hasMarker()` keeps injection idempotent.
-  - **`agents.ts`** (id `frame-ship-agents`) — provisions the 31-agent roster from `agents/*.md` into the global discovery route, enriches every discovered id in place, sets the orchestrator default.
-  - **`guardrails.ts`** (id `frame-ship-guardrails`) — injects the full `rules/guardrails.md` on context + the minimal one-liner set on compaction.
-  - **`shared.ts`** — version lockstep target (`header + const VERSION`) + bounded filesystem helpers. Not a plugin (no default export).
-  - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs all three lanes under the original id `frame-ship`, preserving single-file installs. Never list it together with `skills.ts`.
+- **`.opencode/plugins/`** — Split zero-deps V2 runtime:
+  - **`skills.ts`** (id `frame-ship`) — registers skills via `ctx.skill.transform`, injects workflow cards and pointers via `ctx.session.hook("context")`, preserves chain across compaction.
+  - **`agents.ts`** (id `frame-ship-agents`) — provisions agent roster into global discovery.
+  - **`guardrails.ts`** (id `frame-ship-guardrails`) — injects guardrails on context.
+  - **`commands.ts`** — custom opencode commands.
+  - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs all lanes under original id `frame-ship`.
 
 ## Philosophy
 
@@ -220,39 +220,27 @@ Project structure:
 
 ```text
 ./
-├── plugin.json                   # agy marker: name frame-ship (agy plugin install .)
-├── hooks.json                    # frame-ship-context + safety-gate + format-note
+├── plugin.json                   # plugin manifest
+├── hooks.json                    # hooks configuration
 ├── rules/
-│   └── frame-ship.md             # persistent cards, verbatim, version-locked v0.12.0
-├── mise.toml                    # Node 22 + tasks (mise install)
-├── plugins/
-│   ├── antigravity/
-│   │   └── hooks/
-│   │       ├── context-inject.ts     # PreInvocation → injectSteps (1:1 context parity, node)
-│   │       ├── safety-gate.ts        # PreToolUse gate on run_command (node)
-│   │       ├── format-note.ts        # PostToolUse observer → {} (node)
-│   │       └── fixtures/             # replay vectors (allow/deny/secret/{}/first/compact)
-│   └── opencode/
-│       ├── INSTALL.md              # install: package (use) + local file (dev)
-│       ├── frame-ship.ts           # composed entry (main): all three lanes, id frame-ship
-│       ├── skills.ts               # plugin: skills lane + session hooks (id frame-ship)
-│       ├── agents.ts               # plugin: agents lane (id frame-ship-agents)
-│       ├── guardrails.ts           # plugin: guardrails lane (id frame-ship-guardrails)
-│       └── shared.ts               # version lockstep + fs helpers (not a plugin)
-├── skills/
-│   ├── using-frame-ship/       # → bootstrap + chain contract
-│   ├── frame-intent/           # → docs/frame-ship/briefs/BRIEF-<slug>.md + OKRs
-│   ├── translate-to-spec/      # → REQ-IDs + ARCHITECTURE.md
-│   ├── propose-changes/        # → PROPOSED_CHANGES.md, repo untouched
-│   ├── review-security/        # → SECURITY_REVIEW.md + STRIDE verdict
-│   ├── review-architecture/    # → ADR + contract verdict
-│   ├── execute-spec/           # → impl + test-matrix.md
-│   ├── quality-gate/           # → GATE_REPORT.md (multi-reviewer)
-│   ├── verify-handoff/         # → HANDOFF.md via DoD
-│   └── ship-release/           # → RELEASE_NOTES.md + changelog + rollback
-├── tests/                      # smoke suite (npm test → node --test)
-├── AGENTS.md                   # project knowledge base (source of truth)
-├── LICENSE.md                  # MIT
+│   └── frame-ship.md             # persistent rules / cards
+├── scripts/
+│   └── context-inject.ts         # PreInvocation context injection script
+├── .opencode/
+│   └── plugins/
+│       ├── agents.ts             # agents lane plugin
+│       ├── commands.ts           # custom commands plugin
+│       ├── frame-ship.ts         # composed entry point
+│       ├── guardrails.ts         # guardrails lane plugin
+│       └── skills.ts             # skills lane & session hooks plugin
+├── .antigravity-plugin/          # Antigravity CLI plugin manifest
+├── .claude-plugin/               # Claude Code plugin manifest
+├── agents/                       # agent role definitions
+├── skills/                       # composable workflow skills
+├── docs/                         # briefs, specs, guides
+├── mise.toml                     # Node 22 + tasks (mise install)
+├── package.json
+├── LICENSE
 └── README.md
 ```
 

@@ -5,7 +5,7 @@
     "main": "./.opencode/plugins/frame-ship.ts",
     "type": "module",
     "repository": "https://github.com/deuriib/frame-ship",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "keywords": [
         "pi-package",
         "skills",
