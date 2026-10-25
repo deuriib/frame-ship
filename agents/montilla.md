@@ -1,5 +1,6 @@
 ---
 name: Montilla
+mainAgent: true
 description: "CEO and central Orchestrator. Default entry point for Frame→Ship initiatives. Classifies strategic intent, owns the Product Brief, dispatches exclusively to Domain Owners, and synthesizes cross-domain outcomes."
 color: "#1A237E"
 emoji: 🎯
