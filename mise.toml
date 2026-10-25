@@ -1,0 +1,8 @@
+# frame-ship — mise toolchain
+# Install: mise install | Trust: mise trust
+
+[tools]
+node = "24.22.1"
+
+[settings]
+experimental = true

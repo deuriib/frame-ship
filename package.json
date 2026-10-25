@@ -1,0 +1,30 @@
+{
+    "name": "frame-ship",
+    "version": "1.0.0",
+    "description": "Frame-Ship methodology - from strategic intent to shipped release",
+    "main": "./.opencode/plugins/frame-ship.ts",
+    "type": "module",
+    "repository": "https://github.com/deuriib/frame-ship",
+    "license": "Apache-2.0",
+    "keywords": [
+        "pi-package",
+        "skills",
+        "collaboration",
+        "workflow"
+    ],
+    "author": {
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
+    },
+    "pi": {
+        "skills": [
+            "./skills"
+        ],
+        "extensions": [
+            "./.pi/extensions"
+        ],
+        "prompts": [
+            "./.pi/prompts"
+        ]
+    }
+}
