@@ -2,12 +2,11 @@
 
 > _"Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."_
 
-![Node](https://img.shields.io/badge/node-22%20LTS-339933?logo=node.js&logoColor=white)
+![Node](https://img.shields.io/badge/node-24%20LTS-339933?logo=node.js&logoColor=white)
 ![Mise](https://img.shields.io/badge/mise-managed-7950ED?logo=mise&logoColor=white)
 ![Opencode](https://img.shields.io/badge/opencode-plugin-000000?logo=openai&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
-![Private](https://img.shields.io/badge/repo-private-lightgrey)
 
 **An agentic skills framework & Frame→Ship methodology that works — from strategic intent to shipped release.**
 
