@@ -25,7 +25,7 @@ Bound to the **owning domain owner gate** (engineering / security / domain owner
 0. **Pre-flight load — HARD STOP.** `skill(verify-handoff)` loaded? Owning domain owner template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. Single = direct verify; multi = orchestrator dispatches ordered to read skill. **No OPEN gate = no handoff** (waiver only domain owners + orchestrator).
 1. Read spec + test/evidence matrix + `GATE_REPORT.md` with `SPEC/HARD/GATE/DOMAINS` packet intact.
 2. **Run DoD** via `references/dod-checklist.md`—Common section for all, Domain appendix only for touched domains.
-3. **Produce `docs/specs/40_workspace/<domain>/HANDOFF.md`** via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows—with evidence links). **Singleton:** create-if-missing else update-in-place, never suffixed.
+3. **Produce `docs/frame-ship/specs/40_workspace/<domain>/HANDOFF.md`** via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows—with evidence links). **Singleton:** create-if-missing else update-in-place, never suffixed.
 4. **All gates pass** → hand off to `ship-release`.
 5. **Gates fail** → return to `execute-spec` with specific findings.
 6. **Close with a commit.** Example: `docs(handoff-003): verify DoD and route SPEC-003 to ship`.

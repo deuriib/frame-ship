@@ -30,8 +30,10 @@ Use this template to create, verify, or update the project's root `README.md` du
 ## Architecture & Workflow
 
 ```
+
 [ASCII or Mermaid diagram illustrating component relationships or the Frame→Ship lifecycle]
 frame-intent ──► translate-to-spec ──► propose-changes ──► review ──► execute-spec ──► quality-gate ──► verify ──► ship
+
 ```
 
 ---
@@ -79,11 +81,11 @@ cd [repo]
 ## Documentation Index
 
 | Resource | Path | Description |
-|---|---|---|
+| --- | --- | --- |
 | **Installation Guide** | [`INSTALL.md`](./INSTALL.md) | Platform compatibility, verify steps, and troubleshooting |
 | **Changelog** | [`CHANGELOG.md`](./CHANGELOG.md) | Full release history and changes per version |
 | **Migration Guide** | [`MIGRATION.md`](./MIGRATION.md) | Upgrade instructions and breaking change migrations |
-| **Specifications** | `docs/specs/` | Living specs, ADRs (`12_adr/`), and archived deliverables |
+| **Specifications** | `docs/frame-ship/specs/` | Living specs, ADRs (`12_adr/`), and archived deliverables |
 | **Knowledge Base** | [`AGENTS.md`](./AGENTS.md) | Architecture map, toolchain commands, and conventions |
 
 ---
@@ -100,6 +102,7 @@ cd [repo]
 ## License
 
 [License Name, e.g. MIT] © [Year] [Author / Organization]. See [`LICENSE.md`](./LICENSE.md) for details.
+
 ```
 
 ---

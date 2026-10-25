@@ -23,12 +23,12 @@ Bound to **owning domain owners**—engineering, security, finance, legal, marke
 ## Process
 
 0. **Pre-flight load — HARD STOP.** `skill(translate-to-spec)` loaded? Owning domain owner identified? Packet ready (`SPEC:<brief-path>#OKRs / HARD:<mode> / GATE:<none-yet> / DOMAINS:<list>`)? Any NO → STOP. Execution is subagents only. Trivial <15-line reversible work is CEO fast-path, outside methodology.
-1. Read `docs/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
+1. Read `docs/frame-ship/briefs/BRIEF-<slug>.md` (reference only, never paste full context) including `execution_mode` and `Domains-touched`.
 2. **Orchestrator dispatches** the owning domain owners by domains touched. Each returns its spec to the orchestrator.
-3. Each domain owner produces `docs/specs/20_backlog/SPEC-###-<slug>.md` via `references/spec-template.md`, carrying `execution_mode` + `DOMAINS` forward. Every spec declares `Domains-touched` + owning domain owner. Max 2 parallel lanes. Sequential degradation, same contract.
-4. **Engineering owner consolidates** `docs/specs/10_design/ARCHITECTURE.md` via `../review-architecture/references/architecture-template.md`. Singleton: create-if-missing else update-in-place, never suffixed.
-5. **Index requirements** in `docs/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
-6. **Hand off** to `propose-changes` as `SPEC:docs/specs/20_backlog/SPEC-###-<slug>.md#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
+3. Each domain owner produces `docs/frame-ship/specs/20_backlog/SPEC-###-<slug>.md` via `references/spec-template.md`, carrying `execution_mode` + `DOMAINS` forward. Every spec declares `Domains-touched` + owning domain owner. Max 2 parallel lanes. Sequential degradation, same contract.
+4. **Engineering owner consolidates** `docs/frame-ship/specs/10_design/ARCHITECTURE.md` via `../review-architecture/references/architecture-template.md`. Singleton: create-if-missing else update-in-place, never suffixed.
+5. **Index requirements** in `docs/frame-ship/specs/15_requirements/` via `references/requirements-template.md` (functional + non-functional + domain controls).
+6. **Hand off** to `propose-changes` as `SPEC:docs/frame-ship/specs/20_backlog/SPEC-###-<slug>.md#REQ-IDs / HARD:<execution_mode+constraints> / GATE:<none-yet> / DOMAINS:<list>`.
 7. **Close with a commit.** Example: `feat(spec-003): add spec to 20_backlog with REQ-IDs and ARCHITECTURE contract`.
 
 ## What I Won't Do

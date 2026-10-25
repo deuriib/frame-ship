@@ -23,8 +23,8 @@ Bound to the **orchestrator dispatches**; owning domain owner + domain specialis
 ## Process
 
 0. **Pre-flight load — HARD STOP.** `skill(propose-changes)` loaded? Agent template read for proposing specialist + owning domain owner? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches ordered to read skill.
-1. Read the target spec (`docs/specs/20_backlog/SPEC-###-<slug>.md`) including `execution_mode` and `Domains-touched`.
-2. Produce `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` via `references/proposal-template.md`, carrying `execution_mode` + `DOMAINS` forward. **Singleton:** create-if-missing else update-in-place, never suffixed.
+1. Read the target spec (`docs/frame-ship/specs/20_backlog/SPEC-###-<slug>.md`) including `execution_mode` and `Domains-touched`.
+2. Produce `docs/frame-ship/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` via `references/proposal-template.md`, carrying `execution_mode` + `DOMAINS` forward. **Singleton:** create-if-missing else update-in-place, never suffixed.
 3. Include **risk assessment** via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).
 4. **Identify approvers by domain**—owning domain owner mandatory; engineering owner for architecture impact; security owner for auth/data/API/PII. **Block until approval.**
 5. Hand off to `review-security` / `review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.

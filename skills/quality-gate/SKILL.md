@@ -50,7 +50,7 @@ A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Do
 0. **Pre-flight load — HARD STOP.** `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
 1. **Identify touched domains** from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
 2. **Dispatch each required reviewer** as a separate, independent subagent (strictly 1 subagent per reviewer; reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first). No single agent may perform multiple reviewers' work.
-3. Each reviewer create-if-missing else update-in-place `docs/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
+3. Each reviewer create-if-missing else update-in-place `docs/frame-ship/specs/40_workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. **Consolidate into `GATE_REPORT.md`** via `references/gate-report.md` (create-if-missing else update-in-place).
 5. Any ❌ → gate **CLOSED**. Any ⚠️ → **CONDITIONAL** (conditions must clear). All ✅ → gate **OPEN** → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 6. **Waivers only** by domain owners + orchestrator via `references/waiver-template.md`.

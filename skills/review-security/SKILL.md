@@ -23,7 +23,7 @@ Bound to the **security owner**, who orchestrates security reviewers for PII flo
 ## Process
 
 0. **Pre-flight load — HARD STOP.** Load `skill(review-security)`. Read agent templates for security owner + security reviewer. No skill = STOP. Security owner runs inside the orchestrator's ordered skill read (single = direct read).
-1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—only `PROPOSED_CHANGES.md`, never suffixed).
+1. Read `docs/frame-ship/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—only `PROPOSED_CHANGES.md`, never suffixed).
 2. Threat-model with **STRIDE** via `references/threat-model.md`.
 3. Produce the review via `references/security-review-template.md`.
 4. Issue a binding verdict + conditions. **Block implementation on Rejected.**

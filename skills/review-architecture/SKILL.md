@@ -9,7 +9,7 @@ description: Use when a change modifies public APIs, data models, or cross-cutti
 
 ## Overview
 
-Validate proposals against `docs/specs/10_design/ARCHITECTURE.md` and record significant decisions as ADRs in `docs/specs/12_adr/`. No invariant break without an explicit ADR.
+Validate proposals against `docs/frame-ship/specs/10_design/ARCHITECTURE.md` and record significant decisions as ADRs in `docs/frame-ship/specs/12_adr/`. No invariant break without an explicit ADR.
 
 ## Chain Contract
 
@@ -23,9 +23,9 @@ Bound to the **engineering owner** with architect for design input and automatio
 ## Process
 
 0. **Pre-flight load — HARD STOP.** `skill(review-architecture)` loaded? Agent templates read for engineering owner + architect? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
-1. Read `docs/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—never suffixed).
-2. Compare against `docs/specs/10_design/ARCHITECTURE.md` (canonical singleton—update-in-place, never `ARCHITECTURE-*.md`; interfaces/API shapes live in its Components/Data Flow table—no separate `API_CONTRACTS.md`).
-3. **ADR only if** the change breaks/creates an invariant, adds a component, or changes a cross-domain contract: produce `docs/specs/12_adr/ADR-###-<slug>.md` via `references/adr-template.md`. Within existing contracts → NO ADR, record the verdict only. One number = one file, never reuse a number. `Status: proposed` with code already merged = **gate FAIL**.
+1. Read `docs/frame-ship/specs/40_workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—never suffixed).
+2. Compare against `docs/frame-ship/specs/10_design/ARCHITECTURE.md` (canonical singleton—update-in-place, never `ARCHITECTURE-*.md`; interfaces/API shapes live in its Components/Data Flow table—no separate `API_CONTRACTS.md`).
+3. **ADR only if** the change breaks/creates an invariant, adds a component, or changes a cross-domain contract: produce `docs/frame-ship/specs/12_adr/ADR-###-<slug>.md` via `references/adr-template.md`. Within existing contracts → NO ADR, record the verdict only. One number = one file, never reuse a number. `Status: proposed` with code already merged = **gate FAIL**.
 4. Issue review via `references/architecture-review.md` as the single `ARCHITECTURE_REVIEW.md` per lane (create-if-missing else update-in-place, never suffixed). Ephemeral—on ship it is promoted to `50_archive/<spec-id>/` by `ship-release`, not left in `40_workspace/`.
 5. Hand off to `execute-spec` if approved.
 6. **Close with a commit.** Example: `docs(adr-009): record architectural decision in 12_adr`.

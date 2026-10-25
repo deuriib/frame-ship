@@ -1,6 +1,6 @@
 # ARCHIVE-RECORD — Release Evidence Index
 
-One `ARCHIVE-RECORD.md` per archived spec, at `docs/specs/50_archive/<spec-id>/ARCHIVE-RECORD.md`. Written in `ship-release` step 6.3, BEFORE the `40_workspace/` purge (step 6.4) — it is the index that makes the purge safe: it says what was promoted (survives) and what was purged (gone, but accounted for).
+One `ARCHIVE-RECORD.md` per archived spec, at `docs/frame-ship/specs/50_archive/<spec-id>/ARCHIVE-RECORD.md`. Written in `ship-release` step 6.3, BEFORE the `40_workspace/` purge (step 6.4) — it is the index that makes the purge safe: it says what was promoted (survives) and what was purged (gone, but accounted for).
 
 **Singleton:** create-if-missing else update-in-place, never suffix — one record per `<spec-id>` dir.
 
@@ -9,7 +9,7 @@ One `ARCHIVE-RECORD.md` per archived spec, at `docs/specs/50_archive/<spec-id>/A
 ```markdown
 # ARCHIVE-RECORD: <spec-id>
 
-**Spec:** docs/specs/50_archive/<spec-id>/<spec-file>.md
+**Spec:** docs/frame-ship/specs/50_archive/<spec-id>/<spec-file>.md
 **Date:** YYYY-MM-DD
 **Gate verdict:** OPEN | CONDITIONAL | CLOSED+waiver
 **Commit(s):** <release commit sha(s)>
