@@ -1,0 +1,42 @@
+---
+description: "Hard Engineering rules"
+---
+
+# Engineering Rules
+
+- **ENG-01** no `any`; TS strict with `noImplicitAny`; use `unknown` + narrowing, generics, discriminated unions.
+- **ENG-02** Python mypy/pyright strict, ban `Any`, no untyped defs; use `Protocol`, `TypedDict`, `Literal`, `TypeVar`.
+- **ENG-03** Java/C# no raw types, no `dynamic` unless interop, nullable refs on; Go/Rust no `interface{}` unless necessary, no `unwrap()`/`expect()` in prod.
+- **ENG-04** no unsafe casts; no non-null assertion or `ts-ignore` without proof/ticket.
+- **ENG-05** exhaustive switches; `readonly`/immutable by default; no stringly-typed code.
+- **ENG-06** pure functions preferred; side effects at edges; DI over globals.
+- **ENG-07** no circular deps, dead code, commented-out code, or ticketless TODOs.
+- **ENG-08** SRP, early returns, complexity ≤10, nesting ≤3, functions ≤40 lines (soft); composition over inheritance; no magic values.
+- **ENG-09** no empty or catch-all handlers; no exceptions for control flow; wrap with context (`Result`/`Either` where apt).
+- **ENG-10** fail fast and closed; no silent failures; cleanup via `using`/`defer`.
+- **ENG-11** immutability first; backpressure; no unbounded queues; timeouts, jittered retries, breakers, idempotency, graceful shutdown.
+- **ENG-12** one reason to change; composition/strategy/plugins; small role interfaces; depend on abstractions; I/O at edges.
+- **ENG-13** no pattern without a concrete pain point (ADR + named in code).
+- **ENG-14** banned: God Object, Spaghetti, Golden Hammer, Lava Flow, Big Ball of Mud, Copy-Paste, Singleton abuse, Service Locator.
+- **ENG-15** ADRs mandatory; hexagonal/clean core with zero framework/DB/HTTP deps; DDD boundaries; modular monolith first; contract-first versioned APIs; no distributed monolith, no shared DB, no SPOF; Strangler Fig, no big-bang rewrites; versioned tested IaC; env parity; flags + kill switches.
+- **ENG-16** frontend: small focused components; presentational vs container; props down/events up; no prop drilling >2 levels.
+- **ENG-17** state local > lifted > context > global; server state separate; no duplicating server state client-side; immutable updates or Immer.
+- **ENG-18** no unproven `memo`/`useMemo`/`useCallback`; virtualize long lists; code-split routes; lazy load below-the-fold; SSR/SSG/CSR/ISR chosen per route and documented; no hydration mismatch.
+- **ENG-19** no side effects in render; cleanup subscriptions; correct deps; data fetch aborts on unmount; handle loading/error/empty/partial; optimistic updates with rollback.
+- **ENG-20** error boundaries at route and feature level; 404 handling; observability reporting; forms validate client + server, errors wired via `aria-describedby`.
+- **ENG-21** frontend security: no `dangerouslySetInnerHTML` without DOMPurify; CSP nonces; no secrets in bundle; no `eval`; no tokens in `localStorage`; SRI for external scripts.
+- **ENG-22** structured logs; no `console.log` in prod; no PII; metrics, traces, correlation IDs, SLOs, alerts, audit logs, tested backups, rehearsed DR, graceful degradation.
+- **ENG-23** WCAG 2.1 AA — semantic HTML, keyboard, focus, contrast ≥4.5:1; store UTC, display local.
+- **ENG-24** fairness, explainability, HITL for critical decisions, versioning, drift monitoring, fallback; no PII in prompts unless approved and masked.
+- **ENG-25** README, OpenAPI/AsyncAPI, runbooks, Keep a Changelog, SemVer, migrations, ADRs, C4; comments explain why.
+- **ENG-26** work-unit Conventional Scope Commits; short-lived branches; rebase; no direct-to-main; peer review; no self-merge; green CI gates.
+- **ENG-27** Critical/High findings block merge and release.
+- **ENG-28** declare the desired outcome, not the steps; prefer code that says *what* (desired state, queries, UI-as-a-function-of-state) over mutating *how*; concrete swaps: set-based SQL over cursor loops, UI rendered from state over manual DOM updates, desired-state IaC over imperative provisioning, `map`/`filter`/`reduce` over hand-rolled push loops; keep data flow visible — inputs → pure transforms → effects at edges (ENG-06); hidden intermediate mutation is where bugs live; imperative code earns its place only at measured hotspots or inherently sequential procedures (protocols, parsers), with an inline reason when you drop a level.
+- **ENG-29** design tokens for styling; scoped/atomic CSS; no inline styles except dynamic values; dark mode, RTL, responsive from tokens.
+- **ENG-30** i18n: no hardcoded user-facing strings; locale-aware formatting; ICU pluralization; lazy-loaded translations; translation workflow versioned.
+- **ENG-31** perf budgets: LCP <2.5s, INP <200ms, CLS <0.1; bundle-size budget; Lighthouse CI gate; documented browser matrix; polyfills only where required.
+- **ENG-32** assets: WebP/AVIF, `srcset`, lazy load, preload critical, `width`/`height` to prevent CLS, font subsetting, `font-display: swap`.
+- **ENG-33** tests: pyramid unit > integration > E2E; deterministic, no `sleep`; coverage ≥80% critical paths; mutation testing on core logic; flaky tests quarantined and fixed ≤24h.
+- **ENG-34** no PII in test data; synthetic or anonymized only.
+- **ENG-35** deps pinned and minimal; daily CVE scan; license compatibility; SBOM; reproducible builds; no unmaintained libraries; signed commits and artifacts.
+- **ENG-36** data lifecycle defined; quality checks at ingestion; lineage tracked; governance with ownership, classification, retention; parameterized queries only.
