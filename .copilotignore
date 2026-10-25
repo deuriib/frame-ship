@@ -1,0 +1,66 @@
+# Binarios y artefactos
+**/dist/**
+**/build/**
+**/out/**
+**/target/**
+**/bin/**
+**/obj/**
+**/coverage/**
+**/.next/**
+**/.nuxt/**
+**/.turbo/**
+**/node_modules/**
+**/vendor/**
+**/.venv/**
+**/venv/**
+**/__pycache__/**
+**/*.min.js
+**/*.min.css
+**/*.map
+**/*.wasm
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.class
+**/*.jar
+**/*.war
+
+# Lockfiles (irrelevantes para DENY)
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+**/poetry.lock
+**/Pipfile.lock
+**/Cargo.lock
+**/Podfile.lock
+**/mix.lock
+**/go.sum       # mantener si auditas supply chain, si no, quitar
+
+# Estado / caches sensibles
+**/*.tfstate
+**/*.tfstate.backup
+**/.terraform/**
+**/.terragrunt-cache/**
+
+# Archivos que *pueden* contener secretos reales — excluir SIEMPRE
+**/.env
+**/.env.local
+**/.env.*.local
+**/.env.production
+**/.env.staging
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/id_rsa*
+**/id_ed25519*
+**/credentials.json
+**/service-account*.json
+
+# Settings personales
+**/.vscode/**
+**/.idea/**
+**/.DS_Store
