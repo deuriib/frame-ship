@@ -1,0 +1,11 @@
+{
+    "frame-ship-context": {
+        "PreInvocation": [
+            {
+                "type": "command",
+                "command": "node scripts/context-inject.ts",
+                "timeout": 10
+            }
+        ]
+    }
+}

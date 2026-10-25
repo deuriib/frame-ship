@@ -1,0 +1,21 @@
+{
+    "name": "frame-ship",
+    "description": "Frame-Ship methodology - from strategic intent to shipped release",
+    "version": "1.0.0",
+    "author": {
+        "name": "Deuri Vasquez",
+        "email": "deuriib@gmail.com"
+    },
+    "license": "Apache-2.0",
+    "keywords": [
+        "workflows",
+        "collaboration",
+        "best-practices",
+        "skills"
+    ],
+    "agents": "agents/",
+    "skills": [
+        "skills/"
+    ],
+    "hooks": "hooks.json"
+}
