@@ -7,6 +7,7 @@
 ![Opencode](https://img.shields.io/badge/opencode-plugin-000000?logo=openai&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
+[![Sponsor](https://img.shields.io/badge/♥-Sponsor-EC4899?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/deuriib)
 
 **An agentic skills framework & Frame→Ship methodology that works — from strategic intent to shipped release.**
 
