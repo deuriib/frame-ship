@@ -1,5 +1,7 @@
 ---
-description: "Hard Deny rules"
+trigger: always_on
+description: "Apply these guidelines for Deny rules"
+globs:
 ---
 
 # Deny Rules — hard gates, no silent pass

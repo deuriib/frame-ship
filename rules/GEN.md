@@ -1,5 +1,7 @@
 ---
-description: "Hard Shared Foundation rules"
+trigger: always_on
+description: "Apply this guidelines for Shared Foundation rules"
+globs:
 ---
 
 # GEN — Shared Foundation (all domains)

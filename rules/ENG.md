@@ -1,5 +1,7 @@
 ---
-description: "Hard Engineering rules"
+trigger: model_decision
+description: "Apply this guidelines for Engineering rules"
+globs:
 ---
 
 # Engineering Rules

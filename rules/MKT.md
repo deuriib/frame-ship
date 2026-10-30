@@ -1,5 +1,7 @@
 ---
-description: "Hard Marketing rules"
+trigger: model_decision
+description: "Apply this guidelines for Marketing rules"
+globs:
 ---
 
 # MKT — Marketing

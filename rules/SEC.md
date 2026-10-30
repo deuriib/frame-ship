@@ -1,5 +1,7 @@
 ---
-description: "Hard Security rules"
+trigger: model_decision
+description: "Apply this guideliones for Security rules"
+globs:
 ---
 
 # Security Rules

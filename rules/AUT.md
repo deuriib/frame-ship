@@ -1,5 +1,7 @@
 ---
-description: "Hard Automation (CI/CD & Ops) rules"
+trigger: model_decision
+description: "Apply these guidelines for Automation (CI/CD & Ops) rules"
+globs:
 ---
 
 # AUT — Automation (CI/CD & Ops)

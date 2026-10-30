@@ -1,5 +1,7 @@
 ---
-description: "Hard Finance rules"
+trigger: model_decision
+description: "Apply this guidelines for Finance rules"
+globs:
 ---
 
 

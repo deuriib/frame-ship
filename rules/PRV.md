@@ -1,5 +1,7 @@
 ---
-description: "Hard Privacy rules"
+trigger: always_on
+description: "Apply this guidelines for Privacy rules"
+globs:
 ---
 
 # PRV — Privacy (Ley 172-13)

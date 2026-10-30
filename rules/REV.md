@@ -1,5 +1,7 @@
 ---
-description: "Hard CRO / Revenue rules"
+triger: model_decision
+description: "Apply this guidelines for CRO/Revenue rules"
+globs:
 ---
 
 # REV — CRO / Revenue

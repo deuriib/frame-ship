@@ -1,5 +1,7 @@
 ---
-description: "Hard CHRO / CPO (People) rules"
+trigger: model_decision
+description: "Apply this guidelines for CHRO / CPO (People) rules"
+globs:
 ---
 
 # PPL — CHRO / CPO (People)

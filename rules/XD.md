@@ -1,5 +1,7 @@
 ---
-description: "Hard Cross-Domain rules"
+trigger: model_decision
+description: "Apply this guidelines for Cross-Domain rules"
+globs:
 ---
 
 # XD — Cross-Domain

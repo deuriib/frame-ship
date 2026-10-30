@@ -1,3 +1,9 @@
+---
+trigger: always_on
+description: frame-ship persistent rules
+globs:
+---
+
 # frame-ship — persistent rules
 
 ## Chain (do not skip)

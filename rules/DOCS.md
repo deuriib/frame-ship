@@ -1,5 +1,7 @@
 ---
-description: "Hard Docs rules"
+trigger: model_decision
+description: "Apple this guideline for Docs rules"
+globs:
 ---
 
 # Docs Upkeep Rules

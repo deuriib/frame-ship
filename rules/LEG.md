@@ -1,5 +1,7 @@
 ---
-description: "Hard Legal rules"
+trigger: model_decision
+description: "Apply this guidelines for Legal rules"
+globs:
 ---
 
 # LEG — Legal
