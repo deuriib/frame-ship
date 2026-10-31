@@ -17,7 +17,7 @@ Bootstrap skill: teaches that skills trigger automatically, states the authorita
 - **Next:** `frame-ship:frame-intent` (chain entry for new initiatives)
 
 ```text
-using-frame-ship → frame-intent → translate-to-spec → propose-changes
+ [research] → frame-intent → translate-to-spec → propose-changes
   → review-security / review-architecture → execute-spec → quality-gate
   → verify-handoff → ship-release
 ```
@@ -40,6 +40,7 @@ Bound to **every agent in session**—this skill binds behavior, not a role. Sin
 
 | Trigger | Stage skill |
 |---|---|
+| High uncertainty / Novel domain / Data dependency | `frame-ship:research` |
 | New initiative / OKRs / strategic planning | `frame-ship:frame-intent` |
 | Brief approved / new domain spec | `frame-ship:translate-to-spec` |
 | Ready to implement / pre-approval | `frame-ship:propose-changes` |

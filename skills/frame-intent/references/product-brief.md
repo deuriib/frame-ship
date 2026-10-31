@@ -1,6 +1,7 @@
 # Product Brief: {{TITLE}}
 
 **ID:** BRIEF-XXX
+**Research-Required:** [yes | no | waived + reason]
 **Initiator:** orchestrator
 **Date:** YYYY-MM-DD
 **Status:** draft | approved
