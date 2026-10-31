@@ -283,6 +283,8 @@ Anti-patterns:
 - [x] `docs/frame-ship/briefs` + `docs/frame-ship/specs` scaffolding (referenced by skills)
 - [ ] Release automation via `ship-release` skill + tagged versions
 
+![Repobeats analytics](https://repobeats.com/deuriib/frame-ship?theme=light&size=medium&period=30)
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
