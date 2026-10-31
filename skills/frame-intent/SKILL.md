@@ -33,7 +33,7 @@ Bound to the **orchestrator**—classifies strategic intent and owns the brief. 
 5. **Propose 2–3 framings** with trade-offs—lead with recommendation and why. YAGNI ruthlessly.
 6. **Present the BRIEF in sections** scaled to complexity; ask after each section. Cover problem, outcome, scope, stakeholders, constraints.
 7. **Produce `docs/frame-ship/briefs/BRIEF-<slug>.md`** via `references/product-brief.md` with `Classification:`, `Framings-considered:`, `Approval:`, and `Domains-touched` from the 8-domain catalogue.
-8. **Define 3–7 OKRs** via `references/okr-template.md`.
+8. **Populate the `## OKRs` section** within the brief using the structure from `references/okr-template.md`.
 9. **Self-review the BRIEF** with fresh eyes—placeholder scan, internal consistency, scope check, ambiguity check. Fix inline, no re-review loop.
 10. **User reviews before handoff.** Wait for explicit yes. HARD-GATE: ceremony scales with size; the approval itself never does.
 11. **Identify required domain owners** (8-domain catalogue in `../AGENTS.md`) and flag cross-cutting concerns.

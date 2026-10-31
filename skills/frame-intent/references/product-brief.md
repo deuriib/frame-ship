@@ -47,3 +47,7 @@
 ## Open Questions
 
 - [ ] [Question + owner]
+
+## OKRs
+
+[Insert OKRs here using the structure from references/okr-template.md]

@@ -280,7 +280,7 @@ Anti-patterns:
 - [x] General plugin adapters: Antigravity CLI (agy) — root-drop plugin (plugin.json, hooks.json, hooks/*.ts via node, rules/, skills/ reused verbatim, 1:1 context parity) → Zed → VS Code → rest (one at a time, opencode stays green)
 - [ ] `docs/README.<harness>.md` per supported harness
 - [x] Test harness in `tests/` (plugin injection + marker idempotency) + CI typecheck on push
-- [x] `docs/frame-ship/briefs` + `docs/frame-ship/specs` scaffolding (referenced by skills)
+- [x] `docs/frame-ship/briefs` + `docs/frame-ship/` scaffolding (referenced by skills)
 - [ ] Release automation via `ship-release` skill + tagged versions
 
 ![Repobeats analytics](https://repobeats.com/deuriib/frame-ship?theme=light&size=medium&period=30)

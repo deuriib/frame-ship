@@ -1,4 +1,6 @@
-# OKRs: {{INITIATIVE}}
+# OKR Section Template: {{INITIATIVE}}
+
+(This content is merged into the BRIEF file)# OKRs: {{INITIATIVE}}
 
 **Period:** QX YYYY
 **Owner:** orchestrator

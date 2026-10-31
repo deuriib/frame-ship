@@ -40,7 +40,7 @@ tests/
 - **Unit tests:** `tests/unit/<domain>/<name>.test.ts` (or collocated adjacent to implementation: `src/<domain>/<name>.test.ts`).
 - **Integration tests:** `tests/integration/<domain>/<name>.integration.test.ts`.
 - **E2E tests:** `tests/e2e/<flow-name>.e2e.test.ts`.
-- **Non-code domain evidence:** `docs/frame-ship/specs/40_workspace/<domain>/evidence/` (e.g. `E-001-legal-redline.pdf`, `E-002-finance-recon.xlsx`).
+- **Non-code domain evidence:** `docs/frame-ship/workspace/<domain>/evidence/` (e.g. `E-001-legal-redline.pdf`, `E-002-finance-recon.xlsx`).
 
 ---
 
@@ -150,14 +150,14 @@ verify-handoff ───────► ship-release
 
 | Chain Stage | Primary Testing Activity | Responsible Role | Input Packet | Output Artifact / Test Evidence | Gate / Pass Criteria |
 | --- | --- | --- | --- | --- | --- |
-| **1. frame-intent** | Define measurable business outcomes and quantifiable key results. | Orchestrator + Business Domain Owners | Strategic Direction | `BRIEF-<slug>.md` + `OKR-<slug>.md` | Measurable KPIs with unambiguous verification baselines. |
-| **2. translate-to-spec** | Define testable requirements (`REQ-XXX`) with formal Given-When-Then acceptance criteria. | Domain Owner + Engineering Owner | Approved Brief | `docs/frame-ship/specs/15_requirements/REQ-*.md`, `ARCHITECTURE.md` | Every requirement has unambiguous, falsifiable criteria. |
-| **3. propose-changes** | Formulate technical test plan, assess test blast radius, declare new test files. | Specialist | Approved Spec | `docs/frame-ship/specs/40_workspace/engineering/PROPOSED_CHANGES.md` | Test strategy pre-approved before any code modification. |
+| **1. frame-intent** | Define measurable business outcomes and quantifiable key results. | Orchestrator + Business Domain Owners | Strategic Direction | `BRIEF-<slug>.md` | Measurable KPIs with unambiguous verification baselines. |
+| **2. translate-to-spec** | Define testable requirements (`REQ-XXX`) with formal Given-When-Then acceptance criteria. | Domain Owner + Engineering Owner | Approved Brief | `docs/frame-ship/requirements/REQ-*.md`, `ARCHITECTURE.md` | Every requirement has unambiguous, falsifiable criteria. |
+| **3. propose-changes** | Formulate technical test plan, assess test blast radius, declare new test files. | Specialist | Approved Spec | `docs/frame-ship/workspace/engineering/PROPOSED_CHANGES.md` | Test strategy pre-approved before any code modification. |
 | **4. review-security** | Review STRIDE threat model, specify security test vectors (auth, PII, injection). | Security Owner | Proposal | `THREAT_MODEL.md` + Security Review Verdict | No open High/Critical security vulnerabilities. |
-| **5. review-architecture** | Validate architectural fitness, boundary rules, and public interface contracts. | Engineering Owner | Proposal | `ADR-*.md` in `docs/frame-ship/specs/12_adr/` | Architectural invariants and backwards compatibility upheld. |
+| **5. review-architecture** | Validate architectural fitness, boundary rules, and public interface contracts. | Engineering Owner | Proposal | `ADR-*.md` in `docs/frame-ship/adr/` | Architectural invariants and backwards compatibility upheld. |
 | **6. execute-spec** | Implement code against tests (Unit, Integration, E2E). Populate traceable test matrix. | Domain Specialist | Approved Proposal + Approvals | `TEST_MATRIX.md`, committed tests, passing test suites | 100% P0 REQ-ID trace; all tests pass; coverage floors met. |
 | **7. quality-gate** | Multi-lens independent verification: Quality Assurance suite run, Refuter edge-case attack, Resilience audit. | Quality Assurance Reviewer + Refuter Reviewer + Domain Reviewers | `SPEC/HARD/GATE/DOMAINS` packet | `quality-assurance-review.md`, `refuter-review.md`, `GATE_REPORT.md` | All gate reviews PASS; zero unhandled findings; gate OPEN. |
-| **8. verify-handoff** | Verify Definition of Done (DoD), CI pass logs, test matrix completeness before release. | Owning Domain Owner + Orchestrator | `GATE_REPORT.md` (OPEN) | `docs/frame-ship/specs/30_delivery/HANDOFF.md` | DoD 100% verified; zero failing tests; zero undocumented waivers. |
+| **8. verify-handoff** | Verify Definition of Done (DoD), CI pass logs, test matrix completeness before release. | Owning Domain Owner + Orchestrator | `GATE_REPORT.md` (OPEN) | `docs/frame-ship/delivery/HANDOFF.md` | DoD 100% verified; zero failing tests; zero undocumented waivers. |
 | **9. ship-release** | Smoke testing, synthetic probes, canary validation, post-deploy rollback drill. | Release Manager / DevOps / Ops | Verified `HANDOFF.md` | `RELEASE_NOTES.md` + archived spec | Live deployment passes smoke checks; rollback dry-run proven. |
 
 ### Supporting Skills Fit
@@ -179,7 +179,7 @@ Use this section to plan tests for a spec during `execute-spec`:
 | REQ-001 | T-001 | `tests/unit/auth/token.test.ts` | Unit | Returns valid JWT when credentials match; throws 401 on invalid secret |
 | REQ-001 | T-002 | `tests/security/auth-expiry.test.ts` | Security | Rejects expired token after TTL; denies refresh after revocation |
 | REQ-002 | T-003 | `tests/integration/db/user-repo.test.ts` | Integration | Persists user record and rolls back transaction on duplicate email |
-| REQ-003 | E-001 | `docs/frame-ship/specs/40_workspace/legal/evidence/` | Attestation | Legal counsel written sign-off on updated terms of service |
+| REQ-003 | E-001 | `docs/frame-ship/workspace/legal/evidence/` | Attestation | Legal counsel written sign-off on updated terms of service |
 
 ### 5.2 Test Environment & Setup Requirements
 

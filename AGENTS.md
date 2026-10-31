@@ -63,3 +63,16 @@ These agents are designed to be injected into your workflow via:
 
 ---
 *“Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación.”*
+
+## Folder Structure
+
+| Folder | Purpose |
+|---|---|
+| `docs/frame-ship/briefs/` | Product Briefs (`BRIEF-XXX.md`) |
+| `docs/frame-ship/design/` | Architecture (`ARCHITECTURE.md`) |
+| `docs/frame-ship/adr/` | Architecture Decision Records (`ADR-XXX.md`) |
+| `docs/frame-ship/requirements/` | Requirements Index (`REQ-XXX.md`) |
+| `docs/frame-ship/backlog/` | Implementation Specs (`SPEC-XXX.md`) |
+| `docs/frame-ship/delivery/` | Release Notes and Delivery tracking |
+| `docs/frame-ship/workspace/` | Implementation artifacts, proposals, and handoffs |
+| `docs/frame-ship/archive/` | Archived specifications and records |
