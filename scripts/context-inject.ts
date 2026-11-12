@@ -4,12 +4,12 @@
  *
  * 1:1 parity with `plugins/opencode/skills.ts`:
  *   opencode `config` (skills.paths)              → agy `skills/` dir (same files, reused verbatim)
- *   opencode `chat.system.transform` (3 cards)    → `rules/frame-ship.md` (static) + this hook (live bootstrap)
+ *   opencode `chat.system.transform` (3 cards)    → `rules/Frame-ship.md` (static) + this hook (live bootstrap)
  *   opencode `loadBootstrapBody`                   → live read of skills/using-frame-ship/SKILL.md,
  *                                                   plugin root resolved from our own import.meta.url
  *                                                   (mirrors opencode resolveSkillsDir), silent fallback
  *   opencode `session.compacting` (reminder)      → N/A in agy (no compaction lifecycle event;
- *                                                   rules/frame-ship.md is always-on in context)
+ *                                                   rules/Frame-ship.md is always-on in context)
  *   opencode `hasMarker` dedupe                   → full bootstrap exactly once (invocationNum == 0,
  *                                                   0-indexed per official hooks docs)
  *
@@ -24,7 +24,7 @@ import { join } from "node:path";
 const MARKER = "[frame-ship]";
 
 const CHAIN =
-    "frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release";
+    "[research] → frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release → [operate]";
 
 const BOOTSTRAP_LABEL = `${MARKER} frame-ship:using-frame-ship bootstrap:`;
 const BOOTSTRAP_ACK = `NOTE: frame-ship:using-frame-ship is already loaded in this context — do not re-load it via the skill tool; follow the chain: ${CHAIN}.`;
@@ -87,8 +87,7 @@ function readFileIfExists(path: string): string {
 /** Live bootstrap body (opencode `loadBootstrapBody` parity): SKILL.md body only, silent fallback. */
 function loadBootstrapBody(pluginRoot: string, workspacePaths: string[]): string {
     const rel = join("skills", "using-frame-ship", "SKILL.md");
-    const guardrails = join("rules", "guardrails.md")
-    const candidates: string[] = [join(pluginRoot, rel), join(process.cwd(), rel), join(pluginRoot, guardrails), join(process.cwd(), guardrails)];
+    const candidates: string[] = [join(pluginRoot, rel), join(process.cwd(), rel)];
     for (const w of workspacePaths) {
         if (typeof w === "string" && w) candidates.push(join(w, rel));
     }

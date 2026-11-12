@@ -13,9 +13,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: jdx/mise-action@v3
-      # - run: npm ci
-      # - run: mise run typecheck
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      # Typecheck the zero-dependency parsing module (the plugin entry files
+      # import @opencode/plugin types, which require the opencode SDK — out of
+      # scope for a standalone checkout). Real behaviour is verified by `test`.
+      - run: npm run typecheck
 
   test:
     runs-on: ubuntu-24.04
@@ -24,5 +28,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
-      # - run: npm ci
-      # - run: npm test
+      - run: npm test

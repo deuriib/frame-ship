@@ -13,111 +13,13 @@
 
 import { Plugin } from "@opencode/plugin";
 import { readTextFile, resolveRepoDir } from "../lib/shared";
+import {
+  parseAgentFile,
+  toOpenCodeMode,
+  toOpenCodePermissions,
+} from "../lib/agent-parse";
 import { readdir } from "node:fs/promises";
 import { join, relative } from "node:path";
-
-// ---- Tipos compartidos ---------------------------------------------------
-
-interface ParsedAgent {
-  name: string;
-  description: string;
-  mainAgent: boolean;
-  subagent: boolean;
-  effort: string;
-  tools: string[];
-  system: string;
-}
-
-// ---- Parseo de frontmatter (sin cambios) ---------------------------------
-
-function stripQuotes(value: string): string {
-  const text = (value || "").trim();
-  if (
-    text.length >= 2 &&
-    ((text.startsWith('"') && text.endsWith('"')) ||
-      (text.startsWith("'") && text.endsWith("'")))
-  ) {
-    return text.slice(1, -1).trim();
-  }
-  return text;
-}
-
-function parseAgentFile(raw: string): ParsedAgent {
-  const empty: ParsedAgent = {
-    name: "",
-    description: "",
-    mainAgent: false,
-    subagent: false,
-    effort: "",
-    tools: [],
-    system: (raw || "").trim(),
-  };
-  const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
-  const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
-  if (!fence) return empty;
-  const frontmatter = fence[1] || "";
-  const nameMatch = frontmatter.match(
-    /^\s*name\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
-  );
-  const descMatch = frontmatter.match(
-    /^\s*description\s*:\s*(?:"([^"]*)"|'([^']*)'|(.*?))\s*$/m,
-  );
-  const effortMatch = frontmatter.match(/^\s*effort\s*:\s*(\S+)\s*$/m);
-  const toolsBlock = frontmatter.match(
-    /^\s*tools\s*:\s*(?:\r?\n|$)((?:\s*-\s*.*(?:\r?\n|$))*)/m,
-  );
-  const tools: string[] = [];
-  if (toolsBlock) {
-    for (const line of (toolsBlock[1] || "").split(/\r?\n/)) {
-      const item = line.match(/^\s*-\s*(\S+)\s*$/);
-      if (item) tools.push(item[1].trim());
-    }
-  }
-  const body = text.slice(fence[0].length).trim();
-  return {
-    name: stripQuotes(nameMatch?.[1] ?? nameMatch?.[2] ?? nameMatch?.[3] ?? ""),
-    description: stripQuotes(
-      descMatch?.[1] ?? descMatch?.[2] ?? descMatch?.[3] ?? "",
-    ),
-    mainAgent: /^\s*mainAgent\s*:\s*true\s*$/m.test(frontmatter),
-    subagent: /^\s*subagent\s*:\s*true\s*$/m.test(frontmatter),
-    effort: (effortMatch?.[1] || "").trim().toLowerCase(),
-    tools,
-    system: body,
-  };
-}
-
-// ---- Translate frame-ship → OpenCode -------------------
-
-function toOpenCodeMode(
-  mainAgent: boolean,
-  subagent: boolean,
-): "primary" | "subagent" | "all" {
-  if (mainAgent && subagent) return "all";
-  if (mainAgent) return "primary";
-  return "subagent";
-}
-
-function toOpenCodePermissions(
-  frameTools: string[],
-): Array<{ action: string; resource: string; effect: "allow" | "deny" }> {
-  const has = (name: string): boolean => frameTools.includes(name);
-  const read = has("view_file") || has("list_dir");
-  const edit = has("write_to_file") || has("replace_file_content");
-  const delegation =
-    has("invoke_subagent") || has("manage_subagents") || has("send_message");
-  return [
-    { action: "read", resource: "*", effect: read ? "allow" : "deny" },
-    { action: "glob", resource: "*", effect: has("find_by_name") ? "allow" : "deny" },
-    { action: "grep", resource: "*", effect: has("grep_search") ? "allow" : "deny" },
-    { action: "edit", resource: "*", effect: edit ? "allow" : "deny" },
-    { action: "shell", resource: "*", effect: has("run_command") ? "allow" : "deny" },
-    { action: "subagent", resource: "*", effect: delegation ? "allow" : "deny" },
-    { action: "question", resource: "*", effect: has("ask_question") ? "allow" : "deny" },
-    { action: "webfetch", resource: "*", effect: has("read_url_content") ? "allow" : "deny" },
-    { action: "skill", resource: "*", effect: "allow" },
-  ];
-}
 
 // ---- Descubrimiento recursivo de .md bajo {root}/agents ------------------
 
@@ -167,10 +69,10 @@ export default Plugin.define({
     for (const filePath of agentFiles) {
       const raw = await readTextFile(filePath);
       if (!raw) continue;
-      const parsed = parseAgentFile(raw);
+      const rel = relative(agentsDir, filePath); // ej. "team/reviewer.md"
+      const parsed = parseAgentFile(raw, rel);
       if (!parsed.system) continue;
 
-      const rel = relative(agentsDir, filePath); // ej. "team/reviewer.md"
       const id = rel.replace(/\.md$/, "").replace(/\\/g, "/"); // "team/reviewer"
 
       // No tocar agentes integrados
