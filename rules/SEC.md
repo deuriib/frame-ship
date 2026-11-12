@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply this guideliones for Security rules"
+description: "Apply these guidelines for Security rules"
 globs:
 ---
 

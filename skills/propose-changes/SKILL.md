@@ -22,11 +22,11 @@ Bound to the **orchestrator dispatches**; owning domain owner + domain specialis
 
 ## Process
 
-0. **Pre-flight load — HARD STOP.** `skill(propose-changes)` loaded? Agent template read for proposing specialist + owning domain owner? Any NO → STOP. Single = direct, no task; multi = orchestrator dispatches ordered to read skill.
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(propose-changes)` loaded? Agent template read for proposing specialist + owning domain owner? Any NO → STOP.
 1. Read the target spec (`docs/frame-ship/backlog/SPEC-###-<slug>.md`) including `execution_mode` and `Domains-touched`.
 2. Produce `docs/frame-ship/workspace/<domain>/PROPOSED_CHANGES.md` via `references/proposal-template.md`, carrying `execution_mode` + `DOMAINS` forward. **Singleton:** create-if-missing else update-in-place, never suffixed.
 3. Include **risk assessment** via `references/risk-assessment.md` (blast radius covers systems + teams + customers + regulators + revenue).
-4. **Identify approvers by domain**—owning domain owner mandatory; engineering owner for architecture impact; security owner for auth/data/API/PII. **Block until approval.**
+4. **Identify approvers by domain**—owning domain owner mandatory; engineering owner for architecture impact; security owner for auth/data/API/PII. **Named human approver required** for legal/regulatory determinations, security exceptions, and irreversible/financial commitments — an agent verdict on these is a draft, not a decision. **Block until approval.**
 5. Hand off to `review-security` / `review-architecture` as required with `SPEC/HARD/GATE/DOMAINS` packet intact.
 6. **Close with a commit** (proposal doc itself is committed; impl files stay untouched). Example: `docs(proposal-003): add PROPOSED_CHANGES for auth with blast radius`.
 

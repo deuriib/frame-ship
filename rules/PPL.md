@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply this guidelines for CHRO / CPO (People) rules"
+description: "Apply these guidelines for CHRO / CPO (People) rules"
 globs:
 ---
 

@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apple this guideline for Docs rules"
+description: "Apply these guidelines for Docs rules"
 globs:
 ---
 

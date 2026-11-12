@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply this guidelines for Legal rules"
+description: "Apply these guidelines for Legal rules"
 globs:
 ---
 

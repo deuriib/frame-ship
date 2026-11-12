@@ -9,7 +9,7 @@ description: Use when a change touches auth, data, external APIs, or when securi
 
 ## Overview
 
-Threat-model security-relevant proposals with STRIDE and issue a binding verdict: **Approved / Conditional / Rejected**. The repository is untouched—only the review document is produced and committed.
+Threat-model security-relevant proposals with STRIDE and issue a binding verdict: **PASS / CONDITIONAL / FAIL**. The repository is untouched—only the review document is produced and committed.
 
 ## Chain Contract
 
@@ -22,7 +22,7 @@ Bound to the **security owner**, who orchestrates security reviewers for PII flo
 
 ## Process
 
-0. **Pre-flight load — HARD STOP.** Load `skill(review-security)`. Read agent templates for security owner + security reviewer. No skill = STOP. Security owner runs inside the orchestrator's ordered skill read (single = direct read).
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). Load `skill(review-security)`. Read agent templates for security owner + security reviewer. No skill = STOP.
 1. Read `docs/frame-ship/workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—only `PROPOSED_CHANGES.md`, never suffixed).
 2. Threat-model with **STRIDE** via `references/threat-model.md`.
 3. Produce the review via `references/security-review-template.md`.

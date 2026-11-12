@@ -1,6 +1,6 @@
 ---
 trigger: always_on
-description: "Apply this guidelines for Privacy rules"
+description: "Apply these guidelines for Privacy rules"
 globs:
 ---
 

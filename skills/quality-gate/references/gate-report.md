@@ -4,6 +4,15 @@
 **Gate Status:** OPEN | CONDITIONAL | CLOSED
 **Domains Touched:** [subset of 8: engineering, security, finance, legal, marketing/brand, people, revenue, automation/ops + data lens if applicable]
 
+## Verdict Vocabulary (one enum)
+
+| Level | Tokens |
+|-------|--------|
+| Reviewer (per agent) | `PASS` / `CONDITIONAL` / `FAIL` |
+| Gate (consolidation) | `OPEN` / `CONDITIONAL` / `CLOSED` |
+
+Mapping: all `PASS` → `OPEN`; any `FAIL` → `CLOSED`; any unmet `CONDITIONAL` → `CONDITIONAL`.
+
 ## Reviewer Verdicts
 
 | Domain          | Reviewer (actual agent) | Verdict     | Findings | Artifact                                                                           |
@@ -70,10 +79,12 @@ Masking reminder rides every export.
 
 ## Load Evidence (HARD STOP — missing = CLOSED)
 
-- [ ] Stage skill loaded: `skill(<stage>)` cited (name + trigger match)
-- [ ] Domain owner/specialist role understood: domain role cited (dispatched role only)
-- [ ] Execution mode declared: `subagents` (max 2, read orders in prompt)
-- [ ] Reviewer independence verified: strictly 1 dedicated subagent per reviewer; zero bundled reviews across multiple domains or wave criteria
+Each row must be **openable by a second person without asking a question** — attestation alone is FAIL (matches `verify-handoff` C4 bar).
+
+- [ ] Skill load present in transcript: `skill(<stage>)` id + trigger match visible in the session log
+- [ ] Reviewer artifacts resolve: every `Reviewer Verdicts` row points at a file that exists (`ls <path>`)
+- [ ] Gate report committed: `git log -1 --name-only` shows this `GATE_REPORT.md` in the gate commit
+- [ ] Lane clean: `git status --short` shows no strays outside this spec's lane
 - [ ] Packet intact: `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — no full-context paste
 - Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate orchestrator).
 
@@ -86,3 +97,4 @@ Masking reminder rides every export.
 - [ ] All reviewers pass or conditions met
 - [ ] Gate Keeper: owning domain owner
 - [ ] Final authority (if waived): domain owners + orchestrator
+- [ ] Named human approver (required for legal/regulatory, security-exception, or irreversible/financial commitments)

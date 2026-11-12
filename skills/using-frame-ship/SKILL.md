@@ -19,7 +19,7 @@ Bootstrap skill: teaches that skills trigger automatically, states the authorita
 ```text
  [research] → frame-intent → translate-to-spec → propose-changes
   → review-security / review-architecture → execute-spec → quality-gate
-  → verify-handoff → ship-release
+  → verify-handoff → ship-release → [operate]
 ```
 
 ## Role Binding
@@ -50,9 +50,9 @@ Bound to **every agent in session**—this skill binds behavior, not a role. Sin
 | Implementation ready for review | `frame-ship:quality-gate` |
 | Work complete, pre-ship review | `frame-ship:verify-handoff` |
 | Verified, ready to ship | `frame-ship:ship-release` |
-| Bug report / failed test / unexpected behavior | `frame-ship:debugging` |
+| Shipped / post-release | `frame-ship:operate` (post-ship verification, non-blocking) |
+| Bug report / failed test / unexpected behavior | `frame-ship:propose-changes` (reproduce → failing test → propose fix) |
 | Parallel lanes (subagents, max 2) | `frame-ship:execute-spec` + `references/worktree-annex.md` |
-| Branch / PR / ready-for-review | `frame-ship:pull-request` |
 
 ### Hard Rules — every step
 
@@ -89,3 +89,5 @@ Re-load this skill first, then resume at the recorded stage with trace and gate 
 
 - `references/bootstrap-checklist.md` — Session-start and post-compaction checks.
 - `references/challenge-round.md` — Shared C1–C4 opt-in challenge mechanics.
+- `references/routing.md` — Entry-point & scope selection by request type.
+- `references/pre-flight.md` — Shared pre-flight contract (HARD STOP) each stage opens with.

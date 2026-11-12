@@ -14,7 +14,7 @@ Route a completed spec to the correct reviewers per touched domain, collect verd
 ## Chain Contract
 
 - **Previous:** `frame-ship:execute-spec`
-- **Next:** `frame-ship:verify-handoff` (only on OPEN gate) | (on failure/bug) `frame-ship:debugging` → `frame-ship:propose-changes`
+- **Next:** `frame-ship:verify-handoff` (only on OPEN gate) | (on failure/bug) `frame-ship:propose-changes`
 
 ```text
 execute-spec → quality-gate → verify-handoff → ship-release
@@ -47,12 +47,12 @@ A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Do
 
 ## Process
 
-0. **Pre-flight load — HARD STOP.** `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
 1. **Identify touched domains** from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
 2. **Dispatch each required reviewer** as a separate, independent subagent (strictly 1 subagent per reviewer; reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first). No single agent may perform multiple reviewers' work.
 3. Each reviewer create-if-missing else update-in-place `docs/frame-ship/workspace/quality-gate/<spec-id>/<reviewer>.md`.
 4. **Consolidate into `GATE_REPORT.md`** via `references/gate-report.md` (create-if-missing else update-in-place).
-5. Any ❌ → gate **CLOSED**. Any ⚠️ → **CONDITIONAL** (conditions must clear). All ✅ → gate **OPEN** → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
+5. Any reviewer `FAIL` → gate **CLOSED**. Any `CONDITIONAL` → **CONDITIONAL** (conditions must clear). All `PASS` → gate **OPEN** → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 6. **Waivers only** by domain owners + orchestrator via `references/waiver-template.md`.
 7. **Close with a commit** (never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
 

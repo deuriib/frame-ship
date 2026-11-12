@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply this guidelines for Engineering rules"
+description: "Apply these guidelines for Engineering rules"
 globs:
 ---
 
