@@ -1,4 +1,4 @@
 ---
-description: Research competitor solutions and recommend next steps with risks
+description: Run discovery research on competitors
 ---
-Research what competitors ship for $ARGUMENTS and recommend what we should build next, with assumptions and risks called out.
+Run frame-ship:research for $ARGUMENTS (competitor analysis): produce RESEARCH_FINDINGS with a GO/NO-GO/PIVOT verdict. Every claim carries a source a second person can open.

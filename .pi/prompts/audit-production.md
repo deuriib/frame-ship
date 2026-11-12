@@ -1,5 +1,5 @@
 ---
-description: Audit production readiness and report gaps ranked by risk
-argument-hint: "[app]"
+description: Audit production via security review + quality gate (evidence-only)
+argument-hint: "[target]"
 ---
-Audit production readiness for ${1:-the app}: health checks, error budgets, and a rollback plan. Report the gaps with fixes, ranked by risk.
+Audit ${1:-production} via review-security + quality-gate (evidence-only, no changes). Report severity + location + owner; do not patch production out-of-band.

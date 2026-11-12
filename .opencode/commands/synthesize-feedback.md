@@ -1,4 +1,4 @@
 ---
-description: Synthesize feedback into top 5 opportunities and a sequenced roadmap
+description: Synthesize feedback into recurring jobs
 ---
-Synthesize $ARGUMENTS into the top 5 opportunities, size each, and produce a sequenced roadmap with a clear first milestone.
+Run frame-ship:research for $ARGUMENTS (feedback synthesis): cluster into recurring jobs, label evidence strength, hand off to frame-intent.

@@ -92,9 +92,9 @@ What maps to what (opencode → agy):
 
 | OpenCode plugin                                                                 | Antigravity CLI equivalent                                                                                   |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `experimental.chat.system.transform` — WORKFLOW_CARD, POINTERS (+ guardrails lane: full `rules/guardrails.md` on context, minimal set on compaction) | `rules/frame-ship.md` — automatically injected into agent context                                            |
+| `experimental.chat.system.transform` — WORKFLOW_CARD, POINTERS (+ guardrails lane: `always_on` rules from `rules/*.md` on context and compaction) | `rules/Frame-ship.md` — automatically injected into agent context                                            |
 | `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`plugins/antigravity/hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
-| `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/frame-ship.md` is persistent & always-on in context             |
+| `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/Frame-ship.md` is persistent & always-on in context             |
 | `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
 
 Local replay (no `agy` binary needed):
