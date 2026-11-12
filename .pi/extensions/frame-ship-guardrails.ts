@@ -4,24 +4,22 @@ import { join } from "node:path";
 
 const MARKER = "[frame-ship-guardrails]";
 
+// Degraded fallback used only when rules/ is unreadable. Deliberately tiny:
+// fail-closed signal, not a second copy of the rule corpus (a long hardcoded
+// copy drifts from the real rules and pretends to be the truth).
 const FALLBACK_GUARDRAILS = `${MARKER}
-## Domains Guardrails (BEFORE dispatch, AFTER verify)
+Guardrails degraded — rules/ unreadable. Deny-by-default: no secrets, no raw
+PII, evidence before claims, escalate Critical/High same-session.`;
 
-### Shared Foundation
-- No sugarcoating. State facts. One point per paragraph.
-- No busywork theater. Every action must have clear value and an owner.
-- Assumptions on irreversible calls stated explicitly before action.
-- FAIL → retry N=2 differently → escalate. No third loop, no sideways.
-- Critical/High surface same session with severity + evidence + owner.
-- Every claim requires proof: diff, scan, log, signed approval, receipt.
-- No secrets/tokens/credentials in code, config, logs, examples, events, prompts, tickets, chats, or commits.
-- Privacy (Ley 172-13): minimization, purpose limitation, PII checkpoints, 72h breach notification.
-
-### Cross-Domain Interfaces
-- Engineering ↔ Security: new boundary/dependency → security review.
-- Marketing ↔ Legal/Privacy: new channel/claim → legal + privacy review.
-- Revenue ↔ Finance: pricing/discounts → joint approval, monthly reconciliation.
-- Any domain ↔ Incident: Critical/High → same-session notification, owner assigned.`;
+// `trigger:` frontmatter decides injection. Anything without a parseable
+// `always_on` trigger is treated as on-demand (never injected here).
+function ruleTrigger(raw: string): string {
+    const text = (typeof raw === "string" ? raw : "").replace(/^[\uFEFF\s]*/, "");
+    const fence = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
+    if (!fence) return "model_decision";
+    const m = (fence[1] || "").match(/^\s*trigger\s*:\s*(\S+)\s*$/m);
+    return m ? m[1].trim() : "model_decision";
+}
 
 async function* walkMarkdownFiles(dir: string): AsyncGenerator<string> {
     const entries = await readdir(dir, { withFileTypes: true });
@@ -54,7 +52,7 @@ export default function (pi: ExtensionAPI) {
             for await (const filePath of walkMarkdownFiles(rulesDir)) {
                 const raw = await readFile(filePath, "utf-8");
                 const body = (raw || "").trim();
-                if (body) bodies.push(body);
+                if (body && ruleTrigger(raw) === "always_on") bodies.push(body);
             }
         } catch {
             // Directorio inexistente → fallback

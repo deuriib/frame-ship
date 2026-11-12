@@ -1,4 +1,4 @@
 ---
-description: Audit a landing page and ship 3 A/B test variants with tracking
+description: Run the Frame→Ship chain for an A/B test
 ---
-Audit $ARGUMENTS and ship 3 A/B test variants with tracking wired in; loop until each variant is live and measurable.
+Run the Frame→Ship chain for $ARGUMENTS (A/B test): frame-intent → propose-changes (pre-register hypothesis + stopping rule) → execute-spec → quality-gate → ship-release. No dark patterns; no peeking before the decision.

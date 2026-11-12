@@ -1,6 +1,6 @@
 ---
-triger: model_decision
-description: "Apply this guidelines for CRO/Revenue rules"
+trigger: model_decision
+description: "Apply these guidelines for CRO/Revenue rules"
 globs:
 ---
 

@@ -14,7 +14,7 @@ Turn verified handoffs into a shippable release with notes, changelog, deploymen
 ## Chain Contract
 
 - **Previous:** `frame-ship:verify-handoff`
-- **Next:** none (chain close; lessons captured by owning C-level on PASS)
+- **Next:** `frame-ship:operate` (post-ship verification; non-blocking for one-shot work)
 
 ## Role Binding
 
@@ -22,17 +22,17 @@ Bound to the **orchestrator** delegating orchestration to the operations functio
 
 ## Process
 
-0. **Pre-flight load — HARD STOP.** `skill(ship-release)` loaded? Agent templates read for orchestrator + owning domain owner / devops? All gates OPEN (or waived) verified? Any NO → STOP. Single = direct; multi = orchestrator dispatches ordered to read skill.
-1. **Verify all DoD checklists + gate reports are OPEN** (with `SPEC/HARD/GATE/DOMAINS` intact).
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(ship-release)` loaded? Agent templates read for orchestrator + owning domain owner / devops? All gates OPEN (or waived) verified? Any NO → STOP.
+1. **Verify all DoD checklists + gate reports are OPEN** (with `SPEC/HARD/GATE/DOMAINS` intact). Record a `GO / NO-GO / HOLD` decision with date + owner — NO-GO is a normal, non-punished outcome (return to `verify-handoff`).
 2. **Produce `docs/frame-ship/delivery/RELEASE_NOTES.md`** via `references/release-notes.md` (ship type: deploy | filing | launch | close | rollout | policy-enable). **Singleton:** create-if-missing else update-in-place, never suffixed.
 3. **Update changelog** via `references/changelog-template.md` (or record N/A with justification for internal-only non-code).
 4. **Audit documentation** via `references/documentation-checklist.md` and synchronize version lockstep via `node scripts/bump-version.mjs --sync` (or bump version). README (`references/readme-template.md`), INSTALL (`references/install-template.md`), and MIGRATION (`references/migration-guide-template.md`) are **CONDITIONAL**: required only when `ship-type` is `deploy` with breaking changes; otherwise cited, not required.
-5. **Coordinate ship mechanics with rollback/undo plan:** devops for deploys; owning domain owner for filings/launches/closes/workflows.
+5. **Coordinate ship mechanics with rollback/undo plan:** devops for deploys; owning domain owner for filings/launches/closes/workflows. **Rehearse the rollback** (revert + retract/void/reverse/disable) with a timestamp before the GO commits.
 6. **Archive by MOVE + promote evidence + purge allowlist** (never copy, never sweep)—exactly these 5 substeps, in order:
    1. `git mv docs/frame-ship/backlog/<spec-file>.md docs/frame-ship/archive/<spec-id>/` and verify `git status --short` shows `R` rename with source path gone (no duplicate, no copy).
-   2. **Promote evidence** into `50_archive/<spec-id>/`: copy `GATE_REPORT.md` + `HANDOFF.md` (from `40_workspace/quality-gate/<spec-id>/` and `40_workspace/<domain>/`)—these prove the release and must survive the purge.
+   2. **Promote evidence** into `docs/frame-ship/archive/<spec-id>/`: copy `GATE_REPORT.md` + `HANDOFF.md` (from `docs/frame-ship/workspace/quality-gate/<spec-id>/` and `docs/frame-ship/workspace/<domain>/`)—these prove the release and must survive the purge.
    3. **Write `docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md`** via `references/archive-record.md`: spec, gate verdict, commit(s), tag, promoted list, purged list, ADR link if any.
-   4. **Purge ONLY this allowlist for this `<spec-id>`:** `40_workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md` + `40_workspace/quality-gate/<spec-id>/`. Nothing outside the allowlist is touched; if another SPEC's lane is active, **STOP** (do not purge across lanes).
+   4. **Purge ONLY this allowlist for this `<spec-id>`:** `docs/frame-ship/workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md` + `docs/frame-ship/workspace/quality-gate/<spec-id>/`. Nothing outside the allowlist is touched; if another SPEC's lane is active, **STOP** (do not purge across lanes).
    5. **Verify before commit:** purged paths absent (`ls`), other lanes untouched, `git status` clean of strays—then release commit includes the `ARCHIVE-RECORD`.
 7. **Close with a release commit** (tag after commit). Example: `chore(release-0.4.0): ship SPEC-003 with notes, ARCHIVE-RECORD and rollback plan`.
 
@@ -44,7 +44,7 @@ Bound to the **orchestrator** delegating orchestration to the operations functio
 - Ship with version mismatch or drift between manifest, plugin runtime, rules, and context hooks.
 - Ship without a rollback/undo plan (revert + retract/void/reverse/disable with owner).
 - Leave the allowlisted drafts in `docs/frame-ship/workspace/` after archival, or purge anything OUTSIDE the allowlist (parallel SPEC lanes must survive).
-- **Archive evidence before purge:** `GATE_REPORT.md` + `HANDOFF.md` must be promoted to `50_archive/<spec-id>/` BEFORE the purge—purging them silently loses the audit trail.
+- **Archive evidence before purge:** `GATE_REPORT.md` + `HANDOFF.md` must be promoted to `docs/frame-ship/archive/<spec-id>/` BEFORE the purge—purging them silently loses the audit trail.
 
 ## Red Flags
 
@@ -52,7 +52,7 @@ Bound to the **orchestrator** delegating orchestration to the operations functio
 |---|---|
 | "Gates are practically done, ship now" | OPEN or waived with record. No exceptions. |
 | "Copy the spec to archive" | MOVE + promote + purge. Copies create duplicates; sweeps violate allowlist. |
-| "Purge everything in 40_workspace" | Allowlist only. Another SPEC's lane must survive. |
+| "Purge everything in workspace" | Allowlist only. Another SPEC's lane must survive. |
 | "Internal-only, no changelog needed" | Record N/A with justification. Skipping silently is a fail. |
 | "Documentation can catch up next release" | Out-of-sync README/INSTALL/MIGRATION blocks ship for deploys with breaking changes. |
 | "Evidence can be purged—git has it" | Promoted evidence survives. Purge allowlist is precise. Archive trail is the point. |
@@ -62,5 +62,5 @@ Bound to the **orchestrator** delegating orchestration to the operations functio
 - `references/release-notes.md` — Highlights/features/fixes/breaking/rollback.
 - `references/changelog-template.md` — Keep-a-Changelog format.
 - `references/documentation-checklist.md` — Pre-release documentation audit + exact purge allowlist.
-- `references/archive-record.md` — `50_archive/<spec-id>/ARCHIVE-RECORD.md`: what was promoted, purged, tagged.
+- `references/archive-record.md` — `docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md`: what was promoted, purged, tagged.
 - Conditional (only `ship-type=deploy` with breaking changes): `references/readme-template.md`, `references/install-template.md`, `references/migration-guide-template.md`.

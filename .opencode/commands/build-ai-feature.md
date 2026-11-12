@@ -1,4 +1,4 @@
 ---
-description: Design and build an AI feature with schema, retrieval, prompts, and evals
+description: Run the Frame→Ship chain for an AI/LLM feature
 ---
-Design and build $ARGUMENTS on a solid data + prompt foundation: schema, retrieval, prompts, and evals — loop until the evals pass on a held-out set.
+Run the Frame→Ship chain for $ARGUMENTS (AI/LLM): frame-intent → translate-to-spec → propose-changes → review-security (STRIDE on the AI boundary) → execute-spec → quality-gate (model QA) → verify-handoff → ship-release. No code before approval.

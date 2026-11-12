@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply this guidelines for Finance rules"
+description: "Apply these guidelines for Finance rules"
 globs:
 ---
 

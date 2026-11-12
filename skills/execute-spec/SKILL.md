@@ -15,7 +15,7 @@ Implement strictly within the approved proposal boundaries with `REQ-ID → test
 
 - **Previous:** `frame-ship:propose-changes` (+ `review-security` / `review-architecture` approvals)
 - **Supporting:** (subagents) `references/worktree-annex.md` — isolated parallel lanes at `.worktrees/<spec-id>`
-- **Next:** `frame-ship:quality-gate` | (optional before review) `frame-ship:pull-request`
+- **Next:** `frame-ship:quality-gate`
 
 ## Role Binding
 
@@ -23,9 +23,9 @@ Bound to the **owning domain owner + domain specialists** for all 8 business dom
 
 ## Process
 
-0. **Pre-flight load — HARD STOP.** `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP. Execution is subagents only. Trivial <15-line reversible work is CEO fast-path, outside methodology.
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(execute-spec)` loaded? Domain owner/specialist role understood? Approvals + `execution_mode` + `DOMAINS` confirmed? Any NO → STOP.
 1. **Confirm all required approvals** are recorded and read `execution_mode` (`subagents`, frozen at frame-intent; overridden per SPEC only with CEO waiver) + `DOMAINS` from spec/proposal.
-2. **Create implementation plan** via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations). **Singleton:** single `IMPLEMENTATION_PLAN.md` per lane—create-if-missing else update-in-place, never suffixed.
+2. **Greenfield scaffold first (when no repo/CI/tests exist)** per `references/scaffold-checklist.md` — repo skeleton, CI green on empty suite, test harness, conventions. **Create implementation plan** via `references/implementation-plan.md` (steps may be file changes OR document/campaign/contract/policy/workflow actions with evidence locations). **Singleton:** single `IMPLEMENTATION_PLAN.md` per lane—create-if-missing else update-in-place, never suffixed.
 3. **Parallel lanes (max 2, `subagents`):** create isolated worktrees first per `references/worktree-annex.md` (consent + clean-baseline + ignore-gate + green `mise run typecheck` before any code). Run each SPEC lane inside `.worktrees/<spec-id>`. Remove + prune after gate evidence is attributed.
 4. **Dispatch:** orchestrator dispatches entire team; domain owners/specialists do the work or brief back. Each prompt orders the specialist to understand their domain role BEFORE acting. Cross-domain need → formal Cross-domain request brief. No sideways dispatch. Sequential degradation, same contract: same packet, same reviewers, same full-wave gate. No min-gate.
 5. **Execute only targets in the approved change list** (files AND non-code targets—no external sends/filings/launches beyond approval).

@@ -1,5 +1,5 @@
 ---
-description: Build a feature end-to-end (API, frontend, tests, CI/deploy)
+description: Run the Frame→Ship chain for a feature (API, frontend, tests, CI/deploy)
 argument-hint: "[feature]"
 ---
-Build ${1:-the feature} end to end — API, frontend, and tests — then wire CI and a deploy, and loop until it's green in staging with functional + unit coverage.
+Run the Frame→Ship chain for ${1:-the feature}: frame-intent → translate-to-spec → propose-changes → review-security/review-architecture (as required) → execute-spec → quality-gate → verify-handoff → ship-release. No code before an approved PROPOSED_CHANGES; no handoff on a CLOSED gate.

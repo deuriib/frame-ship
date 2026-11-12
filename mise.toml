@@ -6,3 +6,7 @@ node = "24.22.1"
 
 [settings]
 experimental = true
+
+[tasks]
+typecheck = "npx -y -p typescript tsc --noEmit"
+test = "node --test \"tests/**/*.test.ts\""

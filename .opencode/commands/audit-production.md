@@ -1,4 +1,4 @@
 ---
-description: Audit production readiness and report gaps ranked by risk
+description: Audit production via security review + quality gate (evidence-only)
 ---
-Audit production readiness for $ARGUMENTS: health checks, error budgets, and a rollback plan. Report the gaps with fixes, ranked by risk.
+Audit $ARGUMENTS via review-security + quality-gate (evidence-only, no changes). Report severity + location + owner; do not patch production out-of-band.

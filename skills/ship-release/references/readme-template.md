@@ -85,7 +85,7 @@ cd [repo]
 | **Installation Guide** | [`INSTALL.md`](./INSTALL.md) | Platform compatibility, verify steps, and troubleshooting |
 | **Changelog** | [`CHANGELOG.md`](./CHANGELOG.md) | Full release history and changes per version |
 | **Migration Guide** | [`MIGRATION.md`](./MIGRATION.md) | Upgrade instructions and breaking change migrations |
-| **Specifications** | `docs/frame-ship/` | Living specs, ADRs (`12_adr/`), and archived deliverables |
+| **Specifications** | `docs/frame-ship/` | Living specs, ADRs (`docs/frame-ship/adr/`), and archived deliverables |
 | **Knowledge Base** | [`AGENTS.md`](./AGENTS.md) | Architecture map, toolchain commands, and conventions |
 
 ---

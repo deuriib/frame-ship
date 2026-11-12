@@ -9,7 +9,7 @@ globs:
 ## Chain (do not skip)
 
 ```text
-frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release
+[research] → frame-intent → translate-to-spec → propose-changes → review-security/review-architecture → execute-spec → quality-gate → verify-handoff → ship-release → [operate]
 ```
 
 ## Load order (HARD STOP)
@@ -21,6 +21,7 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 ## Trigger → skill
 
 - start / what-skills → `using-frame-ship`
+- high uncertainty / novel domain / data dependency → `research` (optional, GO/NO-GO)
 - initiative / OKRs → `frame-intent` (BRIEF + OKRs)
 - brief approved → `translate-to-spec` (REQ + ARCHITECTURE + CONTRACTS)
 - ready to implement → `propose-changes` (PROPOSED_CHANGES, repo untouched)
@@ -30,6 +31,7 @@ frame-intent → translate-to-spec → propose-changes → review-security/revie
 - implementation ready → `quality-gate` (CLOSED on fail)
 - work complete → `verify-handoff` (HANDOFF, DoD)
 - verified → `ship-release` (NOTES + changelog + rollback)
+- shipped / post-release → `operate` (post-ship verification, non-blocking)
 
 ## External skills (complement the chain)
 

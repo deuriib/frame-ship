@@ -1,5 +1,5 @@
 ---
-description: Research competitor solutions and recommend what to build next
-argument-hint: "[problem]"
+description: Run discovery research on competitors
+argument-hint: "[competitors]"
 ---
-Research what competitors ship for ${1:-the specified problem} and recommend what we should build next, with assumptions and risks called out.
+Run frame-ship:research for ${1:-the competitors} (competitor analysis): produce RESEARCH_FINDINGS with a GO/NO-GO/PIVOT verdict. Every claim carries a source a second person can open.

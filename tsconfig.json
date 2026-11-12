@@ -1,0 +1,24 @@
+{
+  // frame-ship TypeScript config — typecheck-only (no emit).
+  //
+  // Scope: the zero-dependency library modules under .opencode/lib/ (the pure,
+  // unit-testable parsing logic). Everything else needs host/SDK types that a
+  // standalone zero-dependency checkout does not carry:
+  //   - .opencode/plugins/*.ts     → @opencode/plugin
+  //   - .pi/extensions/*.ts        → @earendil-works/pi-coding-agent
+  //   - scripts/*.ts, tests/*.ts   → node:* builtins (@types/node)
+  // Those paths are verified at runtime (`node --test`) rather than typechecked.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": [],
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [".opencode/lib/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

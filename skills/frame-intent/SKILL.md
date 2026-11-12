@@ -22,7 +22,7 @@ Bound to the **orchestrator**—classifies strategic intent and owns the brief. 
 
 ## Process
 
-0. **Pre-flight load — HARD STOP (subagents).** `skill(frame-intent)` loaded? Domain ownership identified? `execution_mode` about to be frozen? Any NO → STOP. FAIL → retry N=2 → escalate.
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(frame-intent)` loaded? Domain ownership identified? `execution_mode` about to be frozen? Any NO → STOP.
 1. **Explore context first**—files, docs, recent commits, plus any sideways/external skills that assist discovery, planning, or decomposition. If the request spans multiple independent subsystems, flag it immediately and decompose into sub-initiatives (own BRIEF→SPEC cycle each); brainstorm the first through the normal flow.
 2. **Classify first, announce, allow override.** Ratchet is one-way: hidden complexity upgrades the path. When in doubt, take the heavier path.
    - `spike-equivalent` — feasibility question; output is an answer, not a brief. Probe in 2–3 sentences, nod, recommendation. Throwaway labeled.

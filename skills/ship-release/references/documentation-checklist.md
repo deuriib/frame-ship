@@ -14,7 +14,7 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 | **INSTALL.md** | `references/install-template.md` | Dev / Ops | Clean install dry-run | Platform requirements, verify commands, and banner markers aligned. |
 | **MIGRATION.md** | `references/migration-guide-template.md` | Engineering Owner | Review / dry-run | Required if breaking changes exist; rollback steps documented. |
 | **Code & Header Markers** | `scripts/bump-version.mjs` | Automated script | `node scripts/bump-version.mjs --check` | Plugin header, `VERSION` constant, and parity comments identical. |
-| **Context & Rules** | `rules/frame-ship.md` | Automated script / Dev | Marker grep | Version lockstep note and persistent cards updated. |
+| **Context & Rules** | `rules/Frame-ship.md` | Automated script / Dev | Marker grep | Version lockstep note and persistent cards updated. |
 | **Knowledge Base** | `AGENTS.md` (root & subdirs) | Engineering Owner | Read-back & line count | Runtime line counts, package version, and toolchain commands aligned. |
 | **Spec Lifecycle** | `docs/frame-ship/` | Release Manager | Git status check | Spec `git mv` to `archive/<spec-id>/` (R rename, source gone); `ARCHIVE-RECORD.md` written; allowlisted scratch in `workspace/` purged (nothing outside the allowlist). |
 
@@ -28,7 +28,7 @@ Use this checklist during `ship-release` to guarantee that all project documenta
        ├── package.json
        ├── plugins/opencode/shared.ts
        ├── plugins/antigravity/hooks/context-inject.ts
-       ├── rules/frame-ship.md
+       ├── rules/Frame-ship.md
        ├── README.md
        ├── plugins/opencode/INSTALL.md
        └── AGENTS.md (version + runtime line count)
@@ -46,9 +46,9 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 
 4. Spec Archival & Workspace Hygiene (promote before purge — see SKILL §3 step 6)
    ├── mkdir docs/frame-ship/archive/<spec-id>/ && git mv docs/frame-ship/backlog/<spec>.md docs/frame-ship/archive/<spec-id>/
-   ├── Copy GATE_REPORT.md + HANDOFF.md into 50_archive/<spec-id>/ (evidence survives)
-   ├── Write 50_archive/<spec-id>/ARCHIVE-RECORD.md (references/archive-record.md)
-   ├── Purge allowlist ONLY: 40_workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md + 40_workspace/quality-gate/<spec-id>/
+   ├── Copy GATE_REPORT.md + HANDOFF.md into docs/frame-ship/archive/<spec-id>/ (evidence survives)
+   ├── Write docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md (references/archive-record.md)
+   ├── Purge allowlist ONLY: docs/frame-ship/workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md + docs/frame-ship/workspace/quality-gate/<spec-id>/
    └── Verify: purged paths absent, OTHER SPEC lanes untouched, git status clean
 ```
 

@@ -58,3 +58,4 @@ prod/widen perms. Proof-or-refuted: finding without `diff/scan/log` = REFUTED.
 - [ ] orchestrator
 - [ ] Relevant domain owner(s)
 - [ ] security owner (for security waivers)
+- [ ] Named human approver (required for legal/regulatory, security-exception, or irreversible/financial commitments)

@@ -1,6 +1,6 @@
 ---
 trigger: always_on
-description: "Apply this guidelines for Shared Foundation rules"
+description: "Apply these guidelines for Shared Foundation rules"
 globs:
 ---
 
