@@ -8,24 +8,55 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   typecheck:
+    name: Typecheck
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: 24.22.1
+
       # Typecheck the zero-dependency parsing module (the plugin entry files
       # import @opencode/plugin types, which require the opencode SDK — out of
       # scope for a standalone checkout). Real behaviour is verified by `test`.
-      - run: npm run typecheck
+      - name: Run Typecheck
+        run: npm run typecheck
 
   test:
+    name: Unit & Contract Tests
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: 24.22.1
-      - run: npm test
+
+      - name: Run Tests
+        run: npm test
+
+  docs-test:
+    name: Verify Documentation Commands
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: 24.22.1
+
+      - name: Verify Documentation Commands (Onboarding Injection)
+        run: echo '{"invocationNum": 0}' | node scripts/context-inject.ts
