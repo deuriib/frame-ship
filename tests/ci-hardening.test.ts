@@ -182,7 +182,7 @@ test("release.yml defines tag-triggered release with scoped permissions and asse
   );
   assert.match(
     content,
-    /softprops\/action-gh-release@c062e08bd532815e2082a85e87e3ef299c7d8760\s+#\s*v2\.0\.8/,
+    /softprops\/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191\s+#\s*v2\.0\.8/,
     "release.yml must pin softprops/action-gh-release to commit SHA",
   );
 

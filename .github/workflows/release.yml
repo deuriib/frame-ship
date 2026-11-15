@@ -37,7 +37,7 @@ jobs:
           cat SHA256SUMS
 
       - name: Publish GitHub Release and Assets
-        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef299c7d8760 # v2.0.8
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
         with:
           files: |
             *.tgz
