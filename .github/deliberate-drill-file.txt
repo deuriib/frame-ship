@@ -1,0 +1,2 @@
+Deliberate file to test CODEOWNERS and branch protection ruleset gate.
+Owned by @deuriib under /.github/
