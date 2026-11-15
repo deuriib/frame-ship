@@ -1,6 +1,6 @@
 # Reliability Review: SPEC-XXX
 
-**Reviewer:** review-reliability
+**Review Lens:** Reliability (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

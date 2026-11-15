@@ -1,17 +1,17 @@
 # Definition of Done: SPEC-XXX
 
-**Verifier:** [agent]
+**Verifier:** [domain owner]
 **Date:** YYYY-MM-DD
 **Domains-Touched:** [per spec]
 
 ## Common (all 8 domains)
 
 - [ ] All acceptance criteria met
-- [ ] All REQ-IDs have linked evidence (link present AND resolves AND relevant; attestation-alone = FAIL; missing link = FAIL; dead/irrelevant link = FAIL with recorded reviewer-judgment reason; no handoff. Demo: `docs/frame-ship/workspace/security/SAMPLE-grilling-C4-deadlink-FAIL.md`)
+- [ ] All REQ-IDs have linked evidence (link present AND resolves AND relevant; attestation-alone = FAIL; missing link = FAIL; dead/irrelevant link = FAIL with recorded reviewer-judgment reason; no handoff. Demo: `.frame-ship/security/SAMPLE-grilling-C4-deadlink-FAIL.md`)
 - [ ] C4 FAIL lists `residual-risk + owner` (security lane; silent PASS = FAIL)
 - [ ] Edge cases / failure modes handled
 - [ ] Gate OPEN (or CONDITIONAL conditions cleared + waiver recorded if applicable)
-- [ ] Load evidence: stage skill + dispatched agent template cited (paths), execution_mode declared: `subagents`, packet intact — missing = FAIL, no handoff
+- [ ] Load evidence: stage skill cited (path), execution_mode declared: `subagents`, packet intact — missing = FAIL, no handoff
 - [ ] Docs/changelog updated for user-facing impact
 
 ## Engineering (engineering owner — only if engineering-touched)

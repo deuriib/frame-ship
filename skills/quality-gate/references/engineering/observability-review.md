@@ -1,20 +1,20 @@
 # Observability Review: SPEC-XXX
 
-**Reviewer:** review-observability
+**Review Lens:** Observability (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 
 ## Checklist
 
 - [ ] Structured logging used (JSON/key-value; no raw `console.log` in production)
-- [ ] Zero PII, secrets, or tokens in logs, traces, or metrics (GEN-12, PRV-02)
+- [ ] Zero PII, secrets, or tokens in logs, traces, or metrics (`rules/deny-hard-gates.md`, `rules/data-minimization.md`)
 - [ ] Correlation IDs / trace propagation across service boundaries and async handlers
 - [ ] Four golden signals captured via metrics (latency, traffic, errors, saturation)
 - [ ] Distributed tracing spans created at meaningful boundaries with sufficient attributes
 - [ ] Bounded metric cardinality (no unbounded label values causing memory/cost explosion)
 - [ ] Error logging includes context, stack traces (where appropriate), and error codes
 - [ ] Health check, liveness, and readiness probes instrumented
-- [ ] Alerts mapped to runbooks or automated actions (OPS-11)
+- [ ] Alerts mapped to runbooks or automated actions (`rules/reliability.md`)
 
 ## Telemetry Verification Matrix
 

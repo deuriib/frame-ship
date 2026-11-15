@@ -27,6 +27,20 @@ globs:
 - ready to implement → `propose-changes` (PROPOSED_CHANGES, repo untouched)
 - auth / data / external API → `review-security` (STRIDE)
 - public API / data model / cross-cutting → `review-architecture` (ADR)
+- legal / contracts / compliance / IP → `review-legal`
+- unit economics / finance / treasury → `review-finance`
+- brand / marketing / claims → `review-marketing`
+- pricing / deal desk / revenue → `review-revenue`
+- culture / compensation / people / Creed → `review-people`
+- CI/CD / IaC / SLOs / operations → `review-automation`
+- schema / migrations / lineage / PII → `review-data`
+- readability / cognitive load / complexity → `review-readability`
+- determinism / race conditions / idempotency → `review-reliability`
+- adversarial refutation / edge cases → `review-refuter`
+- telemetry / tracing / structured logs → `review-observability`
+- circuit breakers / retries / fallbacks → `review-resilience`
+- dependencies / supply chain / SPOFs → `review-risk`
+- test coverage / test discipline → `review-quality-assurance`
 - approved spec → `execute-spec` (approved files, REQ → test)
 - implementation ready → `quality-gate` (CLOSED on fail)
 - work complete → `verify-handoff` (HANDOFF, DoD)

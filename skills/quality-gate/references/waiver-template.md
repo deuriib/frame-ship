@@ -43,7 +43,7 @@ waiver against this bar only (every CONDITIONAL gets a row; rows = CONDITIONALs 
 [Must match `Expiry:` line above — valid until date or condition + re-review owner.
 Default: 90 days or next release, whichever first.]
 
-## PII checkpoint (REQ-SEC-003/004 + REQ-P-006 co-sign)
+## PII checkpoint (rules/data-minimization.md + rules/deny-hard-gates.md)
 
 Zero PII/secrets/tokens/credentials/sessions in waiver text, grill
 questions/answers/prompts/logs/examples/exports. Every prompt/adapter/event/log/

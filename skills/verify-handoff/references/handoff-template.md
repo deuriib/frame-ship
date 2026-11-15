@@ -1,7 +1,7 @@
-# Handoff: {{AGENT_ROLE}}
+# Handoff: SPEC-XXX
 
 **Spec Reference:** SPEC-XXX
-**Agent:** [name]
+**Domain:** [domain]
 **Date:** YYYY-MM-DD
 **Status:** complete | blocked | partial
 **Domains-Touched:** [per spec]
@@ -19,7 +19,7 @@
 
 - [ ] Acceptance criteria satisfied (all domains)
 - [ ] Tests/evidence linked per REQ-ID
-- [ ] Load evidence present (skill + template paths + mode + packet)
+- [ ] Load evidence present (skill path + mode + packet)
 - [ ] Domain checks passing (Common + touched-domain appendix in `dod-checklist.md`)
 - [ ] Security checks passing (if security-touched)
 - [ ] Documentation / filing / comms updated as applicable
@@ -28,6 +28,6 @@
 
 [Anything preventing completion]
 
-## Next Agent
+## Next Stage
 
-[Who picks this up next, and what they need to do]
+[Which stage picks this up next, and what needs to happen]

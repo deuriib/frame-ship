@@ -1,13 +1,13 @@
 /**
  * frame-ship v0.12.0 — Frame→Ship shared runtime module (zero deps, V2-only).
- * NOT a plugin (no default export): imported by ./skills.ts (id "frame-ship"),
- * ./agents.ts (id "frame-ship-agents"), ./guardrails.ts (id
- * "frame-ship-guardrails"), and by ./frame-ship.ts (the composed entry point
- * used by package installs).
+ * NOT a plugin (no default export): imported by ../plugins/skills.ts (id
+ * "frame-ship-skills"), ../plugins/guardrails.ts (id
+ * "frame-ship-guardrails"), ../plugins/commands.ts (id
+ * "frame-ship-commands"), and ../plugins/frame-ship.ts (the composed entry
+ * point used by package installs).
  * Owns the version lockstep target (header + `const VERSION`) plus the
- * repo-root path resolution and bounded filesystem helpers both lanes share.
- * Location: plugins/opencode/shared.ts — same directory as the plugin entries,
- * so repo-root derivation is identical for every file in this folder.
+ * repo-root path resolution and bounded filesystem helpers shared across lanes.
+ * Location: .opencode/lib/shared.ts.
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
@@ -25,8 +25,8 @@ function fileUrlToPath(url: string): string | undefined {
   }
 }
 
-// Repo-root artifacts (<repo-root>/skills, <repo-root>/agents) live next to
-// this file's <repo-root>/plugins/opencode/. Resolve relative to our own
+// Repo-root artifacts (<repo-root>/skills, <repo-root>/rules) live next to
+// this file's <repo-root>/.opencode/lib/. Resolve relative to our own
 // location (import.meta.url of THIS module) so installs work from ANY cwd —
 // never assume cwd IS the frame-ship repo. Falls back to the caller's
 // fallbackBase (ctx.location.directory) only when our own URL is unavailable
@@ -114,69 +114,5 @@ export async function readTextFile(path: string): Promise<string> {
     return text;
   } catch {
     return "";
-  }
-}
-
-// Bun.file().exists() first, dynamic node:fs/promises fallback (no static
-// node: import so `tsc` stays clean without @types/node). Resolves false on
-// failure — provisioning is best-effort; the update transform still enriches
-// manually-copied agents when writes are unavailable (read-only config dir).
-export async function fileExists(path: string): Promise<boolean> {
-  try {
-    const bunFile = (
-      globalThis as unknown as {
-        Bun?: { file: (p: string) => { exists: () => Promise<boolean> } };
-      }
-    )?.Bun?.file;
-    if (typeof bunFile === "function") {
-      return await bunFile(path).exists();
-    }
-    // @ts-ignore — node types intentionally not installed; dynamic import only.
-    const fs = (await import("node:fs/promises")) as unknown as {
-      stat: (p: string) => Promise<unknown>;
-    };
-    await fs.stat(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-export async function ensureDir(dir: string): Promise<boolean> {
-  try {
-    // @ts-ignore — node types intentionally not installed; dynamic import only.
-    const fs = (await import("node:fs/promises")) as unknown as {
-      mkdir: (p: string, opts: { recursive: boolean }) => Promise<unknown>;
-    };
-    await fs.mkdir(dir, { recursive: true });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-export async function writeTextFile(
-  path: string,
-  content: string,
-): Promise<boolean> {
-  try {
-    const bunWrite = (
-      globalThis as unknown as { Bun?: { write: unknown } }
-    )?.Bun?.write;
-    if (typeof bunWrite === "function") {
-      await (bunWrite as (p: string, c: string) => Promise<unknown>)(
-        path,
-        content,
-      );
-      return true;
-    }
-    // @ts-ignore — node types intentionally not installed; dynamic import only.
-    const fs = (await import("node:fs/promises")) as unknown as {
-      writeFile: (p: string, c: string, enc: string) => Promise<void>;
-    };
-    await fs.writeFile(path, content, "utf8");
-    return true;
-  } catch {
-    return false;
   }
 }

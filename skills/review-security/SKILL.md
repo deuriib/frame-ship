@@ -9,7 +9,7 @@ description: Use when a change touches auth, data, external APIs, or when securi
 
 ## Overview
 
-Threat-model security-relevant proposals with STRIDE and issue a binding verdict: **PASS / CONDITIONAL / FAIL**. The repository is untouched—only the review document is produced and committed.
+Threat-model security-relevant proposals with STRIDE and issue a binding verdict: **PASS / CONDITIONAL / FAIL**. The repository is untouched—`SECURITY_REVIEW.md` is produced in `.frame-ship/<domain>/SECURITY_REVIEW.md` (gitignored) and promoted to `docs/frame-ship/archive/<spec-id>/` by `ship-release`.
 
 ## Chain Contract
 
@@ -22,12 +22,12 @@ Bound to the **security owner**, who orchestrates security reviewers for PII flo
 
 ## Process
 
-0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). Load `skill(review-security)`. Read agent templates for security owner + security reviewer. No skill = STOP.
-1. Read `docs/frame-ship/workspace/<domain>/PROPOSED_CHANGES.md` (singleton canonical—only `PROPOSED_CHANGES.md`, never suffixed).
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). Load `skill(review-security)`. Load applicable security rules. No skill = STOP.
+1. Read `.frame-ship/<domain>/PROPOSED_CHANGES.md` (singleton canonical—only `PROPOSED_CHANGES.md`, never suffixed).
 2. Threat-model with **STRIDE** via `references/threat-model.md`.
-3. Produce the review via `references/security-review-template.md`.
+3. Produce `.frame-ship/<domain>/SECURITY_REVIEW.md` via `references/security-review-template.md` (singleton per lane; promoted to `docs/frame-ship/archive/<spec-id>/` by `ship-release`).
 4. Issue a binding verdict + conditions. **Block implementation on Rejected.**
-5. Close with a commit. Example: `docs(sec-003): approve SECURITY_REVIEW with STRIDE verdict`.
+5. Record the verdict in `.frame-ship/<domain>/SECURITY_REVIEW.md` (promoted to `docs/frame-ship/archive/<spec-id>/` on ship) and route to `execute-spec` if Approved (or Conditional with conditions met).
 
 ## Verdict Rules
 

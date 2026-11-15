@@ -8,8 +8,8 @@
  * Registers `frame-ship:<stage>` skills, injects workflow card + pointers +
  * live bootstrap (guardrails live in ./guardrails.ts), and preserves the
  * chain across compaction.
- * Location: plugins/opencode/skills.ts. Load it directly, or load
- * ./frame-ship.ts (composed entry: skills + agents + guardrails under one id).
+ * Location: .opencode/plugins/skills.ts. Load it directly, or load
+ * ./frame-ship.ts (composed entry: skills + guardrails + commands under one id).
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 
@@ -57,7 +57,7 @@ function stripFrontmatter(raw: string): string {
   return text.trim();
 }
 
-// Skill frontmatter: name + description (same shape as agents; body kept whole
+// Skill frontmatter: name + description (body kept whole
 // as Skill.Info.content — references stay file-based per scope).
 function parseSkillFile(raw: string): {
   name: string;

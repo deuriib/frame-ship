@@ -1,6 +1,6 @@
 # Marketing Review: SPEC-XXX
 
-**Reviewer:** brand-reviewer (marketing owner)
+**Review Lens:** Brand & Marketing (marketing/brand)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

@@ -2,17 +2,20 @@
  * frame-ship: guardrails plugin (id "frame-ship-guardrails") — Frame→Ship
  * guardrails lane (zero deps, V2-only). Source of truth: `./rules/**/*.md`,
  * read recursively at runtime so the full text never drifts into a hardcoded
- * copy. Version lockstep lives in ./shared.ts (header + const VERSION).
+ * copy. Version lockstep lives in ../lib/shared.ts (header + const VERSION).
  *
  * Trigger-aware: only rules whose frontmatter declares `trigger: always_on`
- * (the foundation — Frame-ship, GEN, DENY, PRV) are injected on session
- * context and on compaction. Domain rules with `trigger: model_decision`
- * (ENG, SEC, FIN, LEG, MKT, PPL, REV, TST, AUT, XD, DOCS) load on demand
- * when that domain's specialist/reviewer activates, so the always-on
+ * (the foundation — `Frame-ship.md`, `coding-standards.md`,
+ * `commit-conventions.md`, `deny-hard-gates.md`, `docs-upkeep.md`,
+ * `foundation-conduct.md`, `minimal-code.md`, `testing-discipline.md`) are
+ * injected on session context and on compaction. Domain rules with
+ * `trigger: model_decision` (e.g. `architecture.md`, `devops.md`,
+ * `engineering-standards.md`, `trust-boundaries.md`, `data-minimization.md`,
+ * etc.) load on demand when their domain activates, so the always-on
  * instruction payload stays lean and each rule carries one enforceable home.
  *
- * Location: plugins/opencode/guardrails.ts. Load it directly, or load
- * ./frame-ship.ts (composed entry: skills + agents + guardrails under one id).
+ * Location: .opencode/plugins/guardrails.ts. Load it directly, or load
+ * ./frame-ship.ts (composed entry: skills + guardrails + commands under one id).
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 

@@ -1,6 +1,6 @@
 # Worktree Annex — isolated parallel lanes inside execute-spec
 
-> Former `git-worktree` supporting skill, merged here (2026-09-22): one annex instead of a skill dir + 4 refs. Chain order never changes; this is a supporting habit loaded alongside `execute-spec`. Skills are preserved by reference: security guards (barrera), pwsh/automation mechanics (automation+engineering owners), announce wording (people owner — verbatim, no variants).
+> Former `git-worktree` supporting skill, merged here (2026-09-22): one annex instead of a skill dir + 4 refs. Chain order never changes; this is a supporting habit loaded alongside `execute-spec`. Skills are preserved by reference: security guards (security domain), pwsh/automation mechanics (automation+engineering owners), announce wording (people owner — verbatim, no variants).
 
 ## 0. Conventions
 

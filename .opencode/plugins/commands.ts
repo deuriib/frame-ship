@@ -7,8 +7,8 @@
  * the execute callback re-submits the rendered template through
  * ctx.session.prompt(), preserving session, delivery and attachments.
  * Never overwrites user-defined commands with the same name.
- * Location: plugins/opencode/commands.ts. Load it directly, or load
- * ./frame-ship.ts (composed entry: skills + agents + guardrails + commands).
+ * Location: .opencode/plugins/commands.ts. Load it directly, or load
+ * ./frame-ship.ts (composed entry: skills + guardrails + commands).
  * Creed: "Haces las cosas como para Dios, por eso trabajas con excelencia y dedicación."
  */
 

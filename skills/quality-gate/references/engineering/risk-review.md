@@ -1,6 +1,6 @@
 # Risk Review: SPEC-XXX
 
-**Reviewer:** review-risk
+**Review Lens:** Risk (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

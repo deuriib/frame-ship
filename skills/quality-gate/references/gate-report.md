@@ -8,29 +8,29 @@
 
 | Level | Tokens |
 |-------|--------|
-| Reviewer (per agent) | `PASS` / `CONDITIONAL` / `FAIL` |
+| Review Lens | `PASS` / `CONDITIONAL` / `FAIL` |
 | Gate (consolidation) | `OPEN` / `CONDITIONAL` / `CLOSED` |
 
 Mapping: all `PASS` → `OPEN`; any `FAIL` → `CLOSED`; any unmet `CONDITIONAL` → `CONDITIONAL`.
 
 ## Reviewer Verdicts
 
-| Domain          | Reviewer (actual agent) | Verdict     | Findings | Artifact                                                                           |
-| --------------- | ----------------------- | ----------- | -------- | ---------------------------------------------------------------------------------- |
-| engineering     | review-readability      | pass        | 0        | `engineering/readability-review.md`                                                |
-| engineering     | review-reliability      | conditional | 2        | `engineering/reliability-review.md`                                                |
-| engineering     | review-refuter          | pass        | 0        | `engineering/refuter-review.md`                                                    |
-| engineering     | review-resilience       | pass        | 0        | `engineering/resilience-review.md`                                                 |
-| engineering     | review-risk             | pass        | 0        | fast gate note                                                                     |
-| engineering     | quality-assurance       | pass        | 0        | `engineering/quality-assurance-review.md`                                          |
-| engineering     | review-data             | pass        | 0        | `domains/data-review.md`                                                           |
-| security        | security-reviewer       | pass        | 0        | `domains/security-review.md`                                                       |
-| finance         | finance-reviewer        | pass        | 0        | `domains/finance-review.md`                                                        |
-| legal           | legal-reviewer          | pass        | 0        | `domains/legal-review.md`                                                          |
-| marketing/brand | brand-reviewer          | pass        | 0        | `domains/marketing-review.md`                                                      |
-| people          | people-reviewer         | pass        | 0        | `domains/people-review.md`                                                         |
-| revenue         | revenue-reviewer        | pass        | 0        | `domains/revenue-review.md`                                                        |
-| automation/ops  | automation-reviewer     | pass        | 0        | `domains/automation-review.md` (+ `domains/ops-review.md` lens when infra-touched) |
+| Domain          | Review Lens     | Verdict     | Findings | Artifact                                                                           |
+| --------------- | --------------- | ----------- | -------- | ---------------------------------------------------------------------------------- |
+| engineering     | readability     | pass        | 0        | `engineering/readability-review.md`                                                |
+| engineering     | reliability     | conditional | 2        | `engineering/reliability-review.md`                                                |
+| engineering     | refuter         | pass        | 0        | `engineering/refuter-review.md`                                                    |
+| engineering     | resilience      | pass        | 0        | `engineering/resilience-review.md`                                                 |
+| engineering     | risk            | pass        | 0        | fast gate note                                                                     |
+| engineering     | test-suite      | pass        | 0        | `engineering/quality-assurance-review.md`                                          |
+| engineering     | data            | pass        | 0        | `domains/data-review.md`                                                           |
+| security        | security        | pass        | 0        | `domains/security-review.md`                                                       |
+| finance         | finance         | pass        | 0        | `domains/finance-review.md`                                                        |
+| legal           | legal           | pass        | 0        | `domains/legal-review.md`                                                          |
+| marketing/brand | marketing/brand | pass        | 0        | `domains/marketing-review.md`                                                      |
+| people          | people          | pass        | 0        | `domains/people-review.md`                                                         |
+| revenue         | revenue         | pass        | 0        | `domains/revenue-review.md`                                                        |
+| automation/ops  | automation/ops  | pass        | 0        | `domains/automation-review.md` (+ `domains/ops-review.md` lens when infra-touched) |
 
 Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touched rows.
 
@@ -51,7 +51,7 @@ Delete non-touched domain rows before sign-off; multi-domain specs keep ALL touc
 
 **Residual-risk:** [risk + owner, or explicit `none + owner` — silent APPROVE+conditions = FAIL]
 
-Substance backstop (COND-K1/SEC1/Q4-shared): presence ≠ substance — a vacuous box-tick (`Accepted-risk: low because low`, owner `someone`, `Expiry: later`) FAILs via a recorded reviewer-judgment reason, never passes silently. Demo: `docs/frame-ship/workspace/security/SAMPLE-grilling-C3-thin-FAIL.md` (3-waiver fixture: thin FAIL, missing-block FAIL, full PASS — every waiver gets a row).
+Substance backstop (COND-K1/SEC1/Q4-shared): presence ≠ substance — a vacuous box-tick (`Accepted-risk: low because low`, owner `someone`, `Expiry: later`) FAILs via a recorded reviewer-judgment reason, never passes silently. Demo: `.frame-ship/security/SAMPLE-grilling-C3-thin-FAIL.md` (3-waiver fixture: thin FAIL, missing-block FAIL, full PASS — every waiver gets a row).
 
 Full re-review banned — C3 reviews every waiver against this bar only
 (every CONDITIONAL gets a row; rows = CONDITIONALs — sample-of-one never satisfies),
@@ -60,7 +60,7 @@ never re-runs the routing table. CLOSED stays CLOSED without recorded
 Expiry default: 90 days or next release, whichever first
 (orchestrator-confirmed; re-review owner mandatory).
 
-### PII checkpoint (REQ-SEC-003/004 + REQ-P-006 co-sign)
+### PII checkpoint (rules/data-minimization.md + rules/deny-hard-gates.md)
 
 Zero PII/secrets/tokens/credentials/sessions in waiver text, grill
 questions/answers/prompts/logs/examples/exports. Every prompt/adapter/event/log/
@@ -71,7 +71,7 @@ Wide/cross-tenant disclosure = finding. No-freelance-fix: findings report
 prod/widen perms. Proof-or-refuted: finding without `diff/scan/log` = REFUTED;
 Critical/High with proof surfaces same session.
 
-### Tone (REQ-P-003/006 co-sign, people owner verifies at gate)
+### Tone (people domain verifies at gate)
 
 Warm and direct — one waiver at a time; say `exit/salir` / pause anytime, no penalty.
 Exit-terminal (COND-P5-shared): `exit/salir` mid-C3 = pause + recorded `grill: exited` + escalate; uncleared waivers stay CONDITIONAL, no silent promote.
@@ -83,7 +83,7 @@ Each row must be **openable by a second person without asking a question** — a
 
 - [ ] Skill load present in transcript: `skill(<stage>)` id + trigger match visible in the session log
 - [ ] Reviewer artifacts resolve: every `Reviewer Verdicts` row points at a file that exists (`ls <path>`)
-- [ ] Gate report committed: `git log -1 --name-only` shows this `GATE_REPORT.md` in the gate commit
+- [ ] Gate report recorded: `ls .frame-ship/quality-gate/<spec-id>/GATE_REPORT.md` resolves (promoted to `docs/frame-ship/archive/<spec-id>/GATE_REPORT.md` at `ship-release`)
 - [ ] Lane clean: `git status --short` shows no strays outside this spec's lane
 - [ ] Packet intact: `SPEC:<path>#REQ / HARD:<mode+constraints> / GATE:<verdicts> / DOMAINS:<list>` — no full-context paste
 - Any unchecked above → gate CLOSED, return to stage with findings (retry N=2 → escalate orchestrator).

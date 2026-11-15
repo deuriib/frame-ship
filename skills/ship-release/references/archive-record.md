@@ -1,6 +1,6 @@
 # ARCHIVE-RECORD — Release Evidence Index
 
-One `ARCHIVE-RECORD.md` per archived spec, at `docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md`. Written in `ship-release` step 6.3, BEFORE the `docs/frame-ship/workspace/` purge (step 6.4) — it is the index that makes the purge safe: it says what was promoted (survives) and what was purged (gone, but accounted for).
+One `ARCHIVE-RECORD.md` per archived spec, at `docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md`. Written in `ship-release` step 6.3, BEFORE the `.frame-ship/` purge (step 6.4) — it is the index that makes the purge safe: it says what was promoted (survives) and what was purged (gone, but accounted for).
 
 **Singleton:** create-if-missing else update-in-place, never suffix — one record per `<spec-id>` dir.
 
@@ -19,17 +19,21 @@ One `ARCHIVE-RECORD.md` per archived spec, at `docs/frame-ship/archive/<spec-id>
 ## Promoted (survive in docs/frame-ship/archive/<spec-id>/)
 
 - [x] <spec-file>.md          — moved via git mv (R rename)
-- [x] GATE_REPORT.md          — from docs/frame-ship/workspace/quality-gate/<spec-id>/
-- [x] HANDOFF.md              — from docs/frame-ship/workspace/<domain>/
+- [x] GATE_REPORT.md          — from .frame-ship/quality-gate/<spec-id>/
+- [x] HANDOFF.md              — from .frame-ship/<domain>/
+- [ ] ARCHITECTURE_REVIEW.md  — from .frame-ship/<domain>/ (when present)
+- [ ] SECURITY_REVIEW.md      — from .frame-ship/<domain>/ (when present)
 - [ ] ADR-###-<slug>.md       — link if this spec created/amended one (docs/frame-ship/adr/, not copied)
 
 ## Purged (allowlist only, this <spec-id>)
 
-- docs/frame-ship/workspace/<domain>/PROPOSED_CHANGES.md
-- docs/frame-ship/workspace/<domain>/IMPLEMENTATION_PLAN.md
-- docs/frame-ship/workspace/<domain>/TEST_MATRIX.md
-- docs/frame-ship/workspace/<domain>/HANDOFF.md
-- docs/frame-ship/workspace/quality-gate/<spec-id>/   (all <reviewer>.md; GATE_REPORT.md promoted first)
+- .frame-ship/<domain>/PROPOSED_CHANGES.md
+- .frame-ship/<domain>/SECURITY_REVIEW.md (if present; promoted first)
+- .frame-ship/<domain>/ARCHITECTURE_REVIEW.md (if present; promoted first)
+- .frame-ship/<domain>/IMPLEMENTATION_PLAN.md
+- .frame-ship/<domain>/TEST_MATRIX.md
+- .frame-ship/<domain>/HANDOFF.md
+- .frame-ship/quality-gate/<spec-id>/   (all <review-lens>.md; GATE_REPORT.md promoted first)
 
 ## Rollback plan
 

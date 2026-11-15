@@ -1,6 +1,6 @@
 # Refuter Review: SPEC-XXX
 
-**Reviewer:** review-refuter (adversarial)
+**Review Lens:** Adversarial Refuter (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass ("could not falsify") | conditional | fail
 

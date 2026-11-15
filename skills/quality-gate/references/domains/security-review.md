@@ -1,6 +1,6 @@
 # Security Review: SPEC-XXX
 
-**Reviewer:** security-reviewer (security owner)
+**Review Lens:** Security (security)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 
