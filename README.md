@@ -5,7 +5,8 @@
 ![Node](https://img.shields.io/badge/node-24%20LTS-339933?logo=node.js&logoColor=white)
 ![Mise](https://img.shields.io/badge/mise-managed-7950ED?logo=mise&logoColor=white)
 ![Opencode](https://img.shields.io/badge/opencode-plugin-000000?logo=openai&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 [![Sponsor](https://img.shields.io/badge/♥-Sponsor-EC4899?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/deuriib)
 
@@ -21,6 +22,8 @@ A complete delivery methodology for your coding agents, built on top of a set of
 - [What's Inside](#whats-inside)
 - [Philosophy](#philosophy)
 - [Contributing](#contributing)
+- [Community & Support](#community--support)
+- [Security Policy](#security-policy)
 - [Updating](#updating)
 - [Developing](#developing)
 - [Roadmap](#roadmap)
@@ -61,9 +64,9 @@ opencode plugin add github:deuriib/frame-ship
 
 Then quit + restart opencode (config is not hot-reloaded). Verify: the system prompt contains `[frame-ship v0.12.0]` and the native `skill` tool discovers `using-frame-ship` through `ship-release`.
 
-Prerequisites: [opencode](https://opencode.ai/), Git + [`gh`](https://cli.github.com/) authenticated (repo is still private), Node 22 LTS via `mise install`.
+Prerequisites: [opencode](https://opencode.ai/), Git, Node 24 LTS (or Node 22+ via `mise install`).
 
-For development on frame-ship itself (live local changes), use a local path instead — see [`plugins/opencode/INSTALL.md`](./plugins/opencode/INSTALL.md). Never commit a `file:///` path to a shared config.
+For development on frame-ship itself (live local changes), load the workspace root directly into your OpenCode configuration. Never commit a local `file:///` path to a shared config.
 
 > Note: full per-harness guides (`docs/README.<harness>.md`) land as each adapter ships. Today: opencode + Antigravity CLI (agy).
 
@@ -93,15 +96,14 @@ What maps to what (opencode → agy):
 | OpenCode plugin                                                                 | Antigravity CLI equivalent                                                                                   |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `experimental.chat.system.transform` — WORKFLOW_CARD, POINTERS (+ guardrails lane: `always_on` rules from `rules/*.md` on context and compaction) | `rules/Frame-ship.md` — automatically injected into agent context                                            |
-| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`plugins/antigravity/hooks/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
+| `experimental.chat.system.transform` — live `using-frame-ship/SKILL.md`         | PreInvocation hook (`scripts/context-inject.ts`) — `injectSteps` + `ephemeralMessage` on `invocationNum === 0` |
 | `experimental.session.compacting` — COMPACTION_REMINDER                         | No compaction event in agy — `rules/Frame-ship.md` is persistent & always-on in context             |
 | `hasMarker` idempotency                                                         | `invocationNum === 0` guard — bootstrap injected exactly once per session                                    |
 
 Local replay (no `agy` binary needed):
 
 ```bash
-node plugins/antigravity/hooks/safety-gate.ts < plugins/antigravity/hooks/fixtures/pretool-allow.json
-node plugins/antigravity/hooks/context-inject.ts < plugins/antigravity/hooks/fixtures/preinvocation-first.json
+echo '{"invocationNum": 0}' | node scripts/context-inject.ts
 ```
 
 ## The Basic Workflow
@@ -203,14 +205,30 @@ Hard rules (non-negotiable):
 
 ## Contributing
 
-1. Start at `frame-intent` for initiatives, or `propose-changes` for scoped fixes (proposal first, no code).
-2. Keep changes small, traced (`REQ-ID → test → artifact`), and verified.
-3. Run `mise run typecheck` before pushing.
-4. After any plugin/skill edit: quit + restart opencode (config not hot-reloaded).
-5. One problem per change; never approve your own proposal.
-6. Every release section in `CHANGELOG.md` gets a matching `git tag vX.Y.Z` — the tag is the release truth.
+Contributions are welcome! Please review our [Contributing Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before submitting pull requests.
+
+1. **Proposal before code**: Start at `frame-intent` for initiatives, or `propose-changes` for scoped fixes. Never approve your own proposal.
+2. **Clean branch & DCO sign-off**: Use `git checkout -b <type>/<description>` and sign commits with `git commit -s -m "type(scope): description"`.
+3. **Traceability**: Keep changes small, traced (`REQ-ID → test → artifact`), and verified.
+4. **Docs upkeep**: Update documentation in the same pull request as code changes.
+5. **Quality verification**: Run `npm test` and `npm run typecheck` before pushing.
+6. **Releases**: Every release section in `CHANGELOG.md` gets a matching `git tag vX.Y.Z` — the tag is the release truth.
 
 Skill frontmatter stays exact: `name: <kebab==dir>`, one-sentence `description` with `Use when/Triggered by`. No extra keys. Body shape: Purpose / Chain / Role / Process / Won't do / References. Creed lives in `SKILL.md` only.
+
+## Community & Support
+
+- **Discussions & Q&A**: Join our [GitHub Discussions](https://github.com/deuriib/frame-ship/discussions) for general help, design questions, and ideas.
+- **Bug Reports**: Open a structured report via [GitHub Issues](https://github.com/deuriib/frame-ship/issues).
+- **Support Guidelines**: See [SUPPORT.md](SUPPORT.md) for maintainer availability, escalation channels, and response windows.
+- **Code of Conduct**: All participants must follow our [Code of Conduct](CODE_OF_CONDUCT.md) (Contributor Covenant v2.1). Monitored contact: `deuriib@gmail.com` (48-hour response SLA).
+
+## Security Policy
+
+Security reports are handled with priority and confidential coordination:
+- **Private Reporting**: Open a confidential draft via [GitHub Security Advisories](https://github.com/deuriib/frame-ship/security/advisories) or email `deuriib@gmail.com`.
+- **Response SLA**: Initial acknowledgement within 48 hours, triage within 5 business days, patch release within 30 calendar days.
+- **Policy Details**: See [SECURITY.md](SECURITY.md) for supported versions (`1.1.x`) and vulnerability reporting procedures.
 
 ## Updating
 
@@ -261,12 +279,13 @@ Project structure:
 Commands:
 
 ```bash
-# from repo root (mise)
-mise run typecheck   # typecheck .opencode/plugins/{frame-ship,skills,guardrails,commands}.ts + .opencode/lib/shared.ts
-mise run install     # npm install at repo root
+# Using npm
+npm test             # Run native test suite (tests/**/*.test.ts)
+npm run typecheck    # Run TypeScript compiler typecheck (tsc --noEmit)
 
-# raw (from repo root)
-npx -y -p typescript tsc --noEmit
+# Using mise
+mise run test        # Run test suite via mise
+mise run typecheck   # Run typechecker via mise
 ```
 
 Conventions:
