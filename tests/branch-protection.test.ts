@@ -53,9 +53,12 @@ test("production-main.json ruleset satisfies GitHub Ruleset requirements for mai
     "Strict required status checks policy must be enabled",
   );
   const contexts = statusRule.parameters.required_status_checks.map((c: { context: string }) => c.context);
-  assert.ok(contexts.includes("typecheck"), "Must require typecheck check context");
-  assert.ok(contexts.includes("test"), "Must require test check context");
-  assert.ok(contexts.includes("docs-test"), "Must require docs-test check context");
+  assert.ok(contexts.includes("Typecheck"), "Must require Typecheck check context");
+  assert.ok(contexts.includes("Unit & Contract Tests"), "Must require Unit & Contract Tests check context");
+  assert.ok(
+    contexts.includes("Verify Documentation Commands"),
+    "Must require Verify Documentation Commands check context",
+  );
 });
 
 test("enterprise-main-spec.json includes Conventional Commits regex pattern and enterprise parameters", async () => {
