@@ -17,7 +17,9 @@ The chain is fixed and linear; this table only chooses **where to enter** and **
 
 ## Domains Touched → Reviewer Wave
 
-A change that touches a domain routes that domain's reviewer into `quality-gate`. Domains: engineering, security, finance, legal, marketing/brand, people, revenue, automation/ops + the `review-data` lens for any schema/PII-store impact.
+A change that touches a domain routes that domain's reviewer into `quality-gate` via its specialized review skill:
+- **Engineering Lenses:** `review-readability`, `review-reliability`, `review-refuter`, `review-observability`, `review-resilience`, `review-risk`, `review-quality-assurance`, `review-architecture`
+- **Domain Reviews:** `review-security`, `review-finance`, `review-legal`, `review-marketing`, `review-people`, `review-revenue`, `review-automation`, `review-data` (cross-cutting lens for any schema/PII-store impact).
 
 ## Mode Sizing
 

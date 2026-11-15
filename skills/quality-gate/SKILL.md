@@ -29,32 +29,39 @@ Bound to the **orchestrator dispatches all gate reviewers**; owning domain owner
 
 ## Reviewer Routing Table
 
-| Domain | Owner | Reviewers |
-|---|---|---|
-| engineering | engineering owner | review-readability, review-reliability, review-refuter, review-observability, review-resilience, review-risk, quality-assurance, review-data (data specs) |
-| security | security owner | security-reviewer |
-| finance | finance owner | finance-reviewer |
-| legal | legal owner | legal-reviewer |
-| brand/marketing | marketing owner | brand-reviewer |
-| people | people owner | people-reviewer |
-| revenue | revenue owner | revenue-reviewer |
-| automation/ops | automation owner | automation-reviewer (+ ops lens) |
-| data (cross-cutting lens) | engineering owner | review-data + data-engineer lineage check |
+| Domain | Owner | Review Lenses | Specialized Review Skill |
+|---|---|---|---|
+| engineering | engineering owner | readability | `review-readability` |
+| engineering | engineering owner | reliability | `review-reliability` |
+| engineering | engineering owner | adversarial refuter | `review-refuter` |
+| engineering | engineering owner | observability | `review-observability` |
+| engineering | engineering owner | resilience | `review-resilience` |
+| engineering | engineering owner | risk & supply chain | `review-risk` |
+| engineering | engineering owner | test suite & quality assurance | `review-quality-assurance` |
+| engineering | engineering owner | architecture & system design | `review-architecture` |
+| security | security owner | security & threat modeling (STRIDE) | `review-security` |
+| finance | finance owner | unit economics & accounting | `review-finance` |
+| legal | legal owner | regulatory & contract compliance | `review-legal` |
+| brand/marketing | marketing owner | brand positioning & claims | `review-marketing` |
+| people | people owner | culture, compensation & Creed | `review-people` |
+| revenue | revenue owner | pricing, deal desk & forecasting | `review-revenue` |
+| automation/ops | automation owner | CI/CD, IaC, SLOs & rollback | `review-automation` |
+| data (cross-cutting lens) | data/engineering owner | schema, migrations, PII & lineage | `review-data` |
 
-A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Domains-touched` comes from the spec packet; data lens attaches to any spec with schema/lineage/PII-store impact.
+A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Domains-touched` comes from the spec packet; data lens attaches to any spec with schema/lineage/PII-store impact. Each reviewer is loaded via its dedicated specialized review skill (`skill(review-*)`).
 
-**Execution mode** (from spec `execution_mode`): `subagents` only—full wave per routing table + adversarial `review-refuter` before `quality-assurance` (full-wave único, no min-gate). Sequential degradation, same contract: same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
+**Execution mode** (from spec `execution_mode`): `subagents` only—full wave per routing table + adversarial refuter review before test-suite verification (full-wave único, no min-gate). Sequential degradation, same contract: same packet, same reviewers, same full-wave gate. No min-gate, no silent downgrade.
 
 ## Process
 
 0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(quality-gate)` loaded? Owning domain owner identified? Each reviewer dispatched by orchestrator? Any NO → STOP.
 1. **Identify touched domains** from spec `Domains-touched`/tags/requirements (must be subset of 8-domain catalogue in `../AGENTS.md`).
 2. **Dispatch each required reviewer** as a separate, independent subagent (strictly 1 subagent per reviewer; reference-only `SPEC/HARD/GATE/DOMAINS` packet + explicit orders to understand domain role first). No single agent may perform multiple reviewers' work.
-3. Each reviewer create-if-missing else update-in-place `docs/frame-ship/workspace/quality-gate/<spec-id>/<reviewer>.md`.
-4. **Consolidate into `GATE_REPORT.md`** via `references/gate-report.md` (create-if-missing else update-in-place).
+3. Each reviewer create-if-missing else update-in-place `.frame-ship/quality-gate/<spec-id>/<review-lens>.md`.
+4. **Consolidate into `.frame-ship/quality-gate/<spec-id>/GATE_REPORT.md`** via `references/gate-report.md` (create-if-missing else update-in-place; promoted to `docs/frame-ship/archive/<spec-id>/` by `ship-release`).
 5. Any reviewer `FAIL` → gate **CLOSED**. Any `CONDITIONAL` → **CONDITIONAL** (conditions must clear). All `PASS` → gate **OPEN** → hand off to `verify-handoff` with `SPEC/HARD/GATE/DOMAINS` intact.
 6. **Waivers only** by domain owners + orchestrator via `references/waiver-template.md`.
-7. **Close with a commit** (never fails the gate). Example: `docs(gate-003): record OPEN verdict for SPEC-003 with 7 reviews`.
+7. **Record gate verdict** in `.frame-ship/quality-gate/<spec-id>/GATE_REPORT.md` (gitignored in `.frame-ship/`; promoted to `docs/frame-ship/archive/<spec-id>/GATE_REPORT.md` and committed during `ship-release`).
 
 ### C3 — CONDITIONAL/Waiver Interrogation Lane (security-owned)
 
@@ -76,12 +83,12 @@ A spec spanning multiple domains needs ALL touched-domain reviewers to sign. `Do
 | "One agent can cover several reviewer roles" | Strictly 1 subagent per reviewer. Bundled reviews are prohibited. |
 | "CONDITIONAL is close enough to OPEN" | Conditions must clear. Uncleared = CONDITIONAL, no silent promote. |
 | "I'll re-review the spec in C3" | C3 interrogates CONDITIONALs only—no routing-table change, no re-dispatch. |
-| "The gate is failing, I'll just commit and move on" | Commit never fails the gate; the verdict does. CLOSED stays CLOSED without recorded waiver. |
+| "The gate is failing, I'll just write the report and move on" | Writing `.frame-ship/quality-gate/<spec-id>/GATE_REPORT.md` never opens a failing gate; the verdict does. CLOSED stays CLOSED without recorded waiver. |
 | "Internal-only spec skips the data lens" | Data lens attaches to any spec with schema/lineage/PII-store impact. |
 
 ## References
 
 - `references/gate-report.md` — Consolidated verdicts + conditions.
 - `references/waiver-template.md` — Domain owners + orchestrator override record.
-- `references/engineering/` — readability, reliability, refuter, observability, resilience, risk, quality-assurance checklists.
+- `references/engineering/` — readability, reliability, refuter, observability, resilience, risk, test-suite verification checklists.
 - `references/domains/` — finance, legal, marketing, people, security, data, revenue, automation checklists + ops lens.

@@ -1,6 +1,6 @@
 # Readability Review: SPEC-XXX
 
-**Reviewer:** review-readability
+**Review Lens:** Readability (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

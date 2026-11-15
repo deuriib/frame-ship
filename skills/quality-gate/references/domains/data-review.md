@@ -1,6 +1,6 @@
 # Data Review: SPEC-XXX
 
-**Reviewer:** review-data (engineering owner)
+**Review Lens:** Data Lineage & Privacy (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 
@@ -9,7 +9,7 @@
 - [ ] Schema changes versioned
 - [ ] Data lineage documented
 - [ ] Quality checks (nulls, types, ranges)
-- [ ] PII handling compliant (privacy-engineer consulted)
+- [ ] PII handling compliant (`rules/data-minimization.md` verified)
 - [ ] Migration path defined
 - [ ] Backfill strategy (if applicable)
 - [ ] Analytics impact assessed

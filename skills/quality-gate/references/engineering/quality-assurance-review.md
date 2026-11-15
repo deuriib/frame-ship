@@ -1,6 +1,6 @@
 # Quality Assurance Review: SPEC-XXX
 
-**Reviewer:** quality-assurance (runs the real suite)
+**Review Lens:** Test Suite & Coverage (engineering — runs the real suite)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

@@ -1,6 +1,6 @@
 # Automation Review: SPEC-XXX
 
-**Reviewer:** automation-reviewer (automation owner) + engineering owner (ops mechanics)
+**Review Lens:** Automation & Ops (automation/ops + engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

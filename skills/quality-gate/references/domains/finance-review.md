@@ -1,6 +1,6 @@
 # Finance Review: SPEC-XXX
 
-**Reviewer:** finance-reviewer (finance owner)
+**Review Lens:** Finance (finance)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

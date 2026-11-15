@@ -1,6 +1,6 @@
 # Resilience Review: SPEC-XXX
 
-**Reviewer:** review-resilience
+**Review Lens:** Resilience (engineering)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

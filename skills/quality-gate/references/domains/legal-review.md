@@ -1,6 +1,6 @@
 # Legal Review: SPEC-XXX
 
-**Reviewer:** legal-reviewer (legal owner)
+**Review Lens:** Legal (legal)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

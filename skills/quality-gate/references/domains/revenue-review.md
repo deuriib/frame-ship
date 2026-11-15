@@ -1,6 +1,6 @@
 # Revenue Review: SPEC-XXX
 
-**Reviewer:** revenue-reviewer (revenue owner)
+**Review Lens:** Revenue (revenue)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 

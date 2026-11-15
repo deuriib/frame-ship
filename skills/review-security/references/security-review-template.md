@@ -1,6 +1,6 @@
 # Security Review: SPEC-XXX
 
-**Reviewer:** security owner via security-reviewer / review-risk
+**Review Lens:** Security & Threat Model (security)
 **Date:** YYYY-MM-DD
 **Verdict:** Approved | Conditional | Rejected
 

@@ -1,6 +1,6 @@
 # People Review: SPEC-XXX
 
-**Reviewer:** people-reviewer (people owner)
+**Review Lens:** People (people)
 **Date:** YYYY-MM-DD
 **Verdict:** pass | conditional | fail
 
@@ -13,7 +13,7 @@
 - [ ] Hiring/training needs flagged
 - [ ] Change management plan (if needed)
 - [ ] Uniform subagents wording verified (W-SUBAGENTS + W-SEQ grep evidence attached)
-- [ ] No min-gate path invoked; full-wave + refuter before quality-assurance
+- [ ] No min-gate path invoked; full-wave + adversarial refuter before test-suite verification
 - [ ] Rule-change impact communicated (all roles aligned with subagents nomenclature and natural process)
 
 ## Findings
@@ -26,4 +26,4 @@
 
 [Why this verdict]
 
-Attach W-SUBAGENTS/W-SEQ grep evidence + multi-subagents residue grep (NF-001 pattern); rationale cites diff=0.
+Attach W-SUBAGENTS and W-SEQ grep evidence + multi-subagents residue grep (NF-001 pattern); rationale cites diff=0.
