@@ -2,82 +2,43 @@
 
 ## Overview
 
-This repository contains a collection of specialized AI agents designed to operate within the **Frame→Ship** methodology. These agents are task-oriented entities with specific **Skills**, **Rules**, and **Personas** that allow them to execute complex, high-stakes workflows with precision and excellence.
+This repository implements the **Frame→Ship** delivery methodology — from strategic intent (`frame-intent`) through specification, pre-approval proposal, security and architecture review, implementation, multi-domain quality gate, handoff verification, and release archival (`ship-release`).
 
-> Single source of truth for the roster is `agents/*.md` (frontmatter `name:`). This file is a human-readable index generated from it — if it disagrees with `agents/`, the file wins.
+## Architecture Pillars
 
-## Agent Architecture
+Frame→Ship is built on two pillars:
 
-Every agent in this ecosystem is defined by three pillars:
+1. **Skills (`skills/`):** Composable stage workflows and methodologies. Each skill consists of a `SKILL.md` (instruction set) and `references/` (templates, checklists, and rubrics).
+2. **Rules (`rules/`):** Domain-specific constraints and guardrails enforced across execution:
+   - `always_on` foundation rules (`Frame-ship.md`, `coding-standards.md`, `commit-conventions.md`, `deny-hard-gates.md`, `docs-upkeep.md`, `foundation-conduct.md`, `minimal-code.md`, `testing-discipline.md`) are injected on every context build and compaction.
+   - `model_decision` domain rules (`architecture.md`, `devops.md`, `engineering-standards.md`, `trust-boundaries.md`, `data-minimization.md`, etc.) load on demand when their domain activates.
 
-1. **Persona (`agents/`):** The character, expertise, and behavioral constraints of the agent. It defines *who* the agent is and *how* it interacts.
-2. **Skills (`skills/`):** The actionable tools and methodologies available to the agent. Skills are composed of a `SKILL.md` (instruction set) and `references/` (templates and checklists).
-3. **Rules (`rules/`):** The domain-specific constraints and guidelines that the agent must respect during execution. `always_on` rules (foundation) are injected on every context build; `model_decision` rules load on demand when their domain activates.
+## Functional Domains & Specialized Review Skills
 
-## Agent Roster
+Work in Frame→Ship is organized across 8 functional domains (plus a cross-cutting data lens), each backed by dedicated specialized review skills:
 
-### 👑 Domain Owners (dispatch + verdict authority)
+| Domain | Scope | Specialized Review Skill(s) | Verdicts |
+|--------|-------|-----------------------------|----------|
+| `engineering` | Architecture, readability, reliability, refuter, observability, resilience, risk, QA | `review-architecture`, `review-readability`, `review-reliability`, `review-refuter`, `review-observability`, `review-resilience`, `review-risk`, `review-quality-assurance` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `security` | Cybersecurity, IAM, STRIDE threat modeling, OWASP Top 10, privacy | `review-security` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `legal` | Regulatory compliance, contracts, licensing, IP, Ley 172-13 | `review-legal` (licensed human attorney approves) | `PASS` / `CONDITIONAL` / `FAIL` |
+| `finance` | Unit economics, FP&A, accounting controls, tax, treasury | `review-finance` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `marketing/brand` | Brand positioning, content production, claims substantiation, channel operations | `review-marketing` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `revenue` | Pricing, deal desk, pipeline forecasting, billing recognition, post-sale | `review-revenue` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `people` | Culture, Creed alignment, compensation, collaboration, change impact | `review-people` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `automation/ops` | IaC, CI/CD pipelines, runbooks, SLOs, rollback readiness | `review-automation` | `PASS` / `CONDITIONAL` / `FAIL` |
+| `data` (cross-cutting) | Schema design, migrations, lineage, retention, PII minimization | `review-data` | `PASS` / `CONDITIONAL` / `FAIL` |
 
-| Agent | Name | Domain |
-|-------|------|--------|
-| `montilla` | Montilla | CEO & Orchestrator — classifies intent, owns the Brief, dispatches to owners |
-| `vasquez` | Vasquez | Engineering Owner (CTO) — specs, ADRs, review wave, technical handoffs |
-| `barrera` | Barrera | Security Owner (CISO) — cybersecurity, IAM, STRIDE, security gate |
-| `subero` | Subero | Legal Owner (CLO) — compliance, licensing, IP, Ley 172-13 |
-| `dauhajre` | Dauhajre | Finance Owner (CFO) — unit economics, budget, finance gate |
-| `vera` | Vera | Marketing Owner (CMO) — brand, positioning, developer relations voice |
-| `montero` | Montero | Revenue Owner (CRO) — pricing, funnels, revenue gate |
-| `santana` | Santana | People Owner (CHRO/CPO) — culture, Creed, collaboration, people gate |
-| `espinoza` | Espinoza | Automation & Ops Owner (COO) — IaC, CI/CD, runbooks, automation gate |
-
-### ⚙️ Specialists (execution; never self-dispatch, never self-approve)
-
-| Agent | Fused disciplines | Reports to |
-|-------|-------------------|-----------|
-| `engineering-specialist` | Architect, Backend, Frontend, Data, DevOps | Vasquez |
-| `security-specialist` | Pentest/OWASP, IAM, Privacy, IR, GRC | Barrera |
-| `legal-specialist` | Compliance, Contracts, Privacy, IP, Research | Subero |
-| `marketing-specialist` | Brand, Content, Copywriting, SEO, GTM | Vera |
-| `finance-specialist` | FP&A, Cost, Accounting, Tax | Dauhajre |
-| `revenue-specialist` | Pricing, Funnel, RevOps, Deal structuring | Montero |
-| `people-specialist` | People Ops, Agent Rules, Performance, Mediation | Santana |
-| `automation-specialist` | Automation, DevOps, Workflow integration | Espinoza |
-
-### 🛡️ Reviewers (independent; strictly 1 subagent per reviewer)
-
-| Agent | Domain | Verdict tokens |
-|-------|--------|----------------|
-| `security-reviewer` | Security | `PASS` / `CONDITIONAL` / `FAIL` |
-| `finance-reviewer` | Finance | `PASS` / `CONDITIONAL` / `FAIL` |
-| `legal-reviewer` | Legal & regulatory | `PASS` / `CONDITIONAL` / `FAIL` (draft — a licensed human attorney approves) |
-| `brand-reviewer` | Marketing & brand | `PASS` / `CONDITIONAL` / `FAIL` |
-| `people-reviewer` | People & culture | `PASS` / `CONDITIONAL` / `FAIL` |
-| `revenue-reviewer` | Revenue | `PASS` / `CONDITIONAL` / `FAIL` |
-| `automation-reviewer` | Automation & ops | `PASS` / `CONDITIONAL` / `FAIL` |
-| `review-data` | Data lens & schema (cross-cutting) | `PASS` / `CONDITIONAL` / `FAIL` |
-
-### 🧪 Engineering Reviewers + QA (full wave)
-
-| Agent | Focus |
-|-------|-------|
-| `review-readability` | Readability, cognitive load, onboarding cost |
-| `review-reliability` | Correctness, determinism, graceful failure |
-| `review-refuter` | Adversarial stress-test of assumptions (before QA) |
-| `review-observability` | Logs, metrics, traces, diagnosability |
-| `review-resilience` | Degradation, recovery, self-healing |
-| `review-risk` | Change-level risk across technical/ops/business |
-| `quality-assurance` | Runs the suite, coverage, REQ→test traceability |
-
-## How to Interact with Agents
+## How to Work with Frame→Ship
 
 1. **Initialize with intent** (`frame-intent`): state the goal, who it affects, and what success looks like.
-2. **Invoke skills explicitly**: name the stage skill (e.g., `review-architecture` for an ADR, `review-security` for auth/data/API).
-3. **Respect the rules**: agents are bound by `rules/`. A refusal means the task violates a hard rule (e.g., `DENY.md`).
-4. **Iterate via `propose-changes`**: refine outputs against a specific rule/reference, not "better".
+2. **Invoke skills explicitly**: load the stage skill (`review-architecture` for an ADR, `review-security` for auth/data/API, `execute-spec` for implementation, `quality-gate` for verification).
+3. **Respect the rules**: execution is bound by `rules/`. A refusal means the task violates a hard gate (e.g., `rules/deny-hard-gates.md`).
+4. **Iterate via `propose-changes`**: refine outputs against a specific rule or reference, never write implementation code before proposal approval.
 
 ## Deployment & Integration
 
-- **Opencode Plugin**: `.opencode/plugins/` (skills, agents, guardrails, commands lanes).
+- **OpenCode Plugin**: `.opencode/plugins/` (`skills`, `guardrails`, and `commands` lanes + `frame-ship.ts` composed entry).
 - **Antigravity CLI (`agy`)**: root-drop plugin (`plugin.json`, `hooks.json`, `scripts/context-inject.ts`).
 - **Pi**: `package.json` `pi` block (`skills/`, `.pi/extensions/`, `.pi/prompts/`).
 - **Claude Code**: `.claude-plugin/`.
@@ -95,6 +56,6 @@ Every agent in this ecosystem is defined by three pillars:
 | `docs/frame-ship/adr/` | Architecture Decision Records (`ADR-XXX.md`) |
 | `docs/frame-ship/requirements/` | Requirements Index (`REQ-XXX.md`) |
 | `docs/frame-ship/backlog/` | Implementation Specs (`SPEC-XXX.md`) |
-| `docs/frame-ship/delivery/` | Release notes, handoffs, `OPERATE_REPORT.md` |
-| `docs/frame-ship/workspace/` | Implementation artifacts, proposals, gate reports |
-| `docs/frame-ship/archive/` | Archived specs + promoted evidence |
+| `docs/frame-ship/delivery/` | Release notes (`RELEASE_NOTES.md`), `OPERATE_REPORT.md` |
+| `.frame-ship/` | Ephemeral workspace (gitignored): proposals, plans, test matrices, gate reports, handoffs |
+| `docs/frame-ship/archive/` | Archived specs + promoted final artifacts (`GATE_REPORT.md`, `HANDOFF.md`, `ARCHIVE-RECORD.md`) |

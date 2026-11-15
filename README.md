@@ -142,11 +142,27 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 - **translate-to-spec** — Brief to REQ-IDs + architecture contracts
 - **propose-changes** — Design-before-code proposal + risk assessment
 
-#### Guard
+#### Guard & Specialized Reviews
 
-- **review-security** — STRIDE threat model + verdict
-- **review-architecture** — ADR + contract verdict
 - **quality-gate** — Multi-domain reviewer router + consolidated gate report (includes waiver template)
+- **Domain Review Skills:**
+  - **review-security** — STRIDE threat model + verdict
+  - **review-legal** — Regulatory, IP, contract compliance, and licensing
+  - **review-finance** — Unit economics, FP&A, accounting controls, and treasury
+  - **review-marketing** — Brand positioning, claims substantiation, and channel ops
+  - **review-revenue** — Pricing, deal desk terms, and forecasting
+  - **review-people** — Culture, Creed alignment, compensation, and change impact
+  - **review-automation** — CI/CD pipelines, IaC, SLOs, and rollback readiness
+  - **review-data** — Schema design, zero-downtime migrations, lineage, and PII minimization
+- **Engineering Lens Review Skills:**
+  - **review-architecture** — ADR + contract verdict
+  - **review-readability** — Cognitive load, naming, bounded complexity, and modularity
+  - **review-reliability** — Concurrency, determinism, timeouts, and idempotency
+  - **review-refuter** — Adversarial refutation, edge cases, and red-teaming
+  - **review-observability** — Structured logs, tracing, metrics, and alerts
+  - **review-resilience** — Circuit breakers, retry jitter, and blast-radius containment
+  - **review-risk** — Supply-chain dependencies, lockfile integrity, and SPOF analysis
+  - **review-quality-assurance** — Test discipline, matrix coverage, and regression prevention
 
 #### Build
 
@@ -160,10 +176,9 @@ using-frame-ship → frame-intent → translate-to-spec → propose-changes
 ### Plugin Runtime
 
 - **`.opencode/plugins/`** — Split zero-deps V2 runtime:
-  - **`skills.ts`** (id `frame-ship`) — registers skills via `ctx.skill.transform`, injects workflow cards and pointers via `ctx.session.hook("context")`, preserves chain across compaction.
-  - **`agents.ts`** (id `frame-ship-agents`) — provisions agent roster into global discovery.
-  - **`guardrails.ts`** (id `frame-ship-guardrails`) — injects guardrails on context.
-  - **`commands.ts`** — custom opencode commands.
+  - **`skills.ts`** (id `frame-ship-skills`) — registers skills via `ctx.skill.transform`, injects workflow cards and pointers via `ctx.session.hook("context")`, preserves chain across compaction.
+  - **`guardrails.ts`** (id `frame-ship-guardrails`) — injects `always_on` foundation rules from `rules/*.md` on context and compaction.
+  - **`commands.ts`** (id `frame-ship-commands`) — custom opencode commands.
   - **`frame-ship.ts`** — composed entry (`package.json` `main`): runs all lanes under original id `frame-ship`.
 
 ## Philosophy
@@ -229,14 +244,12 @@ Project structure:
 │   └── context-inject.ts         # PreInvocation context injection script
 ├── .opencode/
 │   └── plugins/
-│       ├── agents.ts             # agents lane plugin
 │       ├── commands.ts           # custom commands plugin
 │       ├── frame-ship.ts         # composed entry point
 │       ├── guardrails.ts         # guardrails lane plugin
 │       └── skills.ts             # skills lane & session hooks plugin
 ├── .antigravity-plugin/          # Antigravity CLI plugin manifest
 ├── .claude-plugin/               # Claude Code plugin manifest
-├── agents/                       # agent role definitions
 ├── skills/                       # composable workflow skills
 ├── docs/                         # briefs, specs, guides
 ├── mise.toml                     # Node 22 + tasks (mise install)
@@ -249,7 +262,7 @@ Commands:
 
 ```bash
 # from repo root (mise)
-mise run typecheck   # typecheck plugins/opencode/{frame-ship,skills,agents,guardrails,shared}.ts
+mise run typecheck   # typecheck .opencode/plugins/{frame-ship,skills,guardrails,commands}.ts + .opencode/lib/shared.ts
 mise run install     # npm install at repo root
 
 # raw (from repo root)
@@ -270,7 +283,7 @@ Anti-patterns:
 - Skipping `review-security` on auth/data/API; arch change without ADR.
 - Handoff on CLOSED gate without c-levels+CEO waiver record.
 - Pasting full context between stages — reference-only packets.
-- Adding runtime deps to the plugins — all five `plugins/opencode/*.ts` files stay zero-dep (loading the composed entry together with `skills.ts` duplicates id `frame-ship`).
+- Adding runtime deps to the plugins — all `.opencode/plugins/*.ts` files stay zero-dep (loading the composed entry together with `skills.ts` duplicates plugin registration).
 - Editing `references/` without updating parent SKILL.
 - Adding `version/author` to SKILL frontmatter — loader expects `name/description` only.
 
