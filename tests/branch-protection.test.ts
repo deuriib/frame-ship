@@ -31,12 +31,18 @@ test("production-main.json ruleset satisfies GitHub Ruleset requirements for mai
   assert.ok(ruleTypes.includes("pull_request"), "Must include pull_request rule");
   assert.ok(ruleTypes.includes("required_status_checks"), "Must include required_status_checks rule");
 
-  // Pull request parameters
+  // Pull request parameters (tailored for solo maintainer governance: PR workflow required, 0 external approvals required)
   const prRule = ruleset.rules.find((r: { type: string }) => r.type === "pull_request");
-  assert.strictEqual(prRule.parameters.required_approving_review_count, 1, "Must require at least 1 approval");
-  assert.strictEqual(prRule.parameters.dismiss_stale_reviews_on_push, true, "Must dismiss stale reviews on push");
-  assert.strictEqual(prRule.parameters.require_code_owner_review, true, "Must require CODEOWNERS review");
-  assert.strictEqual(prRule.parameters.require_last_push_approval, true, "Must require approval of the latest push");
+  assert.strictEqual(
+    prRule.parameters.required_approving_review_count,
+    0,
+    "Solo maintainer mode: required_approving_review_count must be 0 to avoid author self-approval deadlock",
+  );
+  assert.strictEqual(
+    prRule.parameters.require_code_owner_review,
+    false,
+    "Solo maintainer mode: require_code_owner_review must be false to avoid author self-approval deadlock",
+  );
   assert.strictEqual(prRule.parameters.required_review_thread_resolution, true, "Must resolve all review threads");
 
   // Status checks parameters
