@@ -1,0 +1,63 @@
+name: Feature Request
+description: Suggest an idea or enhancement for frame-ship.
+title: "[Feat]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for proposing a feature for frame-ship! 💡
+        We welcome ideas that enhance the Frame→Ship delivery lifecycle, agent review skills, and governance guardrails.
+
+        > [!TIP]
+        > For broad architectural discussions or early-stage brainstorming, consider starting a conversation in [GitHub Discussions](https://github.com/deuriib/frame-ship/discussions) first.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Need
+      description: Is your feature request related to a problem, limitation, or friction in your workflow?
+      placeholder: A clear description of the problem or need you want to address...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution or API
+      description: Describe the solution, behavior, or API changes you would like to see implemented.
+      placeholder: A clear and concise description of what should happen and how it fits into the Frame→Ship lifecycle...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative approaches, workarounds, or existing tools you have evaluated.
+      placeholder: Any alternative designs or temporary solutions you considered...
+
+  - type: checkboxes
+    id: domain
+    attributes:
+      label: Domain & Area of Impact
+      description: Which area(s) of frame-ship does this feature touch? (Select all that apply)
+      options:
+        - label: "Skills (`skills/` lifecycle workflows, specialized review skills, stage transitions)"
+        - label: "Rules (`rules/` governance guardrails, always_on foundation rules, model_decision rules)"
+        - label: "Agent Harness Integration (Antigravity CLI, OpenCode, Claude Code, Pi extensions)"
+        - label: "Documentation & Guides (`docs/`, specifications, architecture records, README)"
+        - label: "CI/CD & Developer Tooling (GitHub Actions, release automation, quality gates)"
+
+  - type: checkboxes
+    id: validations
+    attributes:
+      label: Pre-submission Checklist
+      description: Please verify the following before submitting your proposal.
+      options:
+        - label: I have searched existing [issues and discussions](https://github.com/deuriib/frame-ship/issues) to ensure this idea is not already tracked.
+          required: true
+        - label: I understand that major architectural changes require a formal specification and approval before implementation.
+          required: true
+        - label: I agree to follow the project's [Code of Conduct](https://github.com/deuriib/frame-ship/blob/main/CODE_OF_CONDUCT.md).
+          required: true

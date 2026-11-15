@@ -1,0 +1,89 @@
+name: Bug Report
+description: Report a bug, defect, or unexpected behavior in frame-ship.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for reporting a bug in frame-ship! 🛠️
+        Please fill out this form as completely as possible to help us diagnose and resolve the issue quickly.
+
+        > [!IMPORTANT]
+        > **Confidential Security Notice**: If you are reporting a security vulnerability, please do **NOT** submit this public issue. Refer to [SECURITY.md](https://github.com/deuriib/frame-ship/blob/main/SECURITY.md) to submit a confidential private advisory or email `deuriib@gmail.com`.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what went wrong.
+      placeholder: What happened? Provide a high-level summary of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the behavior.
+      placeholder: |
+        1. Run command '...'
+        2. Execute skill or hook '...'
+        3. See error '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened instead.
+      placeholder: What happened instead? Include unexpected error messages or incorrect states.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment & Versions
+      description: Please provide your operating system, runtime, and harness environment details.
+      value: |
+        - OS: [e.g. Linux Ubuntu 24.04, macOS Sonoma, Windows 11 (WSL2)]
+        - Node.js Version: [e.g. 24.22.1]
+        - npm Version: [e.g. 10.8.2]
+        - Agent Harness: [e.g. Antigravity CLI (agy), OpenCode, Claude Code, Pi]
+        - frame-ship Version / Commit: [e.g. 1.1.0 or git rev-parse HEAD]
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please copy and paste any relevant terminal output or error stack traces. Output is automatically formatted as a shell code block.
+      render: shell
+      placeholder: Paste terminal output, error logs, or stack traces here...
+
+  - type: checkboxes
+    id: validations
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm the following checks before submitting your report.
+      options:
+        - label: I have searched existing [open and closed issues](https://github.com/deuriib/frame-ship/issues) and confirmed this is not a duplicate.
+          required: true
+        - label: I have verified that this issue is reproducible on the latest release line (`1.1.x`).
+          required: true
+        - label: I have verified that no sensitive credentials, API keys, private tokens, or personal data are included in this report.
+          required: true
+        - label: I agree to follow the project's [Code of Conduct](https://github.com/deuriib/frame-ship/blob/main/CODE_OF_CONDUCT.md).
+          required: true

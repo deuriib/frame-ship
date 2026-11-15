@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community Discussions
+    url: https://github.com/deuriib/frame-ship/discussions
+    about: Ask questions, explore agent workflows, and discuss delivery methodology best practices.
+  - name: Security Vulnerability Reporting
+    url: https://github.com/deuriib/frame-ship/security/advisories/new
+    about: Confidentially report security vulnerabilities in accordance with SECURITY.md.
+  - name: Support and Guidance
+    url: https://github.com/deuriib/frame-ship/blob/main/SUPPORT.md
+    about: Review our support policy, maintainer availability, and issue triage SLAs.
