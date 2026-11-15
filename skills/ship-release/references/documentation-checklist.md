@@ -16,7 +16,7 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 | **Code & Header Markers** | `scripts/bump-version.mjs` | Automated script | `node scripts/bump-version.mjs --check` | Plugin header, `VERSION` constant, and parity comments identical. |
 | **Context & Rules** | `rules/Frame-ship.md` | Automated script / Dev | Marker grep | Version lockstep note and persistent cards updated. |
 | **Knowledge Base** | `AGENTS.md` (root & subdirs) | Engineering Owner | Read-back & line count | Runtime line counts, package version, and toolchain commands aligned. |
-| **Spec Lifecycle** | `docs/frame-ship/` | Release Manager | Git status check | Spec `git mv` to `archive/<spec-id>/` (R rename, source gone); `ARCHIVE-RECORD.md` written; allowlisted scratch in `workspace/` purged (nothing outside the allowlist). |
+| **Spec Lifecycle** | `docs/frame-ship/` | Release Manager | Git status check | Spec `git mv` to `archive/<spec-id>/` (R rename, source gone); `ARCHIVE-RECORD.md` written; allowlisted scratch in `.frame-ship/` purged (nothing outside the allowlist). |
 
 ---
 
@@ -46,9 +46,9 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 
 4. Spec Archival & Workspace Hygiene (promote before purge — see SKILL §3 step 6)
    ├── mkdir docs/frame-ship/archive/<spec-id>/ && git mv docs/frame-ship/backlog/<spec>.md docs/frame-ship/archive/<spec-id>/
-   ├── Copy GATE_REPORT.md + HANDOFF.md into docs/frame-ship/archive/<spec-id>/ (evidence survives)
+   ├── Copy GATE_REPORT.md + HANDOFF.md (+ ARCHITECTURE_REVIEW.md / SECURITY_REVIEW.md when present) into docs/frame-ship/archive/<spec-id>/ (evidence survives)
    ├── Write docs/frame-ship/archive/<spec-id>/ARCHIVE-RECORD.md (references/archive-record.md)
-   ├── Purge allowlist ONLY: docs/frame-ship/workspace/<domain>/{PROPOSED_CHANGES,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md + docs/frame-ship/workspace/quality-gate/<spec-id>/
+   ├── Purge allowlist ONLY: .frame-ship/<domain>/{PROPOSED_CHANGES,SECURITY_REVIEW,ARCHITECTURE_REVIEW,IMPLEMENTATION_PLAN,TEST_MATRIX,HANDOFF}.md + .frame-ship/quality-gate/<spec-id>/
    └── Verify: purged paths absent, OTHER SPEC lanes untouched, git status clean
 ```
 
@@ -59,4 +59,4 @@ Use this checklist during `ship-release` to guarantee that all project documenta
 - **Never ship with version drift:** Leaving any plugin header, context hook, or manifest on an older version is a gate violation.
 - **Never ship with dead documentation links:** Every link in `README.md`, `INSTALL.md`, and `RELEASE_NOTES.md` must resolve.
 - **Never skip changelog for user-facing changes:** Even non-code ships must document operational, legal, or financial changes.
-- **Never leave the allowlisted drafts lingering in `workspace/` after archive:** The 4 lane singletons for THIS spec + `quality-gate/<spec-id>/` are purged before the release commit — but ONLY after `GATE_REPORT.md` + `HANDOFF.md` are promoted to `archive/<spec-id>/`, and NEVER across other SPECs' lanes.
+- **Never leave the allowlisted drafts lingering in `.frame-ship/` after archive:** The allowlisted lane singletons for THIS spec + `.frame-ship/quality-gate/<spec-id>/` are purged before the release commit — but ONLY after `GATE_REPORT.md` + `HANDOFF.md` (+ `ARCHITECTURE_REVIEW.md` / `SECURITY_REVIEW.md` when present) are promoted to `docs/frame-ship/archive/<spec-id>/`, and NEVER across other SPECs' lanes.

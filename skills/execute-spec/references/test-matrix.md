@@ -1,6 +1,6 @@
 # Test / Evidence Matrix: SPEC-XXX
 
-**Agent:** [specialist name]
+**Domain:** [domain]
 **Date:** YYYY-MM-DD
 **Domains-Touched:** [per spec]
 

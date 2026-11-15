@@ -9,7 +9,7 @@ description: Use when a specialist declares work complete and it needs review be
 
 ## Overview
 
-Run the full DoD checklist against spec + test matrix + open gate report, then produce `HANDOFF.md` routing to the next agent. **No gate OPEN, no handoff.**
+Run the full DoD checklist against spec + test matrix + open gate report, then produce `HANDOFF.md` routing to the next stage. **No gate OPEN, no handoff.**
 
 ## Chain Contract
 
@@ -22,13 +22,13 @@ Bound to the **owning domain owner gate** (engineering / security / domain owner
 
 ## Process
 
-0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(verify-handoff)` loaded? Owning domain owner template read? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. **No OPEN gate = no handoff** (waiver only domain owners + orchestrator).
-1. Read spec + test/evidence matrix + `GATE_REPORT.md` with `SPEC/HARD/GATE/DOMAINS` packet intact.
+0. **Pre-flight load — HARD STOP** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(verify-handoff)` loaded? DoD checklist loaded? `SPEC/HARD/GATE/DOMAINS` packet + `GATE_REPORT.md` in hand? Any NO → STOP. **No OPEN gate = no handoff** (waiver only domain owners + orchestrator).
+1. Read spec + `.frame-ship/<domain>/TEST_MATRIX.md` + `.frame-ship/quality-gate/<spec-id>/GATE_REPORT.md` with `SPEC/HARD/GATE/DOMAINS` packet intact.
 2. **Run DoD** via `references/dod-checklist.md`—Common section for all, Domain appendix only for touched domains.
-3. **Produce `docs/frame-ship/workspace/<domain>/HANDOFF.md`** via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows—with evidence links). **Singleton:** create-if-missing else update-in-place, never suffixed.
+3. **Produce `.frame-ship/<domain>/HANDOFF.md`** via `references/handoff-template.md` (deliverables may be files, documents, filings, campaigns, closes, workflows—with evidence links; promoted to `docs/frame-ship/archive/<spec-id>/` by `ship-release`). **Singleton:** create-if-missing else update-in-place, never suffixed.
 4. **All gates pass** → hand off to `ship-release`.
 5. **Gates fail** → return to `execute-spec` with specific findings.
-6. **Close with a commit.** Example: `docs(handoff-003): verify DoD and route SPEC-003 to ship`.
+6. **Route verified `.frame-ship/<domain>/HANDOFF.md` to `ship-release`** (where final artifacts are promoted to `docs/frame-ship/archive/<spec-id>/` and committed; commit any tracked `docs/` updates if applicable).
 
 ### C4 — REQ→Evidence-Link Presence Check (surgical, security-owned)
 
@@ -54,5 +54,5 @@ Bound to the **owning domain owner gate** (engineering / security / domain owner
 
 ## References
 
-- `references/handoff-template.md` — Deliverables + DoD + next agent.
+- `references/handoff-template.md` — Deliverables + DoD + next stage.
 - `references/dod-checklist.md` — Functional/quality/security/docs gates.

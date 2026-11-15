@@ -1,14 +1,14 @@
-# Proposed Changes: {{AGENT_ROLE}}
+# Proposed Changes: SPEC-XXX
 
 **Spec Reference:** SPEC-XXX
-**Agent:** [name]
+**Domain:** [domain]
 **Date:** YYYY-MM-DD
 **Execution_Mode:** subagents (inherited from spec)
 **Domains-Touched:** [engineering | security | finance | legal | marketing/brand | people | revenue | automation/ops — delete as applicable, must match spec]
 
 ## Summary
 
-[What this agent proposes to do, in 2-3 sentences]
+[What this proposal changes, in 2-3 sentences]
 
 ## Changes
 

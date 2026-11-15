@@ -23,10 +23,10 @@ Bound to the **orchestrator** + operations/devops + owning domain owner. Emits `
 ## Process
 
 0. **Pre-flight load** (contract: `../using-frame-ship/references/pre-flight.md`). `skill(operate)` loaded? Post-ship window defined? SLO/error-budget targets named?
-1. **Verify the deploy**: canary/blue-green observed, rollback rehearsed (timestamped), change event emitted (`AUT-13`), alerts routed to on-call with a runbook (`AUT-14`).
-2. **Confirm SLO / error budget**: error rate, latency, saturation within budget; a breach triggers the recorded rollback, not a manual patch (`AUT-08`).
+1. **Verify the deploy**: canary/blue-green observed, rollback rehearsed (timestamped), change event emitted (`rules/devops.md`), alerts routed to on-call with a runbook (`rules/reliability.md`).
+2. **Confirm SLO / error budget**: error rate, latency, saturation within budget; a breach triggers the recorded rollback, not a manual patch (`rules/devops.md`).
 3. **Route findings**: defects → `frame-ship:propose-changes` (reproduce → failing test → propose fix); incidents → incident runbook; product feedback → `frame-ship:research`/`frame-intent`.
-4. **Produce `OPERATE_REPORT.md`** via `references/operate-checklist.md` — post-ship evidence (rollback rehearsal timestamp, SLO telemetry, alert/runbook status) + a finding → owner register.
+4. **Produce `docs/frame-ship/delivery/OPERATE_REPORT.md`** via `references/operate-checklist.md` — post-ship evidence (rollback rehearsal timestamp, SLO telemetry, alert/runbook status) + a finding → owner register.
 5. **Feed the loop**: close with a commit; findings land in the next discovery/brief.
 
 ## What I Won't Do

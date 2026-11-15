@@ -1,6 +1,6 @@
 # Implementation Plan: SPEC-XXX
 
-**Agent:** [specialist name]
+**Domain:** [domain]
 **Date:** YYYY-MM-DD
 **Approved By:** owning domain owner + engineering owner, security owner (if engineering/security-relevant)
 **Domains-Touched:** [per spec]
