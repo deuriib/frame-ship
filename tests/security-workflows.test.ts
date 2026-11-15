@@ -30,12 +30,12 @@ test("codeql.yml workflow is configured with pinned SHAs, security permissions, 
   );
   assert.match(
     content,
-    /github\/codeql-action\/init@b56ba49b26e50535fa1e7f7db0f4f7b4765d08d1\s+#\s+v3\.28\.10/,
+    /github\/codeql-action\/init@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d\s+#\s+v3\.28\.10/,
     "github/codeql-action/init must be pinned to full commit SHA v3.28.10",
   );
   assert.match(
     content,
-    /github\/codeql-action\/analyze@b56ba49b26e50535fa1e7f7db0f4f7b4765d08d1\s+#\s+v3\.28\.10/,
+    /github\/codeql-action\/analyze@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d\s+#\s+v3\.28\.10/,
     "github/codeql-action/analyze must be pinned to full commit SHA v3.28.10",
   );
 
@@ -58,7 +58,7 @@ test("dependency-review.yml workflow enforces high severity gating and license c
   // Verify pinned action commit SHA
   assert.match(
     content,
-    /actions\/dependency-review-action@5a50f586e3b11f0b604d78294ff22708b7d7b39a\s+#\s+v4\.5\.0/,
+    /actions\/dependency-review-action@3b139cfc5fae8b618d3eae3675e383bb1769c019\s+#\s+v4\.5\.0/,
     "actions/dependency-review-action must be pinned to full commit SHA v4.5.0",
   );
 
