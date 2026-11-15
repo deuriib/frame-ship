@@ -1,6 +1,6 @@
 {
     "name": "frame-ship",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Frame-Ship methodology - from strategic intent to shipped release",
     "main": "./.opencode/plugins/frame-ship.ts",
     "type": "module",
