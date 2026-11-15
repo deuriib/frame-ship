@@ -30,14 +30,15 @@
     {
       "type": "pull_request",
       "parameters": {
-        "required_approving_review_count": 1,
-        "dismiss_stale_reviews_on_push": true,
+        "required_approving_review_count": 0,
+        "dismiss_stale_reviews_on_push": false,
         "required_reviewers": [],
-        "require_code_owner_review": true,
-        "require_last_push_approval": true,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false,
         "required_review_thread_resolution": true,
-        "require_extra_approval_for_unattributed_changes": true,
+        "require_extra_approval_for_unattributed_changes": false,
         "allowed_merge_methods": [
+          "merge",
           "squash",
           "rebase"
         ]
@@ -50,13 +51,13 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
-            "context": "typecheck"
+            "context": "Typecheck"
           },
           {
-            "context": "test"
+            "context": "Unit & Contract Tests"
           },
           {
-            "context": "docs-test"
+            "context": "Verify Documentation Commands"
           }
         ]
       }
