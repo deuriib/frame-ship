@@ -1,0 +1,29 @@
+name: sync-labels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/labels.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Sync GitHub Labels
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Synchronize Labels
+        uses: kjanat/github-labelmanager@e968d59fb16afae3a977f7620089e14ac3bd8872 # v1.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

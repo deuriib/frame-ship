@@ -1,0 +1,30 @@
+# ==============================================================================
+# Dependabot Configuration for Frame->Ship
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# ==============================================================================
+
+version: 2
+updates:
+  # Maintain npm dependencies defined in package.json
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    reviewers:
+      - "deuriib"
+    commit-message:
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 10
+
+  # Maintain GitHub Actions actions and workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    reviewers:
+      - "deuriib"
+    commit-message:
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 10

@@ -1,0 +1,77 @@
+# ==============================================================================
+# Frame->Ship Code Ownership Configuration
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Rules:
+# - The last matching pattern takes precedence.
+# - Global default '*' must be at the top.
+# - Every entry maps to verified active maintainer @deuriib.
+# ==============================================================================
+
+# Global fallback: default code owner for all files across the repository
+* @deuriib
+
+# ------------------------------------------------------------------------------
+# Core Governance & Delivery Methodology
+# ------------------------------------------------------------------------------
+# Domain-specific constraints and foundation guardrails
+/rules/ @deuriib
+
+# Composable stage workflows and specialized review skills
+/skills/ @deuriib
+
+# Frame->Ship specifications, briefs, ADRs, and delivery records
+/docs/frame-ship/ @deuriib
+
+# Ephemeral sprint workspace and quality gate evidence (local / transient)
+/.frame-ship/ @deuriib
+
+# ------------------------------------------------------------------------------
+# GitHub Configuration & Automation
+# ------------------------------------------------------------------------------
+# CI/CD workflows, issue forms, PR templates, labels, and dependabot
+/.github/ @deuriib
+
+# ------------------------------------------------------------------------------
+# Verification & Quality Assurance
+# ------------------------------------------------------------------------------
+# Test suites and testing discipline harnesses
+/tests/ @deuriib
+
+# ------------------------------------------------------------------------------
+# Harness Integrations & Extensions
+# ------------------------------------------------------------------------------
+/.agents/ @deuriib
+/.antigravity-plugin/ @deuriib
+/.claude-plugin/ @deuriib
+/.omp/ @deuriib
+/.opencode/ @deuriib
+/.pi/ @deuriib
+/hooks/ @deuriib
+/scripts/ @deuriib
+
+# ------------------------------------------------------------------------------
+# Documentation & Architecture
+# ------------------------------------------------------------------------------
+/docs/ @deuriib
+/README.md @deuriib
+/CONTRIBUTING.md @deuriib
+/CODE_OF_CONDUCT.md @deuriib
+/SECURITY.md @deuriib
+/SUPPORT.md @deuriib
+/CHANGELOG.md @deuriib
+/LICENSE @deuriib
+/DCO.md @deuriib
+/THIRD-PARTY-NOTICES.md @deuriib
+/AGENTS.md @deuriib
+
+# ------------------------------------------------------------------------------
+# Package Manifests & Environment Config
+# ------------------------------------------------------------------------------
+/package.json @deuriib
+/package-lock.json @deuriib
+/tsconfig.json @deuriib
+/mise.toml @deuriib
+/plugin.json @deuriib
+/hooks.json @deuriib
+/gemini-extension.json @deuriib

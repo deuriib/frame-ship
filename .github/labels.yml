@@ -1,0 +1,217 @@
+$schema: "https://raw.githubusercontent.com/kjanat/github-labelmanager/master/.github/labels.schema.json"
+
+# ==============================================================================
+# Declarative Label Taxonomy for Frame->Ship
+# Managed via .github/workflows/sync-labels.yml using kjanat/github-labelmanager
+# ==============================================================================
+
+labels:
+  # ----------------------------------------------------------------------------
+  # Type Taxonomy
+  # ----------------------------------------------------------------------------
+  - name: "bug"
+    color: "#d73a4a"
+    description: "Something is not working or failing an assertion"
+    aliases:
+      - "defect"
+      - "type: bug"
+
+  - name: "feature"
+    color: "#a2eeef"
+    description: "New capability, stage, workflow, or behavior addition"
+    aliases:
+      - "enhancement"
+      - "type: feature"
+
+  - name: "rule"
+    color: "#7057ff"
+    description: "New or modified governance rule or hard gate in rules/"
+    aliases:
+      - "type: rule"
+
+  - name: "skill"
+    color: "#008672"
+    description: "New or modified composable stage or review skill in skills/"
+    aliases:
+      - "type: skill"
+
+  - name: "docs"
+    color: "#0075ca"
+    description: "Improvements or additions to documentation, briefs, or specs"
+    aliases:
+      - "documentation"
+      - "type: docs"
+
+  - name: "refactor"
+    color: "#fbca04"
+    description: "Code change that neither fixes a bug nor adds a feature"
+    aliases:
+      - "type: refactor"
+
+  - name: "chore"
+    color: "#cfd3d7"
+    description: "Maintenance, build, CI, dependencies, or tooling updates"
+    aliases:
+      - "type: chore"
+
+  # ----------------------------------------------------------------------------
+  # Priority Taxonomy
+  # ----------------------------------------------------------------------------
+  - name: "priority: critical"
+    color: "#b60205"
+    description: "Urgent issue blocking core delivery or violating hard gate"
+    aliases:
+      - "critical"
+      - "P0"
+
+  - name: "priority: high"
+    color: "#d93f0b"
+    description: "High priority defect or requirement scheduled for next release"
+    aliases:
+      - "high"
+      - "P1"
+
+  - name: "priority: medium"
+    color: "#e36209"
+    description: "Standard priority work scheduled in active sprint cycle"
+    aliases:
+      - "medium"
+      - "P2"
+
+  - name: "priority: low"
+    color: "#0e8a16"
+    description: "Low priority improvement, cosmetic polish, or minor task"
+    aliases:
+      - "low"
+      - "P3"
+
+  # ----------------------------------------------------------------------------
+  # Domain Taxonomy (Frame->Ship 8 Functional Domains)
+  # ----------------------------------------------------------------------------
+  - name: "domain: engineering"
+    color: "#1d76db"
+    description: "Architecture, readability, reliability, QA, or engine design"
+    aliases:
+      - "engineering"
+
+  - name: "domain: security"
+    color: "#d02636"
+    description: "Cybersecurity, IAM, STRIDE threat model, or privacy controls"
+    aliases:
+      - "security-domain"
+
+  - name: "domain: legal"
+    color: "#5319e7"
+    description: "Regulatory compliance, licensing, contracts, or IP notices"
+    aliases:
+      - "legal"
+
+  - name: "domain: finance"
+    color: "#006b75"
+    description: "Unit economics, FP&A, accounting controls, or treasury"
+    aliases:
+      - "finance"
+
+  - name: "domain: marketing"
+    color: "#bfdadc"
+    description: "Brand positioning, content production, or channel operations"
+    aliases:
+      - "marketing"
+
+  - name: "domain: revenue"
+    color: "#1b7c3f"
+    description: "Pricing, pipeline forecasting, deal desk, or post-sale"
+    aliases:
+      - "revenue"
+
+  - name: "domain: automation"
+    color: "#4d7c0f"
+    description: "IaC, CI/CD pipelines, automated runbooks, or rollback drills"
+    aliases:
+      - "automation"
+      - "automation/ops"
+
+  - name: "domain: people"
+    color: "#d4c5f9"
+    description: "Creed alignment, team culture, compensation, or collaboration"
+    aliases:
+      - "people"
+
+  # ----------------------------------------------------------------------------
+  # Status & Triage Lifecycle Taxonomy
+  # ----------------------------------------------------------------------------
+  - name: "triage"
+    color: "#ededed"
+    description: "New issue or PR awaiting triage and maintainer review"
+    aliases:
+      - "status: triage"
+
+  - name: "blocked"
+    color: "#b60205"
+    description: "Work is blocked by external dependency or upstream review"
+    aliases:
+      - "status: blocked"
+
+  - name: "needs-info"
+    color: "#d876e3"
+    description: "Awaiting reproduction steps or clarification from author"
+    aliases:
+      - "question"
+      - "status: needs-info"
+
+  - name: "in-progress"
+    color: "#bfd4f2"
+    description: "Actively being designed, developed, or verified"
+    aliases:
+      - "status: in-progress"
+
+  - name: "ready-to-ship"
+    color: "#0e8a16"
+    description: "Passed all quality gates and verified ready for release"
+    aliases:
+      - "status: ready-to-ship"
+      - "ready"
+
+  # ----------------------------------------------------------------------------
+  # Security & Supply Chain Taxonomy
+  # ----------------------------------------------------------------------------
+  - name: "dependencies"
+    color: "#0366d6"
+    description: "Dependency manifests, package upgrades, and lockfiles"
+    aliases:
+      - "deps"
+
+  - name: "security"
+    color: "#b60205"
+    description: "Security vulnerability, advisory, or hardening control"
+    aliases:
+      - "vulnerability"
+
+  - name: "cve"
+    color: "#6f42c1"
+    description: "Identified Common Vulnerabilities and Exposures tracking"
+    aliases:
+      - "CVE"
+
+  # ----------------------------------------------------------------------------
+  # Meta & Community Taxonomy
+  # ----------------------------------------------------------------------------
+  - name: "good first issue"
+    color: "#7057ff"
+    description: "Good for newcomers and first-time contributors"
+
+  - name: "help wanted"
+    color: "#008672"
+    description: "Extra attention, discussion, or help is requested"
+
+  - name: "duplicate"
+    color: "#cfd3d7"
+    description: "This issue or pull request already exists"
+
+  - name: "invalid"
+    color: "#e4e669"
+    description: "This issue does not seem valid or out of scope"
+
+  - name: "wontfix"
+    color: "#ffffff"
+    description: "This will not be worked on or deviates from core methodology"
